@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+
+[sub_resource type="Environment" id=3]
+background_mode = 1
+background_color = Color( 1, 1, 1, 1 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.2
+glow_enabled = true
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.3, 0.1, 0.3 )
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.3
+
+[node name="Player" type="KinematicBody"]
+script = ExtResource( 1 )
+jump_impulse = 15
+
+[node name="Pivot" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0 )
+
+[node name="Camera" type="Camera" parent="Pivot"]
+environment = SubResource( 3 )
+far = 2000.0
+
+[node name="Feet" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.85, 0 )
+shape = SubResource( 2 )
