@@ -5,9 +5,16 @@ extends Spatial
 # var b = "text"
 
 const THICKNESS = 1
+var room_width
+var room_length
+var room_height
 
 # Called when the node enters the scene tree for the first time.
 func init(width, length, height):
+	room_width = width
+	room_length = length
+	room_height = height
+	
 	$Floor.init(width, length)
 
 	$WestWall.init(length, height)
