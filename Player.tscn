@@ -17,7 +17,7 @@ radius = 0.3
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
-jump_impulse = 15
+jump_impulse = 12
 
 [node name="Pivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0 )
