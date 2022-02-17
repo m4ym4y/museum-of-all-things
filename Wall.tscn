@@ -1,12 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Wall.gd" type="Script" id=1]
+[ext_resource path="res://Label3d.tscn" type="PackedScene" id=2]
 
-[node name="Wall" type="CSGCombiner"]
-use_collision = true
+[node name="Wall" type="Spatial"]
 script = ExtResource( 1 )
+label3d_scene = ExtResource( 2 )
 
-[node name="CSGBox" type="CSGBox" parent="."]
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+use_collision = true
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
 width = 1.0
 height = 10.0
 depth = 10.0

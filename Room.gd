@@ -8,12 +8,14 @@ const THICKNESS = 1
 var room_width
 var room_length
 var room_height
+var room_name
 
 # Called when the node enters the scene tree for the first time.
-func init(width, length, height):
+func init(width, length, height, name = "Untitled Room"):
 	room_width = width
 	room_length = length
 	room_height = height
+	room_name = name
 	
 	$Floor.init(width, length)
 
