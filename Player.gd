@@ -63,3 +63,8 @@ func _physics_process(delta):
 		$Pivot.global_translate(Vector3(0, -crouch_speed * delta, 0))
 	elif not Input.is_action_pressed("crouch") and not fully_standing:
 		$Pivot.global_translate(Vector3(0, crouch_speed * delta, 0))
+
+	if Input.is_action_pressed("interact"):
+		var collider = $Pivot/Camera/RayCast.get_collider()
+		if collider and collider.has_method("interact"):
+			collider.interact()

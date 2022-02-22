@@ -4,6 +4,7 @@ extends Spatial
 # var a = 2
 # var b = "text"
 export (PackedScene) var label3d_scene
+export (PackedScene) var door_scene
 
 const PREVIEW_WIDTH = 10.0
 const PREVIEW_HEIGHT = 10.0
@@ -23,7 +24,7 @@ func init(width, height):
 		Vector3(1, height / PREVIEW_HEIGHT, width / PREVIEW_WIDTH))
 	$CSGCombiner/CSGBox.set_translation(Vector3(-0.5, height / 2, 0))
 
-func add_door(left, width, height, name = "Untitled Room"):
+func add_door(left, width, height, name = "Untitled Room", filled = false):
 	var doorway = CSGBox.new()
 
 	# TODO: less janky hack?
@@ -43,8 +44,15 @@ func add_door(left, width, height, name = "Untitled Room"):
 	doorway.set_width(THICKNESS)
 	doorway.set_height(min(wall_height, height))
 	doorway.set_translation(
-			Vector3(-THICKNESS / 2, height / 2, -wall_width / 2 + left))
+		Vector3(-THICKNESS / 2, height / 2, -wall_width / 2 + left))
 	doorway.set_operation(CSGShape.OPERATION_SUBTRACTION)
+
+	if filled:
+		var door = door_scene.instance()
+		door.init(width, height)
+		door.set_translation(
+			Vector3(-THICKNESS / 2, height / 2, -wall_width / 2 + left))
+		add_child(door)
 
 	add_child(front_label)
 	add_child(back_label)

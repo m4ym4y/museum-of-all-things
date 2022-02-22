@@ -26,6 +26,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0 )
 environment = SubResource( 3 )
 far = 2000.0
 
+[node name="RayCast" type="RayCast" parent="Pivot/Camera"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -3, 0 )
+
 [node name="Feet" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0 )
 shape = SubResource( 1 )
