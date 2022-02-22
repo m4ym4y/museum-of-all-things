@@ -47,8 +47,9 @@ func add_door(left, width, height, name = "Untitled Room", filled = false):
 		Vector3(-THICKNESS / 2, height / 2, -wall_width / 2 + left))
 	doorway.set_operation(CSGShape.OPERATION_SUBTRACTION)
 
+	var door
 	if filled:
-		var door = door_scene.instance()
+		door = door_scene.instance()
 		door.init(width, height)
 		door.set_translation(
 			Vector3(-THICKNESS / 2, height / 2, -wall_width / 2 + left))
@@ -57,6 +58,8 @@ func add_door(left, width, height, name = "Untitled Room", filled = false):
 	add_child(front_label)
 	add_child(back_label)
 	$CSGCombiner.add_child(doorway)
+
+	return door
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
