@@ -1,4 +1,4 @@
-extends StaticBody
+extends Spatial
 
 const PREVIEW_WIDTH = 10.0
 const PREVIEW_LENGTH = 10.0
