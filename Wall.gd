@@ -52,7 +52,7 @@ func add_door(left, width, height, name = "Untitled Room", filled = false):
 		door = door_scene.instance()
 		door.init(width, height)
 		door.set_translation(
-			Vector3(-THICKNESS, height / 2, wall_width / 2 - left))
+			Vector3(-THICKNESS + door.THICKNESS / 2, height / 2, wall_width / 2 - left))
 		add_child(door)
 
 	add_child(front_label)

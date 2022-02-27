@@ -93,6 +93,21 @@ var ROOM_MAP = {
 	]
 }
 
+func get_room_offset (door_spec, room1_spec, room2):
+	var room_left_offset_width = door_spec.left - room1_spec.width / 2.0
+	var room_left_offset_length = door_spec.left - room1_spec.length / 2.0
+	var room_offset_length = room2.room_length / 2.0 + room1_spec.length / 2.0 + 2 * THICKNESS
+	var room_offset_width = room2.room_width / 2.0 + room1_spec.width / 2.0 + 2 * THICKNESS
+
+	if door_spec.wall == "NorthWall":
+		return Vector3(room_left_offset_width, 0, -room_offset_length)
+	elif door_spec.wall == "SouthWall":
+		return Vector3(-room_left_offset_width, 0, room_offset_length)
+	elif door_spec.wall == "WestWall":
+		return Vector3(-room_offset_width, 0, -room_left_offset_length)
+	else: # EastWall
+		return Vector3(room_offset_width, 0, room_left_offset_length)
+
 func create_room_from_map (room_spec):
 	if ROOM_LIST.has(room_spec.name):
 		return ROOM_LIST[room_spec.name]
@@ -122,34 +137,9 @@ func _on_Door_try_to_open (door_body, room1_spec, door_spec, room1):
 
 	var room2 = create_room_from_map(door_spec.room)
 	var room2_wall = room2.get_node(OPPOSING_WALL_MAP[door_spec.wall])
-	room2_wall.add_door(room2_wall.wall_width / 2.0,
+	var room2_offset = get_room_offset(door_spec, room1_spec, room2)
+	var door = room2_wall.add_door(room2_wall.wall_width / 2.0,
 			door_spec.width, door_spec.height, room1_spec.name, false)
-
-	var room2_offset
-	if door_spec.wall == "NorthWall":
-		room2_offset = Vector3(
-			door_spec.left - room1_spec.width / 2.0,
-			0,
-			-room2.room_length / 2.0 - room1_spec.length / 2.0 - 2 * THICKNESS
-		)
-	elif door_spec.wall == "SouthWall":
-		room2_offset = Vector3(
-			room1_spec.width / 2.0 - door_spec.left,
-			0,
-			room2.room_length / 2.0 + room1_spec.length / 2.0 + 2 * THICKNESS
-		)
-	elif door_spec.wall == "WestWall":
-		room2_offset = Vector3(
-			-room2.room_width / 2.0 - room1_spec.width / 2.0 - 2 * THICKNESS,
-			0,
-			room1_spec.length / 2.0 - door_spec.left
-		)
-	else: # EastWall
-		room2_offset = Vector3(
-			room2.room_width / 2.0 + room1_spec.width / 2.0 + 2 * THICKNESS,
-			0,
-			door_spec.left - room1_spec.length / 2.0
-		)
 
 	room2.set_translation(room1.get_translation() + room2_offset)
 	add_child(room2)
