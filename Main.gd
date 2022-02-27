@@ -17,80 +17,77 @@ const OPPOSING_WALL_MAP = {
 	"EastWall": "WestWall"
 }
 
+var DOOR_LIST = {}
 var ROOM_LIST = {}
 var ROOM_MAP = {
-	name = "Central Room",
-	width = 10,
-	length = 10,
-	height = 4,
-	doors = [
-		{
-			wall = "NorthWall",
-			left = 2,
-			width = 1,
-			height = 2,
-			room = {
-				name = "North Room",
-				width = 20,
-				length = 20,
-				height = 4,
-				doors = [
-					{
-						wall = "WestWall",
-						left = 5,
-						width = 1,
-						height = 2,
-						room = {
-							name = "North-West Room",
-							width = 10,
-							length = 20,
-							height = 6,
-							doors = []
-						}
-					}
-				]
-			}
-		},
-		{
-			wall = "SouthWall",
-			left = 2,
-			width = 1,
-			height = 2,
-			room = {
-				name = "South Room",
-				width = 40,
-				length = 16,
-				height = 4,
-				doors = []
-			}
-		},
-		{
-			wall = "WestWall",
-			left = 2,
-			width = 1,
-			height = 2,
-			room = {
-				name = "West Room",
-				width = 20,
-				length = 10,
-				height = 4,
-				doors = []
-			}
-		},
-		{
-			wall = "EastWall",
-			left = 2,
-			width = 1,
-			height = 2,
-			room = {
-				name = "East Room",
-				width = 12,
-				length = 10,
-				height = 6,
-				doors = []
+	"Central Room": {
+		width = 10,
+		length = 10,
+		height = 4,
+		doors = {
+			"North Room": {
+				wall = "NorthWall",
+				left = 2,
+				width = 1,
+				height = 2
+			},
+			"South Room": {
+				wall = "SouthWall",
+				left = 2,
+				width = 1,
+				height = 2
+			},
+			"West Room": {
+				wall = "WestWall",
+				left = 2,
+				width = 1,
+				height = 2
+			},
+			"East Room": {
+				wall = "EastWall",
+				left = 2,
+				width = 1,
+				height = 2
 			}
 		}
-	]
+	},
+	"North Room": {
+		width = 20,
+		length = 20,
+		height = 4,
+		doors = {
+			"North-West Room": {
+				wall = "WestWall",
+				left = 5,
+				width = 1,
+				height = 2
+			}
+		}
+	},
+	"South Room": {
+		width = 40,
+		length = 16,
+		height = 4,
+		doors = {}
+	},
+	"West Room": {
+		width = 20,
+		length = 10,
+		height = 4,
+		doors = {}
+	},
+	"East Room": {
+		width = 12,
+		length = 10,
+		height = 6,
+		doors = {}
+	},
+	"North-West Room": {
+		width = 10,
+		length = 20,
+		height = 6,
+		doors = {}
+	}
 }
 
 func get_room_offset (door_spec, room1_spec, room2):
@@ -108,42 +105,69 @@ func get_room_offset (door_spec, room1_spec, room2):
 	else: # EastWall
 		return Vector3(room_offset_width, 0, room_left_offset_length)
 
-func create_room_from_map (room_spec):
-	if ROOM_LIST.has(room_spec.name):
-		return ROOM_LIST[room_spec.name]
+func create_room_from_map (room_name):
+	if ROOM_LIST.has(room_name):
+		return ROOM_LIST[room_name]
 
+	var room_spec = ROOM_MAP[room_name]
 	var room = room_scene.instance()
-	room.init(room_spec.width, room_spec.length, room_spec.height, room_spec.name)
+	room.init(room_spec.width, room_spec.length, room_spec.height, room_name)
 
-	for door_spec in room_spec.doors:
+	for room2_name in room_spec.doors:
+		var door_spec = room_spec.doors[room2_name]
 		var door = room.get_node(door_spec.wall).add_door(
-			door_spec.left, door_spec.width, door_spec.height, door_spec.room.name, true)
+			door_spec.left, door_spec.width, door_spec.height, room2_name, true)
+		init_door(door, room_name, room2_name)
 
-		door.get_node("DoorBody").connect("try_to_open", self, "_on_Door_try_to_open",
-			[room_spec, door_spec, room])
-
-	ROOM_LIST[room_spec.name] = room
+	ROOM_LIST[room_name] = room
 	return room
+
+func init_door(door, room1_name, room2_name):
+	DOOR_LIST[room1_name + '/' + room2_name] = door.get_node("DoorBody")
+	door.get_node("DoorBody").connect("try_to_open", self, "_on_Door_try_to_open",
+			[room1_name, room2_name])
+
+func get_door(from_room, to_room):
+	return DOOR_LIST[from_room + '/' + to_room]
+
+func _on_Door_try_to_open (door_body, room1_name, room2_name):
+	var room1 = ROOM_LIST[room1_name]
+	var room1_spec = ROOM_MAP[room1_name]
+	var room2 = create_room_from_map(room2_name)
+
+	# unload all rooms other than the two active rooms
+	# TODO: also close all doors
+	for name in ROOM_LIST:
+		if name != room1_name and name != room2_name:
+			ROOM_LIST[name].queue_free()
+			ROOM_LIST.erase(name)
+
+	if not room2.is_inside_tree():
+		var door_spec = room1_spec.doors[room2_name]
+		var room2_wall = room2.get_node(OPPOSING_WALL_MAP[door_spec.wall])
+		var room2_offset = get_room_offset(door_spec, room1_spec, room2)
+		ROOM_MAP[room2_name].doors[room1_name] = {
+			width = door_spec.width,
+			height = door_spec.height,
+			left = room2_wall.wall_width / 2.0,
+			wall = OPPOSING_WALL_MAP[door_spec.wall]
+		}
+
+		var door = room2_wall.add_door(room2_wall.wall_width / 2.0,
+				door_spec.width, door_spec.height, room1_name, true)
+		init_door(door, room2_name, room1_name)
+		room2.set_translation(room1.get_translation() + room2_offset)
+		add_child(room2)
+
+	get_door(room2_name, room1_name).open()
+	door_body.open()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-	var start_room = create_room_from_map(ROOM_MAP)
+	var start_room = create_room_from_map("Central Room")
 	add_child(start_room)
-
-func _on_Door_try_to_open (door_body, room1_spec, door_spec, room1):
-	print('open door handler')
-
-	var room2 = create_room_from_map(door_spec.room)
-	var room2_wall = room2.get_node(OPPOSING_WALL_MAP[door_spec.wall])
-	var room2_offset = get_room_offset(door_spec, room1_spec, room2)
-	var door = room2_wall.add_door(room2_wall.wall_width / 2.0,
-			door_spec.width, door_spec.height, room1_spec.name, false)
-
-	room2.set_translation(room1.get_translation() + room2_offset)
-	add_child(room2)
-	door_body.open()
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
