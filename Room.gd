@@ -23,10 +23,10 @@ func init(width, length, height, name = "Untitled Room"):
 	$WestWall.set_translation(Vector3(-width / 2, 0, 0))
 
 	$NorthWall.init(width, height)
-	$NorthWall.set_translation(Vector3(0, 0, -length / 2 - THICKNESS))
+	$NorthWall.set_translation(Vector3(0, 0, -length / 2))
 
 	$SouthWall.init(width, height)
-	$SouthWall.set_translation(Vector3(0, 0, length / 2 + THICKNESS))
+	$SouthWall.set_translation(Vector3(0, 0, length / 2))
 
 	$EastWall.init(length, height)
 	$EastWall.set_translation(Vector3(width / 2, 0, 0))

@@ -142,13 +142,13 @@ func _on_Door_try_to_open (door_body, room1_spec, door_spec, room1):
 		room2_offset = Vector3(
 			-room2.room_width / 2.0 - room1_spec.width / 2.0 - 2 * THICKNESS,
 			0,
-			door_spec.left - room1_spec.length / 2.0
+			room1_spec.length / 2.0 - door_spec.left
 		)
 	else: # EastWall
 		room2_offset = Vector3(
 			room2.room_width / 2.0 + room1_spec.width / 2.0 + 2 * THICKNESS,
 			0,
-			room1_spec.length / 2.0 - door_spec.left
+			door_spec.left - room1_spec.length / 2.0
 		)
 
 	room2.set_translation(room1.get_translation() + room2_offset)

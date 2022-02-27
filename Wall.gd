@@ -36,15 +36,15 @@ func add_door(left, width, height, name = "Untitled Room", filled = false):
 	back_label.flip_h = true
 
 	front_label.set_translation(
-		Vector3(0.01, height + 0.2, -wall_width / 2 + left))
+		Vector3(0.01, height + 0.2, wall_width / 2 - left))
 	back_label.set_translation(
-		Vector3(-THICKNESS - 0.01, height + 0.2, -wall_width / 2 + left))
+		Vector3(-THICKNESS - 0.01, height + 0.2, wall_width / 2 - left))
 
 	doorway.set_depth(min(wall_width, width))
 	doorway.set_width(THICKNESS)
 	doorway.set_height(min(wall_height, height))
 	doorway.set_translation(
-		Vector3(-THICKNESS / 2, height / 2, -wall_width / 2 + left))
+		Vector3(-THICKNESS / 2, height / 2, wall_width / 2 - left))
 	doorway.set_operation(CSGShape.OPERATION_SUBTRACTION)
 
 	var door
@@ -52,7 +52,7 @@ func add_door(left, width, height, name = "Untitled Room", filled = false):
 		door = door_scene.instance()
 		door.init(width, height)
 		door.set_translation(
-			Vector3(-THICKNESS / 2, height / 2, -wall_width / 2 + left))
+			Vector3(-THICKNESS, height / 2, wall_width / 2 - left))
 		add_child(door)
 
 	add_child(front_label)
