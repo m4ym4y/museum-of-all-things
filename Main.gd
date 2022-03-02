@@ -1,4 +1,5 @@
 extends Node
+signal loaded_room
 
 export (PackedScene) var room_scene
 
@@ -32,6 +33,12 @@ var ROOM_MAP = {
 		length = 10,
 		height = 4,
 		doors = {
+			"Dinosaur": {
+				wall = "NorthWall",
+				left = 4,
+				width = 1,
+				height = 2
+			},
 			"North Room": {
 				wall = "NorthWall",
 				left = 2,
@@ -112,6 +119,12 @@ func get_room_offset (door_spec, room1_spec, room2):
 	else: # EastWall
 		return Vector3(room_offset_width, 0, room_left_offset_length)
 
+func load_room (room_name):
+	if ROOM_MAP.has(room_name):
+		emit_signal("loaded_room", room_name)
+		return
+	$HTTPRequest.request("http://localhost:8080/wikipedia/" + room_name)
+
 func create_room_from_map (room_name):
 	if ROOM_LIST.has(room_name):
 		return ROOM_LIST[room_name]
@@ -142,6 +155,10 @@ func _on_Door_try_to_open (door_body, room1_name, room2_name):
 	var room1_spec = ROOM_MAP[room1_name]
 	print('opening door from room', room1_name, 'to', room2_name)
 
+	if not ROOM_MAP.has(room2_name):
+		load_room(room2_name)
+		yield(self, 'loaded_room')
+
 	# unload all rooms other than the two active rooms
 	# TODO: also close all doors
 	for name in ROOM_LIST:
@@ -170,10 +187,19 @@ func _on_Door_try_to_open (door_body, room1_name, room2_name):
 	get_door(room2_name, room1_name).open()
 	door_body.open()
 
+func _on_request_completed(result, response_code, headers, body):
+	print('got result', response_code, body.get_string_from_utf8())
+	var room_spec = JSON.parse(body.get_string_from_utf8()).result
+	ROOM_MAP[room_spec.name] = room_spec
+	emit_signal("loaded_room", room_spec.name)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$HTTPRequest.connect("request_completed", self, "_on_request_completed")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+	# load_room("Dinosaur")
+	# yield(self, 'loaded_room')
 	var start_room = create_room_from_map("Central Room")
 	add_child(start_room)
 
