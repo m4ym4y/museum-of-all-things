@@ -1,9 +1,7 @@
 extends Sprite3D
 
 var image_url
-
 var PNG_REGEX = RegEx.new()
-
 var JPG_REGEX = RegEx.new()
 
 # Declare member variables here. Examples:
@@ -14,9 +12,9 @@ func _on_request_completed(result, response_code, headers, body):
 	var image_texture = ImageTexture.new()
 	var image = Image.new()
 
-	if JPG_REGEX.search(image_url):
+	if JPG_REGEX.search(image_url.to_lower()):
 		image.load_jpg_from_buffer(body)
-	elif PNG_REGEX.search(image_url):
+	elif PNG_REGEX.search(image_url.to_lower()):
 		image.load_png_from_buffer(body)
 
 	image_texture.create_from_image(image)

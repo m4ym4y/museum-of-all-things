@@ -7,6 +7,9 @@ const app = new Koa()
 const router = new Router()
 const port = 8080
 
+const WIKIPEDIA_IGNORE_IMAGE = [
+  '//upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/50px-Question_book-new.svg.png'
+]
 const WIKIPEDIA_PREFIX = 'https://en.wikipedia.org/wiki/'
 const MIN_LINKS = 4
 const MAX_LINKS = 12
@@ -25,7 +28,13 @@ router.get('/wikipedia/:page', async ctx => {
   const html = await res.text()
   const dom = cheerio.load(html)
 
-  const image = dom('#bodyContent').find('a.image > img')
+  let image: string = ''
+  dom('#bodyContent').find('a.image > img').each((_, el) => {
+    const img = el as cheerio.TagElement
+    if (!image && !WIKIPEDIA_IGNORE_IMAGE.includes(img.attribs.src)) {
+      image = img.attribs.src.replace(/^\/\//, 'https://')
+    }
+  })
 
   const candidateLinks: string[] = []
   dom('a[href^="/wiki/"]').each((_, el) => {
@@ -56,7 +65,7 @@ router.get('/wikipedia/:page', async ctx => {
   
   ctx.body = {
     name: ctx.params.page,
-    image: image.attr('src')?.replace(/^\/\//, 'https://'),
+    image,
     width: randomRange(MIN_DIMENSION, MAX_DIMENSION) * 2,
     length: randomRange(MIN_DIMENSION, MAX_DIMENSION) * 2,
     height: randomRange(2, 4) * 2,

@@ -8,6 +8,7 @@ extends Sprite3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	scale = Vector3(0.25, 0.25, 0.25)
 	pass # Replace with function body.
 
 func set_label(text):

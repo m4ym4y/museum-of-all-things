@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Viewport.gd" type="Script" id=1]
 [ext_resource path="res://Label3d.gd" type="Script" id=2]
+[ext_resource path="res://art/fonts/OpenSans-VariableFont_wdth,wght.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 3 )
 
 [node name="Label3d" type="Sprite3D"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
@@ -12,7 +17,7 @@ texture = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Viewport" type="Viewport" parent="."]
-size = Vector2( 76, 14 )
+size = Vector2( 350, 88 )
 transparent_bg = true
 render_target_v_flip = true
 script = ExtResource( 1 )
@@ -21,4 +26,5 @@ script = ExtResource( 1 )
 margin_right = 40.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Hello World"
