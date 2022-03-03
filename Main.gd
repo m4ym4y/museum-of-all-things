@@ -133,6 +133,10 @@ func create_room_from_map (room_name):
 	var room = room_scene.instance()
 	room.init(room_spec.width, room_spec.length, room_spec.height, room_name)
 
+	if room_spec.has("image"):
+		print('INIT IMAGE ', room_spec.image)
+		room.get_node("GallerySprite").init(room_spec.image)
+
 	for room2_name in room_spec.doors:
 		var door_spec = room_spec.doors[room2_name]
 		var door = room.get_node(door_spec.wall).add_door(

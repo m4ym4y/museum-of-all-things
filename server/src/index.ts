@@ -25,6 +25,8 @@ router.get('/wikipedia/:page', async ctx => {
   const html = await res.text()
   const dom = cheerio.load(html)
 
+  const image = dom('#bodyContent').find('a.image > img')
+
   const candidateLinks: string[] = []
   dom('a[href^="/wiki/"]').each((_, el) => {
     const link = el as cheerio.TagElement
@@ -54,6 +56,7 @@ router.get('/wikipedia/:page', async ctx => {
   
   ctx.body = {
     name: ctx.params.page,
+    image: image.attr('src')?.replace(/^\/\//, 'https://'),
     width: randomRange(MIN_DIMENSION, MAX_DIMENSION) * 2,
     length: randomRange(MIN_DIMENSION, MAX_DIMENSION) * 2,
     height: randomRange(2, 4) * 2,
