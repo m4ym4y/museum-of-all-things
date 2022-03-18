@@ -123,7 +123,7 @@ func load_room (room_name):
 	if ROOM_MAP.has(room_name):
 		emit_signal("loaded_room", room_name)
 		return
-	$HTTPRequest.request("http://localhost:8080/wikipedia/" + room_name)
+	$RoomGenerator.fetch_room(room_name)
 
 func create_room_from_map (room_name):
 	if ROOM_LIST.has(room_name):
@@ -135,7 +135,7 @@ func create_room_from_map (room_name):
 
 	if room_spec.has("image"):
 		print('INIT IMAGE ', room_spec.image)
-		room.get_node("GallerySprite").init(room_spec.image)
+		room.get_node("GallerySprite").init(room_spec.image, 3, 3)
 
 	for room2_name in room_spec.doors:
 		var door_spec = room_spec.doors[room2_name]
@@ -191,15 +191,13 @@ func _on_Door_try_to_open (door_body, room1_name, room2_name):
 	get_door(room2_name, room1_name).open()
 	door_body.open()
 
-func _on_request_completed(result, response_code, headers, body):
-	print('got result', response_code, body.get_string_from_utf8())
-	var room_spec = JSON.parse(body.get_string_from_utf8()).result
+func _on_room_ready(room_spec):
 	ROOM_MAP[room_spec.name] = room_spec
 	emit_signal("loaded_room", room_spec.name)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$HTTPRequest.connect("request_completed", self, "_on_request_completed")
+	$RoomGenerator.connect("room_ready", self, "_on_room_ready")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 	# load_room("Dinosaur")

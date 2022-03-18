@@ -8,7 +8,10 @@ export (PackedScene) var door_scene
 
 const PREVIEW_WIDTH = 10.0
 const PREVIEW_HEIGHT = 10.0
-const THICKNESS = 1.0
+
+# add some extra thickness to prevent bugs
+const THICKNESS = 1
+const EXTRA_MARGIN = 1
 
 var wall_width
 var wall_height
@@ -41,7 +44,7 @@ func add_door(left, width, height, name = "Untitled Room", filled = false):
 		Vector3(-THICKNESS - 0.01, height + 0.2, wall_width / 2 - left))
 
 	doorway.set_depth(min(wall_width, width))
-	doorway.set_width(THICKNESS)
+	doorway.set_width(THICKNESS + EXTRA_MARGIN)
 	doorway.set_height(min(wall_height, height))
 	doorway.set_translation(
 		Vector3(-THICKNESS / 2, height / 2, wall_width / 2 - left))
