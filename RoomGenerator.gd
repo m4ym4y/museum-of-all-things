@@ -3,6 +3,8 @@ signal room_ready
 
 const SUMMARY_API = "https://en.wikipedia.org/api/rest_v1/page/summary/"
 const RELATED_API = "https://en.wikipedia.org/api/rest_v1/page/related/"
+const LINKS_API = "https://en.wikipedia.org/w/api.php?action=query&prop=links&pllimit=max&format=json"
+
 const USER_AGENT = "https://github.com/m4ym4y/library-of-babel"
 const COMMON_HEADERS = [
 	"accept: application/json; charset=utf-8",
@@ -17,8 +19,10 @@ const WALL_ENUM = [
 ]
 
 var summary_response
-var related_response
-var prefetched_summaries = {}
+var linked_pages
+var linked_pages_complete = false
+var linked_pages_original_request
+var linked_request_limit
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -26,42 +30,49 @@ var prefetched_summaries = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	$SummaryHTTPRequest.connect("request_completed", self, "_on_summary_request_completed")
 	$RelatedHTTPRequest.connect("request_completed", self, "_on_related_request_completed")
 
 func fetch_room(room_name):
 	summary_response = null
-	related_response = null
+	linked_pages = []
+	linked_pages_complete = false
+	linked_pages_original_request = LINKS_API + "&titles=" + room_name.percent_encode()
+	linked_request_limit = 5
 
-	$RelatedHTTPRequest.request(RELATED_API + room_name.percent_encode(),
-			COMMON_HEADERS)
-
-	if prefetched_summaries.has(room_name):
-		summary_response = prefetched_summaries[room_name]
-	else:
-		$SummaryHTTPRequest.request(SUMMARY_API + room_name.percent_encode(),
-				COMMON_HEADERS)
-
-	# these are stale now
-	prefetched_summaries = {}
+	$RelatedHTTPRequest.request(linked_pages_original_request, COMMON_HEADERS)
+	$SummaryHTTPRequest.request(SUMMARY_API + room_name.percent_encode(), COMMON_HEADERS)
 
 func _on_summary_request_completed(result, response_code, headers, body):
 	summary_response = JSON.parse(body.get_string_from_utf8()).result
-	if related_response:
+	if linked_pages_complete:
 		_on_room_ready()
 
 func _on_related_request_completed(result, response_code, headers, body):
-	related_response = JSON.parse(body.get_string_from_utf8()).result
-	if summary_response:
-		_on_room_ready()
+	var response_batch = JSON.parse(body.get_string_from_utf8()).result
+
+	print('got response', response_batch)
+	for page in response_batch.query.pages:
+		linked_pages += response_batch.query.pages[page].links
+
+	if response_batch.has('continue') and linked_request_limit > 0:
+		linked_request_limit -= 1
+		$RelatedHTTPRequest.request(linked_pages_original_request +
+				"&plcontinue=" + response_batch.continue.plcontinue, COMMON_HEADERS)
+	else:
+		linked_pages_complete = true
+		if summary_response:
+			_on_room_ready()
 
 func _on_room_ready():
 	var door_spec = {}
 	var wall_index = 0
 
-	for related_summary in related_response.pages:
-		prefetched_summaries[related_summary.title] = related_summary
-		door_spec[related_summary.title] = {
+	linked_pages.shuffle()
+
+	for i in range(1, min(linked_pages.size(), 20)):
+		door_spec[linked_pages[i].title] = {
 			wall = WALL_ENUM[wall_index % WALL_ENUM.size()],
 			left = 1 + 2 * (wall_index / WALL_ENUM.size()),
 			width = 1,
