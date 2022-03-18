@@ -28,6 +28,9 @@ var linked_request_limit
 # var a = 2
 # var b = "text"
 
+func wikify (string):
+	return string.replace(" ", "_").percent_encode()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
@@ -42,7 +45,7 @@ func fetch_room(room_name):
 	linked_request_limit = 5
 
 	$RelatedHTTPRequest.request(linked_pages_original_request, COMMON_HEADERS)
-	$SummaryHTTPRequest.request(SUMMARY_API + room_name.percent_encode(), COMMON_HEADERS)
+	$SummaryHTTPRequest.request(SUMMARY_API + wikify(room_name), COMMON_HEADERS)
 
 func _on_summary_request_completed(result, response_code, headers, body):
 	summary_response = JSON.parse(body.get_string_from_utf8()).result
