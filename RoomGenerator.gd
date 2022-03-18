@@ -33,12 +33,14 @@ func fetch_room(room_name):
 	summary_response = null
 	related_response = null
 
-	$RelatedHTTPRequest.request(RELATED_API + room_name, COMMON_HEADERS)
+	$RelatedHTTPRequest.request(RELATED_API + room_name.percent_encode(),
+			COMMON_HEADERS)
 
 	if prefetched_summaries.has(room_name):
 		summary_response = prefetched_summaries[room_name]
 	else:
-		$SummaryHTTPRequest.request(SUMMARY_API + room_name, COMMON_HEADERS)
+		$SummaryHTTPRequest.request(SUMMARY_API + room_name.percent_encode(),
+				COMMON_HEADERS)
 
 	# these are stale now
 	prefetched_summaries = {}
