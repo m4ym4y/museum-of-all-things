@@ -5,7 +5,7 @@ const SUMMARY_API = "https://en.wikipedia.org/api/rest_v1/page/summary/"
 const RELATED_API = "https://en.wikipedia.org/api/rest_v1/page/related/"
 const LINKS_API = "https://en.wikipedia.org/w/api.php?action=query&prop=links&pllimit=max&format=json"
 
-const USER_AGENT = "https://github.com/m4ym4y/library-of-babel"
+const USER_AGENT = "https://github.com/m4ym4y/wikipedia-museum"
 const COMMON_HEADERS = [
 	"accept: application/json; charset=utf-8",
 	"user-agent: " + USER_AGENT
