@@ -210,6 +210,10 @@ config/name="Wikipedia-museum"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/qodot/plugin.cfg" )
+
 [input]
 
 move_forward={
