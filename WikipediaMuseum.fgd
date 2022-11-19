@@ -1,0 +1,45 @@
+@SolidClass = worldspawn : "World Entity" [
+]
+
+@SolidClass = group : "Brush Group" [
+]
+
+@SolidClass = detail : "Detail Brush" [
+]
+
+@SolidClass = illusionary : "Non-colliding Brush" [
+]
+
+@SolidClass = worldspawn : "World Entity" [
+]
+
+@BaseClass color(255 255 40) = Light[
+	_color(color255) : "Light color"  : "255 255 255"
+	delay(choices) : "Attenuation"  = [
+		1 : "Inverse distance falloff"
+		2 : "Inverse distance squared"
+		5 : "Inverse distance squared B"
+		0 : "Linear falloff (Default)"
+		4 : "Local minlight"
+		3 : "No falloff"
+	]
+	light(integer) : "Brightness"  : 300
+	mangle(string) : "Spotlight angle"  : "0.005 0 0"
+	wait(integer) : "Fade distance multiplier"  : 1
+]
+
+@PointClass size(-8 -8 -8, 8 8 8) base(Light) = light : "Invisible light source" [
+	angle(float) : "Rotation Angle"  : 0
+]
+
+@PointClass size(-8 -8 -8, 8 8 8) color(204 204 204) = door[
+]
+
+@PointClass size(-8 -8 -8, 8 8 8) color(204 204 204) = entrance[
+]
+
+@PointClass size(-8 -8 -8, 8 8 8) color(204 204 204) = exit[
+]
+
+@PointClass size(-8 -8 -8, 8 8 8) color(204 204 204) = item[
+]

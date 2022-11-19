@@ -186,14 +186,3 @@
 ( 288 0 -16 ) ( 288 0 16 ) ( 288 64 -16 ) white 0 0 0 1 1
 }
 }
-// entity 1
-{
-"classname" "entrance"
-"origin" "-80 32 48"
-"angle" "180"
-}
-// entity 2
-{
-"classname" "exit"
-"origin" "288 32 48"
-}

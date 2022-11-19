@@ -1,15 +1,42 @@
-[gd_resource type="Resource" load_steps=5 format=2]
+[gd_resource type="Resource" load_steps=25 format=2]
 
-[ext_resource path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" type="Resource" id=1]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/solid_classes/trigger_solid_class.tres" type="Resource" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://addons/qodot/src/resources/game-definitions/trenchbroom/trenchbroom_game_config_folder.gd" type="Script" id=3]
 [ext_resource path="res://addons/qodot/game_definitions/trenchbroom/qodot_trenchbroom_config_file.tres" type="Resource" id=4]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/point_classes/signal_point_class.tres" type="Resource" id=5]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/base_classes/targetname_base_class.tres" type="Resource" id=6]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/base_classes/target_base_class.tres" type="Resource" id=7]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/solid_classes/group_solid_class.tres" type="Resource" id=8]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/solid_classes/detail_solid_class.tres" type="Resource" id=9]
+[ext_resource path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_file.gd" type="Script" id=10]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/solid_classes/func_group_solid_class.tres" type="Resource" id=11]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/solid_classes/worldspawn_solid_class.tres" type="Resource" id=12]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/solid_classes/illusionary_solid_class.tres" type="Resource" id=13]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/base_classes/light_base_class.tres" type="Resource" id=14]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/solid_classes/rotate_solid_class.tres" type="Resource" id=15]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/solid_classes/button_solid_class.tres" type="Resource" id=16]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/point_classes/physics_ball_point_class.tres" type="Resource" id=17]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/point_classes/receiver_point_class.tres" type="Resource" id=18]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/point_classes/light_point_class.tres" type="Resource" id=19]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/solid_classes/physics_solid_class.tres" type="Resource" id=20]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/solid_classes/wall_solid_class.tres" type="Resource" id=21]
+[ext_resource path="res://addons/qodot/game_definitions/fgd/solid_classes/mover_solid_class.tres" type="Resource" id=22]
+[ext_resource path="res://wikipedia_museum_fgd.tres" type="Resource" id=23]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 10 )
+export_file = false
+target_folder = "/home/maya/prog/wikipedia-museum"
+fgd_name = "Qodot"
+base_fgd_files = [  ]
+entity_definitions = [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 14 ), null, null, null, null, null, null, null, ExtResource( 5 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 17 ), null, null, null, null, null, null, ExtResource( 12 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 13 ), ExtResource( 21 ), ExtResource( 1 ), ExtResource( 22 ), ExtResource( 15 ), ExtResource( 20 ), ExtResource( 16 ) ]
 
 [resource]
 script = ExtResource( 3 )
 export_file = false
-trenchbroom_games_folder = "C:/OtherPrograms/TrenchBroom/2020.1/games"
+trenchbroom_games_folder = "/usr/share/TrenchBroom/games/WikipediaMuseum"
 game_name = "Qodot"
 icon = ExtResource( 2 )
 game_config_file = ExtResource( 4 )
-fgd_files = [ ExtResource( 1 ) ]
+fgd_files = [ SubResource( 1 ), ExtResource( 23 ) ]

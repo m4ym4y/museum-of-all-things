@@ -1,11 +1,13 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://art/wood.png" type="Texture" id=1]
 [ext_resource path="res://HallwayExhibitRoom.gd" type="Script" id=2]
-[ext_resource path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" type="Resource" id=3]
+[ext_resource path="res://wikipedia_museum_fgd.tres" type="Resource" id=3]
 [ext_resource path="res://addons/qodot/src/nodes/qodot_map.gd" type="Script" id=4]
 [ext_resource path="res://textures/white.png" type="Texture" id=5]
 [ext_resource path="res://textures/wood.tres" type="Material" id=6]
+[ext_resource path="res://RoomExit.tscn" type="PackedScene" id=7]
+[ext_resource path="res://RoomEntrance.tscn" type="PackedScene" id=8]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 1 )
@@ -154,7 +156,7 @@ omni_attenuation = 4.28709
 transform = Transform( -0.913908, 0.126712, -0.385638, 0, 0.95003, 0.312159, 0.405922, 0.285284, -0.86824, -2.3524, 6.50556, -0.812111 )
 
 [node name="QodotMap" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.101, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0292935, -2.101, 0.0130434 )
 script = ExtResource( 4 )
 map_file = "/home/maya/prog/wikipedia-museum/maps/hallway1.map"
 inverse_scale_factor = 16.0
@@ -241,3 +243,9 @@ shape = SubResource( 24 )
 
 [node name="entity_0_brush_19_collision_shape" type="CollisionShape" parent="QodotMap/entity_0_worldspawn"]
 shape = SubResource( 25 )
+
+[node name="entity_1_entrance" parent="QodotMap" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, -5 )
+
+[node name="entity_2_exit" parent="QodotMap" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 18 )
