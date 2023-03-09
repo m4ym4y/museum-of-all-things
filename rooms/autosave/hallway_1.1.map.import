@@ -1,0 +1,13 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+path="res://.import/hallway_1.1.map-93935e0788990ea487a024d06e2d61e1.tres"
+
+[deps]
+
+source_file="res://rooms/autosave/hallway_1.1.map"
+dest_files=[ "res://.import/hallway_1.1.map-93935e0788990ea487a024d06e2d61e1.tres" ]
+
+[params]
+

@@ -237,7 +237,7 @@ map_file = "P:/Personal/Godot/Qodot/qodot-example/addons/qodot/example_scenes/0-
 inverse_scale_factor = 16.0
 entity_fgd = ExtResource( 2 )
 base_texture_dir = "res://addons/qodot/textures"
-texture_file_extension = "png"
+texture_file_extensions = PoolStringArray( "png" )
 worldspawn_layers = [  ]
 brush_clip_texture = "special/clip"
 face_skip_texture = "special/skip"
@@ -255,10 +255,6 @@ set_owner_batch_size = 16
 [node name="entity_0_mesh_instance" type="MeshInstance" parent="QodotMap/entity_0_worldspawn"]
 use_in_baked_light = true
 mesh = SubResource( 4 )
-material/0 = null
-material/1 = null
-material/2 = null
-material/3 = null
 
 [node name="entity_0_brush_0_collision_shape" type="CollisionShape" parent="QodotMap/entity_0_worldspawn"]
 shape = SubResource( 5 )

@@ -25,3 +25,7 @@ depending on what is linked from that wikipedia article.
   - the exhibit scene would have data associated with it, loaded from the wikipedia article. Another element will be used to process this into a stream of links, images, and paragraphs. The exhibit will assemble rooms, filling them with links and media, until the article is exhausted.
     - there might be some level of curation because there are likely way more links than doors, compared to the slots for media. And we might not want to have every part of the article represented in the exhibit.
 
+- multiplayer features to enable games
+  - menu to turn on/off display of what room you're in
+  - 'pinging' tool that lets you highlight something in the room, but also lets you highlight a player and announces that in chat
+  - this way you could play games like laser tag, racing to a certain destination, etc.

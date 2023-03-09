@@ -1,8 +1,0 @@
-[gd_scene format=2]
-
-[node name="CameraPivot" type="Position3D"]
-transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0 )
-
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0250053, -0.0209942, 100 )
-far = 979.3

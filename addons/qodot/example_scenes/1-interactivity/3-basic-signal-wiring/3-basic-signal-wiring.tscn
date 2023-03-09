@@ -334,8 +334,6 @@ set_owner_batch_size = 16
 [node name="entity_0_mesh_instance" type="MeshInstance" parent="QodotMap/entity_0_worldspawn"]
 use_in_baked_light = true
 mesh = SubResource( 7 )
-material/0 = null
-material/1 = null
 
 [node name="entity_0_brush_0_collision_shape" type="CollisionShape" parent="QodotMap/entity_0_worldspawn"]
 shape = SubResource( 8 )
@@ -467,7 +465,6 @@ properties = {
 
 [node name="entity_2_mesh_instance" type="MeshInstance" parent="QodotMap/entity_2_button"]
 mesh = SubResource( 45 )
-material/0 = null
 
 [node name="entity_2_brush_0_collision_shape" type="CollisionShape" parent="QodotMap/entity_2_button"]
 shape = SubResource( 46 )
@@ -484,7 +481,6 @@ properties = {
 
 [node name="entity_3_mesh_instance" type="MeshInstance" parent="QodotMap/entity_3_mover"]
 mesh = SubResource( 47 )
-material/0 = null
 
 [node name="entity_3_brush_0_collision_shape" type="CollisionShape" parent="QodotMap/entity_3_mover"]
 shape = SubResource( 48 )
@@ -500,7 +496,6 @@ properties = {
 
 [node name="entity_7_mesh_instance" type="MeshInstance" parent="QodotMap/entity_7_button"]
 mesh = SubResource( 49 )
-material/0 = null
 
 [node name="entity_7_brush_0_collision_shape" type="CollisionShape" parent="QodotMap/entity_7_button"]
 shape = SubResource( 50 )
@@ -516,7 +511,6 @@ properties = {
 
 [node name="entity_8_mesh_instance" type="MeshInstance" parent="QodotMap/entity_8_button"]
 mesh = SubResource( 51 )
-material/0 = null
 
 [node name="entity_8_brush_0_collision_shape" type="CollisionShape" parent="QodotMap/entity_8_button"]
 shape = SubResource( 52 )
@@ -533,7 +527,6 @@ properties = {
 
 [node name="entity_9_mesh_instance" type="MeshInstance" parent="QodotMap/entity_9_mover"]
 mesh = SubResource( 53 )
-material/0 = null
 
 [node name="entity_9_brush_0_collision_shape" type="CollisionShape" parent="QodotMap/entity_9_mover"]
 shape = SubResource( 54 )
@@ -550,7 +543,6 @@ properties = {
 
 [node name="entity_10_mesh_instance" type="MeshInstance" parent="QodotMap/entity_10_mover"]
 mesh = SubResource( 55 )
-material/0 = null
 
 [node name="entity_10_brush_0_collision_shape" type="CollisionShape" parent="QodotMap/entity_10_mover"]
 shape = SubResource( 56 )
