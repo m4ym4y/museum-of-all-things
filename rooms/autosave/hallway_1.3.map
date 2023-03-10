@@ -38,18 +38,11 @@
 // entity 3
 {
 "classname" "item"
-"origin" "8 15 40"
+"origin" "8 16 40"
 "angle" "270"
 }
 // entity 4
 {
 "classname" "entrance"
-"origin" "8 -64 24"
-"angle" "90"
-}
-// entity 5
-{
-"classname" "exit"
-"origin" "8 64 24"
-"angle" "270"
+"origin" "8 -56 24"
 }

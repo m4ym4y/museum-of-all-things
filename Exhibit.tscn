@@ -1,12 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Exhibit.gd" type="Script" id=5]
 
 [node name="Exhibit" type="Spatial"]
 script = ExtResource( 5 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.0220322, 0.318877, -0.94754, -0.00741251, 0.947796, 0.31879, 0.99973, 3.3503e-11, 0.0232457, -4.38761, 5.65043, 2.11091 )
-
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.666831, -0.582743, 0.464487, -0.0853217, 0.559495, 0.82443, -0.740309, -0.589386, 0.323368, 0, 2.41365, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.14822, 0 )

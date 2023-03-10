@@ -92,10 +92,28 @@ properties = {
 }
 
 [node name="entity_3_item" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.5, 0.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9375, 2.5, 0.5 )
 script = ExtResource( 4 )
 properties = {
 "angle": "270",
 "classname": "item",
-"origin": "8 8 40"
+"origin": "8 15 40"
+}
+
+[node name="entity_4_entrance" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, 0.5 )
+script = ExtResource( 4 )
+properties = {
+"angle": "90",
+"classname": "entrance",
+"origin": "8 -64 24"
+}
+
+[node name="entity_5_exit" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, 0.5 )
+script = ExtResource( 4 )
+properties = {
+"angle": "270",
+"classname": "exit",
+"origin": "8 64 24"
 }

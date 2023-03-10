@@ -4,6 +4,8 @@
 
 ![a link to the 'gastrolith' room](./screenshot2.png)
 
+(currently being rewritten)
+
 The goal of this project is to make an interactive 3d museum that is generated
 on the fly, using content from wikipedia to fill exhibits. The museum is
 virtually limitless, allowing you to take doors from one exhibit to another,
