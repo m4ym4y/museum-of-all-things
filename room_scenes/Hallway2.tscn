@@ -312,7 +312,7 @@ properties = {
 }
 
 [node name="entity_11_door" type="Spatial" parent="map"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, 26.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0029, 1.50892, 26.5056 )
 script = ExtResource( 2 )
 properties = {
 "angle": "90",
