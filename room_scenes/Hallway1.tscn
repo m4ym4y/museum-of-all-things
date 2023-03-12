@@ -44,6 +44,8 @@ points = PoolVector3Array( -4, 1, -4, -4, -1, -4, 4, -1, -4, 4, 1, -4, -4, 1, 4,
 points = PoolVector3Array( 1, 4, -1, 1, 1, -1, 2, 1, -1, 2, 4, -1, 1, 4, 2, 1, 1, 2, 2, 1, 2, 2, 4, 2 )
 
 [node name="Hallway1" type="Spatial"]
+
+[node name="map" type="Spatial" parent="."]
 script = ExtResource( 1 )
 map_file = "/home/maya/prog/museum-of-wikipedia/rooms/hallway_1.map"
 inverse_scale_factor = 16.0
@@ -62,19 +64,19 @@ use_trenchbroom_group_hierarchy = false
 tree_attach_batch_size = 16
 set_owner_batch_size = 16
 
-[node name="entity_0_worldspawn" type="StaticBody" parent="."]
+[node name="entity_0_worldspawn" type="StaticBody" parent="map"]
 
-[node name="entity_0_mesh_instance" type="MeshInstance" parent="entity_0_worldspawn"]
+[node name="entity_0_mesh_instance" type="MeshInstance" parent="map/entity_0_worldspawn"]
 use_in_baked_light = true
 mesh = SubResource( 3 )
 
-[node name="entity_0_brush_0_collision_shape" type="CollisionShape" parent="entity_0_worldspawn"]
+[node name="entity_0_brush_0_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
 shape = SubResource( 4 )
 
-[node name="entity_0_brush_1_collision_shape" type="CollisionShape" parent="entity_0_worldspawn"]
+[node name="entity_0_brush_1_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
 shape = SubResource( 5 )
 
-[node name="entity_1_door" type="Spatial" parent="."]
+[node name="entity_1_door" type="Spatial" parent="map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.5, 4.5 )
 script = ExtResource( 4 )
 properties = {
@@ -83,7 +85,7 @@ properties = {
 "origin": "72 -8 24"
 }
 
-[node name="entity_2_door" type="Spatial" parent="."]
+[node name="entity_2_door" type="Spatial" parent="map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.5, -4.5 )
 script = ExtResource( 4 )
 properties = {
@@ -91,7 +93,7 @@ properties = {
 "origin": "-72 -8 24"
 }
 
-[node name="entity_3_item" type="Spatial" parent="."]
+[node name="entity_3_item" type="Spatial" parent="map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9375, 2.5, 0.5 )
 script = ExtResource( 4 )
 properties = {
@@ -100,7 +102,7 @@ properties = {
 "origin": "8 15 40"
 }
 
-[node name="entity_4_entrance" type="Spatial" parent="."]
+[node name="entity_4_entrance" type="Spatial" parent="map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, 0.5 )
 script = ExtResource( 4 )
 properties = {
@@ -109,7 +111,7 @@ properties = {
 "origin": "8 -64 24"
 }
 
-[node name="entity_5_exit" type="Spatial" parent="."]
+[node name="entity_5_exit" type="Spatial" parent="map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, 0.5 )
 script = ExtResource( 4 )
 properties = {
@@ -117,3 +119,6 @@ properties = {
 "classname": "exit",
 "origin": "8 64 24"
 }
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148635, 4.46786, 0.0151796 )
