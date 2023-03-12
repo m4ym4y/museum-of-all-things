@@ -5,6 +5,7 @@ var PNG_REGEX = RegEx.new()
 var JPG_REGEX = RegEx.new()
 var width
 var height
+var text
 
 const PIXELS_PER_METER = 200
 
@@ -31,6 +32,11 @@ func _on_request_completed(result, response_code, headers, body):
 	image_texture.create_from_image(image)
 	texture = image_texture
 
+	var label = Label3D.new()
+	label.text = text
+	label.translation.y = -height - 0.1
+	add_child(label)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	PNG_REGEX.compile("\\.png$")
@@ -39,7 +45,7 @@ func _ready():
 		$HTTPRequest.request(image_url)
 	pass
 
-func init(url, _width, _height):
+func init(url, _width, _height, _text):
 	print("LOADING IMAGE BY URL ", url)
 	if url.begins_with('//'):
 		image_url = 'https:' + url
@@ -47,6 +53,7 @@ func init(url, _width, _height):
 		image_url = url
 	width = _width
 	height = _height
+	text = _text
 	$HTTPRequest.connect("request_completed", self, "_on_request_completed")
 	if is_inside_tree():
 		$HTTPRequest.request(image_url)
