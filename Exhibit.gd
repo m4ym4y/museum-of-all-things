@@ -14,67 +14,7 @@ const TextItem = preload("res://room_items/TextItem.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# in future this will be init with wikipedia article
-	"""init(['hello', 'world', 'test', 'lorem', 'ipsum',
-		'hello', 'world', 'test', 'lorem', 'ipsum',
-		'hello', 'world', 'test', 'lorem', 'ipsum',
-		'hello', 'world', 'test', 'lorem', 'ipsum',
-		'hello', 'world', 'test', 'lorem', 'ipsum',
-		'hello', 'world', 'test', 'lorem', 'ipsum'
-	])"""
-	init([
-		{
-			"type": "image",
-			"src": "//upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg/640px-Einstein_1921_by_F_Schmutzer_-_restoration.jpg",
-			"text": "caption"
-		},
-		{
-			"type": "text",
-			"text": "Albert Einstein (/ˈaɪnstaɪn/ EYEN-styne;[6] German: [ˈalbɛʁt ˈʔaɪnʃtaɪn] (listen); 14 March 1879 – 18 April 1955) was a German-born theoretical physicist,[7] widely acknowledged to be one of the greatest and most influential physicists of all time. Einstein is best known for developing the theory of relativity, but he also made important contributions to the development of the theory of quantum mechanics. Relativity and quantum mechanics are the two pillars of modern physics.[3][8] His mass–energy equivalence formula E = mc2, which arises from relativity theory, has been dubbed 'the world's most famous equation'."
-		},
-		{
-			"type": "image",
-			"src": "//upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Albert_Einstein_at_the_age_of_three_%281882%29.jpg/320px-Albert_Einstein_at_the_age_of_three_%281882%29.jpg",
-			"text": "Einstein at the age of three in 1882"
-		},
-		{
-			"type": "text",
-			"text": "His work is also known for its influence on the philosophy of science.[10][11] He received the 1921 Nobel Prize in Physics 'for his services to theoretical physics, and especially for his discovery of the law of the photoelectric effect',[12] a pivotal step in the development of quantum theory. His intellectual achievements and originality resulted in 'Einstein' becoming synonymous with 'genius'.[13] Einsteinium, one of the synthetic elements in the periodic table, was named in his honor."
-		},
-		{
-			"type": "image",
-			"src": "//upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Albert_Einstein_as_a_child.jpg/640px-Albert_Einstein_as_a_child.jpg",
-			"text": "Einstein in 1893 (age 14)"
-		},
-		{
-			"type": "image",
-			"src": "//upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Albert_Einstein%27s_exam_of_maturity_grades_%28color2%29.jpg/640px-Albert_Einstein%27s_exam_of_maturity_grades_%28color2%29.jpg",
-			"text": "Einstein's Matura certificate, 1896[note 2]"
-		},
-		{
-			"type": "image",
-			"src": "//upload.wikimedia.org/wikipedia/commons/thumb/8/87/Albert_Einstein_and_his_wife_Mileva_Maric.jpg/640px-Albert_Einstein_and_his_wife_Mileva_Maric.jpg",
-			"text": "Albert Einstein and Mileva Marić Einstein, 1912"
-		},
-		{
-			"type": "image",
-			"src": "//upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Einstein_patentoffice.jpg/640px-Einstein_patentoffice.jpg",
-			"text": "Einstein in 1904 (age 25)"
-		},
-		{
-			"type": "image",
-			"src": "//upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Einstein_thesis.png/640px-Einstein_thesis.png",
-			"text": "Cover image of the PhD dissertation of Albert Einstein defended in 1905"
-		},
-	])
-
-# TODO: put this in main class instead
-func _input(event):
-	if event.is_action_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	if event.is_action_pressed("click"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	pass
 
 func add_room():
 	pass
@@ -86,7 +26,8 @@ func get_angle(child):
 		return 0.0
 
 # start with items that are just text
-func init(items):
+func init(data):
+	var items = data.items
 	var exit_pos = Vector3(0, 0, 0)
 
 	while items.size() > 0:
