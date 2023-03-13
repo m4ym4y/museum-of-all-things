@@ -14,6 +14,7 @@ const room_types = [
 
 const ImageItem = preload("res://room_items/ImageItem.tscn")
 const TextItem = preload("res://room_items/TextItem.tscn")
+const DoorPlaceholder = preload("res://DoorPlaceholder.tscn")
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -62,23 +63,23 @@ func init(data):
 			elif child.name.ends_with("door"):
 				print("found door")
 				var door = doors.pop_front()
-				if not door:
-					continue
 
-				if not emitted:
-					emitted = true
-					# $Timer.connect("timeout", self, "_on_timer_timeout", [door, child.translation, get_angle(child)])
-					$Timer.connect("timeout", self, "_on_timer_timeout", [door, child])
+				if door:
+					# TODO: actually add a door instead of loading on a timer
+					if not emitted:
+						emitted = true
+						# $Timer.connect("timeout", self, "_on_timer_timeout", [door, child.translation, get_angle(child)])
+						$Timer.connect("timeout", self, "_on_timer_timeout", [door, child])
+				else:
+					# block off the door if we have no link
+					var placeholder = DoorPlaceholder.instance()
+					child.add_child(placeholder)
 
 			elif child.name.ends_with("item"):
 				print("found item")
 				var item = items.pop_front()
 				if not item:
 					continue
-
-				"""var item_scene = Label3D.new()
-				item_scene.text = item
-				print('angle:', get_angle(child))"""
 				
 				var item_scene
 				if item.type == "image":

@@ -1,0 +1,12 @@
+[gd_scene format=2]
+
+[node name="DoorPlaceholder" type="Spatial"]
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+use_collision = true
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+width = 1.5
+height = 4.0
+depth = 4.0
