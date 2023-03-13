@@ -95,7 +95,7 @@ func load_exhibit(title, translation = Vector3(0, 0, 0), angle = 0):
 
 	exhibit.connect("open_door", self, "_on_open_door", [title])
 	exhibit.rotation.y = angle
-	exhibit.translation = translation - exhibit.entrance
+	exhibit.global_transform.origin = translation # - exhibit.entrance
 
 	# TODO: position exhibit at the correct location according to the triggered door
 	add_child(exhibit)

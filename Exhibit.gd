@@ -65,10 +65,10 @@ func init(data):
 				if not door:
 					continue
 
-			if not emitted:
-				emitted = true
-				# $Timer.connect("timeout", self, "_on_timer_timeout", [door, child.translation, get_angle(child)])
-				$Timer.connect("timeout", self, "_on_timer_timeout", [door, child])
+				if not emitted:
+					emitted = true
+					# $Timer.connect("timeout", self, "_on_timer_timeout", [door, child.translation, get_angle(child)])
+					$Timer.connect("timeout", self, "_on_timer_timeout", [door, child])
 
 			elif child.name.ends_with("item"):
 				print("found item")
@@ -76,20 +76,20 @@ func init(data):
 				if not item:
 					continue
 
-			"""var item_scene = Label3D.new()
-			item_scene.text = item
-			print('angle:', get_angle(child))"""
-			
-			var item_scene
-			if item.type == "image":
-				item_scene = ImageItem.instance()
-				item_scene.init(item.src, 1, 1, item.text)
-			elif item.type == "text":
-				item_scene = TextItem.instance()
-				item_scene.init(item.text)
+				"""var item_scene = Label3D.new()
+				item_scene.text = item
+				print('angle:', get_angle(child))"""
+				
+				var item_scene
+				if item.type == "image":
+					item_scene = ImageItem.instance()
+					item_scene.init(item.src, 1, 1, item.text)
+				elif item.type == "text":
+					item_scene = TextItem.instance()
+					item_scene.init(item.text)
 
-			item_scene.rotation.y = get_angle(child)
-			child.add_child(item_scene)
+				item_scene.rotation.y = get_angle(child)
+				child.add_child(item_scene)
 
 		room.translation = exit_pos - entrance_pos
 		add_child(room)
@@ -98,8 +98,8 @@ func init(data):
 # func _on_timer_timeout(door, door_translation, door_angle):
 	# emit_signal("open_door", door, door_translation, door_angle)
 func _on_timer_timeout(door, door_object):
-	print("DOOR ", door, " ", door_object, " IS AT TRANSLATION: ", entrance - door_object.translation)
-	emit_signal("open_door", door, entrance - door_object.translation, get_angle(door_object))
+	print("DOOR ", door, " ", door_object, " IS AT TRANSLATION: ", door_object.global_transform.origin)
+	emit_signal("open_door", door, door_object.global_transform.origin, get_angle(door_object))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
