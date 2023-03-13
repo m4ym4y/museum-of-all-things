@@ -1,8 +1,6 @@
 extends Spatial
 
 signal open_door(to_exhibit, door_translation, door_angle)
-# for testing
-var emitted = false
 
 var entrance = Vector3(0, 0, 0)
 var entrance_angle = 0
@@ -14,13 +12,10 @@ const room_types = [
 
 const ImageItem = preload("res://room_items/ImageItem.tscn")
 const TextItem = preload("res://room_items/TextItem.tscn")
+
 const DoorPlaceholder = preload("res://DoorPlaceholder.tscn")
+const Door = preload("res://Door.tscn")
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
@@ -62,14 +57,12 @@ func init(data):
 
 			elif child.name.ends_with("door"):
 				print("found door")
-				var door = doors.pop_front()
+				var door_to = doors.pop_front()
 
-				if door:
-					# TODO: actually add a door instead of loading on a timer
-					if not emitted:
-						emitted = true
-						# $Timer.connect("timeout", self, "_on_timer_timeout", [door, child.translation, get_angle(child)])
-						$Timer.connect("timeout", self, "_on_timer_timeout", [door, child])
+				if door_to:
+					var door_object = Door.instance()
+					door_object.connect("open", self, "_on_door_open", [door_to, child])
+					child.add_child(door_object)
 				else:
 					# block off the door if we have no link
 					var placeholder = DoorPlaceholder.instance()
@@ -96,11 +89,8 @@ func init(data):
 		add_child(room)
 		exit_pos = room.translation + next_exit_pos
 
-# func _on_timer_timeout(door, door_translation, door_angle):
-	# emit_signal("open_door", door, door_translation, door_angle)
-func _on_timer_timeout(door, door_object):
-	print("DOOR ", door, " ", door_object, " IS AT TRANSLATION: ", door_object.global_transform.origin)
-	emit_signal("open_door", door, door_object.global_transform.origin, get_angle(door_object))
+func _on_door_open(door_to, door_object):
+	emit_signal("open_door", door_to, door_object.global_transform.origin, get_angle(door_object))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
