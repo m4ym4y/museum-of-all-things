@@ -59,14 +59,17 @@ func init(data):
 				print("found door")
 				var door_to = doors.pop_front()
 
+				var door_scene
 				if door_to:
-					var door_object = Door.instance()
-					door_object.connect("open", self, "_on_door_open", [door_to, child])
-					child.add_child(door_object)
+					door_scene = Door.instance()
+					door_scene.init(door_to)
+					door_scene.connect("open", self, "_on_door_open", [door_to, child])
 				else:
 					# block off the door if we have no link
-					var placeholder = DoorPlaceholder.instance()
-					child.add_child(placeholder)
+					door_scene = DoorPlaceholder.instance()
+
+				door_scene.rotation.y = get_angle(child)
+				child.add_child(door_scene)
 
 			elif child.name.ends_with("item"):
 				print("found item")

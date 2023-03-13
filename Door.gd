@@ -10,6 +10,9 @@ signal open
 func _ready():
 	pass # Replace with function body.
 
+func init(name):
+	$Label3D.text = name
+
 #TODO: cooldown timer
 var interacted = false
 func interact():
@@ -17,10 +20,10 @@ func interact():
 		interacted = true
 		print("DOOR INTERACT TRIGGER")
 		emit_signal("open")
-		$CSGBox.translation.y -= 10
+		translation.y -= 10
 		# yield(get_tree().create_timer(5), "timeout")
 		# interacted = false
-		# $CSGBox.translation.y += 10
+		# translation.y += 10
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
