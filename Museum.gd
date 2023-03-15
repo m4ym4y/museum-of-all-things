@@ -80,7 +80,7 @@ const static_exhibit_data = {
 				"text": "The theory of relativity usually encompasses two interrelated physics theories by Albert Einstein; special relativity and general relativity, proposed and published in 1905 and 1915, respectively.[1] Special relativity applies to all physical phenomena in the absence of gravity. General relativity explains the law of gravitation and its relation to the forces of nature.[2] It applies to the cosmological and astrophysical realm, including astronomy.[3]"
 			}
 		],
-		"doors": []
+		"doors": [ "Dinosaur" ]
 	}
 }
 
@@ -100,14 +100,33 @@ func load_exhibit(title, translation = Vector3(0, 0, 0), angle = 0):
 	# TODO: position exhibit at the correct location according to the triggered door
 	add_child(exhibit)
 
+var loading_exhibit
+var loading_door_translation
+var loading_door_angle
+
 func _on_open_door(to_exhibit, door_translation, door_angle, from_exhibit):
 	print("HANDLING OPEN DOOR")
 	# Free exhibits other than the one we're in
 	for k in loaded_exhibits.keys():
 		if k != from_exhibit:
 			loaded_exhibits[k].queue_free()
+			loaded_exhibits.erase(k)
+	
+	if static_exhibit_data.has(to_exhibit):
+		load_exhibit(to_exhibit, door_translation, door_angle)
+		return
 
-	load_exhibit(to_exhibit, door_translation, door_angle)
+	loading_exhibit = to_exhibit
+	loading_door_translation = door_translation
+	loading_door_angle = door_angle + loaded_exhibits[from_exhibit].rotation.y
+	$ExhibitFetcher.fetch(to_exhibit)
+
+	#load_exhibit(to_exhibit, door_translation, door_angle)
+
+func _on_fetch_complete(exhibit_data):
+	static_exhibit_data[loading_exhibit] = exhibit_data
+	load_exhibit(loading_exhibit, loading_door_translation, loading_door_angle)
 
 func _ready():
+	$ExhibitFetcher.connect("fetch_complete", self, "_on_fetch_complete")
 	load_exhibit(starting_exhibit)

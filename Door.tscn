@@ -14,4 +14,4 @@ depth = 4.0
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.267 )
-text = "Text text test"
+text = "(If you're reading this text in-game there's a bug)"

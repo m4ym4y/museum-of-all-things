@@ -28,6 +28,7 @@ func get_angle(child):
 	else:
 		return 0.0
 
+# TODO: refactor this method to break out the different cases
 # start with items that are just text
 func init(data):
 	var items = data.items
