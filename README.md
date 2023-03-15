@@ -1,8 +1,7 @@
 # Wikipedia Museum
 
-![screenshot of the 'dinosaur' room](./screenshot1.png)
+![screenshot of the 'dinosaur' room](./docs/screenshot.png)
 
-![a link to the 'gastrolith' room](./screenshot2.png)
 
 (currently being rewritten)
 
