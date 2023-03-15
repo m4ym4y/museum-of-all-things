@@ -13,7 +13,8 @@ const COMMON_HEADERS = [
 ]
 
 # TODO: experimental endpoint. use different API?
-const links_endpoint = 'https://en.wikipedia.org/api/rest_v1/page/related/'
+# const links_endpoint = 'https://en.wikipedia.org/api/rest_v1/page/related/'
+const links_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=links&pllimit=max&format=json&titles="
 
 var exhibit_data = {}
 var media_result = RESULT_INCOMPLETE
@@ -29,22 +30,24 @@ func reset_results():
 	media_result = RESULT_INCOMPLETE
 	summary_result = RESULT_INCOMPLETE
 	links_result = RESULT_INCOMPLETE
+	linked_request_limit = 10
+	link_results = []
 
-func fetch(title_):
+func fetch(title):
 	reset_results()
 
-	var title = title_.percent_encode()
+	# var title = title_.percent_encode()
 	var request_data = [
-		{ "endpoint": media_endpoint, "handler": "_on_media_request_complete" },
-		{ "endpoint": summary_endpoint, "handler": "_on_summary_request_complete" },
-		{ "endpoint": links_endpoint, "handler": "_on_links_request_complete" }
+		{ "endpoint": media_endpoint + title + "?redirect=false", "handler": "_on_media_request_complete" },
+		{ "endpoint": summary_endpoint + title + "?redirect=false", "handler": "_on_summary_request_complete" },
+		{ "endpoint": links_endpoint + title, "handler": "_on_links_request_complete" }
 	]
 
 	for data in request_data:
 		var request = HTTPRequest.new()
-		request.connect("request_completed", self, data.handler)
+		request.connect("request_completed", self, data.handler, [ data.endpoint ])
 		add_child(request)
-		request.request(data.endpoint + title, COMMON_HEADERS)
+		request.request(data.endpoint, COMMON_HEADERS)
 		print("DISPATCHED_REQUEST", data)
 
 func all_requests_finished():
@@ -58,7 +61,7 @@ func emit_if_finished():
 func get_json(body):
 	return JSON.parse(body.get_string_from_utf8()).result
 
-func _on_media_request_complete(result, response_code, headers, body):
+func _on_media_request_complete(result, response_code, headers, body, _url):
 	media_result = response_code
 	print("MEDIA RESULT RETURNED ", media_result)
 	var res = get_json(body)
@@ -80,17 +83,31 @@ func _on_media_request_complete(result, response_code, headers, body):
 
 	emit_if_finished()
 
-func _on_links_request_complete(result, response_code, headers, body):
-	links_result = response_code
-	print("LINK RESULT RETURNED ", links_result)
+var link_results = []
+var linked_request_limit = 10
+
+func _on_links_request_complete(result, response_code, headers, body, original_url):
 	var res = get_json(body)
 
-	for page in res.pages:
-		exhibit_data.doors.push_back(page.title)
+	# print("GOT PAGES", res.query.pages)
+	for page in res.query.pages.keys():
+		for link in res.query.pages[page].links:
+			link_results.push_back(link.title.replace(" ", "_").percent_encode())
+	
+	if res.has("continue") or linked_request_limit == 0:
+		linked_request_limit -= 1
+		var continue_request = HTTPRequest.new()
+		continue_request.connect("request_completed", self, "_on_links_request_complete", [ original_url ])
+		add_child(continue_request)
+		continue_request.request(original_url + "&plcontinue=" + res.continue.plcontinue.percent_encode(), COMMON_HEADERS)
+	else:
+		links_result = response_code
+		link_results.shuffle()
+		exhibit_data.doors = link_results
+		link_results = []
+		emit_if_finished()
 
-	emit_if_finished()
-
-func _on_summary_request_complete(result, response_code, headers, body):
+func _on_summary_request_complete(result, response_code, headers, body, _url):
 	summary_result = response_code
 	print("SUMMARY RESULT RETURNED ", summary_result)
 	var res = get_json(body)
