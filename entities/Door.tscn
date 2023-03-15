@@ -1,7 +1,0 @@
-[gd_scene format=2]
-
-[node name="Door" type="Spatial"]
-
-[node name="CSGBox" type="CSGBox" parent="."]
-width = 0.1
-depth = 1.0

@@ -1,9 +1,0 @@
-[gd_resource type="SpatialMaterial" load_steps=2 format=2]
-
-[ext_resource path="res://textures/wood.png" type="Texture" id=1]
-
-[resource]
-albedo_texture = ExtResource( 1 )
-metallic = 0.67
-roughness = 0.5
-uv1_triplanar = true

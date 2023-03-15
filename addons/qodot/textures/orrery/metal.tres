@@ -1,5 +1,0 @@
-[gd_resource type="SpatialMaterial" format=2]
-
-[resource]
-metallic = 0.85
-roughness = 0.2
