@@ -8,7 +8,10 @@ extends Spatial
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$Timer.connect("timeout", self, "_on_timer_timeout")
+
+func _on_timer_timeout():
+	get_node("HUD/Label").text = str(Engine.get_frames_per_second())
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):

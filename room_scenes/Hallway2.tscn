@@ -373,14 +373,14 @@ shadow_enabled = true
 omni_range = 18.296
 
 [node name="OmniLight" type="OmniLight" parent="OmniLight"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0651239, 2.30693, 23.0302 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0651239, 2.30693, 29.4169 )
 light_color = Color( 0.85098, 0, 1, 1 )
 light_bake_mode = 0
 shadow_enabled = true
 omni_range = 18.296
 
 [node name="OmniLight" type="OmniLight" parent="OmniLight/OmniLight"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43645, 0.0182667, -12.0823 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43645, 2.70886, -15.0634 )
 light_color = Color( 0.466667, 0.2, 1, 1 )
 light_bake_mode = 0
 shadow_enabled = true

@@ -253,6 +253,7 @@ jump={
 crouch={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 interact={
@@ -268,9 +269,9 @@ ssl/certificates="res://certs/cacert.crt"
 [physics]
 
 common/enable_pause_aware_picking=true
+common/physics_interpolation=true
 
 [rendering]
 
-quality/filters/msaa=4
-quality/filters/use_fxaa=true
+quality/filters/msaa=2
 environment/default_environment="res://default_env.tres"
