@@ -120,7 +120,11 @@ points = PoolVector3Array( -9, 15, -10, -9, 14, -10, 6, 14, -10, 6, 15, -10, -9,
 
 [node name="Hallway2" type="Spatial"]
 
-[node name="map" type="Spatial" parent="."]
+[node name="rotator" type="Spatial" parent="."]
+
+[node name="map_and_lights" type="Spatial" parent="rotator"]
+
+[node name="map" type="Spatial" parent="rotator/map_and_lights"]
 script = ExtResource( 1 )
 map_file = "/home/maya/prog/museum-of-wikipedia/rooms/hallway_2.map"
 inverse_scale_factor = 16.0
@@ -139,94 +143,94 @@ use_trenchbroom_group_hierarchy = false
 tree_attach_batch_size = 16
 set_owner_batch_size = 16
 
-[node name="entity_0_worldspawn" type="StaticBody" parent="map"]
+[node name="entity_0_worldspawn" type="StaticBody" parent="rotator/map_and_lights/map"]
 
-[node name="entity_0_mesh_instance" type="MeshInstance" parent="map/entity_0_worldspawn"]
+[node name="entity_0_mesh_instance" type="MeshInstance" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 use_in_baked_light = true
 mesh = SubResource( 3 )
 
-[node name="entity_0_brush_0_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_0_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 4 )
 
-[node name="entity_0_brush_1_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_1_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 5 )
 
-[node name="entity_0_brush_2_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_2_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 6 )
 
-[node name="entity_0_brush_3_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_3_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 7 )
 
-[node name="entity_0_brush_4_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_4_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 8 )
 
-[node name="entity_0_brush_5_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_5_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 9 )
 
-[node name="entity_0_brush_6_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_6_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 10 )
 
-[node name="entity_0_brush_7_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_7_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 11 )
 
-[node name="entity_0_brush_8_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_8_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 12 )
 
-[node name="entity_0_brush_9_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_9_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 13 )
 
-[node name="entity_0_brush_10_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_10_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 14 )
 
-[node name="entity_0_brush_11_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_11_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 15 )
 
-[node name="entity_0_brush_12_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_12_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 16 )
 
-[node name="entity_0_brush_13_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_13_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 17 )
 
-[node name="entity_0_brush_14_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_14_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 18 )
 
-[node name="entity_0_brush_15_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_15_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 19 )
 
-[node name="entity_0_brush_16_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_16_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 20 )
 
-[node name="entity_0_brush_17_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_17_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 21 )
 
-[node name="entity_0_brush_18_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_18_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 22 )
 
-[node name="entity_0_brush_19_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_19_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 23 )
 
-[node name="entity_0_brush_20_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_20_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 24 )
 
-[node name="entity_0_brush_21_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_21_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 25 )
 
-[node name="entity_0_brush_22_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_22_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 26 )
 
-[node name="entity_0_brush_23_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_23_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 27 )
 
-[node name="entity_0_brush_24_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_24_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 28 )
 
-[node name="entity_0_brush_25_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_25_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 29 )
 
-[node name="entity_0_brush_26_collision_shape" type="CollisionShape" parent="map/entity_0_worldspawn"]
+[node name="entity_0_brush_26_collision_shape" type="CollisionShape" parent="rotator/map_and_lights/map/entity_0_worldspawn"]
 shape = SubResource( 30 )
 
-[node name="entity_1_exit" type="Spatial" parent="map"]
+[node name="entity_1_exit" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.5, -10 )
 script = ExtResource( 2 )
 properties = {
@@ -234,7 +238,7 @@ properties = {
 "origin": "-160 -24 24"
 }
 
-[node name="entity_2_entrance" type="Spatial" parent="map"]
+[node name="entity_2_entrance" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.5, 32 )
 script = ExtResource( 2 )
 properties = {
@@ -243,7 +247,7 @@ properties = {
 "origin": "512 -24 24"
 }
 
-[node name="entity_3_item" type="Spatial" parent="map"]
+[node name="entity_3_item" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 22.0625 )
 script = ExtResource( 2 )
 properties = {
@@ -251,7 +255,7 @@ properties = {
 "origin": "353 -32 40"
 }
 
-[node name="entity_4_item" type="Spatial" parent="map"]
+[node name="entity_4_item" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, 15.0625 )
 script = ExtResource( 2 )
 properties = {
@@ -259,7 +263,7 @@ properties = {
 "origin": "241 -16 40"
 }
 
-[node name="entity_5_item" type="Spatial" parent="map"]
+[node name="entity_5_item" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 8.0625 )
 script = ExtResource( 2 )
 properties = {
@@ -267,7 +271,7 @@ properties = {
 "origin": "129 -32 40"
 }
 
-[node name="entity_6_item" type="Spatial" parent="map"]
+[node name="entity_6_item" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, 1.0625 )
 script = ExtResource( 2 )
 properties = {
@@ -275,7 +279,7 @@ properties = {
 "origin": "17 -16 40"
 }
 
-[node name="entity_7_item" type="Spatial" parent="map"]
+[node name="entity_7_item" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 20.9375 )
 script = ExtResource( 2 )
 properties = {
@@ -284,7 +288,7 @@ properties = {
 "origin": "335 -32 40"
 }
 
-[node name="entity_8_item" type="Spatial" parent="map"]
+[node name="entity_8_item" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, 13.9375 )
 script = ExtResource( 2 )
 properties = {
@@ -293,7 +297,7 @@ properties = {
 "origin": "223 -16 40"
 }
 
-[node name="entity_9_item" type="Spatial" parent="map"]
+[node name="entity_9_item" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2.5, 6.9375 )
 script = ExtResource( 2 )
 properties = {
@@ -302,7 +306,7 @@ properties = {
 "origin": "111 -32 40"
 }
 
-[node name="entity_10_item" type="Spatial" parent="map"]
+[node name="entity_10_item" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 2.5, -0.0625 )
 script = ExtResource( 2 )
 properties = {
@@ -311,7 +315,7 @@ properties = {
 "origin": "-1 -16 40"
 }
 
-[node name="entity_11_door" type="Spatial" parent="map"]
+[node name="entity_11_door" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, 26.5 )
 script = ExtResource( 2 )
 properties = {
@@ -320,7 +324,7 @@ properties = {
 "origin": "424 -160 24"
 }
 
-[node name="entity_12_door" type="Spatial" parent="map"]
+[node name="entity_12_door" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1.5, 10.5 )
 script = ExtResource( 2 )
 properties = {
@@ -329,7 +333,7 @@ properties = {
 "origin": "168 112 24"
 }
 
-[node name="entity_13_door" type="Spatial" parent="map"]
+[node name="entity_13_door" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1.5, -4.5 )
 script = ExtResource( 2 )
 properties = {
@@ -338,7 +342,7 @@ properties = {
 "origin": "-72 112 24"
 }
 
-[node name="entity_14_door" type="Spatial" parent="map"]
+[node name="entity_14_door" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1.5, 26.5 )
 script = ExtResource( 2 )
 properties = {
@@ -347,7 +351,7 @@ properties = {
 "origin": "424 112 24"
 }
 
-[node name="entity_15_door" type="Spatial" parent="map"]
+[node name="entity_15_door" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, 10.5 )
 script = ExtResource( 2 )
 properties = {
@@ -356,7 +360,7 @@ properties = {
 "origin": "168 -160 24"
 }
 
-[node name="entity_16_door" type="Spatial" parent="map"]
+[node name="entity_16_door" type="Spatial" parent="rotator/map_and_lights/map"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, -4.5 )
 script = ExtResource( 2 )
 properties = {
@@ -365,21 +369,21 @@ properties = {
 "origin": "-72 -160 24"
 }
 
-[node name="OmniLight" type="OmniLight" parent="."]
+[node name="OmniLight" type="OmniLight" parent="rotator/map_and_lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43645, 6.91574, -3.19297 )
 light_color = Color( 0.243137, 1, 0, 1 )
 light_bake_mode = 0
 shadow_enabled = true
 omni_range = 18.296
 
-[node name="OmniLight" type="OmniLight" parent="OmniLight"]
+[node name="OmniLight" type="OmniLight" parent="rotator/map_and_lights/OmniLight"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0651239, 2.30693, 29.4169 )
 light_color = Color( 0.85098, 0, 1, 1 )
 light_bake_mode = 0
 shadow_enabled = true
 omni_range = 18.296
 
-[node name="OmniLight" type="OmniLight" parent="OmniLight/OmniLight"]
+[node name="OmniLight" type="OmniLight" parent="rotator/map_and_lights/OmniLight/OmniLight"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43645, 2.70886, -15.0634 )
 light_color = Color( 0.466667, 0.2, 1, 1 )
 light_bake_mode = 0

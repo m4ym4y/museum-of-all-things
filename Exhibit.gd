@@ -6,8 +6,8 @@ var entrance = Vector3(0, 0, 0)
 var entrance_angle = 0
 
 const room_types = [
-	preload("res://room_scenes/Hallway1.tscn"),
-	preload("res://room_scenes/Hallway2.tscn")
+	preload("res://room_scenes/Hallway2.tscn"),
+	preload("res://room_scenes/HallwayRing.tscn")
 ]
 
 const ImageItem = preload("res://room_items/ImageItem.tscn")
@@ -28,21 +28,33 @@ func get_angle(child):
 	else:
 		return 0.0
 
+func rotate_room(room, pivot, angle):
+	var rotator = room.get_node("rotator")
+	var map = room.get_node("rotator/map_and_lights")
+
+	map.translation = -pivot
+	rotator.rotation.y = angle
+	rotator.translation = pivot
+
 # TODO: refactor this method to break out the different cases
 # start with items that are just text
 func init(data):
 	var items = data.items
 	var doors = data.doors
 	var exit_pos = Vector3(0, 0, 0)
+	var exit_angle = 0
 
 	while items.size() > 0:
 		# todo: choose room randomly
-		var room = room_types[1].instance()
+		var room_index = randi() % room_types.size()
+		print('RAND', room_index)
+		var room = room_types[room_index].instance()
 		var entrance_pos = Vector3(0, 0, 0)
 		var next_exit_pos
+		var next_exit_angle
 
 		# add as many items as can fit in the room
-		for child in room.get_node("map").get_children():
+		for child in room.get_node("rotator/map_and_lights/map").get_children():
 			if child.name.ends_with("entrance"):
 				# set the overall exhibit entrance if this is the first room
 				if not entrance:
@@ -54,6 +66,7 @@ func init(data):
 
 			elif child.name.ends_with("exit"):
 				next_exit_pos = child.translation
+				next_exit_angle = get_angle(child)
 				print("found exit: ", next_exit_pos)
 
 			elif child.name.ends_with("door"):
@@ -90,8 +103,10 @@ func init(data):
 				child.add_child(item_scene)
 
 		room.translation = exit_pos - entrance_pos
+		rotate_room(room, entrance_pos, exit_angle)
 		add_child(room)
 		exit_pos = room.translation + next_exit_pos
+		exit_angle = room.rotation.y + next_exit_angle
 
 func _on_door_open(door_to, door_object):
 	emit_signal("open_door", door_to, door_object.global_transform.origin, get_angle(door_object))

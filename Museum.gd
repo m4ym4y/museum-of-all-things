@@ -128,5 +128,6 @@ func _on_fetch_complete(exhibit_data):
 	load_exhibit(loading_exhibit, loading_door_translation, loading_door_angle)
 
 func _ready():
+	randomize()
 	$ExhibitFetcher.connect("fetch_complete", self, "_on_fetch_complete")
 	load_exhibit(starting_exhibit)
