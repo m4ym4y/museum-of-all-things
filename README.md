@@ -1,5 +1,7 @@
 # Wikipedia Museum
 
+[Visit the museum here!!](https://m4ym4y.github.io/wikipedia-museum/)
+
 ![screenshot of the 'butterfly' room](./docs/screenshot2.png)
 
 ![screenshot of the 'dinosaur' room](./docs/screenshot.png)
