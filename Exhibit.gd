@@ -47,7 +47,9 @@ func init(data):
 	while items.size() > 0:
 		# todo: choose room randomly
 		var room_index = randi() % room_types.size()
-		print('RAND', room_index)
+		if data.has("force_room_index"):
+			room_index = data.force_room_index
+
 		var room = room_types[room_index].instance()
 		var entrance_pos = Vector3(0, 0, 0)
 		var next_exit_pos

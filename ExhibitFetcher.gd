@@ -9,7 +9,7 @@ const RESULT_INCOMPLETE = -1
 const USER_AGENT = "https://github.com/m4ym4y/wikipedia-museum"
 const COMMON_HEADERS = [
 	"accept: application/json; charset=utf-8",
-	"user-agent: " + USER_AGENT
+	# "user-agent: " + USER_AGENT
 ]
 
 # TODO: experimental endpoint. use different API?
