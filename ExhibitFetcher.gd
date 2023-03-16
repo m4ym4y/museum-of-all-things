@@ -9,12 +9,12 @@ const RESULT_INCOMPLETE = -1
 const USER_AGENT = "https://github.com/m4ym4y/wikipedia-museum"
 const COMMON_HEADERS = [
 	"accept: application/json; charset=utf-8",
-	"user-agent: " + USER_AGENT
+	# "user-agent: " + USER_AGENT
 ]
 
 # TODO: experimental endpoint. use different API?
 # const links_endpoint = 'https://en.wikipedia.org/api/rest_v1/page/related/'
-const links_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=links&pllimit=max&format=json&titles="
+const links_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=links&pllimit=max&format=json&origin=*&titles="
 
 var exhibit_data = {}
 var media_result = RESULT_INCOMPLETE

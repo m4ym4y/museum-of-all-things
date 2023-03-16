@@ -5,10 +5,6 @@
 [node name="Exhibit" type="Spatial"]
 script = ExtResource( 5 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.666831, -0.582743, 0.464486, -0.0853217, 0.559495, 0.824431, -0.740309, -0.589386, 0.323368, 0, 2.41365, 0 )
-editor_only = true
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
