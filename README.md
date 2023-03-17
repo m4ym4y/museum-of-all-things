@@ -15,7 +15,6 @@ depending on what is linked from that wikipedia article.
 
 - add more room layouts
 - allow more diverse content to be imported into the exhibit, instead of just images and summary
-    - improve image quality
 - improve graphics (esp. textures & lighting)
 - add the ability to open the wikipedia page you're currently in in your browser
 - multiplayer features to enable games

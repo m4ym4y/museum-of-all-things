@@ -7,7 +7,7 @@ var width
 var height
 var text
 
-const PIXELS_PER_METER = 200
+var PIXELS_PER_METER = 100
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -25,16 +25,25 @@ func _on_request_completed(result, response_code, headers, body):
 	elif PNG_REGEX.search(image_url.to_lower()):
 		image.load_png_from_buffer(body)
 
-	image.resize(width * PIXELS_PER_METER, height * PIXELS_PER_METER,
-			Image.INTERPOLATE_NEAREST)
-
 	image_texture.create_from_image(image)
 	texture = image_texture
 
 	var label = Label3D.new()
 	label.text = text
-	label.translation.y = -height - 0.1
+	label.autowrap = true
+	label.width = width * PIXELS_PER_METER * 1.5
 	add_child(label)
+
+	if image.get_width() != 0:
+		pixel_size = float(width) / float(image.get_width())
+		# var to_image_bottom = width * (float(image.get_width) / float(image.get_height))
+		label.translation.y = -width * (float(image.get_height() / 2) / float(image.get_width())) - 0.1
+		# label.translation.y = -width - 0.1
+		label.vertical_alignment = VALIGN_TOP
+		if label.translation.y < -float(height) / 2.0:
+			translation.y -= label.translation.y + float(height) / 2.0
+	else:
+		label.text += "\n(image could not be displayed)"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

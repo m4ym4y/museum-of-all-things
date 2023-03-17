@@ -92,7 +92,7 @@ func init(data):
 				var item_scene
 				if item.type == "image":
 					item_scene = ImageItem.instance()
-					item_scene.init(item.src, 1, 1, item.text)
+					item_scene.init(item.src, 1.5, 1.5, item.text)
 				elif item.type == "text":
 					item_scene = TextItem.instance()
 					item_scene.init(item.text)
@@ -108,8 +108,7 @@ func init(data):
 
 func _on_door_open(door_to, door_object, room):
 	emit_signal("open_door", door_to, door_object.global_transform.origin,
-			# get_angle(door_object) + room.get_node("rotator").rotation.y)
-			get_angle(door_object))
+			get_angle(door_object) + room.get_node("rotator").rotation.y)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
