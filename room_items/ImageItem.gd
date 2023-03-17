@@ -17,7 +17,6 @@ func _on_request_completed(result, response_code, headers, body):
 		push_error("Failed to fetch the image at " + image_url)
 		return
 
-	print("LOADED IMAGE ", image_url, " ", response_code)
 	var image_texture = ImageTexture.new()
 	var image = Image.new()
 
@@ -46,7 +45,6 @@ func _ready():
 	pass
 
 func init(url, _width, _height, _text):
-	print("LOADING IMAGE BY URL ", url)
 	if url.begins_with('//'):
 		image_url = 'https:' + url
 	else:

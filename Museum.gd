@@ -11,7 +11,7 @@ const static_exhibit_data = {
 				"text": "Welcome to the wikipedia museum! Here you can explore Wikipedia in a virtual space. To step between exhibits, walk up to one of the doors at the edge of the room at hit 'E'. Be careful not to fall into the void!!!"
 			}
 		],
-		"doors": [ "Dinosaur", "Albert_Einstein", "Fungus", "Soup", "Everything_Everywhere_All_at_Once", "Butterfly", "2022_in_science" ]
+		"doors": [ "Thelocarpales", "Dinosaur", "Albert_Einstein", "Fungus", "Soup", "Everything_Everywhere_All_at_Once", "Butterfly", "2022_in_science" ]
 	}
 }
 
@@ -26,7 +26,8 @@ func load_exhibit(title, translation = Vector3(0, 0, 0), angle = 0):
 
 	exhibit.connect("open_door", self, "_on_open_door", [title])
 	exhibit.rotation.y = angle
-	exhibit.global_transform.origin = translation # - exhibit.entrance
+	# exhibit.global_transform.origin = translation # - exhibit.entrance
+	exhibit.translation = translation # - exhibit.entrance
 
 	# TODO: position exhibit at the correct location according to the triggered door
 	add_child(exhibit)

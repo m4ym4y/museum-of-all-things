@@ -64,22 +64,19 @@ func init(data):
 					entrance_angle = get_angle(child)
 
 				entrance_pos = child.translation
-				print("found entrance: ", entrance_pos)
 
 			elif child.name.ends_with("exit"):
 				next_exit_pos = child.translation
 				next_exit_angle = get_angle(child)
-				print("found exit: ", next_exit_pos)
 
 			elif child.name.ends_with("door"):
-				print("found door")
 				var door_to = doors.pop_front()
 
 				var door_scene
 				if door_to:
 					door_scene = Door.instance()
 					door_scene.init(door_to)
-					door_scene.connect("open", self, "_on_door_open", [door_to, child])
+					door_scene.connect("open", self, "_on_door_open", [door_to, child, room])
 				else:
 					# block off the door if we have no link
 					door_scene = DoorPlaceholder.instance()
@@ -88,7 +85,6 @@ func init(data):
 				child.add_child(door_scene)
 
 			elif child.name.ends_with("item"):
-				print("found item")
 				var item = items.pop_front()
 				if not item:
 					continue
@@ -110,8 +106,10 @@ func init(data):
 		exit_pos = room.translation + next_exit_pos
 		exit_angle = room.rotation.y + next_exit_angle
 
-func _on_door_open(door_to, door_object):
-	emit_signal("open_door", door_to, door_object.global_transform.origin, get_angle(door_object))
+func _on_door_open(door_to, door_object, room):
+	emit_signal("open_door", door_to, door_object.global_transform.origin,
+			# get_angle(door_object) + room.get_node("rotator").rotation.y)
+			get_angle(door_object))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

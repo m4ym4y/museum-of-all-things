@@ -18,7 +18,6 @@ var interacted = false
 func interact():
 	if not interacted:
 		interacted = true
-		print("DOOR INTERACT TRIGGER")
 		emit_signal("open")
 		translation.y -= 10
 		# yield(get_tree().create_timer(5), "timeout")

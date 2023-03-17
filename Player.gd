@@ -66,6 +66,5 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("interact"):
 		var collider = $Pivot/Camera/RayCast.get_collider()
-		print("COLLIDER", collider)
 		if collider and collider.has_method("interact"):
 			collider.interact()
