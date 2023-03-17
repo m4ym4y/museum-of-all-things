@@ -8,11 +8,19 @@ const links_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=lin
 
 const RESULT_INCOMPLETE = -1 
 const USER_AGENT = "https://github.com/m4ym4y/wikipedia-museum"
-const COMMON_HEADERS = [
-	"accept: application/json; charset=utf-8",
-	"user-agent: " + USER_AGENT
-]
 
+var COMMON_HEADERS
+func _ready():
+	print("fetching on OS ", OS.get_name())
+	if OS.get_name() != "HTML5":
+		COMMON_HEADERS = [
+			"accept: application/json; charset=utf-8",
+			"user-agent: " + USER_AGENT
+		]
+	else:
+		COMMON_HEADERS = [
+			"accept: application/json; charset=utf-8",
+		]
 
 var exhibit_data = {}
 var media_result = RESULT_INCOMPLETE
