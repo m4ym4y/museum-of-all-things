@@ -11,7 +11,7 @@ func _ready():
 	pass # Replace with function body.
 
 func init(name):
-	$Label3D.text = name
+	$Label.text = name.percent_decode().replace("_", " ")
 
 #TODO: cooldown timer
 var interacted = false

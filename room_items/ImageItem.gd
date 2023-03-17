@@ -7,8 +7,6 @@ var width
 var height
 var text
 
-var PIXELS_PER_METER = 100
-
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -28,10 +26,8 @@ func _on_request_completed(result, response_code, headers, body):
 	image_texture.create_from_image(image)
 	texture = image_texture
 
-	var label = Label3D.new()
+	var label = $Label
 	label.text = text
-	label.autowrap = true
-	label.width = width * PIXELS_PER_METER * 1.5
 	add_child(label)
 
 	if image.get_width() != 0:
