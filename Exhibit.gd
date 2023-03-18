@@ -8,7 +8,8 @@ var entrance_angle = 0
 const room_types = [
 	preload("res://room_scenes/Hallway2.tscn"),
 	preload("res://room_scenes/HallwayRing.tscn"),
-	preload("res://room_scenes/HallwayBalcony1.tscn")
+	preload("res://room_scenes/HallwayBalcony1.tscn"),
+	preload("res://room_scenes/HallwayT.tscn")
 ]
 
 const ImageItem = preload("res://room_items/ImageItem.tscn")
