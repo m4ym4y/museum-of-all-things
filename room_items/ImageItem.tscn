@@ -17,4 +17,4 @@ script = ExtResource( 1 )
 pixel_size = 0.001
 font = SubResource( 1 )
 autowrap = true
-width = 1200.0
+width = 1800.0

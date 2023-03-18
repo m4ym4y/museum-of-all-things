@@ -4,7 +4,7 @@
 [ext_resource path="res://fonts/NotoSans-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
-size = 80
+size = 120
 use_filter = true
 font_data = ExtResource( 2 )
 
