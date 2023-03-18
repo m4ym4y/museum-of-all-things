@@ -4,7 +4,7 @@
 
 ![screenshot of the 'butterfly' room](./docs/screenshot2.png)
 
-![screenshot of the 'dinosaur' room](./docs/screenshot.png)
+![screenshot of the 'life' room](./docs/screenshot3.png)
 
 The goal of this project is to make an interactive 3d museum that is generated
 procedurally, using content from wikipedia to fill exhibits. The museum is
