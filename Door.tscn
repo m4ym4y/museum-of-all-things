@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Door.gd" type="Script" id=1]
 [ext_resource path="res://fonts/NotoSans-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://textures/white.tres" type="Material" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -17,6 +18,7 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0
 width = 0.5
 height = 4.0
 depth = 4.0
+material = ExtResource( 3 )
 
 [node name="Label" type="Label3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.267 )

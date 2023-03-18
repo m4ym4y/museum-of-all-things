@@ -1,4 +1,6 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://textures/white.tres" type="Material" id=1]
 
 [node name="DoorPlaceholder" type="Spatial"]
 
@@ -9,3 +11,4 @@ use_collision = true
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0 )
 height = 3.0
 depth = 3.0
+material = ExtResource( 1 )
