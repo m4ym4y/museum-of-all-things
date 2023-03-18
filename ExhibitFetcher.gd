@@ -26,6 +26,12 @@ var media_result = RESULT_INCOMPLETE
 var summary_result = RESULT_INCOMPLETE
 var links_result = RESULT_INCOMPLETE
 
+const LOCATION_STR = "location: "
+func get_location_header(headers):
+	for header in headers:
+		if header.begins_with(LOCATION_STR):
+			return header.substr(LOCATION_STR.length())
+
 func reset_results():
 	exhibit_data = {
 		"items": [],
@@ -37,6 +43,7 @@ func reset_results():
 	links_result = RESULT_INCOMPLETE
 	linked_request_limit = 10
 	link_results = []
+	links_url_redirected = null
 
 func fetch(title):
 	reset_results()
@@ -50,6 +57,7 @@ func fetch(title):
 
 	for data in request_data:
 		var request = HTTPRequest.new()
+		request.max_redirects = 0
 		request.connect("request_completed", self, data.handler, [ data.endpoint ])
 		add_child(request)
 		request.request(data.endpoint, COMMON_HEADERS)
@@ -66,6 +74,18 @@ func get_json(body):
 	return JSON.parse(body.get_string_from_utf8()).result
 
 func _on_media_request_complete(result, response_code, headers, body, _url):
+	if result == 11:
+		var redirected_request = HTTPRequest.new()
+		var redirected_url = media_endpoint + get_location_header(headers)
+		redirected_request.max_redirects = 0
+		redirected_request.connect("request_completed", self, "_on_media_request_complete", [ redirected_url ])
+		add_child(redirected_request)
+		redirected_request.request(redirected_url, COMMON_HEADERS)
+
+	if result != 0 or response_code != 200:
+		push_error("error in media request")
+		return
+
 	media_result = response_code
 	var res = get_json(body)
 
@@ -87,9 +107,19 @@ func _on_media_request_complete(result, response_code, headers, body, _url):
 
 var link_results = []
 var linked_request_limit = 10
+var links_url_redirected = null
 
 func _on_links_request_complete(result, response_code, headers, body, original_url):
+	if result != 0 or response_code != 200:
+		push_error("error in links request")
+		return
+
+	if links_url_redirected != null and links_url_redirected != original_url:
+		return
+
 	var res = get_json(body)
+	if res.query.pages.has("-1"):
+		return
 
 	for page in res.query.pages.keys():
 		for link in res.query.pages[page].links:
@@ -98,6 +128,7 @@ func _on_links_request_complete(result, response_code, headers, body, original_u
 	if res.has("continue") or linked_request_limit == 0:
 		linked_request_limit -= 1
 		var continue_request = HTTPRequest.new()
+		continue_request.max_redirects = 0
 		continue_request.connect("request_completed", self, "_on_links_request_complete", [ original_url ])
 		add_child(continue_request)
 		continue_request.request(original_url + "&plcontinue=" + res.continue.plcontinue.percent_encode(), COMMON_HEADERS)
@@ -109,6 +140,30 @@ func _on_links_request_complete(result, response_code, headers, body, original_u
 		emit_if_finished()
 
 func _on_summary_request_complete(result, response_code, headers, body, _url):
+	if result == 11:
+		var redirected_request = HTTPRequest.new()
+		var redirected_url = summary_endpoint + get_location_header(headers)
+		redirected_request.max_redirects = 0
+		redirected_request.connect("request_completed", self, "_on_summary_request_complete", [ redirected_url ])
+		add_child(redirected_request)
+		redirected_request.request(redirected_url, COMMON_HEADERS)
+
+		var redirected_links_request = HTTPRequest.new()
+		var redirected_links_url = links_endpoint + get_location_header(headers)
+
+		links_url_redirected = redirected_links_url
+		link_results = []
+		links_result = RESULT_INCOMPLETE
+
+		redirected_links_request.max_redirects = 0
+		redirected_links_request.connect("request_completed", self, "_on_links_request_complete", [ redirected_links_url ])
+		add_child(redirected_links_request)
+		redirected_links_request.request(redirected_links_url, COMMON_HEADERS)
+
+	if result != 0 or response_code != 200:
+		push_error("error in summary request")
+		return
+
 	summary_result = response_code
 	var res = get_json(body)
 

@@ -8,7 +8,7 @@
 script = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86676, 0.460238, -6.38627 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0151, 0.460238, -5.30786 )
 
 [node name="ExhibitFetcher" parent="." instance=ExtResource( 3 )]
 
