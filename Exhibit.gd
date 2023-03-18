@@ -45,7 +45,6 @@ func init(data):
 	var exit_angle = 0
 
 	while items.size() > 0:
-		# todo: choose room randomly
 		var room_index = randi() % room_types.size()
 		if data.has("force_room_index"):
 			room_index = data.force_room_index
@@ -62,7 +61,6 @@ func init(data):
 				if not entrance:
 					entrance = child.translation
 					entrance_angle = get_angle(child)
-
 				entrance_pos = child.translation
 
 			elif child.name.ends_with("exit"):
@@ -103,8 +101,8 @@ func init(data):
 		room.translation = exit_pos - entrance_pos
 		rotate_room(room, entrance_pos, exit_angle)
 		add_child(room)
-		exit_pos = room.translation + next_exit_pos
-		exit_angle = room.rotation.y + next_exit_angle
+		exit_pos = room.translation + (next_exit_pos - entrance_pos).rotated(Vector3(0, 1, 0), room.get_node("rotator").rotation.y) + entrance_pos
+		exit_angle = room.get_node("rotator").rotation.y + next_exit_angle
 
 func _on_door_open(door_to, door_object, room):
 	emit_signal("open_door", door_to, door_object.global_transform.origin,

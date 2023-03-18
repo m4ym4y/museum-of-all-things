@@ -11,7 +11,6 @@ const USER_AGENT = "https://github.com/m4ym4y/wikipedia-museum"
 
 var COMMON_HEADERS
 func _ready():
-	print("fetching on OS ", OS.get_name())
 	if OS.get_name() != "HTML5":
 		COMMON_HEADERS = [
 			"accept: application/json; charset=utf-8",
@@ -50,7 +49,6 @@ func fetch(title):
 	]
 
 	for data in request_data:
-		print("launching request: ", data.handler, " ", data.endpoint)
 		var request = HTTPRequest.new()
 		request.connect("request_completed", self, data.handler, [ data.endpoint ])
 		add_child(request)
@@ -68,7 +66,6 @@ func get_json(body):
 	return JSON.parse(body.get_string_from_utf8()).result
 
 func _on_media_request_complete(result, response_code, headers, body, _url):
-	print("MEDIA RESPONSE", response_code, " ", result, " ", headers)
 	media_result = response_code
 	var res = get_json(body)
 
@@ -92,7 +89,6 @@ var link_results = []
 var linked_request_limit = 10
 
 func _on_links_request_complete(result, response_code, headers, body, original_url):
-	print("LINKS RESPONSE", response_code)
 	var res = get_json(body)
 
 	for page in res.query.pages.keys():
@@ -114,7 +110,6 @@ func _on_links_request_complete(result, response_code, headers, body, original_u
 
 func _on_summary_request_complete(result, response_code, headers, body, _url):
 	summary_result = response_code
-	print("SUMAMRY RESPONSE", response_code, result, headers)
 	var res = get_json(body)
 
 	exhibit_data.items.push_front({

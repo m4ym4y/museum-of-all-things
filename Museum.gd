@@ -8,10 +8,10 @@ const static_exhibit_data = {
 		"items": [
 			{
 				"type": "text",
-				"text": "Welcome to the wikipedia museum! Here you can explore Wikipedia in a virtual space. To step between exhibits, walk up to one of the doors at the edge of the room at hit 'E'. Be careful not to fall into the void!!!"
+				"text": "Welcome to the wikipedia museum! Here you can explore Wikipedia in a virtual space. To step between exhibits, walk up to one of the doors at the edge of the room and hit 'E'. Be careful not to fall into the void!!!"
 			}
 		],
-		"doors": [ "Thelocarpales", "Dinosaur", "Albert_Einstein", "Fungus", "Soup", "Everything_Everywhere_All_at_Once", "Butterfly", "2022_in_science" ]
+		"doors": [ "Dinosaur", "Albert_Einstein", "Fungus", "Soup", "Butterfly", "2022_in_science" ]
 	}
 }
 
@@ -60,6 +60,5 @@ func _on_fetch_complete(exhibit_data):
 	load_exhibit(loading_exhibit, loading_door_translation, loading_door_angle)
 
 func _ready():
-	randomize()
 	$ExhibitFetcher.connect("fetch_complete", self, "_on_fetch_complete")
 	load_exhibit(starting_exhibit)
