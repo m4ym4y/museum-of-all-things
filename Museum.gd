@@ -37,7 +37,6 @@ var loading_door_translation
 var loading_door_angle
 
 func _on_open_door(to_exhibit, door_translation, door_angle, from_exhibit):
-	print("HANDLING OPEN DOOR")
 	# Free exhibits other than the one we're in
 	for k in loaded_exhibits.keys():
 		if k != from_exhibit:
