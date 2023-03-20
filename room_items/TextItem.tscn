@@ -13,6 +13,7 @@ script = ExtResource( 1 )
 
 [node name="Label" type="Label3D" parent="."]
 pixel_size = 0.001
+modulate = Color( 0, 0, 0, 1 )
 font = SubResource( 1 )
 autowrap = true
 width = 2400.0

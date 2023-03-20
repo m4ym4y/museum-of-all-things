@@ -6,6 +6,7 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
+outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 2 )
 
@@ -23,6 +24,7 @@ material = ExtResource( 3 )
 [node name="Label" type="Label3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.267 )
 pixel_size = 0.002
+modulate = Color( 0, 0, 0, 1 )
 text = "If you're reading this, something went wrong."
 font = SubResource( 1 )
 autowrap = true
