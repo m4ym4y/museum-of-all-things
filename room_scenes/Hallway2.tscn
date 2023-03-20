@@ -368,9 +368,9 @@ properties = {
 
 [node name="OmniLight" type="OmniLight" parent="rotator/map_and_lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43645, 6.91574, -3.19297 )
+visible = false
 light_color = Color( 0.243137, 1, 0, 1 )
 light_bake_mode = 0
-shadow_enabled = true
 shadow_bias = 0.4
 omni_range = 18.296
 
@@ -378,7 +378,6 @@ omni_range = 18.296
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0651239, 2.30693, 29.4169 )
 light_color = Color( 0.85098, 0, 1, 1 )
 light_bake_mode = 0
-shadow_enabled = true
 shadow_bias = 0.4
 omni_range = 18.296
 
@@ -386,6 +385,20 @@ omni_range = 18.296
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43645, 2.70886, -15.0634 )
 light_color = Color( 0.466667, 0.2, 1, 1 )
 light_bake_mode = 0
-shadow_enabled = true
 shadow_bias = 0.4
 omni_range = 18.296
+
+[node name="OmniLight2" type="OmniLight" parent="rotator/map_and_lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.10081, 8.24697, 23.7045 )
+light_energy = 0.5
+shadow_bias = 0.4
+omni_range = 231.095
+omni_shadow_mode = 0
+
+[node name="OmniLight3" type="OmniLight" parent="rotator/map_and_lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79314, 7.77666, 8.78834 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_bias = 0.4
+omni_range = 231.095
+omni_shadow_mode = 0
