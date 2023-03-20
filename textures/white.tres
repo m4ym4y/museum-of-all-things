@@ -1,7 +1,11 @@
-[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+[gd_resource type="SpatialMaterial" load_steps=3 format=2]
 
 [ext_resource path="res://textures/white.png" type="Texture" id=1]
+[ext_resource path="res://textures/white_normalmap.png" type="Texture" id=2]
 
 [resource]
 albedo_texture = ExtResource( 1 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 2 )
 uv1_triplanar = true
