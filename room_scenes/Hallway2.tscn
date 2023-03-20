@@ -390,9 +390,8 @@ omni_range = 18.296
 
 [node name="OmniLight2" type="OmniLight" parent="rotator/map_and_lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.10081, 8.24697, 23.7045 )
-light_energy = 0.5
 shadow_bias = 0.4
-omni_range = 231.095
+omni_range = 12.0
 omni_shadow_mode = 0
 
 [node name="OmniLight3" type="OmniLight" parent="rotator/map_and_lights"]
@@ -400,5 +399,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79314, 7.77666, 8.78834 )
 light_energy = 0.5
 shadow_enabled = true
 shadow_bias = 0.4
-omni_range = 231.095
+omni_range = 25.0
 omni_shadow_mode = 0

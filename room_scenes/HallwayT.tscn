@@ -531,18 +531,18 @@ properties = {
 }
 
 [node name="OmniLight5" type="OmniLight" parent="rotator/map_and_lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.151, 10.0254, -8.3211 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3264, 10.6266, -9.2785 )
 light_energy = 0.5
 shadow_bias = 0.4
-omni_range = 231.095
+omni_range = 40.0
 omni_shadow_mode = 0
 
 [node name="OmniLight6" type="OmniLight" parent="rotator/map_and_lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6499, 10.0254, 2.08056 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6369, 10.0254, -0.430105 )
 light_energy = 0.5
 shadow_enabled = true
 shadow_bias = 0.4
-omni_range = 231.095
+omni_range = 20.0
 omni_shadow_mode = 0
 
 [node name="OmniLight" type="OmniLight" parent="rotator/map_and_lights"]
