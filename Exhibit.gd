@@ -6,10 +6,22 @@ var entrance = Vector3(0, 0, 0)
 var entrance_angle = 0
 
 const room_types = [
-	preload("res://room_scenes/Hallway2.tscn"),
-	preload("res://room_scenes/HallwayRing.tscn"),
-	preload("res://room_scenes/HallwayBalcony1.tscn"),
-	preload("res://room_scenes/HallwayT.tscn")
+	{
+		"scene": preload("res://room_scenes/Hallway2.tscn"),
+		"orientation": 0
+	},
+	{
+		"scene": preload("res://room_scenes/HallwayRing.tscn"),
+		"orientation": 1
+	},
+	{
+		"scene": preload("res://room_scenes/HallwayBalcony1.tscn"),
+		"orientation": 1
+	},
+	{
+		"scene": preload("res://room_scenes/HallwayT.tscn"),
+		"orientation": -1
+	}
 ]
 
 const ImageItem = preload("res://room_items/ImageItem.tscn")
@@ -46,12 +58,20 @@ func init(data):
 	var exit_pos = Vector3(0, 0, 0)
 	var exit_angle = 0
 
+	# TODO: we might need to start with a different orientation
+	var orientation = 0
+
 	while items.size() > 0:
-		var room_index = randi() % room_types.size()
+		var room_index
 		if data.has("force_room_index"):
 			room_index = data.force_room_index
+		else:
+			room_index = randi() % room_types.size()
+			while abs(orientation + room_types[room_index].orientation) >= 2:
+				room_index = randi() % room_types.size()
 
-		var room = room_types[room_index].instance()
+		orientation += room_types[room_index].orientation
+		var room = room_types[room_index].scene.instance()
 		var entrance_pos = Vector3(0, 0, 0)
 		var next_exit_pos
 		var next_exit_angle
