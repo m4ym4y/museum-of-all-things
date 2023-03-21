@@ -6,6 +6,10 @@ const media_endpoint = 'https://en.wikipedia.org/api/rest_v1/page/media-list/'
 const summary_endpoint = 'https://en.wikipedia.org/api/rest_v1/page/summary/'
 const links_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=links&pllimit=max&format=json&origin=*&titles="
 
+# TODO: do we really want full text?
+#const content_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&formatversion=2&exintro=1&exlimit=max&explaintext=1&titles="
+const content_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&formatversion=2&exlimit=max&explaintext=1&titles="
+
 const RESULT_INCOMPLETE = -1 
 const USER_AGENT = "https://github.com/m4ym4y/wikipedia-museum"
 
@@ -25,6 +29,7 @@ var exhibit_data = {}
 var media_result = RESULT_INCOMPLETE
 var summary_result = RESULT_INCOMPLETE
 var links_result = RESULT_INCOMPLETE
+var content_result = RESULT_INCOMPLETE
 
 const LOCATION_STR = "location: "
 func get_location_header(headers):
@@ -34,6 +39,8 @@ func get_location_header(headers):
 
 func reset_results():
 	exhibit_data = {
+		"image_items": [],
+		"text_items": [],
 		"items": [],
 		"doors": []
 	}
@@ -41,6 +48,7 @@ func reset_results():
 	media_result = RESULT_INCOMPLETE
 	summary_result = RESULT_INCOMPLETE
 	links_result = RESULT_INCOMPLETE
+	content_result = RESULT_INCOMPLETE
 	linked_request_limit = 10
 	link_results = []
 	links_url_redirected = null
@@ -52,6 +60,7 @@ func fetch(title):
 	var request_data = [
 		{ "endpoint": media_endpoint + title, "handler": "_on_media_request_complete" },
 		{ "endpoint": summary_endpoint + title, "handler": "_on_summary_request_complete" },
+		{ "endpoint": content_endpoint + title, "handler": "_on_content_request_complete" },
 		{ "endpoint": links_endpoint + title, "handler": "_on_links_request_complete" }
 	]
 
@@ -65,9 +74,17 @@ func fetch(title):
 func all_requests_finished():
 	return media_result != RESULT_INCOMPLETE and summary_result != RESULT_INCOMPLETE and links_result != RESULT_INCOMPLETE
 
+func process_finished_data():
+	while exhibit_data.image_items.size() or exhibit_data.text_items.size():
+		if exhibit_data.text_items.size():
+			exhibit_data.items.push_back(exhibit_data.text_items.pop_front())
+		if exhibit_data.image_items.size():
+			exhibit_data.items.push_back(exhibit_data.image_items.pop_front())
+
 func emit_if_finished():
 	# TODO: also handle if one or more requests ended in error
 	if all_requests_finished():
+		process_finished_data()
 		emit_signal("fetch_complete", exhibit_data)
 
 func get_json(body):
@@ -101,7 +118,42 @@ func _on_media_request_complete(result, response_code, headers, body, _url):
 			else:
 				# TODO: ???
 				exhibit_item.text = "no caption provided"
-			exhibit_data.items.push_back(exhibit_item)
+			exhibit_data.image_items.push_back(exhibit_item)
+
+	emit_if_finished()
+
+const CHARS_PER_TEXT_ITEM = 250
+
+func _on_content_request_complete(result, response_code, headers, body, _url):
+	if result == 11:
+		var redirected_request = HTTPRequest.new()
+		var redirected_url = content_endpoint + get_location_header(headers)
+		redirected_request.max_redirects = 0
+		redirected_request.connect("request_completed", self, "_on_content_request_complete", [ redirected_url ])
+		add_child(redirected_request)
+		redirected_request.request(redirected_url, COMMON_HEADERS)
+	
+	var res = get_json(body)
+	if res.query.pages.has("-1"):
+		return
+
+	var content = res.query.pages[0].extract
+	var content_sentences = content.split(".")
+	var current_item = ""
+
+	for sentence in content_sentences:
+		current_item += sentence + "."
+		if current_item.length() >= CHARS_PER_TEXT_ITEM:
+			exhibit_data.text_items.push_back({
+				"type": "text",
+				"text": current_item
+			})
+			current_item = ""
+
+	exhibit_data.text_items.push_back({
+		"type": "text",
+		"text": current_item
+	})
 
 	emit_if_finished()
 
@@ -167,7 +219,7 @@ func _on_summary_request_complete(result, response_code, headers, body, _url):
 	summary_result = response_code
 	var res = get_json(body)
 
-	exhibit_data.items.push_front({
+	exhibit_data.text_items.push_front({
 		"type": "text",
 		"text": res.extract
 	})
