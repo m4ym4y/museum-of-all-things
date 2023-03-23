@@ -546,7 +546,6 @@ omni_shadow_mode = 0
 [node name="OmniLight6" type="OmniLight" parent="rotator/map_and_lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6369, 10.0254, -0.430105 )
 light_energy = 0.5
-shadow_enabled = true
 shadow_bias = 0.4
 omni_range = 20.0
 omni_shadow_mode = 0
