@@ -1,6 +1,6 @@
 # Wikipedia Museum
 
-![screenshot of the 'soup' room](./docs/screenshot2.png)
+![screenshot of the 'fungus' room](./docs/screenshot1.png)
 
 [**Visit the museum here!!**](https://m4ym4y.github.io/wikipedia-museum/)
 
@@ -18,7 +18,7 @@ All museum content is sourced from Wikipedia.
 - Creator and Programmer: [Maya](https://github.com/m4ym4y)
 - Dramaturg: Emma Bee Pernudi-Moon
 
-![screenshot of the 'fungus' room](./docs/screenshot1.png)
+![screenshot of the 'soup' room](./docs/screenshot2.png)
 
 ## Plans
 
