@@ -218,6 +218,8 @@ enabled=PoolStringArray( "res://addons/qodot/plugin.cfg" )
 
 ss=false
 reflections=false
+interpolation=true
+camera=true
 
 [gui]
 

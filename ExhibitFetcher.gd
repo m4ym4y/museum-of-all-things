@@ -8,7 +8,7 @@ const links_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=lin
 
 # TODO: do we really want full text?
 #const content_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&formatversion=2&exintro=1&exlimit=max&explaintext=1&titles="
-const content_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&formatversion=2&exlimit=max&explaintext=1&titles="
+const content_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&formatversion=2&exlimit=max&origin=*&explaintext=1&titles="
 
 const RESULT_INCOMPLETE = -1 
 const USER_AGENT = "https://github.com/m4ym4y/wikipedia-museum"
