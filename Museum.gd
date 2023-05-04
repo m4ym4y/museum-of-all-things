@@ -11,17 +11,16 @@ const static_exhibit_data = {
 				"text": "Welcome to the wikipedia museum! Here you can explore Wikipedia in a virtual space. To step between exhibits, walk up to one of the doors at the edge of the room and hit 'E'. Be careful not to fall into the void!!!"
 			}
 		],
-		"doors": [ "Dinosaur", "Albert_Einstein", "Fungus", "Soup", "Butterfly", "2022_in_science" ]
+		"doors": [ "Cat_Anatomy", "Albert_Einstein", "Fungus", "Soup", "Butterfly", "2022_in_science" ]
 	}
 }
 
 var loaded_exhibits = {}
 
-func load_exhibit(title, translation = Vector3(0, 0, 0), angle = 0):
+func load_exhibit(title, translation = Vector3(0, 0, 0), angle = 0, from = ""):
 	var exhibit = Exhibit.instance()
 
-	# TODO: load dynamically from wikipedia
-	exhibit.init(static_exhibit_data[title])
+	exhibit.init(static_exhibit_data[title], from)
 	loaded_exhibits[title] = exhibit
 
 	exhibit.connect("open_door", self, "_on_open_door", [title])
@@ -35,6 +34,7 @@ func load_exhibit(title, translation = Vector3(0, 0, 0), angle = 0):
 var loading_exhibit
 var loading_door_translation
 var loading_door_angle
+var loading_exhibit_from
 
 func _on_open_door(to_exhibit, door_translation, door_angle, from_exhibit):
 	# Free exhibits other than the one we're in
@@ -44,19 +44,20 @@ func _on_open_door(to_exhibit, door_translation, door_angle, from_exhibit):
 			loaded_exhibits.erase(k)
 	
 	if static_exhibit_data.has(to_exhibit):
-		load_exhibit(to_exhibit, door_translation, door_angle)
+		load_exhibit(to_exhibit, door_translation, door_angle, from_exhibit)
 		return
 
 	loading_exhibit = to_exhibit
 	loading_door_translation = door_translation
 	loading_door_angle = door_angle + loaded_exhibits[from_exhibit].rotation.y
+	loading_exhibit_from = from_exhibit
 	$ExhibitFetcher.fetch(to_exhibit)
 
 	#load_exhibit(to_exhibit, door_translation, door_angle)
 
 func _on_fetch_complete(exhibit_data):
 	static_exhibit_data[loading_exhibit] = exhibit_data
-	load_exhibit(loading_exhibit, loading_door_translation, loading_door_angle)
+	load_exhibit(loading_exhibit, loading_door_translation, loading_door_angle, loading_exhibit_from)
 
 func _ready():
 	randomize()

@@ -39,8 +39,7 @@ func get_location_header(headers):
 
 func reset_results():
 	exhibit_data = {
-		"image_items": [],
-		"text_items": [],
+		"secondary_items": [],
 		"items": [],
 		"doors": []
 	}
@@ -72,19 +71,14 @@ func fetch(title):
 		request.request(data.endpoint, COMMON_HEADERS)
 
 func all_requests_finished():
-	return media_result != RESULT_INCOMPLETE and summary_result != RESULT_INCOMPLETE and links_result != RESULT_INCOMPLETE
-
-func process_finished_data():
-	while exhibit_data.image_items.size() or exhibit_data.text_items.size():
-		if exhibit_data.text_items.size():
-			exhibit_data.items.push_back(exhibit_data.text_items.pop_front())
-		if exhibit_data.image_items.size():
-			exhibit_data.items.push_back(exhibit_data.image_items.pop_front())
+	return media_result != RESULT_INCOMPLETE and \
+		summary_result != RESULT_INCOMPLETE and \
+		links_result != RESULT_INCOMPLETE and \
+		content_result != RESULT_INCOMPLETE
 
 func emit_if_finished():
 	# TODO: also handle if one or more requests ended in error
 	if all_requests_finished():
-		process_finished_data()
 		emit_signal("fetch_complete", exhibit_data)
 
 func get_json(body):
@@ -118,7 +112,7 @@ func _on_media_request_complete(result, response_code, headers, body, _url):
 			else:
 				# TODO: ???
 				exhibit_item.text = "no caption provided"
-			exhibit_data.image_items.push_back(exhibit_item)
+			exhibit_data.items.push_back(exhibit_item)
 
 	emit_if_finished()
 
@@ -138,23 +132,26 @@ func _on_content_request_complete(result, response_code, headers, body, _url):
 		return
 
 	var content = res.query.pages[0].extract
+
 	var content_sentences = content.split(".")
 	var current_item = ""
 
 	for sentence in content_sentences:
 		current_item += sentence + "."
 		if current_item.length() >= CHARS_PER_TEXT_ITEM:
-			exhibit_data.text_items.push_back({
+			exhibit_data.secondary_items.push_back({
 				"type": "text",
 				"text": current_item
 			})
 			current_item = ""
 
-	exhibit_data.text_items.push_back({
-		"type": "text",
-		"text": current_item
-	})
+	if current_item.length() > 0:
+		exhibit_data.secondary_items.push_back({
+			"type": "text",
+			"text": current_item
+		})
 
+	content_result = response_code
 	emit_if_finished()
 
 var link_results = []
@@ -219,7 +216,7 @@ func _on_summary_request_complete(result, response_code, headers, body, _url):
 	summary_result = response_code
 	var res = get_json(body)
 
-	exhibit_data.text_items.push_front({
+	exhibit_data.items.push_front({
 		"type": "text",
 		"text": res.extract
 	})
