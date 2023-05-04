@@ -30,7 +30,3 @@ All museum content is sourced from Wikipedia.
   - menu to turn on/off display of what room you're in
   - 'pinging' tool that lets you highlight something in the room, but also lets you highlight a player and announces that in chat
   - this way you could play games like laser tag, racing to a certain destination, etc.
-
-## Pages causing bugs
-
-- https://en.wikipedia.org/api/rest_v1/page/summary/Norman_conquest_of_England?redirect=false
