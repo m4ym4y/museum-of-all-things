@@ -28,7 +28,6 @@ func _on_request_completed(result, _response_code, _headers, body):
 
 	var label = $Label
 	label.text = text
-	add_child(label)
 
 	if image.get_width() != 0:
 		pixel_size = float(width) / float(image.get_width())
