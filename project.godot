@@ -280,7 +280,6 @@ common/physics_interpolation=true
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 quality/filters/msaa=2
 quality/filters/use_fxaa=true
 environment/default_environment="res://default_env.tres"

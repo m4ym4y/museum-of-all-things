@@ -62,6 +62,7 @@ func init(data, from = ""):
 	var doors = data.doors
 	var exit_pos = Vector3(0, 0, 0)
 	var exit_angle = 0
+	var exhibit_lighting_percent = clamp(items.size(), 1.0, 10.0) / 10.0
 
 	if items.size() == 0 and secondary_items.size() > 0:
 		items.push_back(secondary_items.pop_front())
@@ -84,6 +85,8 @@ func init(data, from = ""):
 		var next_exit_pos
 		var next_exit_angle
 		var exit_ref
+
+		#_set_room_lighting(room, exhibit_lighting_percent)
 
 		# add as many items as can fit in the room
 		for child in room.get_node("rotator/map_and_lights/map").get_children():
@@ -151,6 +154,14 @@ func _connect_doorway(doorway_ref, door_to, room):
 	door.connect("open", self, "_on_door_open", [door_to, doorway_ref, room])
 	door.rotation.y = get_angle(doorway_ref)
 	doorway_ref.add_child(door)
+
+func _set_room_lighting(room_ref, percent):
+	for child in room_ref.get_node("rotator/map_and_lights").get_children():
+		if child.is_class('OmniLight'):
+			print('setting light to ', percent)
+			child.light_energy = percent
+			# TODO: colors
+			# child.color = color
 
 func _on_door_open(door_to, door_object, room):
 	emit_signal("open_door", door_to, door_object.global_transform.origin,

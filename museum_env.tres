@@ -1,0 +1,12 @@
+[gd_resource type="Environment" format=2]
+
+[resource]
+background_mode = 1
+background_energy = 0.0
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.75
+ambient_light_sky_contribution = 0.0
+ss_reflections_enabled = true
+ss_reflections_max_steps = 256
+ss_reflections_fade_in = 0.212133
+ss_reflections_fade_out = 2.21913
