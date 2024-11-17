@@ -2,7 +2,7 @@ extends Node3D
 
 const Exhibit = preload("res://Exhibit.tscn")
 const starting_exhibit = "Starting_Page"
-const static_exhibit_data = {
+var exhibit_data = {
 	"Starting_Page": {
 		"force_room_index": 1,
 		"items": [
@@ -20,7 +20,7 @@ var loaded_exhibits = {}
 func load_exhibit(title, position = Vector3(0, 0, 0), angle = 0, from = ""):
 	var exhibit = Exhibit.instantiate()
 
-	exhibit.init(static_exhibit_data[title], from)
+	exhibit.init(exhibit_data[title], from)
 	loaded_exhibits[title] = exhibit
 
 	exhibit.connect("open_door", Callable(self, "_on_open_door").bind(title))
@@ -42,8 +42,8 @@ func _on_open_door(to_exhibit, door_translation, door_angle, from_exhibit):
 		if k != from_exhibit:
 			loaded_exhibits[k].queue_free()
 			loaded_exhibits.erase(k)
-	
-	if static_exhibit_data.has(to_exhibit):
+
+	if exhibit_data.has(to_exhibit):
 		load_exhibit(to_exhibit, door_translation, door_angle, from_exhibit)
 		return
 
@@ -55,8 +55,8 @@ func _on_open_door(to_exhibit, door_translation, door_angle, from_exhibit):
 
 	#load_exhibit(to_exhibit, door_translation, door_angle)
 
-func _on_fetch_complete(exhibit_data):
-	static_exhibit_data[loading_exhibit] = exhibit_data
+func _on_fetch_complete(new_exhibit_data):
+	exhibit_data[loading_exhibit] = new_exhibit_data
 	load_exhibit(loading_exhibit, loading_door_translation, loading_door_angle, loading_exhibit_from)
 
 func _ready():

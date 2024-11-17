@@ -34,7 +34,7 @@ func _on_request_completed(result, _response_code, _headers, body):
 		# var to_image_bottom = width * (float(image.get_width) / float(image.get_height))
 		label.position.y = -width * (float(image.get_height() / 2) / float(image.get_width())) - 0.1
 		# label.translation.y = -width - 0.1
-		label.vertical_alignment = VALIGN_TOP
+		label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 		if label.position.y < -float(height) / 2.0:
 			position.y -= label.position.y + float(height) / 2.0
 	else:

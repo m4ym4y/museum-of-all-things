@@ -83,7 +83,7 @@ func emit_if_finished():
 
 func get_json(body):
 	var test_json_conv = JSON.new()
-	test_json_conv.parse(body.get_string_from_utf8()).result
+	test_json_conv.parse(body.get_string_from_utf8())
 	return test_json_conv.get_data()
 
 func _on_media_request_complete(result, response_code, headers, body, _url):
