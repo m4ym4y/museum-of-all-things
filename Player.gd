@@ -6,7 +6,7 @@ var crouch_move_speed = 4
 var mouse_sensitivity = 0.002
 @export var jump_impulse = 13
 
-var velocity = Vector3()
+var player_velocity = Vector3()
 
 var starting_height
 var crouching_height
@@ -45,24 +45,24 @@ func _unhandled_input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	velocity.y += gravity * delta
+	player_velocity.y += gravity * delta
 
 	var fully_crouched = $Pivot.get_position().y <= crouching_height
 	var fully_standing = $Pivot.get_position().y >= starting_height
 	var speed = max_speed if fully_standing else crouch_move_speed
 	var desired_velocity = get_input_dir() * speed
 
-	velocity.x = desired_velocity.x
-	velocity.z = desired_velocity.z
-	set_velocity(velocity)
+	player_velocity.x = desired_velocity.x
+	player_velocity.z = desired_velocity.z
+	set_velocity(player_velocity)
 	set_up_direction(Vector3.UP)
 	set_floor_stop_on_slope_enabled(true)
 	move_and_slide()
-	velocity = velocity
+	velocity = player_velocity
 
 	if Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = jump_impulse
-	
+
 	if Input.is_action_pressed("crouch") and not fully_crouched:
 		$Pivot.global_translate(Vector3(0, -crouch_speed * delta, 0))
 	elif not Input.is_action_pressed("crouch") and not fully_standing:
