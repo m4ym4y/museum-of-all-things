@@ -2,12 +2,13 @@
 
 importer="qodot.map"
 type="Resource"
-path="res://.import/hallway_balcony_1.map-d898430616c8e5423d70fb8fc7c1df5f.tres"
+uid="uid://d3irhba3r13hu"
+path="res://.godot/imported/hallway_balcony_1.map-d898430616c8e5423d70fb8fc7c1df5f.tres"
 
 [deps]
 
 source_file="res://rooms/hallway_balcony_1.map"
-dest_files=[ "res://.import/hallway_balcony_1.map-d898430616c8e5423d70fb8fc7c1df5f.tres" ]
+dest_files=["res://.godot/imported/hallway_balcony_1.map-d898430616c8e5423d70fb8fc7c1df5f.tres"]
 
 [params]
 

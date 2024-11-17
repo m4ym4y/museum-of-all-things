@@ -2,12 +2,13 @@
 
 importer="qodot.map"
 type="Resource"
-path="res://.import/hallway_1.2.map-b139e73b01f140f6deb14c484216ce2f.tres"
+uid="uid://dsdeirxkuegvn"
+path="res://.godot/imported/hallway_1.2.map-b139e73b01f140f6deb14c484216ce2f.tres"
 
 [deps]
 
 source_file="res://rooms/autosave/hallway_1.2.map"
-dest_files=[ "res://.import/hallway_1.2.map-b139e73b01f140f6deb14c484216ce2f.tres" ]
+dest_files=["res://.godot/imported/hallway_1.2.map-b139e73b01f140f6deb14c484216ce2f.tres"]
 
 [params]
 

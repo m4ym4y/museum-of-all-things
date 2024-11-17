@@ -2,12 +2,13 @@
 
 importer="qodot.map"
 type="Resource"
-path="res://.import/hallway_2.map-a6c4a50a297fe4189981af8f846a3319.tres"
+uid="uid://nauri1niv7d2"
+path="res://.godot/imported/hallway_2.map-a6c4a50a297fe4189981af8f846a3319.tres"
 
 [deps]
 
 source_file="res://rooms/hallway_2.map"
-dest_files=[ "res://.import/hallway_2.map-a6c4a50a297fe4189981af8f846a3319.tres" ]
+dest_files=["res://.godot/imported/hallway_2.map-a6c4a50a297fe4189981af8f846a3319.tres"]
 
 [params]
 

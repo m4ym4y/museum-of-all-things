@@ -2,12 +2,13 @@
 
 importer="qodot.map"
 type="Resource"
-path="res://.import/hallway_ring.4.map-af061b34ef25edaff8ce441ac1c66ef7.tres"
+uid="uid://cmjbytqlv4bw4"
+path="res://.godot/imported/hallway_ring.4.map-af061b34ef25edaff8ce441ac1c66ef7.tres"
 
 [deps]
 
 source_file="res://rooms/autosave/hallway_ring.4.map"
-dest_files=[ "res://.import/hallway_ring.4.map-af061b34ef25edaff8ce441ac1c66ef7.tres" ]
+dest_files=["res://.godot/imported/hallway_ring.4.map-af061b34ef25edaff8ce441ac1c66ef7.tres"]
 
 [params]
 
