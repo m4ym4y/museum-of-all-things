@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 signal open_door(to_exhibit, door_translation, door_angle)
 
@@ -48,9 +48,9 @@ func rotate_room(room, pivot, angle):
 	var rotator = room.get_node("rotator")
 	var map = room.get_node("rotator/map_and_lights")
 
-	map.translation = -pivot
+	map.position = -pivot
 	rotator.rotation.y = angle
-	rotator.translation = pivot
+	rotator.position = pivot
 
 # TODO: refactor this method to break out the different cases
 # start with items that are just text
@@ -79,7 +79,7 @@ func init(data, from = ""):
 				room_index = randi() % room_types.size()
 
 		orientation += room_types[room_index].orientation
-		var room = room_types[room_index].scene.instance()
+		var room = room_types[room_index].scene.instantiate()
 		var entrance_pos = Vector3(0, 0, 0)
 		var next_exit_pos
 		var next_exit_angle
@@ -90,15 +90,15 @@ func init(data, from = ""):
 			if child.name.ends_with("entrance"):
 				# set the overall exhibit entrance if this is the first room
 				if not entrance:
-					entrance = child.translation
+					entrance = child.position
 					entrance_angle = get_angle(child)
 					entrance_ref = child
 					if from == "":
 						_block_doorway(entrance_ref)
-				entrance_pos = child.translation
+				entrance_pos = child.position
 
 			elif child.name.ends_with("exit"):
-				next_exit_pos = child.translation
+				next_exit_pos = child.position
 				next_exit_angle = get_angle(child)
 				exit_ref = child
 
@@ -121,10 +121,10 @@ func init(data, from = ""):
 
 				var item_scene
 				if item.type == "image":
-					item_scene = ImageItem.instance()
+					item_scene = ImageItem.instantiate()
 					item_scene.init(item.src, 1.5, 1.5, item.text)
 				elif item.type == "text":
-					item_scene = TextItem.instance()
+					item_scene = TextItem.instantiate()
 					item_scene.init(item.text)
 
 				item_scene.rotation.y = get_angle(child)
@@ -134,21 +134,21 @@ func init(data, from = ""):
 		if items.size() == 0:
 			_block_doorway(exit_ref)
 
-		room.translation = exit_pos - entrance_pos
+		room.position = exit_pos - entrance_pos
 		rotate_room(room, entrance_pos, exit_angle)
 		add_child(room)
-		exit_pos = room.translation + (next_exit_pos - entrance_pos).rotated(Vector3(0, 1, 0), room.get_node("rotator").rotation.y) + entrance_pos
+		exit_pos = room.position + (next_exit_pos - entrance_pos).rotated(Vector3(0, 1, 0), room.get_node("rotator").rotation.y) + entrance_pos
 		exit_angle = room.get_node("rotator").rotation.y + next_exit_angle
 
 func _block_doorway(doorway_ref):
-	var block = DoorPlaceholder.instance()
+	var block = DoorPlaceholder.instantiate()
 	block.rotation.y = get_angle(doorway_ref)
 	doorway_ref.add_child(block)
 
 func _connect_doorway(doorway_ref, door_to, room):
-	var door = Door.instance()
+	var door = Door.instantiate()
 	door.init(door_to)
-	door.connect("open", self, "_on_door_open", [door_to, doorway_ref, room])
+	door.connect("open", Callable(self, "_on_door_open").bind(door_to, doorway_ref, room))
 	door.rotation.y = get_angle(doorway_ref)
 	doorway_ref.add_child(door)
 

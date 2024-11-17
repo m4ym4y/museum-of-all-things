@@ -1,37 +1,35 @@
 [remap]
 
 importer="texture"
-type="StreamTexture"
-path.s3tc="res://.import/checkerboard_material.png-bd565bc7d3537fb58b836d3d0a566856.s3tc.stex"
-path.etc2="res://.import/checkerboard_material.png-bd565bc7d3537fb58b836d3d0a566856.etc2.stex"
+type="CompressedTexture2D"
+uid="uid://na3k7waw2y0y"
+path.s3tc="res://.godot/imported/checkerboard_material.png-bd565bc7d3537fb58b836d3d0a566856.s3tc.ctex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/qodot/textures/materials/checkerboard_material.png"
-dest_files=[ "res://.import/checkerboard_material.png-bd565bc7d3537fb58b836d3d0a566856.s3tc.stex", "res://.import/checkerboard_material.png-bd565bc7d3537fb58b836d3d0a566856.etc2.stex" ]
+dest_files=["res://.godot/imported/checkerboard_material.png-bd565bc7d3537fb58b836d3d0a566856.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
+compress/high_quality=false
 compress/lossy_quality=1.0
-compress/hdr_mode=0
-compress/bptc_ldr=0
+compress/hdr_compression=1
 compress/normal_map=0
-flags/repeat=1
-flags/filter=false
-flags/mipmaps=true
-flags/anisotropic=true
-flags/srgb=1
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
 process/fix_alpha_border=false
 process/premult_alpha=false
-process/HDR_as_SRGB=false
-process/invert_color=false
 process/normal_map_invert_y=false
-stream=false
-size_limit=0
-detect_3d=false
-svg/scale=1.0
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1

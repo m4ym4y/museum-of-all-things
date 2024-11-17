@@ -1,7 +1,7 @@
 class_name QodotRotateEntity
-extends KinematicBody
+extends CharacterBody3D
 
-export(Dictionary) var properties setget set_properties
+@export var properties: Dictionary: set = set_properties
 
 var rotate_axis := Vector3.UP
 var rotate_speed := 360.0
@@ -22,4 +22,4 @@ func _ready() -> void:
 	update_properties()
 
 func _process(delta: float) -> void:
-	rotate(rotate_axis, deg2rad(rotate_speed * delta))
+	rotate(rotate_axis, deg_to_rad(rotate_speed * delta))

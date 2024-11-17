@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 
 # Declare member variables here. Examples:
@@ -9,8 +9,8 @@ extends Spatial
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if OS.get_name() != "HTML5":
-		$WorldEnvironment.environment.ss_reflections_enabled = true
-	$Timer.connect("timeout", self, "_on_timer_timeout")
+		$WorldEnvironment.environment.ssr_enabled = true
+	$Timer.connect("timeout", Callable(self, "_on_timer_timeout"))
 
 func _on_timer_timeout():
 	get_node("HUD/Label").text = str(Engine.get_frames_per_second())

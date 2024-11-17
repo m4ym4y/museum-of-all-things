@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 const Exhibit = preload("res://Exhibit.tscn")
 const starting_exhibit = "Starting_Page"
@@ -17,16 +17,16 @@ const static_exhibit_data = {
 
 var loaded_exhibits = {}
 
-func load_exhibit(title, translation = Vector3(0, 0, 0), angle = 0, from = ""):
-	var exhibit = Exhibit.instance()
+func load_exhibit(title, position = Vector3(0, 0, 0), angle = 0, from = ""):
+	var exhibit = Exhibit.instantiate()
 
 	exhibit.init(static_exhibit_data[title], from)
 	loaded_exhibits[title] = exhibit
 
-	exhibit.connect("open_door", self, "_on_open_door", [title])
+	exhibit.connect("open_door", Callable(self, "_on_open_door").bind(title))
 	exhibit.rotation.y = angle
 	# exhibit.global_transform.origin = translation # - exhibit.entrance
-	exhibit.translation = translation # - exhibit.entrance
+	exhibit.position = position # - exhibit.entrance
 
 	# TODO: position exhibit at the correct location according to the triggered door
 	add_child(exhibit)
@@ -61,5 +61,5 @@ func _on_fetch_complete(exhibit_data):
 
 func _ready():
 	randomize()
-	$ExhibitFetcher.connect("fetch_complete", self, "_on_fetch_complete")
+	$ExhibitFetcher.connect("fetch_complete", Callable(self, "_on_fetch_complete"))
 	load_exhibit(starting_exhibit)

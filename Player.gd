@@ -1,10 +1,10 @@
-extends KinematicBody
+extends CharacterBody3D
 
 var gravity = -30
 var max_speed = 8
 var crouch_move_speed = 4
 var mouse_sensitivity = 0.002
-export var jump_impulse = 13
+@export var jump_impulse = 13
 
 var velocity = Vector3()
 
@@ -20,7 +20,7 @@ var crouch_speed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	starting_height = $Pivot.get_translation().y
+	starting_height = $Pivot.get_position().y
 	crouching_height = starting_height / 3
 	crouch_speed = (starting_height - crouching_height) / crouch_time
 
@@ -47,14 +47,18 @@ func _unhandled_input(event):
 func _physics_process(delta):
 	velocity.y += gravity * delta
 
-	var fully_crouched = $Pivot.get_translation().y <= crouching_height
-	var fully_standing = $Pivot.get_translation().y >= starting_height
+	var fully_crouched = $Pivot.get_position().y <= crouching_height
+	var fully_standing = $Pivot.get_position().y >= starting_height
 	var speed = max_speed if fully_standing else crouch_move_speed
 	var desired_velocity = get_input_dir() * speed
 
 	velocity.x = desired_velocity.x
 	velocity.z = desired_velocity.z
-	velocity = move_and_slide(velocity, Vector3.UP, true)
+	set_velocity(velocity)
+	set_up_direction(Vector3.UP)
+	set_floor_stop_on_slope_enabled(true)
+	move_and_slide()
+	velocity = velocity
 
 	if Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = jump_impulse
@@ -65,6 +69,6 @@ func _physics_process(delta):
 		$Pivot.global_translate(Vector3(0, crouch_speed * delta, 0))
 
 	if Input.is_action_pressed("interact"):
-		var collider = $Pivot/Camera/RayCast.get_collider()
+		var collider = $Pivot/Camera3D/RayCast3D.get_collider()
 		if collider and collider.has_method("interact"):
 			collider.interact()

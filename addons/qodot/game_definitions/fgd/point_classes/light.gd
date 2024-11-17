@@ -1,6 +1,6 @@
+@tool
 class_name QodotLight
 extends QodotEntity
-tool
 
 func update_properties():
 	for child in get_children():
@@ -10,30 +10,30 @@ func update_properties():
 	var light_node = null
 
 	if 'mangle' in properties:
-		light_node = SpotLight.new()
+		light_node = SpotLight3D.new()
 
 		var yaw = properties['mangle'].x
 		var pitch = properties['mangle'].y
-		light_node.rotate(Vector3.UP, deg2rad(180 + yaw))
-		light_node.rotate(light_node.global_transform.basis.x, deg2rad(180 + pitch))
+		light_node.rotate(Vector3.UP, deg_to_rad(180 + yaw))
+		light_node.rotate(light_node.global_transform.basis.x, deg_to_rad(180 + pitch))
 
 		if 'angle' in properties:
-			light_node.set_param(Light.PARAM_SPOT_ANGLE, properties['angle'])
+			light_node.set_param(Light3D.PARAM_SPOT_ANGLE, properties['angle'])
 	else:
-		light_node = OmniLight.new()
+		light_node = OmniLight3D.new()
 
 	var light_brightness = 300
 	if 'light' in properties:
 		light_brightness = properties['light']
-		light_node.set_param(Light.PARAM_ENERGY, light_brightness / 100.0)
-		light_node.set_param(Light.PARAM_INDIRECT_ENERGY, light_brightness / 100.0)
+		light_node.set_param(Light3D.PARAM_ENERGY, light_brightness / 100.0)
+		light_node.set_param(Light3D.PARAM_INDIRECT_ENERGY, light_brightness / 100.0)
 
 	var light_range := 1.0
 	if 'wait' in properties:
 		light_range = properties['wait']
 
 	var normalized_brightness = light_brightness / 300.0
-	light_node.set_param(Light.PARAM_RANGE, 16.0 * light_range * (normalized_brightness * normalized_brightness))
+	light_node.set_param(Light3D.PARAM_RANGE, 16.0 * light_range * (normalized_brightness * normalized_brightness))
 
 	var light_attenuation = 0
 	if 'delay' in properties:
@@ -56,11 +56,11 @@ func update_properties():
 		_:
 			attenuation = 1
 
-	light_node.set_param(Light.PARAM_ATTENUATION, attenuation)
+	light_node.set_param(Light3D.PARAM_ATTENUATION, attenuation)
 	light_node.set_shadow(true)
-	light_node.set_bake_mode(Light.BAKE_ALL)
+	light_node.set_bake_mode(Light3D.BAKE_ALL)
 
-	var light_color = Color.white
+	var light_color = Color.WHITE
 	if '_color' in properties:
 		light_color = properties['_color']
 

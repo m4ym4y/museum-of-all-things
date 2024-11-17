@@ -1,10 +1,10 @@
-extends KinematicBody
+extends CharacterBody3D
 
-export(Dictionary) var properties setget set_properties
+@export var properties: Dictionary: set = set_properties
 
-var base_transform: Transform
-var offset_transform: Transform
-var target_transform: Transform
+var base_transform: Transform3D
+var offset_transform: Transform3D
+var target_transform: Transform3D
 
 var speed := 1.0
 
@@ -14,8 +14,8 @@ func set_properties(new_properties: Dictionary) -> void:
 		update_properties()
 
 func update_properties() -> void:
-	if 'translation' in properties:
-		offset_transform.origin = properties.translation
+	if 'position' in properties:
+		offset_transform.origin = properties.position
 
 	if 'rotation' in properties:
 		offset_transform.basis = offset_transform.basis.rotated(Vector3.RIGHT, properties.rotation.x)

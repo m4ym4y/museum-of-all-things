@@ -1,8 +1,8 @@
+@tool
 class_name PhysicsEntity
-extends RigidBody
-tool
+extends RigidBody3D
 
-export(Dictionary) var properties setget set_properties
+@export var properties: Dictionary: set = set_properties
 
 func set_properties(new_properties : Dictionary) -> void:
 	if(properties != new_properties):

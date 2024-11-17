@@ -32,11 +32,11 @@ func _on_request_completed(result, _response_code, _headers, body):
 	if image.get_width() != 0:
 		pixel_size = float(width) / float(image.get_width())
 		# var to_image_bottom = width * (float(image.get_width) / float(image.get_height))
-		label.translation.y = -width * (float(image.get_height() / 2) / float(image.get_width())) - 0.1
+		label.position.y = -width * (float(image.get_height() / 2) / float(image.get_width())) - 0.1
 		# label.translation.y = -width - 0.1
 		label.vertical_alignment = VALIGN_TOP
-		if label.translation.y < -float(height) / 2.0:
-			translation.y -= label.translation.y + float(height) / 2.0
+		if label.position.y < -float(height) / 2.0:
+			position.y -= label.position.y + float(height) / 2.0
 	else:
 		label.text += "\n(image could not be displayed)"
 
@@ -56,7 +56,7 @@ func init(url, _width, _height, _text):
 	width = _width
 	height = _height
 	text = _text
-	$HTTPRequest.connect("request_completed", self, "_on_request_completed")
+	$HTTPRequest.connect("request_completed", Callable(self, "_on_request_completed"))
 	if is_inside_tree():
 		$HTTPRequest.request(image_url)
 
