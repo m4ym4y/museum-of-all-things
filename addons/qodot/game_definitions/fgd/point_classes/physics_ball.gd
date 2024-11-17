@@ -5,10 +5,10 @@ extends PhysicsEntity
 func update_properties():
 	super.update_properties()
 	if 'size' in properties:
-		$MeshInstance3D.mesh.radius = properties.size * 0.5
-		$MeshInstance3D.mesh.height = properties.size
+		$MeshInstance.mesh.radius = properties.size * 0.5
+		$MeshInstance.mesh.height = properties.size
 
-		$CollisionShape3D.shape.radius = properties.size * 0.5
+		$CollisionShape.shape.radius = properties.size * 0.5
 
 
 func use():

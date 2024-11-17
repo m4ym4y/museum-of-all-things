@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buefbyb14qm1k"
-path.s3tc="res://.godot/imported/LightMap.png-1e5f86e1725ae01e697c44b20949e43a.s3tc.ctex"
+uid="uid://biadus1lby6yd"
+path="res://.godot/imported/icon_qodot_node3d.svg-34e38a00186815329c3590ab244948d7.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/qodot/example_scenes/0-visuals/5-baked-lighting/LightMap.png"
-dest_files=["res://.godot/imported/LightMap.png-1e5f86e1725ae01e697c44b20949e43a.s3tc.ctex"]
+source_file="res://addons/qodot/icons/icon_qodot_node3d.svg"
+dest_files=["res://.godot/imported/icon_qodot_node3d.svg-34e38a00186815329c3590ab244948d7.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
@@ -33,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

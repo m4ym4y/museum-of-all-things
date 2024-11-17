@@ -1,31 +1,23 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" script_class="QodotFGDSolidClass" load_steps=3 format=3 uid="uid://v3fbh0xn5d2h"]
 
-[ext_resource path="res://addons/qodot/game_definitions/fgd/solid_classes/physics.gd" type="Script" id=1]
-[ext_resource path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_solid_class.gd" type="Script" id=2]
+[ext_resource type="Script" path="res://addons/qodot/game_definitions/fgd/solid_classes/physics.gd" id="1"]
+[ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_solid_class.gd" id="2"]
 
 [resource]
-script = ExtResource( 2 )
-class_options = "----------------------------------------------------------------"
+script = ExtResource("2")
+spawn_type = 2
+build_visuals = true
+collision_shape_type = 1
+script_class = ExtResource("1")
 classname = "physics"
 description = "Physics Brush"
 qodot_internal = false
-base_classes = [  ]
+base_classes = Array[Resource]([])
 class_properties = {
 "mass": 1.0,
-"velocity": Vector3( 0, 0, 0 )
+"velocity": Vector3(0, 0, 0)
 }
-class_property_descriptions = {
-}
-meta_properties = {
-}
-node_options = "----------------------------------------------------------------"
-node_class = "RigidBody3D"
+class_property_descriptions = {}
+meta_properties = {}
+node_class = "RigidBody"
 transient_node = false
-spawn = "----------------------------------------------------------------"
-spawn_type = 2
-visual_build = "----------------------------------------------------------------"
-build_visuals = true
-collision_build = "----------------------------------------------------------------"
-collision_shape_type = 1
-scripting = "----------------------------------------------------------------"
-script_class = ExtResource( 1 )

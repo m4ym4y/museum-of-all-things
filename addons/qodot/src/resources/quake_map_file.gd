@@ -1,4 +1,4 @@
 class_name QuakeMapFile
 extends Resource
 
-@export var revision := 0
+@export var revision: int = 0

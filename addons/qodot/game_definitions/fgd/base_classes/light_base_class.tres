@@ -1,16 +1,16 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" script_class="QodotFGDBaseClass" load_steps=2 format=3 uid="uid://c5o31v30rw7v5"]
 
-[ext_resource path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_base_class.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_base_class.gd" id="1"]
 
 [resource]
-script = ExtResource( 1 )
+script = ExtResource("1")
 class_options = "----------------------------------------------------------------"
-classname = "Light3D"
+classname = "Light"
 description = ""
 qodot_internal = false
-base_classes = [  ]
+base_classes = Array[Resource]([])
 class_properties = {
-"_color": Color( 1, 1, 1, 1 ),
+"_color": Color(1, 1, 1, 1),
 "delay": {
 "Inverse distance falloff": 1,
 "Inverse distance squared": 2,
@@ -20,18 +20,18 @@ class_properties = {
 "No falloff": 3
 },
 "light": 300,
-"mangle": Vector3( 0.005, 0, 0 ),
+"mangle": Vector3(0.005, 0, 0),
 "wait": 1
 }
 class_property_descriptions = {
-"_color": "Light3D color",
+"_color": "Light color",
 "delay": "Attenuation",
 "light": "Brightness",
 "mangle": "Spotlight angle",
 "wait": "Fade distance multiplier"
 }
 meta_properties = {
-"color": Color( 1, 1, 0.156863, 1 )
+"color": Color(1, 1, 0.156863, 1)
 }
 node_options = "----------------------------------------------------------------"
 node_class = ""

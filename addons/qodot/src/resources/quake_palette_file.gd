@@ -3,5 +3,5 @@ extends Resource
 
 @export var colors: PackedColorArray
 
-func _init(colors) -> void:
+func _init(colors):
 	self.colors = colors

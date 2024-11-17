@@ -3,15 +3,14 @@ extends Resource
 
 var prefix: String = ""
 
-@export var class_options: String = QodotUtil.CATEGORY_STRING
-
+@export_group("Class Options")
 @export var classname := ""
 
 @export var description := ""
 
 @export var qodot_internal := false
 
-@export var base_classes := [] # (Array, Resource)
+@export var base_classes: Array[Resource] = [] # (Array, Resource)
 
 @export var class_properties := {}
 
@@ -22,8 +21,7 @@ var prefix: String = ""
 	"color": Color(0.8, 0.8, 0.8)
 }
 
-@export var node_options: String = QodotUtil.CATEGORY_STRING
-
+@export_group("Node Options")
 @export var node_class := ""
 
 @export var transient_node := false
@@ -49,6 +47,10 @@ func build_def_text() -> String:
 		meta_props['base'] = base_str
 
 	for prop in meta_props:
+		if self is QodotFGDSolidClass:
+			if prop == "size" or prop == "model":
+				continue
+		
 		var value = meta_props[prop]
 		res += " " + prop + "("
 
@@ -86,14 +88,24 @@ func build_def_text() -> String:
 
 		var prop_val = null
 		var prop_type := ""
-		var prop_description: String = class_property_descriptions[prop] if prop in class_property_descriptions else ""
+		var prop_description: String
+		if prop in class_property_descriptions:
+			# Optional default value for Choices can be set up as [String, int]
+			if value is Dictionary and class_property_descriptions[prop] is Array:
+				var prop_arr: Array = class_property_descriptions[prop]
+				if prop_arr.size() > 1 and prop_arr[1] is int:
+					prop_description = "\"" + prop_arr[0] + "\" : " + str(prop_arr[1])
+			else:
+				prop_description = "\"" + class_property_descriptions[prop] + "\""
+		else:
+			prop_description = ""
 
 		if value is int:
 			prop_type = "integer"
-			prop_val = String(value)
+			prop_val = str(value)
 		elif value is float:
 			prop_type = "float"
-			prop_val = String(value)
+			prop_val = "\"" + str(value) + "\""
 		elif value is String:
 			prop_type = "string"
 			prop_val = "\"" + value + "\""
@@ -116,13 +128,13 @@ func build_def_text() -> String:
 			prop_val = "[" + "\n"
 			for choice in value:
 				var choice_val = value[choice]
-				prop_val += "\t\t" + String(choice_val) + " : \"" + choice + "\"\n"
+				prop_val += "\t\t" + str(choice_val) + " : \"" + choice + "\"\n"
 			prop_val += "\t]"
 		elif value is Array:
 			prop_type = "flags"
 			prop_val = "[" + "\n"
 			for arr_val in value:
-				prop_val += "\t\t" + String(arr_val[1]) + " : \"" + String(arr_val[0]) + "\" : " + ("1" if arr_val[2] else "0") + "\n"
+				prop_val += "\t\t" + str(arr_val[1]) + " : \"" + str(arr_val[0]) + "\" : " + ("1" if arr_val[2] else "0") + "\n"
 			prop_val += "\t]"
 		elif value is NodePath:
 			prop_type = "target_destination"
@@ -137,9 +149,9 @@ func build_def_text() -> String:
 			res += ")"
 
 			if not value is Array:
-				res += " : \""
-				res += prop_description
-				res += "\" "
+				if not value is Dictionary or prop_description != "":
+					res += " : "
+					res += prop_description
 
 			if value is Dictionary or value is Array:
 				res += " = "

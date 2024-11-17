@@ -1,40 +1,20 @@
-[gd_resource type="Resource" script_class="QodotFGDPointClass" load_steps=4 format=3 uid="uid://dvq5x1v15uh0i"]
+[gd_resource type="Resource" script_class="QodotFGDPointClass" load_steps=4 format=3 uid="uid://cubvqwi3p77sq"]
 
 [ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_point_class.gd" id="1"]
-[ext_resource type="PackedScene" path="res://addons/qodot/game_definitions/fgd/point_classes/physics_ball.tscn" id="2"]
-
-[sub_resource type="GDScript" id="1"]
-script/source = "class_name PhysicsBall
-extends PhysicsEntity
-tool
-
-func update_properties():
-	.update_properties()
-	if 'size' in properties:
-		$MeshInstance3D.mesh.radius = properties.size * 0.5
-		$MeshInstance3D.mesh.height = properties.size
-
-		$CollisionShape3D.shape.radius = properties.size * 0.5
-
-
-func use():
-	bounce()
-
-func bounce():
-	linear_velocity.y = 10
-"
+[ext_resource type="PackedScene" uid="uid://b7ccfkajnmn64" path="res://addons/qodot/game_definitions/fgd/point_classes/physics_ball.tscn" id="2"]
+[ext_resource type="Script" path="res://addons/qodot/game_definitions/fgd/point_classes/physics_ball.gd" id="3_bpq0c"]
 
 [resource]
 script = ExtResource("1")
 scene = "----------------------------------------------------------------"
 scene_file = ExtResource("2")
 scripting = "----------------------------------------------------------------"
-script_class = SubResource("1")
+script_class = ExtResource("3_bpq0c")
 class_options = "----------------------------------------------------------------"
 classname = "physics_ball"
 description = "Physics Ball"
 qodot_internal = false
-base_classes = []
+base_classes = Array[Resource]([])
 class_properties = {
 "mass": 1.0,
 "size": 1.0,

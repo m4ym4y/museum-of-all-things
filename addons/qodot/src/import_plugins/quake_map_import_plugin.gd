@@ -2,7 +2,7 @@
 class_name QuakeMapImportPlugin
 extends EditorImportPlugin
 
-# Quake .map import plugin
+# Quake super.map import plugin
 
 func _get_importer_name() -> String:
 	return 'qodot.map'
@@ -13,19 +13,25 @@ func _get_visible_name() -> String:
 func _get_resource_type() -> String:
 	return 'Resource'
 
-func _get_recognized_extensions() -> Array:
-	return ['map']
+func _get_recognized_extensions() -> PackedStringArray:
+	return PackedStringArray(['map'])
+	
+func _get_priority():
+	return 1.0
 
 func _get_save_extension() -> String:
 	return 'tres'
 
-func _get_import_options(preset) -> Array:
+func _get_import_options(path, preset):
 	return []
 
 func _get_preset_count() -> int:
 	return 0
+	
+func _get_import_order():
+	return 0
 
-func import(source_file, save_path, options, r_platform_variants, r_gen_files) -> int:
+func _import(source_file, save_path, options, r_platform_variants, r_gen_files) -> Error:
 	var save_path_str = '%s.%s' % [save_path, _get_save_extension()]
 
 	var map_resource : QuakeMapFile = null
@@ -37,4 +43,4 @@ func import(source_file, save_path, options, r_platform_variants, r_gen_files) -
 	else:
 		map_resource = QuakeMapFile.new()
 
-	return ResourceSaver.save(save_path_str, map_resource)
+	return ResourceSaver.save(map_resource, save_path_str)

@@ -8,17 +8,19 @@ enum PBRSuffix {
 	ROUGHNESS,
 	EMISSION,
 	AO,
-	DEPTH
+	HEIGHT,
+	ALBEDO
 }
 
-# Suffix string / Godot enum / SpatialMaterial property
+# Suffix string / Godot enum / StandardMaterial3D property
 const PBR_SUFFIX_NAMES := {
 	PBRSuffix.NORMAL: 'normal',
 	PBRSuffix.METALLIC: 'metallic',
 	PBRSuffix.ROUGHNESS: 'roughness',
 	PBRSuffix.EMISSION: 'emission',
 	PBRSuffix.AO: 'ao',
-	PBRSuffix.DEPTH: 'depth',
+	PBRSuffix.HEIGHT: 'height',
+	PBRSuffix.ALBEDO: 'albedo',
 }
 
 const PBR_SUFFIX_PATTERNS := {
@@ -27,23 +29,25 @@ const PBR_SUFFIX_PATTERNS := {
 	PBRSuffix.ROUGHNESS: '%s_roughness.%s',
 	PBRSuffix.EMISSION: '%s_emission.%s',
 	PBRSuffix.AO: '%s_ao.%s',
-	PBRSuffix.DEPTH: '%s_depth.%s',
+	PBRSuffix.HEIGHT: '%s_height.%s',
+	PBRSuffix.ALBEDO: '%s_albedo.%s'
 }
 
-const PBR_SUFFIX_TEXTURES := {
+var PBR_SUFFIX_TEXTURES := {
 	PBRSuffix.NORMAL: StandardMaterial3D.TEXTURE_NORMAL,
 	PBRSuffix.METALLIC: StandardMaterial3D.TEXTURE_METALLIC,
 	PBRSuffix.ROUGHNESS: StandardMaterial3D.TEXTURE_ROUGHNESS,
 	PBRSuffix.EMISSION: StandardMaterial3D.TEXTURE_EMISSION,
 	PBRSuffix.AO: StandardMaterial3D.TEXTURE_AMBIENT_OCCLUSION,
-	PBRSuffix.DEPTH: StandardMaterial3D.TEXTURE_DEPTH,
+	PBRSuffix.HEIGHT: StandardMaterial3D.TEXTURE_HEIGHTMAP,
+	PBRSuffix.ALBEDO: StandardMaterial3D.TEXTURE_ALBEDO
 }
 
 const PBR_SUFFIX_PROPERTIES := {
 	PBRSuffix.NORMAL: 'normal_enabled',
 	PBRSuffix.EMISSION: 'emission_enabled',
 	PBRSuffix.AO: 'ao_enabled',
-	PBRSuffix.DEPTH: 'depth_enabled',
+	PBRSuffix.HEIGHT: 'heightmap_enabled',
 }
 
 # Parameters
@@ -52,8 +56,8 @@ var texture_extensions: PackedStringArray
 var texture_wads: Array
 
 # Instances
-var directory := DirAccess.new()
 var texture_wad_resources : Array = []
+var unshaded := false
 
 # Getters
 func get_pbr_suffix_pattern(suffix: int) -> String:
@@ -110,26 +114,29 @@ func load_texture(texture_name: String) -> Texture2D:
 
 	return null
 
-func create_materials(texture_list: Array, material_extension: String, default_material: Material) -> Dictionary:
+func create_materials(texture_list: Array, material_extension: String, default_material: Material, default_material_albedo_uniform: String) -> Dictionary:
 	var texture_materials := {}
+	# prints("TEXLI", texture_list)
 	for texture in texture_list:
 		texture_materials[texture] = create_material(
 			texture,
 			material_extension,
-			default_material
+			default_material,
+			default_material_albedo_uniform
 		)
 	return texture_materials
 
 func create_material(
 	texture_name: String,
 	material_extension: String,
-	default_material: StandardMaterial3D
-	) -> StandardMaterial3D:
+	default_material: Material,
+	default_material_albedo_uniform: String
+	) -> Material:
 	# Autoload material if it exists
 	var material_dict := {}
 
 	var material_path = "%s/%s.%s" % [base_texture_path, texture_name, material_extension]
-	if not material_path in material_dict and directory.file_exists(material_path):
+	if not material_path in material_dict and FileAccess.file_exists(material_path):
 		var loaded_material: Material = load(material_path)
 		if loaded_material:
 			material_dict[material_path] = loaded_material
@@ -138,24 +145,34 @@ func create_material(
 	if material_path in material_dict:
 		return material_dict[material_path]
 
-	var material : StandardMaterial3D = null
+	var material : Material = null
 
 	if default_material:
 		material = default_material.duplicate()
 	else:
 		material = StandardMaterial3D.new()
-
 	var texture : Texture2D = load_texture(texture_name)
 	if not texture:
 		return material
 
-	material.set_texture(StandardMaterial3D.TEXTURE_ALBEDO, texture)
+	if material is BaseMaterial3D:
+		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED if unshaded else BaseMaterial3D.SHADING_MODE_PER_PIXEL
+
+	if material is StandardMaterial3D:
+		material.set_texture(StandardMaterial3D.TEXTURE_ALBEDO, texture)
+	elif material is ShaderMaterial && default_material_albedo_uniform != "":
+		material.set_shader_parameter(default_material_albedo_uniform, texture)
 
 	var pbr_textures : Dictionary = get_pbr_textures(texture_name)
-	for pbr_suffix in PBRSuffix:
-		var suffix = PBRSuffix[pbr_suffix]
+	
+	for pbr_suffix in PBRSuffix.values():
+		var suffix = pbr_suffix
 		var tex = pbr_textures[suffix]
 		if tex:
+			if material is ShaderMaterial:
+				material = StandardMaterial3D.new()
+				material.set_texture(StandardMaterial3D.TEXTURE_ALBEDO, texture)
+			
 			var enable_prop : String = PBR_SUFFIX_PROPERTIES[suffix] if suffix in PBR_SUFFIX_PROPERTIES else ""
 			if(enable_prop != ""):
 				material.set(enable_prop, true)
@@ -169,13 +186,12 @@ func create_material(
 # PBR texture fetching
 func get_pbr_textures(texture_name: String) -> Dictionary:
 	var pbr_textures := {}
-	for pbr_suffix in PBRSuffix:
-		var suffix = PBRSuffix[pbr_suffix]
-		pbr_textures[suffix] = get_pbr_texture(texture_name, suffix)
+	for pbr_suffix in PBRSuffix.values():
+		pbr_textures[pbr_suffix] = get_pbr_texture(texture_name, pbr_suffix)
 
 	return pbr_textures
 
-func get_pbr_texture(texture: String, suffix: int) -> Texture2D:
+func get_pbr_texture(texture: String, suffix: PBRSuffix) -> Texture2D:
 	var texture_comps : PackedStringArray = texture.split('/')
 
 	if texture_comps.size() == 0:
@@ -191,7 +207,7 @@ func get_pbr_texture(texture: String, suffix: int) -> Texture2D:
 			]
 		]
 
-		if(directory.file_exists(path)):
+		if(FileAccess.file_exists(path)):
 			return load(path) as Texture2D
 
 	return null
