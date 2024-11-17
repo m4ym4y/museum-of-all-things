@@ -1,8 +1,8 @@
 class_name OrbitArm
 extends Node3D
 
-@export var translate := true
-@export var rotate := true
+@export var should_translate := true
+@export var should_rotate := true
 @export var zoom := true
 
 var yaw = 0.0
@@ -21,15 +21,15 @@ func _input(event) -> void:
 	if event is InputEventMouseButton:
 		if not zoom: return
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			$Camera3D.position.z -= 2.0
+			$Camera.translation.z -= 2.0
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			$Camera3D.position.z += 2.0
+			$Camera.translation.z += 2.0
 	elif event is InputEventMouseMotion:
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_MASK_LEFT):
-			if not translate: return
-			position += $Camera3D.global_transform.basis.x * event.relative.x * -0.05
-			position += $Camera3D.global_transform.basis.y * event.relative.y * 0.05
-		elif Input.is_mouse_button_pressed(MOUSE_BUTTON_MASK_RIGHT):
-			if not rotate: return
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			if not should_translate: return
+			translate($Camera.global_transform.basis.x * event.relative.x * -0.05)
+			translate($Camera.global_transform.basis.y * event.relative.y * 0.05)
+		elif Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+			if not should_rotate: return
 			yaw += event.relative.x * -0.002
 			pitch += event.relative.y * -0.002

@@ -1,6 +1,5 @@
 @tool
-class_name QuakeWadImportPlugin
-extends EditorImportPlugin
+class_name QuakeWadImportPlugin extends EditorImportPlugin
 
 enum WadEntryType {
 	Palette = 0x40,
@@ -21,35 +20,45 @@ func _get_visible_name() -> String:
 func _get_resource_type() -> String:
 	return 'Resource'
 
-func _get_recognized_extensions() -> Array:
-	return ['wad']
+func _get_recognized_extensions() -> PackedStringArray:
+	return PackedStringArray(['wad'])
 
 func _get_save_extension() -> String:
-	return 'tres'
+	return 'res'
 
-func _get_import_options(preset) -> Array:
+func _get_option_visibility(path: String, option_name: StringName, options: Dictionary) -> bool:
+	return true
+
+func _get_import_options(path, preset) -> Array[Dictionary]:
 	return [
 		{
 			'name': 'palette_file',
 			'default_value': 'res://addons/qodot/palette.lmp',
 			'property_hint': PROPERTY_HINT_FILE,
 			'hint_string': '*.lmp'
+		},
+		{
+			'name': 'generate_mipmaps',
+			'default_value': true,
+			'property_hint': PROPERTY_HINT_NONE
 		}
 	]
 
-func _get_option_visibility(option: String, options: Dictionary) -> bool:
-	return true
-
 func _get_preset_count() -> int:
 	return 0
-
-func import(source_file, save_path, options, r_platform_variants, r_gen_files) -> int:
+	
+func _get_import_order() -> int:
+	return 0
+	
+func _get_priority() -> float:
+	return 1.0
+	
+func _import(source_file, save_path, options, r_platform_variants, r_gen_files) -> Error:
 	var save_path_str : String = '%s.%s' % [save_path, _get_save_extension()]
 
-	var file := File.new()
-	var err : int = file.open(source_file, File.READ)
-
-	if err != OK:
+	var file = FileAccess.open(source_file, FileAccess.READ)
+	if file == null:
+		var err = FileAccess.get_open_error()
 		print(['Error opening super.wad file: ', err])
 		return err
 
@@ -86,7 +95,7 @@ func import(source_file, save_path, options, r_platform_variants, r_gen_files) -
 		var name : PackedByteArray = file.get_buffer(TEXTURE_NAME_LENGTH)
 		var name_string : String = name.get_string_from_ascii()
 
-		if type == WadEntryType.MipsTexture:
+		if type == int(WadEntryType.MipsTexture):
 			entries.append([
 				offset,
 				in_wad_size,
@@ -132,14 +141,14 @@ func import(source_file, save_path, options, r_platform_variants, r_gen_files) -
 			pixels_rgb.append(rgb_color.g8)
 			pixels_rgb.append(rgb_color.b8)
 
-		var texture_image := Image.new()
-		texture_image.create_from_data(width, height, false, Image.FORMAT_RGB8, pixels_rgb)
-
-		var texture := ImageTexture.new()
-		texture.create_from_image(texture_image) #,Texture2D.FLAG_MIPMAPS | Texture2D.FLAG_REPEAT | Texture2D.FLAG_ANISOTROPIC_FILTER
+		var texture_image := Image.create_from_data(width, height, false, Image.FORMAT_RGB8, pixels_rgb)
+		if options["generate_mipmaps"] == true:
+			texture_image.generate_mipmaps()
+		
+		var texture := ImageTexture.create_from_image(texture_image) #,Texture2D.FLAG_MIPMAPS | Texture2D.FLAG_REPEAT | Texture2D.FLAG_ANISOTROPIC_FILTER
 
 		textures[name] = texture
 
 	# Save WAD resource
 	var wad_resource := QuakeWadFile.new(textures)
-	return ResourceSaver.save(save_path_str, wad_resource)
+	return ResourceSaver.save(wad_resource, save_path_str)

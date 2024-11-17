@@ -2,5 +2,5 @@
 class_name QodotFGDBaseClass
 extends QodotFGDClass
 
-func _init() -> void:
+func _init():
 	prefix = "@BaseClass"

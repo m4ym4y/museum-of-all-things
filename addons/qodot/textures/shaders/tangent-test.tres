@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://vixaih7yaqwa"]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id="1"]
 code = "shader_type spatial;
 
 void fragment() {
@@ -8,4 +8,5 @@ void fragment() {
 }"
 
 [resource]
-shader = SubResource( 1 )
+render_priority = 0
+shader = SubResource("1")
