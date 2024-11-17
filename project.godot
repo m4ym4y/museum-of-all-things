@@ -6,213 +6,18 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "LiquidLayer",
-"class": "LavaLayer",
-"language": "GDScript",
-"path": "res://addons/qodot/game_definitions/worldspawn_layers/liquid/lava.gd"
-}, {
-"base": "Area",
-"class": "LiquidLayer",
-"language": "GDScript",
-"path": "res://addons/qodot/game_definitions/worldspawn_layers/liquid.gd"
-}, {
-"base": "Spatial",
-"class": "OrbitArm",
-"language": "GDScript",
-"path": "res://addons/qodot/example_scenes/2-miscallaneous/1-runtime-map-building/orbit_arm.gd"
-}, {
-"base": "PhysicsEntity",
-"class": "PhysicsBall",
-"language": "GDScript",
-"path": "res://addons/qodot/game_definitions/fgd/point_classes/physics_ball.gd"
-}, {
-"base": "RigidBody",
-"class": "PhysicsEntity",
-"language": "GDScript",
-"path": "res://addons/qodot/game_definitions/fgd/solid_classes/physics.gd"
-}, {
-"base": "Reference",
-"class": "QodotDependencies",
-"language": "GDScript",
-"path": "res://addons/qodot/src/util/qodot_dependencies.gd"
-}, {
-"base": "QodotSpatial",
-"class": "QodotEntity",
-"language": "GDScript",
-"path": "res://addons/qodot/src/nodes/qodot_entity.gd"
-}, {
-"base": "QodotFGDClass",
-"class": "QodotFGDBaseClass",
-"language": "GDScript",
-"path": "res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_base_class.gd"
-}, {
-"base": "Resource",
-"class": "QodotFGDClass",
-"language": "GDScript",
-"path": "res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_class.gd"
-}, {
-"base": "Resource",
-"class": "QodotFGDFile",
-"language": "GDScript",
-"path": "res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_file.gd"
-}, {
-"base": "QodotFGDClass",
-"class": "QodotFGDPointClass",
-"language": "GDScript",
-"path": "res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_point_class.gd"
-}, {
-"base": "QodotFGDClass",
-"class": "QodotFGDSolidClass",
-"language": "GDScript",
-"path": "res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_solid_class.gd"
-}, {
-"base": "QodotEntity",
-"class": "QodotLight",
-"language": "GDScript",
-"path": "res://addons/qodot/game_definitions/fgd/point_classes/light.gd"
-}, {
-"base": "QodotSpatial",
-"class": "QodotMap",
-"language": "GDScript",
-"path": "res://addons/qodot/src/nodes/qodot_map.gd"
-}, {
-"base": "EditorPlugin",
-"class": "QodotPlugin",
-"language": "GDScript",
-"path": "res://addons/qodot/src/qodot_plugin.gd"
-}, {
-"base": "KinematicBody",
-"class": "QodotRotateEntity",
-"language": "GDScript",
-"path": "res://addons/qodot/game_definitions/fgd/solid_classes/rotate.gd"
-}, {
-"base": "Spatial",
-"class": "QodotSpatial",
-"language": "GDScript",
-"path": "res://addons/qodot/src/nodes/qodot_spatial.gd"
-}, {
-"base": "Reference",
-"class": "QodotTextureLoader",
-"language": "GDScript",
-"path": "res://addons/qodot/src/util/qodot_texture_loader.gd"
-}, {
-"base": "Reference",
-"class": "QodotUtil",
-"language": "GDScript",
-"path": "res://addons/qodot/src/util/qodot_util.gd"
-}, {
-"base": "Resource",
-"class": "QodotWorldspawnLayer",
-"language": "GDScript",
-"path": "res://addons/qodot/src/resources/worldspawn_layer.gd"
-}, {
-"base": "Resource",
-"class": "QuakeMapFile",
-"language": "GDScript",
-"path": "res://addons/qodot/src/resources/quake_map_file.gd"
-}, {
-"base": "EditorImportPlugin",
-"class": "QuakeMapImportPlugin",
-"language": "GDScript",
-"path": "res://addons/qodot/src/import_plugins/quake_map_import_plugin.gd"
-}, {
-"base": "Resource",
-"class": "QuakePaletteFile",
-"language": "GDScript",
-"path": "res://addons/qodot/src/resources/quake_palette_file.gd"
-}, {
-"base": "EditorImportPlugin",
-"class": "QuakePaletteImportPlugin",
-"language": "GDScript",
-"path": "res://addons/qodot/src/import_plugins/quake_palette_import_plugin.gd"
-}, {
-"base": "Resource",
-"class": "QuakeWadFile",
-"language": "GDScript",
-"path": "res://addons/qodot/src/resources/quake_wad_file.gd"
-}, {
-"base": "EditorImportPlugin",
-"class": "QuakeWadImportPlugin",
-"language": "GDScript",
-"path": "res://addons/qodot/src/import_plugins/quake_wad_import_plugin.gd"
-}, {
-"base": "LiquidLayer",
-"class": "SlimeLayer",
-"language": "GDScript",
-"path": "res://addons/qodot/game_definitions/worldspawn_layers/liquid/slime.gd"
-}, {
-"base": "Resource",
-"class": "TrenchBroomFaceAttrib",
-"language": "GDScript",
-"path": "res://addons/qodot/src/resources/game-definitions/trenchbroom/trenchbroom_face_attrib.gd"
-}, {
-"base": "Resource",
-"class": "TrenchBroomGameConfigFile",
-"language": "GDScript",
-"path": "res://addons/qodot/src/resources/game-definitions/trenchbroom/trenchbroom_game_config_file.gd"
-}, {
-"base": "Resource",
-"class": "TrenchBroomGameConfigFolder",
-"language": "GDScript",
-"path": "res://addons/qodot/src/resources/game-definitions/trenchbroom/trenchbroom_game_config_folder.gd"
-}, {
-"base": "Resource",
-"class": "TrenchBroomTag",
-"language": "GDScript",
-"path": "res://addons/qodot/src/resources/game-definitions/trenchbroom/trenchbroom_tag.gd"
-}, {
-"base": "LiquidLayer",
-"class": "WaterLayer",
-"language": "GDScript",
-"path": "res://addons/qodot/game_definitions/worldspawn_layers/liquid/water.gd"
-} ]
-_global_script_class_icons={
-"LavaLayer": "",
-"LiquidLayer": "",
-"OrbitArm": "",
-"PhysicsBall": "",
-"PhysicsEntity": "",
-"QodotDependencies": "",
-"QodotEntity": "",
-"QodotFGDBaseClass": "",
-"QodotFGDClass": "",
-"QodotFGDFile": "",
-"QodotFGDPointClass": "",
-"QodotFGDSolidClass": "",
-"QodotLight": "",
-"QodotMap": "",
-"QodotPlugin": "",
-"QodotRotateEntity": "",
-"QodotSpatial": "res://addons/qodot/icons/icon_qodot_spatial.svg",
-"QodotTextureLoader": "",
-"QodotUtil": "",
-"QodotWorldspawnLayer": "",
-"QuakeMapFile": "",
-"QuakeMapImportPlugin": "",
-"QuakePaletteFile": "",
-"QuakePaletteImportPlugin": "",
-"QuakeWadFile": "",
-"QuakeWadImportPlugin": "",
-"SlimeLayer": "",
-"TrenchBroomFaceAttrib": "",
-"TrenchBroomGameConfigFile": "",
-"TrenchBroomGameConfigFolder": "",
-"TrenchBroomTag": "",
-"WaterLayer": ""
-}
+config_version=5
 
 [application]
 
 config/name="Museum of Wikipedia"
 run/main_scene="res://Main.tscn"
+config/features=PackedStringArray("4.3")
 config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/qodot/plugin.cfg" )
+enabled=PackedStringArray("res://addons/qodot/plugin.cfg")
 
 [global]
 
@@ -229,58 +34,58 @@ common/drop_mouse_on_gui_input_disabled=true
 
 move_forward={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":87,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 move_back={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":83,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 strafe_left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":65,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 strafe_right={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":68,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 click={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
 }
 jump={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":32,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 crouch={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777238,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194326,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194325,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 interact={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":69,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 
 [network]
 
-ssl/certificates="res://certs/cacert.crt"
+tls/certificate_bundle_override="res://certs/cacert.crt"
 
 [physics]
 
-common/enable_pause_aware_picking=true
 common/physics_interpolation=true
+common/enable_pause_aware_picking=true
 
 [rendering]
 
+environment/defaults/default_environment="res://default_env.tres"
 quality/driver/driver_name="GLES2"
 quality/filters/msaa=2
 quality/filters/use_fxaa=true
-environment/default_environment="res://default_env.tres"

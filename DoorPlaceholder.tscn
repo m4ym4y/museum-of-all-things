@@ -2,13 +2,13 @@
 
 [ext_resource path="res://textures/white.tres" type="Material" id=1]
 
-[node name="DoorPlaceholder" type="Spatial"]
+[node name="DoorPlaceholder" type="Node3D"]
 
-[node name="CSGCombiner" type="CSGCombiner" parent="."]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 use_collision = true
 
-[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0 )
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 0 )
 height = 3.0
 depth = 3.0
 material = ExtResource( 1 )

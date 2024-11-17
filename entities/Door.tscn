@@ -1,7 +1,7 @@
 [gd_scene format=2]
 
-[node name="Door" type="Spatial"]
+[node name="Door" type="Node3D"]
 
-[node name="CSGBox" type="CSGBox" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
 width = 0.1
 depth = 1.0

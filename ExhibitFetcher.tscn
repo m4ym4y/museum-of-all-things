@@ -2,5 +2,5 @@
 
 [ext_resource path="res://ExhibitFetcher.gd" type="Script" id=1]
 
-[node name="ExhibitFetcher" type="Spatial"]
+[node name="ExhibitFetcher" type="Node3D"]
 script = ExtResource( 1 )

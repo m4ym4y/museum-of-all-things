@@ -2,14 +2,14 @@
 
 [ext_resource path="res://addons/qodot/src/nodes/qodot_map.gd" type="Script" id=1]
 [ext_resource path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" type="Resource" id=2]
-[ext_resource path="res://addons/qodot/textures/pbr/military-panel/military-panel_depth.png" type="Texture" id=3]
-[ext_resource path="res://addons/qodot/textures/pbr/military-panel/military-panel_metallic.png" type="Texture" id=4]
-[ext_resource path="res://addons/qodot/textures/pbr/military-panel/military-panel_normal.png" type="Texture" id=5]
-[ext_resource path="res://addons/qodot/textures/pbr/military-panel/military-panel_roughness.png" type="Texture" id=6]
-[ext_resource path="res://addons/qodot/textures/pbr/military-panel/military-panel_ao.png" type="Texture" id=7]
-[ext_resource path="res://addons/qodot/textures/pbr/military-panel.png" type="Texture" id=8]
+[ext_resource path="res://addons/qodot/textures/pbr/military-panel/military-panel_depth.png" type="Texture2D" id=3]
+[ext_resource path="res://addons/qodot/textures/pbr/military-panel/military-panel_metallic.png" type="Texture2D" id=4]
+[ext_resource path="res://addons/qodot/textures/pbr/military-panel/military-panel_normal.png" type="Texture2D" id=5]
+[ext_resource path="res://addons/qodot/textures/pbr/military-panel/military-panel_roughness.png" type="Texture2D" id=6]
+[ext_resource path="res://addons/qodot/textures/pbr/military-panel/military-panel_ao.png" type="Texture2D" id=7]
+[ext_resource path="res://addons/qodot/textures/pbr/military-panel.png" type="Texture2D" id=8]
 
-[sub_resource type="ProceduralSky" id=1]
+[sub_resource type="Sky" id=1]
 sun_latitude = 30.0
 sun_longitude = -60.0
 
@@ -17,9 +17,9 @@ sun_longitude = -60.0
 background_mode = 2
 background_sky = SubResource( 1 )
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="StandardMaterial3D" id=3]
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="StandardMaterial3D" id=4]
 albedo_texture = ExtResource( 8 )
 metallic_texture = ExtResource( 4 )
 roughness_texture = ExtResource( 6 )
@@ -41,8 +41,8 @@ depth_texture = ExtResource( 3 )
 [sub_resource type="ArrayMesh" id=5]
 surfaces/0 = {
 "aabb": AABB( -4, -4, -4, 8, 8.00001, 8 ),
-"array_data": PoolByteArray( 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 129, 0, 129, 0, 0, 127, 0, 56, 0, 184, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 129, 0, 129, 0, 0, 127, 0, 56, 0, 56, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 129, 0, 129, 0, 0, 127, 0, 184, 0, 56, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 129, 0, 129, 0, 0, 127, 0, 184, 0, 184, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 192, 129, 0, 0, 0, 0, 0, 127, 127, 0, 184, 0, 184, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 64, 129, 0, 0, 0, 0, 0, 127, 127, 0, 56, 0, 184, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 64, 129, 0, 0, 0, 0, 0, 127, 127, 0, 56, 0, 56, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 192, 129, 0, 0, 0, 0, 0, 127, 127, 0, 184, 0, 56, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 192, 0, 129, 0, 0, 0, 0, 129, 127, 0, 56, 0, 184, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 192, 0, 129, 0, 0, 0, 0, 129, 127, 0, 56, 0, 56, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 64, 0, 129, 0, 0, 0, 0, 129, 127, 0, 184, 0, 56, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 64, 0, 129, 0, 0, 0, 0, 129, 127, 0, 184, 0, 184, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 192, 0, 127, 0, 0, 0, 0, 127, 127, 0, 184, 0, 184, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 64, 0, 127, 0, 0, 0, 0, 127, 127, 0, 56, 0, 184, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 64, 0, 127, 0, 0, 0, 0, 127, 127, 0, 56, 0, 56, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 192, 0, 127, 0, 0, 0, 0, 127, 127, 0, 184, 0, 56, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 192, 127, 0, 0, 0, 0, 0, 129, 127, 0, 56, 0, 184, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 192, 127, 0, 0, 0, 0, 0, 129, 127, 0, 56, 0, 56, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 64, 127, 0, 0, 0, 0, 0, 129, 127, 0, 184, 0, 56, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 64, 127, 0, 0, 0, 0, 0, 129, 127, 0, 184, 0, 184, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 127, 0, 127, 0, 0, 127, 0, 184, 0, 184, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 127, 0, 127, 0, 0, 127, 0, 56, 0, 184, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 127, 0, 127, 0, 0, 127, 0, 56, 0, 56, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 127, 0, 127, 0, 0, 127, 0, 184, 0, 56 ),
-"array_index_data": PoolByteArray( 0, 0, 1, 0, 2, 0, 0, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 4, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 8, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 12, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 16, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 20, 0, 22, 0, 23, 0 ),
+"array_data": PackedByteArray( 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 129, 0, 129, 0, 0, 127, 0, 56, 0, 184, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 129, 0, 129, 0, 0, 127, 0, 56, 0, 56, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 129, 0, 129, 0, 0, 127, 0, 184, 0, 56, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 129, 0, 129, 0, 0, 127, 0, 184, 0, 184, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 192, 129, 0, 0, 0, 0, 0, 127, 127, 0, 184, 0, 184, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 64, 129, 0, 0, 0, 0, 0, 127, 127, 0, 56, 0, 184, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 64, 129, 0, 0, 0, 0, 0, 127, 127, 0, 56, 0, 56, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 192, 129, 0, 0, 0, 0, 0, 127, 127, 0, 184, 0, 56, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 192, 0, 129, 0, 0, 0, 0, 129, 127, 0, 56, 0, 184, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 192, 0, 129, 0, 0, 0, 0, 129, 127, 0, 56, 0, 56, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 64, 0, 129, 0, 0, 0, 0, 129, 127, 0, 184, 0, 56, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 64, 0, 129, 0, 0, 0, 0, 129, 127, 0, 184, 0, 184, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 192, 0, 127, 0, 0, 0, 0, 127, 127, 0, 184, 0, 184, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 64, 0, 127, 0, 0, 0, 0, 127, 127, 0, 56, 0, 184, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 64, 0, 127, 0, 0, 0, 0, 127, 127, 0, 56, 0, 56, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 192, 0, 127, 0, 0, 0, 0, 127, 127, 0, 184, 0, 56, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 192, 127, 0, 0, 0, 0, 0, 129, 127, 0, 56, 0, 184, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 192, 127, 0, 0, 0, 0, 0, 129, 127, 0, 56, 0, 56, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 64, 127, 0, 0, 0, 0, 0, 129, 127, 0, 184, 0, 56, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 64, 127, 0, 0, 0, 0, 0, 129, 127, 0, 184, 0, 184, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 127, 0, 127, 0, 0, 127, 0, 184, 0, 184, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 128, 64, 0, 0, 127, 0, 127, 0, 0, 127, 0, 56, 0, 184, 0, 0, 128, 64, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 127, 0, 127, 0, 0, 127, 0, 56, 0, 56, 0, 0, 128, 192, 0, 0, 128, 192, 0, 0, 128, 64, 0, 0, 127, 0, 127, 0, 0, 127, 0, 184, 0, 56 ),
+"array_index_data": PackedByteArray( 0, 0, 1, 0, 2, 0, 0, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 4, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 8, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 12, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 16, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 20, 0, 22, 0, 23, 0 ),
 "blend_shape_data": [  ],
 "format": 97559,
 "index_count": 36,
@@ -52,16 +52,16 @@ surfaces/0 = {
 "vertex_count": 24
 }
 
-[sub_resource type="ConvexPolygonShape" id=6]
-points = PoolVector3Array( -4, 4, -4, -4, -4, -4, 4, -4, -4, 4, 4, -4, -4, 4, 4, -4, -4, 4, 4, -4, 4, 4, 4, 4 )
+[sub_resource type="ConvexPolygonShape3D" id=6]
+points = PackedVector3Array( -4, 4, -4, -4, -4, -4, 4, -4, -4, 4, 4, -4, -4, 4, 4, -4, -4, 4, 4, -4, 4, 4, 4, 4 )
 
-[node name="AutoPBR" type="Spatial"]
+[node name="AutoPBR" type="Node3D"]
 
 [node name="README" type="Node" parent="."]
 __meta__ = {
 "_editor_description_": "This scene introduces automatic PBR application.
 
-The standard `SpatialMaterial` used for rendering in Godot supports much more than the basic Albedo channel specified in a map file. Qodot accounts for this by allowing for the automatic application of the normal, metallic, roughness, emission, ambient occlusion and depth texture channels.
+The standard `StandardMaterial3D` used for rendering in Godot supports much more than the basic Albedo channel specified in a map file. Qodot accounts for this by allowing for the automatic application of the normal, metallic, roughness, emission, ambient occlusion and depth texture channels.
 
 These can be enabled by creating a folder with the same name as your texture, and storing it alongside it in the filesystem. Textures with specific prefixes stored in this folder will be treated as custom texture channels to be applied alongside their parent texture.
 
@@ -79,11 +79,11 @@ These can be modified in the `Qodot/Textures` category of the Project Settings w
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( -0.5, 0.612372, -0.612373, 0, 0.707107, 0.707106, 0.866025, 0.353553, -0.353554, 0, 8, 0 )
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D( -0.5, 0.612372, -0.612373, 0, 0.707107, 0.707106, 0.866025, 0.353553, -0.353554, 0, 8, 0 )
 shadow_enabled = true
 
-[node name="QodotMap" type="Spatial" parent="."]
+[node name="QodotMap" type="Node3D" parent="."]
 script = ExtResource( 1 )
 map_file = "P:/Personal/Godot/Qodot/qodot-example/addons/qodot/example_scenes/0-visuals/3-auto-pbr/3-auto-pbr.map"
 inverse_scale_factor = 16.0
@@ -102,12 +102,12 @@ use_trenchbroom_group_hierarchy = false
 tree_attach_batch_size = 16
 set_owner_batch_size = 16
 
-[node name="entity_0_worldspawn" type="StaticBody" parent="QodotMap"]
+[node name="entity_0_worldspawn" type="StaticBody3D" parent="QodotMap"]
 
-[node name="entity_0_mesh_instance" type="MeshInstance" parent="QodotMap/entity_0_worldspawn"]
+[node name="entity_0_mesh_instance" type="MeshInstance3D" parent="QodotMap/entity_0_worldspawn"]
 use_in_baked_light = true
 mesh = SubResource( 5 )
 material/0 = null
 
-[node name="entity_0_brush_0_collision_shape" type="CollisionShape" parent="QodotMap/entity_0_worldspawn"]
+[node name="entity_0_brush_0_collision_shape" type="CollisionShape3D" parent="QodotMap/entity_0_worldspawn"]
 shape = SubResource( 6 )

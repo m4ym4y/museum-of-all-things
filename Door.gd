@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 signal open
 
@@ -11,7 +11,7 @@ func _ready():
 	pass # Replace with function body.
 
 func init(name):
-	$Label.text = name.percent_decode().replace("_", " ")
+	$Label.text = name.uri_decode().replace("_", " ")
 
 #TODO: cooldown timer
 var interacted = false
@@ -19,7 +19,7 @@ func interact():
 	if not interacted:
 		interacted = true
 		emit_signal("open")
-		translation.y -= 10
+		position.y -= 10
 		# yield(get_tree().create_timer(5), "timeout")
 		# interacted = false
 		# translation.y += 10

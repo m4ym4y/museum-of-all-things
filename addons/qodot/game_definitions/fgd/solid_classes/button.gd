@@ -1,10 +1,10 @@
-extends Area
+extends Area3D
 
 signal trigger()
 signal pressed()
 signal released()
 
-export(Dictionary) var properties setget set_properties
+@export var properties: Dictionary: set = set_properties
 
 var pressed = false
 var base_translation = Vector3.ZERO
@@ -46,18 +46,18 @@ func update_properties() -> void:
 		release_signal_delay = properties.release_signal_delay
 
 func _init() -> void:
-	connect("body_shape_entered", self, "body_shape_entered")
-	connect("body_shape_exited", self, "body_shape_exited")
+	connect("body_shape_entered", Callable(self, "body_shape_entered"))
+	connect("body_shape_exited", Callable(self, "body_shape_exited"))
 
 func _enter_tree() -> void:
-	base_translation = translation
+	base_translation = position
 
 func _process(delta: float) -> void:
 	var target_position = base_translation + (axis * (depth if pressed else 0.0))
-	translation = translation.linear_interpolate(target_position, speed * delta)
+	position = position.lerp(target_position, speed * delta)
 
 func body_shape_entered(body_id, body: Node, body_shape_idx: int, self_shape_idx: int) -> void:
-	if body is StaticBody:
+	if body is StaticBody3D:
 		return
 
 	if overlaps == 0:
@@ -66,7 +66,7 @@ func body_shape_entered(body_id, body: Node, body_shape_idx: int, self_shape_idx
 	overlaps += 1
 
 func body_shape_exited(body_id, body: Node, body_shape_idx: int, self_shape_idx: int) -> void:
-	if body is StaticBody:
+	if body is StaticBody3D:
 		return
 
 	overlaps -= 1
@@ -74,7 +74,7 @@ func body_shape_exited(body_id, body: Node, body_shape_idx: int, self_shape_idx:
 		if release_delay == 0:
 			release()
 		elif release_delay > 0:
-			yield(get_tree().create_timer(release_delay), "timeout")
+			await get_tree().create_timer(release_delay).timeout
 			release()
 
 func press() -> void:
@@ -87,11 +87,11 @@ func press() -> void:
 	emit_pressed()
 
 func emit_trigger() -> void:
-	yield(get_tree().create_timer(trigger_signal_delay), "timeout")
+	await get_tree().create_timer(trigger_signal_delay).timeout
 	emit_signal("trigger")
 
 func emit_pressed() -> void:
-	yield(get_tree().create_timer(press_signal_delay), "timeout")
+	await get_tree().create_timer(press_signal_delay).timeout
 	emit_signal("pressed")
 
 func release() -> void:
@@ -100,5 +100,5 @@ func release() -> void:
 
 	pressed = false
 
-	yield(get_tree().create_timer(release_signal_delay), "timeout")
+	await get_tree().create_timer(release_signal_delay).timeout
 	emit_signal("released")

@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 signal fetch_complete(exhibit_data)
 
@@ -66,7 +66,7 @@ func fetch(title):
 	for data in request_data:
 		var request = HTTPRequest.new()
 		request.max_redirects = 0
-		request.connect("request_completed", self, data.handler, [ data.endpoint ])
+		request.connect("request_completed", Callable(self, data.handler).bind(data.endpoint))
 		add_child(request)
 		request.request(data.endpoint, COMMON_HEADERS)
 
@@ -82,14 +82,16 @@ func emit_if_finished():
 		emit_signal("fetch_complete", exhibit_data)
 
 func get_json(body):
-	return JSON.parse(body.get_string_from_utf8()).result
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(body.get_string_from_utf8()).result
+	return test_json_conv.get_data()
 
 func _on_media_request_complete(result, response_code, headers, body, _url):
 	if result == 11:
 		var redirected_request = HTTPRequest.new()
 		var redirected_url = media_endpoint + get_location_header(headers)
 		redirected_request.max_redirects = 0
-		redirected_request.connect("request_completed", self, "_on_media_request_complete", [ redirected_url ])
+		redirected_request.connect("request_completed", Callable(self, "_on_media_request_complete").bind(redirected_url))
 		add_child(redirected_request)
 		redirected_request.request(redirected_url, COMMON_HEADERS)
 
@@ -123,7 +125,7 @@ func _on_content_request_complete(result, response_code, headers, body, _url):
 		var redirected_request = HTTPRequest.new()
 		var redirected_url = content_endpoint + get_location_header(headers)
 		redirected_request.max_redirects = 0
-		redirected_request.connect("request_completed", self, "_on_content_request_complete", [ redirected_url ])
+		redirected_request.connect("request_completed", Callable(self, "_on_content_request_complete").bind(redirected_url))
 		add_child(redirected_request)
 		redirected_request.request(redirected_url, COMMON_HEADERS)
 	
@@ -172,15 +174,15 @@ func _on_links_request_complete(result, response_code, headers, body, original_u
 
 	for page in res.query.pages.keys():
 		for link in res.query.pages[page].links:
-			link_results.push_back(link.title.replace(" ", "_").percent_encode())
+			link_results.push_back(link.title.replace(" ", "_").uri_encode())
 	
 	if res.has("continue") or linked_request_limit == 0:
 		linked_request_limit -= 1
 		var continue_request = HTTPRequest.new()
 		continue_request.max_redirects = 0
-		continue_request.connect("request_completed", self, "_on_links_request_complete", [ original_url ])
+		continue_request.connect("request_completed", Callable(self, "_on_links_request_complete").bind(original_url))
 		add_child(continue_request)
-		continue_request.request(original_url + "&plcontinue=" + res.continue.plcontinue.percent_encode(), COMMON_HEADERS)
+		continue_request.request(original_url + "&plcontinue=" + res.continue.plcontinue.uri_encode(), COMMON_HEADERS)
 	else:
 		links_result = response_code
 		link_results.shuffle()
@@ -193,7 +195,7 @@ func _on_summary_request_complete(result, response_code, headers, body, _url):
 		var redirected_request = HTTPRequest.new()
 		var redirected_url = summary_endpoint + get_location_header(headers)
 		redirected_request.max_redirects = 0
-		redirected_request.connect("request_completed", self, "_on_summary_request_complete", [ redirected_url ])
+		redirected_request.connect("request_completed", Callable(self, "_on_summary_request_complete").bind(redirected_url))
 		add_child(redirected_request)
 		redirected_request.request(redirected_url, COMMON_HEADERS)
 
@@ -205,7 +207,7 @@ func _on_summary_request_complete(result, response_code, headers, body, _url):
 		links_result = RESULT_INCOMPLETE
 
 		redirected_links_request.max_redirects = 0
-		redirected_links_request.connect("request_completed", self, "_on_links_request_complete", [ redirected_links_url ])
+		redirected_links_request.connect("request_completed", Callable(self, "_on_links_request_complete").bind(redirected_links_url))
 		add_child(redirected_links_request)
 		redirected_links_request.request(redirected_links_url, COMMON_HEADERS)
 

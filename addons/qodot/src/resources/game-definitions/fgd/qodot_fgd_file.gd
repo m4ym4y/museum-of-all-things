@@ -1,15 +1,15 @@
+@tool
 class_name QodotFGDFile
 extends Resource
-tool
 
 ## A node used to to express a set of entity definitions that can be exproted
 
 #psuedo-button to export
-export(bool) var export_file : bool setget set_export_file
-export(String, DIR, GLOBAL) var target_folder : String
-export(String) var fgd_name : String = "Qodot"
-export(Array, Resource) var base_fgd_files := []
-export(Array, Resource) var entity_definitions := [
+@export var export_file: bool: set = set_export_file
+@export var target_folder : String # (String, DIR, GLOBAL)
+@export var fgd_name: String = "Qodot"
+@export var base_fgd_files := [] # (Array, Resource)
+@export var entity_definitions := [ # (Array, Resource)
 	preload("res://addons/qodot/game_definitions/fgd/solid_classes/worldspawn_solid_class.tres"),
 	preload("res://addons/qodot/game_definitions/fgd/solid_classes/group_solid_class.tres"),
 	preload("res://addons/qodot/game_definitions/fgd/solid_classes/detail_solid_class.tres"),

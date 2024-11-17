@@ -1,18 +1,18 @@
+@tool
 class_name TrenchBroomGameConfigFile
 extends Resource
-tool
 
-export(bool) var export_file : bool setget set_export_file
-export(String, FILE, GLOBAL, "*.cfg") var target_file : String
+@export var export_file: bool: set = set_export_file
+@export var target_file : String # (String, FILE, GLOBAL, "*.cfg")
 
-export(String) var game_name := "Qodot"
+@export var game_name := "Qodot"
 
-export(Array, Resource) var brush_tags : Array = []
-export(Array, Resource) var face_tags : Array = []
-export(Array, Resource) var face_attrib_surface_flags : Array = []
-export(Array, Resource) var face_attrib_content_flags : Array = []
+@export var brush_tags : Array = [] # (Array, Resource)
+@export var face_tags : Array = [] # (Array, Resource)
+@export var face_attrib_surface_flags : Array = [] # (Array, Resource)
+@export var face_attrib_content_flags : Array = [] # (Array, Resource)
 
-export(Array, String) var fgd_filenames : Array = []
+@export var fgd_filenames : Array = [] # (Array, String)
 
 var base_text: String = """{
 	version: 3,
