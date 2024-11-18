@@ -15,16 +15,20 @@ func _on_request_completed(result, _response_code, _headers, body):
 		push_error("Failed to fetch the image at " + image_url)
 		return
 
-	var image_texture = ImageTexture.new()
 	var image = Image.new()
+	var error
 
 	if JPG_REGEX.search(image_url.to_lower()):
-		image.load_jpg_from_buffer(body)
+		error = image.load_jpg_from_buffer(body)
+		if error != OK:
+			push_error("JPG Error")
 	elif PNG_REGEX.search(image_url.to_lower()):
-		image.load_png_from_buffer(body)
+		error = image.load_png_from_buffer(body)
 
-	image_texture.create_from_image(image)
-	texture = image_texture
+	if error != OK:
+		push_error('error loading image ', image_url, ' code ', _response_code)
+	else:
+		texture = ImageTexture.create_from_image(image)
 
 	var label = $Label
 	label.text = text

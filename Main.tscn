@@ -5,9 +5,10 @@
 
 [sub_resource type="Environment" id="1"]
 background_mode = 1
+ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_sky_contribution = 0.0
-ambient_light_energy = 0.75
+ambient_light_energy = 0.25
 ssr_enabled = true
 ssr_max_steps = 128
 ssr_fade_in = 0.212133

@@ -529,21 +529,18 @@ omni_range = 18.296
 
 [node name="OmniLight5" type="OmniLight3D" parent="rotator/map_and_lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.05895, 12.0776, 0.347023)
-light_energy = 0.5
 shadow_bias = 0.05
 omni_range = 30.0
 omni_shadow_mode = 0
 
 [node name="OmniLight6" type="OmniLight3D" parent="rotator/map_and_lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02245, 9.71219, 14.2922)
-light_energy = 0.5
 shadow_bias = 0.4
 omni_range = 20.0
 omni_shadow_mode = 0
 
 [node name="OmniLight7" type="OmniLight3D" parent="rotator/map_and_lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.8557, 9.71219, 17.5543)
-light_energy = 0.5
 shadow_bias = 0.4
 omni_range = 20.0
 omni_shadow_mode = 0

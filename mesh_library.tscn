@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://do2hoycmvhwx5"]
+
+[ext_resource type="ArrayMesh" uid="uid://cqx6504q1n84q" path="res://3d_tiles/floor.obj" id="1_nhorf"]
+[ext_resource type="ArrayMesh" uid="uid://dfel3x4ha4i57" path="res://3d_tiles/wall.obj" id="3_ao2xr"]
+[ext_resource type="Material" uid="uid://datvvi6j3c0kp" path="res://textures/white.tres" id="4_1vya5"]
+[ext_resource type="ArrayMesh" uid="uid://covu5na1hibmy" path="res://3d_tiles/convex_corner_wall.obj" id="5_p5gs5"]
+[ext_resource type="ArrayMesh" uid="uid://dx38ygeltsn2g" path="res://3d_tiles/wall_all_sides.obj" id="6_3itpy"]
+[ext_resource type="ArrayMesh" uid="uid://dhctqrba2l38r" path="res://3d_tiles/ceiling.obj" id="6_o6e3e"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_557ku"]
+points = PackedVector3Array(-2, 0, -2, -2, 0, 2, 2, 0, -2, 2, 0, 2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w52m3"]
+points = PackedVector3Array(2.00002, 4, 2, 2.00002, 4, -2, 1.99998, 0, 2, 1.99998, 0, -2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4175m"]
+points = PackedVector3Array(-2.00002, 4.00002, 2, -2.00002, -2.1e-05, 2, 2.00002, 3.99963, 2, 2.00002, 3.99963, -2, 1.99963, -2.1e-05, -2, 1.99963, -2.1e-05, 2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_el13e"]
+points = PackedVector3Array(-2.00002, 4.00002, 2, -2.00002, 4.00002, -2, -2.00002, -2.1e-05, 2, 2.00002, 3.99963, 2, 2.00002, 3.99963, -2, -2.00002, -2.1e-05, -2, 1.99963, -2.1e-05, 2, 1.99963, -2.1e-05, -2)
+
+[node name="MeshLibrary" type="Node3D"]
+
+[node name="floor" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_nhorf")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_557ku")
+
+[node name="wall" type="MeshInstance3D" parent="."]
+mesh = ExtResource("3_ao2xr")
+surface_material_override/0 = ExtResource("4_1vya5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_w52m3")
+
+[node name="convex_corner_wall" type="MeshInstance3D" parent="."]
+mesh = ExtResource("5_p5gs5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="convex_corner_wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="convex_corner_wall/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_4175m")
+
+[node name="ceiling" type="MeshInstance3D" parent="."]
+mesh = ExtResource("6_o6e3e")
+
+[node name="wall_all_sides" type="MeshInstance3D" parent="."]
+mesh = ExtResource("6_3itpy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wall_all_sides"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall_all_sides/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_el13e")
