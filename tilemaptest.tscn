@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://5javxi3uy0ep"]
+
+[ext_resource type="MeshLibrary" uid="uid://dn3xjwj3urrq6" path="res://3d_tiles/mesh_library.tres" id="1_rioij"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_rioij")
+cell_size = Vector3(4, 4, 4)
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+data = {
+"cells": PackedInt32Array(0, 0, 0, 65535, 0, 0, 65535, 65535, 0, 0, 65535, 0, 65534, 0, 1, 65534, 65535, 1, 65535, 65534, 1441793, 65535, 1, 1048577, 0, 1, 1048577, 1, 1, 1048577, 1, 65535, 1441794, 0, 65534, 1441793, 1, 0, 1441792, 131071, 0, 3, 131071, 65535, 3, 65536, 65535, 3, 65536, 0, 3, 65537, 65535, 3, 65537, 0, 3)
+}
+metadata/_editor_floor_ = Vector3(0, 2, 0)

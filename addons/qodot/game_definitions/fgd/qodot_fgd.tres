@@ -21,7 +21,7 @@
 
 [resource]
 script = ExtResource("6")
-export_file = false
+export_file = true
 target_folder = ""
 fgd_name = "Qodot"
 base_fgd_files = Array[Resource]([])

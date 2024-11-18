@@ -15,9 +15,19 @@ run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://icon.png"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=800
+window/size/resizable=false
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/qodot/plugin.cfg")
+
+[filesystem]
+
+import/blender/enabled=false
 
 [global]
 

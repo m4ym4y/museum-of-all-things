@@ -128,7 +128,7 @@ func _on_content_request_complete(result, response_code, headers, body, _url):
 		redirected_request.connect("request_completed", Callable(self, "_on_content_request_complete").bind(redirected_url))
 		add_child(redirected_request)
 		redirected_request.request(redirected_url, COMMON_HEADERS)
-	
+
 	var res = get_json(body)
 	if res.query.pages.has("-1"):
 		return
