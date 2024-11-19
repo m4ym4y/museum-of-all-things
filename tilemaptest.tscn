@@ -1,12 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://5javxi3uy0ep"]
+[gd_scene load_steps=5 format=3 uid="uid://5javxi3uy0ep"]
 
 [ext_resource type="Script" path="res://tilemaptest.gd" id="1_04i35"]
 [ext_resource type="PackedScene" uid="uid://dprs5jpm03ygc" path="res://tiled_exhibit_generator.tscn" id="2_ghbh5"]
+[ext_resource type="PackedScene" uid="uid://bw5yn00va6hxl" path="res://Player.tscn" id="4_wgc5d"]
+
+[sub_resource type="Environment" id="Environment_g30yg"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.75
+ssr_enabled = true
+ssr_max_steps = 36
+ssr_fade_in = 0.579562
+ssr_fade_out = 1.07177
+ssr_depth_tolerance = 20.01
+ssao_enabled = true
+fog_mode = 1
+fog_light_color = Color(1, 1, 1, 1)
+fog_density = 1.0
+fog_depth_curve = 0.37893
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_04i35")
 max_room_width = 4
 max_room_length = 4
-room_count = 7
+room_count = 20
 
 [node name="TiledExhibitGenerator" parent="." instance=ExtResource("2_ghbh5")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g30yg")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.04145, 2.00065, 0)
+
+[node name="Player" parent="." instance=ExtResource("4_wgc5d")]
+transform = Transform3D(0.99939, 0, 0.0349169, 0, 1, 0, -0.0349169, 0, 0.99939, 2, 2, 2)
