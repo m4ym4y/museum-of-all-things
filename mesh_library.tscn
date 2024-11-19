@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://do2hoycmvhwx5"]
+[gd_scene load_steps=13 format=3 uid="uid://do2hoycmvhwx5"]
 
 [ext_resource type="ArrayMesh" uid="uid://cqx6504q1n84q" path="res://3d_tiles/floor.obj" id="1_nhorf"]
 [ext_resource type="ArrayMesh" uid="uid://dfel3x4ha4i57" path="res://3d_tiles/wall.obj" id="3_ao2xr"]
@@ -6,6 +6,7 @@
 [ext_resource type="ArrayMesh" uid="uid://covu5na1hibmy" path="res://3d_tiles/convex_corner_wall.obj" id="5_p5gs5"]
 [ext_resource type="ArrayMesh" uid="uid://dx38ygeltsn2g" path="res://3d_tiles/wall_all_sides.obj" id="6_3itpy"]
 [ext_resource type="ArrayMesh" uid="uid://dhctqrba2l38r" path="res://3d_tiles/ceiling.obj" id="6_o6e3e"]
+[ext_resource type="ArrayMesh" uid="uid://ct0p5ce8ug473" path="res://3d_tiles/wall_block.obj" id="7_l1sn1"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_557ku"]
 points = PackedVector3Array(-2, 0, -2, -2, 0, 2, 2, 0, -2, 2, 0, 2)
@@ -18,6 +19,9 @@ points = PackedVector3Array(-2.00002, 4.00002, 2, -2.00002, -2.1e-05, 2, 2.00002
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_el13e"]
 points = PackedVector3Array(-2.00002, 4.00002, 2, -2.00002, 4.00002, -2, -2.00002, -2.1e-05, 2, 2.00002, 3.99963, 2, 2.00002, 3.99963, -2, -2.00002, -2.1e-05, -2, 1.99963, -2.1e-05, 2, 1.99963, -2.1e-05, -2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d6xge"]
+points = PackedVector3Array(2, 4, 2, 2, 4, -2, -2, 4, 2, 2, 0, 2, 2, 0, -2, -2, 4, -2, -2, 0, 2, -2, 0, -2)
 
 [node name="MeshLibrary" type="Node3D"]
 
@@ -56,3 +60,12 @@ mesh = ExtResource("6_3itpy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="wall_all_sides/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_el13e")
+
+[node name="wall_block" type="MeshInstance3D" parent="."]
+mesh = ExtResource("7_l1sn1")
+surface_material_override/0 = ExtResource("4_1vya5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wall_block"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall_block/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_d6xge")

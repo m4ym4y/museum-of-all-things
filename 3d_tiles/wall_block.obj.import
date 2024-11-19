@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ct0p5ce8ug473"
+path="res://.godot/imported/wall_block.obj-6834326cab4886c5fe815cc8429370c9.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wall_block.obj-6834326cab4886c5fe815cc8429370c9.mesh"]
+
+source_file="res://3d_tiles/wall_block.obj"
+dest_files=["res://.godot/imported/wall_block.obj-6834326cab4886c5fe815cc8429370c9.mesh", "res://.godot/imported/wall_block.obj-6834326cab4886c5fe815cc8429370c9.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
