@@ -34,5 +34,6 @@ void fragment() {
     
     // Fade-out color
     float t = smoothstep(fade_out_distance_min, fade_out_distance_max, pixel_distance);
-    ALBEDO = mix(portal_color, fade_out_color.rgb, t);
+    ALBEDO = portal_color;
+    ALPHA = 1.0;
 }

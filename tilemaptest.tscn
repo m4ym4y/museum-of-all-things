@@ -6,7 +6,7 @@
 
 [sub_resource type="Environment" id="Environment_g30yg"]
 ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_color = Color(0.831373, 0.921569, 1, 1)
 ambient_light_energy = 0.75
 ssr_enabled = true
 ssr_max_steps = 36
@@ -14,16 +14,23 @@ ssr_fade_in = 0.579562
 ssr_fade_out = 1.07177
 ssr_depth_tolerance = 20.01
 ssao_enabled = true
+ssao_horizon = 0.5
+sdfgi_use_occlusion = true
+sdfgi_bounce_feedback = 0.7
+sdfgi_energy = 8.0
+glow_intensity = 8.0
+glow_strength = 2.0
+glow_hdr_scale = 0.19
 fog_mode = 1
 fog_light_color = Color(1, 1, 1, 1)
 fog_density = 1.0
-fog_depth_curve = 0.37893
+fog_depth_curve = 0.594605
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_04i35")
-max_room_width = 4
-max_room_length = 4
-room_count = 20
+min_room_dimension = 1
+max_room_dimension = 2
+room_count = 30
 
 [node name="TiledExhibitGenerator" parent="." instance=ExtResource("2_ghbh5")]
 
@@ -32,6 +39,7 @@ environment = SubResource("Environment_g30yg")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.04145, 2.00065, 0)
+visible = false
 
 [node name="Player" parent="." instance=ExtResource("4_wgc5d")]
-transform = Transform3D(0.99939, 0, 0.0349169, 0, 1, 0, -0.0349169, 0, 0.99939, 2, 2, 2)
+transform = Transform3D(0.99939, 0, 0.0349169, 0, 1, 0, -0.0349169, 0, 0.99939, 3.81256, 2, 7.22213)

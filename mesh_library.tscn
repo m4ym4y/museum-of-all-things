@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://do2hoycmvhwx5"]
+[gd_scene load_steps=19 format=3 uid="uid://do2hoycmvhwx5"]
 
 [ext_resource type="ArrayMesh" uid="uid://cqx6504q1n84q" path="res://3d_tiles/floor.obj" id="1_nhorf"]
 [ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://textures/wood.tres" id="2_yraxm"]
@@ -10,6 +10,7 @@
 [ext_resource type="ArrayMesh" uid="uid://ct0p5ce8ug473" path="res://3d_tiles/wall_block.obj" id="7_l1sn1"]
 [ext_resource type="ArrayMesh" uid="uid://be74lubpnfy73" path="res://3d_tiles/internal_hall_turn.obj" id="9_k1vwa"]
 [ext_resource type="ArrayMesh" uid="uid://8jnujvxdl3ed" path="res://3d_tiles/internal_hall.obj" id="10_jogll"]
+[ext_resource type="ArrayMesh" uid="uid://dl5nose8tpc4q" path="res://3d_tiles/marker.obj" id="11_bieq1"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yaqsi"]
 points = PackedVector3Array(-2, 4, -2, -2, 4, 2, 2, 4, -2, 2, 4, 2)
@@ -87,6 +88,7 @@ surface_material_override/0 = ExtResource("4_1vya5")
 shape = SubResource("ConvexPolygonShape3D_d6xge")
 
 [node name="internal_hall_turn" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("9_k1vwa")
 surface_material_override/0 = ExtResource("4_1vya5")
 
@@ -104,3 +106,6 @@ surface_material_override/0 = ExtResource("4_1vya5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="internal_hall/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_4eay2")
+
+[node name="marker" type="MeshInstance3D" parent="."]
+mesh = ExtResource("11_bieq1")
