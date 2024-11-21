@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://y1oelsib8v3i"]
+
+[ext_resource type="Script" path="res://room_items/wall_item.gd" id="1_bqav0"]
+[ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://textures/wood.tres" id="2_q6y6t"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e6b5o"]
+material = ExtResource("2_q6y6t")
+size = Vector3(2.5, 4, 0.1)
+
+[node name="WallItem" type="Node3D"]
+script = ExtResource("1_bqav0")
+
+[node name="Item" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="Plaque" type="MeshInstance3D" parent="Item"]
+mesh = SubResource("BoxMesh_e6b5o")
+skeleton = NodePath("../..")
