@@ -4,6 +4,7 @@ extends Node3D
 @onready var portal = preload("res://Portal.tscn")
 var entry
 var exits = []
+var item_slots = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -68,6 +69,7 @@ func generate(
   # entry = [start_pos, Vector3(1, 0, 0)]
   entry = starting_hall
   exits = []
+  item_slots = []
 
   var room_width = rand_dim.call()
   var room_length = rand_dim.call()
@@ -230,10 +232,23 @@ func decorate_wall_tile(grid, pos):
     ):
       var hall = generate_hall(grid, hall_dir, wall)
       exits.append(hall)
+    # put exhibit items everywhere else
+    else:
+      var is_dupe = false
+      for item_slot in item_slots:
+        if item_slot[0].is_equal_approx(slot):
+          is_dupe = true
+      if not is_dupe:
+        item_slots.append([slot, hall_dir])
 
 func generate_hall(grid, hall_dir, hall_start):
   var ori = vecToOrientation(grid, hall_dir)
   var hall_corner = hall_start + hall_dir
+  var label = Label3D.new()
+  label.position = 4 * (hall_start - hall_dir * 0.51) + Vector3(0, 3.5, 0)
+  label.rotation.y = vecToRot(hall_dir)
+  label.text = ""
+  add_child(label)
 
   grid.set_cell_item(hall_start, INTERNAL_HALL, ori)
   grid.set_cell_item(hall_start - Vector3(0, 1, 0), FLOOR, 0)
@@ -247,7 +262,7 @@ func generate_hall(grid, hall_dir, hall_start):
   grid.set_cell_item(exit_hall, INTERNAL_HALL, exit_ori)
   grid.set_cell_item(exit_hall - Vector3(0, 1, 0), FLOOR, 0)
 
-  return [exit_hall, exit_hall_dir]
+  return [exit_hall, exit_hall_dir, label]
 
 func room_to_bounds(center, width, length):
   return [

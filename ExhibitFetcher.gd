@@ -1,6 +1,6 @@
 extends Node3D
 
-signal fetch_complete(exhibit_data)
+signal fetch_complete(exhibit_data, context)
 
 const media_endpoint = 'https://en.wikipedia.org/api/rest_v1/page/media-list/'
 const summary_endpoint = 'https://en.wikipedia.org/api/rest_v1/page/summary/'
@@ -10,10 +10,12 @@ const links_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=lin
 #const content_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&formatversion=2&exintro=1&exlimit=max&explaintext=1&titles="
 const content_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&formatversion=2&exlimit=max&origin=*&explaintext=1&titles="
 
-const RESULT_INCOMPLETE = -1 
+const RESULT_INCOMPLETE = -1
 const USER_AGENT = "https://github.com/m4ym4y/wikipedia-museum"
 
 var COMMON_HEADERS
+var _context
+
 func _ready():
 	if OS.get_name() != "HTML5":
 		COMMON_HEADERS = [
@@ -44,6 +46,7 @@ func reset_results():
 		"doors": []
 	}
 
+	_context = null
 	media_result = RESULT_INCOMPLETE
 	summary_result = RESULT_INCOMPLETE
 	links_result = RESULT_INCOMPLETE
@@ -52,8 +55,9 @@ func reset_results():
 	link_results = []
 	links_url_redirected = null
 
-func fetch(title):
+func fetch(title, context):
 	reset_results()
+	_context = context
 
 	# var title = title_.percent_encode()
 	var request_data = [
@@ -79,7 +83,7 @@ func all_requests_finished():
 func emit_if_finished():
 	# TODO: also handle if one or more requests ended in error
 	if all_requests_finished():
-		emit_signal("fetch_complete", exhibit_data)
+		emit_signal("fetch_complete", exhibit_data, _context)
 
 func get_json(body):
 	var test_json_conv = JSON.new()
@@ -175,7 +179,7 @@ func _on_links_request_complete(result, response_code, headers, body, original_u
 	for page in res.query.pages.keys():
 		for link in res.query.pages[page].links:
 			link_results.push_back(link.title.replace(" ", "_").uri_encode())
-	
+
 	if res.has("continue") or linked_request_limit == 0:
 		linked_request_limit -= 1
 		var continue_request = HTTPRequest.new()
