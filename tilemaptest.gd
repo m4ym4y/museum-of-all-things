@@ -47,7 +47,6 @@ func set_up_exhibit(exhibit):
   entry_portal.position = gridToWorld(entry[0]) + Vector3(0, 1.5, 0)
   entry_portal.exit_portal = entry_portal
   add_child(entry_portal)
-  print(_next_height, " ENTRY PORTAL LOCATION", entry_portal.position, exits)
 
   # add a marker at every exit
   for exit in exits:
@@ -59,7 +58,6 @@ func set_up_exhibit(exhibit):
     loader_trigger.monitoring = true
     loader_trigger.position = gridToWorld(exit[0] - exit[1] - exit[1].rotated(Vector3(0, 1, 0), PI / 2))
     loader_trigger.body_entered.connect(_on_loader_body_entered.bind(exit_portal, entry_portal, loader_trigger))
-    print("BINDING LOADER")
     add_child(exit_portal)
     add_child(loader_trigger)
 
@@ -68,8 +66,6 @@ func set_up_exhibit(exhibit):
 func _on_loader_body_entered(body, exit_portal, entry_portal, loader_trigger):
   if body.is_in_group("Player") and loader_trigger.loaded == false:
     loader_trigger.loaded = true
-    print(_next_height, "PLAYER ENTERED", body.position)
-    print(_next_height, "EXIT PORTAL POSITION", exit_portal.position)
     _next_height += 10
     var new_exhibit = TiledExhibitGenerator.instantiate()
     var new_exhibit_portal = set_up_exhibit(new_exhibit)
