@@ -49,6 +49,9 @@ const _EXIT_CAMERA_NEAR_MIN:float = 0.01
 ## The exit portal. Leave unset to use this portal as an exit only.
 @export var exit_portal:Portal
 
+var _area: Area3D
+var _bodies_inside = []
+
 # The viewport rendering the portal surface
 var _viewport:SubViewport
 
@@ -100,6 +103,49 @@ func _ready() -> void:
     _create_viewport()
 
   get_viewport().connect("size_changed", _handle_resize)
+
+  _setup_collision_detection()
+
+func _setup_collision_detection():
+    # Get the existing Area3D node called "PortalTeleport"
+  _area = $PortalTeleport  # Adjust the path if "PortalTeleport" is not a direct child
+  if _area == null:
+      push_error("PortalTeleport Area3D node not found as a child of the portal.")
+      return
+
+  # Connect the body_entered and body_exited signals
+  _area.body_entered.connect(_on_body_entered)
+  _area.body_exited.connect(_on_body_exited)
+
+func _on_body_entered(body) -> void:
+  if body.is_in_group("Player"):
+    print("PLAYER ENTERED PORTAL", position, body.position)
+    # Add the body to the list of bodies inside the portal area
+    _bodies_inside.append(body)
+    # Attempt to teleport the body
+    _attempt_teleport(body)
+
+func _on_body_exited(body:PhysicsBody3D) -> void:
+  if body.is_in_group("Player"):
+    if body in _bodies_inside:
+      _bodies_inside.erase(body)
+
+func _attempt_teleport(body:PhysicsBody3D) -> void:
+# Check if the body is moving towards the portal
+  var body_velocity = body.velocity
+  var portal_normal = -global_transform.basis.z.normalized()
+  var relative_velocity = body_velocity.normalized().dot(portal_normal)
+
+  if relative_velocity > 0:
+    # The body is moving towards the portal
+    if exit_portal != null:
+      # Transform the body's global transform to the exit portal
+      var new_transform = real_to_exit_transform(body.global_transform)
+      body.global_transform = new_transform
+
+      # Transform the body's velocity to the exit portal
+      var new_velocity = real_to_exit_direction(body.velocity)
+      body.velocity = new_velocity
 
 func _handle_resize() -> void:
   _seconds_until_resize = _RESIZE_THROTTLE_SECONDS

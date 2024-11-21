@@ -1,16 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dprs5jpm03ygc"]
+[gd_scene load_steps=2 format=3 uid="uid://dprs5jpm03ygc"]
 
-[ext_resource type="MeshLibrary" uid="uid://dn3xjwj3urrq6" path="res://3d_tiles/mesh_library.tres" id="1_ch5r2"]
 [ext_resource type="Script" path="res://tiled_exhibit_generator.gd" id="1_yxh7s"]
 
 [node name="TiledExhibitGenerator" type="Node3D"]
 script = ExtResource("1_yxh7s")
-
-[node name="GridMap" type="GridMap" parent="."]
-mesh_library = ExtResource("1_ch5r2")
-cell_size = Vector3(4, 4, 4)
-cell_octant_size = 16
-cell_center_x = false
-cell_center_y = false
-cell_center_z = false
-metadata/_editor_floor_ = Vector3(0, 0, 0)

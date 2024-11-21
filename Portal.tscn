@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ho2ladgr7arp"]
+[gd_scene load_steps=4 format=3 uid="uid://ho2ladgr7arp"]
 
 [ext_resource type="Script" path="res://portal.gd" id="1_hu5eu"]
-[ext_resource type="Script" path="res://portal_teleport.gd" id="2_nowqw"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_igkif"]
 size = Vector2(2, 4)
@@ -10,7 +9,7 @@ orientation = 2
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_th76g"]
 points = PackedVector3Array(-1, -2, 0, 1, -2, 0, -1, 2, 0, 1, 2, 0)
 
-[node name="Portal" type="MeshInstance3D"]
+[node name="Portal" type="MeshInstance3D" groups=["Portal"]]
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_igkif")
 script = ExtResource("1_hu5eu")
@@ -20,7 +19,6 @@ fade_out_distance_min = 10.0
 fade_out_color = Color(1, 1, 1, 0)
 
 [node name="PortalTeleport" type="Area3D" parent="."]
-script = ExtResource("2_nowqw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PortalTeleport"]
 shape = SubResource("ConvexPolygonShape3D_th76g")
