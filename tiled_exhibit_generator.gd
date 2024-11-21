@@ -166,7 +166,6 @@ func generate(
   return [entry, exits]
 
 func decorate_room(grid, room):
-  print("DECORATING ROOM", room)
   var center = room.center
   var width = room.width
   var length = room.length
@@ -229,13 +228,10 @@ func decorate_wall_tile(grid, pos):
         grid.get_cell_item(hall_corner - Vector3(0, 1, 0)) != FLOOR and
         len(cell_neighbors(grid, hall_corner - Vector3(0, 1, 0), FLOOR)) == 0
     ):
-      print("TRYING TO ADD EXIT")
       var hall = generate_hall(grid, hall_dir, wall)
-      print("ADDING EXIT")
       exits.append(hall)
 
 func generate_hall(grid, hall_dir, hall_start):
-  print("GENERATING HALL")
   var ori = vecToOrientation(grid, hall_dir)
   var hall_corner = hall_start + hall_dir
 
