@@ -6,8 +6,7 @@ extends Node3D
 @onready var TiledExhibitGenerator = preload("res://tiled_exhibit_generator.tscn")
 
 # item types
-@onready var ImageItem = preload("res://room_items/ImageItem.tscn")
-@onready var TextItem = preload("res://room_items/TextItem.tscn")
+@onready var WallItem = preload("res://room_items/wall_item.tscn")
 
 @onready var _fetcher = $ExhibitFetcher
 @onready var _next_height = 0
@@ -104,24 +103,15 @@ func _on_fetch_complete(data, context):
 
   for slot in slots:
     print(slot[0])
-    var data_item = items.pop_front()
-    if data_item == null:
+    var item_data = items.pop_front()
+    if item_data == null:
       break
 
-    var item
-    if data_item.type == "image":
-      item = ImageItem.instantiate()
-      item.init(data_item.src, 2, 2, data_item.text)
-    elif data_item.type == "text":
-      item = TextItem.instantiate()
-      item.init(data_item.text)
-    else:
-      continue
-
-    item.position = gridToWorld(slot[0]) + Vector3(0, 2, 0) - slot[1] * 0.01
+    var item = WallItem.instantiate()
+    item.position = gridToWorld(slot[0]) - slot[1] * 0.01
     item.rotation.y = vecToRot(slot[1])
-
     add_child(item)
+    item.init(item_data)
 
 func _input(event):
   if event.is_action_pressed("ui_cancel"):

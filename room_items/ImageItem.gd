@@ -1,5 +1,7 @@
 extends Sprite3D
 
+signal loaded
+
 var image_url
 var PNG_REGEX = RegEx.new()
 var JPG_REGEX = RegEx.new()
@@ -41,6 +43,7 @@ func _on_request_completed(result, _response_code, _headers, body):
 		label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 		if label.position.y < -float(height) / 2.0:
 			position.y -= label.position.y + float(height) / 2.0
+		emit_signal("loaded")
 	else:
 		label.text += "\n(image could not be displayed)"
 
