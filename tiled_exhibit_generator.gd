@@ -48,14 +48,14 @@ func vgt(v1, v2):
   return v1 if v1.x > v2.x or v1.z > v2.z else v2
 
 func generate(
+    grid,
     start_pos,
     min_room_dimension,
     max_room_dimension,
     room_count
   ):
 
-  var grid = $GridMap
-  grid.clear()
+  # grid.clear()
 
   var rand_dim = func() -> int:
     return randi_range(min_room_dimension, max_room_dimension)
@@ -65,7 +65,8 @@ func generate(
   grid.set_cell_item(starting_hall[0] + Vector3(0, 1, 0), WALL, 0)
 
   # reset exported points
-  entry = [start_pos, Vector3(1, 0, 0)]
+  # entry = [start_pos, Vector3(1, 0, 0)]
+  entry = starting_hall
   exits = []
 
   var room_width = rand_dim.call()
@@ -95,7 +96,7 @@ func generate(
     room_list.append(room_entry)
 
     var bounds = room_to_bounds(room_center, room_width, room_length)
-    carve_room(grid, bounds[0], bounds[1], 0)
+    carve_room(grid, bounds[0], bounds[1], start_pos.y)
 
     var early_terminate = true
 
@@ -107,7 +108,7 @@ func generate(
         next_room_length = rand_dim.call()
         next_room_center = room_center + Vector3(
           next_room_direction.x * (room_width / 2 + next_room_width / 2 + 3),
-          start_pos.y,
+          0,
           next_room_direction.z * (room_length / 2 + next_room_length / 2 + 3)
         )
 
@@ -120,7 +121,7 @@ func generate(
       branch_point_list.pop_back()
       var prev_room = branch_point_list.pop_back()
       if prev_room == null:
-        return
+        break
 
       room_center = prev_room["center"]
       room_width = prev_room["width"]
@@ -165,9 +166,13 @@ func generate(
   return [entry, exits]
 
 func decorate_room(grid, room):
+  print("DECORATING ROOM", room)
   var center = room.center
   var width = room.width
   var length = room.length
+
+  if !Engine.is_editor_hint():
+    decorate_room_center(center, width, length)
 
   var bounds = room_to_bounds(center, width, length)
   var c1 = bounds[0]
@@ -181,6 +186,19 @@ func decorate_room(grid, room):
   for z in range(c1.z, c2.z + 1):
     for x in [c1.x, c2.x]:
       decorate_wall_tile(grid, Vector3(x, y, z))
+
+func decorate_room_center(center, width, length):
+  var light = SpotLight3D.new()
+  var bounds = room_to_bounds(center, width, length)
+  var truecenter = 4 * ((bounds[0] + bounds[1]) / 2)
+
+  light.position = truecenter + Vector3(0, 7, 0)
+  light.rotation.x = 3 * PI / 2
+  light.spot_range = 17 + min(width, length)
+  light.spot_attenuation = 0.5
+  light.light_energy = 5
+  light.light_color = Color(randf(), randf(), randf())
+  add_child(light)
 
 func vecToRot(vec):
   if vec.z < 0:
@@ -211,10 +229,13 @@ func decorate_wall_tile(grid, pos):
         grid.get_cell_item(hall_corner - Vector3(0, 1, 0)) != FLOOR and
         len(cell_neighbors(grid, hall_corner - Vector3(0, 1, 0), FLOOR)) == 0
     ):
+      print("TRYING TO ADD EXIT")
       var hall = generate_hall(grid, hall_dir, wall)
+      print("ADDING EXIT")
       exits.append(hall)
 
 func generate_hall(grid, hall_dir, hall_start):
+  print("GENERATING HALL")
   var ori = vecToOrientation(grid, hall_dir)
   var hall_corner = hall_start + hall_dir
 

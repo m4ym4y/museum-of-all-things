@@ -8,7 +8,7 @@ size = Vector3(0.6, 0.2, 0.6)
 [sub_resource type="CapsuleShape3D" id="2"]
 radius = 0.3
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1")
 jump_impulse = 12
 
