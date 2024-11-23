@@ -14,9 +14,9 @@ cast_shadow = 0
 mesh = SubResource("PlaneMesh_igkif")
 script = ExtResource("1_hu5eu")
 vertical_viewport_resolution = 0
-disable_viewport_distance = 5.0
-fade_out_distance_min = 10.0
-fade_out_color = Color(1, 1, 1, 0)
+disable_viewport_distance = 10.0
+fade_out_distance_min = 6.0
+fade_out_color = Color(1, 0.960784, 0.882353, 1)
 
 [node name="PortalTeleport" type="Area3D" parent="."]
 
