@@ -2,233 +2,151 @@ extends Node3D
 
 signal fetch_complete(exhibit_data, context)
 
-const media_endpoint = 'https://en.wikipedia.org/api/rest_v1/page/media-list/'
-const summary_endpoint = 'https://en.wikipedia.org/api/rest_v1/page/summary/'
-const links_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=links&pllimit=max&format=json&origin=*&titles="
-
-# TODO: do we really want full text?
-#const content_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&formatversion=2&exintro=1&exlimit=max&explaintext=1&titles="
-const content_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&formatversion=2&exlimit=max&origin=*&explaintext=1&titles="
-
-const RESULT_INCOMPLETE = -1
+const MAX_BATCH_SIZE = 50
+const REQUEST_DELAY = 1.0
 const USER_AGENT = "https://github.com/m4ym4y/wikipedia-museum"
-
 var COMMON_HEADERS
-var _context
+
+# TODO: add image description via extended metadata
+# var all_info_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=images|info|links|extracts&exintro=true&explaintext=true&pllimit=max&imlimit=max&format=json&redirects=1&titles="
+var all_info_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=info|links|extracts&exintro=true&explaintext=true&pllimit=max&imlimit=max&format=json&redirects=1&titles="
+var _request_queue = []
+var _request_in_flight = false
+var _results = {}
 
 func _ready():
 	if OS.get_name() != "HTML5":
-		COMMON_HEADERS = [
-			"accept: application/json; charset=utf-8",
-			"user-agent: " + USER_AGENT
-		]
+		COMMON_HEADERS = [ "accept: application/json; charset=utf-8", "user-agent: " + USER_AGENT ]
 	else:
-		COMMON_HEADERS = [
-			"accept: application/json; charset=utf-8",
-		]
+		COMMON_HEADERS = [ "accept: application/json; charset=utf-8" ]
 
-var exhibit_data = {}
-var media_result = RESULT_INCOMPLETE
-var summary_result = RESULT_INCOMPLETE
-var links_result = RESULT_INCOMPLETE
-var content_result = RESULT_INCOMPLETE
+# TODO: should the queue batch together all the upcoming requests?
+func _advance_queue():
+	_request_in_flight = false
+	var next_fetch = _request_queue.pop_front()
+	if next_fetch != null:
+		fetch(next_fetch[0], next_fetch[1])
 
-const LOCATION_STR = "location: "
-func get_location_header(headers):
-	for header in headers:
-		if header.begins_with(LOCATION_STR):
-			return header.substr(LOCATION_STR.length())
+func _join_titles(titles):
+	return "|".join(titles.map(func(t): return t.uri_encode()))
 
-func reset_results():
-	exhibit_data = {
-		"secondary_items": [],
-		"items": [],
-		"doors": []
+func fetch(titles: PackedStringArray, context):
+	# TODO: check cache
+	var new_titles = []
+	for title in titles:
+		if not get_result(title):
+			new_titles.append(title)
+	if len(new_titles) == 0:
+		emit_signal("fetch_complete", titles, context)
+		return
+
+	# TODO: break this up into multiple batches
+	if len(new_titles) > MAX_BATCH_SIZE:
+		push_error("Too many page requests at once")
+		return
+
+	# queue if another request is in flight
+	if _request_in_flight:
+		_request_queue.append([ titles, context ])
+		return
+	_request_in_flight = true
+
+	var url = all_info_endpoint + _join_titles(new_titles)
+	var ctx = {
+		"url": url,
+		"titles": titles,
+		"new_titles": new_titles,
 	}
+	_dispatch_request(url, ctx, context)
 
-	_context = null
-	media_result = RESULT_INCOMPLETE
-	summary_result = RESULT_INCOMPLETE
-	links_result = RESULT_INCOMPLETE
-	content_result = RESULT_INCOMPLETE
-	linked_request_limit = 10
-	link_results = []
-	links_url_redirected = null
+func get_result(title):
+	if _results.has(title):
+		var result = _results[title]
+		if result.has("normalized"):
+			result = _results[result.normalized]
+		return result
+	else:
+		return null
 
-func fetch(title, context):
-	reset_results()
-	_context = context
+func _dispatch_request(url, ctx, caller_ctx):
+	var request = HTTPRequest.new()
+	request.max_redirects = 0
+	request.request_completed.connect(_on_request_completed.bind(ctx, caller_ctx))
+	add_child(request)
+	ctx.request = request
+	print("fetching url ", url)
+	var result = request.request(url, COMMON_HEADERS)
+	if result != OK:
+		push_error("failed to send http request ", result, " ", url)
+		request.queue_free()
 
-	# var title = title_.percent_encode()
-	var request_data = [
-		{ "endpoint": media_endpoint + title, "handler": "_on_media_request_complete" },
-		{ "endpoint": summary_endpoint + title, "handler": "_on_summary_request_complete" },
-		{ "endpoint": content_endpoint + title, "handler": "_on_content_request_complete" },
-		{ "endpoint": links_endpoint + title, "handler": "_on_links_request_complete" }
-	]
+func _set_page_field(title, field, value):
+	if not _results.has(title):
+		_results[title] = {}
+	_results[title][field] = value
 
-	for data in request_data:
-		var request = HTTPRequest.new()
-		request.max_redirects = 0
-		request.connect("request_completed", Callable(self, data.handler).bind(data.endpoint))
-		add_child(request)
-		request.request(data.endpoint, COMMON_HEADERS)
+func _append_page_field(title, field, values):
+	if not _results.has(title):
+		_results[title] = {}
+	if not _results[title].has(field):
+		_results[title][field] = []
+	_results[title][field].append_array(values)
 
-func all_requests_finished():
-	return media_result != RESULT_INCOMPLETE and \
-		summary_result != RESULT_INCOMPLETE and \
-		links_result != RESULT_INCOMPLETE and \
-		content_result != RESULT_INCOMPLETE
-
-func emit_if_finished():
-	# TODO: also handle if one or more requests ended in error
-	if all_requests_finished():
-		emit_signal("fetch_complete", exhibit_data, _context)
-
-func get_json(body):
+func _get_json(body):
 	var test_json_conv = JSON.new()
 	test_json_conv.parse(body.get_string_from_utf8())
 	return test_json_conv.get_data()
 
-func _on_media_request_complete(result, response_code, headers, body, _url):
-	if result == 11:
-		var redirected_request = HTTPRequest.new()
-		var redirected_url = media_endpoint + get_location_header(headers)
-		redirected_request.max_redirects = 0
-		redirected_request.connect("request_completed", Callable(self, "_on_media_request_complete").bind(redirected_url))
-		add_child(redirected_request)
-		redirected_request.request(redirected_url, COMMON_HEADERS)
+func _filter_links_ns(links):
+	var agg = []
+	for link in links:
+		if link.has("ns") and link.has("title") and link.ns == 0:
+			agg.append(link.title)
+	return agg
 
+func _on_request_completed(result, response_code, headers, body, ctx, caller_ctx):
 	if result != 0 or response_code != 200:
-		push_error("error in media request")
+		push_error("error in request ", response_code, " ", ctx.url)
+		call_deferred("_advance_queue")
 		return
 
-	media_result = response_code
-	var res = get_json(body)
+	var res = _get_json(body)
 
-	# TODO: validate response and json
-	for item in res.items:
-		if not item.has("title"):
-			continue
-		if item.title.ends_with(".jpg") or item.title.ends_with(".png"):
-			var exhibit_item = { "type": "image" }
-			exhibit_item.src = item.srcset[0].src
-			if item.has("caption"):
-				exhibit_item.text = item.caption.text
-			else:
-				# TODO: ???
-				exhibit_item.text = "no caption provided"
-			exhibit_data.items.push_back(exhibit_item)
-
-	emit_if_finished()
-
-const CHARS_PER_TEXT_ITEM = 250
-
-func _on_content_request_complete(result, response_code, headers, body, _url):
-	if result == 11:
-		var redirected_request = HTTPRequest.new()
-		var redirected_url = content_endpoint + get_location_header(headers)
-		redirected_request.max_redirects = 0
-		redirected_request.connect("request_completed", Callable(self, "_on_content_request_complete").bind(redirected_url))
-		add_child(redirected_request)
-		redirected_request.request(redirected_url, COMMON_HEADERS)
-
-	var res = get_json(body)
-	if res.query.pages.has("-1"):
+	if not res.has("query"):
 		return
 
-	var content = res.query.pages[0].extract
+	var query = res.query
 
-	var content_sentences = content.split(".")
-	var current_item = ""
+	# handle the canonical names
+	if query.has("normalized"):
+		var normalized = query.normalized
+		for title in normalized:
+			_set_page_field(title.from, "normalized", title.to)
 
-	for sentence in content_sentences:
-		current_item += sentence + "."
-		if current_item.length() >= CHARS_PER_TEXT_ITEM:
-			exhibit_data.secondary_items.push_back({
-				"type": "text",
-				"text": current_item
-			})
-			current_item = ""
+	if query.has("redirects"):
+		var redirects = query.redirects
+		for title in redirects:
+			_set_page_field(title.from, "normalized", title.to)
 
-	if current_item.length() > 0:
-		exhibit_data.secondary_items.push_back({
-			"type": "text",
-			"text": current_item
-		})
+	# store the information we did get
+	if query.has("pages"):
+		var pages = query.pages
+		for page_id in pages.keys():
+			var page = pages[page_id]
+			if page.has("images"):
+				_append_page_field(page.title, "images", page.images.map(func(i): i.title))
+			if page.has("links"):
+				_append_page_field(page.title, "links", _filter_links_ns(page.links))
+			if page.has("extract"):
+				_set_page_field(page.title, "extract", page.extract)
 
-	content_result = response_code
-	emit_if_finished()
-
-var link_results = []
-var linked_request_limit = 10
-var links_url_redirected = null
-
-func _on_links_request_complete(result, response_code, headers, body, original_url):
-	if result != 0 or response_code != 200:
-		push_error("error in links request")
-		return
-
-	if links_url_redirected != null and links_url_redirected != original_url:
-		return
-
-	var res = get_json(body)
-	if res.query.pages.has("-1"):
-		return
-
-	for page in res.query.pages.keys():
-		for link in res.query.pages[page].links:
-			link_results.push_back(link.title.replace(" ", "_").uri_encode())
-
-	if res.has("continue") or linked_request_limit == 0:
-		linked_request_limit -= 1
-		var continue_request = HTTPRequest.new()
-		continue_request.max_redirects = 0
-		continue_request.connect("request_completed", Callable(self, "_on_links_request_complete").bind(original_url))
-		add_child(continue_request)
-		continue_request.request(original_url + "&plcontinue=" + res.continue.plcontinue.uri_encode(), COMMON_HEADERS)
+	# handle continues
+	if res.has("continue"):
+		var continue_url = all_info_endpoint + _join_titles(ctx.new_titles)
+		for field in res.continue.keys():
+			continue_url += "&" + field + "=" + res.continue[field]
+		ctx.url = continue_url
+		_dispatch_request(continue_url, ctx, caller_ctx)
 	else:
-		links_result = response_code
-		link_results.shuffle()
-		exhibit_data.doors = link_results
-		link_results = []
-		emit_if_finished()
-
-func _on_summary_request_complete(result, response_code, headers, body, _url):
-	if result == 11:
-		var redirected_request = HTTPRequest.new()
-		var redirected_url = summary_endpoint + get_location_header(headers)
-		redirected_request.max_redirects = 0
-		redirected_request.connect("request_completed", Callable(self, "_on_summary_request_complete").bind(redirected_url))
-		add_child(redirected_request)
-		redirected_request.request(redirected_url, COMMON_HEADERS)
-
-		var redirected_links_request = HTTPRequest.new()
-		var redirected_links_url = links_endpoint + get_location_header(headers)
-
-		links_url_redirected = redirected_links_url
-		link_results = []
-		links_result = RESULT_INCOMPLETE
-
-		redirected_links_request.max_redirects = 0
-		redirected_links_request.connect("request_completed", Callable(self, "_on_links_request_complete").bind(redirected_links_url))
-		add_child(redirected_links_request)
-		redirected_links_request.request(redirected_links_url, COMMON_HEADERS)
-
-	if result != 0 or response_code != 200:
-		push_error("error in summary request")
-		return
-
-	summary_result = response_code
-	var res = get_json(body)
-
-	exhibit_data.items.push_front({
-		"type": "text",
-		"text": res.extract
-	})
-
-	emit_if_finished()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+		get_tree().create_timer(REQUEST_DELAY).timeout.connect(_advance_queue)
+		emit_signal("fetch_complete", ctx.titles, caller_ctx)

@@ -82,8 +82,10 @@ func _on_loader_body_entered(body, exit_portal, entry_portal, loader_trigger, la
     exit_portal.exit_portal = new_exhibit_portal
     new_exhibit_portal.exit_portal = exit_portal
     add_child(new_exhibit)
-    var next_article = coalesce(label.text, "Fungus")
-    _fetcher.fetch(next_article, {
+    # var next_article = coalesce(label.text, "Fungus")
+    var next_article = coalesce(label.text, "Lahmiales")
+    _fetcher.fetch([next_article], {
+      "title": next_article,
       "exit_portal": exit_portal,
       "entry_portal": entry_portal,
       "loader_trigger": loader_trigger,
@@ -91,18 +93,57 @@ func _on_loader_body_entered(body, exit_portal, entry_portal, loader_trigger, la
       "new_exhibit": new_exhibit
     })
 
-func _on_fetch_complete(data, context):
-  var doors = data.doors.duplicate()
-  var items = data.items.duplicate()
+func _result_to_exhibit_data(result):
+  var items = []
+  var doors = []
+
+  if result:
+    if result.has("extract"):
+      items.append({
+        "type": "text",
+        "text": result.extract
+      })
+
+    if result.has("links"):
+      doors = result.links.duplicate()
+      doors.shuffle()
+
+    if result.has("images"):
+      for image in result.images:
+        items.append({
+          "type": "image",
+          "src": image,
+          "text": ""
+        })
+
+  return {
+    "doors": doors,
+    "items": items,
+  }
+
+func _on_fetch_complete(_titles, context):
+  # we don't need to do anything to handle a prefetch
+  if context.has("prefetch"):
+    return
+
+  var result = _fetcher.get_result(context.title)
+  if not result:
+    print("NO RESULT", _titles)
+
+  var data = _result_to_exhibit_data(result)
+  var doors = data.doors
+  var items = data.items
   var exits = context.new_exhibit.exits
   var slots = context.new_exhibit.item_slots
+  var linked_exhibits = []
 
   # fill in doors out of the exhibit
   for exit in exits:
-    exit[2].text = coalesce(data.doors.pop_front(), "")
+    var linked_exhibit = coalesce(doors.pop_front(), "")
+    exit[2].text = linked_exhibit
+    linked_exhibits.append(linked_exhibit)
 
   for slot in slots:
-    print(slot[0])
     var item_data = items.pop_front()
     if item_data == null:
       break
@@ -112,6 +153,10 @@ func _on_fetch_complete(data, context):
     item.rotation.y = vecToRot(slot[1])
     add_child(item)
     item.init(item_data)
+
+  # launch batch request to linked exhibit
+  print("prefetching articles ", linked_exhibits)
+  _fetcher.fetch([linked_exhibits], { "prefetch": true })
 
 func _input(event):
   if event.is_action_pressed("ui_cancel"):
