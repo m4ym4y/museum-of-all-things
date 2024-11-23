@@ -7,6 +7,7 @@ extends Node3D
 
 # item types
 @onready var WallItem = preload("res://room_items/wall_item.tscn")
+@onready var IMAGE_REGEX = RegEx.new()
 
 @onready var _fetcher = $ExhibitFetcher
 @onready var _next_height = 0
@@ -14,6 +15,7 @@ var _grid
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+  IMAGE_REGEX.compile("\\.(png|jpg|jpeg)$")
   if Engine.is_editor_hint():
     _regenerate_map()
   else:
@@ -39,7 +41,7 @@ func gridToWorld(vec):
 func coalesce(a, b):
   return a if a else b
 
-func set_up_exhibit(exhibit):
+func set_up_exhibit(exhibit, room_count=default_room_count):
   var generated_results = exhibit.generate(
       _grid,
       Vector3(0, _next_height, 0),
@@ -76,21 +78,16 @@ func set_up_exhibit(exhibit):
 func _on_loader_body_entered(body, exit_portal, entry_portal, loader_trigger, label):
   if body.is_in_group("Player") and loader_trigger.loaded == false:
     loader_trigger.loaded = true
-    _next_height += 10
-    var new_exhibit = TiledExhibitGenerator.instantiate()
-    var new_exhibit_portal = set_up_exhibit(new_exhibit)
-    exit_portal.exit_portal = new_exhibit_portal
-    new_exhibit_portal.exit_portal = exit_portal
-    add_child(new_exhibit)
     # var next_article = coalesce(label.text, "Fungus")
-    var next_article = coalesce(label.text, "Lahmiales")
+    # var next_article = coalesce(label.text, "Lahmiales")
+    # var next_article = coalesce(label.text, "Tribe (biology)")
+    var next_article = coalesce(label.text, "Diploid")
     _fetcher.fetch([next_article], {
       "title": next_article,
       "exit_portal": exit_portal,
       "entry_portal": entry_portal,
       "loader_trigger": loader_trigger,
       "next_article": next_article,
-      "new_exhibit": new_exhibit
     })
 
 func _result_to_exhibit_data(result):
@@ -110,16 +107,21 @@ func _result_to_exhibit_data(result):
 
     if result.has("images"):
       for image in result.images:
-        items.append({
-          "type": "image",
-          "src": image,
-          "text": ""
-        })
+        if IMAGE_REGEX.search(image.src):
+          items.append({
+            "type": "image",
+            "src": image.src,
+            "text": image.text,
+          })
 
   return {
     "doors": doors,
     "items": items,
   }
+
+func _init_item(item, data):
+  add_child(item)
+  item.init(data)
 
 func _on_fetch_complete(_titles, context):
   # we don't need to do anything to handle a prefetch
@@ -133,8 +135,16 @@ func _on_fetch_complete(_titles, context):
   var data = _result_to_exhibit_data(result)
   var doors = data.doors
   var items = data.items
-  var exits = context.new_exhibit.exits
-  var slots = context.new_exhibit.item_slots
+
+  _next_height += 10
+  var new_exhibit = TiledExhibitGenerator.instantiate()
+  add_child(new_exhibit)
+  var new_exhibit_portal = set_up_exhibit(new_exhibit, max(len(items) / 6, 1))
+  context.exit_portal.exit_portal = new_exhibit_portal
+  new_exhibit_portal.exit_portal = context.exit_portal
+
+  var exits = new_exhibit.exits
+  var slots = new_exhibit.item_slots
   var linked_exhibits = []
 
   # fill in doors out of the exhibit
@@ -143,6 +153,7 @@ func _on_fetch_complete(_titles, context):
     exit[2].text = linked_exhibit
     linked_exhibits.append(linked_exhibit)
 
+  var delay = 0.0
   for slot in slots:
     var item_data = items.pop_front()
     if item_data == null:
@@ -151,12 +162,14 @@ func _on_fetch_complete(_titles, context):
     var item = WallItem.instantiate()
     item.position = gridToWorld(slot[0]) - slot[1] * 0.01
     item.rotation.y = vecToRot(slot[1])
-    add_child(item)
-    item.init(item_data)
+
+    # we use a delay to stop there from being a frame drop when a bunch of items are added at once
+    get_tree().create_timer(delay).timeout.connect(_init_item.bind(item, item_data))
+    delay += 0.1
 
   # launch batch request to linked exhibit
-  print("prefetching articles ", linked_exhibits)
-  _fetcher.fetch([linked_exhibits], { "prefetch": true })
+  # print("prefetching articles ", linked_exhibits)
+  # _fetcher.fetch(linked_exhibits, { "prefetch": true })
 
 func _input(event):
   if event.is_action_pressed("ui_cancel"):
@@ -170,7 +183,7 @@ func _process(delta: float) -> void:
 
 @export var min_room_dimension: int = 2
 @export var max_room_dimension: int = 5
-@export var room_count: int = 4
+@export var default_room_count: int = 4
 @export var iterations: int = 1
 
 @export var regenerate_starting_exhibit: bool = false:

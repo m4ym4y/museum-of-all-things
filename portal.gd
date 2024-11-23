@@ -119,7 +119,6 @@ func _setup_collision_detection():
 
 func _on_body_entered(body) -> void:
   if body.is_in_group("Player"):
-    print("PLAYER ENTERED PORTAL", position, body.position)
     # Add the body to the list of bodies inside the portal area
     _bodies_inside.append(body)
     # Attempt to teleport the body
