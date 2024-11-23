@@ -56,6 +56,8 @@ func _ready():
 	pass
 
 func init(url, _width, _height, _text):
+	if not url:
+		return
 	if url.begins_with('//'):
 		image_url = 'https:' + url
 	else:

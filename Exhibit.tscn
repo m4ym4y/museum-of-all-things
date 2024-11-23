@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://l2fcd6bexfpi"]
 
-[ext_resource path="res://Exhibit.gd" type="Script" id=5]
+[ext_resource type="Script" path="res://Exhibit.gd" id="5"]
 
 [node name="Exhibit" type="Node3D"]
-script = ExtResource( 5 )
+script = ExtResource("5")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
