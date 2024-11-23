@@ -2,7 +2,9 @@
 
 ![screenshot of the 'fungus' room](./docs/screenshot1.png)
 
-[**Visit the museum here!!**](https://m4ym4y.github.io/wikipedia-museum/)
+Next release coming soon!
+
+[**Visit the previous, web-based, version of the museum here!!**](https://m4ym4y.github.io/wikipedia-museum/)
 
 The goal of this project is to make an interactive 3d museum that is generated
 procedurally, using content from wikipedia to fill exhibits. The museum is
