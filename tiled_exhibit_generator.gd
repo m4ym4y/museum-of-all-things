@@ -63,7 +63,6 @@ func generate(
   ):
   _rng = RandomNumberGenerator.new()
   _rng.seed = hash(title)
-  _rng.state = 0
 
   var rand_dim = func() -> int:
     return _rng.randi_range(min_room_dimension, max_room_dimension)
