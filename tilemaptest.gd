@@ -94,7 +94,19 @@ func _on_loader_body_entered(body, exit_portal, entry_portal, loader_trigger, la
       "next_article": next_article,
     })
 
-func _result_to_exhibit_data(result):
+func _seeded_shuffle(seed, arr):
+  var rng = RandomNumberGenerator.new()
+  var n = len(arr)
+  rng.seed = hash(seed)
+
+  for i in range(n - 1, 0, -1):
+    var j = rng.randi() % (i + 1) # Get a random index in range [0, i]
+    # Swap elements at indices i and j
+    var temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+
+func _result_to_exhibit_data(title, result):
   var items = []
   var doors = []
 
@@ -107,7 +119,7 @@ func _result_to_exhibit_data(result):
 
     if result.has("links"):
       doors = result.links.duplicate()
-      doors.shuffle()
+      _seeded_shuffle(title, doors)
 
     if result.has("images"):
       for image in result.images:
@@ -136,7 +148,7 @@ func _on_fetch_complete(_titles, context):
   if not result:
     print("NO RESULT", _titles)
 
-  var data = _result_to_exhibit_data(result)
+  var data = _result_to_exhibit_data(context.title, result)
   var doors = data.doors
   var items = data.items
 

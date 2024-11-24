@@ -15,6 +15,10 @@ run/main_scene="res://tilemaptest.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://icon.png"
 
+[autoload]
+
+DataManager="*res://data_manager.gd"
+
 [display]
 
 window/size/viewport_width=1280

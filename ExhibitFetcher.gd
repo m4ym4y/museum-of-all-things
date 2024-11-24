@@ -7,6 +7,7 @@ const REQUEST_DELAY = 1.0
 const USER_AGENT = "https://github.com/m4ym4y/wikipedia-museum"
 # TODO: wikimedia support, and category support
 const WIKIMEDIA_PREFIX = "https://commons.wikimedia.org/wiki/"
+const WIKIPEDIA_PREFIX = "https://wikipedia.org/wiki/"
 var COMMON_HEADERS
 
 # TODO: add image description via extended metadata
@@ -47,7 +48,9 @@ func fetch(titles, context):
 	var new_titles = []
 	for title in titles:
 		if not get_result(title):
-			new_titles.append(title)
+			var cached = _read_from_cache(title)
+			if not cached:
+				new_titles.append(title)
 	if len(new_titles) == 0:
 		emit_signal("fetch_complete", titles, context)
 		return
@@ -208,10 +211,24 @@ func _on_mediawiki_request_completed(res, ctx, caller_ctx):
 		_dispatch_request(continue_url, ctx, caller_ctx)
 	else:
 		get_tree().create_timer(REQUEST_DELAY).timeout.connect(_advance_queue)
+		for title in ctx.titles:
+			_cache_if_complete(title)
 		_check_complete_and_emit(ctx.titles, caller_ctx)
+
+func _cache_if_complete(title):
+	var result = get_result(title)
+	if result != null:
+		DataManager.save_json_data(WIKIPEDIA_PREFIX + title, result)
+
+func _read_from_cache(title):
+	var json = DataManager.load_json_data(WIKIPEDIA_PREFIX + title)
+	if json:
+		_results[title] = json
+	return json
 
 func _on_media_list_request_completed(res, ctx, caller_ctx):
 	_set_page_field(ctx.title, "media_list_complete", true)
+	_cache_if_complete(ctx.title)
 
 	if not res.has("items"):
 		return
