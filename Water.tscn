@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://bfyy27kell8ig"]
+
+[ext_resource type="Shader" path="res://shaders/water.gdshader" id="1_ddbfe"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h5ib4"]
+subdivide_width = 30
+subdivide_depth = 30
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rc4st"]
+noise_type = 3
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xwo4q"]
+width = 128
+height = 128
+seamless = true
+as_normal_map = true
+bump_strength = 2.0
+noise = SubResource("FastNoiseLite_rc4st")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uk4jp"]
+noise_type = 3
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ysuxp"]
+width = 128
+height = 128
+seamless = true
+as_normal_map = true
+bump_strength = 2.0
+noise = SubResource("FastNoiseLite_uk4jp")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tw2pw"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7cxrp"]
+width = 256
+height = 256
+seamless = true
+noise = SubResource("FastNoiseLite_tw2pw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qvos3"]
+render_priority = 0
+shader = ExtResource("1_ddbfe")
+shader_parameter/albedo = Color(0.820731, 0.965488, 0.948758, 1)
+shader_parameter/albedo2 = Color(0, 0.624993, 0.9593, 1)
+shader_parameter/metallic = 0.25
+shader_parameter/alpha = 0.75
+shader_parameter/roughness = 0.0
+shader_parameter/wave_direction = Vector2(2, 0)
+shader_parameter/wave_direction2 = Vector2(0, 1)
+shader_parameter/time_scale = 0.05
+shader_parameter/noise_scale = 10.0
+shader_parameter/height_scale = 0.15
+shader_parameter/wave = SubResource("NoiseTexture2D_7cxrp")
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_xwo4q")
+shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_ysuxp")
+
+[node name="Water" type="MeshInstance3D"]
+cast_shadow = 0
+lod_bias = 0.001
+visibility_range_end = 18.0
+visibility_range_end_margin = 3.0
+visibility_range_fade_mode = 1
+mesh = SubResource("PlaneMesh_h5ib4")
+surface_material_override/0 = SubResource("ShaderMaterial_qvos3")

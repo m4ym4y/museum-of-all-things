@@ -95,7 +95,7 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+anti_aliasing/quality/msaa_3d=1
 environment/defaults/default_environment="res://default_env.tres"
 quality/driver/driver_name="GLES2"
-quality/filters/msaa=2
 quality/filters/use_fxaa=true

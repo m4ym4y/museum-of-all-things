@@ -5,11 +5,15 @@ signal fetch_complete(exhibit_data, context)
 const MAX_BATCH_SIZE = 50
 const REQUEST_DELAY = 1.0
 const USER_AGENT = "https://github.com/m4ym4y/wikipedia-museum"
+# TODO: wikimedia support, and category support
+const WIKIMEDIA_PREFIX = "https://commons.wikimedia.org/wiki/"
 var COMMON_HEADERS
 
 # TODO: add image description via extended metadata
 # var all_info_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=images|info|links|extracts&exintro=true&explaintext=true&pllimit=max&imlimit=max&format=json&redirects=1&titles="
+# var all_info_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=info|extlinks|links|extracts&exintro=true&explaintext=true&pllimit=max&imlimit=max&format=json&redirects=1&titles="
 var all_info_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=info|links|extracts&exintro=true&explaintext=true&pllimit=max&imlimit=max&format=json&redirects=1&titles="
+# var wiki_commons_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&gcmtitle=Category:Fossils&generator=categorymembers&gcmtype=file|subcat&prop=imageinfo|categories&iiprop=url|user|comment|extmetadata&gcmlimit=max&cllimit=max&format=json"
 var media_list_endpoint = "https://en.wikipedia.org/api/rest_v1/page/media-list/"
 
 var _request_queue = []
@@ -82,7 +86,8 @@ func get_result(title):
 	if _results.has(title):
 		var result = _results[title]
 		if result.has("normalized"):
-			result = _results[result.normalized]
+			if _results.has(result.normalized):
+				result = _results[result.normalized]
 		if result.has("media_wiki_complete") and result.has("media_list_complete"):
 			return result
 		return null
@@ -96,7 +101,8 @@ func _dispatch_request(url, ctx, caller_ctx):
 	add_child(request)
 	ctx.request = request
 	ctx.url = url
-	print("fetching url ", url)
+	if OS.is_debug_build():
+		print("fetching url ", url)
 	var result = request.request(url, COMMON_HEADERS)
 	if result != OK:
 		push_error("failed to send http request ", result, " ", url)
@@ -125,6 +131,13 @@ func _filter_links_ns(links):
 	for link in links:
 		if link.has("ns") and link.has("title") and link.ns == 0:
 			agg.append(link.title)
+	return agg
+
+func _filter_extlinks(links):
+	var agg = []
+	for link in links:
+		if link.has("*") and link["*"].begins_with(WIKIMEDIA_PREFIX):
+			agg.append(link["*"])
 	return agg
 
 func _normalize_article_title(title):
@@ -178,6 +191,8 @@ func _on_mediawiki_request_completed(res, ctx, caller_ctx):
 			var page = pages[page_id]
 			if page.has("links"):
 				_append_page_field(page.title, "links", _filter_links_ns(page.links))
+			if page.has("extlinks"):
+				_append_page_field(page.title, "links", _filter_extlinks(page.extlinks))
 			if page.has("extract"):
 				_set_page_field(page.title, "extract", page.extract)
 			# TODO: will this work if we already finished that field in an earlier request?

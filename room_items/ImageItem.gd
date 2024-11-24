@@ -23,9 +23,11 @@ func _on_request_completed(result, _response_code, _headers, body):
 	if JPG_REGEX.search(image_url.to_lower()):
 		error = image.load_jpg_from_buffer(body)
 		if error != OK:
-			push_error("JPG Error")
+			return
 	elif PNG_REGEX.search(image_url.to_lower()):
 		error = image.load_png_from_buffer(body)
+		if error != OK:
+			return
 
 	if error != OK:
 		push_error('error loading image ', image_url, ' code ', _response_code)

@@ -41,13 +41,15 @@ func gridToWorld(vec):
 func coalesce(a, b):
   return a if a else b
 
-func set_up_exhibit(exhibit, room_count=default_room_count):
+func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_title="Lobby"):
   var generated_results = exhibit.generate(
       _grid,
       Vector3(0, _next_height, 0),
       min_room_dimension,
       max_room_dimension,
-      room_count
+      room_count,
+      title,
+      prev_title,
   )
 
   var entry = generated_results[0]
@@ -68,22 +70,24 @@ func set_up_exhibit(exhibit, room_count=default_room_count):
     var loader_trigger = LoaderTrigger.instantiate()
     loader_trigger.monitoring = true
     loader_trigger.position = gridToWorld(exit[0] - exit[1] - exit[1].rotated(Vector3(0, 1, 0), PI / 2))
-    loader_trigger.body_entered.connect(_on_loader_body_entered.bind(exit_portal, entry_portal, loader_trigger, exit[2]))
+    loader_trigger.body_entered.connect(_on_loader_body_entered.bind(exit_portal, entry_portal, loader_trigger, exit[2], title))
     add_child(exit_portal)
     add_child(loader_trigger)
     add_child
 
   return entry_portal
 
-func _on_loader_body_entered(body, exit_portal, entry_portal, loader_trigger, label):
+func _on_loader_body_entered(body, exit_portal, entry_portal, loader_trigger, label, title):
   if body.is_in_group("Player") and loader_trigger.loaded == false:
     loader_trigger.loaded = true
     # var next_article = coalesce(label.text, "Fungus")
     # var next_article = coalesce(label.text, "Lahmiales")
     # var next_article = coalesce(label.text, "Tribe (biology)")
-    var next_article = coalesce(label.text, "Diploid")
+    # var next_article = coalesce(label.text, "Diploid")
+    var next_article = coalesce(label.text, "USA")
     _fetcher.fetch([next_article], {
       "title": next_article,
+      "prev_title": title,
       "exit_portal": exit_portal,
       "entry_portal": entry_portal,
       "loader_trigger": loader_trigger,
@@ -136,10 +140,16 @@ func _on_fetch_complete(_titles, context):
   var doors = data.doors
   var items = data.items
 
-  _next_height += 10
+  _next_height += 20
   var new_exhibit = TiledExhibitGenerator.instantiate()
   add_child(new_exhibit)
-  var new_exhibit_portal = set_up_exhibit(new_exhibit, max(len(items) / 6, 1))
+  var new_exhibit_portal = set_up_exhibit(
+    new_exhibit,
+    max(len(items) / 6, 1),
+    context.title,
+    context.prev_title
+  )
+
   context.exit_portal.exit_portal = new_exhibit_portal
   new_exhibit_portal.exit_portal = context.exit_portal
 

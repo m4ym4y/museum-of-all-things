@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnrbo3fki1110"
-path.s3tc="res://.godot/imported/wood_normalmap.png-46116aea4be33a7a05dcd54bb067bc3a.s3tc.ctex"
+uid="uid://bnaojhlqnot34"
+path.s3tc="res://.godot/imported/lamp.png-b927d877fdc1996da0a099a40e69d13f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/wood_normalmap.png"
-dest_files=["res://.godot/imported/wood_normalmap.png-46116aea4be33a7a05dcd54bb067bc3a.s3tc.ctex"]
+source_file="res://blender/lamp.png"
+dest_files=["res://.godot/imported/lamp.png-b927d877fdc1996da0a099a40e69d13f.s3tc.ctex"]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1

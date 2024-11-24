@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://do2hoycmvhwx5"]
+[gd_scene load_steps=21 format=3 uid="uid://do2hoycmvhwx5"]
 
 [ext_resource type="ArrayMesh" uid="uid://cqx6504q1n84q" path="res://3d_tiles/floor.obj" id="1_nhorf"]
 [ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://textures/wood.tres" id="2_yraxm"]
@@ -11,6 +11,7 @@
 [ext_resource type="ArrayMesh" uid="uid://be74lubpnfy73" path="res://3d_tiles/internal_hall_turn.obj" id="9_k1vwa"]
 [ext_resource type="ArrayMesh" uid="uid://8jnujvxdl3ed" path="res://3d_tiles/internal_hall.obj" id="10_jogll"]
 [ext_resource type="ArrayMesh" uid="uid://dl5nose8tpc4q" path="res://3d_tiles/marker.obj" id="11_bieq1"]
+[ext_resource type="ArrayMesh" uid="uid://bcb8di0twdcv" path="res://3d_tiles/bench.obj" id="12_1661x"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yaqsi"]
 points = PackedVector3Array(-2, 4, -2, -2, 4, 2, 2, 4, -2, 2, 4, 2)
@@ -32,6 +33,9 @@ data = PackedVector3Array(-2, 3.0001, 2, -2, 0, 2, -2, 4, 2, -2, 4, 2, -2, 0, 2,
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4eay2"]
 data = PackedVector3Array(-2, 2.9993, 2, -2, 0, 2, -2, 4, 2, -2, 4, 2, -2, 0, 2, -2, 4, -2, -2, 4, -2, -2, 0, 2, -2, 3.0005, -2, -2, 3.0005, -2, -2, 0, 2, -2, 0, -2, -2, 3.0005, -2, -2, 0, -2, -1, 3, -2, -1, 3, -2, -2, 0, -2, -1, 0, -2, 2, 2.9999, -2, 2, 0, -2, 2, 4, -2, 2, 4, -2, 2, 0, -2, 2, 4, 2, 2, 4, 2, 2, 0, -2, 2, 3.0009, 2, 2, 3.0009, 2, 2, 0, -2, 2, 0, 2, 2, 0, 2, 1, 0, 2, 2, 3.0009, 2, 2, 3.0009, 2, 1, 0, 2, 1, 3, 2, 2, 0, 2, 2, 0, -2, 1, 0, 2, 1, 0, 2, 2, 0, -2, 1, 0, -2, -2, 0, -2, -2, 0, 2, -1, 0, -2, -1, 0, -2, -2, 0, 2, -1, 0, 2, -2, 4, -2, 2, 4, -2, -2, 4, 2, -2, 4, 2, 2, 4, -2, 2, 4, 2, -1, 3, -2, -1, 0, -2, -1, 3, 2, -1, 3, 2, -1, 0, -2, -1, 0, 2, 1, 3, -2, 1, 3, 2, 1, 0, -2, 1, 0, -2, 1, 3, 2, 1, 0, 2, 1, 3, -2, -1, 3, -2, 1, 3, 2, 1, 3, 2, -1, 3, -2, -1, 3, 2, 2, 2.9999, -2, 1, 3, -2, 2, 0, -2, 2, 0, -2, 1, 3, -2, 1, 0, -2, -2, 3.0005, -2, -1, 3, -2, -2, 4, -2, -2, 4, -2, -1, 3, -2, 2, 4, -2, 2, 4, -2, -1, 3, -2, 2, 2.9999, -2, 2, 2.9999, -2, -1, 3, -2, 1, 3, -2, -2, 2.9993, 2, -1, 3, 2, -2, 0, 2, -2, 0, 2, -1, 3, 2, -1, 0, 2, 2, 3.0009, 2, 1, 3, 2, 2, 4, 2, 2, 4, 2, 1, 3, 2, -2, 4, 2, -2, 4, 2, 1, 3, 2, -2, 2.9993, 2, -2, 2.9993, 2, 1, 3, 2, -1, 3, 2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qutds"]
+points = PackedVector3Array(1, 0.5, 0.25, 1, 0.5, -0.25, -1, 0.5, 0.25, 1, 0, 0.25, 1, 0, -0.25, -1, 0.5, -0.25, -1, 0, 0.25, -1, 0, -0.25)
 
 [node name="MeshLibrary" type="Node3D"]
 
@@ -108,4 +112,14 @@ surface_material_override/0 = ExtResource("4_1vya5")
 shape = SubResource("ConcavePolygonShape3D_4eay2")
 
 [node name="marker" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("11_bieq1")
+
+[node name="bench" type="MeshInstance3D" parent="."]
+mesh = ExtResource("12_1661x")
+surface_material_override/0 = ExtResource("4_1vya5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="bench"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bench/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_qutds")

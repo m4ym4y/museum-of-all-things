@@ -2,6 +2,9 @@
 extends Node3D
 
 @onready var portal = preload("res://Portal.tscn")
+@onready var pool_scene = preload("res://Pool.tscn")
+
+@onready var _rng
 var entry
 var exits = []
 var item_slots = []
@@ -36,11 +39,12 @@ const CEILING = 3
 const INTERNAL_HALL = 7
 const INTERNAL_HALL_TURN = 6
 const MARKER = 8
+const BENCH = 9
 
 const DIRECTIONS = [Vector3(1, 0, 0), Vector3(0, 0, 1), Vector3(-1, 0, 0), Vector3(0, 0, -1)]
 
 func rand_dir():
-  return DIRECTIONS[randi() % len(DIRECTIONS)]
+  return DIRECTIONS[_rng.randi() % len(DIRECTIONS)]
 
 func vlt(v1, v2):
   return v1 if v1.x < v2.x or v1.z < v2.z else v2
@@ -53,16 +57,20 @@ func generate(
     start_pos,
     min_room_dimension,
     max_room_dimension,
-    room_count
+    room_count,
+    title,
+    prev_title,
   ):
-
-  # grid.clear()
+  _rng = RandomNumberGenerator.new()
+  _rng.seed = hash(title)
+  _rng.state = 0
 
   var rand_dim = func() -> int:
-    return randi_range(min_room_dimension, max_room_dimension)
+    return _rng.randi_range(min_room_dimension, max_room_dimension)
 
   # var starting_hall_dir = rand_dir(0)
-  var starting_hall = generate_hall(grid, Vector3(1, 0, 0), start_pos)
+  var starting_hall = generate_hall(grid, Vector3(1, 0, 0), start_pos, true)
+  starting_hall[2].text = prev_title
   grid.set_cell_item(starting_hall[0] + Vector3(0, 1, 0), WALL, 0)
 
   # reset exported points
@@ -103,7 +111,7 @@ func generate(
     var early_terminate = true
 
     # sometimes just throw in branches to keep em guessing
-    if len(branch_point_list) < 3 or randi() % 4 != 0:
+    if len(branch_point_list) < 3 or _rng.randi() % 4 != 0:
       for nop_ in range(50):
         next_room_direction = rand_dir()
         next_room_width = rand_dim.call()
@@ -138,11 +146,11 @@ func generate(
       var end_hall_offset
 
       if (start_hall - end_hall).x != 0:
-        hall_width = randi_range(1, min(room_length, next_room_length))
+        hall_width = _rng.randi_range(1, min(room_length, next_room_length))
         start_hall -= Vector3(0, 0, hall_width / 2)
         end_hall += Vector3(0, 0, (hall_width - 1) / 2)
       else:
-        hall_width = randi_range(1, min(room_width, next_room_width))
+        hall_width = _rng.randi_range(1, min(room_width, next_room_width))
         start_hall -= Vector3(hall_width / 2, 0, 0)
         end_hall += Vector3((hall_width - 1) / 2, 0, 0)
 
@@ -173,7 +181,7 @@ func decorate_room(grid, room):
   var length = room.length
 
   if !Engine.is_editor_hint():
-    decorate_room_center(center, width, length)
+    decorate_room_center(grid, center, width, length)
 
   var bounds = room_to_bounds(center, width, length)
   var c1 = bounds[0]
@@ -188,8 +196,31 @@ func decorate_room(grid, room):
     for x in [c1.x, c2.x]:
       decorate_wall_tile(grid, Vector3(x, y, z))
 
-func decorate_room_center(center, width, length):
-  var light = SpotLight3D.new()
+func decorate_room_center(grid, center, width, length):
+  if width > 2 and length > 2 and _rng.randi_range(0, 2) == 0:
+    var pool = pool_scene.instantiate()
+    var bounds = room_to_bounds(center, width, length)
+    var true_center = (bounds[0] + bounds[1]) / 2
+    pool.position = true_center * 4
+    add_child(pool)
+    return
+
+  var bench_area_bounds = null
+  var bench_area_ori = 0
+  if width > length and width > 2:
+    bench_area_bounds = room_to_bounds(center, width - 2, 0)
+  elif length > width and length > 2:
+    bench_area_ori = vecToOrientation(grid, Vector3(1, 0, 0))
+    bench_area_bounds = room_to_bounds(center, 0, length - 2)
+  if bench_area_bounds:
+    var c1 = bench_area_bounds[0]
+    var c2 = bench_area_bounds[1]
+    var y = center.y
+    for x in range(c1.x, c2.x + 1):
+      for z in range(c1.z, c2.z + 1):
+        grid.set_cell_item(Vector3(x, y, z), BENCH, bench_area_ori)
+
+  """var light = SpotLight3D.new()
   var bounds = room_to_bounds(center, width, length)
   var truecenter = 4 * ((bounds[0] + bounds[1]) / 2)
 
@@ -198,8 +229,8 @@ func decorate_room_center(center, width, length):
   light.spot_range = 17 + min(width, length)
   light.spot_attenuation = 0.5
   light.light_energy = 5
-  light.light_color = Color(randf(), randf(), randf())
-  add_child(light)
+  light.light_color = Color(_rng.randf(), _rng.randf(), _rng.randf())
+  add_child(light)"""
 
 func vecToRot(vec):
   if vec.z < 0:
@@ -241,14 +272,9 @@ func decorate_wall_tile(grid, pos):
       if not is_dupe:
         item_slots.append([slot, hall_dir])
 
-func generate_hall(grid, hall_dir, hall_start):
+func generate_hall(grid, hall_dir, hall_start, label_at_end=false):
   var ori = vecToOrientation(grid, hall_dir)
   var hall_corner = hall_start + hall_dir
-  var label = Label3D.new()
-  label.position = 4 * (hall_start - hall_dir * 0.51) + Vector3(0, 3.5, 0)
-  label.rotation.y = vecToRot(hall_dir)
-  label.text = ""
-  add_child(label)
 
   grid.set_cell_item(hall_start, INTERNAL_HALL, ori)
   grid.set_cell_item(hall_start - Vector3(0, 1, 0), FLOOR, 0)
@@ -261,6 +287,17 @@ func generate_hall(grid, hall_dir, hall_start):
   var exit_ori = vecToOrientation(grid, exit_hall_dir)
   grid.set_cell_item(exit_hall, INTERNAL_HALL, exit_ori)
   grid.set_cell_item(exit_hall - Vector3(0, 1, 0), FLOOR, 0)
+
+  var label = Label3D.new()
+  if label_at_end:
+    label.position = 4 * (exit_hall + exit_hall_dir * 0.51) + Vector3(0, 3.5, 0)
+    label.rotation.y = vecToRot(exit_hall_dir) + PI
+    label.text = ""
+  else:
+    label.position = 4 * (hall_start - hall_dir * 0.51) + Vector3(0, 3.5, 0)
+    label.rotation.y = vecToRot(hall_dir)
+    label.text = ""
+  add_child(label)
 
   return [exit_hall, exit_hall_dir, label]
 
