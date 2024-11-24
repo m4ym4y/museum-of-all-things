@@ -5,9 +5,13 @@ signal loaded
 var image_url
 var PNG_REGEX = RegEx.new()
 var JPG_REGEX = RegEx.new()
+var _image
 var width
 var height
 var text
+
+func get_image_size():
+	return Vector2(_image.get_width(), _image.get_height())
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -17,30 +21,33 @@ func _on_request_completed(result, _response_code, _headers, body):
 		push_error("Failed to fetch the image at " + image_url)
 		return
 
-	var image = Image.new()
+	_image = Image.new()
 	var error
 
 	if JPG_REGEX.search(image_url.to_lower()):
-		error = image.load_jpg_from_buffer(body)
+		error = _image.load_jpg_from_buffer(body)
 		if error != OK:
 			return
 	elif PNG_REGEX.search(image_url.to_lower()):
-		error = image.load_png_from_buffer(body)
+		error = _image.load_png_from_buffer(body)
 		if error != OK:
 			return
 
 	if error != OK:
 		push_error('error loading image ', image_url, ' code ', _response_code)
 	else:
-		texture = ImageTexture.create_from_image(image)
+		texture = ImageTexture.create_from_image(_image)
 
 	var label = $Label
 	label.text = text
 
-	if image.get_width() != 0:
-		pixel_size = float(width) / float(image.get_width())
+	if _image.get_width() != 0:
+		pixel_size = min(
+			float(width) / float(_image.get_width()),
+			float(height) / float(_image.get_height())
+		)
 		# var to_image_bottom = width * (float(image.get_width) / float(image.get_height))
-		label.position.y = -width * (float(image.get_height() / 2) / float(image.get_width())) - 0.1
+		label.position.y = -width * (float(_image.get_height() / 2) / float(_image.get_width())) - 0.1
 		# label.translation.y = -width - 0.1
 		label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 		if label.position.y < -float(height) / 2.0:

@@ -3,8 +3,10 @@ extends Node3D
 @onready var ImageItem = preload("res://room_items/ImageItem.tscn")
 @onready var TextItem = preload("res://room_items/TextItem.tscn")
 @onready var _item_node = $Item
+@onready var _item
 @onready var _ceiling = $Ceiling
 @onready var _light = get_node("Item/SpotLight3D")
+@onready var _frame = get_node("Item/Frame")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -50,19 +52,26 @@ func _start_animate():
 	ceiling_tween.set_ease(Tween.EASE_IN_OUT)
 
 func _on_image_item_loaded():
+	var size = _item.get_image_size()
+	if size.x > size.y:
+		_frame.scale.y = size.y / float(size.x)
+	else:
+		_frame.scale.x = size.x / float(size.y)
+	_frame.position = _item.position
+	_frame.position.z = 0
 	_start_animate()
 
 func init(item_data):
-	var item
 	if item_data.type == "image":
-		item = ImageItem.instantiate()
-		item.init(item_data.src, 2, 2, item_data.text)
-		item.loaded.connect(_on_image_item_loaded)
+		_item = ImageItem.instantiate()
+		_item.init(item_data.src, 2, 2, item_data.text)
+		_item.loaded.connect(_on_image_item_loaded)
 	elif item_data.type == "text":
-		item = TextItem.instantiate()
-		item.init(item_data.text)
+		_frame.visible = false
+		_item = TextItem.instantiate()
+		_item.init(item_data.text)
 		_start_animate()
 	else:
 		return
-	item.position = Vector3(0, 0, 0.11)
-	_item_node.add_child(item)
+	_item.position = Vector3(0, 0, 0.07)
+	_item_node.add_child(_item)

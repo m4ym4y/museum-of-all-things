@@ -80,11 +80,11 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
 func _on_loader_body_entered(body, exit_portal, entry_portal, loader_trigger, label, title):
   if body.is_in_group("Player") and loader_trigger.loaded == false:
     loader_trigger.loaded = true
-    # var next_article = coalesce(label.text, "Fungus")
+    var next_article = coalesce(label.text, "Fungus")
     # var next_article = coalesce(label.text, "Lahmiales")
     # var next_article = coalesce(label.text, "Tribe (biology)")
     # var next_article = coalesce(label.text, "Diploid")
-    var next_article = coalesce(label.text, "USA")
+    # var next_article = coalesce(label.text, "USA")
     _fetcher.fetch([next_article], {
       "title": next_article,
       "prev_title": title,
