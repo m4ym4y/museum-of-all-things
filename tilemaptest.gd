@@ -4,12 +4,20 @@ extends Node3D
 @onready var Portal = preload("res://Portal.tscn")
 @onready var LoaderTrigger = preload("res://loader_trigger.tscn")
 @onready var TiledExhibitGenerator = preload("res://tiled_exhibit_generator.tscn")
+@onready var DEFAULT_DOORS = [
+  "Fungus",
+  "Soup",
+  "Albert Einstein",
+  "Dinosaur",
+  "USA",
+]
 
 # item types
 @onready var WallItem = preload("res://room_items/wall_item.tscn")
 @onready var IMAGE_REGEX = RegEx.new()
 
 @onready var _fetcher = $ExhibitFetcher
+@onready var _exhibits = {}
 @onready var _next_height = 0
 var _grid
 
@@ -23,6 +31,12 @@ func _ready() -> void:
     _grid.clear()
     _fetcher.fetch_complete.connect(_on_fetch_complete)
     set_up_exhibit($TiledExhibitGenerator)
+
+    # set up default exhibits in lobby
+    var exits = $TiledExhibitGenerator.exits
+    for exit in exits:
+      var linked_exhibit = coalesce(DEFAULT_DOORS.pop_front(), "")
+      exit[2].text = linked_exhibit
 
 func vecToRot(vec):
   if vec.z < -0.1:
@@ -85,6 +99,13 @@ func _on_loader_body_entered(body, exit_portal, entry_portal, loader_trigger, la
     # var next_article = coalesce(label.text, "Tribe (biology)")
     # var next_article = coalesce(label.text, "Diploid")
     # var next_article = coalesce(label.text, "USA")
+    if _exhibits.has(next_article):
+      var next_exhibit = _exhibits[next_article]
+      if next_exhibit.has("entry_portal"):
+        var portal = next_exhibit.entry_portal
+        exit_portal.exit_portal = portal
+        portal.exit_portal = exit_portal
+
     _fetcher.fetch([next_article], {
       "title": next_article,
       "prev_title": title,
@@ -164,6 +185,9 @@ func _on_fetch_complete(_titles, context):
 
   context.exit_portal.exit_portal = new_exhibit_portal
   new_exhibit_portal.exit_portal = context.exit_portal
+
+  if not _exhibits.has(context.title):
+    _exhibits[context.title] = { "entry_portal": new_exhibit_portal }
 
   var exits = new_exhibit.exits
   var slots = new_exhibit.item_slots
