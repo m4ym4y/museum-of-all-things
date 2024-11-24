@@ -1,6 +1,6 @@
 # Wikipedia Museum
 
-![screenshot of the 'fungus' room](./docs/screenshot1.png)
+![screenshot of the 'insect' room](./docs/2024-11-23-11-1732396145_1271x796.png)
 
 Next release coming soon!
 
@@ -11,7 +11,7 @@ procedurally, using content from wikipedia to fill exhibits. The museum is
 virtually limitless, allowing you to take doors from one exhibit to another,
 depending on what is linked from that wikipedia article.
 
-![screenshot of the 'butterfly' room](./docs/screenshot3.png)
+![screenshot of the 'fungus' room](./docs/2024-11-23-11-1732420409_1271x795.png)
 
 ## Credits
 
@@ -20,7 +20,7 @@ All museum content is sourced from Wikipedia.
 - Creator and Programmer: [Maya](https://github.com/m4ym4y)
 - Dramaturg: Emma Bee Pernudi-Moon
 
-![screenshot of the 'soup' room](./docs/screenshot2.png)
+![screenshot of the 'USA' room](docs/2024-11-23-11-1732415302_1274x796.png)
 
 ## Plans
 
