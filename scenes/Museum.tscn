@@ -29,6 +29,7 @@ volumetric_fog_temporal_reprojection_amount = 0.5
 
 [node name="Museum" type="Node3D"]
 script = ExtResource("1_7pjtd")
+max_room_dimension = 4
 default_room_count = 1
 
 [node name="TiledExhibitGenerator" parent="." instance=ExtResource("2_ma65o")]

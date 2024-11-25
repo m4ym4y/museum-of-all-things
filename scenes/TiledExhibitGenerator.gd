@@ -229,10 +229,10 @@ func decorate_room_center(center, width, length):
   var bench_area_bounds = null
   var bench_area_ori = 0
   if width > length and width > 2:
-    bench_area_bounds = room_to_bounds(center, width - 2, 0)
+    bench_area_bounds = room_to_bounds(center, width - 2, 1)
   elif length > width and length > 2:
     bench_area_ori = Util.vecToOrientation(_grid, Vector3(1, 0, 0))
-    bench_area_bounds = room_to_bounds(center, 0, length - 2)
+    bench_area_bounds = room_to_bounds(center, 1, length - 2)
   if bench_area_bounds:
     var c1 = bench_area_bounds[0]
     var c2 = bench_area_bounds[1]
