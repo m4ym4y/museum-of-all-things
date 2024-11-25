@@ -217,7 +217,7 @@ func decorate_room(room):
       decorate_wall_tile(Vector3(x, y, z))
 
 func decorate_room_center(center, width, length):
-  if width > 2 and length > 2 and _rng.randi_range(0, 2) == 0:
+  if width > 3 and length > 3 and _rng.randi_range(0, 2) == 0:
     var pool = pool_scene.instantiate()
     var bounds = room_to_bounds(center, width, length)
     var true_center = (bounds[0] + bounds[1]) / 2
