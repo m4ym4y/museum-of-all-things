@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://5javxi3uy0ep"]
+
+[ext_resource type="Script" path="res://scenes/Museum.gd" id="1_7pjtd"]
+[ext_resource type="PackedScene" uid="uid://dprs5jpm03ygc" path="res://scenes/TiledExhibitGenerator.tscn" id="2_ma65o"]
+[ext_resource type="PackedScene" uid="uid://bw5yn00va6hxl" path="res://scenes/Player.tscn" id="3_sb6r6"]
+[ext_resource type="MeshLibrary" uid="uid://dn3xjwj3urrq6" path="res://assets/3d_tiles/mesh_library.tres" id="4_du8my"]
+[ext_resource type="PackedScene" uid="uid://dvchvw2bc87oe" path="res://scenes/util/ExhibitFetcher.tscn" id="5_yffah"]
+
+[sub_resource type="Environment" id="Environment_g30yg"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.960784, 0.882353, 1)
+ambient_light_energy = 0.25
+ssr_enabled = true
+ssr_max_steps = 128
+ssr_fade_in = 0.522331
+ssr_depth_tolerance = 128.0
+ssao_enabled = true
+ssao_horizon = 0.5
+sdfgi_use_occlusion = true
+glow_hdr_scale = 0.19
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(1, 1, 1, 1)
+fog_density = 1.0
+fog_depth_curve = 0.594605
+volumetric_fog_density = 0.3447
+volumetric_fog_temporal_reprojection_enabled = false
+volumetric_fog_temporal_reprojection_amount = 0.5
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_7pjtd")
+min_room_dimension = 1
+default_room_count = 1
+
+[node name="TiledExhibitGenerator" parent="." instance=ExtResource("2_ma65o")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g30yg")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.04145, 2.00065, 0)
+visible = false
+
+[node name="Player" parent="." instance=ExtResource("3_sb6r6")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 1, 5)
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("4_du8my")
+cell_size = Vector3(4, 4, 4)
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+data = {
+"cells": PackedInt32Array(0, 0, 1441799, -65536, 0, 0, 1, 0, 1441798, -65535, 0, 0, 1, 1, 655367, -65535, 1, 0, 65537, 1, 5, 65535, 1, 5, 131071, 1, 5, 65535, 2, 1048583, 131071, 2, 5, 65535, 3, 5, 131071, 3, 5, 65535, 4, 1048583, 131071, 4, 5, 65535, 5, 5, 131071, 5, 5, 65535, 6, 5, 131071, 6, 5, 65535, 7, 1048583, 131071, 7, 5, 65535, 8, 5, 131071, 8, 5, 0, 1, 5, 65536, 1, 5, 131072, 2, 3, -65536, 2, 0, 131072, 3, 3, -65536, 3, 0, 131072, 4, 3, -65536, 4, 0, 131072, 5, 3, -65536, 5, 0, 131072, 6, 3, -65536, 6, 0, 131072, 7, 3, -65536, 7, 0, 0, 8, 655367, 65536, 8, 5, 131073, 2, 3, -65535, 2, 0, 131073, 3, 3, -65535, 3, 0, 131073, 4, 3, -65535, 4, 0, 131073, 5, 3, -65535, 5, 0, 131073, 6, 3, -65535, 6, 0, 131073, 7, 3, -65535, 7, 0, 1, 8, 5, 65537, 8, 5, 2, 1, 5, 65538, 1, 5, 131074, 2, 3, -65534, 2, 0, 131074, 3, 3, -65534, 3, 0, 131074, 4, 3, -65534, 4, 0, 131074, 5, 3, -65534, 5, 0, 131074, 6, 3, -65534, 6, 0, 131074, 7, 3, -65534, 7, 0, 2, 8, 655367, 65538, 8, 5, 3, 1, 7, 65539, 1, 5, 131075, 2, 3, -65533, 2, 0, 131075, 3, 3, -65533, 3, 0, 131075, 4, 3, -65533, 4, 0, 131075, 5, 3, -65533, 5, 0, 131075, 6, 3, -65533, 6, 0, 131075, 7, 3, -65533, 7, 0, 3, 8, 5, 65539, 8, 5, 4, 1, 5, 65540, 1, 5, 4, 2, 1441799, 65540, 2, 5, 4, 3, 5, 65540, 3, 5, 4, 4, 5, 65540, 4, 5, 4, 5, 1441799, 65540, 5, 5, 4, 6, 5, 65540, 6, 5, 4, 7, 1441799, 65540, 7, 5, 4, 8, 5, 65540, 8, 5, -1, 2, 0, 65534, 2, 1048582, -2, 2, 0, 65534, 1, 7, -2, 1, 0, -1, 7, 0, 65534, 7, 1048582, -2, 7, 0, 65534, 6, 7, -2, 6, 0, -65536, 8, 0, 0, 9, 655366, -65536, 9, 0, 65535, 9, 1048583, -1, 9, 0, -65534, 8, 0, 2, 9, 655366, -65534, 9, 0, 1, 9, 1048583, -65535, 9, 0, -65533, 1, 0, 3, 0, 6, -65533, 0, 0, 4, 0, 1441799, -65532, 0, 0, -65532, 2, 0, 5, 2, 1441798, -65531, 2, 0, 5, 3, 655367, -65531, 3, 0, -65532, 7, 0, 5, 7, 1441798, -65531, 7, 0, 5, 8, 655367, -65531, 8, 0, -1, 4, 0, 65534, 4, 1048582, -2, 4, 0, 65534, 3, 7, -2, 3, 0, -65532, 5, 0, 5, 5, 1441798, -65531, 5, 0, 5, 6, 655367, -65531, 6, 0)
+}
+
+[node name="ExhibitFetcher" parent="." instance=ExtResource("5_yffah")]

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://8jnujvxdl3ed"
+path="res://.godot/imported/internal_hall.obj-46f8715501af829d9e65c9a4845ca4e2.mesh"
+
+[deps]
+
+files=["res://.godot/imported/internal_hall.obj-46f8715501af829d9e65c9a4845ca4e2.mesh"]
+
+source_file="res://assets/3d_tiles/internal_hall.obj"
+dest_files=["res://.godot/imported/internal_hall.obj-46f8715501af829d9e65c9a4845ca4e2.mesh", "res://.godot/imported/internal_hall.obj-46f8715501af829d9e65c9a4845ca4e2.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

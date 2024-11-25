@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://y1oelsib8v3i"]
+
+[ext_resource type="Script" path="res://scenes/items/WallItem.gd" id="1_5qdg2"]
+[ext_resource type="Material" uid="uid://c7c48j23p78pk" path="res://assets/textures/wood_2.tres" id="2_u80il"]
+[ext_resource type="ArrayMesh" uid="uid://bv4r86wfq0i3o" path="res://assets/models/frame.obj" id="3_k5t3j"]
+[ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="4_1bj2r"]
+[ext_resource type="ArrayMesh" uid="uid://w7n601qqnrhk" path="res://assets/models/track_light_ceiling.obj" id="4_6x08y"]
+[ext_resource type="Material" uid="uid://4bp64rsyyvv5" path="res://assets/textures/lamp.tres" id="6_744c2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e6b5o"]
+material = ExtResource("2_u80il")
+size = Vector3(2.5, 4, 0.1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u0b5x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2olvn"]
+
+[node name="WallItem" type="Node3D"]
+script = ExtResource("1_5qdg2")
+
+[node name="Item" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="Plaque" type="MeshInstance3D" parent="Item"]
+mesh = SubResource("BoxMesh_e6b5o")
+skeleton = NodePath("../..")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Item"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5, 3.5)
+light_energy = 0.0
+spot_range = 12.0
+spot_attenuation = 0.75
+spot_angle = 25.0
+
+[node name="Frame" type="Node3D" parent="Item"]
+
+[node name="Frame" type="MeshInstance3D" parent="Item/Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
+mesh = ExtResource("3_k5t3j")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_1bj2r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Item/Frame"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.06)
+mesh = SubResource("PlaneMesh_u0b5x")
+surface_material_override/0 = SubResource("StandardMaterial3D_2olvn")
+
+[node name="Ceiling" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ceiling"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3, 3.5)
+mesh = ExtResource("4_6x08y")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_1bj2r")
+surface_material_override/1 = ExtResource("4_1bj2r")
+surface_material_override/2 = ExtResource("4_1bj2r")
+surface_material_override/3 = ExtResource("6_744c2")

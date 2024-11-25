@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://4bp64rsyyvv5"]
+
+[ext_resource type="Texture2D" uid="uid://bnaojhlqnot34" path="res://assets/textures/lamp.png" id="1_oeeij"]
+
+[resource]
+shading_mode = 0
+albedo_texture = ExtResource("1_oeeij")

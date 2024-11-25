@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="Museum of Wikipedia"
-run/main_scene="res://tilemaptest.tscn"
+run/main_scene="res://scenes/Museum.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://icon.png"
 
 [autoload]
 
-DataManager="*res://data_manager.gd"
+DataManager="*res://scenes/util/data_manager.gd"
 
 [display]
 
@@ -100,6 +100,6 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 anti_aliasing/quality/msaa_3d=1
-environment/defaults/default_environment="res://default_env.tres"
+environment/defaults/default_environment="res://assets/resources/default_env.tres"
 quality/driver/driver_name="GLES2"
 quality/filters/use_fxaa=true

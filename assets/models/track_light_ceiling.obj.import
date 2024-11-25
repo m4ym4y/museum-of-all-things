@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://w7n601qqnrhk"
+path="res://.godot/imported/track_light_ceiling.obj-5c2b791343feb964b489ad041ad07d78.mesh"
+
+[deps]
+
+files=["res://.godot/imported/track_light_ceiling.obj-5c2b791343feb964b489ad041ad07d78.mesh"]
+
+source_file="res://assets/models/track_light_ceiling.obj"
+dest_files=["res://.godot/imported/track_light_ceiling.obj-5c2b791343feb964b489ad041ad07d78.mesh", "res://.godot/imported/track_light_ceiling.obj-5c2b791343feb964b489ad041ad07d78.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

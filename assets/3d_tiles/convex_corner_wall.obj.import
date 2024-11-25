@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://covu5na1hibmy"
+path="res://.godot/imported/convex_corner_wall.obj-d837331fac4f9f175a50ef81d65e8232.mesh"
+
+[deps]
+
+files=["res://.godot/imported/convex_corner_wall.obj-d837331fac4f9f175a50ef81d65e8232.mesh"]
+
+source_file="res://assets/3d_tiles/convex_corner_wall.obj"
+dest_files=["res://.godot/imported/convex_corner_wall.obj-d837331fac4f9f175a50ef81d65e8232.mesh", "res://.godot/imported/convex_corner_wall.obj-d837331fac4f9f175a50ef81d65e8232.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

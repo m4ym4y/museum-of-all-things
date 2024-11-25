@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dl5nose8tpc4q"
+path="res://.godot/imported/marker.obj-8d1ac36ee78388864eeb0db0c919d191.mesh"
+
+[deps]
+
+files=["res://.godot/imported/marker.obj-8d1ac36ee78388864eeb0db0c919d191.mesh"]
+
+source_file="res://assets/3d_tiles/marker.obj"
+dest_files=["res://.godot/imported/marker.obj-8d1ac36ee78388864eeb0db0c919d191.mesh", "res://.godot/imported/marker.obj-8d1ac36ee78388864eeb0db0c919d191.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
