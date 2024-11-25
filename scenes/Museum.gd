@@ -1,7 +1,7 @@
 @tool
 extends Node3D
 
-@onready var Portal = preload("res://scenes/Portal.tscn")
+# @onready var Portal = preload("res://scenes/Portal.tscn")
 @onready var LoaderTrigger = preload("res://scenes/LoaderTrigger.tscn")
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
 @onready var DEFAULT_DOORS = [
@@ -17,7 +17,8 @@ extends Node3D
 @onready var IMAGE_REGEX = RegEx.new()
 
 @onready var _fetcher = $ExhibitFetcher
-@onready var _exhibits = {}
+@onready var _loaded_exhibit = $TiledExhibitGenerator
+@onready var _loaded_exhibit_title = "Lobby"
 @onready var _next_height = 0
 var _grid
 
@@ -28,7 +29,7 @@ func _init():
 func _ready() -> void:
   IMAGE_REGEX.compile("\\.(png|jpg|jpeg)$")
   if Engine.is_editor_hint():
-    _regenerate_map()
+    return
   else:
     _grid = $GridMap
     _grid.clear()
@@ -38,67 +39,122 @@ func _ready() -> void:
     # set up default exhibits in lobby
     var exits = $TiledExhibitGenerator.exits
     for exit in exits:
-      var linked_exhibit = Util.coalesce(DEFAULT_DOORS.pop_front(), "")
+      var linked_exhibit = Util.coalesce(DEFAULT_DOORS.pop_front(), "Fungus")
       exit.to_label.text = linked_exhibit
 
-func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_title="Lobby"):
+func set_up_exhibit(exhibit, pos=null, dir=null, room_count=default_room_count, title="Lobby", prev_title="Lobby", start_hall_override=null):
+  if start_hall_override:
+    print("calling generate %s %s %s %s %s %s %s" % [pos, dir, room_count, title, prev_title, start_hall_override.to_pos, start_hall_override.to_dir])
+  else:
+    print("calling generate %s %s %s %s %s" % [pos, dir, room_count, title, prev_title])
+
   var generated_results = exhibit.generate(
       _grid,
-      Vector3(0, _next_height, 0),
+      Util.coalesce(pos, Vector3.ZERO),
+      Util.coalesce(dir, Vector3(1, 0, 0)),
       min_room_dimension,
       max_room_dimension,
       room_count,
       title,
       prev_title,
+      start_hall_override
   )
 
   var entry = generated_results.entry
   var exits = generated_results.exits
 
-  var entry_portal = Portal.instantiate()
-  entry_portal.rotation.y = Util.vecToRot(entry.to_dir) + PI
-  entry_portal.position = Util.gridToWorld(entry.to_pos) + Vector3(0, 1.5, 0)
-  entry_portal.exit_portal = entry_portal
-  add_child(entry_portal)
-
-  # add a marker at every exit
+  # bind to every exit preloader
   for exit in exits:
-    var exit_portal = Portal.instantiate()
-    exit_portal.rotation.y = Util.vecToRot(exit.to_dir)
-    exit_portal.position = Util.gridToWorld(exit.to_pos) + Vector3(0, 1.5, 0)
-    exit_portal.exit_portal = entry_portal
-    var loader_trigger = LoaderTrigger.instantiate()
-    loader_trigger.monitoring = true
-    loader_trigger.position = Util.gridToWorld(exit.to_pos - exit.to_dir - exit.to_dir.rotated(Vector3(0, 1, 0), PI / 2))
-    loader_trigger.body_entered.connect(_on_loader_body_entered.bind(exit_portal, entry_portal, loader_trigger, exit.to_label, title))
-    add_child(exit_portal)
-    add_child(loader_trigger)
+    exit.loader.body_entered.connect(_on_preloader_body_entered.bind(exit))
+    exit.detector.direction_changed.connect(_on_change_loaded_room.bind(exit))
 
-  return entry_portal
-
-func _on_loader_body_entered(body, exit_portal, entry_portal, loader_trigger, label, title):
-  if body.is_in_group("Player") and loader_trigger.loaded == false:
-    loader_trigger.loaded = true
-    var next_article = Util.coalesce(label.text, "Fungus")
+func _on_preloader_body_entered(body, exit):
+  if body.is_in_group("Player") and exit.loader.loaded == false:
+    exit.loader.loaded = true
+    var next_article = Util.coalesce(exit.to_label.text, "Fungus")
     # var next_article = coalesce(label.text, "Lahmiales")
     # var next_article = coalesce(label.text, "Tribe (biology)")
     # var next_article = coalesce(label.text, "Diploid")
     # var next_article = coalesce(label.text, "USA")
-    if _exhibits.has(next_article):
-      var next_exhibit = _exhibits[next_article]
-      if next_exhibit.has("entry_portal"):
-        var portal = next_exhibit.entry_portal
-        exit_portal.exit_portal = portal
-        portal.exit_portal = exit_portal
 
     _fetcher.fetch([next_article], {
       "title": next_article,
-      "prev_title": title,
-      "exit_portal": exit_portal,
-      "entry_portal": entry_portal,
-      "loader_trigger": loader_trigger,
-      "next_article": next_article,
+      "exit": exit,
+      # TODO: we may actually need to handle this
+      "prefetch": true
     })
+
+func _on_change_loaded_room(direction, exit):
+  var title
+  var prev_title
+  var start_pos
+  var start_dir
+  var start_hall_override
+  if direction == "entry":
+    title = exit.from_label.text
+    prev_title = exit.to_label.text
+    start_pos = exit.from_room_root
+    start_dir = exit.from_room_root_dir
+  else:
+    title = exit.to_label.text
+    prev_title = exit.from_label.text
+    start_pos = exit.to_pos
+    start_dir = exit.to_dir
+    start_hall_override = exit
+
+  if title == _loaded_exhibit_title:
+    return
+
+  var result = _fetcher.get_result(Util.coalesce(title, "Fungus"))
+  if not result:
+    print("NO RESULT", title)
+    return
+
+  _loaded_exhibit_title = title
+  var new_exhibit = TiledExhibitGenerator.instantiate()
+  add_child(new_exhibit)
+  exit.reparent(new_exhibit)
+
+  _loaded_exhibit.queue_free()
+  await _loaded_exhibit.tree_exited
+  await get_tree().process_frame
+
+  _loaded_exhibit = new_exhibit
+
+  var data = _result_to_exhibit_data(title, result)
+  var doors = data.doors
+  var items = data.items
+
+  set_up_exhibit(
+    new_exhibit,
+    start_pos,
+    start_dir,
+    max(len(items) / 6, 1),
+    title,
+    prev_title,
+    start_hall_override
+  )
+
+  # fill in doors out of the exhibit
+  for new_exit in new_exhibit.exits:
+    var linked_exhibit = Util.coalesce(doors.pop_front(), "")
+    new_exit.to_label.text = linked_exhibit
+
+  var slots = new_exhibit.item_slots
+  var delay = 0.0
+  for slot in slots:
+    var item_data = items.pop_front()
+    if item_data == null:
+      break
+
+    var item = WallItem.instantiate()
+    new_exhibit.add_child(item)
+    item.position = Util.gridToWorld(slot[0]) - slot[1] * 0.01
+    item.rotation.y = Util.vecToRot(slot[1])
+
+    # we use a delay to stop there from being a frame drop when a bunch of items are added at once
+    get_tree().create_timer(delay).timeout.connect(_init_item.bind(item, item_data))
+    delay += 0.1
 
 func _seeded_shuffle(seed, arr):
   var rng = RandomNumberGenerator.new()
@@ -142,65 +198,12 @@ func _result_to_exhibit_data(title, result):
   }
 
 func _init_item(item, data):
-  add_child(item)
-  item.init(data)
+  if is_instance_valid(item):
+    item.init(data)
 
 func _on_fetch_complete(_titles, context):
-  # we don't need to do anything to handle a prefetch
-  if context.has("prefetch"):
-    return
-
-  var result = _fetcher.get_result(context.title)
-  if not result:
-    print("NO RESULT", _titles)
-
-  var data = _result_to_exhibit_data(context.title, result)
-  var doors = data.doors
-  var items = data.items
-
-  _next_height += 20
-  var new_exhibit = TiledExhibitGenerator.instantiate()
-  add_child(new_exhibit)
-  var new_exhibit_portal = set_up_exhibit(
-    new_exhibit,
-    max(len(items) / 6, 1),
-    context.title,
-    context.prev_title
-  )
-
-  context.exit_portal.exit_portal = new_exhibit_portal
-  new_exhibit_portal.exit_portal = context.exit_portal
-
-  if not _exhibits.has(context.title):
-    _exhibits[context.title] = { "entry_portal": new_exhibit_portal }
-
-  var exits = new_exhibit.exits
-  var slots = new_exhibit.item_slots
-  var linked_exhibits = []
-
-  # fill in doors out of the exhibit
-  for exit in exits:
-    var linked_exhibit = Util.coalesce(doors.pop_front(), "")
-    exit.to_label.text = linked_exhibit
-    linked_exhibits.append(linked_exhibit)
-
-  var delay = 0.0
-  for slot in slots:
-    var item_data = items.pop_front()
-    if item_data == null:
-      break
-
-    var item = WallItem.instantiate()
-    item.position = Util.gridToWorld(slot[0]) - slot[1] * 0.01
-    item.rotation.y = Util.vecToRot(slot[1])
-
-    # we use a delay to stop there from being a frame drop when a bunch of items are added at once
-    get_tree().create_timer(delay).timeout.connect(_init_item.bind(item, item_data))
-    delay += 0.1
-
-  # launch batch request to linked exhibit
-  # print("prefetching articles ", linked_exhibits)
-  # _fetcher.fetch(linked_exhibits, { "prefetch": true })
+  # TODO: we may need to open a door here
+  pass
 
 func _input(event):
   if event is InputEventKey and Input.is_key_pressed(KEY_P):
@@ -222,23 +225,8 @@ func _process(delta: float) -> void:
 
 @export var regenerate_starting_exhibit: bool = false:
   set(new_value):
-    _regenerate_map()
+    return
 
 func _clear_group(group):
   for scene in get_tree().get_nodes_in_group(group):
     scene.queue_free()
-
-func _regenerate_map():
-  _grid = $GridMap
-
-  _grid.clear()
-  _clear_group("Portal")
-  _clear_group("Loader")
-
-  set_up_exhibit($TiledExhibitGenerator)
-
-  for _n in range(iterations - 1):
-    _next_height += 10
-    var next_exhibit = TiledExhibitGenerator.instantiate()
-    set_up_exhibit(next_exhibit)
-    add_child(next_exhibit)

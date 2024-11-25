@@ -27,7 +27,7 @@ volumetric_fog_density = 0.3447
 volumetric_fog_temporal_reprojection_enabled = false
 volumetric_fog_temporal_reprojection_amount = 0.5
 
-[node name="Node3D" type="Node3D"]
+[node name="Museum" type="Node3D"]
 script = ExtResource("1_7pjtd")
 min_room_dimension = 1
 default_room_count = 1

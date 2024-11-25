@@ -13,6 +13,8 @@ extends Node3D
 var entry
 var exits = []
 var item_slots = []
+var _start_pos
+var _start_dir
 var _raw_grid
 var _grid
 
@@ -62,12 +64,17 @@ func vgt(v1, v2):
 func generate(
     grid,
     start_pos,
+    start_dir,
     min_room_dimension,
     max_room_dimension,
     room_count,
     title,
     prev_title,
+    override_start_hall=false
   ):
+  print("in generating ", start_pos, start_dir, title)
+  _start_pos = start_pos
+  _start_dir = start_dir
   _raw_grid = grid
   _grid = grid_wrapper.instantiate()
   _grid.init(_raw_grid)
@@ -81,15 +88,19 @@ func generate(
   var rand_dim = func() -> int:
     return _rng.randi_range(min_room_dimension, max_room_dimension)
 
-  var starting_hall = hall.instantiate()
-  add_child(starting_hall)
-  starting_hall.init(
-    _raw_grid,
-    title,
-    prev_title,
-    start_pos,
-    Vector3(1, 0, 0)
-  )
+  var starting_hall
+  if override_start_hall:
+    starting_hall = override_start_hall
+  else:
+    starting_hall = hall.instantiate()
+    add_child(starting_hall)
+    starting_hall.init(
+      _raw_grid,
+      title,
+      prev_title,
+      start_pos,
+      start_dir,
+    )
 
   entry = starting_hall
   exits = []
@@ -139,9 +150,9 @@ func generate(
         )
 
         var new_bounds = room_to_bounds(next_room_center, next_room_width, next_room_length)
-        if not overlaps_room(new_bounds[0], new_bounds[1], start_pos.y):
-          early_terminate = false
-          break
+        # if not overlaps_room(new_bounds[0], new_bounds[1], start_pos.y):
+        early_terminate = false
+        break
 
     if early_terminate:
       branch_point_list.pop_back()
@@ -271,7 +282,9 @@ func decorate_wall_tile(pos):
         _title,
         _prev_title,
         wall,
-        hall_dir
+        hall_dir,
+        _start_pos,
+        _start_dir,
       )
 
       exits.append(new_hall)
