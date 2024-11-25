@@ -105,9 +105,6 @@ func generate(
     starting_hall.to_pos.z + starting_hall.to_dir.z * (2 + room_length / 2),
   ) - starting_hall.to_dir
 
-  print("starting hall to pos ", title, " ", starting_hall.to_pos)
-  print("first room center ", title, " ", room_center)
-
   var next_room_direction
   var next_room_width
   var next_room_length

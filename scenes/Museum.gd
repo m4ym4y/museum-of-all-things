@@ -17,6 +17,7 @@ extends Node3D
 @onready var IMAGE_REGEX = RegEx.new()
 
 @onready var _fetcher = $ExhibitFetcher
+@onready var _exhibit_hist = []
 @onready var _exhibits = {}
 @onready var _next_height = 0
 var _grid
@@ -59,7 +60,7 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
   entry_portal.rotation.y = Util.vecToRot(entry.to_dir) + PI
   entry_portal.position = Util.gridToWorld(entry.to_pos) + Vector3(0, 1.5, 0)
   entry_portal.exit_portal = entry_portal
-  add_child(entry_portal)
+  exhibit.add_child(entry_portal)
 
   # add a marker at every exit
   for exit in exits:
@@ -68,7 +69,7 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
     exit_portal.position = Util.gridToWorld(exit.to_pos) + Vector3(0, 1.5, 0)
     exit_portal.exit_portal = entry_portal
     exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit_portal, entry_portal, exit))
-    add_child(exit_portal)
+    exhibit.add_child(exit_portal)
 
   return entry_portal
 
@@ -135,9 +136,10 @@ func _result_to_exhibit_data(title, result):
     "items": items,
   }
 
-func _init_item(item, data):
-  add_child(item)
-  item.init(data)
+func _init_item(exhibit, item, data):
+  if is_instance_valid(exhibit) and is_instance_valid(item):
+    exhibit.add_child(item)
+    item.init(data)
 
 func _on_fetch_complete(_titles, context):
   # we don't need to do anything to handle a prefetch
@@ -146,7 +148,7 @@ func _on_fetch_complete(_titles, context):
 
   var result = _fetcher.get_result(context.title)
   if not result:
-    print("NO RESULT", _titles)
+    # TODO: show an out of order sign
     return
 
   var data = _result_to_exhibit_data(context.title, result)
@@ -167,7 +169,20 @@ func _on_fetch_complete(_titles, context):
   new_exhibit_portal.exit_portal = context.exit_portal
 
   if not _exhibits.has(context.title):
-    _exhibits[context.title] = { "entry_portal": new_exhibit_portal }
+    _exhibits[context.title] = { "entry_portal": new_exhibit_portal, "exhibit": new_exhibit }
+    _exhibit_hist.append(context.title)
+    # TODO: never delete the exhibit the user is in
+    # TODO: remember the history of exhibits and where their entries should go, and where we exited them from
+    # clearly this isn't ready yet
+    """
+    if len(_exhibit_hist) > max_exhibits_loaded:
+      var key = _exhibit_hist.pop_front()
+      if _exhibits.has(key):
+        var old_exhibit = _exhibits[key]
+        if old_exhibit.has('exhibit'):
+          old_exhibit.exhibit.queue_free()
+        _exhibits.erase(key)
+    """
 
   context.exit.exit_door.open()
 
@@ -192,7 +207,7 @@ func _on_fetch_complete(_titles, context):
     item.rotation.y = Util.vecToRot(slot[1])
 
     # we use a delay to stop there from being a frame drop when a bunch of items are added at once
-    get_tree().create_timer(delay).timeout.connect(_init_item.bind(item, item_data))
+    get_tree().create_timer(delay).timeout.connect(_init_item.bind(new_exhibit, item, item_data))
     delay += 0.1
 
   # launch batch request to linked exhibit
@@ -212,6 +227,7 @@ func _input(event):
 func _process(delta: float) -> void:
   pass
 
+@export var max_exhibits_loaded: int = 2
 @export var min_room_dimension: int = 2
 @export var max_room_dimension: int = 5
 @export var default_room_count: int = 4
