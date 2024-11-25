@@ -88,8 +88,8 @@ func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(
   entry_door.rotation.y = Util.vecToRot(from_dir)
   exit_door.position = Util.gridToWorld(to_pos) - position
   exit_door.rotation.y = Util.vecToRot(to_dir)
-  entry_door.slide_door(true)
-  exit_door.slide_door(true)
+  # entry_door.set_open(true)
+  # exit_door.set_open(false)
 
   detector.init(Util.gridToWorld(from_pos - from_dir), Util.gridToWorld(to_pos - to_dir))
   detector.position = Util.gridToWorld((from_pos + to_pos) / 2) - position

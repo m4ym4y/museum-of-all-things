@@ -98,8 +98,8 @@ func _on_change_loaded_room(direction, exit):
   else:
     title = exit.to_label.text
     prev_title = exit.from_label.text
-    start_pos = exit.to_pos
-    start_dir = exit.to_dir
+    start_pos = exit.from_pos
+    start_dir = exit.from_dir
     start_hall_override = exit
 
   if title == _loaded_exhibit_title:
@@ -110,9 +110,17 @@ func _on_change_loaded_room(direction, exit):
     print("NO RESULT", title)
     return
 
+  print("opening exit door")
+  exit.exit_door.open()
+  exit.entry_door.open()
+  # exit.exit_door.set_open(direction == "exit")
+  # exit.entry_door.set_open(direction == "entry")
+
   _loaded_exhibit_title = title
   var new_exhibit = TiledExhibitGenerator.instantiate()
   add_child(new_exhibit)
+
+  # if direction == "exit":
   exit.reparent(new_exhibit)
 
   _loaded_exhibit.queue_free()

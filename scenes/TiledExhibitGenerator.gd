@@ -94,6 +94,7 @@ func generate(
   else:
     starting_hall = hall.instantiate()
     add_child(starting_hall)
+    print("start hall in hall creation ", start_pos, start_dir)
     starting_hall.init(
       _raw_grid,
       title,
@@ -101,6 +102,9 @@ func generate(
       start_pos,
       start_dir,
     )
+
+  starting_hall.entry_door.close()
+  starting_hall.exit_door.close()
 
   entry = starting_hall
   exits = []
@@ -111,8 +115,11 @@ func generate(
   var room_center = Vector3(
     starting_hall.to_pos.x + starting_hall.to_dir.x * (2 + room_width / 2),
     start_pos.y,
-    starting_hall.to_pos.z + starting_hall.to_dir.z * (1 + room_length / 2),
-  )
+    starting_hall.to_pos.z + starting_hall.to_dir.z * (2 + room_length / 2),
+  ) - starting_hall.to_dir
+
+  print("starting hall to pos ", title, " ", starting_hall.to_pos)
+  print("first room center ", title, " ", room_center)
 
   var next_room_direction
   var next_room_width
