@@ -16,15 +16,16 @@ func close():
 	set_open(false)
 
 func set_open(open = true):
-	_open = open
-	_door.position = _open_pos if open else _closed_pos
-	"""var tween = get_tree().create_tween()
-	tween.tween_property(
-		_door,
-		"position",
-		_open_pos if open else _closed_pos,
-		1.0
-	)"""
+	if is_visible():
+		var tween = get_tree().create_tween()
+		tween.tween_property(
+			_door,
+			"position",
+			_open_pos if open else _closed_pos,
+			1.0
+		)
+	else:
+		_door.position = _open_pos if open else _closed_pos
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

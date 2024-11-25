@@ -90,6 +90,7 @@ func generate(
 
   var starting_hall
   if override_start_hall:
+    print("overrode starting hall")
     starting_hall = override_start_hall
   else:
     starting_hall = hall.instantiate()
@@ -103,8 +104,8 @@ func generate(
       start_dir,
     )
 
-  starting_hall.entry_door.close()
-  starting_hall.exit_door.close()
+  # starting_hall.entry_door.close()
+  # starting_hall.exit_door.close()
 
   entry = starting_hall
   exits = []
@@ -157,9 +158,9 @@ func generate(
         )
 
         var new_bounds = room_to_bounds(next_room_center, next_room_width, next_room_length)
-        # if not overlaps_room(new_bounds[0], new_bounds[1], start_pos.y):
-        early_terminate = false
-        break
+        if not overlaps_room(new_bounds[0], new_bounds[1], start_pos.y):
+          early_terminate = false
+          break
 
     if early_terminate:
       branch_point_list.pop_back()
@@ -307,7 +308,7 @@ func decorate_wall_tile(pos):
 func room_to_bounds(center, width, length):
   return [
     Vector3(center.x - width / 2, center.y, center.z - length / 2),
-    Vector3(center.x + width / 2 + width % 2, center.y, center.z + length / 2 + length % 2)
+    Vector3(center.x + width / 2 - ((width + 1) % 2), center.y, center.z + length / 2 + ((length + 1) % 2))
   ]
 
 func carve_room(corner1, corner2, y):
@@ -322,6 +323,8 @@ func carve_room(corner1, corner2, y):
           _grid.set_cell_item(Vector3(x, y, z), WALL, 0)
           _grid.set_cell_item(Vector3(x, y + 1, z), WALL, 0)
           _grid.set_cell_item(Vector3(x, y + 2, z), -1, 0)
+        elif _grid.get_cell_item(Vector3(x, y, z)) == INTERNAL_HALL:
+          _grid.set_cell_item(Vector3(x, y + 1, z), WALL, 0)
       else:
         _grid.set_cell_item(Vector3(x, y, z), -1, 0)
         _grid.set_cell_item(Vector3(x, y + 1, z), -1, 0)
@@ -334,4 +337,7 @@ func overlaps_room(corner1, corner2, y):
       var cell = _grid.get_cell_item(Vector3(x, y - 1, z))
       if cell == FLOOR:
         return true
+        #if x != corner1.x - 1 and x != corner2.x + 1 and z != corner1.z - 1 and z != corner2.z + 1:
+        #  if _grid.get_cell_item(Vector3(x, y, z)) != INTERNAL_HALL:
+        #    return true
   return false

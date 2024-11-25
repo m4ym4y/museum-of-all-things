@@ -1,5 +1,7 @@
 extends Node3D
 
+signal init_called
+
 @onready var grid_wrapper = preload("res://scenes/util/GridWrapper.tscn")
 @onready var loader = $LoaderTrigger
 @onready var entry_door = $EntryDoor
@@ -42,6 +44,7 @@ func get_info():
   }
 
 func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(0, 0, 0), room_root_dir = Vector3(1, 0, 0)):
+  emit_signal("init_called")
   position = Util.gridToWorld(hall_start)
   loader.monitoring = true
 
@@ -59,6 +62,7 @@ func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(
 
   _grid.set_cell_item(hall_start, INTERNAL_HALL, ori)
   _grid.set_cell_item(hall_start - Vector3(0, 1, 0), FLOOR, 0)
+  _grid.set_cell_item(hall_start + Vector3(0, 1, 0), WALL, 0)
   _grid.set_cell_item(hall_corner, INTERNAL_HALL_TURN, ori)
   _grid.set_cell_item(hall_corner - Vector3(0, 1, 0), FLOOR, 0)
 
@@ -88,8 +92,8 @@ func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(
   entry_door.rotation.y = Util.vecToRot(from_dir)
   exit_door.position = Util.gridToWorld(to_pos) - position
   exit_door.rotation.y = Util.vecToRot(to_dir)
-  # entry_door.set_open(true)
-  # exit_door.set_open(false)
+  entry_door.set_open(true)
+  exit_door.set_open(false)
 
   detector.init(Util.gridToWorld(from_pos - from_dir), Util.gridToWorld(to_pos - to_dir))
   detector.position = Util.gridToWorld((from_pos + to_pos) / 2) - position

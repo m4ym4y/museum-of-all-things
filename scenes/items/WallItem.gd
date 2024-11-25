@@ -25,21 +25,21 @@ func _start_animate():
 		_item_node,
 		"position",
 		_item_node.position + Vector3(0, 4, 0),
-		0.5 # duration
+		0.0 # 0.5 # duration
 	)
 
 	ceiling_tween.tween_property(
 		_ceiling,
 		"position",
 		_ceiling.position - Vector3(0, 2, 0),
-		0.5 # duration
+		0.0 # 0.5 # duration
 	)
 
 	light_tween.tween_property(
 		_light,
 		"light_energy",
 		3.0,
-		1.0
+		0.0 # 1.0
 	)
 
 	tween.set_trans(Tween.TRANS_LINEAR)

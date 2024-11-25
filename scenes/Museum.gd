@@ -110,11 +110,11 @@ func _on_change_loaded_room(direction, exit):
     print("NO RESULT", title)
     return
 
-  print("opening exit door")
-  exit.exit_door.open()
-  exit.entry_door.open()
-  # exit.exit_door.set_open(direction == "exit")
-  # exit.entry_door.set_open(direction == "entry")
+  # print("opening exit door")
+  exit.tree_exited.connect(_on_tree_exit_print.bind(exit.to_label.text))
+  exit.init_called.connect(_on_init_call_print.bind(exit.to_label.text))
+  # exit.exit_door.open()
+  # exit.entry_door.open()
 
   _loaded_exhibit_title = title
   var new_exhibit = TiledExhibitGenerator.instantiate()
@@ -122,6 +122,9 @@ func _on_change_loaded_room(direction, exit):
 
   # if direction == "exit":
   exit.reparent(new_exhibit)
+  await get_tree().process_frame
+  exit.exit_door.set_open(direction == "exit")
+  exit.entry_door.set_open(direction == "entry")
 
   _loaded_exhibit.queue_free()
   await _loaded_exhibit.tree_exited
@@ -160,6 +163,7 @@ func _on_change_loaded_room(direction, exit):
     item.position = Util.gridToWorld(slot[0]) - slot[1] * 0.01
     item.rotation.y = Util.vecToRot(slot[1])
 
+    # _init_item(item, item_data)
     # we use a delay to stop there from being a frame drop when a bunch of items are added at once
     get_tree().create_timer(delay).timeout.connect(_init_item.bind(item, item_data))
     delay += 0.1
@@ -238,3 +242,9 @@ func _process(delta: float) -> void:
 func _clear_group(group):
   for scene in get_tree().get_nodes_in_group(group):
     scene.queue_free()
+
+func _on_tree_exit_print(arg):
+  print("node exiting treeeee", arg)
+
+func _on_init_call_print(arg):
+  print("node init call", arg)
