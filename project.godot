@@ -18,6 +18,7 @@ config/icon="res://icon.png"
 [autoload]
 
 DataManager="*res://scenes/util/data_manager.gd"
+Util="*res://scenes/util/Util.gd"
 
 [display]
 
@@ -27,7 +28,7 @@ window/size/resizable=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/qodot/plugin.cfg")
+enabled=PackedStringArray()
 
 [filesystem]
 
@@ -90,7 +91,7 @@ interact={
 
 [network]
 
-tls/certificate_bundle_override="res://certs/cacert.crt"
+tls/certificate_bundle_override="res://assets/certs/cacert.crt"
 
 [physics]
 

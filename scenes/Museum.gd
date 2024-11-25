@@ -21,6 +21,9 @@ extends Node3D
 @onready var _next_height = 0
 var _grid
 
+func _init():
+  RenderingServer.set_debug_generate_wireframes(true)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   IMAGE_REGEX.compile("\\.(png|jpg|jpeg)$")
@@ -35,25 +38,8 @@ func _ready() -> void:
     # set up default exhibits in lobby
     var exits = $TiledExhibitGenerator.exits
     for exit in exits:
-      var linked_exhibit = coalesce(DEFAULT_DOORS.pop_front(), "")
-      exit[2].text = linked_exhibit
-
-func vecToRot(vec):
-  if vec.z < -0.1:
-    return 0.0
-  elif vec.z > 0.1:
-    return PI
-  elif vec.x > 0.1:
-    return 3 * PI / 2
-  elif vec.x < -0.1:
-    return PI / 2
-  return 0.0
-
-func gridToWorld(vec):
-  return 4 * vec
-
-func coalesce(a, b):
-  return a if a else b
+      var linked_exhibit = Util.coalesce(DEFAULT_DOORS.pop_front(), "")
+      exit.to_label.text = linked_exhibit
 
 func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_title="Lobby"):
   var generated_results = exhibit.generate(
@@ -66,35 +52,34 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
       prev_title,
   )
 
-  var entry = generated_results[0]
-  var exits = generated_results[1]
+  var entry = generated_results.entry
+  var exits = generated_results.exits
 
   var entry_portal = Portal.instantiate()
-  entry_portal.rotation.y = vecToRot(entry[1]) + PI
-  entry_portal.position = gridToWorld(entry[0]) + Vector3(0, 1.5, 0)
+  entry_portal.rotation.y = Util.vecToRot(entry.to_dir) + PI
+  entry_portal.position = Util.gridToWorld(entry.to_pos) + Vector3(0, 1.5, 0)
   entry_portal.exit_portal = entry_portal
   add_child(entry_portal)
 
   # add a marker at every exit
   for exit in exits:
     var exit_portal = Portal.instantiate()
-    exit_portal.rotation.y = vecToRot(exit[1])
-    exit_portal.position = gridToWorld(exit[0]) + Vector3(0, 1.5, 0)
+    exit_portal.rotation.y = Util.vecToRot(exit.to_dir)
+    exit_portal.position = Util.gridToWorld(exit.to_pos) + Vector3(0, 1.5, 0)
     exit_portal.exit_portal = entry_portal
     var loader_trigger = LoaderTrigger.instantiate()
     loader_trigger.monitoring = true
-    loader_trigger.position = gridToWorld(exit[0] - exit[1] - exit[1].rotated(Vector3(0, 1, 0), PI / 2))
-    loader_trigger.body_entered.connect(_on_loader_body_entered.bind(exit_portal, entry_portal, loader_trigger, exit[2], title))
+    loader_trigger.position = Util.gridToWorld(exit.to_pos - exit.to_dir - exit.to_dir.rotated(Vector3(0, 1, 0), PI / 2))
+    loader_trigger.body_entered.connect(_on_loader_body_entered.bind(exit_portal, entry_portal, loader_trigger, exit.to_label, title))
     add_child(exit_portal)
     add_child(loader_trigger)
-    add_child
 
   return entry_portal
 
 func _on_loader_body_entered(body, exit_portal, entry_portal, loader_trigger, label, title):
   if body.is_in_group("Player") and loader_trigger.loaded == false:
     loader_trigger.loaded = true
-    var next_article = coalesce(label.text, "Fungus")
+    var next_article = Util.coalesce(label.text, "Fungus")
     # var next_article = coalesce(label.text, "Lahmiales")
     # var next_article = coalesce(label.text, "Tribe (biology)")
     # var next_article = coalesce(label.text, "Diploid")
@@ -195,8 +180,8 @@ func _on_fetch_complete(_titles, context):
 
   # fill in doors out of the exhibit
   for exit in exits:
-    var linked_exhibit = coalesce(doors.pop_front(), "")
-    exit[2].text = linked_exhibit
+    var linked_exhibit = Util.coalesce(doors.pop_front(), "")
+    exit.to_label.text = linked_exhibit
     linked_exhibits.append(linked_exhibit)
 
   var delay = 0.0
@@ -206,8 +191,8 @@ func _on_fetch_complete(_titles, context):
       break
 
     var item = WallItem.instantiate()
-    item.position = gridToWorld(slot[0]) - slot[1] * 0.01
-    item.rotation.y = vecToRot(slot[1])
+    item.position = Util.gridToWorld(slot[0]) - slot[1] * 0.01
+    item.rotation.y = Util.vecToRot(slot[1])
 
     # we use a delay to stop there from being a frame drop when a bunch of items are added at once
     get_tree().create_timer(delay).timeout.connect(_init_item.bind(item, item_data))
@@ -218,6 +203,9 @@ func _on_fetch_complete(_titles, context):
   # _fetcher.fetch(linked_exhibits, { "prefetch": true })
 
 func _input(event):
+  if event is InputEventKey and Input.is_key_pressed(KEY_P):
+    var vp = get_viewport()
+    vp.debug_draw = (vp.debug_draw + 1 ) % 4
   if event.is_action_pressed("ui_cancel"):
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
   if event.is_action_pressed("click"):

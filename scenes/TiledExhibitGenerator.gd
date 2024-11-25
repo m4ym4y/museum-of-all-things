@@ -3,11 +3,18 @@ extends Node3D
 
 @onready var portal = preload("res://scenes/Portal.tscn")
 @onready var pool_scene = preload("res://scenes/Pool.tscn")
+@onready var hall = preload("res://scenes/Hall.tscn")
+@onready var grid_wrapper = preload("res://scenes/util/GridWrapper.tscn")
 
 @onready var _rng
+@onready var _title
+@onready var _prev_title
+
 var entry
 var exits = []
 var item_slots = []
+var _raw_grid
+var _grid
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,7 +23,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
   pass
 
-func cell_neighbors(grid, pos, id):
+func cell_neighbors(pos, id):
   var neighbors = []
   for x in range(-1, 2):
     for z in range(-1, 2):
@@ -27,7 +34,7 @@ func cell_neighbors(grid, pos, id):
         continue
 
       var vec = Vector3(pos.x + x, pos.y, pos.z + z)
-      var cell_val = grid.get_cell_item(vec)
+      var cell_val = _grid.get_cell_item(vec)
 
       if cell_val == id:
         neighbors.append(vec)
@@ -61,19 +68,29 @@ func generate(
     title,
     prev_title,
   ):
+  _raw_grid = grid
+  _grid = grid_wrapper.instantiate()
+  _grid.init(_raw_grid)
+  add_child(_grid)
+
   _rng = RandomNumberGenerator.new()
   _rng.seed = hash(title)
+  _title = title
+  _prev_title = prev_title
 
   var rand_dim = func() -> int:
     return _rng.randi_range(min_room_dimension, max_room_dimension)
 
-  # var starting_hall_dir = rand_dir(0)
-  var starting_hall = generate_hall(grid, Vector3(1, 0, 0), start_pos, true)
-  starting_hall[2].text = prev_title
-  grid.set_cell_item(starting_hall[0] + Vector3(0, 1, 0), WALL, 0)
+  var starting_hall = hall.instantiate()
+  add_child(starting_hall)
+  starting_hall.init(
+    _raw_grid,
+    title,
+    prev_title,
+    start_pos,
+    Vector3(1, 0, 0)
+  )
 
-  # reset exported points
-  # entry = [start_pos, Vector3(1, 0, 0)]
   entry = starting_hall
   exits = []
   item_slots = []
@@ -81,9 +98,9 @@ func generate(
   var room_width = rand_dim.call()
   var room_length = rand_dim.call()
   var room_center = Vector3(
-    starting_hall[0].x + starting_hall[1].x * (2 + room_width / 2),
+    starting_hall.to_pos.x + starting_hall.to_dir.x * (2 + room_width / 2),
     start_pos.y,
-    starting_hall[0].z + starting_hall[1].z * (1 + room_length / 2),
+    starting_hall.to_pos.z + starting_hall.to_dir.z * (1 + room_length / 2),
   )
 
   var next_room_direction
@@ -105,7 +122,7 @@ func generate(
     room_list.append(room_entry)
 
     var bounds = room_to_bounds(room_center, room_width, room_length)
-    carve_room(grid, bounds[0], bounds[1], start_pos.y)
+    carve_room(bounds[0], bounds[1], start_pos.y)
 
     var early_terminate = true
 
@@ -122,7 +139,7 @@ func generate(
         )
 
         var new_bounds = room_to_bounds(next_room_center, next_room_width, next_room_length)
-        if not overlaps_room(grid, new_bounds[0], new_bounds[1], start_pos.y):
+        if not overlaps_room(new_bounds[0], new_bounds[1], start_pos.y):
           early_terminate = false
           break
 
@@ -154,7 +171,6 @@ func generate(
         end_hall += Vector3((hall_width - 1) / 2, 0, 0)
 
       carve_room(
-          grid,
           start_hall,
           end_hall,
           start_pos.y
@@ -170,17 +186,20 @@ func generate(
 
   # ignore starting hall
   for room in room_list:
-    decorate_room(grid, room)
+    decorate_room(room)
 
-  return [entry, exits]
+  return {
+    "entry": entry,
+    "exits": exits
+  }
 
-func decorate_room(grid, room):
+func decorate_room(room):
   var center = room.center
   var width = room.width
   var length = room.length
 
   if !Engine.is_editor_hint():
-    decorate_room_center(grid, center, width, length)
+    decorate_room_center(center, width, length)
 
   var bounds = room_to_bounds(center, width, length)
   var c1 = bounds[0]
@@ -190,17 +209,17 @@ func decorate_room(grid, room):
   # walk border of room to place wall objects
   for x in range(c1.x, c2.x + 1):
     for z in [c1.z, c2.z]:
-      decorate_wall_tile(grid, Vector3(x, y, z))
+      decorate_wall_tile(Vector3(x, y, z))
   for z in range(c1.z, c2.z + 1):
     for x in [c1.x, c2.x]:
-      decorate_wall_tile(grid, Vector3(x, y, z))
+      decorate_wall_tile(Vector3(x, y, z))
 
-func decorate_room_center(grid, center, width, length):
+func decorate_room_center(center, width, length):
   if width > 2 and length > 2 and _rng.randi_range(0, 2) == 0:
     var pool = pool_scene.instantiate()
     var bounds = room_to_bounds(center, width, length)
     var true_center = (bounds[0] + bounds[1]) / 2
-    pool.position = true_center * 4
+    pool.position = Util.gridToWorld(true_center)
     add_child(pool)
     return
 
@@ -209,7 +228,7 @@ func decorate_room_center(grid, center, width, length):
   if width > length and width > 2:
     bench_area_bounds = room_to_bounds(center, width - 2, 0)
   elif length > width and length > 2:
-    bench_area_ori = vecToOrientation(grid, Vector3(1, 0, 0))
+    bench_area_ori = Util.vecToOrientation(_grid, Vector3(1, 0, 0))
     bench_area_bounds = room_to_bounds(center, 0, length - 2)
   if bench_area_bounds:
     var c1 = bench_area_bounds[0]
@@ -217,11 +236,11 @@ func decorate_room_center(grid, center, width, length):
     var y = center.y
     for x in range(c1.x, c2.x + 1):
       for z in range(c1.z, c2.z + 1):
-        grid.set_cell_item(Vector3(x, y, z), BENCH, bench_area_ori)
+        _grid.set_cell_item(Vector3(x, y, z), BENCH, bench_area_ori)
 
   """var light = SpotLight3D.new()
   var bounds = room_to_bounds(center, width, length)
-  var truecenter = 4 * ((bounds[0] + bounds[1]) / 2)
+  var truecenter = 4 * ((bounds[0] + bounds[1]) / 2))
 
   light.position = truecenter + Vector3(0, 7, 0)
   light.rotation.x = 3 * PI / 2
@@ -231,25 +250,10 @@ func decorate_room_center(grid, center, width, length):
   light.light_color = Color(_rng.randf(), _rng.randf(), _rng.randf())
   add_child(light)"""
 
-func vecToRot(vec):
-  if vec.z < 0:
-    return 0.0
-  elif vec.z > 0:
-    return PI
-  elif vec.x > 0:
-    return 3 * PI / 2
-  elif vec.x < 0:
-    return PI / 2
-  return 0.0
-
-func vecToOrientation(grid, vec):
-  var vec_basis = Basis.looking_at(vec.normalized())
-  return grid.get_orthogonal_index_from_basis(vec_basis)
-
-func decorate_wall_tile(grid, pos):
+func decorate_wall_tile(pos):
   # grid.set_cell_item(pos + Vector3(0, 2, 0), MARKER, 0)
 
-  var wall_neighbors = cell_neighbors(grid, pos, WALL)
+  var wall_neighbors = cell_neighbors(pos, WALL)
   for wall in wall_neighbors:
     var slot = (wall + pos) / 2
     var hall_dir = wall - pos
@@ -257,11 +261,20 @@ func decorate_wall_tile(grid, pos):
 
     # put an exit everywhere it fits
     if (
-        grid.get_cell_item(hall_corner - Vector3(0, 1, 0)) != FLOOR and
-        len(cell_neighbors(grid, hall_corner - Vector3(0, 1, 0), FLOOR)) == 0
+        _grid.get_cell_item(hall_corner - Vector3(0, 1, 0)) != FLOOR and
+        len(cell_neighbors(hall_corner - Vector3(0, 1, 0), FLOOR)) == 0
     ):
-      var hall = generate_hall(grid, hall_dir, wall)
-      exits.append(hall)
+      var new_hall = hall.instantiate()
+      add_child(new_hall)
+      new_hall.init(
+        _raw_grid,
+        _title,
+        _prev_title,
+        wall,
+        hall_dir
+      )
+
+      exits.append(new_hall)
     # put exhibit items everywhere else
     else:
       var is_dupe = false
@@ -271,42 +284,13 @@ func decorate_wall_tile(grid, pos):
       if not is_dupe:
         item_slots.append([slot, hall_dir])
 
-func generate_hall(grid, hall_dir, hall_start, label_at_end=false):
-  var ori = vecToOrientation(grid, hall_dir)
-  var hall_corner = hall_start + hall_dir
-
-  grid.set_cell_item(hall_start, INTERNAL_HALL, ori)
-  grid.set_cell_item(hall_start - Vector3(0, 1, 0), FLOOR, 0)
-  grid.set_cell_item(hall_corner, INTERNAL_HALL_TURN, ori)
-  grid.set_cell_item(hall_corner - Vector3(0, 1, 0), FLOOR, 0)
-
-  var exit_hall_dir = hall_dir.rotated(Vector3(0, 1, 0), 3 * PI / 2)
-  # var exit_hall_dir = Vector3(0, 0, 1)
-  var exit_hall = hall_corner + exit_hall_dir
-  var exit_ori = vecToOrientation(grid, exit_hall_dir)
-  grid.set_cell_item(exit_hall, INTERNAL_HALL, exit_ori)
-  grid.set_cell_item(exit_hall - Vector3(0, 1, 0), FLOOR, 0)
-
-  var label = Label3D.new()
-  if label_at_end:
-    label.position = 4 * (exit_hall + exit_hall_dir * 0.51) + Vector3(0, 3.5, 0)
-    label.rotation.y = vecToRot(exit_hall_dir) + PI
-    label.text = ""
-  else:
-    label.position = 4 * (hall_start - hall_dir * 0.51) + Vector3(0, 3.5, 0)
-    label.rotation.y = vecToRot(hall_dir)
-    label.text = ""
-  add_child(label)
-
-  return [exit_hall, exit_hall_dir, label]
-
 func room_to_bounds(center, width, length):
   return [
     Vector3(center.x - width / 2, center.y, center.z - length / 2),
     Vector3(center.x + width / 2 + width % 2, center.y, center.z + length / 2 + length % 2)
   ]
 
-func carve_room(grid, corner1, corner2, y):
+func carve_room(corner1, corner2, y):
   var lx = corner1.x
   var gx = corner2.x
   var lz = corner1.z
@@ -314,20 +298,20 @@ func carve_room(grid, corner1, corner2, y):
   for x in range(lx - 1, gx + 2):
     for z in range(lz - 1, gz + 2):
       if x < lx or z < lz or x > gx or z > gz:
-        if grid.get_cell_item(Vector3(x, y - 1, z)) != FLOOR:
-          grid.set_cell_item(Vector3(x, y, z), WALL, 0)
-          grid.set_cell_item(Vector3(x, y + 1, z), WALL, 0)
-          grid.set_cell_item(Vector3(x, y + 2, z), -1, 0)
+        if _grid.get_cell_item(Vector3(x, y - 1, z)) != FLOOR:
+          _grid.set_cell_item(Vector3(x, y, z), WALL, 0)
+          _grid.set_cell_item(Vector3(x, y + 1, z), WALL, 0)
+          _grid.set_cell_item(Vector3(x, y + 2, z), -1, 0)
       else:
-        grid.set_cell_item(Vector3(x, y, z), -1, 0)
-        grid.set_cell_item(Vector3(x, y + 1, z), -1, 0)
-        grid.set_cell_item(Vector3(x, y + 2, z), CEILING, 0)
-        grid.set_cell_item(Vector3(x, y - 1, z), FLOOR, 0)
+        _grid.set_cell_item(Vector3(x, y, z), -1, 0)
+        _grid.set_cell_item(Vector3(x, y + 1, z), -1, 0)
+        _grid.set_cell_item(Vector3(x, y + 2, z), CEILING, 0)
+        _grid.set_cell_item(Vector3(x, y - 1, z), FLOOR, 0)
 
-func overlaps_room(grid, corner1, corner2, y):
+func overlaps_room(corner1, corner2, y):
   for x in range(corner1.x - 1, corner2.x + 2):
     for z in range(corner1.z - 1, corner2.z + 2):
-      var cell = grid.get_cell_item(Vector3(x, y - 1, z))
+      var cell = _grid.get_cell_item(Vector3(x, y - 1, z))
       if cell == FLOOR:
         return true
   return false

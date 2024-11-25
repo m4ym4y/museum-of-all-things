@@ -15,7 +15,7 @@ size = Vector3(2.5, 4, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2olvn"]
 
-[node name="WallItem" type="Node3D"]
+[node name="WallItem" type="Node3D" groups=["ExhibitItem"]]
 script = ExtResource("1_5qdg2")
 
 [node name="Item" type="Node3D" parent="."]

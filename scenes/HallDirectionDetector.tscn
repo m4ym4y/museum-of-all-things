@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://df28hj6wi4fdx"]
+
+[ext_resource type="Script" path="res://scenes/HallDirectionDetector.gd" id="1_2rqy8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hgtki"]
+size = Vector3(8, 8, 8)
+
+[node name="HallDirectionDetector" type="Area3D"]
+monitoring = false
+script = ExtResource("1_2rqy8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_hgtki")
