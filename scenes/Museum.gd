@@ -67,19 +67,15 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
     exit_portal.rotation.y = Util.vecToRot(exit.to_dir)
     exit_portal.position = Util.gridToWorld(exit.to_pos) + Vector3(0, 1.5, 0)
     exit_portal.exit_portal = entry_portal
-    var loader_trigger = LoaderTrigger.instantiate()
-    loader_trigger.monitoring = true
-    loader_trigger.position = Util.gridToWorld(exit.to_pos - exit.to_dir - exit.to_dir.rotated(Vector3(0, 1, 0), PI / 2))
-    loader_trigger.body_entered.connect(_on_loader_body_entered.bind(exit_portal, entry_portal, loader_trigger, exit.to_label, title))
+    exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit_portal, entry_portal, exit))
     add_child(exit_portal)
-    add_child(loader_trigger)
 
   return entry_portal
 
-func _on_loader_body_entered(body, exit_portal, entry_portal, loader_trigger, label, title):
-  if body.is_in_group("Player") and loader_trigger.loaded == false:
-    loader_trigger.loaded = true
-    var next_article = Util.coalesce(label.text, "Fungus")
+func _on_loader_body_entered(body, exit_portal, entry_portal, exit):
+  if body.is_in_group("Player") and exit.loader.loaded == false:
+    exit.loader.loaded = true
+    var next_article = Util.coalesce(exit.to_label.text, "Fungus")
     # var next_article = coalesce(label.text, "Lahmiales")
     # var next_article = coalesce(label.text, "Tribe (biology)")
     # var next_article = coalesce(label.text, "Diploid")
@@ -93,11 +89,9 @@ func _on_loader_body_entered(body, exit_portal, entry_portal, loader_trigger, la
 
     _fetcher.fetch([next_article], {
       "title": next_article,
-      "prev_title": title,
       "exit_portal": exit_portal,
       "entry_portal": entry_portal,
-      "loader_trigger": loader_trigger,
-      "next_article": next_article,
+      "exit": exit,
     })
 
 func _seeded_shuffle(seed, arr):
@@ -153,6 +147,7 @@ func _on_fetch_complete(_titles, context):
   var result = _fetcher.get_result(context.title)
   if not result:
     print("NO RESULT", _titles)
+    return
 
   var data = _result_to_exhibit_data(context.title, result)
   var doors = data.doors
@@ -165,7 +160,7 @@ func _on_fetch_complete(_titles, context):
     new_exhibit,
     max(len(items) / 6, 1),
     context.title,
-    context.prev_title
+    context.exit.from_label.text
   )
 
   context.exit_portal.exit_portal = new_exhibit_portal
@@ -173,6 +168,8 @@ func _on_fetch_complete(_titles, context):
 
   if not _exhibits.has(context.title):
     _exhibits[context.title] = { "entry_portal": new_exhibit_portal }
+
+  context.exit.exit_door.open()
 
   var exits = new_exhibit.exits
   var slots = new_exhibit.item_slots

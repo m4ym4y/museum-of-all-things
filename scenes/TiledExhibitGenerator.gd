@@ -91,6 +91,8 @@ func generate(
     Vector3(1, 0, 0)
   )
 
+  starting_hall.exit_door.open()
+
   entry = starting_hall
   exits = []
   item_slots = []
