@@ -59,6 +59,7 @@ func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(
 
   _grid.set_cell_item(hall_start, INTERNAL_HALL, ori)
   _grid.set_cell_item(hall_start - Vector3(0, 1, 0), FLOOR, 0)
+  _grid.set_cell_item(hall_start + Vector3(0, 1, 0), WALL, 0)
   _grid.set_cell_item(hall_corner, INTERNAL_HALL_TURN, ori)
   _grid.set_cell_item(hall_corner - Vector3(0, 1, 0), FLOOR, 0)
 
@@ -73,13 +74,13 @@ func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(
   to_pos = exit_hall
 
   from_label = Label3D.new()
-  from_label.position = Util.gridToWorld((exit_hall + exit_hall_dir * 0.51) + Vector3(0, 3.5, 0))
+  from_label.position = Util.gridToWorld(exit_hall + exit_hall_dir * 0.51) + Vector3(0, 3.5, 0) - position
   from_label.rotation.y = Util.vecToRot(exit_hall_dir) + PI
   from_label.text = from_title
   add_child(from_label)
 
   to_label = Label3D.new()
-  to_label.position = Util.gridToWorld((hall_start - hall_dir * 0.51) + Vector3(0, 3.5, 0))
+  to_label.position = Util.gridToWorld(hall_start - hall_dir * 0.51) + Vector3(0, 3.5, 0) - position
   to_label.rotation.y = Util.vecToRot(hall_dir)
   to_label.text = ""
   add_child(to_label)
@@ -88,8 +89,8 @@ func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(
   entry_door.rotation.y = Util.vecToRot(from_dir)
   exit_door.position = Util.gridToWorld(to_pos) - position
   exit_door.rotation.y = Util.vecToRot(to_dir)
-  entry_door.slide_door(true)
-  exit_door.slide_door(false)
+  entry_door.set_open(true)
+  exit_door.set_open(false)
 
   detector.init(Util.gridToWorld(from_pos - from_dir), Util.gridToWorld(to_pos - to_dir))
   detector.position = Util.gridToWorld((from_pos + to_pos) / 2) - position

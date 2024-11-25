@@ -100,8 +100,11 @@ func generate(
   var room_center = Vector3(
     starting_hall.to_pos.x + starting_hall.to_dir.x * (2 + room_width / 2),
     start_pos.y,
-    starting_hall.to_pos.z + starting_hall.to_dir.z * (1 + room_length / 2),
-  )
+    starting_hall.to_pos.z + starting_hall.to_dir.z * (2 + room_length / 2),
+  ) - starting_hall.to_dir
+
+  print("starting hall to pos ", title, " ", starting_hall.to_pos)
+  print("first room center ", title, " ", room_center)
 
   var next_room_direction
   var next_room_width
@@ -287,7 +290,7 @@ func decorate_wall_tile(pos):
 func room_to_bounds(center, width, length):
   return [
     Vector3(center.x - width / 2, center.y, center.z - length / 2),
-    Vector3(center.x + width / 2 + width % 2, center.y, center.z + length / 2 + length % 2)
+    Vector3(center.x + width / 2 - ((width + 1) % 2), center.y, center.z + length / 2 + ((length + 1) % 2))
   ]
 
 func carve_room(corner1, corner2, y):
@@ -302,6 +305,8 @@ func carve_room(corner1, corner2, y):
           _grid.set_cell_item(Vector3(x, y, z), WALL, 0)
           _grid.set_cell_item(Vector3(x, y + 1, z), WALL, 0)
           _grid.set_cell_item(Vector3(x, y + 2, z), -1, 0)
+        elif _grid.get_cell_item(Vector3(x, y, z)) == INTERNAL_HALL:
+          _grid.set_cell_item(Vector3(x, y + 1, z), WALL, 0)
       else:
         _grid.set_cell_item(Vector3(x, y, z), -1, 0)
         _grid.set_cell_item(Vector3(x, y + 1, z), -1, 0)

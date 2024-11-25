@@ -9,7 +9,9 @@ func _notification(what):
 
 func _on_free():
   for cell in _cells_set:
-    _grid.set_cell_item(cell, -1, 0)
+    # dont reset an overwritten cell
+    if _grid.get_cell_item(cell[0]) == cell[1]:
+      _grid.set_cell_item(cell[0], -1, 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,7 +25,7 @@ func init(grid):
   _grid = grid
 
 func set_cell_item(pos, val, ori):
-  _cells_set.append(pos)
+  _cells_set.append([pos, val])
   _grid.set_cell_item(pos, val, ori)
 
 func get_cell_item(pos):

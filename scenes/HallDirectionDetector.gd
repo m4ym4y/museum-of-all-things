@@ -42,7 +42,6 @@ func _process(_delta: float) -> void:
 
 		if current_direction != previous_direction:
 			var result = "entry" if current_direction == to_a else "exit"
-			print("direction change to ", result)
 			emit_signal("direction_changed", result)
 			previous_direction = current_direction
 

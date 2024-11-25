@@ -1,13 +1,13 @@
 extends Node
 
 func vecToRot(vec):
-  if vec.z < 0:
+  if vec.z < -0.1:
     return 0.0
-  elif vec.z > 0:
+  elif vec.z > 0.1:
     return PI
-  elif vec.x > 0:
+  elif vec.x > 0.1:
     return 3 * PI / 2
-  elif vec.x < 0:
+  elif vec.x < -0.1:
     return PI / 2
   return 0.0
 

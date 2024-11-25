@@ -28,7 +28,7 @@ func _init():
 func _ready() -> void:
   IMAGE_REGEX.compile("\\.(png|jpg|jpeg)$")
   if Engine.is_editor_hint():
-    _regenerate_map()
+    return
   else:
     _grid = $GridMap
     _grid.clear()
