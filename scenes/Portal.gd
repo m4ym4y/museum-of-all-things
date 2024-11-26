@@ -124,7 +124,7 @@ func _on_body_entered(body) -> void:
     # Attempt to teleport the body
     _attempt_teleport(body)
 
-func _on_body_exited(body:PhysicsBody3D) -> void:
+func _on_body_exited(body) -> void:
   if body.is_in_group("Player"):
     if body in _bodies_inside:
       _bodies_inside.erase(body)

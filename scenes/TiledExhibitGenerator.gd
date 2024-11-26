@@ -85,8 +85,8 @@ func generate(
   add_child(starting_hall)
   starting_hall.init(
     _raw_grid,
-    title,
     prev_title,
+    title,
     start_pos,
     Vector3(1, 0, 0)
   )
@@ -271,7 +271,7 @@ func decorate_wall_tile(pos):
       new_hall.init(
         _raw_grid,
         _title,
-        _prev_title,
+        _title,
         wall,
         hall_dir
       )

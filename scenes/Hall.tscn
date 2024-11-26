@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://0bvu3kq7qnal"]
+[gd_scene load_steps=5 format=3 uid="uid://0bvu3kq7qnal"]
 
 [ext_resource type="Script" path="res://scenes/Hall.gd" id="1_eu127"]
 [ext_resource type="PackedScene" uid="uid://bijq5fqp57yd4" path="res://scenes/LoaderTrigger.tscn" id="2_fcpmw"]
 [ext_resource type="PackedScene" uid="uid://cy7vwbnkk3yj1" path="res://scenes/HallDoor.tscn" id="3_1akbl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o8skc"]
+size = Vector3(8, 8, 8)
 
 [node name="Hall" type="Node3D" groups=["ExhibitItem", "Hall"]]
 script = ExtResource("1_eu127")
@@ -13,3 +16,9 @@ monitoring = false
 [node name="EntryDoor" parent="." instance=ExtResource("3_1akbl")]
 
 [node name="ExitDoor" parent="." instance=ExtResource("3_1akbl")]
+
+[node name="InHall" type="Area3D" parent="."]
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InHall"]
+shape = SubResource("BoxShape3D_o8skc")

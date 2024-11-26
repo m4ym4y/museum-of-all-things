@@ -4,6 +4,7 @@ extends Node3D
 @onready var Portal = preload("res://scenes/Portal.tscn")
 @onready var LoaderTrigger = preload("res://scenes/LoaderTrigger.tscn")
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
+@onready var _player = $Player
 @onready var DEFAULT_DOORS = [
   "Fungus",
   "Soup",
@@ -19,8 +20,12 @@ extends Node3D
 @onready var _fetcher = $ExhibitFetcher
 @onready var _exhibit_hist = []
 @onready var _exhibits = {}
+@onready var _backlink_map = {}
 @onready var _next_height = 0
 var _grid
+
+@onready var _entry_portal
+@onready var _exit_portal
 
 func _init():
   RenderingServer.set_debug_generate_wireframes(true)
@@ -35,6 +40,13 @@ func _ready() -> void:
     _grid.clear()
     _fetcher.fetch_complete.connect(_on_fetch_complete)
     set_up_exhibit($TiledExhibitGenerator)
+
+    _entry_portal = Portal.instantiate()
+    _exit_portal = Portal.instantiate()
+    _entry_portal.exit_portal = _exit_portal
+    _exit_portal.exit_portal = _entry_portal
+    add_child(_entry_portal)
+    add_child(_exit_portal)
 
     # set up default exhibits in lobby
     var exits = $TiledExhibitGenerator.exits
@@ -56,44 +68,67 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
   var entry = generated_results.entry
   var exits = generated_results.exits
 
-  var entry_portal = Portal.instantiate()
-  entry_portal.rotation.y = Util.vecToRot(entry.to_dir) + PI
-  entry_portal.position = Util.gridToWorld(entry.to_pos) + Vector3(0, 1.5, 0)
-  entry_portal.exit_portal = entry_portal
-  exhibit.add_child(entry_portal)
+  # _entry_portal.rotation.y = Util.vecToRot(entry.to_dir) + PI
+  # _entry_portal.position = Util.gridToWorld(entry.to_pos) + Vector3(0, 1.5, 0)
 
   # add a marker at every exit
   for exit in exits:
-    var exit_portal = Portal.instantiate()
-    exit_portal.rotation.y = Util.vecToRot(exit.to_dir)
-    exit_portal.position = Util.gridToWorld(exit.to_pos) + Vector3(0, 1.5, 0)
-    exit_portal.exit_portal = entry_portal
-    exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit_portal, entry_portal, exit))
-    exhibit.add_child(exit_portal)
+    exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit))
 
-  return entry_portal
+  return generated_results
 
-func _on_loader_body_entered(body, exit_portal, entry_portal, exit):
-  if body.is_in_group("Player") and exit.loader.loaded == false:
-    exit.loader.loaded = true
-    var next_article = Util.coalesce(exit.to_label.text, "Fungus")
-    # var next_article = coalesce(label.text, "Lahmiales")
-    # var next_article = coalesce(label.text, "Tribe (biology)")
-    # var next_article = coalesce(label.text, "Diploid")
-    # var next_article = coalesce(label.text, "USA")
-    if _exhibits.has(next_article):
-      var next_exhibit = _exhibits[next_article]
-      if next_exhibit.has("entry_portal"):
-        var portal = next_exhibit.entry_portal
-        exit_portal.exit_portal = portal
-        portal.exit_portal = exit_portal
+func _link_portals(entry, exit, reverse=false):
+  if is_instance_valid(entry) and is_instance_valid(exit):
+    _backlink_map[exit.to_label.text] = exit.from_label.text
+    if reverse:
+      _exit_portal.rotation.y = Util.vecToRot(exit.from_dir)
+      _exit_portal.position = Util.gridToWorld(exit.from_pos) + Vector3(0, 1.5, 0)
+      _entry_portal.position = Util.gridToWorld(entry.from_pos) + Vector3(0, 1.5, 0)
+      _entry_portal.rotation.y = Util.vecToRot(entry.from_dir) + PI
+    else:
+      _exit_portal.rotation.y = Util.vecToRot(exit.to_dir)
+      _exit_portal.position = Util.gridToWorld(exit.to_pos) + Vector3(0, 1.5, 0)
+      _entry_portal.position = Util.gridToWorld(entry.to_pos) + Vector3(0, 1.5, 0)
+      _entry_portal.rotation.y = Util.vecToRot(entry.to_dir) + PI
+  elif is_instance_valid(exit):
+    # TODO: does this happen?
+    # _load_body_from_exit(exit, reverse)
+    pass
+  elif is_instance_valid(entry):
+    _load_body_from_entry(entry)
 
-    _fetcher.fetch([next_article], {
-      "title": next_article,
-      "exit_portal": exit_portal,
-      "entry_portal": entry_portal,
-      "exit": exit,
-    })
+func _on_loader_body_entered(body, exit):
+  if body.is_in_group("Player"):
+    _load_body_from_exit(exit)
+
+func _load_body_from_entry(entry):
+  var prev_article = Util.coalesce(entry.from_label.text, "Fungus")
+
+  # TODO: relink portals so we don't need this block
+  if _exhibits.has(prev_article):
+    push_error("loading from entry even though prev article was unloaded?")
+    return
+
+  _fetcher.fetch([prev_article], {
+    "title": prev_article,
+    "backlink": true,
+    "entry": entry,
+  })
+
+func _load_body_from_exit(exit):
+  var next_article = Util.coalesce(exit.to_label.text, "Fungus")
+
+  if _exhibits.has(next_article):
+    var next_exhibit = _exhibits[next_article]
+    if next_exhibit.has("entry") and exit.player_in_hall:
+      var entry = next_exhibit.entry
+      _link_portals(entry, exit)
+      return
+
+  _fetcher.fetch([next_article], {
+    "title": next_article,
+    "exit": exit
+  })
 
 func _seeded_shuffle(seed, arr):
   var rng = RandomNumberGenerator.new()
@@ -146,6 +181,8 @@ func _on_fetch_complete(_titles, context):
   if context.has("prefetch"):
     return
 
+  var backlink = context.has("backlink") and context.backlink
+  var hall = context.entry if backlink else context.exit
   var result = _fetcher.get_result(context.title)
   if not result:
     # TODO: show an out of order sign
@@ -155,45 +192,30 @@ func _on_fetch_complete(_titles, context):
   var doors = data.doors
   var items = data.items
 
+  var prev_title
+  if backlink:
+    prev_title = _backlink_map[context.title]
+  else:
+    prev_title = hall.from_label.text
+
   _next_height += 20
   var new_exhibit = TiledExhibitGenerator.instantiate()
   add_child(new_exhibit)
-  var new_exhibit_portal = set_up_exhibit(
+  set_up_exhibit(
     new_exhibit,
     max(len(items) / 6, 1),
     context.title,
-    context.exit.from_label.text
+    prev_title
   )
-
-  context.exit_portal.exit_portal = new_exhibit_portal
-  new_exhibit_portal.exit_portal = context.exit_portal
-
-  if not _exhibits.has(context.title):
-    _exhibits[context.title] = { "entry_portal": new_exhibit_portal, "exhibit": new_exhibit }
-    _exhibit_hist.append(context.title)
-    # TODO: never delete the exhibit the user is in
-    # TODO: remember the history of exhibits and where their entries should go, and where we exited them from
-    # clearly this isn't ready yet
-    """
-    if len(_exhibit_hist) > max_exhibits_loaded:
-      var key = _exhibit_hist.pop_front()
-      if _exhibits.has(key):
-        var old_exhibit = _exhibits[key]
-        if old_exhibit.has('exhibit'):
-          old_exhibit.exhibit.queue_free()
-        _exhibits.erase(key)
-    """
-
-  context.exit.exit_door.open()
 
   var exits = new_exhibit.exits
   var slots = new_exhibit.item_slots
   var linked_exhibits = []
 
   # fill in doors out of the exhibit
-  for exit in exits:
+  for e in exits:
     var linked_exhibit = Util.coalesce(doors.pop_front(), "")
-    exit.to_label.text = linked_exhibit
+    e.to_label.text = linked_exhibit
     linked_exhibits.append(linked_exhibit)
 
   var delay = 0.0
@@ -210,9 +232,56 @@ func _on_fetch_complete(_titles, context):
     get_tree().create_timer(delay).timeout.connect(_init_item.bind(new_exhibit, item, item_data))
     delay += 0.1
 
-  # launch batch request to linked exhibit
-  # print("prefetching articles ", linked_exhibits)
-  # _fetcher.fetch(linked_exhibits, { "prefetch": true })
+  var new_hall
+  if backlink:
+    for exit in new_exhibit.exits:
+      if exit.to_label.text == hall.to_label.text:
+        new_hall = exit
+        break
+    if not new_hall:
+      push_error("could not backlink new hall")
+      new_hall = new_exhibit.entry
+  else:
+    new_hall = new_exhibit.entry
+
+  Util.clear_listeners(hall, "on_player_in_hall")
+  Util.clear_listeners(new_hall, "on_player_in_hall")
+  if (hall.player_in_hall):
+    if backlink:
+      _link_portals(hall, new_hall, true)
+    else:
+      _link_portals(new_hall, hall)
+  else:
+    if backlink:
+      hall.on_player_in_hall.connect(_link_portals.bind(hall, new_hall, true))
+      new_hall.on_player_in_hall.connect(_link_portals.bind(hall, new_hall))
+    else:
+      hall.on_player_in_hall.connect(_link_portals.bind(new_hall, hall))
+      new_hall.on_player_in_hall.connect(_link_portals.bind(new_hall, hall, true))
+
+  if not _exhibits.has(context.title):
+    _exhibits[context.title] = { "entry": new_exhibit.entry, "exhibit": new_exhibit, "height": _next_height }
+    _exhibit_hist.append(context.title)
+    # TODO: remember the history of exhibits and where their entries should go, and where we exited them from
+    # clearly this isn't ready yet
+    if len(_exhibit_hist) > max_exhibits_loaded:
+      for e in range(len(_exhibit_hist)):
+        var key = _exhibit_hist[e]
+        if _exhibits.has(key):
+          var old_exhibit = _exhibits[key]
+          if abs(4 * old_exhibit.height - _player.position.y) < 20:
+            continue
+          if abs(4 * old_exhibit.height - new_hall.position.y) < 20:
+            continue
+          old_exhibit.exhibit.queue_free()
+          _exhibits.erase(key)
+          _exhibit_hist.remove_at(e)
+          break
+
+  if backlink:
+    hall.entry_door.open()
+  else:
+    hall.exit_door.open()
 
 func _input(event):
   if event is InputEventKey and Input.is_key_pressed(KEY_P):

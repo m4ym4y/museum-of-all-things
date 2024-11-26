@@ -1,9 +1,12 @@
 extends Node3D
 
+signal on_player_in_hall
+
 @onready var grid_wrapper = preload("res://scenes/util/GridWrapper.tscn")
 @onready var loader = $LoaderTrigger
 @onready var entry_door = $EntryDoor
 @onready var exit_door = $ExitDoor
+@onready var _in_hall = $InHall
 
 const WALL = 5
 const FLOOR = 0
@@ -11,6 +14,8 @@ const INTERNAL_HALL = 7
 const INTERNAL_HALL_TURN = 6
 
 var _grid
+
+var player_in_hall = false
 
 var from_title
 var from_label
@@ -81,7 +86,7 @@ func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(
   to_label = Label3D.new()
   to_label.position = Util.gridToWorld(hall_start - hall_dir * 0.51) + Vector3(0, 3.5, 0) - position
   to_label.rotation.y = Util.vecToRot(hall_dir)
-  to_label.text = ""
+  to_label.text = to_title
   add_child(to_label)
 
   entry_door.position = Util.gridToWorld(from_pos) - position
@@ -90,3 +95,17 @@ func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(
   exit_door.rotation.y = Util.vecToRot(to_dir)
   entry_door.set_open(true)
   exit_door.set_open(false)
+
+  _in_hall.position = Util.gridToWorld((from_pos + to_pos) / 2) + Vector3(0, 4, 0) - position
+  _in_hall.monitoring = true
+  _in_hall.body_entered.connect(_on_body_entered)
+  _in_hall.body_exited.connect(_on_body_exited)
+
+func _on_body_entered(body):
+  if body.is_in_group("Player"):
+    player_in_hall = true
+    emit_signal("on_player_in_hall")
+
+func _on_body_exited(body):
+  if body.is_in_group("Player"):
+    player_in_hall = true

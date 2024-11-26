@@ -20,3 +20,8 @@ func gridToWorld(vec):
 
 func coalesce(a, b):
   return a if a else b
+
+func clear_listeners(n, sig_name):
+  var list = n.get_signal_connection_list(sig_name)
+  for c in list:
+    c.signal.disconnect(c.callable)

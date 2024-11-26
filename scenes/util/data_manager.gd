@@ -90,7 +90,6 @@ func request_image(url):
 	add_child(request)
 	if OS.is_debug_build():
 		print("fetching image ", url)
-	print
 	var error = request.request(url, COMMON_HEADERS)
 	if error != OK:
 		_in_flight.erase(url)

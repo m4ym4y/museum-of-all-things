@@ -6,8 +6,8 @@
 size = Vector2(2, 4)
 orientation = 2
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_th76g"]
-points = PackedVector3Array(-1, -2, 0, 1, -2, 0, -1, 2, 0, 1, 2, 0)
+[sub_resource type="BoxShape3D" id="BoxShape3D_ea702"]
+size = Vector3(2, 4, 1)
 
 [node name="Portal" type="MeshInstance3D" groups=["Portal"]]
 cast_shadow = 0
@@ -21,4 +21,5 @@ fade_out_color = Color(1, 0.960784, 0.882353, 1)
 [node name="PortalTeleport" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PortalTeleport"]
-shape = SubResource("ConvexPolygonShape3D_th76g")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.409514)
+shape = SubResource("BoxShape3D_ea702")
