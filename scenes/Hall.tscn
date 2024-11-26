@@ -18,6 +18,7 @@ monitoring = false
 [node name="ExitDoor" parent="." instance=ExtResource("3_1akbl")]
 
 [node name="InHall" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00140548, 0.018856, -0.0174665)
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InHall"]

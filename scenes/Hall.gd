@@ -93,8 +93,8 @@ func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(
   entry_door.rotation.y = Util.vecToRot(from_dir)
   exit_door.position = Util.gridToWorld(to_pos) - position
   exit_door.rotation.y = Util.vecToRot(to_dir)
-  entry_door.set_open(true)
-  exit_door.set_open(false)
+  entry_door.set_open(true, true)
+  exit_door.set_open(false, true)
 
   _in_hall.position = Util.gridToWorld((from_pos + to_pos) / 2) + Vector3(0, 4, 0) - position
   _in_hall.monitoring = true
@@ -108,4 +108,4 @@ func _on_body_entered(body):
 
 func _on_body_exited(body):
   if body.is_in_group("Player"):
-    player_in_hall = true
+    player_in_hall = false

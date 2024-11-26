@@ -10,6 +10,7 @@ var starting_height
 var crouching_height
 var crouch_time = 0.4
 var crouch_speed
+@onready var camera = get_node("Pivot/Camera3D")
 
 # Declare member variables here. Examples:
 # var a = 2

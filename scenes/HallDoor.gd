@@ -15,8 +15,8 @@ func open():
 func close():
 	set_open(false)
 
-func set_open(open = true):
-	if is_visible():
+func set_open(open = true, instant = false):
+	if is_visible() and not instant:
 		var tween = get_tree().create_tween()
 		tween.tween_property(
 			_door,
