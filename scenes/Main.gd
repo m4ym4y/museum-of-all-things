@@ -1,7 +1,7 @@
 extends Node
 
 @export var Player : PackedScene = preload("res://scenes/Player.tscn")
-@export var XrRoot : PackedScene = preload("res://scenes/XrRoot.tscn")
+@export var XrRoot : PackedScene = preload("res://scenes/XRRoot.tscn")
 var _player
 
 func _init() -> void:
