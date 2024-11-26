@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://5javxi3uy0ep"]
+[gd_scene load_steps=6 format=3 uid="uid://5javxi3uy0ep"]
 
 [ext_resource type="Script" path="res://scenes/Museum.gd" id="1_7pjtd"]
 [ext_resource type="PackedScene" uid="uid://dprs5jpm03ygc" path="res://scenes/TiledExhibitGenerator.tscn" id="2_ma65o"]
-[ext_resource type="PackedScene" uid="uid://bw5yn00va6hxl" path="res://scenes/Player.tscn" id="3_sb6r6"]
 [ext_resource type="MeshLibrary" uid="uid://dn3xjwj3urrq6" path="res://assets/3d_tiles/mesh_library.tres" id="4_du8my"]
 [ext_resource type="PackedScene" uid="uid://dvchvw2bc87oe" path="res://scenes/util/ExhibitFetcher.tscn" id="5_yffah"]
 
@@ -42,14 +41,12 @@ environment = SubResource("Environment_g30yg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.04145, 2.00065, 0)
 visible = false
 
-[node name="Player" parent="." instance=ExtResource("3_sb6r6")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 1, 5)
-
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("4_du8my")
 cell_size = Vector3(4, 4, 4)
 cell_center_x = false
 cell_center_y = false
 cell_center_z = false
+collision_layer = 5
 
 [node name="ExhibitFetcher" parent="." instance=ExtResource("5_yffah")]

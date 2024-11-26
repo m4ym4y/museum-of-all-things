@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dn526eij58wfs"]
+
+[ext_resource type="Script" path="res://scenes/XrRoot.gd" id="1_t4l57"]
+[ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_v48yd"]
+[ext_resource type="PackedScene" uid="uid://fiul51tsyoop" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="3_gm17t"]
+[ext_resource type="PackedScene" uid="uid://ytsxet2k47lj" path="res://addons/godot-xr-tools/user_settings/user_settings_ui.tscn" id="4_mqu6q"]
+
+[node name="XrRoot" type="Node3D"]
+script = ExtResource("1_t4l57")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="VRCommonShaderCache" parent="XROrigin3D/XRCamera3D" instance=ExtResource("1_v48yd")]
+
+[node name="XRController3D_left" type="XRController3D" parent="XROrigin3D"]
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/XRController3D_left"]
+
+[node name="FunctionTeleport" parent="XROrigin3D/XRController3D_left" instance=ExtResource("3_gm17t")]
+
+[node name="XRController3D_right" type="XRController3D" parent="XROrigin3D"]
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/XRController3D_right"]
+
+[node name="XRBodyModifier3D" type="XRBodyModifier3D" parent="XROrigin3D"]
+
+[node name="UserSettingsUI" parent="XROrigin3D" instance=ExtResource("4_mqu6q")]
+current_tab = 0
