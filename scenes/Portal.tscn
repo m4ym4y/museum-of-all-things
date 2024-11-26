@@ -19,6 +19,7 @@ fade_out_distance_min = 6.0
 fade_out_color = Color(1, 0.960784, 0.882353, 1)
 
 [node name="PortalTeleport" type="Area3D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PortalTeleport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)

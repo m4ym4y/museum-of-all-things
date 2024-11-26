@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://dn526eij58wfs"]
+
+[ext_resource type="Script" path="res://scenes/XrRoot.gd" id="1_t4l57"]
+[ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_v48yd"]
+[ext_resource type="PackedScene" uid="uid://fiul51tsyoop" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="3_gm17t"]
+[ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="4_6uron"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/player/player_body.gd" id="4_l0d4h"]
+[ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="5_wqppd"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/functions/movement_turn.gd" id="6_80eyh"]
+
+[node name="XrRoot" type="Node3D" groups=["Player"]]
+script = ExtResource("1_t4l57")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="." groups=["Player"]]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="VRCommonShaderCache" parent="XROrigin3D/XRCamera3D" instance=ExtResource("1_v48yd")]
+
+[node name="XRController3D_left" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+
+[node name="FunctionTeleport" parent="XROrigin3D/XRController3D_left" instance=ExtResource("3_gm17t")]
+strength = 10.0
+collision_mask = 4
+valid_teleport_mask = 4294967292
+
+[node name="LeftHand" parent="XROrigin3D/XRController3D_left" instance=ExtResource("4_6uron")]
+
+[node name="XRController3D_right" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+
+[node name="RightHand" parent="XROrigin3D/XRController3D_right" instance=ExtResource("5_wqppd")]
+
+[node name="XRToolsMovementTurn" type="Node" parent="XROrigin3D/XRController3D_right" groups=["movement_providers"]]
+script = ExtResource("6_80eyh")
+turn_mode = 1
+step_turn_angle = 40.0
+
+[node name="XRToolsPlayerBody" type="CharacterBody3D" parent="XROrigin3D" groups=["Player"]]
+top_level = true
+collision_mask = 3
+script = ExtResource("4_l0d4h")

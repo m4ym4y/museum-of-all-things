@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Museum of Wikipedia"
-run/main_scene="res://scenes/Museum.tscn"
+run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://icon.png"
 
@@ -19,16 +19,19 @@ config/icon="res://icon.png"
 
 DataManager="*res://scenes/util/data_manager.gd"
 Util="*res://scenes/util/Util.gd"
+XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
+XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=800
 window/size/resizable=false
+window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
 
 [filesystem]
 
@@ -104,3 +107,7 @@ anti_aliasing/quality/msaa_3d=1
 environment/defaults/default_environment="res://assets/resources/default_env.tres"
 quality/driver/driver_name="GLES2"
 quality/filters/use_fxaa=true
+
+[xr]
+
+shaders/enabled=true
