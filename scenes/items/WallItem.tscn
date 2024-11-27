@@ -19,7 +19,7 @@ size = Vector3(2.5, 4, 0.1)
 script = ExtResource("1_5qdg2")
 
 [node name="Item" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1, 0)
 
 [node name="Plaque" type="MeshInstance3D" parent="Item"]
 mesh = SubResource("BoxMesh_e6b5o")

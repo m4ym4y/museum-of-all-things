@@ -9,6 +9,9 @@ signal on_player_toward_entry
 @onready var exit_door = $ExitDoor
 @onready var _detector = $HallDirectionDetector
 
+@onready var from_sign = $FromSign
+@onready var to_sign = $ToSign
+
 const WALL = 5
 const FLOOR = 0
 const INTERNAL_HALL = 7
@@ -23,34 +26,24 @@ var player_in_hall: bool:
   set(_value):
     pass
 
-var from_title
-var from_label
+var from_title: String:
+  get:
+    return from_sign.text
+  set(v):
+    from_sign.text = v
+
 var from_pos
 var from_dir
 var from_room_root
 
-var to_title
-var to_label
+var to_title: String:
+  get:
+    return to_sign.text
+  set(v):
+    to_sign.text = v
+
 var to_pos
 var to_dir
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-  pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-  pass
-
-func get_info():
-  return {
-    "from_title": from_label.text,
-    "from_dir": from_dir,
-    "from_pos": from_pos,
-    "to_title": to_label.text,
-    "to_dir": to_dir,
-    "to_pos": to_pos,
-  }
 
 func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(0, 0, 0)):
   position = Util.gridToWorld(hall_start)
@@ -83,17 +76,15 @@ func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(
   to_dir = exit_hall_dir
   to_pos = exit_hall
 
-  from_label = Label3D.new()
-  from_label.position = Util.gridToWorld(exit_hall + exit_hall_dir * 0.51) + Vector3(0, 3.5, 0) - position
-  from_label.rotation.y = Util.vecToRot(exit_hall_dir) + PI
-  from_label.text = from_title
-  add_child(from_label)
+  from_sign.position = Util.gridToWorld(exit_hall + exit_hall_dir * 0.65) - position
+  from_sign.position += exit_hall_dir.rotated(Vector3.UP, PI / 2).normalized() * 1.5
+  from_sign.rotation.y = Util.vecToRot(exit_hall_dir) + 3 * PI / 4
+  from_sign.text = from_title
 
-  to_label = Label3D.new()
-  to_label.position = Util.gridToWorld(hall_start - hall_dir * 0.51) + Vector3(0, 3.5, 0) - position
-  to_label.rotation.y = Util.vecToRot(hall_dir)
-  to_label.text = to_title
-  add_child(to_label)
+  to_sign.position = Util.gridToWorld(hall_start - hall_dir * 0.60) - position
+  to_sign.position -= hall_dir.rotated(Vector3.UP, PI / 2).normalized() * 1.5
+  to_sign.rotation.y = Util.vecToRot(hall_dir) - PI / 4
+  to_sign.text = to_title
 
   entry_door.position = Util.gridToWorld(from_pos) - position
   entry_door.rotation.y = Util.vecToRot(from_dir)

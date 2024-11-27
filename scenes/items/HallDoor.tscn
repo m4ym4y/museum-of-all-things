@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cy7vwbnkk3yj1"]
 
-[ext_resource type="Script" path="res://scenes/HallDoor.gd" id="1_elymj"]
+[ext_resource type="Script" path="res://scenes/items/HallDoor.gd" id="1_elymj"]
 [ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://assets/textures/wood.tres" id="1_r1fbc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bo0ln"]

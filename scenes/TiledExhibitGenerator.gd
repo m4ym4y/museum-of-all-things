@@ -1,8 +1,7 @@
 @tool
 extends Node3D
 
-@onready var portal = preload("res://scenes/Portal.tscn")
-@onready var pool_scene = preload("res://scenes/Pool.tscn")
+@onready var pool_scene = preload("res://scenes/items/Pool.tscn")
 @onready var hall = preload("res://scenes/Hall.tscn")
 @onready var grid_wrapper = preload("res://scenes/util/GridWrapper.tscn")
 

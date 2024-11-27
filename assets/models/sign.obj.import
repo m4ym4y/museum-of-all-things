@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://gjymylshj4jf"
+path="res://.godot/imported/sign.obj-aeb3a4a8282161cdd9301592cc36f484.mesh"
+
+[deps]
+
+files=["res://.godot/imported/sign.obj-aeb3a4a8282161cdd9301592cc36f484.mesh"]
+
+source_file="res://assets/models/sign.obj"
+dest_files=["res://.godot/imported/sign.obj-aeb3a4a8282161cdd9301592cc36f484.mesh", "res://.godot/imported/sign.obj-aeb3a4a8282161cdd9301592cc36f484.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

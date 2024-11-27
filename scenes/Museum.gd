@@ -46,7 +46,7 @@ func _ready() -> void:
 		var exits = $TiledExhibitGenerator.exits
 		for exit in exits:
 			var linked_exhibit = Util.coalesce(DEFAULT_DOORS.pop_front(), "")
-			exit.to_label.text = linked_exhibit
+			exit.to_title = linked_exhibit
 
 func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_title="Lobby"):
 	var generated_results = exhibit.generate(
@@ -79,7 +79,7 @@ func _on_loader_body_entered(body, exit):
 		_load_body_from_exit(exit)
 
 func _load_body_from_entry(entry):
-	var prev_article = Util.coalesce(entry.from_label.text, "Fungus")
+	var prev_article = Util.coalesce(entry.from_title, "Fungus")
 
 	# TODO: relink portals so we don't need this block
 	if _exhibits.has(prev_article):
@@ -93,7 +93,7 @@ func _load_body_from_entry(entry):
 	})
 
 func _load_body_from_exit(exit):
-	var next_article = Util.coalesce(exit.to_label.text, "Fungus")
+	var next_article = Util.coalesce(exit.to_title, "Fungus")
 
 	if _exhibits.has(next_article):
 		var next_exhibit = _exhibits[next_article]
@@ -183,7 +183,7 @@ func _on_fetch_complete(_titles, context):
 	if backlink:
 		prev_title = _backlink_map[context.title]
 	else:
-		prev_title = hall.from_label.text
+		prev_title = hall.from_title
 
 	_next_height += 20
 	var new_exhibit = TiledExhibitGenerator.instantiate()
@@ -202,7 +202,7 @@ func _on_fetch_complete(_titles, context):
 	# fill in doors out of the exhibit
 	for e in exits:
 		var linked_exhibit = Util.coalesce(doors.pop_front(), "")
-		e.to_label.text = linked_exhibit
+		e.to_title = linked_exhibit
 		linked_exhibits.append(linked_exhibit)
 
 	var delay = 0.0
@@ -222,7 +222,7 @@ func _on_fetch_complete(_titles, context):
 	var new_hall
 	if backlink:
 		for exit in new_exhibit.exits:
-			if exit.to_label.text == hall.to_label.text:
+			if exit.to_title == hall.to_title:
 				new_hall = exit
 				break
 		if not new_hall:

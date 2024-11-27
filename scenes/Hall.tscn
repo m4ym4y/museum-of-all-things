@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://0bvu3kq7qnal"]
+[gd_scene load_steps=6 format=3 uid="uid://0bvu3kq7qnal"]
 
 [ext_resource type="Script" path="res://scenes/Hall.gd" id="1_eu127"]
 [ext_resource type="PackedScene" uid="uid://bijq5fqp57yd4" path="res://scenes/LoaderTrigger.tscn" id="2_fcpmw"]
-[ext_resource type="PackedScene" uid="uid://cy7vwbnkk3yj1" path="res://scenes/HallDoor.tscn" id="3_1akbl"]
+[ext_resource type="PackedScene" uid="uid://cy7vwbnkk3yj1" path="res://scenes/items/HallDoor.tscn" id="3_1akbl"]
 [ext_resource type="PackedScene" uid="uid://df28hj6wi4fdx" path="res://scenes/HallDirectionDetector.tscn" id="4_y7uhf"]
+[ext_resource type="PackedScene" uid="uid://c5wpeqr3s3lw4" path="res://scenes/items/Sign.tscn" id="5_h6bvl"]
 
 [node name="Hall" type="Node3D" groups=["ExhibitItem", "Hall"]]
 script = ExtResource("1_eu127")
@@ -16,3 +17,7 @@ monitoring = false
 [node name="ExitDoor" parent="." instance=ExtResource("3_1akbl")]
 
 [node name="HallDirectionDetector" parent="." instance=ExtResource("4_y7uhf")]
+
+[node name="FromSign" parent="." instance=ExtResource("5_h6bvl")]
+
+[node name="ToSign" parent="." instance=ExtResource("5_h6bvl")]

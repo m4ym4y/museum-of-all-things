@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ho2ladgr7arp"]
 
-[ext_resource type="Script" path="res://scenes/Portal.gd" id="1_hu5eu"]
+[ext_resource type="Script" path="res://scenes/items/Portal.gd" id="1_hu5eu"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_igkif"]
 size = Vector2(2, 4)

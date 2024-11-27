@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5wpeqr3s3lw4"]
+
+[ext_resource type="Script" path="res://scenes/items/Sign.gd" id="1_6w7lf"]
+[ext_resource type="ArrayMesh" uid="uid://gjymylshj4jf" path="res://assets/models/sign.obj" id="1_wmw8d"]
+[ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="2_v8iha"]
+[ext_resource type="FontFile" uid="uid://ctf5uof6a8cb4" path="res://assets/fonts/NotoSans-Regular.ttf" id="3_yboib"]
+[ext_resource type="Material" uid="uid://bm6ehx61ibtab" path="res://assets/textures/sign.tres" id="4_t7w8m"]
+
+[node name="Sign" type="Node3D"]
+script = ExtResource("1_6w7lf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visibility_range_end = 30.0
+mesh = ExtResource("1_wmw8d")
+surface_material_override/0 = ExtResource("2_v8iha")
+surface_material_override/1 = ExtResource("4_t7w8m")
+
+[node name="Text" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.975149, 0.221548, 0, -0.221548, 0.975149, 0, 1.65964, 0.00901261)
+visibility_range_end = 10.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
+pixel_size = 0.001
+modulate = Color(0, 0, 0, 1)
+font = ExtResource("3_yboib")
+font_size = 75
+outline_size = 0
+vertical_alignment = 0
+autowrap_mode = 3
+width = 450.0
+
+[node name="Arrow" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.975149, 0.221548, 0, -0.221548, 0.975149, 0, 1.36368, 0.0782965)
+visibility_range_end = 10.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
+pixel_size = 0.001
+modulate = Color(0, 0, 0, 1)
+text = "←"
+font_size = 329

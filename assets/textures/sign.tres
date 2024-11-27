@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bm6ehx61ibtab"]
+
+[ext_resource type="Texture2D" uid="uid://6s001c6me5bj" path="res://assets/textures/sign.png" id="1_hojva"]
+
+[resource]
+albedo_texture = ExtResource("1_hojva")
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.2
+emission_on_uv2 = true
+emission_texture = ExtResource("1_hojva")
+backlight = Color(1, 1, 1, 1)
