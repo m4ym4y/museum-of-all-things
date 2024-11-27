@@ -17,8 +17,7 @@ func _on_image_loaded(url, image):
 
 	DataManager.loaded_image.disconnect(_on_image_loaded)
 	_image = image
-
-	texture = ImageTexture.create_from_image(_image)
+	texture = _image
 
 	var label = $Label
 	label.text = text

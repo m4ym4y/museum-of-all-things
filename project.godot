@@ -17,7 +17,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-DataManager="*res://scenes/util/data_manager.gd"
+DataManager="*res://scenes/util/DataManager.gd"
 Util="*res://scenes/util/Util.gd"
 XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
 XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"

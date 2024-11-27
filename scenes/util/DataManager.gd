@@ -68,12 +68,21 @@ func _create_and_emit_image(url, data):
 	else:
 		# TODO: we don't want to keep them waiting
 		return null
-	_img_cache[url] = data
-	call_deferred("emit_signal", "loaded_image", url, image)
+
+	if image.get_width() == 0:
+		# invalid image
+		return null
+
+	var texture = ImageTexture.create_from_image(image)
+	_img_cache[url] = texture
+	_emit_image(url, texture)
+
+func _emit_image(url, texture):
+	call_deferred("emit_signal", "loaded_image", url, texture)
 
 func request_image(url):
 	if _img_cache.has(url):
-		_create_and_emit_image(url, _img_cache[url])
+		_emit_image(url, _img_cache[url])
 		return
 
 	var data = _read_url(url)
