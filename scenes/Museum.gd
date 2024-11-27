@@ -14,8 +14,7 @@ extends Node3D
 # item types
 @onready var WallItem = preload("res://scenes/items/WallItem.tscn")
 @onready var IMAGE_REGEX = RegEx.new()
-# @onready var _xr = Util.is_xr()
-@onready var _xr = true
+@onready var _xr = Util.is_xr()
 
 @onready var _fetcher = $ExhibitFetcher
 @onready var _exhibit_hist = []
@@ -34,6 +33,10 @@ func init(player):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	IMAGE_REGEX.compile("\\.(png|jpg|jpeg)$")
+
+	if not _xr:
+		$WorldEnvironment.environment.ssr_enabled = true
+
 	if Engine.is_editor_hint():
 		return
 	else:
