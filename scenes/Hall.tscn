@@ -3,9 +3,7 @@
 [ext_resource type="Script" path="res://scenes/Hall.gd" id="1_eu127"]
 [ext_resource type="PackedScene" uid="uid://bijq5fqp57yd4" path="res://scenes/LoaderTrigger.tscn" id="2_fcpmw"]
 [ext_resource type="PackedScene" uid="uid://cy7vwbnkk3yj1" path="res://scenes/HallDoor.tscn" id="3_1akbl"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_o8skc"]
-size = Vector3(6, 6, 6)
+[ext_resource type="PackedScene" uid="uid://df28hj6wi4fdx" path="res://scenes/HallDirectionDetector.tscn" id="4_y7uhf"]
 
 [node name="Hall" type="Node3D" groups=["ExhibitItem", "Hall"]]
 script = ExtResource("1_eu127")
@@ -17,10 +15,4 @@ monitoring = false
 
 [node name="ExitDoor" parent="." instance=ExtResource("3_1akbl")]
 
-[node name="InHall" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00140548, 0.018856, -0.0174665)
-collision_layer = 2
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InHall"]
-shape = SubResource("BoxShape3D_o8skc")
+[node name="HallDirectionDetector" parent="." instance=ExtResource("4_y7uhf")]

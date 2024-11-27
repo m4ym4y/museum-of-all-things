@@ -1,7 +1,6 @@
 @tool
 extends Node3D
 
-@onready var Portal = preload("res://scenes/Portal.tscn")
 @onready var LoaderTrigger = preload("res://scenes/LoaderTrigger.tscn")
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
 @onready var DEFAULT_DOORS = [
@@ -15,7 +14,8 @@ extends Node3D
 # item types
 @onready var WallItem = preload("res://scenes/items/WallItem.tscn")
 @onready var IMAGE_REGEX = RegEx.new()
-@onready var _xr = Util.is_xr()
+# @onready var _xr = Util.is_xr()
+@onready var _xr = true
 
 @onready var _fetcher = $ExhibitFetcher
 @onready var _exhibit_hist = []
@@ -24,9 +24,6 @@ extends Node3D
 @onready var _next_height = 0
 var _grid
 var _player
-
-@onready var _entry_portal
-@onready var _exit_portal
 
 func _init():
 	RenderingServer.set_debug_generate_wireframes(true)
@@ -44,14 +41,6 @@ func _ready() -> void:
 		_grid.clear()
 		_fetcher.fetch_complete.connect(_on_fetch_complete)
 		set_up_exhibit($TiledExhibitGenerator)
-
-		if not _xr:
-			_entry_portal = Portal.instantiate()
-			_exit_portal = Portal.instantiate()
-			_entry_portal.exit_portal = _exit_portal
-			_exit_portal.exit_portal = _entry_portal
-			add_child(_entry_portal)
-			add_child(_exit_portal)
 
 		# set up default exhibits in lobby
 		var exits = $TiledExhibitGenerator.exits
@@ -73,9 +62,6 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
 	var entry = generated_results.entry
 	var exits = generated_results.exits
 
-	# _entry_portal.rotation.y = Util.vecToRot(entry.to_dir) + PI
-	# _entry_portal.position = Util.gridToWorld(entry.to_pos) + Vector3(0, 1.5, 0)
-
 	# add a marker at every exit
 	for exit in exits:
 		exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit))
@@ -85,30 +71,8 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
 func _teleport_player(from_hall, to_hall):
 	var diff_from = _player.position - from_hall.position
 	var rot_diff = Util.vecToRot(to_hall.to_dir) - Util.vecToRot(from_hall.to_dir)
-	print("diff=%s rot=%s pos=%s to_pos=%s from_pos=%s to=%s" % [diff_from, rot_diff, _player.position, to_hall.position, from_hall.position, from_hall.to_label.text])
 	_player.position = to_hall.position + diff_from.rotated(Vector3(0, 1, 0), rot_diff)
 	_player.rotation.y += rot_diff
-
-func _link_portals(entry, exit, reverse=false):
-	if not _xr:
-		if is_instance_valid(entry) and is_instance_valid(exit):
-			_backlink_map[exit.to_label.text] = exit.from_label.text
-			if reverse:
-				_exit_portal.rotation.y = Util.vecToRot(exit.from_dir)
-				_exit_portal.position = Util.gridToWorld(exit.from_pos) + Vector3(0, 1.5, 0)
-				_entry_portal.position = Util.gridToWorld(entry.from_pos) + Vector3(0, 1.5, 0)
-				_entry_portal.rotation.y = Util.vecToRot(entry.from_dir) + PI
-			else:
-				_exit_portal.rotation.y = Util.vecToRot(exit.to_dir)
-				_exit_portal.position = Util.gridToWorld(exit.to_pos) + Vector3(0, 1.5, 0)
-				_entry_portal.position = Util.gridToWorld(entry.to_pos) + Vector3(0, 1.5, 0)
-				_entry_portal.rotation.y = Util.vecToRot(entry.to_dir) + PI
-		elif is_instance_valid(exit):
-			# TODO: does this happen?
-			# _load_body_from_exit(exit, reverse)
-			pass
-		elif is_instance_valid(entry):
-			_load_body_from_entry(entry)
 
 func _on_loader_body_entered(body, exit):
 	if body.is_in_group("Player"):
@@ -135,7 +99,7 @@ func _load_body_from_exit(exit):
 		var next_exhibit = _exhibits[next_article]
 		if next_exhibit.has("entry") and exit.player_in_hall:
 			var entry = next_exhibit.entry
-			_link_portals(entry, exit)
+			_link_halls(entry, exit)
 			return
 
 	_fetcher.fetch([next_article], {
@@ -188,6 +152,16 @@ func _init_item(exhibit, item, data):
 	if is_instance_valid(exhibit) and is_instance_valid(item):
 		exhibit.add_child(item)
 		item.init(data)
+
+func _link_halls(entry, exit):
+	for hall in [entry, exit]:
+		Util.clear_listeners(hall, "on_player_toward_exit")
+		Util.clear_listeners(hall, "on_player_toward_entry")
+
+	exit.on_player_toward_exit.connect(_teleport_player.bind(exit, entry))
+	entry.on_player_toward_entry.connect(_teleport_player.bind(entry, exit))
+	if exit.player_in_hall and exit.player_direction == "exit":
+		_teleport_player(exit, entry)
 
 func _on_fetch_complete(_titles, context):
 	# we don't need to do anything to handle a prefetch
@@ -257,25 +231,7 @@ func _on_fetch_complete(_titles, context):
 	else:
 		new_hall = new_exhibit.entry
 
-	Util.clear_listeners(hall, "on_player_in_hall")
-	Util.clear_listeners(new_hall, "on_player_in_hall")
-	
-	if not _xr:
-		if hall.player_in_hall:
-			if backlink:
-				_link_portals(hall, new_hall, true)
-			else:
-				_link_portals(new_hall, hall)
-		else:
-			if backlink:
-				hall.on_player_in_hall.connect(_link_portals.bind(hall, new_hall, true))
-				new_hall.on_player_in_hall.connect(_link_portals.bind(hall, new_hall))
-			else:
-				hall.on_player_in_hall.connect(_link_portals.bind(new_hall, hall))
-				new_hall.on_player_in_hall.connect(_link_portals.bind(new_hall, hall, true))
-	else:
-		if not hall.player_in_hall:
-			hall.on_player_in_hall.connect(_teleport_player.bind(hall, new_hall))
+	_link_halls(new_hall, hall)
 
 	if not _exhibits.has(context.title):
 		_exhibits[context.title] = { "entry": new_exhibit.entry, "exhibit": new_exhibit, "height": _next_height }

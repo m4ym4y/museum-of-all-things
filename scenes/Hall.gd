@@ -1,12 +1,13 @@
 extends Node3D
 
-signal on_player_in_hall
+signal on_player_toward_exit
+signal on_player_toward_entry
 
 @onready var grid_wrapper = preload("res://scenes/util/GridWrapper.tscn")
 @onready var loader = $LoaderTrigger
 @onready var entry_door = $EntryDoor
 @onready var exit_door = $ExitDoor
-@onready var _in_hall = $InHall
+@onready var _detector = $HallDirectionDetector
 
 const WALL = 5
 const FLOOR = 0
@@ -15,7 +16,12 @@ const INTERNAL_HALL_TURN = 6
 
 var _grid
 
-var player_in_hall = false
+var player_direction
+var player_in_hall: bool:
+  get:
+    return _detector.player or false
+  set(_value):
+    pass
 
 var from_title
 var from_label
@@ -96,16 +102,14 @@ func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(
   entry_door.set_open(true, true)
   exit_door.set_open(false, true)
 
-  _in_hall.position = Util.gridToWorld((from_pos + to_pos) / 2) + Vector3(0, 4, 0) - position
-  _in_hall.monitoring = true
-  _in_hall.body_entered.connect(_on_body_entered)
-  _in_hall.body_exited.connect(_on_body_exited)
+  _detector.position = Util.gridToWorld((from_pos + to_pos) / 2) + Vector3(0, 4, 0) - position
+  _detector.monitoring = true
+  _detector.direction_changed.connect(_on_direction_changed)
+  _detector.init(Util.gridToWorld(from_pos), Util.gridToWorld(to_pos))
 
-func _on_body_entered(body):
-  if body.is_in_group("Player"):
-    player_in_hall = true
-    emit_signal("on_player_in_hall")
-
-func _on_body_exited(body):
-  if body.is_in_group("Player"):
-    player_in_hall = false
+func _on_direction_changed(direction):
+  player_direction = direction
+  if direction == "exit":
+    emit_signal("on_player_toward_exit")
+  else:
+    emit_signal("on_player_toward_entry")
