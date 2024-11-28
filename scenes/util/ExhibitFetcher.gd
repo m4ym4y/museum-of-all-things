@@ -209,7 +209,7 @@ func _on_mediawiki_request_completed(res, ctx, caller_ctx):
 	if res.has("continue"):
 		var continue_url = all_info_endpoint + _join_titles(ctx.new_titles)
 		for field in res.continue.keys():
-			continue_url += "&" + field + "=" + res.continue[field]
+			continue_url += "&" + field + "=" + res.continue[field].uri_encode()
 		ctx.url = continue_url
 		_dispatch_request(continue_url, ctx, caller_ctx)
 	else:

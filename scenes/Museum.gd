@@ -3,6 +3,8 @@ extends Node3D
 @onready var LoaderTrigger = preload("res://scenes/LoaderTrigger.tscn")
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
 @onready var DEFAULT_DOORS = [
+  "List of Polish people",
+  "Louvre",
   "Coffee",
   "Fungus",
   "Soup",
