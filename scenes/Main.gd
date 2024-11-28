@@ -9,6 +9,9 @@ func _init() -> void:
 	_player.position = Vector3(4, 0, 6)
 	_player.rotation.y = PI
 	add_child(_player)
+	
+	if Util.is_xr():
+		_player = _player.get_node("XROrigin3D")
 
 func _ready():
 	$Museum.init(_player)

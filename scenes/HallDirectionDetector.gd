@@ -28,7 +28,7 @@ func _on_body_exited(body: Node) -> void:
 func _process(_delta: float) -> void:
 	if player:
 		var player_facing = -player.global_transform.basis.z.normalized()
-		var p = player.position + player_facing * project_dir
+		var p = player.global_position + player_facing * project_dir
 		var distance_to_a = point_a - p
 		var distance_to_b = point_b - p
 
@@ -37,4 +37,3 @@ func _process(_delta: float) -> void:
 		if direction != previous_direction:
 			emit_signal("direction_changed", direction)
 			previous_direction = direction
-
