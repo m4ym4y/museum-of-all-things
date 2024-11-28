@@ -1,4 +1,3 @@
-@tool
 extends Node3D
 
 @onready var pool_scene = preload("res://scenes/items/Pool.tscn")

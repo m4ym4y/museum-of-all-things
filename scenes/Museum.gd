@@ -1,4 +1,3 @@
-@tool
 extends Node3D
 
 @onready var LoaderTrigger = preload("res://scenes/LoaderTrigger.tscn")
