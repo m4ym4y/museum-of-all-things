@@ -10,7 +10,14 @@ extends Node3D
 
 var entry
 var exits = []
-var item_slots = []
+var item_slots: Array:
+	get:
+		return _item_slots.values()
+	set(_v):
+		pass
+
+var _item_slots = {}
+
 var _raw_grid
 var _grid
 var _floor
@@ -65,6 +72,9 @@ func vgt(v1, v2):
 func vec_key(v):
 	return var_to_bytes(v)
 
+func add_item_slot(s):
+	_item_slots[vec_key(s[0])] = s
+
 func generate(
 		grid,
 		start_pos,
@@ -103,7 +113,7 @@ func generate(
 
 	entry = starting_hall
 	exits = []
-	item_slots = []
+	_item_slots = {}
 
 	var room_width = rand_dim.call()
 	var room_length = rand_dim.call()
@@ -248,13 +258,14 @@ func decorate_room_center(center, width, length):
 			for z in range(c1.z, c2.z + 1):
 				var pos = Vector3(x, y, z)
 				var free_wall = _rng.randi_range(0, 1) == 0
-				if width > 3 or length > 3 and free_wall:
+				var valid_free_wall = len(cell_neighbors(pos, WALL)) == 0 and len(cell_neighbors(pos, INTERNAL_HALL)) == 0
+				if width > 3 or length > 3 and free_wall and valid_free_wall:
 					var dir = Vector3.RIGHT if width > length else Vector3.FORWARD
 					var item_dir = Vector3.FORWARD if width > length else Vector3.RIGHT
 					var ori = Util.vecToOrientation(_grid, dir)
 					_grid.set_cell_item(pos, FREE_WALL, ori)
-					item_slots.append([pos - item_dir * 0.075, item_dir])
-					item_slots.append([pos + item_dir * 0.075, -item_dir])
+					add_item_slot([pos - item_dir * 0.075, item_dir])
+					add_item_slot([pos + item_dir * 0.075, -item_dir])
 				else:
 					_grid.set_cell_item(pos, BENCH, bench_area_ori)
 
@@ -291,12 +302,7 @@ func decorate_wall_tile(pos):
 			exits.append(new_hall)
 		# put exhibit items everywhere else
 		else:
-			var is_dupe = false
-			for item_slot in item_slots:
-				if item_slot[0].is_equal_approx(slot):
-					is_dupe = true
-			if not is_dupe:
-				item_slots.append([slot, hall_dir])
+			add_item_slot([slot, hall_dir])
 
 func room_to_bounds(center, width, length):
 	return [
