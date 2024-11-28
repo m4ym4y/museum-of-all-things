@@ -46,6 +46,7 @@ const INTERNAL_HALL = 7
 const INTERNAL_HALL_TURN = 6
 const MARKER = 8
 const BENCH = 9
+const FREE_WALL = 10
 
 const DIRECTIONS = [Vector3(1, 0, 0), Vector3(0, 0, 1), Vector3(-1, 0, 0), Vector3(0, 0, -1)]
 
@@ -57,6 +58,9 @@ func vlt(v1, v2):
 
 func vgt(v1, v2):
   return v1 if v1.x > v2.x or v1.z > v2.z else v2
+
+func vec_key(v):
+  return var_to_bytes(v)
 
 func generate(
     grid,
@@ -109,18 +113,18 @@ func generate(
   var next_room_length
   var next_room_center
 
-  var room_list = []
+  var room_list = {}
   var branch_point_list = []
   var room_entry
 
-  while len(room_list) < room_count:
+  while room_list.size() < room_count:
     room_entry = {
       "center": room_center,
       "width": room_width,
       "length": room_length
     }
     branch_point_list.append(room_entry)
-    room_list.append(room_entry)
+    room_list[vec_key(room_center)] = room_entry
 
     var bounds = room_to_bounds(room_center, room_width, room_length)
     carve_room(bounds[0], bounds[1], start_pos.y)
@@ -155,7 +159,7 @@ func generate(
       room_length = prev_room["length"]
       continue
 
-    if len(room_list) < room_count:
+    if room_list.size() < room_count:
       var start_hall = vlt(room_center, next_room_center)
       var end_hall = vgt(room_center, next_room_center)
       var hall_width
@@ -183,10 +187,10 @@ func generate(
 
   # add the final room
   # TODO: restructure the whole weird-ass loop here
-  room_list.append(room_entry)
+  room_list[vec_key(room_center)] = room_entry
 
   # ignore starting hall
-  for room in room_list:
+  for room in room_list.values():
     decorate_room(room)
 
   return {
@@ -237,19 +241,17 @@ func decorate_room_center(center, width, length):
     var y = center.y
     for x in range(c1.x, c2.x + 1):
       for z in range(c1.z, c2.z + 1):
-        _grid.set_cell_item(Vector3(x, y, z), BENCH, bench_area_ori)
-
-  """var light = SpotLight3D.new()
-  var bounds = room_to_bounds(center, width, length)
-  var truecenter = 4 * ((bounds[0] + bounds[1]) / 2))
-
-  light.position = truecenter + Vector3(0, 7, 0)
-  light.rotation.x = 3 * PI / 2
-  light.spot_range = 17 + min(width, length)
-  light.spot_attenuation = 0.5
-  light.light_energy = 5
-  light.light_color = Color(_rng.randf(), _rng.randf(), _rng.randf())
-  add_child(light)"""
+        var pos = Vector3(x, y, z)
+        var free_wall = _rng.randi_range(0, 1) == 0
+        if width > 3 or length > 3 and free_wall:
+          var dir = Vector3.RIGHT if width > length else Vector3.FORWARD
+          var item_dir = Vector3.FORWARD if width > length else Vector3.RIGHT
+          var ori = Util.vecToOrientation(_grid, dir)
+          _grid.set_cell_item(pos, FREE_WALL, ori)
+          item_slots.append([pos - item_dir * 0.075, item_dir])
+          item_slots.append([pos + item_dir * 0.075, -item_dir])
+        else:
+          _grid.set_cell_item(pos, BENCH, bench_area_ori)
 
 func decorate_wall_tile(pos):
   # grid.set_cell_item(pos + Vector3(0, 2, 0), MARKER, 0)

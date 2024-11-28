@@ -37,6 +37,8 @@ func _ready() -> void:
 	if not _xr:
 		$WorldEnvironment.environment.ssr_enabled = true
 
+	DataManager.loaded_image.connect(_on_image_item_loaded)
+
 	if Engine.is_editor_hint():
 		return
 	else:
@@ -71,17 +73,25 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
 
 	return generated_results
 
-func _teleport_player(from_hall, to_hall):
-	var diff_from = _player.position - from_hall.position
-	var rot_diff = Util.vecToRot(to_hall.to_dir) - Util.vecToRot(from_hall.to_dir)
-	_player.position = to_hall.position + diff_from.rotated(Vector3(0, 1, 0), rot_diff)
-	_player.rotation.y += rot_diff
+func _teleport_player(entry, exit, reverse=false):
+	if is_instance_valid(exit) and is_instance_valid(entry):
+		if reverse:
+			_teleport_player(exit, entry)
+			return
+		var diff_from = _player.position - exit.position
+		var rot_diff = Util.vecToRot(entry.to_dir) - Util.vecToRot(exit.to_dir)
+		_player.position = entry.position + diff_from.rotated(Vector3(0, 1, 0), rot_diff)
+		_player.rotation.y += rot_diff
+	elif is_instance_valid(exit):
+		_load_exhibit_from_exit(exit)
+	elif is_instance_valid(entry):
+		_load_exhibit_from_entry(entry)
 
 func _on_loader_body_entered(body, exit):
 	if body.is_in_group("Player"):
-		_load_body_from_exit(exit)
+		_load_exhibit_from_exit(exit)
 
-func _load_body_from_entry(entry):
+func _load_exhibit_from_entry(entry):
 	var prev_article = Util.coalesce(entry.from_title, "Fungus")
 
 	# TODO: relink portals so we don't need this block
@@ -95,7 +105,7 @@ func _load_body_from_entry(entry):
 		"entry": entry,
 	})
 
-func _load_body_from_exit(exit):
+func _load_exhibit_from_exit(exit):
 	var next_article = Util.coalesce(exit.to_title, "Fungus")
 
 	if _exhibits.has(next_article):
@@ -122,6 +132,22 @@ func _seeded_shuffle(seed, arr):
 		arr[i] = arr[j]
 		arr[j] = temp
 
+func _on_image_item_loaded(url, _tex, ctx):
+	if ctx and ctx.has('slots'):
+		_add_item(ctx.new_exhibit, ctx.slots, ctx.item_data, ctx.delay)
+
+func _add_item(exhibit, slots, item_data, delay):
+	var slot = slots.pop_front()
+	if slot == null:
+		return
+
+	var item = WallItem.instantiate()
+	item.position = Util.gridToWorld(slot[0]) - slot[1] * 0.01
+	item.rotation.y = Util.vecToRot(slot[1])
+
+	# we use a delay to stop there from being a frame drop when a bunch of items are added at once
+	get_tree().create_timer(delay).timeout.connect(_init_item.bind(exhibit, item, item_data))
+
 func _result_to_exhibit_data(title, result):
 	var items = []
 	var doors = []
@@ -143,7 +169,7 @@ func _result_to_exhibit_data(title, result):
 					items.append({
 						"type": "image",
 						"src": image.src,
-						"text": image.text,
+						"text": Util.coalesce(image.text, image.src.split("/")[-1]),
 					})
 
 	return {
@@ -161,10 +187,11 @@ func _link_halls(entry, exit):
 		Util.clear_listeners(hall, "on_player_toward_exit")
 		Util.clear_listeners(hall, "on_player_toward_entry")
 
-	exit.on_player_toward_exit.connect(_teleport_player.bind(exit, entry))
-	entry.on_player_toward_entry.connect(_teleport_player.bind(entry, exit))
+	_backlink_map[exit.to_title] = exit.from_title
+	exit.on_player_toward_exit.connect(_teleport_player.bind(entry, exit))
+	entry.on_player_toward_entry.connect(_teleport_player.bind(entry, exit, true))
 	if exit.player_in_hall and exit.player_direction == "exit":
-		_teleport_player(exit, entry)
+		_teleport_player(entry, exit)
 
 func _on_fetch_complete(_titles, context):
 	# we don't need to do anything to handle a prefetch
@@ -209,17 +236,16 @@ func _on_fetch_complete(_titles, context):
 		linked_exhibits.append(linked_exhibit)
 
 	var delay = 0.0
-	for slot in slots:
-		var item_data = items.pop_front()
-		if item_data == null:
-			break
-
-		var item = WallItem.instantiate()
-		item.position = Util.gridToWorld(slot[0]) - slot[1] * 0.01
-		item.rotation.y = Util.vecToRot(slot[1])
-
-		# we use a delay to stop there from being a frame drop when a bunch of items are added at once
-		get_tree().create_timer(delay).timeout.connect(_init_item.bind(new_exhibit, item, item_data))
+	for item_data in items:
+		if item_data.type == "image":
+			DataManager.request_image(Util.normalize_url(item_data.src), {
+				"new_exhibit": new_exhibit,
+				"delay": delay,
+				"item_data": item_data,
+				"slots": slots
+			})
+		else:
+			_add_item(new_exhibit, slots, item_data, delay)
 		delay += 0.1
 
 	var new_hall

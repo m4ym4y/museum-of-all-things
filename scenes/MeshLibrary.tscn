@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://do2hoycmvhwx5"]
+[gd_scene load_steps=23 format=3 uid="uid://do2hoycmvhwx5"]
 
 [ext_resource type="ArrayMesh" uid="uid://cqx6504q1n84q" path="res://assets/3d_tiles/floor.obj" id="1_mkj83"]
 [ext_resource type="ArrayMesh" uid="uid://dfel3x4ha4i57" path="res://assets/3d_tiles/wall.obj" id="2_23gr6"]
+[ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://assets/textures/wood.tres" id="2_tedfh"]
 [ext_resource type="ArrayMesh" uid="uid://covu5na1hibmy" path="res://assets/3d_tiles/convex_corner_wall.obj" id="3_qidku"]
 [ext_resource type="ArrayMesh" uid="uid://dhctqrba2l38r" path="res://assets/3d_tiles/ceiling.obj" id="4_fgmr1"]
 [ext_resource type="ArrayMesh" uid="uid://dx38ygeltsn2g" path="res://assets/3d_tiles/wall_all_sides.obj" id="5_ic82d"]
@@ -10,6 +11,8 @@
 [ext_resource type="ArrayMesh" uid="uid://8jnujvxdl3ed" path="res://assets/3d_tiles/internal_hall.obj" id="8_4mi86"]
 [ext_resource type="ArrayMesh" uid="uid://dl5nose8tpc4q" path="res://assets/3d_tiles/marker.obj" id="9_xrbl6"]
 [ext_resource type="ArrayMesh" uid="uid://bcb8di0twdcv" path="res://assets/3d_tiles/bench.obj" id="10_g48g6"]
+[ext_resource type="ArrayMesh" uid="uid://c0n826tfeg74v" path="res://assets/3d_tiles/free_wall.obj" id="11_y14c5"]
+[ext_resource type="Material" uid="uid://datvvi6j3c0kp" path="res://assets/textures/white.tres" id="12_r4mto"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yaqsi"]
 points = PackedVector3Array(-2, 4, -2, -2, 4, 2, 2, 4, -2, 2, 4, 2)
@@ -35,11 +38,15 @@ data = PackedVector3Array(-2, 2.9993, 2, -2, 0, 2, -2, 4, 2, -2, 4, 2, -2, 0, 2,
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qutds"]
 points = PackedVector3Array(1, 0.5, 0.25, 1, 0.5, -0.25, -1, 0.5, 0.25, 1, 0, 0.25, 1, 0, -0.25, -1, 0.5, -0.25, -1, 0, 0.25, -1, 0, -0.25)
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xbjpb"]
+points = PackedVector3Array(0.25, 6, 2, -0.25, 6, 2, 0.25, 0, 2, 0.25, 6, -2, -0.25, 6, -2, -0.25, 0, 2, 0.25, 0, -2, -0.25, 0, -2)
+
 [node name="MeshLibrary" type="Node3D"]
 
 [node name="floor" type="MeshInstance3D" parent="."]
 visible = false
 mesh = ExtResource("1_mkj83")
+surface_material_override/0 = ExtResource("2_tedfh")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="floor"]
 
@@ -80,6 +87,7 @@ shape = SubResource("ConvexPolygonShape3D_el13e")
 [node name="wall_block" type="MeshInstance3D" parent="."]
 visible = false
 mesh = ExtResource("6_q75mp")
+surface_material_override/0 = ExtResource("12_r4mto")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="wall_block"]
 
@@ -89,6 +97,7 @@ shape = SubResource("ConvexPolygonShape3D_d6xge")
 [node name="internal_hall_turn" type="MeshInstance3D" parent="."]
 visible = false
 mesh = ExtResource("7_pr5as")
+surface_material_override/0 = ExtResource("12_r4mto")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="internal_hall_turn"]
 
@@ -98,6 +107,7 @@ shape = SubResource("ConcavePolygonShape3D_uffoy")
 [node name="internal_hall" type="MeshInstance3D" parent="."]
 visible = false
 mesh = ExtResource("8_4mi86")
+surface_material_override/0 = ExtResource("12_r4mto")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="internal_hall"]
 
@@ -110,8 +120,18 @@ mesh = ExtResource("9_xrbl6")
 
 [node name="bench" type="MeshInstance3D" parent="."]
 mesh = ExtResource("10_g48g6")
+surface_material_override/0 = ExtResource("12_r4mto")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="bench"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="bench/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_qutds")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("11_y14c5")
+surface_material_override/0 = ExtResource("12_r4mto")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_xbjpb")

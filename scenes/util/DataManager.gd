@@ -58,7 +58,7 @@ func save_json_data(url: String, json: Dictionary):
 	var data = JSON.stringify(json).to_utf8_buffer()
 	_write_url(url, data)
 
-func _create_and_emit_image(url, data):
+func _create_and_emit_image(url, data, ctx):
 	var fmt = _detect_image_type(data)
 	var image = Image.new()
 	if fmt == "PNG":
@@ -75,19 +75,18 @@ func _create_and_emit_image(url, data):
 
 	var texture = ImageTexture.create_from_image(image)
 	_img_cache[url] = texture
-	_emit_image(url, texture)
+	_emit_image(url, texture, ctx)
 
-func _emit_image(url, texture):
-	call_deferred("emit_signal", "loaded_image", url, texture)
+func _emit_image(url, texture, ctx):
+	call_deferred("emit_signal", "loaded_image", url, texture, ctx)
 
-func request_image(url):
+func request_image(url, ctx=null):
 	if _img_cache.has(url):
-		_emit_image(url, _img_cache[url])
-		return
+		_emit_image(url, _img_cache[url], ctx)
 
 	var data = _read_url(url)
 	if data:
-		_create_and_emit_image(url, data)
+		_create_and_emit_image(url, data, ctx)
 		return
 
 	if _in_flight.has(url):
@@ -95,7 +94,7 @@ func request_image(url):
 
 	_in_flight[url] = true
 	var request = HTTPRequest.new()
-	request.request_completed.connect(_on_image_request_complete.bind(url, request))
+	request.request_completed.connect(_on_image_request_complete.bind(url, request, ctx))
 	add_child(request)
 	if OS.is_debug_build():
 		print("fetching image ", url)
@@ -103,7 +102,7 @@ func request_image(url):
 	if error != OK:
 		_in_flight.erase(url)
 
-func _on_image_request_complete(result, code, _headers, body, url, request):
+func _on_image_request_complete(result, code, _headers, body, url, request, ctx):
 	_in_flight.erase(url)
 	request.queue_free()
 
@@ -111,7 +110,7 @@ func _on_image_request_complete(result, code, _headers, body, url, request):
 		push_error("failed to fetch image ", code, " ", url)
 		return
 
-	_create_and_emit_image(url, body)
+	_create_and_emit_image(url, body, ctx)
 	_write_url(url, body)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

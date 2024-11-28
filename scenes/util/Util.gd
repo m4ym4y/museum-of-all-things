@@ -28,3 +28,9 @@ func clear_listeners(n, sig_name):
 
 func is_xr():
 	return ProjectSettings.get_setting("xr/openxr/enabled")
+
+func normalize_url(url):
+	if url.begins_with('//'):
+		return 'https:' + url
+	else:
+		return url

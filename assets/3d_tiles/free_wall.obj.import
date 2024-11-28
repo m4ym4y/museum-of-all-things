@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c0n826tfeg74v"
+path="res://.godot/imported/free_wall.obj-9500a022996bfd461f662ef32b3897d2.mesh"
+
+[deps]
+
+files=["res://.godot/imported/free_wall.obj-9500a022996bfd461f662ef32b3897d2.mesh"]
+
+source_file="res://assets/3d_tiles/free_wall.obj"
+dest_files=["res://.godot/imported/free_wall.obj-9500a022996bfd461f662ef32b3897d2.mesh", "res://.godot/imported/free_wall.obj-9500a022996bfd461f662ef32b3897d2.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -11,7 +11,7 @@ var text
 func get_image_size():
 	return Vector2(_image.get_width(), _image.get_height())
 
-func _on_image_loaded(url, image):
+func _on_image_loaded(url, image, _ctx):
 	if url != image_url:
 		return
 
@@ -44,10 +44,7 @@ func _ready():
 func init(url, _width, _height, _text):
 	if not url:
 		return
-	if url.begins_with('//'):
-		image_url = 'https:' + url
-	else:
-		image_url = url
+	image_url = Util.normalize_url(url)
 	width = _width
 	height = _height
 	text = _text
