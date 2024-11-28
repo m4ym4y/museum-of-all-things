@@ -224,9 +224,11 @@ func _cache_if_complete(title):
 		DataManager.save_json_data(WIKIPEDIA_PREFIX + title, result)
 
 func _read_from_cache(title):
+	Util.t_start()
 	var json = DataManager.load_json_data(WIKIPEDIA_PREFIX + title)
 	if json:
 		_results[title] = json
+	Util.t_end("read_cache")
 	return json
 
 func _on_media_list_request_completed(res, ctx, caller_ctx):

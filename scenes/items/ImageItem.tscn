@@ -15,7 +15,7 @@ cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
 
 [node name="ImageItem" type="Sprite3D"]
-visibility_range_end = 40.0
+visibility_range_end = 35.0
 visibility_range_end_margin = 10.0
 visibility_range_fade_mode = 1
 shaded = true
@@ -25,6 +25,9 @@ script = ExtResource("1")
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
 [node name="Label" type="Label3D" parent="."]
+visibility_range_end = 18.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
 pixel_size = 0.001
 modulate = Color(0, 0, 0, 1)
 font = SubResource("1")

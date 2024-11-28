@@ -17,6 +17,12 @@ func _process(delta: float) -> void:
 	pass
 
 func _start_animate():
+	var player = get_tree().get_first_node_in_group("Player")
+	var tween_time = 0.5
+
+	if position.distance_to(player.global_position) > 20.0:
+		tween_time = 0
+
 	var tween = create_tween()
 	var light_tween = create_tween()
 	var ceiling_tween = create_tween()
@@ -25,21 +31,21 @@ func _start_animate():
 		_item_node,
 		"position",
 		_item_node.position + Vector3(0, 4, 0),
-		0.5 # duration
+		tween_time
 	)
 
 	ceiling_tween.tween_property(
 		_ceiling,
 		"position",
 		_ceiling.position - Vector3(0, 2, 0),
-		0.5 # duration
+		tween_time
 	)
 
 	light_tween.tween_property(
 		_light,
 		"light_energy",
 		3.0,
-		1.0
+		tween_time
 	)
 
 	tween.set_trans(Tween.TRANS_LINEAR)

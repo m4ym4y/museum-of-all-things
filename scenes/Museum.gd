@@ -52,12 +52,12 @@ func _ready() -> void:
       var linked_exhibit = Util.coalesce(DEFAULT_DOORS.pop_front(), "")
       exit.to_title = linked_exhibit
 
-func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_title="Lobby"):
+func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_title="Lobby", _min_room_dimension=min_room_dimension, _max_room_dimension=max_room_dimension):
   var generated_results = exhibit.generate(
       _grid,
       Vector3(0, _next_height, 0),
-      min_room_dimension,
-      max_room_dimension,
+      _min_room_dimension,
+      _max_room_dimension,
       room_count,
       title,
       prev_title,
@@ -243,12 +243,23 @@ func _on_fetch_complete(_titles, context):
   _next_height += 20
   var new_exhibit = TiledExhibitGenerator.instantiate()
   add_child(new_exhibit)
+
+#  if len(items) > 6:
   set_up_exhibit(
     new_exhibit,
     max(len(items) / 6, 1),
     context.title,
     prev_title
   )
+#  else:
+#    set_up_exhibit(
+#      new_exhibit,
+#      4,
+#      context.title,
+#      prev_title,
+#      1,
+#      2,
+#    )
 
   var exits = new_exhibit.exits
   var slots = new_exhibit.item_slots

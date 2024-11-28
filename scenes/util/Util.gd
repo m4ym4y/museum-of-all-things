@@ -48,3 +48,12 @@ func gen_floor(title):
 
 func gen_fog(title):
 	return FOG_LIST[hash(title) % len(FOG_LIST)]
+
+var _time_start = 0
+func t_start():
+	_time_start = Time.get_ticks_usec()
+
+func t_end(msg):
+	var _time_end = Time.get_ticks_usec()
+	var elapsed = _time_end - _time_start
+	print("elapsed=%s msg=%s" % [elapsed / 1000000.0, msg])

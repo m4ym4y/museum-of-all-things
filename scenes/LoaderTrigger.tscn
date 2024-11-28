@@ -9,5 +9,5 @@ collision_layer = 2
 script = ExtResource("1_mti24")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(11, 0, 0, 0, 11, 0, 0, 0, 11, 0, 2, 0)
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0.00110149, 1.9958, 0.00201583)
 shape = SubResource("BoxShape3D_asqa7")

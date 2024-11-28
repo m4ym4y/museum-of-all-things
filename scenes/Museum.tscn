@@ -48,6 +48,7 @@ visible = false
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("4_du8my")
 cell_size = Vector3(4, 4, 4)
+cell_octant_size = 4
 cell_center_x = false
 cell_center_y = false
 cell_center_z = false

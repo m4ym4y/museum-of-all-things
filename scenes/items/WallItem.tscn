@@ -22,12 +22,16 @@ script = ExtResource("1_5qdg2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1, 0)
 
 [node name="Plaque" type="MeshInstance3D" parent="Item"]
+visibility_range_end = 35.0
+visibility_range_end_margin = 10.0
+visibility_range_fade_mode = 1
 mesh = SubResource("BoxMesh_e6b5o")
 skeleton = NodePath("../..")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Item"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5, 3.5)
 light_energy = 0.0
+distance_fade_enabled = true
 spot_range = 12.0
 spot_attenuation = 0.75
 spot_angle = 25.0
@@ -36,12 +40,16 @@ spot_angle = 25.0
 
 [node name="Frame" type="MeshInstance3D" parent="Item/Frame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
+visibility_range_end = 25.0
+visibility_range_end_margin = 10.0
+visibility_range_fade_mode = 1
 mesh = ExtResource("3_k5t3j")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("4_1bj2r")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Item/Frame"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.06)
+visibility_range_end = 20.0
 mesh = SubResource("PlaneMesh_u0b5x")
 surface_material_override/0 = SubResource("StandardMaterial3D_2olvn")
 
@@ -50,6 +58,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ceiling"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3, 3.5)
+visibility_range_end = 30.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
 mesh = ExtResource("4_6x08y")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("4_1bj2r")
