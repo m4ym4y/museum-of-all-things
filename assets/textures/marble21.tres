@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ddrg1bie5gs8p"]
+
+[ext_resource type="Texture2D" uid="uid://c5h1t3ua43on8" path="res://assets/textures/marble21.png" id="1_470el"]
+
+[resource]
+albedo_texture = ExtResource("1_470el")
+metallic = 0.3
+roughness = 0.0

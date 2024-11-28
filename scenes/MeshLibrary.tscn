@@ -2,7 +2,7 @@
 
 [ext_resource type="ArrayMesh" uid="uid://cqx6504q1n84q" path="res://assets/3d_tiles/floor.obj" id="1_mkj83"]
 [ext_resource type="ArrayMesh" uid="uid://dfel3x4ha4i57" path="res://assets/3d_tiles/wall.obj" id="2_23gr6"]
-[ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://assets/textures/wood.tres" id="2_tedfh"]
+[ext_resource type="Material" uid="uid://x4bq1qrai2w2" path="res://assets/textures/carpet.tres" id="2_hh216"]
 [ext_resource type="ArrayMesh" uid="uid://covu5na1hibmy" path="res://assets/3d_tiles/convex_corner_wall.obj" id="3_qidku"]
 [ext_resource type="ArrayMesh" uid="uid://dhctqrba2l38r" path="res://assets/3d_tiles/ceiling.obj" id="4_fgmr1"]
 [ext_resource type="ArrayMesh" uid="uid://dx38ygeltsn2g" path="res://assets/3d_tiles/wall_all_sides.obj" id="5_ic82d"]
@@ -44,9 +44,8 @@ points = PackedVector3Array(0.25, 6, 2, -0.25, 6, 2, 0.25, 0, 2, 0.25, 6, -2, -0
 [node name="MeshLibrary" type="Node3D"]
 
 [node name="floor" type="MeshInstance3D" parent="."]
-visible = false
 mesh = ExtResource("1_mkj83")
-surface_material_override/0 = ExtResource("2_tedfh")
+surface_material_override/0 = ExtResource("2_hh216")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="floor"]
 
@@ -119,6 +118,7 @@ visible = false
 mesh = ExtResource("9_xrbl6")
 
 [node name="bench" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("10_g48g6")
 surface_material_override/0 = ExtResource("12_r4mto")
 
@@ -127,11 +127,12 @@ surface_material_override/0 = ExtResource("12_r4mto")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="bench/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_qutds")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="free_wall" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("11_y14c5")
 surface_material_override/0 = ExtResource("12_r4mto")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="free_wall"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="free_wall/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_xbjpb")
