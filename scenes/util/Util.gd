@@ -1,5 +1,9 @@
 extends Node
 
+const FLOOR_WOOD = 0
+const FLOOR_CARPET = 11
+const FLOOR_MARBLE = 12
+
 func vecToRot(vec):
 	if vec.z < -0.1:
 		return 0.0
@@ -34,3 +38,6 @@ func normalize_url(url):
 		return 'https:' + url
 	else:
 		return url
+
+func gen_floor(title):
+	return [FLOOR_WOOD, FLOOR_MARBLE, FLOOR_CARPET][hash(title) % 3]

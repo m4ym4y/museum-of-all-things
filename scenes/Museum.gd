@@ -297,11 +297,6 @@ func _on_fetch_complete(_titles, context):
 	else:
 		_link_halls(new_hall, hall)
 
-	if backlink:
-		hall.entry_door.open()
-	else:
-		hall.exit_door.open()
-
 func _input(event):
 	if event is InputEventKey and Input.is_key_pressed(KEY_P):
 		var vp = get_viewport()

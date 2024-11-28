@@ -14,6 +14,7 @@ var exits = []
 var item_slots = []
 var _raw_grid
 var _grid
+var _floor
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,7 +40,10 @@ func cell_neighbors(pos, id):
         neighbors.append(vec)
   return neighbors
 
-const FLOOR = 0
+const FLOOR_WOOD = 0
+const FLOOR_CARPET = 11
+const FLOOR_MARBLE = 12
+
 const WALL = 5
 const CEILING = 3
 const INTERNAL_HALL = 7
@@ -80,6 +84,7 @@ func generate(
   _rng.seed = hash(title)
   _title = title
   _prev_title = prev_title
+  _floor = Util.gen_floor(title)
 
   var rand_dim = func() -> int:
     return _rng.randi_range(min_room_dimension, max_room_dimension)
@@ -94,6 +99,7 @@ func generate(
     Vector3(1, 0, 0)
   )
 
+  starting_hall.entry_door.set_open(false, true)
   starting_hall.exit_door.open()
 
   entry = starting_hall
@@ -264,8 +270,8 @@ func decorate_wall_tile(pos):
 
     # put an exit everywhere it fits
     if (
-        _grid.get_cell_item(hall_corner - Vector3(0, 1, 0)) != FLOOR and
-        len(cell_neighbors(hall_corner - Vector3(0, 1, 0), FLOOR)) == 0
+        _grid.get_cell_item(hall_corner - Vector3(0, 1, 0)) == -1 and
+        len(cell_neighbors(hall_corner - Vector3(0, 1, 0), -1)) == 4
     ):
       var new_hall = hall.instantiate()
       add_child(new_hall)
@@ -301,7 +307,7 @@ func carve_room(corner1, corner2, y):
   for x in range(lx - 1, gx + 2):
     for z in range(lz - 1, gz + 2):
       if x < lx or z < lz or x > gx or z > gz:
-        if _grid.get_cell_item(Vector3(x, y - 1, z)) != FLOOR:
+        if _grid.get_cell_item(Vector3(x, y - 1, z)) == -1:
           _grid.set_cell_item(Vector3(x, y, z), WALL, 0)
           _grid.set_cell_item(Vector3(x, y + 1, z), WALL, 0)
           _grid.set_cell_item(Vector3(x, y + 2, z), -1, 0)
@@ -311,12 +317,12 @@ func carve_room(corner1, corner2, y):
         _grid.set_cell_item(Vector3(x, y, z), -1, 0)
         _grid.set_cell_item(Vector3(x, y + 1, z), -1, 0)
         _grid.set_cell_item(Vector3(x, y + 2, z), CEILING, 0)
-        _grid.set_cell_item(Vector3(x, y - 1, z), FLOOR, 0)
+        _grid.set_cell_item(Vector3(x, y - 1, z), _floor, 0)
 
 func overlaps_room(corner1, corner2, y):
   for x in range(corner1.x - 1, corner2.x + 2):
     for z in range(corner1.z - 1, corner2.z + 2):
       var cell = _grid.get_cell_item(Vector3(x, y - 1, z))
-      if cell == FLOOR:
+      if cell != -1:
         return true
   return false

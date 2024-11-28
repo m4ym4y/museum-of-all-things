@@ -11,9 +11,9 @@ signal on_player_toward_entry
 
 @onready var from_sign = $FromSign
 @onready var to_sign = $ToSign
+@onready var _floor
 
 const WALL = 5
-const FLOOR = 0
 const INTERNAL_HALL = 7
 const INTERNAL_HALL_TURN = 6
 
@@ -46,6 +46,7 @@ var to_pos
 var to_dir
 
 func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(0, 0, 0)):
+  _floor = Util.gen_floor(from_title)
   position = Util.gridToWorld(hall_start)
   loader.monitoring = true
 
@@ -61,16 +62,16 @@ func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(
   var hall_corner = hall_start + hall_dir
 
   _grid.set_cell_item(hall_start, INTERNAL_HALL, ori)
-  _grid.set_cell_item(hall_start - Vector3(0, 1, 0), FLOOR, 0)
+  _grid.set_cell_item(hall_start - Vector3(0, 1, 0), _floor, 0)
   _grid.set_cell_item(hall_start + Vector3(0, 1, 0), WALL, 0)
   _grid.set_cell_item(hall_corner, INTERNAL_HALL_TURN, ori)
-  _grid.set_cell_item(hall_corner - Vector3(0, 1, 0), FLOOR, 0)
+  _grid.set_cell_item(hall_corner - Vector3(0, 1, 0), _floor, 0)
 
   var exit_hall_dir = hall_dir.rotated(Vector3(0, 1, 0), 3 * PI / 2)
   var exit_hall = hall_corner + exit_hall_dir
   var exit_ori = Util.vecToOrientation(_grid, exit_hall_dir)
   _grid.set_cell_item(exit_hall, INTERNAL_HALL, exit_ori)
-  _grid.set_cell_item(exit_hall - Vector3(0, 1, 0), FLOOR, 0)
+  _grid.set_cell_item(exit_hall - Vector3(0, 1, 0), _floor, 0)
   _grid.set_cell_item(exit_hall + Vector3(0, 1, 0), WALL, 0)
 
   to_dir = exit_hall_dir
@@ -86,9 +87,9 @@ func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(
   to_sign.rotation.y = Util.vecToRot(hall_dir) - PI / 4
   to_sign.text = to_title
 
-  entry_door.position = Util.gridToWorld(from_pos) - position
+  entry_door.position = Util.gridToWorld(from_pos) - 1.9 * from_dir - position
   entry_door.rotation.y = Util.vecToRot(from_dir)
-  exit_door.position = Util.gridToWorld(to_pos) - position
+  exit_door.position = Util.gridToWorld(to_pos) + 1.9 * to_dir - position
   exit_door.rotation.y = Util.vecToRot(to_dir)
   entry_door.set_open(true, true)
   exit_door.set_open(false, true)
