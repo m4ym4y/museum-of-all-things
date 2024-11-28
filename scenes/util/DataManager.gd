@@ -2,7 +2,7 @@ extends Node
 
 signal loaded_image(url: String, image: Image)
 
-@onready var COMMON_HEADERS = [ "accept: application/json; charset=utf-8" ]
+@onready var COMMON_HEADERS = [ "accept: image/png, image/jpeg; charset=utf-8" ]
 @onready var _in_flight = {}
 @onready var _img_cache = {}
 
@@ -66,11 +66,11 @@ func _create_and_emit_image(url, data, ctx):
 	elif fmt == "JPEG":
 		image.load_jpg_from_buffer(data)
 	else:
-		# TODO: we don't want to keep them waiting
+		_img_cache[url] = null
 		return null
 
 	if image.get_width() == 0:
-		# invalid image
+		_img_cache[url] = null
 		return null
 
 	var texture = ImageTexture.create_from_image(image)
@@ -78,11 +78,14 @@ func _create_and_emit_image(url, data, ctx):
 	_emit_image(url, texture, ctx)
 
 func _emit_image(url, texture, ctx):
+	if texture == null:
+		return
 	call_deferred("emit_signal", "loaded_image", url, texture, ctx)
 
 func request_image(url, ctx=null):
 	if _img_cache.has(url):
 		_emit_image(url, _img_cache[url], ctx)
+		return
 
 	var data = _read_url(url)
 	if data:

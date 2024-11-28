@@ -187,7 +187,7 @@ func generate(
 
   # add the final room
   # TODO: restructure the whole weird-ass loop here
-  room_list[vec_key(room_center)] = room_entry
+  room_list[vec_key(room_entry.center)] = room_entry
 
   # ignore starting hall
   for room in room_list.values():

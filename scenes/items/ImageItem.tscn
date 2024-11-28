@@ -29,5 +29,5 @@ pixel_size = 0.001
 modulate = Color(0, 0, 0, 1)
 font = SubResource("1")
 font_size = 64
-autowrap_mode = 2
+autowrap_mode = 3
 width = 1800.0

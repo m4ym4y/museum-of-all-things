@@ -28,7 +28,7 @@ func _on_image_loaded(url, image, _ctx):
 			float(height) / float(_image.get_height())
 		)
 		# var to_image_bottom = width * (float(image.get_width) / float(image.get_height))
-		label.position.y = -width * (float(_image.get_height() / 2) / float(_image.get_width())) - 0.1
+		label.position.y = -min(width, height) * (float(_image.get_height() / 2) / float(_image.get_width())) - 0.1
 		# label.translation.y = -width - 0.1
 		label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 		emit_signal("loaded")

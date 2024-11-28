@@ -8,7 +8,7 @@
 [sub_resource type="Environment" id="Environment_g30yg"]
 ambient_light_source = 2
 ambient_light_color = Color(1, 0.960784, 0.882353, 1)
-ambient_light_energy = 0.25
+ambient_light_energy = 0.2
 ssr_max_steps = 128
 ssr_fade_in = 0.522331
 ssr_depth_tolerance = 128.0

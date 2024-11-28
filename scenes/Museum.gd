@@ -113,7 +113,7 @@ func _load_exhibit_from_exit(exit):
 		if next_exhibit.has("entry") and exit.player_in_hall:
 			var entry = next_exhibit.entry
 			_link_halls(entry, exit)
-			return
+		return
 
 	_fetcher.fetch([next_article], {
 		"title": next_article,
@@ -146,7 +146,8 @@ func _add_item(exhibit, slots, item_data, delay):
 	item.rotation.y = Util.vecToRot(slot[1])
 
 	# we use a delay to stop there from being a frame drop when a bunch of items are added at once
-	get_tree().create_timer(delay).timeout.connect(_init_item.bind(exhibit, item, item_data))
+	#get_tree().create_timer(delay).timeout.connect(_init_item.bind(exhibit, item, item_data))
+	_init_item(exhibit, item, item_data)
 
 func _result_to_exhibit_data(title, result):
 	var items = []
@@ -235,19 +236,6 @@ func _on_fetch_complete(_titles, context):
 		e.to_title = linked_exhibit
 		linked_exhibits.append(linked_exhibit)
 
-	var delay = 0.0
-	for item_data in items:
-		if item_data.type == "image":
-			DataManager.request_image(Util.normalize_url(item_data.src), {
-				"new_exhibit": new_exhibit,
-				"delay": delay,
-				"item_data": item_data,
-				"slots": slots
-			})
-		else:
-			_add_item(new_exhibit, slots, item_data, delay)
-		delay += 0.1
-
 	var new_hall
 	if backlink:
 		for exit in new_exhibit.exits:
@@ -259,8 +247,6 @@ func _on_fetch_complete(_titles, context):
 			new_hall = new_exhibit.entry
 	else:
 		new_hall = new_exhibit.entry
-
-	_link_halls(new_hall, hall)
 
 	if not _exhibits.has(context.title):
 		_exhibits[context.title] = { "entry": new_exhibit.entry, "exhibit": new_exhibit, "height": _next_height }
@@ -274,10 +260,28 @@ func _on_fetch_complete(_titles, context):
 						continue
 					if abs(4 * old_exhibit.height - new_hall.position.y) < 20:
 						continue
+					print("erasing exhibit ", key)
 					old_exhibit.exhibit.queue_free()
 					_exhibits.erase(key)
 					_exhibit_hist.remove_at(e)
 					break
+
+	var delay = 0.0
+	for item_data in items:
+		if item_data.type == "image":
+			get_tree().create_timer(delay).timeout.connect(
+				DataManager.request_image.bind(Util.normalize_url(item_data.src), {
+					"new_exhibit": new_exhibit,
+					"delay": delay,
+					"item_data": item_data,
+					"slots": slots
+				})
+			)
+		else:
+			_add_item(new_exhibit, slots, item_data, delay)
+		delay += 0.1
+
+	_link_halls(new_hall, hall)
 
 	if backlink:
 		hall.entry_door.open()
