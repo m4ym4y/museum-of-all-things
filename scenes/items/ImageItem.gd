@@ -22,13 +22,21 @@ func _on_image_loaded(url, image, _ctx):
 	var label = $Label
 	label.text = text
 
-	if _image.get_width() != 0:
+	var w = _image.get_width()
+	var h = _image.get_height()
+	var fw = float(w)
+	var fh = float(h)
+
+	if w != 0:
 		pixel_size = min(
-			float(width) / float(_image.get_width()),
-			float(height) / float(_image.get_height())
+			float(width) / fw,
+			float(height) / fh
 		)
+
+		var height = 2.0 if h > w else 2.0 * (fh / fw)
 		# var to_image_bottom = width * (float(image.get_width) / float(image.get_height))
-		label.position.y = -min(width, height) * (float(_image.get_height() / 2) / float(_image.get_width())) - 0.1
+
+		label.position.y = (-height / 2.0) - 0.1
 		# label.translation.y = -width - 0.1
 		label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 		emit_signal("loaded")

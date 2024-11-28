@@ -73,22 +73,26 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
 
 	return generated_results
 
-func _teleport_player(entry, exit, reverse=false):
-	if is_instance_valid(exit) and is_instance_valid(entry):
-		if reverse:
-			_teleport_player(exit, entry)
-			return
-		var diff_from = _player.position - exit.position
-		var rot_diff = Util.vecToRot(entry.to_dir) - Util.vecToRot(exit.to_dir)
-		_player.position = entry.position + diff_from.rotated(Vector3(0, 1, 0), rot_diff)
+func _teleport_player(from_hall, to_hall, entry_to_exit=false):
+	if is_instance_valid(from_hall) and is_instance_valid(to_hall):
+		var diff_from = _player.position - from_hall.position
+		var rot_diff = Util.vecToRot(to_hall.to_dir) - Util.vecToRot(from_hall.to_dir)
+		_player.position = to_hall.position + diff_from.rotated(Vector3(0, 1, 0), rot_diff)
 		_player.rotation.y += rot_diff
-	elif is_instance_valid(exit):
-		_load_exhibit_from_exit(exit)
-	elif is_instance_valid(entry):
-		_load_exhibit_from_entry(entry)
+	elif is_instance_valid(from_hall):
+		if entry_to_exit:
+			_load_exhibit_from_entry(from_hall)
+		else:
+			_load_exhibit_from_exit(from_hall)
+	elif is_instance_valid(to_hall):
+		if entry_to_exit:
+			_load_exhibit_from_exit(to_hall)
+		else:
+			_load_exhibit_from_entry(to_hall)
 
 func _on_loader_body_entered(body, exit):
 	if body.is_in_group("Player"):
+		print("loader body entered")
 		_load_exhibit_from_exit(exit)
 
 func _load_exhibit_from_entry(entry):
@@ -106,13 +110,14 @@ func _load_exhibit_from_entry(entry):
 	})
 
 func _load_exhibit_from_exit(exit):
+	print("load exhibit from exit")
 	var next_article = Util.coalesce(exit.to_title, "Fungus")
 
 	if _exhibits.has(next_article):
 		var next_exhibit = _exhibits[next_article]
-		if next_exhibit.has("entry") and exit.player_in_hall:
+		if next_exhibit.has("entry") and exit.player_in_hall and exit.player_direction == "exit":
 			var entry = next_exhibit.entry
-			_link_halls(entry, exit)
+			_teleport_player(entry, exit)
 		return
 
 	_fetcher.fetch([next_article], {
@@ -146,8 +151,8 @@ func _add_item(exhibit, slots, item_data, delay):
 	item.rotation.y = Util.vecToRot(slot[1])
 
 	# we use a delay to stop there from being a frame drop when a bunch of items are added at once
-	#get_tree().create_timer(delay).timeout.connect(_init_item.bind(exhibit, item, item_data))
-	_init_item(exhibit, item, item_data)
+	get_tree().create_timer(delay).timeout.connect(_init_item.bind(exhibit, item, item_data))
+	#_init_item(exhibit, item, item_data)
 
 func _result_to_exhibit_data(title, result):
 	var items = []
@@ -184,15 +189,18 @@ func _init_item(exhibit, item, data):
 		item.init(data)
 
 func _link_halls(entry, exit):
+	print("linking halls")
 	for hall in [entry, exit]:
 		Util.clear_listeners(hall, "on_player_toward_exit")
 		Util.clear_listeners(hall, "on_player_toward_entry")
 
 	_backlink_map[exit.to_title] = exit.from_title
-	exit.on_player_toward_exit.connect(_teleport_player.bind(entry, exit))
+	exit.on_player_toward_exit.connect(_teleport_player.bind(exit, entry))
 	entry.on_player_toward_entry.connect(_teleport_player.bind(entry, exit, true))
 	if exit.player_in_hall and exit.player_direction == "exit":
-		_teleport_player(entry, exit)
+		_teleport_player(exit, entry)
+	elif entry.player_in_hall and entry.player_direction == "entry":
+		_teleport_player(entry, exit, true)
 
 func _on_fetch_complete(_titles, context):
 	# we don't need to do anything to handle a prefetch
@@ -268,20 +276,24 @@ func _on_fetch_complete(_titles, context):
 
 	var delay = 0.0
 	for item_data in items:
-		if item_data.type == "image":
-			get_tree().create_timer(delay).timeout.connect(
-				DataManager.request_image.bind(Util.normalize_url(item_data.src), {
-					"new_exhibit": new_exhibit,
-					"delay": delay,
-					"item_data": item_data,
-					"slots": slots
-				})
-			)
-		else:
-			_add_item(new_exhibit, slots, item_data, delay)
+		_add_item(new_exhibit, slots, item_data, delay)
+#		if item_data.type == "image":
+#			get_tree().create_timer(delay).timeout.connect(
+#				DataManager.request_image.bind(Util.normalize_url(item_data.src), {
+#					"new_exhibit": new_exhibit,
+#					"delay": delay,
+#					"item_data": item_data,
+#					"slots": slots
+#				})
+#			)
+#		else:
 		delay += 0.1
 
-	_link_halls(new_hall, hall)
+	print("linking halls in setup")
+	if backlink:
+		_link_halls(hall, new_hall)
+	else:
+		_link_halls(new_hall, hall)
 
 	if backlink:
 		hall.entry_door.open()
