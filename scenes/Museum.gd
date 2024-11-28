@@ -92,7 +92,6 @@ func _teleport_player(from_hall, to_hall, entry_to_exit=false):
 
 func _on_loader_body_entered(body, exit):
 	if body.is_in_group("Player"):
-		print("loader body entered")
 		_load_exhibit_from_exit(exit)
 
 func _load_exhibit_from_entry(entry):
@@ -110,7 +109,6 @@ func _load_exhibit_from_entry(entry):
 	})
 
 func _load_exhibit_from_exit(exit):
-	print("load exhibit from exit")
 	var next_article = Util.coalesce(exit.to_title, "Fungus")
 
 	if _exhibits.has(next_article):
@@ -189,7 +187,6 @@ func _init_item(exhibit, item, data):
 		item.init(data)
 
 func _link_halls(entry, exit):
-	print("linking halls")
 	for hall in [entry, exit]:
 		Util.clear_listeners(hall, "on_player_toward_exit")
 		Util.clear_listeners(hall, "on_player_toward_entry")
@@ -268,7 +265,6 @@ func _on_fetch_complete(_titles, context):
 						continue
 					if abs(4 * old_exhibit.height - new_hall.position.y) < 20:
 						continue
-					print("erasing exhibit ", key)
 					old_exhibit.exhibit.queue_free()
 					_exhibits.erase(key)
 					_exhibit_hist.remove_at(e)
@@ -289,7 +285,6 @@ func _on_fetch_complete(_titles, context):
 #		else:
 		delay += 0.1
 
-	print("linking halls in setup")
 	if backlink:
 		_link_halls(hall, new_hall)
 	else:
