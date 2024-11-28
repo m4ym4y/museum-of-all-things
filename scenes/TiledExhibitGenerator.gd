@@ -267,10 +267,16 @@ func decorate_wall_tile(pos):
     var slot = (wall + pos) / 2
     var hall_dir = wall - pos
     var hall_corner = wall + hall_dir
+    var hall_exit_dir = hall_dir.rotated(Vector3.UP, 3 * PI / 2)
+    var past_hall_exit = hall_corner + 2 * hall_exit_dir
 
     # put an exit everywhere it fits
     if (
         _grid.get_cell_item(hall_corner - Vector3(0, 1, 0)) == -1 and
+        not (
+          _grid.get_cell_item(past_hall_exit - Vector3.UP) != -1 and
+          _grid.get_cell_item(past_hall_exit) == -1
+        ) and
         len(cell_neighbors(hall_corner - Vector3(0, 1, 0), -1)) == 4
     ):
       var new_hall = hall.instantiate()

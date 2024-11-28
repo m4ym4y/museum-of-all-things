@@ -21,6 +21,7 @@ extends Node3D
 @onready var _exhibits = {}
 @onready var _backlink_map = {}
 @onready var _next_height = 0
+@onready var _current_room_title = "Lobby"
 var _grid
 var _player
 
@@ -73,18 +74,31 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
 
 	return generated_results
 
+func _set_current_room_title(title):
+	_current_room_title = title
+	var fog_color = Util.gen_fog(_current_room_title)
+	var environment = $WorldEnvironment.environment
+	if environment.fog_light_color != fog_color:
+		var tween = create_tween()
+		tween.tween_property(
+				environment,
+				"fog_light_color",
+				fog_color,
+				1.0)
+
+		tween.set_trans(Tween.TRANS_LINEAR)
+		tween.set_ease(Tween.EASE_IN_OUT)
+
 func _teleport_player(from_hall, to_hall, entry_to_exit=false):
 	# print("teleport. from=%s to=%s" % [from_hall.from_title, to_hall.to_title])
 	if is_instance_valid(from_hall) and is_instance_valid(to_hall):
-		print("teleport. from=%s to=%s" % [from_hall.position, to_hall.position])
 		if (from_hall.position - _player.position).length() > max_teleport_distance:
-			print("player not in hall. abort.")
 			return
 		var diff_from = _player.position - from_hall.position
 		var rot_diff = Util.vecToRot(to_hall.to_dir) - Util.vecToRot(from_hall.to_dir)
 		_player.position = to_hall.position + diff_from.rotated(Vector3(0, 1, 0), rot_diff)
-		print("position=", _player.position)
 		_player.rotation.y += rot_diff
+		_set_current_room_title(from_hall.from_title if entry_to_exit else from_hall.to_title)
 	elif is_instance_valid(from_hall):
 		if entry_to_exit:
 			_load_exhibit_from_entry(from_hall)

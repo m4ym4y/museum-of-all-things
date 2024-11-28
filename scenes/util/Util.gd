@@ -39,5 +39,12 @@ func normalize_url(url):
 	else:
 		return url
 
+# it is intentional that these line up
+var FLOOR_LIST = [FLOOR_WOOD, FLOOR_MARBLE, FLOOR_CARPET]
+var FOG_LIST   = [Color.WHITE, Color.WHITE, Color.BLACK ]
+
 func gen_floor(title):
-	return [FLOOR_WOOD, FLOOR_MARBLE, FLOOR_CARPET][hash(title) % 3]
+	return FLOOR_LIST[hash(title) % len(FLOOR_LIST)]
+
+func gen_fog(title):
+	return FOG_LIST[hash(title) % len(FOG_LIST)]
