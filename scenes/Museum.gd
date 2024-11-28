@@ -74,10 +74,16 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
 	return generated_results
 
 func _teleport_player(from_hall, to_hall, entry_to_exit=false):
+	# print("teleport. from=%s to=%s" % [from_hall.from_title, to_hall.to_title])
 	if is_instance_valid(from_hall) and is_instance_valid(to_hall):
+		print("teleport. from=%s to=%s" % [from_hall.position, to_hall.position])
+		if (from_hall.position - _player.position).length() > max_teleport_distance:
+			print("player not in hall. abort.")
+			return
 		var diff_from = _player.position - from_hall.position
 		var rot_diff = Util.vecToRot(to_hall.to_dir) - Util.vecToRot(from_hall.to_dir)
 		_player.position = to_hall.position + diff_from.rotated(Vector3(0, 1, 0), rot_diff)
+		print("position=", _player.position)
 		_player.rotation.y += rot_diff
 	elif is_instance_valid(from_hall):
 		if entry_to_exit:
@@ -207,7 +213,7 @@ func _on_fetch_complete(_titles, context):
 	var backlink = context.has("backlink") and context.backlink
 	var hall = context.entry if backlink else context.exit
 	var result = _fetcher.get_result(context.title)
-	if not result:
+	if not result or not is_instance_valid(hall):
 		# TODO: show an out of order sign
 		return
 
@@ -265,6 +271,7 @@ func _on_fetch_complete(_titles, context):
 						continue
 					if abs(4 * old_exhibit.height - new_hall.position.y) < 20:
 						continue
+					print("erasing exhibit ", key)
 					old_exhibit.exhibit.queue_free()
 					_exhibits.erase(key)
 					_exhibit_hist.remove_at(e)
@@ -308,6 +315,7 @@ func _input(event):
 func _process(delta: float) -> void:
 	pass
 
+@export var max_teleport_distance: float = 10.0
 @export var max_exhibits_loaded: int = 2
 @export var min_room_dimension: int = 2
 @export var max_room_dimension: int = 5
