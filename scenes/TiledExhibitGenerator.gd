@@ -18,6 +18,7 @@ var item_slots: Array:
 
 var _item_slots = {}
 
+var _room_count
 var _raw_grid
 var _grid
 var _floor
@@ -114,6 +115,7 @@ func generate(
 	entry = starting_hall
 	exits = []
 	_item_slots = {}
+	_room_count = room_count
 
 	var room_width = rand_dim.call()
 	var room_length = rand_dim.call()
@@ -259,7 +261,7 @@ func decorate_room_center(center, width, length):
 				var pos = Vector3(x, y, z)
 				var free_wall = _rng.randi_range(0, 1) == 0
 				var valid_free_wall = len(cell_neighbors(pos, WALL)) == 0 and len(cell_neighbors(pos, INTERNAL_HALL)) == 0
-				if width > 3 or length > 3 and free_wall and valid_free_wall:
+				if width > 3 or length > 3 and free_wall and valid_free_wall and _room_count > 2:
 					var dir = Vector3.RIGHT if width > length else Vector3.FORWARD
 					var item_dir = Vector3.FORWARD if width > length else Vector3.RIGHT
 					var ori = Util.vecToOrientation(_grid, dir)

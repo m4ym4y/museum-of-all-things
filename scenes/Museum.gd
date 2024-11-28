@@ -3,6 +3,7 @@ extends Node3D
 @onready var LoaderTrigger = preload("res://scenes/LoaderTrigger.tscn")
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
 @onready var DEFAULT_DOORS = [
+  "Coffee",
   "Fungus",
   "Soup",
   "Albert Einstein",
@@ -244,22 +245,12 @@ func _on_fetch_complete(_titles, context):
   var new_exhibit = TiledExhibitGenerator.instantiate()
   add_child(new_exhibit)
 
-#  if len(items) > 6:
   set_up_exhibit(
     new_exhibit,
-    max(len(items) / 6, 1),
+    max(len(items) / 6, 2),
     context.title,
     prev_title
   )
-#  else:
-#    set_up_exhibit(
-#      new_exhibit,
-#      4,
-#      context.title,
-#      prev_title,
-#      1,
-#      2,
-#    )
 
   var exits = new_exhibit.exits
   var slots = new_exhibit.item_slots
