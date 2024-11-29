@@ -54,7 +54,6 @@ func _ready() -> void:
       exit.to_title = linked_exhibit
 
 func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_title="Lobby", _min_room_dimension=min_room_dimension, _max_room_dimension=max_room_dimension):
-  Util.t_start()
   var generated_results = exhibit.generate(
       _grid,
       Vector3(0, _next_height, 0),
@@ -64,7 +63,6 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
       title,
       prev_title,
   )
-  Util.t_end("generate_room")
 
   var entry = generated_results.entry
   var exits = generated_results.exits

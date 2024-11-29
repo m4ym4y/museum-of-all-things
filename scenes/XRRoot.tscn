@@ -22,8 +22,8 @@ tracker = &"left_hand"
 
 [node name="FunctionTeleport" parent="XROrigin3D/XRController3D_left" instance=ExtResource("3_gm17t")]
 strength = 10.0
-collision_mask = 4
-valid_teleport_mask = 4294967292
+collision_mask = 1
+valid_teleport_mask = 4294901761
 
 [node name="LeftHand" parent="XROrigin3D/XRController3D_left" instance=ExtResource("4_6uron")]
 
@@ -39,5 +39,5 @@ step_turn_angle = 40.0
 
 [node name="XRToolsPlayerBody" type="CharacterBody3D" parent="XROrigin3D" groups=["Player"]]
 top_level = true
-collision_mask = 3
+collision_layer = 4
 script = ExtResource("4_l0d4h")

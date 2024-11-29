@@ -5,7 +5,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_asqa7"]
 
 [node name="LoaderTrigger" type="Area3D" groups=["ExhibitItem", "Loader"]]
-collision_layer = 2
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("1_mti24")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

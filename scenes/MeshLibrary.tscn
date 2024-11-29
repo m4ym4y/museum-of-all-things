@@ -63,6 +63,7 @@ mesh = ExtResource("1_mkj83")
 surface_material_override/0 = ExtResource("2_tedfh")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="floor"]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_yaqsi")
@@ -72,6 +73,7 @@ visible = false
 mesh = ExtResource("2_23gr6")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="wall"]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="wall/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_w52m3")
@@ -81,6 +83,7 @@ visible = false
 mesh = ExtResource("3_qidku")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="convex_corner_wall"]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="convex_corner_wall/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_4175m")
@@ -94,6 +97,7 @@ visible = false
 mesh = ExtResource("5_ic82d")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="wall_all_sides"]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="wall_all_sides/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_el13e")
@@ -104,6 +108,7 @@ mesh = ExtResource("6_q75mp")
 surface_material_override/0 = ExtResource("12_r4mto")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="wall_block"]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="wall_block/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_d6xge")
@@ -113,6 +118,7 @@ mesh = ExtResource("7_pr5as")
 surface_material_override/0 = ExtResource("12_r4mto")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="internal_hall_turn"]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="internal_hall_turn/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2, 1.5)
@@ -132,6 +138,7 @@ mesh = ExtResource("8_4mi86")
 surface_material_override/0 = ExtResource("12_r4mto")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="internal_hall"]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="internal_hall/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, 0)
@@ -151,6 +158,7 @@ mesh = ExtResource("10_g48g6")
 surface_material_override/0 = ExtResource("12_r4mto")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="bench"]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="bench/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_qutds")
@@ -161,6 +169,7 @@ mesh = ExtResource("11_y14c5")
 surface_material_override/0 = ExtResource("12_r4mto")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="free_wall"]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="free_wall/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_xbjpb")
@@ -171,6 +180,7 @@ mesh = ExtResource("1_mkj83")
 surface_material_override/0 = ExtResource("2_hh216")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="floor_carpet"]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor_carpet/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_qcooa")
@@ -181,6 +191,7 @@ mesh = ExtResource("1_mkj83")
 surface_material_override/0 = ExtResource("15_vywv5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="floor_marble"]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor_marble/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_ne81i")
