@@ -147,13 +147,16 @@ func generate(
 		carve_room(bounds[0], bounds[1], start_pos.y)
 
 		var early_terminate = true
+		var try_dirs = DIRECTIONS.duplicate()
+		try_dirs.shuffle()
 
 		# sometimes just throw in branches to keep em guessing
 		if len(branch_point_list) < 3 or _rng.randi() % 4 != 0:
-			for nop_ in range(50):
-				next_room_direction = rand_dir()
-				next_room_width = rand_dim.call()
-				next_room_length = rand_dim.call()
+			next_room_width = rand_dim.call()
+			next_room_length = rand_dim.call()
+
+			for dir in try_dirs:
+				next_room_direction = dir
 				next_room_center = room_center + Vector3(
 					next_room_direction.x * (room_width / 2 + next_room_width / 2 + 3),
 					0,

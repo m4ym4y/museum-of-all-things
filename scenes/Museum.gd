@@ -39,8 +39,6 @@ func _ready() -> void:
 
   $WorldEnvironment.environment.ssr_enabled = not _xr
 
-  DataManager.loaded_image.connect(_on_image_item_loaded)
-
   if Engine.is_editor_hint():
     return
   else:
@@ -56,6 +54,7 @@ func _ready() -> void:
       exit.to_title = linked_exhibit
 
 func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_title="Lobby", _min_room_dimension=min_room_dimension, _max_room_dimension=max_room_dimension):
+  Util.t_start()
   var generated_results = exhibit.generate(
       _grid,
       Vector3(0, _next_height, 0),
@@ -65,6 +64,7 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
       title,
       prev_title,
   )
+  Util.t_end("generate_room")
 
   var entry = generated_results.entry
   var exits = generated_results.exits
@@ -157,11 +157,7 @@ func _seeded_shuffle(seed, arr):
     arr[i] = arr[j]
     arr[j] = temp
 
-func _on_image_item_loaded(url, _tex, ctx):
-  if ctx and ctx.has('slots'):
-    _add_item(ctx.new_exhibit, ctx.slots, ctx.item_data, ctx.delay)
-
-func _add_item(exhibit, slots, item_data, delay):
+func _add_item(exhibit, slots, item_data):
   var slot = slots.pop_front()
   if slot == null:
     return
@@ -171,8 +167,8 @@ func _add_item(exhibit, slots, item_data, delay):
   item.rotation.y = Util.vecToRot(slot[1])
 
   # we use a delay to stop there from being a frame drop when a bunch of items are added at once
-  get_tree().create_timer(delay).timeout.connect(_init_item.bind(exhibit, item, item_data))
-  #_init_item(exhibit, item, item_data)
+  # get_tree().create_timer(delay).timeout.connect(_init_item.bind(exhibit, item, item_data))
+  _init_item(exhibit, item, item_data)
 
 func _result_to_exhibit_data(title, result):
   var items = []
@@ -249,7 +245,7 @@ func _on_fetch_complete(_titles, context):
 
   set_up_exhibit(
     new_exhibit,
-    max(len(items) / 6, 2),
+    max(len(items) / 10, 2),
     context.title,
     prev_title
   )
@@ -294,25 +290,23 @@ func _on_fetch_complete(_titles, context):
           _exhibit_hist.remove_at(e)
           break
 
-  var delay = 0.0
+  var item_queue = []
   for item_data in items:
-    _add_item(new_exhibit, slots, item_data, delay)
-#		if item_data.type == "image":
-#			get_tree().create_timer(delay).timeout.connect(
-#				DataManager.request_image.bind(Util.normalize_url(item_data.src), {
-#					"new_exhibit": new_exhibit,
-#					"delay": delay,
-#					"item_data": item_data,
-#					"slots": slots
-#				})
-#			)
-#		else:
-    delay += 0.1
+    item_queue.append(_add_item.bind(new_exhibit, slots, item_data))
+  _process_item_queue(item_queue, 0.1)
 
   if backlink:
     _link_halls(hall, new_hall)
   else:
     _link_halls(new_hall, hall)
+
+func _process_item_queue(queue, delay):
+  var callable = queue.pop_front()
+  if not callable:
+    return
+  else:
+    callable.call()
+    get_tree().create_timer(delay).timeout.connect(_process_item_queue.bind(queue, delay))
 
 func _input(event):
   if event is InputEventKey and Input.is_key_pressed(KEY_P):
