@@ -10,6 +10,8 @@
 script = ExtResource("1_eu127")
 
 [node name="LoaderTrigger" parent="." instance=ExtResource("2_fcpmw")]
+collision_layer = 0
+collision_mask = 4
 monitoring = false
 
 [node name="EntryDoor" parent="." instance=ExtResource("3_1akbl")]
@@ -17,6 +19,8 @@ monitoring = false
 [node name="ExitDoor" parent="." instance=ExtResource("3_1akbl")]
 
 [node name="HallDirectionDetector" parent="." instance=ExtResource("4_y7uhf")]
+collision_layer = 0
+collision_mask = 4
 
 [node name="FromSign" parent="." instance=ExtResource("5_h6bvl")]
 

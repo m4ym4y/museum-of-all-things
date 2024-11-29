@@ -9,7 +9,7 @@ size = Vector3(0.6, 0.2, 0.6)
 radius = 0.3
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
-collision_mask = 3
+collision_layer = 4
 script = ExtResource("1")
 jump_impulse = 12
 

@@ -18,6 +18,7 @@ mesh = SubResource("BoxMesh_bo0ln")
 surface_material_override/0 = ExtResource("1_r1fbc")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Door"]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Door/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_oah2i")
