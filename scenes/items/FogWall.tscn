@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://d11xwkqf1h74w"]
+
+[sub_resource type="FogMaterial" id="FogMaterial_m3gin"]
+emission = Color(1, 1, 1, 1)
+edge_fade = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2ymk"]
+shading_mode = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pmrmk"]
+material = SubResource("StandardMaterial3D_c2ymk")
+size = Vector2(4, 8)
+
+[node name="FogWall" type="Node3D"]
+
+[node name="FogVolume" type="FogVolume" parent="."]
+size = Vector3(4, 8, 2)
+material = SubResource("FogMaterial_m3gin")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 1)
+mesh = SubResource("PlaneMesh_pmrmk")

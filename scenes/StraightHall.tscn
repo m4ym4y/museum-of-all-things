@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhoi8lq346d7a"]
+
+[ext_resource type="PackedScene" uid="uid://d11xwkqf1h74w" path="res://scenes/items/FogWall.tscn" id="1_umwxu"]
+[ext_resource type="ArrayMesh" uid="uid://dmoul6rrdv75k" path="res://assets/models/straight_hall.obj" id="2_ghr5s"]
+[ext_resource type="Material" uid="uid://datvvi6j3c0kp" path="res://assets/textures/white.tres" id="3_7wb8o"]
+
+[node name="StraightHall" type="Node3D"]
+
+[node name="FogWall" parent="." instance=ExtResource("1_umwxu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_ghr5s")
+surface_material_override/0 = ExtResource("3_7wb8o")

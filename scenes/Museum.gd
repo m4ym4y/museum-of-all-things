@@ -11,6 +11,23 @@ extends Node3D
 	"Albert Einstein",
 	"Dinosaur",
 	"USA",
+	"Portland, Oregon",
+	"Goncharov (meme)",
+	"Persepolis",
+	"Control Car",
+	"Dragon",
+	"Sister",
+	"Arts in the Philippines",
+	"Armenian Architecture",
+	"Marine Life",
+	"History of Germany",
+	"Pablo Picasso",
+	"Breast-shaped Hill",
+	"Freddy Mercury",
+	"Chernobyl disaster",
+	"Earth",
+	"Petra",
+	"Taipei 101",
 ]
 
 # item types
@@ -22,7 +39,7 @@ extends Node3D
 @onready var _exhibit_hist = []
 @onready var _exhibits = {}
 @onready var _backlink_map = {}
-@onready var _next_height = 0
+@onready var _next_height = 20
 @onready var _current_room_title = "Lobby"
 var _grid
 var _player
@@ -39,19 +56,22 @@ func _ready() -> void:
 
 	$WorldEnvironment.environment.ssr_enabled = not _xr
 
-	if Engine.is_editor_hint():
-		return
-	else:
-		_grid = $GridMap
-		_grid.clear()
-		_fetcher.fetch_complete.connect(_on_fetch_complete)
-		set_up_exhibit($TiledExhibitGenerator)
+	_grid = $Lobby/GridMap
+	_fetcher.fetch_complete.connect(_on_fetch_complete)
+	_set_up_lobby($Lobby)
 
-		# set up default exhibits in lobby
-		var exits = $TiledExhibitGenerator.exits
-		for exit in exits:
-			var linked_exhibit = Util.coalesce(DEFAULT_DOORS.pop_front(), "")
-			exit.to_title = linked_exhibit
+func _set_up_lobby(lobby):
+	var exits = lobby.exits
+	_exhibits["$Lobby"] = lobby
+
+	print("Setting up lobby with %s exits..." % len(exits))
+
+	for exit in exits:
+		var title = DEFAULT_DOORS.pop_front()
+		if not title:
+			break
+		exit.to_title = title
+		exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit))
 
 func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_title="Lobby", _min_room_dimension=min_room_dimension, _max_room_dimension=max_room_dimension):
 	var generated_results = exhibit.generate(
