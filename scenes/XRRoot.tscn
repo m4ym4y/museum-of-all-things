@@ -8,10 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="5_wqppd"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/functions/movement_turn.gd" id="6_80eyh"]
 
-[node name="XrRoot" type="Node3D" groups=["Player"]]
+[node name="XrRoot" type="Node3D"]
 script = ExtResource("1_t4l57")
 
-[node name="XROrigin3D" type="XROrigin3D" parent="." groups=["Player"]]
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
 

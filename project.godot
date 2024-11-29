@@ -111,4 +111,5 @@ environment/defaults/default_environment="res://assets/resources/default_env.tre
 
 [xr]
 
+openxr/enabled=true
 shaders/enabled=true
