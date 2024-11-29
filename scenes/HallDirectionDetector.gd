@@ -2,7 +2,7 @@ extends Area3D
 
 signal direction_changed(direction: String)
 
-@export var project_dir: float = 1.0
+@export var project_dir: float = 2.0
 @onready var _xr = Util.is_xr()
 
 var point_a: Vector3
@@ -20,7 +20,7 @@ func init(entry: Vector3, exit: Vector3):
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
-		player = body
+		player = body if not _xr else body.get_parent().get_node("XRCamera3D")
 
 func _on_body_exited(body: Node) -> void:
 	if body.is_in_group("Player"):
@@ -28,7 +28,7 @@ func _on_body_exited(body: Node) -> void:
 
 func _process(_delta: float) -> void:
 	if player:
-		var player_facing = -player.global_transform.basis.z.normalized() if not _xr else player._estimate_body_forward_dir()
+		var player_facing = -player.global_transform.basis.z.normalized()
 		var p = player.global_position + player_facing * project_dir
 		var distance_to_a = point_a - p
 		var distance_to_b = point_b - p

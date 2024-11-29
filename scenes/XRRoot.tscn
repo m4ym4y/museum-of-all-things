@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dn526eij58wfs"]
+[gd_scene load_steps=9 format=3 uid="uid://dn526eij58wfs"]
 
 [ext_resource type="Script" path="res://scenes/XRRoot.gd" id="1_t4l57"]
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_v48yd"]
 [ext_resource type="PackedScene" uid="uid://fiul51tsyoop" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="3_gm17t"]
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="4_6uron"]
+[ext_resource type="Material" uid="uid://b20jn7y6kh1ct" path="res://assets/textures/player_ghost.tres" id="4_jb2jl"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/player/player_body.gd" id="4_l0d4h"]
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="5_wqppd"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/functions/movement_turn.gd" id="6_80eyh"]
@@ -21,16 +22,22 @@ script = ExtResource("1_t4l57")
 tracker = &"left_hand"
 
 [node name="FunctionTeleport" parent="XROrigin3D/XRController3D_left" instance=ExtResource("3_gm17t")]
+can_teleport_color = Color(1, 1, 1, 1)
+cant_teleport_color = Color(0.501961, 0.501961, 0.501961, 1)
+no_collision_color = Color(0.501961, 0.501961, 0.501961, 1)
 strength = 10.0
 collision_mask = 1
 valid_teleport_mask = 4294901761
+player_material = ExtResource("4_jb2jl")
 
 [node name="LeftHand" parent="XROrigin3D/XRController3D_left" instance=ExtResource("4_6uron")]
+hand_material_override = ExtResource("4_jb2jl")
 
 [node name="XRController3D_right" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
 
 [node name="RightHand" parent="XROrigin3D/XRController3D_right" instance=ExtResource("5_wqppd")]
+hand_material_override = ExtResource("4_jb2jl")
 
 [node name="XRToolsMovementTurn" type="Node" parent="XROrigin3D/XRController3D_right" groups=["movement_providers"]]
 script = ExtResource("6_80eyh")

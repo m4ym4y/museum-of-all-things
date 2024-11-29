@@ -91,16 +91,15 @@ func _set_current_room_title(title):
 func _teleport_player(from_hall, to_hall, entry_to_exit=false):
 	# print("teleport. from=%s to=%s" % [from_hall.from_title, to_hall.to_title])
 	if is_instance_valid(from_hall) and is_instance_valid(to_hall):
-		var distance = (from_hall.position - _player.global_position).length()
+		var pos = _player.global_position if not _xr else _player.get_node("XRCamera3D").global_position
+		var distance = (from_hall.position - pos).length()
 		if distance > max_teleport_distance:
+			print("distance=%s max=%s" % [distance, max_teleport_distance])
 			return
 		var diff_from = _player.global_position - from_hall.position
 		var rot_diff = Util.vecToRot(to_hall.to_dir) - Util.vecToRot(from_hall.to_dir)
 		_player.global_position = to_hall.position + diff_from.rotated(Vector3(0, 1, 0), rot_diff)
-		if _xr:
-			_player.get_node("XRToolsPlayerBody").rotate_player(rot_diff)
-		else:
-			_player.global_rotation.y += rot_diff
+		_player.global_rotation.y += rot_diff
 		_set_current_room_title(from_hall.from_title if entry_to_exit else from_hall.to_title)
 	elif is_instance_valid(from_hall):
 		if entry_to_exit:
