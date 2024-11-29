@@ -39,6 +39,7 @@ extends Node3D
 @onready var _exhibit_hist = []
 @onready var _exhibits = {}
 @onready var _backlink_map = {}
+@onready var _text_map = {}
 @onready var _next_height = 20
 @onready var _current_room_title = "Lobby"
 var _grid
@@ -95,8 +96,13 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
 
 func _set_current_room_title(title):
 	_current_room_title = title
+	
+	$Speaker.stop()
+	get_tree().create_timer(3.0).timeout.connect(_speak_current_page)
+	
 	var fog_color = Util.gen_fog(_current_room_title)
 	var environment = $WorldEnvironment.environment
+	
 	if environment.fog_light_color != fog_color:
 		var tween = create_tween()
 		tween.tween_property(
@@ -131,6 +137,10 @@ func _teleport_player(from_hall, to_hall, entry_to_exit=false):
 			_load_exhibit_from_exit(to_hall)
 		else:
 			_load_exhibit_from_entry(to_hall)
+
+func _speak_current_page():
+	if _text_map.has(_current_room_title):
+		$Speaker.speak(_text_map[_current_room_title])
 
 func _on_loader_body_entered(body, exit):
 	if body.is_in_group("Player"):
@@ -196,6 +206,7 @@ func _result_to_exhibit_data(title, result):
 
 	if result:
 		if result.has("extract"):
+			_text_map[title] = result.extract
 			items.append({
 				"type": "text",
 				"text": result.extract
@@ -211,7 +222,7 @@ func _result_to_exhibit_data(title, result):
 					items.append({
 						"type": "image",
 						"src": image.src,
-						"text": Util.coalesce(image.text, image.src.split("/")[-1]),
+						"text": Util.coalesce(image.text, image.src.split("/")[-1].uri_decode()),
 					})
 
 	return {

@@ -26,6 +26,7 @@ can_teleport_color = Color(1, 1, 1, 1)
 cant_teleport_color = Color(0.501961, 0.501961, 0.501961, 1)
 no_collision_color = Color(0.501961, 0.501961, 0.501961, 1)
 strength = 10.0
+max_slope = 45.0
 collision_mask = 1
 valid_teleport_mask = 4294901761
 player_material = ExtResource("4_jb2jl")
