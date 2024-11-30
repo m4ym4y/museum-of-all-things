@@ -22,6 +22,7 @@ var _room_count
 var _raw_grid
 var _grid
 var _floor
+var _no_props
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -78,13 +79,17 @@ func add_item_slot(s):
 
 func generate(
 		grid,
-		start_pos,
-		min_room_dimension,
-		max_room_dimension,
-		room_count,
-		title,
-		prev_title,
+		params,
 	):
+	var start_pos = params.start_pos
+	var min_room_dimension = params.min_room_dimension
+	var max_room_dimension = params.max_room_dimension
+	var room_count = params.room_count
+	var title = params.title
+	var prev_title = params.prev_title
+
+	_no_props = params.has("no_props") and params.no_props
+
 	_raw_grid = grid
 	_grid = grid_wrapper.instantiate()
 	_grid.init(_raw_grid)
@@ -224,7 +229,7 @@ func decorate_room(room):
 	var width = room.width
 	var length = room.length
 
-	if !Engine.is_editor_hint():
+	if !Engine.is_editor_hint() and not _no_props:
 		decorate_room_center(center, width, length)
 
 	var bounds = room_to_bounds(center, width, length)

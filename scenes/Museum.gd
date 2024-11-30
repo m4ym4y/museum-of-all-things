@@ -95,17 +95,8 @@ func _set_up_lobby(lobby):
 		exit.to_title = title
 		exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit))
 
-func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_title="Lobby", _min_room_dimension=min_room_dimension, _max_room_dimension=max_room_dimension):
-	var generated_results = exhibit.generate(
-			_grid,
-			Vector3(0, _next_height, 0),
-			_min_room_dimension,
-			_max_room_dimension,
-			room_count,
-			title,
-			prev_title,
-	)
-
+func set_up_exhibit(exhibit, params):
+	var generated_results = exhibit.generate(_grid, params)
 	var entry = generated_results.entry
 	var exits = generated_results.exits
 
@@ -299,12 +290,15 @@ func _on_fetch_complete(_titles, context):
 	var new_exhibit = TiledExhibitGenerator.instantiate()
 	add_child(new_exhibit)
 
-	set_up_exhibit(
-		new_exhibit,
-		max(len(items) / 10, 2),
-		context.title,
-		prev_title
-	)
+	set_up_exhibit(new_exhibit, {
+		"start_pos": Vector3.UP * _next_height,
+		"min_room_dimension": min_room_dimension,
+		"max_room_dimension": max_room_dimension,
+		"room_count": max(len(items) / 10, 2),
+		"title": context.title,
+		"prev_title": prev_title,
+		"no_props": len(items) < 10,
+	})
 
 	if len(items) == 1:
 		var notice = NoImageNotice.instantiate()
@@ -388,28 +382,3 @@ func _process(delta: float) -> void:
 @export var max_exhibits_loaded: int = 2
 @export var min_room_dimension: int = 2
 @export var max_room_dimension: int = 5
-@export var default_room_count: int = 4
-@export var iterations: int = 1
-
-@export var regenerate_starting_exhibit: bool = false:
-	set(new_value):
-		_regenerate_map()
-
-func _clear_group(group):
-	for scene in get_tree().get_nodes_in_group(group):
-		scene.queue_free()
-
-func _regenerate_map():
-	_grid = $GridMap
-
-	_grid.clear()
-	_clear_group("Portal")
-	_clear_group("Loader")
-
-	set_up_exhibit($TiledExhibitGenerator)
-
-	for _n in range(iterations - 1):
-		_next_height += 10
-		var next_exhibit = TiledExhibitGenerator.instantiate()
-		set_up_exhibit(next_exhibit)
-		add_child(next_exhibit)

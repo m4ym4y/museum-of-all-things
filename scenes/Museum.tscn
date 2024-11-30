@@ -35,7 +35,6 @@ script = ExtResource("1_7pjtd")
 max_teleport_distance = 20.0
 max_exhibits_loaded = 5
 max_room_dimension = 4
-default_room_count = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_g30yg")
