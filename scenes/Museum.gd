@@ -160,7 +160,8 @@ func _teleport_player(from_hall, to_hall, entry_to_exit=false):
 
 func _speak_current_page():
 	if _text_map.has(_current_room_title):
-		$Speaker.speak(_text_map[_current_room_title])
+		#$Speaker.speak(_text_map[_current_room_title])
+		pass
 
 func _on_loader_body_entered(body, exit):
 	if body.is_in_group("Player"):
