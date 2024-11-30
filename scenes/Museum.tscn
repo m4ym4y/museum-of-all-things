@@ -10,7 +10,6 @@ ambient_light_source = 2
 ambient_light_color = Color(1, 0.960784, 0.882353, 1)
 ambient_light_energy = 0.2
 ssr_enabled = true
-ssr_max_steps = 512
 ssr_fade_in = 0.522331
 ssr_depth_tolerance = 128.0
 ssao_enabled = true
@@ -23,7 +22,6 @@ fog_mode = 1
 fog_light_color = Color(1, 1, 1, 1)
 fog_density = 1.0
 fog_depth_curve = 0.594605
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 volumetric_fog_albedo = Color(0, 0, 0, 1)
 volumetric_fog_length = 32.0
@@ -39,10 +37,6 @@ default_room_count = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_g30yg")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.04145, 2.00065, 0)
-visible = false
 
 [node name="ExhibitFetcher" parent="." instance=ExtResource("5_yffah")]
 

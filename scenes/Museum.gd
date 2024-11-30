@@ -22,12 +22,19 @@ extends Node3D
 	"Marine Life",
 	"History of Germany",
 	"Pablo Picasso",
-	"Breast-shaped Hill",
+	"Breast-shaped hill",
 	"Freddy Mercury",
 	"Chernobyl disaster",
 	"Earth",
 	"Petra",
 	"Taipei 101",
+	"Kobe Bryant",
+	"Genghis Khan",
+	"Titanic",
+	"Graffiti",
+	"Arabia quadrangle",
+	"Architecture of Liverpool",
+	"Minox",
 ]
 
 # item types

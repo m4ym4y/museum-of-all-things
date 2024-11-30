@@ -10,7 +10,8 @@ func _ready() -> void:
   _voice = voices[0]
 
 func speak(text):
-  DisplayServer.tts_speak(text, _voice)
+  if _voice:
+    DisplayServer.tts_speak(text, _voice)
 
 func stop():
   DisplayServer.tts_stop()

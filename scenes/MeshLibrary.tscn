@@ -60,10 +60,10 @@ points = PackedVector3Array(-2, 4, -2, -2, 4, 2, 2, 4, -2, 2, 4, 2)
 points = PackedVector3Array(-2, 4, -2, -2, 4, 2, 2, 4, -2, 2, 4, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0jfue"]
-size = Vector3(0.5, 4, 8)
+size = Vector3(0.5, 8, 8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f62at"]
-size = Vector3(0.5, 4, 8)
+size = Vector3(0.5, 8, 8)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ga3yr"]
 points = PackedVector3Array(-2, 2, -2, -2, 1.89996, -1.80031, -2, 2, -1.80031, 2, 2, -2, 2, 1.89996, -1.80031, -2, 1.4998, -1.00039, -2, 0.0998434, 2, 2, 2, -1.80031, 2, 1.4998, -1.00039, -2, 0.499804, 0.999608, -2, 0, 2, 2, 0.0998434, 2, 2, 0.499804, 0.999608, -2, 0.0998434, 1.79992, 2, 0, 2, 2, 0.0998434, 1.79992)
@@ -215,21 +215,21 @@ shape = SubResource("ConvexPolygonShape3D_ne81i")
 
 [node name="straight_hall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
-visible = false
 mesh = ExtResource("16_rrmem")
 surface_material_override/0 = ExtResource("12_r4mto")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="straight_hall"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="straight_hall/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 4, 0)
 shape = SubResource("BoxShape3D_0jfue")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="straight_hall/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 4, 0)
 shape = SubResource("BoxShape3D_f62at")
 
 [node name="half_stair_lower" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("17_uq5j0")
 surface_material_override/0 = ExtResource("19_4jtqk")
 
@@ -239,6 +239,7 @@ surface_material_override/0 = ExtResource("19_4jtqk")
 shape = SubResource("ConvexPolygonShape3D_ga3yr")
 
 [node name="half_stair_upper" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("18_07a44")
 surface_material_override/0 = ExtResource("19_4jtqk")
 
