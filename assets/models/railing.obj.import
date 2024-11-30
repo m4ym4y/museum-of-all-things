@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dgpw05cmt5sbj"
+path="res://.godot/imported/railing.obj-151ed99af8e9814f917fe43710a0d259.mesh"
+
+[deps]
+
+files=["res://.godot/imported/railing.obj-151ed99af8e9814f917fe43710a0d259.mesh"]
+
+source_file="res://assets/models/railing.obj"
+dest_files=["res://.godot/imported/railing.obj-151ed99af8e9814f917fe43710a0d259.mesh", "res://.godot/imported/railing.obj-151ed99af8e9814f917fe43710a0d259.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

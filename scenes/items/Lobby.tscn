@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://u4b0awts0vdi"]
+[gd_scene load_steps=12 format=3 uid="uid://u4b0awts0vdi"]
 
 [ext_resource type="MeshLibrary" uid="uid://dn3xjwj3urrq6" path="res://assets/3d_tiles/mesh_library.tres" id="1_3jgkl"]
 [ext_resource type="Script" path="res://scenes/items/Lobby.gd" id="1_rlemg"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://c5wpeqr3s3lw4" path="res://scenes/items/Sign.tscn" id="6_oy2e6"]
 [ext_resource type="PackedScene" uid="uid://y1oelsib8v3i" path="res://scenes/items/WallItem.tscn" id="7_c644f"]
 [ext_resource type="PackedScene" uid="uid://d11xwkqf1h74w" path="res://scenes/items/FogWall.tscn" id="8_85ppu"]
+[ext_resource type="ArrayMesh" uid="uid://dgpw05cmt5sbj" path="res://assets/models/railing.obj" id="9_kw8qj"]
+[ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="10_f3x0l"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_l4pxp"]
 points = PackedVector3Array(-2.3068, 0.628428, -2.375, -2.3068, 0.749855, -2.375, -2.00016, -0.75, -2.375, -2.3068, 0.628428, 0.432522, -2.3068, 0.749855, 0.432522, -1.19359, 0.750002, -2.375, -2.00016, -0.75, 0.374811, 1.99971, -0.75, -2.375, 2.30635, 0.628428, 0.432522, -1.19359, 0.750002, -0.432599, 2.30635, 0.749855, 0.432522, 2.3068, 0.749855, -0.375163, 2.30635, 0.749855, -2.375, 1.99971, -0.75, 0.374811, 2.30635, 0.628428, -2.375)
@@ -99,3 +101,9 @@ light = false
 [node name="FogWall" parent="." instance=ExtResource("8_85ppu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8008, 0.852732, 13.5304)
 visible = false
+
+[node name="Railing" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.28, 3.967, -2)
+mesh = ExtResource("9_kw8qj")
+surface_material_override/0 = ExtResource("10_f3x0l")
+surface_material_override/1 = ExtResource("5_y8wdr")

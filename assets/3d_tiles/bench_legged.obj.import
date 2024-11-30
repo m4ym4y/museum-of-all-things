@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bdwl17nle5t4p"
+path="res://.godot/imported/bench_legged.obj-60103e122e1feb36a482780f418802b5.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bench_legged.obj-60103e122e1feb36a482780f418802b5.mesh"]
+
+source_file="res://assets/3d_tiles/bench_legged.obj"
+dest_files=["res://.godot/imported/bench_legged.obj-60103e122e1feb36a482780f418802b5.mesh", "res://.godot/imported/bench_legged.obj-60103e122e1feb36a482780f418802b5.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
