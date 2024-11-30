@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://u4b0awts0vdi"]
+[gd_scene load_steps=13 format=3 uid="uid://u4b0awts0vdi"]
 
 [ext_resource type="MeshLibrary" uid="uid://dn3xjwj3urrq6" path="res://assets/3d_tiles/mesh_library.tres" id="1_3jgkl"]
 [ext_resource type="Script" path="res://scenes/items/Lobby.gd" id="1_rlemg"]
@@ -13,6 +13,9 @@
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_l4pxp"]
 points = PackedVector3Array(-2.3068, 0.628428, -2.375, -2.3068, 0.749855, -2.375, -2.00016, -0.75, -2.375, -2.3068, 0.628428, 0.432522, -2.3068, 0.749855, 0.432522, -1.19359, 0.750002, -2.375, -2.00016, -0.75, 0.374811, 1.99971, -0.75, -2.375, 2.30635, 0.628428, 0.432522, -1.19359, 0.750002, -0.432599, 2.30635, 0.749855, 0.432522, 2.3068, 0.749855, -0.375163, 2.30635, 0.749855, -2.375, 1.99971, -0.75, 0.374811, 2.30635, 0.628428, -2.375)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1of53"]
+points = PackedVector3Array(12.1, 1.115, 0.0499902, 12.1, 1.08499, 0.0499902, 12.1, 1.115, -0.05, -12.1, 1.115, 0.0499902, 11.9981, 0, 0.0249902, 12.0029, 0, 0.0245106, 12.0076, 0, 0.0230912, 12.0124, 0, 0.0207811, 12.0171, 0, 0.0176684, 12.0195, 0, 0.0138802, 12.0218, 0, 0.00956343, 12.0242, 0, 0.00487471, 12.1, 1.08499, -0.05, -12.1, 1.08499, 0.0499902, -12.1, 1.115, -0.05, -12.0005, 0, 0.0249902, 12.0242, 0, -0.00488449, 12.0218, 0, -0.00957322, 12.0195, 0, -0.01389, 12.0171, 0, -0.0176879, 12.0124, 0, -0.0207909, 12.0076, 0, -0.023101, 12.0029, 0, -0.0245204, 11.9981, 0, -0.0250098, -12.1, 1.08499, -0.05, -12.0266, 0, 0.00487471, -12.0242, 0, 0.00956343, -12.0218, 0, 0.0138802, -12.0195, 0, 0.0176684, -12.0147, 0, 0.0207811, -12.01, 0, 0.0230912, -12.0052, 0, 0.0245106, -12.0005, 0, -0.0250098, -12.0052, 0, -0.0245204, -12.01, 0, -0.023101, -12.0147, 0, -0.0207909, -12.0195, 0, -0.0176879, -12.0218, 0, -0.01389, -12.0242, 0, -0.00957322, -12.0266, 0, -0.00488449)
 
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_rlemg")
@@ -107,3 +110,8 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.28,
 mesh = ExtResource("9_kw8qj")
 surface_material_override/0 = ExtResource("10_f3x0l")
 surface_material_override/1 = ExtResource("5_y8wdr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Railing"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Railing/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_1of53")
