@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://5javxi3uy0ep"]
 
 [ext_resource type="Script" path="res://scenes/Museum.gd" id="1_7pjtd"]
-[ext_resource type="PackedScene" uid="uid://u4b0awts0vdi" path="res://scenes/items/lobby.tscn" id="3_exsdv"]
+[ext_resource type="PackedScene" uid="uid://u4b0awts0vdi" path="res://scenes/items/Lobby.tscn" id="3_exsdv"]
 [ext_resource type="PackedScene" uid="uid://b6i7c7q2pavqs" path="res://scenes/Speaker.tscn" id="4_wopgq"]
 [ext_resource type="PackedScene" uid="uid://dvchvw2bc87oe" path="res://scenes/util/ExhibitFetcher.tscn" id="5_yffah"]
 

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://ytvfcwqs0dy1"]
+
+[ext_resource type="ArrayMesh" uid="uid://ckd1r4li80v78" path="res://assets/models/sign_wide.obj" id="1_0id2t"]
+[ext_resource type="Material" uid="uid://bm6ehx61ibtab" path="res://assets/textures/sign.tres" id="2_uf27x"]
+[ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="3_238m3"]
+
+[node name="Notice" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_0id2t")
+surface_material_override/0 = ExtResource("2_uf27x")
+surface_material_override/1 = ExtResource("3_238m3")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.975149, 0.221548, 0, -0.221548, 0.975149, 0, 0.945, 0.062)
+pixel_size = 0.001
+modulate = Color(0, 0, 0, 1)
+text = "This exhibit does not have any pictures in it. Feel free to read about this topic, or explore it's neighboring exhibits."
+font_size = 80
+outline_size = 0
+autowrap_mode = 3
+width = 1400.0
+
+[node name="Label3D2" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.975149, 0.221548, 0, -0.221548, 0.975149, 0, 1.237, -0.00710414)
+pixel_size = 0.001
+modulate = Color(0, 0, 0, 1)
+text = "🛈"
+font_size = 160
+outline_size = 0

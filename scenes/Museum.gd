@@ -1,8 +1,9 @@
 extends Node3D
 
-@onready var LoaderTrigger = preload("res://scenes/LoaderTrigger.tscn")
+@onready var NoImageNotice = preload("res://scenes/items/NoImageNotice.tscn")
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
 @onready var DEFAULT_DOORS = [
+	"Precipitable water",
 	"List of Polish people",
 	"Louvre",
 	"Coffee",
@@ -304,6 +305,13 @@ func _on_fetch_complete(_titles, context):
 		context.title,
 		prev_title
 	)
+
+	if len(items) == 1:
+		var notice = NoImageNotice.instantiate()
+		notice.rotation.y = Util.vecToRot(new_exhibit.entry.to_dir) - PI / 4
+		notice.position = Util.gridToWorld(new_exhibit.entry.to_pos) + 5 * new_exhibit.entry.to_dir
+		notice.position -= new_exhibit.entry.to_dir.rotated(Vector3.UP, PI / 2) * 2
+		new_exhibit.add_child(notice)
 
 	var exits = new_exhibit.exits
 	var slots = new_exhibit.item_slots
