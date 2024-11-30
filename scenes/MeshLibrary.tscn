@@ -8,9 +8,9 @@
 [ext_resource type="ArrayMesh" uid="uid://dhctqrba2l38r" path="res://assets/3d_tiles/ceiling.obj" id="4_fgmr1"]
 [ext_resource type="ArrayMesh" uid="uid://dx38ygeltsn2g" path="res://assets/3d_tiles/wall_all_sides.obj" id="5_ic82d"]
 [ext_resource type="ArrayMesh" uid="uid://ct0p5ce8ug473" path="res://assets/3d_tiles/wall_block.obj" id="6_q75mp"]
-[ext_resource type="ArrayMesh" uid="uid://be74lubpnfy73" path="res://assets/3d_tiles/internal_hall_turn.obj" id="7_pr5as"]
-[ext_resource type="ArrayMesh" uid="uid://8jnujvxdl3ed" path="res://assets/3d_tiles/internal_hall.obj" id="8_4mi86"]
+[ext_resource type="ArrayMesh" uid="uid://dsnbfgvp65ryq" path="res://assets/3d_tiles/internal_hall_arch_turn.obj" id="9_5ohlx"]
 [ext_resource type="ArrayMesh" uid="uid://dl5nose8tpc4q" path="res://assets/3d_tiles/marker.obj" id="9_xrbl6"]
+[ext_resource type="ArrayMesh" uid="uid://mqag4uipnvv2" path="res://assets/3d_tiles/internal_hall_arch.obj" id="10_733lw"]
 [ext_resource type="ArrayMesh" uid="uid://bcb8di0twdcv" path="res://assets/3d_tiles/bench.obj" id="10_g48g6"]
 [ext_resource type="ArrayMesh" uid="uid://c0n826tfeg74v" path="res://assets/3d_tiles/free_wall.obj" id="11_y14c5"]
 [ext_resource type="Material" uid="uid://datvvi6j3c0kp" path="res://assets/textures/white.tres" id="12_r4mto"]
@@ -36,16 +36,16 @@ points = PackedVector3Array(-2.00002, 4.00002, 2, -2.00002, 4.00002, -2, -2.0000
 points = PackedVector3Array(2, 4, 2, 2, 4, -2, -2, 4, 2, 2, 0, 2, 2, 0, -2, -2, 4, -2, -2, 0, 2, -2, 0, -2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fl1ol"]
-size = Vector3(1, 4, 1)
+size = Vector3(0.5, 4, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6y7eq"]
-size = Vector3(1, 4, 4)
+size = Vector3(0.5, 4, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c2hvi"]
-size = Vector3(3, 4, 1)
+size = Vector3(3.5, 4, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i18nf"]
-size = Vector3(1, 4, 4)
+size = Vector3(0.5, 4, 4)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qutds"]
 points = PackedVector3Array(1, 0.5, 0.25, 1, 0.5, -0.25, -1, 0.5, 0.25, 1, 0, 0.25, 1, 0, -0.25, -1, 0.5, -0.25, -1, 0, 0.25, -1, 0, -0.25)
@@ -130,39 +130,38 @@ collision_mask = 0
 shape = SubResource("ConvexPolygonShape3D_d6xge")
 
 [node name="internal_hall_turn" type="MeshInstance3D" parent="."]
-visible = false
-mesh = ExtResource("7_pr5as")
+mesh = ExtResource("9_5ohlx")
 surface_material_override/0 = ExtResource("12_r4mto")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="internal_hall_turn"]
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="internal_hall_turn/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2, 1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 2, 1.75)
 shape = SubResource("BoxShape3D_fl1ol")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="internal_hall_turn/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 2, 0)
 shape = SubResource("BoxShape3D_6y7eq")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="internal_hall_turn/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 2, -1.75)
 shape = SubResource("BoxShape3D_c2hvi")
 
 [node name="internal_hall" type="MeshInstance3D" parent="."]
 visible = false
-mesh = ExtResource("8_4mi86")
+mesh = ExtResource("10_733lw")
 surface_material_override/0 = ExtResource("12_r4mto")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="internal_hall"]
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="internal_hall/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 2, 0)
 shape = SubResource("BoxShape3D_i18nf")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="internal_hall/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 2, 0)
 shape = SubResource("BoxShape3D_i18nf")
 
 [node name="marker" type="MeshInstance3D" parent="."]
@@ -230,6 +229,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 4, 0)
 shape = SubResource("BoxShape3D_f62at")
 
 [node name="half_stair_lower" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("17_uq5j0")
 surface_material_override/0 = ExtResource("19_4jtqk")
 
@@ -239,6 +239,7 @@ surface_material_override/0 = ExtResource("19_4jtqk")
 shape = SubResource("ConvexPolygonShape3D_lge6f")
 
 [node name="half_stair_upper" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("18_07a44")
 surface_material_override/0 = ExtResource("19_4jtqk")
 

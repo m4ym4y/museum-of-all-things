@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dvchvw2bc87oe" path="res://scenes/util/ExhibitFetcher.tscn" id="5_yffah"]
 
 [sub_resource type="Environment" id="Environment_g30yg"]
+background_mode = 1
 ambient_light_source = 2
 ambient_light_color = Color(1, 0.960784, 0.882353, 1)
 ambient_light_energy = 0.2
@@ -22,6 +23,7 @@ fog_mode = 1
 fog_light_color = Color(1, 1, 1, 1)
 fog_density = 1.0
 fog_depth_curve = 0.594605
+volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 volumetric_fog_albedo = Color(0, 0, 0, 1)
 volumetric_fog_length = 32.0

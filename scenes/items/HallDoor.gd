@@ -2,8 +2,8 @@ extends Node3D
 
 @onready var _door = $Door
 @onready var _open = false
-var _open_pos = Vector3(0, 5, 0)
-var _closed_pos = Vector3(0, 1.5, 0)
+var _open_pos = Vector3(0, 6.5, 0)
+var _closed_pos = Vector3(0, 2, 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

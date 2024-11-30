@@ -77,10 +77,11 @@ func init(grid, from_title, to_title, hall_start, hall_dir, room_root = Vector3(
 	to_dir = exit_hall_dir
 	to_pos = exit_hall
 
-	from_sign.position = Util.gridToWorld(exit_hall + exit_hall_dir * 0.65) - position
-	from_sign.position += exit_hall_dir.rotated(Vector3.UP, PI / 2).normalized() * 1.5
-	from_sign.rotation.y = Util.vecToRot(exit_hall_dir) + 3 * PI / 4
+	#from_sign.position = Util.gridToWorld(exit_hall + exit_hall_dir * 0.65) - position
+	#from_sign.position -= exit_hall_dir.rotated(Vector3.UP, PI / 2).normalized() * 1.5
+	#from_sign.rotation.y = Util.vecToRot(exit_hall_dir) + 3 * PI / 4
 	from_sign.text = from_title
+	from_sign.visible = false
 
 	to_sign.position = Util.gridToWorld(hall_start - hall_dir * 0.60) - position
 	to_sign.position -= hall_dir.rotated(Vector3.UP, PI / 2).normalized() * 1.5

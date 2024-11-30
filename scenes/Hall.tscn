@@ -12,12 +12,12 @@ script = ExtResource("1_eu127")
 [node name="LoaderTrigger" parent="." instance=ExtResource("2_fcpmw")]
 monitoring = false
 
-[node name="EntryDoor" parent="." instance=ExtResource("3_1akbl")]
-
-[node name="ExitDoor" parent="." instance=ExtResource("3_1akbl")]
-
 [node name="HallDirectionDetector" parent="." instance=ExtResource("4_y7uhf")]
 
 [node name="FromSign" parent="." instance=ExtResource("5_h6bvl")]
 
 [node name="ToSign" parent="." instance=ExtResource("5_h6bvl")]
+
+[node name="EntryDoor" parent="." instance=ExtResource("3_1akbl")]
+
+[node name="ExitDoor" parent="." instance=ExtResource("3_1akbl")]

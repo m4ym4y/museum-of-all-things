@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://u4b0awts0vdi"]
+[gd_scene load_steps=10 format=3 uid="uid://u4b0awts0vdi"]
 
 [ext_resource type="MeshLibrary" uid="uid://dn3xjwj3urrq6" path="res://assets/3d_tiles/mesh_library.tres" id="1_3jgkl"]
 [ext_resource type="Script" path="res://scenes/items/lobby.gd" id="1_rlemg"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://c7c48j23p78pk" path="res://assets/textures/wood_2.tres" id="5_y8wdr"]
 [ext_resource type="PackedScene" uid="uid://c5wpeqr3s3lw4" path="res://scenes/items/Sign.tscn" id="6_oy2e6"]
 [ext_resource type="PackedScene" uid="uid://y1oelsib8v3i" path="res://scenes/items/WallItem.tscn" id="7_c644f"]
+[ext_resource type="PackedScene" uid="uid://d11xwkqf1h74w" path="res://scenes/items/FogWall.tscn" id="8_85ppu"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_l4pxp"]
 points = PackedVector3Array(-2.3068, 0.628428, -2.375, -2.3068, 0.749855, -2.375, -2.00016, -0.75, -2.375, -2.3068, 0.628428, 0.432522, -2.3068, 0.749855, 0.432522, -1.19359, 0.750002, -2.375, -2.00016, -0.75, 0.374811, 1.99971, -0.75, -2.375, 2.30635, 0.628428, 0.432522, -1.19359, 0.750002, -0.432599, 2.30635, 0.749855, 0.432522, 2.3068, 0.749855, -0.375163, 2.30635, 0.749855, -2.375, 1.99971, -0.75, 0.374811, 2.30635, 0.628428, -2.375)
@@ -94,3 +95,7 @@ light = false
 [node name="Pool4" parent="." instance=ExtResource("2_7a848")]
 transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.25, -4.5, 0, 1.06516)
 light = false
+
+[node name="FogWall" parent="." instance=ExtResource("8_85ppu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8008, 0.852732, 13.5304)
+visible = false

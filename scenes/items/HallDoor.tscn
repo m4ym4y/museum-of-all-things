@@ -1,24 +1,23 @@
 [gd_scene load_steps=5 format=3 uid="uid://cy7vwbnkk3yj1"]
 
 [ext_resource type="Script" path="res://scenes/items/HallDoor.gd" id="1_elymj"]
-[ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://assets/textures/wood.tres" id="1_r1fbc"]
+[ext_resource type="Material" uid="uid://datvvi6j3c0kp" path="res://assets/textures/white.tres" id="2_d6v76"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bo0ln"]
-size = Vector3(2, 3, 0.05)
+size = Vector3(4, 4, 0.05)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_oah2i"]
-points = PackedVector3Array(-1, -1.5, -0.025, -1, -1.5, 0.025, -1, 1.5, -0.025, 1, -1.5, -0.025, 1, -1.5, 0.025, -1, 1.5, 0.025, 1, 1.5, -0.025, 1, 1.5, 0.025)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pncmq"]
+points = PackedVector3Array(2, 2, 0.025, 2, 2, -0.025, -2, 2, 0.025, 2, -2, 0.025, 2, -2, -0.025, -2, 2, -0.025, -2, -2, 0.025, -2, -2, -0.025)
 
 [node name="HallDoor" type="Node3D"]
 script = ExtResource("1_elymj")
 
 [node name="Door" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 mesh = SubResource("BoxMesh_bo0ln")
-surface_material_override/0 = ExtResource("1_r1fbc")
+surface_material_override/0 = ExtResource("2_d6v76")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Door"]
-collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Door/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_oah2i")
+shape = SubResource("ConvexPolygonShape3D_pncmq")
