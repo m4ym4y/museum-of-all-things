@@ -72,7 +72,7 @@ func init(player):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	IMAGE_REGEX.compile("\\.(png|jpg|jpeg)$")
+	IMAGE_REGEX.compile("\\.(png|jpg|jpeg|webp|svg)$")
 
 	$WorldEnvironment.environment.ssr_enabled = not _xr
 

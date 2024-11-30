@@ -17,14 +17,37 @@ func _get_hash(input: String) -> String:
 	var hash_result = context.finish()
 	return hash_result.hex_encode()
 
-func _detect_image_type(buffer: PackedByteArray):
-	if buffer.size() < 8:
-		return null
-	elif buffer.slice(0, 9) == PackedByteArray([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]):
+func _detect_image_type(data: PackedByteArray) -> String:
+	if data.size() < 8:
+		return "Unknown"  # Insufficient data to determine type
+
+	# Convert to hexadecimal strings for easy comparison
+	var header = data.slice(0, 8)
+	var hex_header = ""
+	for byte in header:
+		hex_header += ("%02x" % byte).to_lower()
+
+	# Check PNG signature
+	if hex_header.begins_with("89504e470d0a1a0a"):
 		return "PNG"
-	elif buffer[0] == 0xFF and buffer[1] == 0xD8:
+
+	# Check JPEG signature
+	if hex_header.begins_with("ffd8ff"):
 		return "JPEG"
-	return null
+
+	# Check WebP signature (RIFF and WEBP)
+	if hex_header.begins_with("52494646"):  # "RIFF"
+		if data.size() >= 12:
+			var riff_type = data.slice(8, 12).get_string_from_ascii()
+			if riff_type == "WEBP":
+				return "WebP"
+
+	# Check SVG (look for '<?xml' or '<svg')
+	if data.size() >= 5:
+		var xml_start = data.slice(0, 5).get_string_from_utf8()
+		if xml_start.begins_with("<?xml") or xml_start.begins_with("<svg"):
+			return "SVG"
+	return "Unknown"
 
 func _write_url(url: String, data: PackedByteArray) -> void:
 	#TODO: acquire lock?
@@ -65,6 +88,10 @@ func _create_and_emit_image(url, data, ctx):
 		image.load_png_from_buffer(data)
 	elif fmt == "JPEG":
 		image.load_jpg_from_buffer(data)
+	elif fmt == "SVG":
+		image.load_svg_from_buffer(data)
+	elif fmt == "WebP":
+		image.load_webp_from_buffer(data)
 	else:
 		_img_cache[url] = null
 		return null
