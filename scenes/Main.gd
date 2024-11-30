@@ -12,7 +12,7 @@ func _init() -> void:
 		_player = _player.get_node("XROrigin3D")
 
 	_player.rotation.y = 3 * PI / 2
-	_player.position = Vector3(-6, 0, 0)
+	_player.position = Vector3(-6, 0, -2)
 
 func _ready():
 	$Museum.init(_player)

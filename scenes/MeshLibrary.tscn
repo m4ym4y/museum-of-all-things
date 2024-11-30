@@ -65,10 +65,10 @@ size = Vector3(0.5, 8, 8)
 [sub_resource type="BoxShape3D" id="BoxShape3D_f62at"]
 size = Vector3(0.5, 8, 8)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ga3yr"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lge6f"]
 points = PackedVector3Array(-2, 2, -2, -2, 1.89996, -1.80031, -2, 2, -1.80031, 2, 2, -2, 2, 1.89996, -1.80031, -2, 1.4998, -1.00039, -2, 0.0998434, 2, 2, 2, -1.80031, 2, 1.4998, -1.00039, -2, 0.499804, 0.999608, -2, 0, 2, 2, 0.0998434, 2, 2, 0.499804, 0.999608, -2, 0.0998434, 1.79992, 2, 0, 2, 2, 0.0998434, 1.79992)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_es1fi"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1bst7"]
 points = PackedVector3Array(-2, 4, -2, -2, 3.89996, -1.80031, -2, 4, -1.80031, 2, 4, -2, 2, 3.89996, -1.80031, -2, 3.4998, -1.00039, -2, 2.09984, 2, 2, 4, -1.80031, 2, 3.4998, -1.00039, -2, 2.4998, 0.999608, -2, 2, 2, 2, 2.09984, 2, 2, 2.4998, 0.999608, -2, 2.09984, 1.79992, 2, 2, 2, 2, 2.09984, 1.79992)
 
 [node name="MeshLibrary" type="Node3D"]
@@ -215,6 +215,7 @@ shape = SubResource("ConvexPolygonShape3D_ne81i")
 
 [node name="straight_hall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+visible = false
 mesh = ExtResource("16_rrmem")
 surface_material_override/0 = ExtResource("12_r4mto")
 
@@ -229,21 +230,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 4, 0)
 shape = SubResource("BoxShape3D_f62at")
 
 [node name="half_stair_lower" type="MeshInstance3D" parent="."]
-visible = false
 mesh = ExtResource("17_uq5j0")
 surface_material_override/0 = ExtResource("19_4jtqk")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="half_stair_lower"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="half_stair_lower/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_ga3yr")
+shape = SubResource("ConvexPolygonShape3D_lge6f")
 
 [node name="half_stair_upper" type="MeshInstance3D" parent="."]
-visible = false
 mesh = ExtResource("18_07a44")
 surface_material_override/0 = ExtResource("19_4jtqk")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="half_stair_upper"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="half_stair_upper/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_es1fi")
+shape = SubResource("ConvexPolygonShape3D_1bst7")

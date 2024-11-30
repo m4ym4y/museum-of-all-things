@@ -37,6 +37,18 @@ extends Node3D
 	"Minox",
 ]
 
+@onready var INTRODUCTION = {
+	"type": "text",
+	"text": """
+Welcome to the Wikipedia Museum!
+ 
+This museum contains all of wikipedia, and is free for you to explore. Each exhibit has been assembled using the images and text contained in its corresponding wikipedia page.
+ 
+Additionally, every exhibit contains doors to many other interesting exhibits. These are chosen based on the pages that the exhibit's wikipedia page links to.
+ 
+Have fun exploring!"""
+}
+
 # item types
 @onready var WallItem = preload("res://scenes/items/WallItem.tscn")
 @onready var IMAGE_REGEX = RegEx.new()
@@ -71,6 +83,7 @@ func _ready() -> void:
 func _set_up_lobby(lobby):
 	var exits = lobby.exits
 	_exhibits["$Lobby"] = lobby
+	lobby.get_node("Introduction").init(INTRODUCTION)
 
 	print("Setting up lobby with %s exits..." % len(exits))
 
@@ -103,13 +116,13 @@ func set_up_exhibit(exhibit, room_count=default_room_count, title="Lobby", prev_
 
 func _set_current_room_title(title):
 	_current_room_title = title
-	
+
 	$Speaker.stop()
 	get_tree().create_timer(3.0).timeout.connect(_speak_current_page)
-	
+
 	var fog_color = Util.gen_fog(_current_room_title)
 	var environment = $WorldEnvironment.environment
-	
+
 	if environment.fog_light_color != fog_color:
 		var tween = create_tween()
 		tween.tween_property(

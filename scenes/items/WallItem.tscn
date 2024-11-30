@@ -63,7 +63,4 @@ visibility_range_end_margin = 5.0
 visibility_range_fade_mode = 1
 mesh = ExtResource("4_6x08y")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("4_1bj2r")
-surface_material_override/1 = ExtResource("4_1bj2r")
-surface_material_override/2 = ExtResource("4_1bj2r")
 surface_material_override/3 = ExtResource("6_744c2")
