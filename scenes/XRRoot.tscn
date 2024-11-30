@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dn526eij58wfs"]
+[gd_scene load_steps=10 format=3 uid="uid://dn526eij58wfs"]
 
 [ext_resource type="Script" path="res://scenes/XRRoot.gd" id="1_t4l57"]
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_v48yd"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://addons/godot-xr-tools/player/player_body.gd" id="4_l0d4h"]
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="5_wqppd"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/functions/movement_turn.gd" id="6_80eyh"]
+[ext_resource type="Script" path="res://addons/godot-xr-tools/functions/movement_direct.gd" id="6_mvrkt"]
 
 [node name="XrRoot" type="Node3D"]
 script = ExtResource("1_t4l57")
@@ -20,6 +21,11 @@ script = ExtResource("1_t4l57")
 
 [node name="XRController3D_left" type="XRController3D" parent="XROrigin3D"]
 tracker = &"left_hand"
+
+[node name="XRToolsMovementDirect" type="Node" parent="XROrigin3D/XRController3D_left" groups=["movement_providers"]]
+script = ExtResource("6_mvrkt")
+strafe = true
+enabled = false
 
 [node name="FunctionTeleport" parent="XROrigin3D/XRController3D_left" instance=ExtResource("3_gm17t")]
 can_teleport_color = Color(1, 1, 1, 1)

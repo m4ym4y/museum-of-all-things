@@ -10,8 +10,10 @@ func _init() -> void:
 
 	if Util.is_xr():
 		_player = _player.get_node("XROrigin3D")
-
-	_player.rotation.y = 3 * PI / 2
+		_player.get_node("XRToolsPlayerBody").rotate_player(-3 * PI / 2)
+	else:
+		_player.rotation.y = 3 * PI / 2
+	
 	_player.position = Vector3(-6, 0, -2)
 
 func _ready():
