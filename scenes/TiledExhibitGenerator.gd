@@ -31,23 +31,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func cell_neighbors(pos, id):
-	var neighbors = []
-	for x in range(-1, 2):
-		for z in range(-1, 2):
-			# no diagonals
-			if x != 0 and z != 0:
-				continue
-			elif x == 0 and z == 0:
-				continue
-
-			var vec = Vector3(pos.x + x, pos.y, pos.z + z)
-			var cell_val = _grid.get_cell_item(vec)
-
-			if cell_val == id:
-				neighbors.append(vec)
-	return neighbors
-
 const FLOOR_WOOD = 0
 const FLOOR_CARPET = 11
 const FLOOR_MARBLE = 12
@@ -56,6 +39,9 @@ const WALL = 5
 const CEILING = 3
 const INTERNAL_HALL = 7
 const INTERNAL_HALL_TURN = 6
+const HALL_STAIRS_UP = 16
+const HALL_STAIRS_DOWN = 17
+const HALL_STAIRS_TURN = 18
 const MARKER = 8
 const BENCH = 9
 const FREE_WALL = 10
@@ -87,6 +73,7 @@ func generate(
 	var room_count = params.room_count
 	var title = params.title
 	var prev_title = params.prev_title
+	var hall_type = params.hall_type if params.has("hall_type") else [true, 0]
 
 	_no_props = params.has("no_props") and params.no_props
 
@@ -110,8 +97,9 @@ func generate(
 		_raw_grid,
 		prev_title,
 		title,
-		start_pos,
-		Vector3(1, 0, 0)
+		start_pos + (Vector3.DOWN * hall_type[1]),
+		Vector3(1, 0, 0),
+		hall_type,
 	)
 
 	starting_hall.entry_door.set_open(false, true)
@@ -129,7 +117,11 @@ func generate(
 		starting_hall.to_pos.x + starting_hall.to_dir.x * (2 + room_width / 2),
 		start_pos.y,
 		starting_hall.to_pos.z + starting_hall.to_dir.z * (2 + room_length / 2),
-	) - starting_hall.to_dir
+	) - (starting_hall.to_dir if hall_type[0] else Vector3.ZERO)
+
+	var b = room_to_bounds(room_center, room_width, room_length)
+	if overlaps_room(b[0], b[1], start_pos.y):
+		print("We are overlapping the starting hall probably")
 
 	var next_room_direction
 	var next_room_width
@@ -202,9 +194,9 @@ func generate(
 				end_hall += Vector3((hall_width - 1) / 2, 0, 0)
 
 			carve_room(
-					start_hall,
-					end_hall,
-					start_pos.y
+				start_hall,
+				end_hall,
+				start_pos.y
 			)
 
 		room_center = next_room_center
@@ -269,7 +261,7 @@ func decorate_room_center(center, width, length):
 			for z in range(c1.z, c2.z + 1):
 				var pos = Vector3(x, y, z)
 				var free_wall = _rng.randi_range(0, 1) == 0
-				var valid_free_wall = len(cell_neighbors(pos, WALL)) == 0 and len(cell_neighbors(pos, INTERNAL_HALL)) == 0
+				var valid_free_wall = len(Util.cell_neighbors(_grid, pos, WALL)) == 0 and len(Util.cell_neighbors(_grid, pos, INTERNAL_HALL)) == 0
 				if width > 3 or length > 3 and free_wall and valid_free_wall and _room_count > 2:
 					var dir = Vector3.RIGHT if width > length else Vector3.FORWARD
 					var item_dir = Vector3.FORWARD if width > length else Vector3.RIGHT
@@ -283,31 +275,24 @@ func decorate_room_center(center, width, length):
 func decorate_wall_tile(pos):
 	# grid.set_cell_item(pos + Vector3(0, 2, 0), MARKER, 0)
 
-	var wall_neighbors = cell_neighbors(pos, WALL)
+	var wall_neighbors = Util.cell_neighbors(_grid, pos, WALL)
 	for wall in wall_neighbors:
 		var slot = (wall + pos) / 2
 		var hall_dir = wall - pos
-		var hall_corner = wall + hall_dir
-		var hall_exit_dir = hall_dir.rotated(Vector3.UP, 3 * PI / 2)
-		var past_hall_exit = hall_corner + 2 * hall_exit_dir
+		var valid_halls = Hall.valid_hall_types(_grid, wall, hall_dir)
 
 		# put an exit everywhere it fits
-		if (
-				_grid.get_cell_item(hall_corner - Vector3(0, 1, 0)) == -1 and
-				not (
-					_grid.get_cell_item(past_hall_exit - Vector3.UP) != -1 and
-					_grid.get_cell_item(past_hall_exit) == -1
-				) and
-				len(cell_neighbors(hall_corner - Vector3(0, 1, 0), -1)) == 4
-		):
+		if (len(valid_halls) > 0):
 			var new_hall = hall.instantiate()
+			var hall_type = valid_halls[_rng.randi() % len(valid_halls)]
 			add_child(new_hall)
 			new_hall.init(
 				_raw_grid,
 				_title,
 				_title,
 				wall,
-				hall_dir
+				hall_dir,
+				hall_type
 			)
 
 			exits.append(new_hall)
@@ -329,12 +314,15 @@ func carve_room(corner1, corner2, y):
 	for x in range(lx - 1, gx + 2):
 		for z in range(lz - 1, gz + 2):
 			if x < lx or z < lz or x > gx or z > gz:
-				if _grid.get_cell_item(Vector3(x, y - 1, z)) == -1:
+				var c = _grid.get_cell_item(Vector3(x, y, z))
+				if c == HALL_STAIRS_UP or c == HALL_STAIRS_DOWN or c == HALL_STAIRS_TURN:
+					continue
+				elif c == INTERNAL_HALL:
+					_grid.set_cell_item(Vector3(x, y + 1, z), WALL, 0)
+				elif _grid.get_cell_item(Vector3(x, y - 1, z)) == -1:
 					_grid.set_cell_item(Vector3(x, y, z), WALL, 0)
 					_grid.set_cell_item(Vector3(x, y + 1, z), WALL, 0)
 					_grid.set_cell_item(Vector3(x, y + 2, z), -1, 0)
-				elif _grid.get_cell_item(Vector3(x, y, z)) == INTERNAL_HALL:
-					_grid.set_cell_item(Vector3(x, y + 1, z), WALL, 0)
 			else:
 				_grid.set_cell_item(Vector3(x, y, z), -1, 0)
 				_grid.set_cell_item(Vector3(x, y + 1, z), -1, 0)
@@ -344,7 +332,6 @@ func carve_room(corner1, corner2, y):
 func overlaps_room(corner1, corner2, y):
 	for x in range(corner1.x - 1, corner2.x + 2):
 		for z in range(corner1.z - 1, corner2.z + 2):
-			var cell = _grid.get_cell_item(Vector3(x, y - 1, z))
-			if cell != -1:
+			if not Util.safe_overwrite(_grid, Vector3(x, y, z)):
 				return true
 	return false

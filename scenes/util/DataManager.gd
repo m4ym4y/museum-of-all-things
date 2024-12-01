@@ -15,6 +15,7 @@ func _get_hash(input: String) -> String:
 	context.start(HashingContext.HASH_SHA256)
 	context.update(input.to_utf8_buffer())
 	var hash_result = context.finish()
+	print("got hash. from=%s to=%s" % [input, hash_result.hex_encode()])
 	return hash_result.hex_encode()
 
 func _detect_image_type(data: PackedByteArray) -> String:

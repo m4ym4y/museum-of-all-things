@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://do2hoycmvhwx5"]
+[gd_scene load_steps=39 format=3 uid="uid://do2hoycmvhwx5"]
 
 [ext_resource type="ArrayMesh" uid="uid://cqx6504q1n84q" path="res://assets/3d_tiles/floor.obj" id="1_mkj83"]
 [ext_resource type="ArrayMesh" uid="uid://dfel3x4ha4i57" path="res://assets/3d_tiles/wall.obj" id="2_23gr6"]
@@ -19,6 +19,8 @@
 [ext_resource type="ArrayMesh" uid="uid://cyw85v7bex4dx" path="res://assets/3d_tiles/half_stairs_lower.obj" id="17_uq5j0"]
 [ext_resource type="ArrayMesh" uid="uid://drhh7ckwwsth7" path="res://assets/3d_tiles/half_stairs_upper.obj" id="18_07a44"]
 [ext_resource type="Material" uid="uid://c7c48j23p78pk" path="res://assets/textures/wood_2.tres" id="19_4jtqk"]
+[ext_resource type="ArrayMesh" uid="uid://lu4ki045ha32" path="res://assets/3d_tiles/internal_hall_stairs.obj" id="20_vo6p2"]
+[ext_resource type="ArrayMesh" uid="uid://cgkd32s7qf8k7" path="res://assets/3d_tiles/internal_hall_stairs_turn.obj" id="21_784fj"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yaqsi"]
 points = PackedVector3Array(-2, 4, -2, -2, 4, 2, 2, 4, -2, 2, 4, 2)
@@ -67,6 +69,9 @@ size = Vector3(0.5, 8, 8)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_23ryu"]
 points = PackedVector3Array(-2, 0, 2, -2, 2, -2, 2, 2, -2, 2, 0, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8hjjm"]
+size = Vector3(4, 1, 4)
 
 [node name="MeshLibrary" type="Node3D"]
 
@@ -227,6 +232,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 4, 0)
 shape = SubResource("BoxShape3D_f62at")
 
 [node name="half_stair_lower" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("17_uq5j0")
 surface_material_override/0 = ExtResource("19_4jtqk")
 
@@ -237,6 +243,7 @@ collision_mask = 0
 shape = SubResource("ConvexPolygonShape3D_23ryu")
 
 [node name="half_stair_upper" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("18_07a44")
 surface_material_override/0 = ExtResource("19_4jtqk")
 
@@ -246,3 +253,50 @@ collision_mask = 0
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="half_stair_upper/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("ConvexPolygonShape3D_23ryu")
+
+[node name="hall_stair_up" type="MeshInstance3D" parent="."]
+mesh = ExtResource("20_vo6p2")
+surface_material_override/0 = ExtResource("19_4jtqk")
+surface_material_override/1 = ExtResource("12_r4mto")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="hall_stair_up"]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="hall_stair_up/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_23ryu")
+
+[node name="hall_stair_down" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2, 0)
+mesh = ExtResource("20_vo6p2")
+surface_material_override/0 = ExtResource("19_4jtqk")
+surface_material_override/1 = ExtResource("12_r4mto")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="hall_stair_down"]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="hall_stair_down/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_23ryu")
+
+[node name="hall_stair_turn" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+visible = false
+mesh = ExtResource("21_784fj")
+surface_material_override/0 = ExtResource("12_r4mto")
+surface_material_override/1 = ExtResource("2_tedfh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="hall_stair_turn"]
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hall_stair_turn/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 2, 1.75)
+shape = SubResource("BoxShape3D_fl1ol")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="hall_stair_turn/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 2, 0)
+shape = SubResource("BoxShape3D_6y7eq")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="hall_stair_turn/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 2, -1.75)
+shape = SubResource("BoxShape3D_c2hvi")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="hall_stair_turn/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_8hjjm")

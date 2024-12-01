@@ -179,6 +179,7 @@ func _load_exhibit_from_entry(entry):
 func _load_exhibit_from_exit(exit):
 	var next_article = Util.coalesce(exit.to_title, "Fungus")
 
+	# TODO: this needs to only work if the hall type matches
 	if _exhibits.has(next_article):
 		var next_exhibit = _exhibits[next_article]
 		if next_exhibit.has("entry") and exit.player_in_hall and exit.player_direction == "exit":
@@ -298,6 +299,7 @@ func _on_fetch_complete(_titles, context):
 		"title": context.title,
 		"prev_title": prev_title,
 		"no_props": len(items) < 10,
+		"hall_type": hall.hall_type,
 	})
 
 	if len(items) == 1:

@@ -57,3 +57,36 @@ func t_end(msg):
 	var _time_end = Time.get_ticks_usec()
 	var elapsed = _time_end - _time_start
 	print("elapsed=%s msg=%s" % [elapsed / 1000000.0, msg])
+
+func cell_neighbors(grid, pos, id):
+	var neighbors = []
+	for x in range(-1, 2):
+		for z in range(-1, 2):
+			# no diagonals
+			if x != 0 and z != 0:
+				continue
+			elif x == 0 and z == 0:
+				continue
+
+			var vec = Vector3(pos.x + x, pos.y, pos.z + z)
+			var cell_val = grid.get_cell_item(vec)
+
+			if cell_val == id:
+				neighbors.append(vec)
+	return neighbors
+
+func only_types_in_cells(grid, cells, types, p=false):
+	for c in cells:
+		var v = grid.get_cell_item(c)
+		if not types.has(v):
+			if p:
+				print("returning false-- found type ", v)
+			return false
+	return true
+
+func safe_overwrite(grid, pos):
+	return only_types_in_cells(grid, [
+		pos,
+		pos - Vector3.UP,
+		pos + Vector3.UP,
+	], [-1, 5])
