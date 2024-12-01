@@ -114,16 +114,19 @@ func create_curve_hall(hall_start, hall_dir, is_right=true, level=FLAT):
 		_grid.set_cell_item(hall_start + Vector3.UP, WALL, 0)
 		_grid.set_cell_item(hall_corner, INTERNAL_HALL_TURN, corner_ori)
 		_grid.set_cell_item(hall_corner - Vector3.UP, _floor, 0)
+		$Light.global_position = Util.gridToWorld(hall_corner) + Vector3.UP * 2
 	elif level == UP:
 		_grid.set_cell_item(hall_start, HALL_STAIRS_UP, ori)
 		_grid.set_cell_item(hall_start + Vector3.UP, -1, ori)
 		_grid.set_cell_item(hall_corner + Vector3.UP, -1, ori)
 		_grid.set_cell_item(hall_corner, HALL_STAIRS_TURN, corner_ori)
+		$Light.global_position = Util.gridToWorld(hall_corner) + Vector3.UP * 4
 	elif level == DOWN:
 		_grid.set_cell_item(hall_start, HALL_STAIRS_DOWN, ori)
 		_grid.set_cell_item(hall_start + Vector3.UP, -1, ori)
 		_grid.set_cell_item(hall_corner, -1, ori)
 		_grid.set_cell_item(hall_corner - Vector3.UP, HALL_STAIRS_TURN, corner_ori)
+		$Light.global_position = Util.gridToWorld(hall_corner)
 
 	var exit_hall_dir = hall_dir.rotated(Vector3.UP, (3 if is_right else 1) * PI / 2)
 	var exit_hall = hall_corner + exit_hall_dir
