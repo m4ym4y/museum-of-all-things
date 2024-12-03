@@ -146,7 +146,7 @@ func generate(
 
 		var early_terminate = true
 		var try_dirs = DIRECTIONS.duplicate()
-		try_dirs.shuffle()
+		Util.shuffle(_rng, try_dirs)
 
 		# sometimes just throw in branches to keep em guessing
 		if len(branch_point_list) < 3 or _rng.randi() % 4 != 0:

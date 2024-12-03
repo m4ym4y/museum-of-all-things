@@ -40,8 +40,10 @@ func normalize_url(url):
 		return url
 
 # it is intentional that these line up
-var FLOOR_LIST = [FLOOR_WOOD, FLOOR_MARBLE, FLOOR_CARPET]
-var FOG_LIST   = [Color.WHITE, Color.WHITE, Color.BLACK ]
+#var FLOOR_LIST = [FLOOR_WOOD, FLOOR_MARBLE, FLOOR_CARPET]
+#var FOG_LIST   = [Color.WHITE, Color.WHITE, Color.BLACK ]
+var FLOOR_LIST = [FLOOR_WOOD, FLOOR_MARBLE]
+var FOG_LIST   = [Color.WHITE, Color.WHITE]
 
 func gen_floor(title):
 	return FLOOR_LIST[hash(title) % len(FLOOR_LIST)]
@@ -90,3 +92,12 @@ func safe_overwrite(grid, pos):
 		pos - Vector3.UP,
 		pos + Vector3.UP,
 	], [-1, 5])
+
+func shuffle(rng, arr):
+	var n = len(arr)
+	for i in range(n - 1, 0, -1):
+		var j = rng.randi() % (i + 1) # Get a random index in range [0, i]
+		# Swap elements at indices i and j
+		var temp = arr[i]
+		arr[i] = arr[j]
+		arr[j] = temp

@@ -194,15 +194,8 @@ func _load_exhibit_from_exit(exit):
 
 func _seeded_shuffle(seed, arr):
 	var rng = RandomNumberGenerator.new()
-	var n = len(arr)
 	rng.seed = hash(seed)
-
-	for i in range(n - 1, 0, -1):
-		var j = rng.randi() % (i + 1) # Get a random index in range [0, i]
-		# Swap elements at indices i and j
-		var temp = arr[i]
-		arr[i] = arr[j]
-		arr[j] = temp
+	Util.shuffle(rng, arr)
 
 func _add_item(exhibit, slots, item_data):
 	var slot = slots.pop_front()
