@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://do2hoycmvhwx5"]
+[gd_scene load_steps=40 format=3 uid="uid://do2hoycmvhwx5"]
 
 [ext_resource type="ArrayMesh" uid="uid://cqx6504q1n84q" path="res://assets/3d_tiles/floor.obj" id="1_mkj83"]
 [ext_resource type="ArrayMesh" uid="uid://dfel3x4ha4i57" path="res://assets/3d_tiles/wall.obj" id="2_23gr6"]
@@ -69,6 +69,9 @@ size = Vector3(0.5, 8, 8)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_23ryu"]
 points = PackedVector3Array(-2, 0, 2, -2, 2, -2, 2, 2, -2, 2, 0, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gl468"]
+size = Vector3(0.5, 8, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8hjjm"]
 size = Vector3(4, 1, 4)
@@ -255,6 +258,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("ConvexPolygonShape3D_23ryu")
 
 [node name="hall_stair_up" type="MeshInstance3D" parent="."]
+visible = false
 mesh = ExtResource("20_vo6p2")
 surface_material_override/0 = ExtResource("19_4jtqk")
 surface_material_override/1 = ExtResource("12_r4mto")
@@ -264,8 +268,17 @@ surface_material_override/1 = ExtResource("12_r4mto")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="hall_stair_up/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_23ryu")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hall_stair_up/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 4, 0)
+shape = SubResource("BoxShape3D_gl468")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="hall_stair_up/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 4, 0)
+shape = SubResource("BoxShape3D_gl468")
+
 [node name="hall_stair_down" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2, 0)
+visible = false
 mesh = ExtResource("20_vo6p2")
 surface_material_override/0 = ExtResource("19_4jtqk")
 surface_material_override/1 = ExtResource("12_r4mto")
@@ -274,6 +287,14 @@ surface_material_override/1 = ExtResource("12_r4mto")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="hall_stair_down/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_23ryu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hall_stair_down/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 4, 0)
+shape = SubResource("BoxShape3D_gl468")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="hall_stair_down/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 4, 0)
+shape = SubResource("BoxShape3D_gl468")
 
 [node name="hall_stair_turn" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

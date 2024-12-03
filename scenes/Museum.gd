@@ -3,7 +3,7 @@ extends Node3D
 @onready var NoImageNotice = preload("res://scenes/items/NoImageNotice.tscn")
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
 @onready var DEFAULT_DOORS = [
-	"Precipitable water",
+	"Electrostatics",
 	"List of Polish people",
 	"Louvre",
 	"Coffee",
@@ -55,7 +55,6 @@ Have fun exploring!"""
 @onready var IMAGE_REGEX = RegEx.new()
 @onready var _xr = Util.is_xr()
 
-@onready var _fetcher = $ExhibitFetcher
 @onready var _exhibit_hist = []
 @onready var _exhibits = {}
 @onready var _backlink_map = {}
@@ -78,7 +77,7 @@ func _ready() -> void:
 	$WorldEnvironment.environment.ssr_enabled = not _xr
 
 	_grid = $Lobby/GridMap
-	_fetcher.fetch_complete.connect(_on_fetch_complete)
+	ExhibitFetcher.fetch_complete.connect(_on_fetch_complete)
 	_set_up_lobby($Lobby)
 
 func _set_up_lobby(lobby):
@@ -170,7 +169,7 @@ func _load_exhibit_from_entry(entry):
 		push_error("loading from entry even though prev article was unloaded?")
 		return
 
-	_fetcher.fetch([prev_article], {
+	ExhibitFetcher.fetch([prev_article], {
 		"title": prev_article,
 		"backlink": true,
 		"entry": entry,
@@ -187,7 +186,7 @@ func _load_exhibit_from_exit(exit):
 			_teleport_player(entry, exit)
 		return
 
-	_fetcher.fetch([next_article], {
+	ExhibitFetcher.fetch([next_article], {
 		"title": next_article,
 		"exit": exit
 	})
@@ -231,6 +230,7 @@ func _result_to_exhibit_data(title, result):
 				if IMAGE_REGEX.search(image.src):
 					items.append({
 						"type": "image",
+						"title": image.title if image.has("title") else "",
 						"src": image.src,
 						"text": Util.coalesce(image.text, image.src.split("/")[-1].uri_decode()),
 					})
@@ -265,7 +265,7 @@ func _on_fetch_complete(_titles, context):
 
 	var backlink = context.has("backlink") and context.backlink
 	var hall = context.entry if backlink else context.exit
-	var result = _fetcher.get_result(context.title)
+	var result = ExhibitFetcher.get_result(context.title)
 	if not result or not is_instance_valid(hall):
 		# TODO: show an out of order sign
 		return
@@ -343,8 +343,12 @@ func _on_fetch_complete(_titles, context):
 					break
 
 	var item_queue = []
+	var image_titles = []
 	for item_data in items:
+		if item_data.type == "image" and item_data.has("title") and item_data.title != "":
+			image_titles.append(item_data.title)
 		item_queue.append(_add_item.bind(new_exhibit, slots, item_data))
+	item_queue.append(ExhibitFetcher.fetch_image_metadata(image_titles, null))
 	_process_item_queue(item_queue, 0.1)
 
 	if backlink:

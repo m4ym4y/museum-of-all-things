@@ -11,4 +11,5 @@ script = ExtResource("1_d7g3n")
 
 [node name="Player" parent="." instance=ExtResource("3_3pqp1")]
 smooth_movement = false
-dampening = 0.002
+dampening = 0.001
+max_speed = 8

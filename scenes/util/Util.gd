@@ -99,3 +99,13 @@ func shuffle(rng, arr):
 		var temp = arr[i]
 		arr[i] = arr[j]
 		arr[j] = temp
+
+func strip_html(s):
+	var mid = display_none_re.sub(s, "", true)
+	return html_tag_re.sub(mid, "", true).replace("\n", " ")
+
+var html_tag_re = RegEx.new()
+var display_none_re = RegEx.new()
+func _ready():
+	display_none_re.compile("<.*?display:\\s*none.*?>.+?<.*?>")
+	html_tag_re.compile("<.+?>")

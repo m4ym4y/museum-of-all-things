@@ -25,6 +25,7 @@ DataManager="*res://scenes/util/DataManager.gd"
 Util="*res://scenes/util/Util.gd"
 XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
 XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"
+ExhibitFetcher="*res://scenes/util/ExhibitFetcher.gd"
 
 [display]
 
@@ -35,7 +36,7 @@ window/vsync/vsync_mode=0
 
 [editor]
 
-movie_writer/movie_file="/home/maya/Videos/wikipedia_museum_cinematic_2.avi"
+movie_writer/movie_file="/home/maya/Videos/wm_walkthrough.avi"
 
 [editor_plugins]
 

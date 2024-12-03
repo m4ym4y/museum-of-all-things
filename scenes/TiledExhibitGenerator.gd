@@ -119,10 +119,6 @@ func generate(
 		starting_hall.to_pos.z + starting_hall.to_dir.z * (2 + room_length / 2),
 	) - (starting_hall.to_dir if hall_type[0] else Vector3.ZERO)
 
-	var b = room_to_bounds(room_center, room_width, room_length)
-	if overlaps_room(b[0], b[1], start_pos.y):
-		print("We are overlapping the starting hall probably")
-
 	var next_room_direction
 	var next_room_width
 	var next_room_length
