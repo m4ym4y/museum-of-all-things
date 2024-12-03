@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://duhitdhs7gf8p"]
+
+[ext_resource type="Texture2D" uid="uid://bl2w4k5ae0arj" path="res://assets/textures/hall_lock.png" id="1_jtced"]
+
+[resource]
+albedo_texture = ExtResource("1_jtced")

@@ -177,7 +177,7 @@ func init(grid, from_title, to_title, hall_start, hall_dir, _hall_type=[true, FL
 	to_sign.text = to_title
 
 	entry_door.position = Util.gridToWorld(from_pos) - 1.9 * from_dir - position
-	entry_door.rotation.y = Util.vecToRot(from_dir)
+	entry_door.rotation.y = Util.vecToRot(from_dir) + PI
 	exit_door.position = Util.gridToWorld(to_pos) + 1.9 * to_dir - position
 	exit_door.rotation.y = Util.vecToRot(to_dir)
 	entry_door.set_open(true, true)
@@ -187,6 +187,13 @@ func init(grid, from_title, to_title, hall_start, hall_dir, _hall_type=[true, FL
 	_detector.monitoring = true
 	_detector.direction_changed.connect(_on_direction_changed)
 	_detector.init(Util.gridToWorld(from_pos), Util.gridToWorld(to_pos))
+
+	ExhibitFetcher.fetch_failed.connect(_on_fetch_failed)
+
+func _on_fetch_failed(titles, message):
+	for title in titles:
+		if title == to_title:
+			exit_door.set_message("Error Loading Exhibit: " + message)
 
 func _on_direction_changed(direction):
 	player_direction = direction

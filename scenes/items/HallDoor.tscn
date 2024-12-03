@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cy7vwbnkk3yj1"]
+[gd_scene load_steps=7 format=3 uid="uid://cy7vwbnkk3yj1"]
 
 [ext_resource type="Script" path="res://scenes/items/HallDoor.gd" id="1_elymj"]
 [ext_resource type="Material" uid="uid://datvvi6j3c0kp" path="res://assets/textures/white.tres" id="2_d6v76"]
+[ext_resource type="ArrayMesh" uid="uid://wbso87dqiion" path="res://assets/models/hall_lock.obj" id="3_mhnho"]
+[ext_resource type="Material" uid="uid://duhitdhs7gf8p" path="res://assets/textures/hall_lock.tres" id="4_87ha0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bo0ln"]
 size = Vector3(4, 4, 0.05)
@@ -22,3 +24,31 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Door/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_pncmq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.03)
+mesh = ExtResource("3_mhnho")
+surface_material_override/0 = ExtResource("4_87ha0")
+
+[node name="LabelPivot" type="Node3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.04)
+
+[node name="Label1" type="Label3D" parent="Door/LabelPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+pixel_size = 0.001
+modulate = Color(0, 0, 0, 1)
+text = "Loading Exhibit..."
+font_size = 100
+outline_size = 0
+autowrap_mode = 3
+width = 850.0
+
+[node name="Label2" type="Label3D" parent="Door/LabelPivot"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, -0.3, 0)
+pixel_size = 0.001
+modulate = Color(0, 0, 0, 1)
+text = "Error Loading Exhibit."
+font_size = 100
+outline_size = 0
+autowrap_mode = 3
+width = 850.0

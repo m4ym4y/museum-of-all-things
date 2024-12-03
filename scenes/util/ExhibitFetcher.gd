@@ -1,6 +1,7 @@
 extends Node
 
 signal fetch_complete(titles, context)
+signal fetch_failed(titles, message)
 signal image_metadata_complete(files, context)
 
 const MAX_BATCH_SIZE = 50
@@ -200,7 +201,14 @@ func _on_request_completed(result, response_code, headers, body, ctx, caller_ctx
 				ctx.title = new_title
 				_dispatch_request(redirected_url, ctx, caller_ctx)
 				return
-		push_error("error in request ", result, " ", response_code, " ", ctx.url)
+		if response_code != 404:
+			push_error("error in request ", result, " ", response_code, " ", ctx.url)
+
+		if ctx.url.begins_with(all_info_endpoint):
+			emit_signal("fetch_failed", ctx.new_titles, str(response_code))
+		elif ctx.url.begins_with(media_list_endpoint):
+			emit_signal("fetch_failed", [ctx.original_title], str(response_code))
+
 		if ctx.url.begins_with(all_info_endpoint) or ctx.url.begins_with(image_metadata_endpoint):
 			get_tree().create_timer(REQUEST_DELAY).timeout.connect(_advance_queue)
 			return
