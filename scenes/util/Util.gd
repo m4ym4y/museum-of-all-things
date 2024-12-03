@@ -40,10 +40,8 @@ func normalize_url(url):
 		return url
 
 # it is intentional that these line up
-#var FLOOR_LIST = [FLOOR_WOOD, FLOOR_MARBLE, FLOOR_CARPET]
-#var FOG_LIST   = [Color.WHITE, Color.WHITE, Color.BLACK ]
-var FLOOR_LIST = [FLOOR_WOOD, FLOOR_MARBLE]
-var FOG_LIST   = [Color.WHITE, Color.WHITE]
+var FLOOR_LIST = [FLOOR_WOOD, FLOOR_MARBLE, FLOOR_CARPET]
+var FOG_LIST   = [Color.WHITE, Color.WHITE, Color.BLACK ]
 
 func gen_floor(title):
 	return FLOOR_LIST[hash(title) % len(FLOOR_LIST)]
