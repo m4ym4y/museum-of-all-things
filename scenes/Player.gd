@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
 var gravity = -30
-var max_speed = 8
 var crouch_move_speed = 4
 var mouse_sensitivity = 0.002
 @export var jump_impulse = 13
@@ -11,6 +10,10 @@ var crouching_height
 var crouch_time = 0.4
 var crouch_speed
 @onready var camera = get_node("Pivot/Camera3D")
+
+@export var smooth_movement = false
+@export var dampening = 0.01
+@export var max_speed = 8
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -35,12 +38,19 @@ func get_input_dir():
 		input_dir += global_transform.basis.x
 	return input_dir.normalized()
 
+var camera_v = Vector2.ZERO
 func _unhandled_input(event):
 	var is_mouse = event is InputEventMouseMotion
 	if is_mouse and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		rotate_y(-event.relative.x * mouse_sensitivity)
-		$Pivot.rotate_x(-event.relative.y * mouse_sensitivity)
-		$Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
+		if not smooth_movement:
+			rotate_y(-event.relative.x * mouse_sensitivity)
+			$Pivot.rotate_x(-event.relative.y * mouse_sensitivity)
+			$Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
+		else:
+			camera_v += Vector2(
+				clamp(-event.relative.y * mouse_sensitivity, -dampening, dampening),
+				clamp(-event.relative.x * mouse_sensitivity, -dampening, dampening)
+			)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -57,6 +67,11 @@ func _physics_process(delta):
 	set_up_direction(Vector3.UP)
 	set_floor_stop_on_slope_enabled(true)
 	move_and_slide()
+
+	if smooth_movement:
+		rotate_y(camera_v.y)
+		$Pivot.rotate_x(camera_v.x)
+		camera_v *= 0.95
 
 	if Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = jump_impulse

@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnnoct48gjtw6"]
+[gd_scene load_steps=4 format=3 uid="uid://bnnoct48gjtw6"]
 
 [ext_resource type="Script" path="res://scenes/Main.gd" id="1_d7g3n"]
 [ext_resource type="PackedScene" uid="uid://5javxi3uy0ep" path="res://scenes/Museum.tscn" id="1_ivvmh"]
+[ext_resource type="PackedScene" uid="uid://bw5yn00va6hxl" path="res://scenes/Player.tscn" id="3_3pqp1"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_d7g3n")
 
 [node name="Museum" parent="." instance=ExtResource("1_ivvmh")]
+
+[node name="Player" parent="." instance=ExtResource("3_3pqp1")]
+smooth_movement = false
+dampening = 0.002
