@@ -100,12 +100,20 @@ func shuffle(rng, arr):
 		arr[i] = arr[j]
 		arr[j] = temp
 
+func strip_markup(s):
+	var mid = curly_tag_re.sub(s, "", true)
+	return markup_tag_re.sub(mid, " ", true)
+
 func strip_html(s):
 	var mid = display_none_re.sub(s, "", true)
 	return html_tag_re.sub(mid, "", true).replace("\n", " ")
 
 var html_tag_re = RegEx.new()
 var display_none_re = RegEx.new()
+var markup_tag_re = RegEx.new()
+var curly_tag_re = RegEx.new()
 func _ready():
 	display_none_re.compile("<.*?display:\\s*none.*?>.+?<.*?>")
 	html_tag_re.compile("<.+?>")
+	markup_tag_re.compile("\\.\\w.+? ")
+	curly_tag_re.compile("\\{.+?\\}")

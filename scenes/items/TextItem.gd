@@ -11,7 +11,7 @@ func _ready():
 	pass
 
 func init(text):
-	$Label.text = text
+	$Label.text = Util.strip_markup(text)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

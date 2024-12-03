@@ -21,7 +21,7 @@ func _on_image_loaded(url, image, _ctx):
 	texture = _image
 
 	var label = $Label
-	label.text = text
+	label.text = Util.strip_markup(text)
 
 	var w = _image.get_width()
 	var h = _image.get_height()
