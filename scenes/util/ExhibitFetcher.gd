@@ -231,7 +231,6 @@ func _read_from_cache(title):
 
 func _on_media_list_request_completed(res, ctx, caller_ctx):
 	_set_page_field(ctx.title, "media_list_complete", true)
-	_cache_if_complete(ctx.original_title)
 
 	if not res.has("items"):
 		return
@@ -247,6 +246,7 @@ func _on_media_list_request_completed(res, ctx, caller_ctx):
 		images.append(image)
 
 	_append_page_field(ctx.title, "images", images)
+	_cache_if_complete(ctx.original_title)
 	_check_complete_and_emit(ctx.titles, caller_ctx)
 
 func _check_complete_and_emit(titles, caller_ctx):
