@@ -42,11 +42,11 @@ extends Node3D
 	"type": "rich_text",
 	"material": "marble",
 	"text": """
-[center][color=black][b][font_size=300]MoAT[/font_size]
+[center][color=black][b][font_size=75]MoAT[/font_size]
 
-[font_size=200]Welcome to the Museum of All Things[/font_size][/b]
+[font_size=50]Welcome to the Museum of All Things[/font_size][/b]
  
-[font_size=100]
+[font_size=25]
 This museum contains all of wikipedia, and is free for you to explore. Each exhibit has been assembled using the images and text contained in its corresponding wikipedia page.
  
 Additionally, every exhibit contains doors to many other interesting exhibits. These are chosen based on the pages that the exhibit's wikipedia page links to.
