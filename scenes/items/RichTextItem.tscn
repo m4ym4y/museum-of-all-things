@@ -18,8 +18,8 @@ texture = SubResource("ViewportTexture_54vlm")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(2400, 4000)
-size_2d_override = Vector2i(2400, 10240)
+size = Vector2i(2400, 3600)
+size_2d_override = Vector2i(2400, 10000)
 
 [node name="Control" type="Control" parent="SubViewport"]
 clip_contents = true

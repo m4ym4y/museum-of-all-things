@@ -64,6 +64,9 @@ Additionally, every exhibit contains doors to many other interesting exhibits. T
 @onready var _backlink_map = {}
 @onready var _next_height = 20
 @onready var _current_room_title = "Lobby"
+@export var items_per_room_estimate = 7
+@export var min_rooms_per_exhibit = 2
+
 var _grid
 var _player
 
@@ -254,7 +257,10 @@ func _on_fetch_complete(_titles, context):
 		"start_pos": Vector3.UP * _next_height,
 		"min_room_dimension": min_room_dimension,
 		"max_room_dimension": max_room_dimension,
-		"room_count": max(len(items) / 10, 2),
+		"room_count": max(
+			len(items) / items_per_room_estimate,
+			min_rooms_per_exhibit
+		),
 		"title": context.title,
 		"prev_title": prev_title,
 		"no_props": len(items) < 10,

@@ -62,12 +62,13 @@ static func _create_text_items(title, extract):
 			current_text = ""
 		else:
 			if line.begins_with("="):
-				if over_lim:
+				var sec = section_fmt % _clean_section(line)
+				if len(current_text) + len(sec) > max_len_soft:
 					_add_text_item(items, current_title, current_subtitle, current_text)
 					current_subtitle = _clean_section(line)
 					current_text = ""
 				else:
-					current_text += section_fmt % _clean_section(line)
+					current_text += sec
 			elif not over_lim:
 				current_text += p_fmt % line
 
