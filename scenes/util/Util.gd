@@ -108,6 +108,16 @@ func strip_html(s):
 	var mid = display_none_re.sub(s, "", true)
 	return html_tag_re.sub(mid, "", true).replace("\n", " ")
 
+func trim_to_length_sentence(s, lim):
+	var pos = len(s) - 1
+	while true:
+		if (s.substr(pos, 2) == ". " or s[pos] == "\n") and pos < lim:
+			break
+		pos -= 1
+		if pos < 0:
+			break
+	return s.substr(0, pos + 1)
+
 var html_tag_re = RegEx.new()
 var display_none_re = RegEx.new()
 var markup_tag_re = RegEx.new()

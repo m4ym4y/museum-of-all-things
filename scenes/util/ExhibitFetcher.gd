@@ -12,7 +12,7 @@ const WIKIMEDIA_PREFIX = "https://commons.wikimedia.org/wiki/"
 const WIKIPEDIA_PREFIX = "https://wikipedia.org/wiki/"
 var COMMON_HEADERS
 
-var all_info_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=info|links|extracts&exintro=true&explaintext=true&pllimit=max&format=json&redirects=1&titles="
+var all_info_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=info|links|extracts&explaintext=true&pllimit=max&exlimit=max&format=json&redirects=1&titles="
 # var wiki_commons_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&gcmtitle=Category:Fossils&generator=categorymembers&gcmtype=file|subcat&prop=imageinfo|categories&iiprop=url|user|comment|extmetadata&gcmlimit=max&cllimit=max&format=json"
 var media_list_endpoint = "https://en.wikipedia.org/api/rest_v1/page/media-list/"
 var image_metadata_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata&iiextmetadatafilter=LicenseShortName|Artist&format=json&titles="

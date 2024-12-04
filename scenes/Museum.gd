@@ -57,13 +57,11 @@ Additionally, every exhibit contains doors to many other interesting exhibits. T
 
 # item types
 @onready var WallItem = preload("res://scenes/items/WallItem.tscn")
-@onready var IMAGE_REGEX = RegEx.new()
 @onready var _xr = Util.is_xr()
 
 @onready var _exhibit_hist = []
 @onready var _exhibits = {}
 @onready var _backlink_map = {}
-@onready var _text_map = {}
 @onready var _next_height = 20
 @onready var _current_room_title = "Lobby"
 var _grid
@@ -77,8 +75,6 @@ func init(player):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	IMAGE_REGEX.compile("\\.(png|jpg|jpeg|webp|svg)$")
-
 	$WorldEnvironment.environment.ssr_enabled = not _xr
 
 	_grid = $Lobby/GridMap
@@ -112,9 +108,6 @@ func set_up_exhibit(exhibit, params):
 
 func _set_current_room_title(title):
 	_current_room_title = title
-
-	$Speaker.stop()
-	get_tree().create_timer(3.0).timeout.connect(_speak_current_page)
 
 	var fog_color = Util.gen_fog(_current_room_title)
 	var environment = $WorldEnvironment.environment
@@ -157,11 +150,6 @@ func _teleport_player(from_hall, to_hall, entry_to_exit=false):
 		else:
 			_load_exhibit_from_entry(to_hall)
 
-func _speak_current_page():
-	if _text_map.has(_current_room_title):
-		#$Speaker.speak(_text_map[_current_room_title])
-		pass
-
 func _on_loader_body_entered(body, exit):
 	if body.is_in_group("Player"):
 		_load_exhibit_from_exit(exit)
@@ -196,11 +184,6 @@ func _load_exhibit_from_exit(exit):
 		"exit": exit
 	})
 
-func _seeded_shuffle(seed, arr):
-	var rng = RandomNumberGenerator.new()
-	rng.seed = hash(seed)
-	Util.shuffle(rng, arr)
-
 func _add_item(exhibit, slots, item_data):
 	var slot = slots.pop_front()
 	if slot == null:
@@ -215,38 +198,6 @@ func _add_item(exhibit, slots, item_data):
 	_init_item(exhibit, item, item_data)
 
 var text_item_fmt = "[color=black][b][font_size=200]%s[/font_size][/b]\n\n%s"
-
-func _result_to_exhibit_data(title, result):
-	var items = []
-	var doors = []
-
-	if result:
-		if result.has("extract"):
-			_text_map[title] = result.extract
-			items.append({
-				"type": "rich_text",
-				"material": "marble",
-				"text": text_item_fmt % [title, result.extract]
-			})
-
-		if result.has("links"):
-			doors = result.links.duplicate()
-			_seeded_shuffle(title, doors)
-
-		if result.has("images"):
-			for image in result.images:
-				if IMAGE_REGEX.search(image.src):
-					items.append({
-						"type": "image",
-						"title": image.title if image.has("title") else "",
-						"src": image.src,
-						"text": Util.coalesce(image.text, image.src.split("/")[-1].uri_decode()),
-					})
-
-	return {
-		"doors": doors,
-		"items": items,
-	}
 
 func _init_item(exhibit, item, data):
 	if is_instance_valid(exhibit) and is_instance_valid(item):
@@ -266,6 +217,13 @@ func _link_halls(entry, exit):
 	elif entry.player_in_hall and entry.player_direction == "entry":
 		_teleport_player(entry, exit, true)
 
+func _count_image_items(arr):
+	var count = 0
+	for i in arr:
+		if i.has("type") and i.type == "image":
+			count += 1
+	return count
+
 func _on_fetch_complete(_titles, context):
 	# we don't need to do anything to handle a prefetch
 	if context.has("prefetch"):
@@ -278,7 +236,7 @@ func _on_fetch_complete(_titles, context):
 		# TODO: show an out of order sign
 		return
 
-	var data = _result_to_exhibit_data(context.title, result)
+	var data = ItemProcessor.create_items(context.title, result)
 	var doors = data.doors
 	var items = data.items
 
@@ -303,7 +261,7 @@ func _on_fetch_complete(_titles, context):
 		"hall_type": hall.hall_type,
 	})
 
-	if len(items) == 1:
+	if _count_image_items(items) < 3:
 		var notice = NoImageNotice.instantiate()
 		notice.rotation.y = Util.vecToRot(new_exhibit.entry.to_dir) - PI / 4
 		notice.position = Util.gridToWorld(new_exhibit.entry.to_pos) + 5 * new_exhibit.entry.to_dir
