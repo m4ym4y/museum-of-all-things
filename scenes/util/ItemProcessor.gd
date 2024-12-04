@@ -28,15 +28,16 @@ static func _seeded_shuffle(seed, arr):
 	rng.seed = hash(seed)
 	Util.shuffle(rng, arr)
 
-static func _add_text_item(items, title, text):
+static func _add_text_item(items, title, subtitle, text):
 	if (
 		not ignore_sections.has(title.to_lower().strip_edges()) and
 		len(text) > 20
 	):
+		var t = ((section_fmt % subtitle) + "\n" + text) if subtitle != "" else text
 		items.append({
 			"type": "rich_text",
 			"material": "marble",
-			"text": text_item_fmt % [title, text]
+			"text": text_item_fmt % [title, t]
 		})
 
 static func _clean_section(s):
@@ -47,22 +48,30 @@ static func _create_text_items(title, extract):
 	var lines = extract.split("\n")
 
 	var current_title = title
+	var current_subtitle = ""
 	var current_text = ""
 
 	for line in lines:
+		var over_lim = len(current_text) > max_len_soft
 		if line == "":
 			continue
 		elif s2_re.search(line):
-			_add_text_item(items, current_title, current_text)
+			_add_text_item(items, current_title, current_subtitle, current_text)
 			current_title = _clean_section(line)
+			current_subtitle = ""
 			current_text = ""
-		elif len(current_text) < max_len_soft:
+		else:
 			if line.begins_with("="):
-				current_text += section_fmt % _clean_section(line)
-			else:
+				if over_lim:
+					_add_text_item(items, current_title, current_subtitle, current_text)
+					current_subtitle = _clean_section(line)
+					current_text = ""
+				else:
+					current_text += section_fmt % _clean_section(line)
+			elif not over_lim:
 				current_text += p_fmt % line
 
-	_add_text_item(items, current_title, current_text)
+	_add_text_item(items, current_title, current_subtitle, current_text)
 
 	return items
 
