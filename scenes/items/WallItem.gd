@@ -2,6 +2,10 @@ extends Node3D
 
 @onready var ImageItem = preload("res://scenes/items/ImageItem.tscn")
 @onready var TextItem = preload("res://scenes/items/TextItem.tscn")
+@onready var RichTextItem = preload("res://scenes/items/RichTextItem.tscn")
+
+@onready var MarbleMaterial = preload("res://assets/textures/marble21.tres")
+
 @onready var _item_node = $Item
 @onready var _item
 @onready var _ceiling = $Ceiling
@@ -68,6 +72,9 @@ func _on_image_item_loaded():
 	_start_animate()
 
 func init(item_data):
+	if item_data.has("material") and item_data.material == "marble":
+		$Item/Plaque.material_override = MarbleMaterial
+
 	if item_data.type == "image":
 		_item = ImageItem.instantiate()
 		_item.loaded.connect(_on_image_item_loaded)
@@ -75,6 +82,11 @@ func init(item_data):
 	elif item_data.type == "text":
 		_frame.visible = false
 		_item = TextItem.instantiate()
+		_item.init(item_data.text)
+		_start_animate()
+	elif item_data.type == "rich_text":
+		_frame.visible = false
+		_item = RichTextItem.instantiate()
 		_item.init(item_data.text)
 		_start_animate()
 	else:

@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://byb3uy8rswlaf"]
+
+[ext_resource type="Script" path="res://scenes/items/RichTextItem.gd" id="1_xha8l"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_54vlm"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Theme" id="Theme_etg41"]
+default_base_scale = 1.0
+default_font_size = 64
+
+[node name="RichTextItem" type="Node3D"]
+script = ExtResource("1_xha8l")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.001
+texture = SubResource("ViewportTexture_54vlm")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(2400, 4000)
+size_2d_override = Vector2i(2400, 10240)
+
+[node name="Control" type="Control" parent="SubViewport"]
+clip_contents = true
+custom_minimum_size = Vector2(2400, 10240)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport/Control"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_right = 0.95
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_etg41")
+bbcode_enabled = true
+text = "Hello world
+sdfjksd kjsdf jksdfjksf jksdf s
+fs jkfsfjk sfjk sdjkfsjdk fjksd fsd
+fs djkfsdkjf sjkdfsjkd"
+fit_content = true
+scroll_active = false

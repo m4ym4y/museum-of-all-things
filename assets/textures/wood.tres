@@ -6,7 +6,7 @@
 [resource]
 albedo_texture = ExtResource("1")
 metallic = 0.25
-roughness = 0.0
+roughness = 0.1
 normal_texture = ExtResource("2_f5vpw")
 backlight = Color(1, 1, 1, 1)
 uv1_triplanar = true

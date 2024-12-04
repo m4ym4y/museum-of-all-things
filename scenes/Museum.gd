@@ -39,15 +39,20 @@ extends Node3D
 ]
 
 @onready var INTRODUCTION = {
-	"type": "text",
+	"type": "rich_text",
+	"material": "marble",
 	"text": """
-Welcome to the Wikipedia Museum!
+[center][color=black][b][font_size=300]MoAT[/font_size]
+
+[font_size=200]Welcome to the Museum of All Things[/font_size][/b]
  
+[font_size=100]
 This museum contains all of wikipedia, and is free for you to explore. Each exhibit has been assembled using the images and text contained in its corresponding wikipedia page.
  
 Additionally, every exhibit contains doors to many other interesting exhibits. These are chosen based on the pages that the exhibit's wikipedia page links to.
  
-Have fun exploring!"""
+[b]Have fun exploring![/b]
+"""
 }
 
 # item types
@@ -209,6 +214,8 @@ func _add_item(exhibit, slots, item_data):
 	# get_tree().create_timer(delay).timeout.connect(_init_item.bind(exhibit, item, item_data))
 	_init_item(exhibit, item, item_data)
 
+var text_item_fmt = "[color=black][b][font_size=200]%s[/font_size][/b]\n\n%s"
+
 func _result_to_exhibit_data(title, result):
 	var items = []
 	var doors = []
@@ -217,8 +224,9 @@ func _result_to_exhibit_data(title, result):
 		if result.has("extract"):
 			_text_map[title] = result.extract
 			items.append({
-				"type": "text",
-				"text": result.extract
+				"type": "rich_text",
+				"material": "marble",
+				"text": text_item_fmt % [title, result.extract]
 			})
 
 		if result.has("links"):

@@ -10,6 +10,7 @@ ambient_light_source = 2
 ambient_light_color = Color(1, 0.960784, 0.882353, 1)
 ambient_light_energy = 0.2
 ssr_enabled = true
+ssr_max_steps = 256
 ssr_fade_in = 0.522331
 ssr_depth_tolerance = 128.0
 ssao_enabled = true
