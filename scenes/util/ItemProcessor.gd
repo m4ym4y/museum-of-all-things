@@ -15,8 +15,8 @@ static var IMAGE_REGEX = RegEx.new()
 static var s2_re = RegEx.new()
 
 static var max_len_soft = 1000
-static var  text_item_fmt = "[color=black][b][font_size=200]%s[/font_size][/b]\n\n%s"
-static var section_fmt = "[p][b][font_size=100]%s[/font_size][/b][/p]\n\n"
+static var text_item_fmt = "[color=black][b][font_size=50]%s[/font_size][/b]\n\n%s"
+static var section_fmt = "[p][b][font_size=25]%s[/font_size][/b][/p]\n\n"
 static var p_fmt = "[p]%s[/p]\n\n"
 
 static func _static_init():
