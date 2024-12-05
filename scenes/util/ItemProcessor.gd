@@ -159,9 +159,7 @@ static func create_items(title, result):
 
 	if result and result.has("wikitext"):
 		var wikitext = result.wikitext
-		Util.t_start()
 		var parsed = _parse_wikitext(wikitext)
-		Util.t_end("_parse_wikitext")
 
 		items.append_array(_create_text_items(title, parsed.extract))
 
