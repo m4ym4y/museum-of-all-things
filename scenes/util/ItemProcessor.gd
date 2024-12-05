@@ -108,7 +108,8 @@ static func _wikitext_to_extract(wikitext):
 	return wikitext.strip_edges()
 
 static func _parse_wikitext(wikitext):
-	var extract = ""
+	var tokens = tokenizer.search_all(wikitext)
+	var extract = []
 	var link = ""
 	var links = []
 
@@ -123,30 +124,34 @@ static func _parse_wikitext(wikitext):
 	var dl
 	var in_link
 	var link_str
+	var t
 
-	for c in wikitext:
-		dc = depth_chars.get(c)
+	for match in tokens:
+		t = match.get_string(0)
+		dc = depth_chars.get(t)
 		dl = len(depth)
 		in_link = dl > 1 and depth[0] == "]" and depth[1] == "]"
+
 		if dc:
 			depth.push_back(dc)
 		elif dl == 0:
-			extract += c
-		elif c == depth[dl - 1]:
+			extract.append(t)
+		elif t == depth[dl - 1]:
 			depth.pop_back()
 		elif in_link:
-			link += c
+			link += t
+		else:
+			extract.append(t)
 
 		if not in_link and len(link) > 0:
-			link_str = link
-			links.append(link_str)
-			if not link_str.begins_with("File:"):
-				var ls = link_str.split("|")
-				extract += ls[len(ls) - 1]
+			links.append(link)
+			if not link.begins_with("File:"):
+				var ls = link.split("|")
+				extract.append(ls[len(ls) - 1])
 			link = ""
 
 	return {
-		"extract": extract,
+		"extract": "".join(extract),
 		"links": links,
 	}
 
@@ -165,7 +170,6 @@ static func create_items(title, result):
 		for link in parsed.links:
 			var target = link.get_slice("|", 0)
 			var caption = alt_re.search(link)
-			print("got target=%s caption=%s" % [target, not not caption])
 
 			if target.begins_with("File:"):
 				items.append({
@@ -174,7 +178,7 @@ static func create_items(title, result):
 					"text": caption.get_string(1) if caption else target,
 				})
 			else:
-				doors.append(_to_link_case(target))
+				doors.append(_to_link_case(target.get_slice("#", 0)))
 
 	var front_item = items.pop_front()
 	_seeded_shuffle(title + ":items", items)
