@@ -5,7 +5,7 @@ extends Area3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if _xr:
+	if _xr or OS.has_feature("movie"):
 		$CollisionShape3D.scale = Vector3.ONE * 8
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

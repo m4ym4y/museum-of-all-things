@@ -3,7 +3,7 @@ extends Node3D
 @onready var NoImageNotice = preload("res://scenes/items/NoImageNotice.tscn")
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
 @onready var DEFAULT_DOORS = [
-	"Electrostatics",
+	"Freshwater fish",
 	"List of Polish people",
 	"Louvre",
 	"Coffee",
@@ -127,12 +127,10 @@ func _set_current_room_title(title):
 		tween.set_ease(Tween.EASE_IN_OUT)
 
 func _teleport_player(from_hall, to_hall, entry_to_exit=false):
-	# print("teleport. from=%s to=%s" % [from_hall.from_title, to_hall.to_title])
 	if is_instance_valid(from_hall) and is_instance_valid(to_hall):
 		var pos = _player.global_position if not _xr else _player.get_node("XRCamera3D").global_position
 		var distance = (from_hall.position - pos).length()
 		if distance > max_teleport_distance:
-			print("distance=%s max=%s" % [distance, max_teleport_distance])
 			return
 		var diff_from = _player.global_position - from_hall.position
 		var rot_diff = Util.vecToRot(to_hall.to_dir) - Util.vecToRot(from_hall.to_dir)
@@ -177,10 +175,19 @@ func _load_exhibit_from_exit(exit):
 	# TODO: this needs to only work if the hall type matches
 	if _exhibits.has(next_article):
 		var next_exhibit = _exhibits[next_article]
-		if next_exhibit.has("entry") and exit.player_in_hall and exit.player_direction == "exit":
-			var entry = next_exhibit.entry
-			_teleport_player(entry, exit)
-		return
+		if (
+			next_exhibit.has("entry") and
+			next_exhibit.entry.hall_type[1] == exit.hall_type[1]
+		):
+			_link_halls(next_exhibit.entry, exit)
+			next_exhibit.entry.from_title = exit.from_title
+			return
+		else:
+			_exhibits[next_article].queue_free()
+			_exhibits.erase(next_article)
+			var i = _exhibit_hist.find(next_article)
+			if i >= 0:
+				_exhibit_hist.remove_at(i)
 
 	ExhibitFetcher.fetch([next_article], {
 		"title": next_article,
@@ -308,7 +315,6 @@ func _on_fetch_complete(_titles, context):
 						continue
 					if abs(4 * old_exhibit.height - new_hall.position.y) < 20:
 						continue
-					print("erasing exhibit ", key)
 					old_exhibit.exhibit.queue_free()
 					_exhibits.erase(key)
 					_exhibit_hist.remove_at(e)
