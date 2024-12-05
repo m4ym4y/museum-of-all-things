@@ -183,7 +183,8 @@ func _load_exhibit_from_exit(exit):
 			next_exhibit.entry.from_title = exit.from_title
 			return
 		else:
-			_exhibits[next_article].queue_free()
+			# TODO: erase orphaned backlinks
+			_exhibits[next_article].exhibit.queue_free()
 			_exhibits.erase(next_article)
 			var i = _exhibit_hist.find(next_article)
 			if i >= 0:
