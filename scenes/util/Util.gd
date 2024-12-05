@@ -100,6 +100,18 @@ func shuffle(rng, arr):
 		arr[i] = arr[j]
 		arr[j] = temp
 
+# shuffle with bias to keep items in place
+func biased_shuffle(rng, arr, sd_to_start):
+	var n = len(arr)
+	for i in range(n - 1, 0, -1):
+		var fi = float(i)
+		# use gaussian distribution to bias towards current position
+		var j = roundi(clamp(rng.randfn(fi + 1.0, fi / sd_to_start), 0.0, fi))
+		# Swap elements at indices i and j
+		var temp = arr[i]
+		arr[i] = arr[j]
+		arr[j] = temp
+
 func strip_markup(s):
 	var mid = curly_tag_re.sub(s, "", true)
 	return markup_tag_re.sub(mid, " ", true)

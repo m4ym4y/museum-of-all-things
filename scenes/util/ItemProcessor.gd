@@ -7,6 +7,7 @@ static var ignore_sections = [
 	"notes",
 	"further reading",
 	"external links",
+	"external link s",
 	"bibliography",
 	"gallery",
 	"sources",
@@ -42,10 +43,13 @@ static func _static_init():
 	alt_re.compile("alt=(.+?)\\|")
 	tokenizer.compile("[^\\{\\}\\[\\]<>]+|[\\{\\}\\[\\]<>]")
 
-static func _seeded_shuffle(seed, arr):
+static func _seeded_shuffle(seed, arr, bias=false):
 	var rng = RandomNumberGenerator.new()
 	rng.seed = hash(seed)
-	Util.shuffle(rng, arr)
+	if not bias:
+		Util.shuffle(rng, arr)
+	else:
+		Util.biased_shuffle(rng, arr, 2.0)
 
 static func _to_link_case(s):
 	if len(s) > 0:
@@ -159,7 +163,8 @@ static func _parse_wikitext(wikitext):
 
 static func create_items(title, result):
 	var items = []
-	var doors = {}
+	var doors = []
+	var doors_used = {}
 
 	if result and result.has("wikitext"):
 		var wikitext = result.wikitext
@@ -178,13 +183,20 @@ static func create_items(title, result):
 					"text": caption.get_string(1) if caption else target,
 				})
 			else:
-				doors[_to_link_case(target.get_slice("#", 0))] = true
+				var door = _to_link_case(target.get_slice("#", 0))
+				if not doors_used.has(door):
+					doors.append(door)
+					doors_used[door] = true
 
+	# keep first item and first door intact
 	var front_item = items.pop_front()
+	var front_door = doors.pop_front()
 	_seeded_shuffle(title + ":items", items)
+	_seeded_shuffle(title + ":doors", doors, true)
 	items.push_front(front_item)
+	doors.push_front(front_door)
 
 	return {
-		"doors": doors.keys(),
+		"doors": doors,
 		"items": items,
 	}
