@@ -158,7 +158,7 @@ static func _parse_wikitext(wikitext):
 
 static func create_items(title, result):
 	var items = []
-	var doors = []
+	var doors = {}
 
 	if result and result.has("wikitext"):
 		var wikitext = result.wikitext
@@ -177,13 +177,13 @@ static func create_items(title, result):
 					"text": caption.get_string(1) if caption else target,
 				})
 			else:
-				doors.append(_to_link_case(target.get_slice("#", 0)))
+				doors[_to_link_case(target.get_slice("#", 0))] = true
 
 	var front_item = items.pop_front()
 	_seeded_shuffle(title + ":items", items)
 	items.push_front(front_item)
 
 	return {
-		"doors": doors,
+		"doors": doors.keys(),
 		"items": items,
 	}
