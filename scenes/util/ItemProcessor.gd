@@ -140,12 +140,10 @@ static func _parse_wikitext(wikitext):
 			depth.pop_back()
 		elif in_link:
 			link += t
-		else:
-			extract.append(t)
 
 		if not in_link and len(link) > 0:
 			links.append(link)
-			if not link.begins_with("File:"):
+			if not link.to_lower().begins_with("file:"):
 				var ls = link.split("|")
 				extract.append(ls[len(ls) - 1])
 			link = ""
@@ -168,7 +166,7 @@ static func create_items(title, result):
 		items.append_array(_create_text_items(title, parsed.extract))
 
 		for link in parsed.links:
-			var target = link.get_slice("|", 0)
+			var target = _to_link_case(link.get_slice("|", 0))
 			var caption = alt_re.search(link)
 
 			if target.begins_with("File:"):
