@@ -47,7 +47,10 @@ static func _seeded_shuffle(seed, arr):
 	Util.shuffle(rng, arr)
 
 static func _to_link_case(s):
-	return s[0].to_upper() + s.substr(1)
+	if len(s) > 0:
+		return s[0].to_upper() + s.substr(1)
+	else:
+		return ""
 
 static func _add_text_item(items, title, subtitle, text):
 	if (
