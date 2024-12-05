@@ -13,6 +13,15 @@ static var ignore_sections = [
 
 static var IMAGE_REGEX = RegEx.new()
 static var s2_re = RegEx.new()
+static var template_re = RegEx.new()
+static var links_re = RegEx.new()
+static var extlinks_re = RegEx.new()
+static var em_re = RegEx.new()
+static var tag_re = RegEx.new()
+static var whitespace_re = RegEx.new()
+static var nl_re = RegEx.new()
+static var alt_re = RegEx.new()
+static var tokenizer = RegEx.new()
 
 static var max_len_soft = 1000
 static var text_item_fmt = "[color=black][b][font_size=50]%s[/font_size][/b]\n\n%s"
@@ -22,11 +31,23 @@ static var p_fmt = "[p]%s[/p]\n\n"
 static func _static_init():
 	IMAGE_REGEX.compile("\\.(png|jpg|jpeg|webp|svg)$")
 	s2_re.compile("^==[^=]")
+	template_re.compile("\\{\\{.*?\\}\\}")
+	links_re.compile("\\[\\[([^|\\]]*?\\|)?(.*?)\\]\\]")
+	extlinks_re.compile("\\[http[^\\s]*\\s(.*?)\\]")
+	em_re.compile("'{2,}")
+	tag_re.compile("<[^>]+>")
+	whitespace_re.compile("[\t ]+")
+	nl_re.compile("\n+")
+	alt_re.compile("alt=(.+?)\\|")
+	tokenizer.compile("[^\\{\\}\\[\\]<>]+|[\\{\\}\\[\\]<>]")
 
 static func _seeded_shuffle(seed, arr):
 	var rng = RandomNumberGenerator.new()
 	rng.seed = hash(seed)
 	Util.shuffle(rng, arr)
+
+static func _to_link_case(s):
+	return s[0].to_upper() + s.substr(1)
 
 static func _add_text_item(items, title, subtitle, text):
 	if (
@@ -76,27 +97,84 @@ static func _create_text_items(title, extract):
 
 	return items
 
+static func _wikitext_to_extract(wikitext):
+	wikitext = template_re.sub(wikitext, "", true)
+	wikitext = links_re.sub(wikitext, "$2", true)
+	wikitext = extlinks_re.sub(wikitext, "$1", true)
+	wikitext = em_re.sub(wikitext, "", true)
+	wikitext = tag_re.sub(wikitext, "", true)
+	wikitext = whitespace_re.sub(wikitext, " ", true)
+	wikitext = nl_re.sub(wikitext, "\n", true)
+	return wikitext.strip_edges()
+
+static func _parse_wikitext(wikitext):
+	var extract = ""
+	var link = ""
+	var links = []
+
+	var depth_chars = {
+		"<": ">",
+		"[": "]",
+		"{": "}",
+	}
+
+	var depth = []
+	var dc
+	var dl
+	var in_link
+	var link_str
+
+	for c in wikitext:
+		dc = depth_chars.get(c)
+		dl = len(depth)
+		in_link = dl > 1 and depth[0] == "]" and depth[1] == "]"
+		if dc:
+			depth.push_back(dc)
+		elif dl == 0:
+			extract += c
+		elif c == depth[dl - 1]:
+			depth.pop_back()
+		elif in_link:
+			link += c
+
+		if not in_link and len(link) > 0:
+			link_str = link
+			links.append(link_str)
+			if not link_str.begins_with("File:"):
+				var ls = link_str.split("|")
+				extract += ls[len(ls) - 1]
+			link = ""
+
+	return {
+		"extract": extract,
+		"links": links,
+	}
+
 static func create_items(title, result):
 	var items = []
 	var doors = []
 
-	if result:
-		if result.has("extract"):
-			items.append_array(_create_text_items(title, result.extract))
+	if result and result.has("wikitext"):
+		var wikitext = result.wikitext
+		Util.t_start()
+		var parsed = _parse_wikitext(wikitext)
+		Util.t_end("_parse_wikitext")
 
-		if result.has("links"):
-			doors = result.links.duplicate()
-			_seeded_shuffle(title, doors)
+		items.append_array(_create_text_items(title, parsed.extract))
 
-		if result.has("images"):
-			for image in result.images:
-				if IMAGE_REGEX.search(image.src):
-					items.append({
-						"type": "image",
-						"title": image.title if image.has("title") else "",
-						"src": image.src,
-						"text": Util.coalesce(image.text, image.src.split("/")[-1].uri_decode()),
-					})
+		for link in parsed.links:
+			var target = link.get_slice("|", 0)
+			var caption = alt_re.search(link)
+			print("got target=%s caption=%s" % [target, not not caption])
+
+			if target.begins_with("File:"):
+				items.append({
+					"type": "image",
+					"title": target,
+					"text": caption.get_string(1) if caption else target,
+				})
+			else:
+				doors.append(_to_link_case(target))
 
 	var front_item = items.pop_front()
 	_seeded_shuffle(title + ":items", items)

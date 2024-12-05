@@ -188,7 +188,7 @@ func init(grid, from_title, to_title, hall_start, hall_dir, _hall_type=[true, FL
 	_detector.direction_changed.connect(_on_direction_changed)
 	_detector.init(Util.gridToWorld(from_pos), Util.gridToWorld(to_pos))
 
-	ExhibitFetcher.fetch_failed.connect(_on_fetch_failed)
+	ExhibitFetcher.wikitext_failed.connect(_on_fetch_failed)
 
 func _on_fetch_failed(titles, message):
 	for title in titles:

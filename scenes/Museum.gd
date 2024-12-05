@@ -81,7 +81,7 @@ func _ready() -> void:
 	$WorldEnvironment.environment.ssr_enabled = not _xr
 
 	_grid = $Lobby/GridMap
-	ExhibitFetcher.fetch_complete.connect(_on_fetch_complete)
+	ExhibitFetcher.wikitext_complete.connect(_on_fetch_complete)
 	_set_up_lobby($Lobby)
 
 func _set_up_lobby(lobby):
@@ -327,7 +327,7 @@ func _on_fetch_complete(_titles, context):
 		if item_data.type == "image" and item_data.has("title") and item_data.title != "":
 			image_titles.append(item_data.title)
 		item_queue.append(_add_item.bind(new_exhibit, slots, item_data))
-	item_queue.append(ExhibitFetcher.fetch_image_metadata(image_titles, null))
+	item_queue.append(ExhibitFetcher.fetch_images(image_titles, null))
 	_process_item_queue(item_queue, 0.1)
 
 	if backlink:

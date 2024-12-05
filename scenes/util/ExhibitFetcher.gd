@@ -1,21 +1,20 @@
 extends Node
 
-signal fetch_complete(titles, context)
-signal fetch_failed(titles, message)
-signal image_metadata_complete(files, context)
+signal wikitext_complete(titles, context)
+signal wikitext_failed(titles, message)
+signal images_complete(files, context)
 
 const MAX_BATCH_SIZE = 50
 const REQUEST_DELAY = 1.0
 const USER_AGENT = "https://github.com/m4ym4y/wikipedia-museum"
+
 # TODO: wikimedia support, and category support
 const WIKIMEDIA_PREFIX = "https://commons.wikimedia.org/wiki/"
 const WIKIPEDIA_PREFIX = "https://wikipedia.org/wiki/"
 var COMMON_HEADERS
 
-var all_info_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=info|links|extracts&explaintext=true&pllimit=max&exlimit=max&format=json&redirects=1&titles="
-# var wiki_commons_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&gcmtitle=Category:Fossils&generator=categorymembers&gcmtype=file|subcat&prop=imageinfo|categories&iiprop=url|user|comment|extmetadata&gcmlimit=max&cllimit=max&format=json"
-var media_list_endpoint = "https://en.wikipedia.org/api/rest_v1/page/media-list/"
-var image_metadata_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata&iiextmetadatafilter=LicenseShortName|Artist&format=json&titles="
+var wikitext_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&redirects=1&titles="
+var images_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=640&iiextmetadatafilter=LicenseShortName|Artist&format=json&redirects=1&titles="
 
 var _request_queue = []
 var _request_in_flight = false
@@ -38,15 +37,21 @@ func _advance_queue():
 	_request_in_flight = false
 	var next_fetch = _request_queue.pop_front()
 	if next_fetch != null:
-		if next_fetch[0] == "fetch_page":
+		if next_fetch[0] == "fetch_wikitext":
 			fetch(next_fetch[1], next_fetch[2])
-		elif next_fetch[0] == "fetch_image_metadata":
-			fetch_image_metadata(next_fetch[1], next_fetch[2])
+		elif next_fetch[0] == "fetch_images":
+			fetch_images(next_fetch[1], next_fetch[2])
 		else:
 			push_error("unknown queue item. type=", next_fetch[0])
 
 func _join_titles(titles):
 	return "|".join(titles.map(func(t): return t.uri_encode()))
+
+func _read_from_cache(title):
+	var json = DataManager.load_json_data(WIKIPEDIA_PREFIX + title)
+	if json:
+		_results[title] = json
+	return json
 
 func _get_uncached_titles(titles):
 	var new_titles = []
@@ -59,23 +64,24 @@ func _get_uncached_titles(titles):
 				new_titles.append(title)
 	return new_titles
 
-func fetch_image_metadata(files, context):
+func fetch_images(files, context):
 	var new_files = _get_uncached_titles(files)
+
 	if len(new_files) == 0:
-		emit_signal("image_metadata_complete", files, context)
+		emit_signal("images_complete", files, context)
 		return
 
 	if len(new_files) > MAX_BATCH_SIZE:
-		_request_queue.append([ "fetch_image_metadata", files.slice(MAX_BATCH_SIZE), context ])
+		_request_queue.append([ "fetch_images", files.slice(MAX_BATCH_SIZE), context ])
 		return
 
 	# queue if another request is in flight
 	if _request_in_flight:
-		_request_queue.append([ "fetch_image_metadata", new_files, context ])
+		_request_queue.append([ "fetch_images", new_files, context ])
 		return
 	_request_in_flight = true
 
-	var url = image_metadata_endpoint + _join_titles(new_files)
+	var url = images_endpoint + _join_titles(new_files)
 	var ctx = {
 		"files": files,
 		"new_files": new_files,
@@ -84,15 +90,10 @@ func fetch_image_metadata(files, context):
 	_dispatch_request(url, ctx, context)
 
 func fetch(titles, context):
-	# TODO: check cache
-	var new_titles = []
-	for title in titles:
-		if not get_result(title):
-			var cached = _read_from_cache(title)
-			if not cached:
-				new_titles.append(title)
+	var new_titles = _get_uncached_titles(titles)
+
 	if len(new_titles) == 0:
-		emit_signal("fetch_complete", titles, context)
+		emit_signal("wikitext_complete", titles, context)
 		return
 
 	if len(new_titles) > MAX_BATCH_SIZE:
@@ -101,11 +102,11 @@ func fetch(titles, context):
 
 	# queue if another request is in flight
 	if _request_in_flight:
-		_request_queue.append([ "fetch_page", new_titles, context ])
+		_request_queue.append([ "fetch_wikitext", new_titles, context ])
 		return
 	_request_in_flight = true
 
-	var url = all_info_endpoint + _join_titles(new_titles)
+	var url = wikitext_endpoint + _join_titles(new_titles)
 	var ctx = {
 		"titles": titles,
 		"new_titles": new_titles,
@@ -114,35 +115,22 @@ func fetch(titles, context):
 	# dispatching mediawiki request
 	_dispatch_request(url, ctx, context)
 
-	# dispatching media list request to REST
-	for title in new_titles:
-		var rest_url = media_list_endpoint + title.uri_encode()
-		var media_ctx = {
-			# TODO: we need to look at content location to get canonical name
-			"original_title": title,
-			"title": title,
-			"titles": titles
-		}
-		_dispatch_request(rest_url, media_ctx, context)
-
 func get_result(title):
 	if _results.has(title):
 		var result = _results[title]
 		if result.has("normalized"):
 			if _results.has(result.normalized):
 				result = _results[result.normalized]
-		if title.begins_with("File:"):
-			return result
-		elif result.has("media_wiki_complete") and result.has("media_list_complete"):
-			return result
-		return null
+			else:
+				return null
+		return result
 	else:
 		return null
 
 func _dispatch_request(url, ctx, caller_ctx):
 	var request = HTTPRequest.new()
 	request.max_redirects = 0
-	request.request_completed.connect(_on_request_completed.bind(ctx, caller_ctx))
+	request.request_completed.connect(_on_request_completed_wrapper.bind(ctx, caller_ctx))
 	add_child(request)
 	ctx.request = request
 	ctx.url = url
@@ -190,42 +178,22 @@ func _normalize_article_title(title):
 	var title_fragments = new_title.split("#")
 	return title_fragments[0]
 
+func _on_request_completed_wrapper(result, response_code, headers, body, ctx, caller_ctx):
+	if _on_request_completed(result, response_code, headers, body, ctx, caller_ctx):
+		get_tree().create_timer(REQUEST_DELAY).timeout.connect(_advance_queue)
+
 func _on_request_completed(result, response_code, headers, body, ctx, caller_ctx):
 	if result != 0 or response_code != 200:
-		if response_code >= 300 and response_code < 400:
-			if ctx.url.begins_with(media_list_endpoint):
-				var title_header = _get_location_header(headers)
-				var redirected_url = media_list_endpoint + title_header
-				var new_title = _normalize_article_title(title_header)
-				_set_page_field(ctx.title, "normalized", new_title)
-				ctx.title = new_title
-				_dispatch_request(redirected_url, ctx, caller_ctx)
-				return
 		if response_code != 404:
 			push_error("error in request ", result, " ", response_code, " ", ctx.url)
-
-		if ctx.url.begins_with(all_info_endpoint):
-			emit_signal("fetch_failed", ctx.new_titles, str(response_code))
-		elif ctx.url.begins_with(media_list_endpoint):
-			emit_signal("fetch_failed", [ctx.original_title], str(response_code))
-
-		if ctx.url.begins_with(all_info_endpoint) or ctx.url.begins_with(image_metadata_endpoint):
-			get_tree().create_timer(REQUEST_DELAY).timeout.connect(_advance_queue)
-			return
-		return
+		if ctx.url.begins_with(wikitext_endpoint):
+			emit_signal("wikitext_failed", ctx.new_titles, str(response_code))
+		return true
 
 	var res = _get_json(body)
 
-	if ctx.url.begins_with(all_info_endpoint):
-		return _on_mediawiki_request_completed(res, ctx, caller_ctx)
-	elif ctx.url.begins_with(media_list_endpoint):
-		return _on_media_list_request_completed(res, ctx, caller_ctx)
-	elif ctx.url.begins_with(image_metadata_endpoint):
-		return _on_image_metadata_request_completed(res, ctx, caller_ctx)
-
-func _on_mediawiki_request_completed(res, ctx, caller_ctx):
 	if not res.has("query"):
-		return
+		return true
 
 	var query = res.query
 
@@ -240,117 +208,67 @@ func _on_mediawiki_request_completed(res, ctx, caller_ctx):
 		for title in redirects:
 			_set_page_field(title.from, "normalized", title.to)
 
+	if ctx.url.begins_with(wikitext_endpoint):
+		return _on_wikitext_request_complete(res, ctx, caller_ctx)
+	elif ctx.url.begins_with(images_endpoint):
+		return _on_images_request_complete(res, ctx, caller_ctx)
+
+func _dispatch_continue(continue_fields, base_url, titles, ctx, caller_ctx):
+	var continue_url = base_url + _join_titles(titles)
+	for field in continue_fields.keys():
+		continue_url += "&" + field + "=" + continue_fields[field].uri_encode()
+	ctx.url = continue_url
+	_dispatch_request(continue_url, ctx, caller_ctx)
+
+func _cache_all(titles):
+	for title in titles:
+		var result = get_result(title)
+		if result != null:
+			DataManager.save_json_data(WIKIPEDIA_PREFIX + title, result)
+
+func _on_wikitext_request_complete(res, ctx, caller_ctx):
 	# store the information we did get
-	if query.has("pages"):
-		var pages = query.pages
+	if res.query.has("pages"):
+		var pages = res.query.pages
 		for page_id in pages.keys():
 			var page = pages[page_id]
-			if page.has("links"):
-				_append_page_field(page.title, "links", _filter_links_ns(page.links))
-			if page.has("extlinks"):
-				_append_page_field(page.title, "links", _filter_extlinks(page.extlinks))
-			if page.has("extract"):
-				_set_page_field(page.title, "extract", page.extract)
-			# TODO: will this work if we already finished that field in an earlier request?
-			if res.has("batchcomplete"):
-				_set_page_field(page.title, "media_wiki_complete", true)
+			if page.has("revisions"):
+				var revisions = page.revisions
+				_set_page_field(page.title, "wikitext", revisions[0]["*"])
 
 	# handle continues
 	if res.has("continue"):
-		var continue_url = all_info_endpoint + _join_titles(ctx.new_titles)
-		for field in res.continue.keys():
-			continue_url += "&" + field + "=" + res.continue[field].uri_encode()
-		ctx.url = continue_url
-		_dispatch_request(continue_url, ctx, caller_ctx)
+		_dispatch_continue(res.continue, wikitext_endpoint, ctx.new_titles, ctx, caller_ctx)
+		return false
 	else:
-		get_tree().create_timer(REQUEST_DELAY).timeout.connect(_advance_queue)
-		for title in ctx.titles:
-			_cache_if_complete(title)
-		_check_complete_and_emit(ctx.titles, caller_ctx)
+		_cache_all(ctx.new_titles)
+		emit_signal("wikitext_complete", ctx.titles, caller_ctx)
+		return true
 
-func _cache_if_complete(title):
-	var result = get_result(title)
-	if result != null:
-		DataManager.save_json_data(WIKIPEDIA_PREFIX + title, result)
-
-func _read_from_cache(title):
-	var json = DataManager.load_json_data(WIKIPEDIA_PREFIX + title)
-	if json:
-		_results[title] = json
-	return json
-
-func _on_media_list_request_completed(res, ctx, caller_ctx):
-	_set_page_field(ctx.title, "media_list_complete", true)
-
-	if not res.has("items"):
-		return
-
-	var images = []
-	for item in res.items:
-		if item.type != "image" or not item.has("srcset") or not item.has("title"):
-			continue
-		var image = { "title": item.title, "src": "", "text": "" }
-		if item.has("caption"):
-			image.text = item.caption.text
-		image.src = item.srcset[0].src
-		images.append(image)
-
-	_append_page_field(ctx.title, "images", images)
-	_cache_if_complete(ctx.original_title)
-	_check_complete_and_emit(ctx.titles, caller_ctx)
-
-func _check_complete_and_emit(titles, caller_ctx):
-	for title in titles:
-		if get_result(title) == null:
-			return
-	emit_signal("fetch_complete", titles, caller_ctx)
-
-func _on_image_metadata_request_completed(res, ctx, caller_ctx):
-	if not res.has("query"):
-		return
-
-	var query = res.query
-
-	# handle the canonical names
-	if query.has("normalized"):
-		var normalized = query.normalized
-		for title in normalized:
-			_set_page_field(title.from, "normalized", title.to)
-
-	if query.has("redirects"):
-		var redirects = query.redirects
-		for title in redirects:
-			_set_page_field(title.from, "normalized", title.to)
-
+func _on_images_request_complete(res, ctx, caller_ctx):
 	# store the information we did get
-	if query.has("pages"):
-		var pages = query.pages
+	if res.query.has("pages"):
+		var pages = res.query.pages
 		for page_id in pages.keys():
 			var page = pages[page_id]
 			var file = page.title
 			if not page.has("imageinfo"):
 				continue
 			for info in page.imageinfo:
-				if not info.has("extmetadata"):
-					continue
-				var md = info.extmetadata
-				if md.has("LicenseShortName"):
-					_set_page_field(file, "license_short_name", md.LicenseShortName.value)
-				if md.has("Artist"):
-					_set_page_field(file, "artist", md.Artist.value)
+				if info.has("extmetadata"):
+					var md = info.extmetadata
+					if md.has("LicenseShortName"):
+						_set_page_field(file, "license_short_name", md.LicenseShortName.value)
+					if md.has("Artist"):
+						_set_page_field(file, "artist", md.Artist.value)
+				if info.has("thumburl"):
+					_set_page_field(file, "src", info.thumburl)
 
 	# handle continues
 	if res.has("continue"):
-		var continue_url = image_metadata_endpoint + _join_titles(ctx.new_files)
-		for field in res.continue.keys():
-			continue_url += "&" + field + "=" + res.continue[field].uri_encode()
-		ctx.url = continue_url
-		_dispatch_request(continue_url, ctx, caller_ctx)
+		_dispatch_continue(res.continue, images_endpoint, ctx.new_files, ctx, caller_ctx)
+		return false
 	else:
-		get_tree().create_timer(REQUEST_DELAY).timeout.connect(_advance_queue)
-		var found_files = []
-		for file in ctx.files:
-			if get_result(file):
-				found_files.append(file)
-			_cache_if_complete(file)
-		emit_signal("image_metadata_complete", found_files, caller_ctx)
+		_cache_all(ctx.new_files)
+		emit_signal("images_complete", ctx.files, caller_ctx)
+		return true
