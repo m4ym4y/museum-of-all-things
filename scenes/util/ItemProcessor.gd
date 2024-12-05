@@ -9,6 +9,7 @@ static var ignore_sections = [
 	"external links",
 	"bibliography",
 	"gallery",
+	"sources",
 ]
 
 static var IMAGE_REGEX = RegEx.new()
