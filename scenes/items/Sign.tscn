@@ -20,20 +20,20 @@ transform = Transform3D(1, 0, 0, 0, 0.975149, 0.221548, 0, -0.221548, 0.975149, 
 visibility_range_end = 10.0
 visibility_range_end_margin = 1.0
 visibility_range_fade_mode = 1
-pixel_size = 0.001
+pixel_size = 0.002
 modulate = Color(0, 0, 0, 1)
 font = ExtResource("3_yboib")
-font_size = 64
 outline_size = 0
 autowrap_mode = 3
-width = 450.0
+width = 225.0
 
 [node name="Arrow" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.975149, 0.221548, 0, -0.221548, 0.975149, 0, 1.36368, 0.0782965)
 visibility_range_end = 10.0
 visibility_range_end_margin = 1.0
 visibility_range_fade_mode = 1
-pixel_size = 0.001
+pixel_size = 0.002
 modulate = Color(0, 0, 0, 1)
 text = "←"
-font_size = 329
+font_size = 165
+outline_size = 6

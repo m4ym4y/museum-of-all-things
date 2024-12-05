@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://5javxi3uy0ep"]
 
 [ext_resource type="Script" path="res://scenes/Museum.gd" id="1_7pjtd"]
-[ext_resource type="PackedScene" uid="uid://u4b0awts0vdi" path="res://scenes/items/Lobby.tscn" id="3_exsdv"]
+[ext_resource type="PackedScene" uid="uid://u4b0awts0vdi" path="res://scenes/Lobby.tscn" id="3_exsdv"]
 
 [sub_resource type="Environment" id="Environment_g30yg"]
 background_mode = 1
