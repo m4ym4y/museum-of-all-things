@@ -12,7 +12,7 @@ signal on_player_toward_entry
 
 @onready var from_sign = $FromSign
 @onready var to_sign = $ToSign
-@onready var _floor
+@onready var floor_type
 
 static var WALL = 5
 static var INTERNAL_HALL = 7
@@ -110,10 +110,10 @@ func create_curve_hall(hall_start, hall_dir, is_right=true, level=FLAT):
 
 	if level == FLAT:
 		_grid.set_cell_item(hall_start, INTERNAL_HALL, ori)
-		_grid.set_cell_item(hall_start - Vector3.UP, _floor, 0)
+		_grid.set_cell_item(hall_start - Vector3.UP, floor_type, 0)
 		_grid.set_cell_item(hall_start + Vector3.UP, WALL, 0)
 		_grid.set_cell_item(hall_corner, INTERNAL_HALL_TURN, corner_ori)
-		_grid.set_cell_item(hall_corner - Vector3.UP, _floor, 0)
+		_grid.set_cell_item(hall_corner - Vector3.UP, floor_type, 0)
 		$Light.global_position = Util.gridToWorld(hall_corner) + Vector3.UP * 2
 	elif level == UP:
 		_grid.set_cell_item(hall_start, HALL_STAIRS_UP, ori)
@@ -137,21 +137,23 @@ func create_curve_hall(hall_start, hall_dir, is_right=true, level=FLAT):
 
 	if level == FLAT:
 		_grid.set_cell_item(exit_hall, INTERNAL_HALL, exit_ori)
-		_grid.set_cell_item(exit_hall - Vector3.UP, _floor, 0)
+		_grid.set_cell_item(exit_hall - Vector3.UP, floor_type, 0)
 		_grid.set_cell_item(exit_hall + Vector3.UP, WALL, 0)
 		to_dir = exit_hall_dir
 		to_pos = exit_hall
 	elif level == UP:
 		_grid.set_cell_item(exit_hall + Vector3.UP, HALL_STAIRS_DOWN, exit_ori_neg)
 		_grid.set_cell_item(exit_hall + 2 * Vector3.UP, -1, 0)
+		_grid.set_cell_item(exit_hall - Vector3.UP, -1, 0)
 		to_pos = exit_hall + Vector3.UP
 	elif level == DOWN:
 		_grid.set_cell_item(exit_hall - Vector3.UP, HALL_STAIRS_UP, exit_ori_neg)
 		_grid.set_cell_item(exit_hall, -1, 0)
+		_grid.set_cell_item(exit_hall + Vector3.UP, -1, 0)
 		to_pos = exit_hall - Vector3.UP
 
 func init(grid, from_title, to_title, hall_start, hall_dir, _hall_type=[true, FLAT]):
-	_floor = Util.gen_floor(from_title)
+	floor_type = Util.gen_floor(from_title)
 	position = Util.gridToWorld(hall_start)
 	loader.monitoring = true
 

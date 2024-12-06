@@ -196,7 +196,7 @@ static func _parse_wikitext(wikitext):
 
 	return links
 
-static func create_items(title, result):
+static func create_items(title, result, prev_title=""):
 	var items = []
 	var doors = []
 	var doors_used = {}
@@ -242,7 +242,7 @@ static func create_items(title, result):
 
 			elif type == "link" and target and target.find(":") < 0:
 				var door = _to_link_case(target.get_slice("#", 0))
-				if not doors_used.has(door):
+				if not doors_used.has(door) and door != title and door != prev_title:
 					doors.append(door)
 					doors_used[door] = true
 

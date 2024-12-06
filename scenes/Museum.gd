@@ -177,7 +177,8 @@ func _load_exhibit_from_exit(exit):
 		var next_exhibit = _exhibits[next_article]
 		if (
 			next_exhibit.has("entry") and
-			next_exhibit.entry.hall_type[1] == exit.hall_type[1]
+			next_exhibit.entry.hall_type[1] == exit.hall_type[1] and
+			next_exhibit.entry.floor_type == exit.floor_type
 		):
 			_link_halls(next_exhibit.entry, exit)
 			next_exhibit.entry.from_title = exit.from_title
@@ -247,15 +248,15 @@ func _on_fetch_complete(_titles, context):
 		# TODO: show an out of order sign
 		return
 
-	var data = ItemProcessor.create_items(context.title, result)
-	var doors = data.doors
-	var items = data.items
-
 	var prev_title
 	if backlink:
 		prev_title = _backlink_map[context.title]
 	else:
 		prev_title = hall.from_title
+
+	var data = ItemProcessor.create_items(context.title, result, prev_title)
+	var doors = data.doors
+	var items = data.items
 
 	_next_height += 20
 	var new_exhibit = TiledExhibitGenerator.instantiate()
