@@ -75,6 +75,7 @@ func _init():
 
 func init(player):
 	_player = player
+	_set_up_lobby($Lobby)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -82,7 +83,6 @@ func _ready() -> void:
 
 	_grid = $Lobby/GridMap
 	ExhibitFetcher.wikitext_complete.connect(_on_fetch_complete)
-	_set_up_lobby($Lobby)
 
 func _set_up_lobby(lobby):
 	var exits = lobby.exits
@@ -343,19 +343,6 @@ func _process_item_queue(queue, delay):
 	else:
 		callable.call()
 		get_tree().create_timer(delay).timeout.connect(_process_item_queue.bind(queue, delay))
-
-func _input(event):
-	if event is InputEventKey and Input.is_key_pressed(KEY_P):
-		var vp = get_viewport()
-		vp.debug_draw = (vp.debug_draw + 1 ) % 4
-	if event.is_action_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	if event.is_action_pressed("click"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func _process(delta: float) -> void:
-	pass
 
 @export var max_teleport_distance: float = 10.0
 @export var max_exhibits_loaded: int = 2

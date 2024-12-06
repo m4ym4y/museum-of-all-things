@@ -26,7 +26,7 @@ func _start_animate():
 	var player = get_tree().get_first_node_in_group("Player")
 	var tween_time = 0.5
 
-	if position.distance_to(player.global_position) > 20.0:
+	if not player or position.distance_to(player.global_position) > 20.0:
 		tween_time = 0
 
 	var tween = create_tween()
