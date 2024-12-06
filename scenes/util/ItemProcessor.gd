@@ -25,6 +25,7 @@ static var nl_re = RegEx.new()
 static var alt_re = RegEx.new()
 static var tokenizer = RegEx.new()
 static var image_name_re = RegEx.new()
+static var image_field_re = RegEx.new()
 
 static var max_len_soft = 1000
 static var text_item_fmt = "[color=black][b][font_size=50]%s[/font_size][/b]\n\n%s"
@@ -42,6 +43,9 @@ static func _static_init():
 	whitespace_re.compile("[\t ]+")
 	nl_re.compile("\n+")
 	alt_re.compile("alt=(.+?)\\|")
+	#image_field_re.compile("(photo|image\\|?)[^_\\|]*?=(.+?)(\\||$)")
+	image_field_re.compile("[\\|=]\\s*([^|=]+\\.\\w{,4})")
+	#image_field_re.compile("photo")
 	tokenizer.compile("[^\\{\\}\\[\\]<>]+|[\\{\\}\\[\\]<>]")
 	image_name_re.compile("^([iI]mage:|[fF]ile:)")
 
@@ -73,6 +77,10 @@ static func _add_text_item(items, title, subtitle, text):
 
 static func _clean_section(s):
 	return s.replace("=", "").strip_edges()
+
+static var trim_filename_front = len("File:")
+static func _clean_filename(s):
+	return IMAGE_REGEX.sub(s.substr(trim_filename_front), "")
 
 static func _create_text_items(title, extract):
 	var items = []
@@ -138,6 +146,8 @@ static func _parse_wikitext(wikitext):
 	var tag = ""
 	var html_tag = null
 	var html = []
+	var template = []
+	var in_template
 
 	for match in tokens:
 		t = match.get_string(0)
@@ -145,6 +155,7 @@ static func _parse_wikitext(wikitext):
 		dl = len(depth)
 		in_link = dl > 1 and depth[0] == "]" and depth[1] == "]"
 		in_tag = dl > 0 and depth[dl - 1] == ">"
+		in_template = dl > 1 and depth[0] == "}" and depth[1] == "}"
 
 		if dc:
 			depth.push_back(dc)
@@ -159,6 +170,8 @@ static func _parse_wikitext(wikitext):
 			tag += t
 		elif in_link:
 			link += t
+		elif in_template:
+			template.append(t)
 
 		if not in_link and len(link) > 0:
 			links.append(link)
@@ -166,6 +179,10 @@ static func _parse_wikitext(wikitext):
 				var ls = link.split("|")
 				extract.append(ls[len(ls) - 1])
 			link = ""
+
+		if not in_template and len(template) > 0:
+			links.append("".join(template))
+			template.clear()
 
 		if not in_tag and len(tag) > 0:
 			# we don't handle nested tags for now
@@ -204,14 +221,29 @@ static func create_items(title, result):
 
 		for link in parsed.links:
 			var target = _to_link_case(image_name_re.sub(link.get_slice("|", 0), "File:"))
+			var other_images = image_field_re.search_all(link)
 			var caption = alt_re.search(link)
 
 			if target.begins_with("File:"):
 				items.append({
 					"type": "image",
 					"title": target,
-					"text": caption.get_string(1) if caption else target,
+					"text": caption.get_string(1) if caption else _clean_filename(target),
 				})
+
+			elif len(other_images) > 0:
+				for match in other_images:
+					var image_title = image_name_re.sub(match.get_string(1), "File:")
+					if not image_title or not IMAGE_REGEX.search(image_title):
+						continue
+					if not image_title.begins_with("File:"):
+						image_title = "File:" + image_title
+					items.append({
+						"type": "image",
+						"title": image_title,
+						"text": caption.get_string(1) if caption else _clean_filename(image_title),
+					})
+
 			elif target:
 				var door = _to_link_case(target.get_slice("#", 0))
 				if not doors_used.has(door):
