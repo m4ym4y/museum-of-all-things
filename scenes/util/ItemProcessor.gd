@@ -174,14 +174,14 @@ static func _parse_wikitext(wikitext):
 			template.append(t)
 
 		if not in_link and len(link) > 0:
-			links.append(link)
+			links.append(["link", link])
 			if not link.to_lower().begins_with("file:"):
 				var ls = link.split("|")
 				extract.append(ls[len(ls) - 1])
 			link = ""
 
 		if not in_template and len(template) > 0:
-			links.append("".join(template))
+			links.append(["template", "".join(template)])
 			template.clear()
 
 		if not in_tag and len(tag) > 0:
@@ -195,7 +195,7 @@ static func _parse_wikitext(wikitext):
 					var html_str = "".join(html)
 					var lines = html_str.split("\n")
 					for line in lines:
-						links.append(line)
+						links.append(["link", line])
 				html.clear()
 				html_tag = null
 			tag = ""
@@ -219,9 +219,11 @@ static func create_items(title, result):
 
 		items.append_array(_create_text_items(title, parsed.extract))
 
-		for link in parsed.links:
+		for link_entry in parsed.links:
+			var type = link_entry[0]
+			var link = link_entry[1]
+
 			var target = _to_link_case(image_name_re.sub(link.get_slice("|", 0), "File:"))
-			var other_images = image_field_re.search_all(link)
 			var caption = alt_re.search(link)
 
 			if target.begins_with("File:"):
@@ -231,20 +233,22 @@ static func create_items(title, result):
 					"text": caption.get_string(1) if caption else _clean_filename(target),
 				})
 
-			elif len(other_images) > 0:
-				for match in other_images:
-					var image_title = image_name_re.sub(match.get_string(1), "File:")
-					if not image_title or not IMAGE_REGEX.search(image_title):
-						continue
-					if not image_title.begins_with("File:"):
-						image_title = "File:" + image_title
-					items.append({
-						"type": "image",
-						"title": image_title,
-						"text": caption.get_string(1) if caption else _clean_filename(image_title),
-					})
+			elif type == "template":
+				var other_images = image_field_re.search_all(link)
+				if len(other_images) > 0:
+					for match in other_images:
+						var image_title = image_name_re.sub(match.get_string(1), "File:")
+						if not image_title or not IMAGE_REGEX.search(image_title):
+							continue
+						if not image_title.begins_with("File:"):
+							image_title = "File:" + image_title
+						items.append({
+							"type": "image",
+							"title": image_title,
+							"text": caption.get_string(1) if caption else _clean_filename(image_title),
+						})
 
-			elif target:
+			elif type == "link" and target and target.find(":") < 0:
 				var door = _to_link_case(target.get_slice("#", 0))
 				if not doors_used.has(door):
 					doors.append(door)
