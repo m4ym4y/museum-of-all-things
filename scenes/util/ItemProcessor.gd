@@ -24,6 +24,7 @@ static var whitespace_re = RegEx.new()
 static var nl_re = RegEx.new()
 static var alt_re = RegEx.new()
 static var tokenizer = RegEx.new()
+static var image_name_re = RegEx.new()
 
 static var max_len_soft = 1000
 static var text_item_fmt = "[color=black][b][font_size=50]%s[/font_size][/b]\n\n%s"
@@ -42,6 +43,7 @@ static func _static_init():
 	nl_re.compile("\n+")
 	alt_re.compile("alt=(.+?)\\|")
 	tokenizer.compile("[^\\{\\}\\[\\]<>]+|[\\{\\}\\[\\]<>]")
+	image_name_re.compile("^([iI]mage:|[fF]ile:)")
 
 static func _seeded_shuffle(seed, arr, bias=false):
 	var rng = RandomNumberGenerator.new()
@@ -131,21 +133,30 @@ static func _parse_wikitext(wikitext):
 	var dc
 	var dl
 	var in_link
-	var link_str
 	var t
+	var in_tag
+	var tag = ""
+	var html_tag = null
+	var html = []
 
 	for match in tokens:
 		t = match.get_string(0)
 		dc = depth_chars.get(t)
 		dl = len(depth)
 		in_link = dl > 1 and depth[0] == "]" and depth[1] == "]"
+		in_tag = dl > 0 and depth[dl - 1] == ">"
 
 		if dc:
 			depth.push_back(dc)
 		elif dl == 0:
-			extract.append(t)
+			if html_tag:
+				html.append(t)
+			else:
+				extract.append(t)
 		elif t == depth[dl - 1]:
 			depth.pop_back()
+		elif in_tag:
+			tag += t
 		elif in_link:
 			link += t
 
@@ -155,6 +166,22 @@ static func _parse_wikitext(wikitext):
 				var ls = link.split("|")
 				extract.append(ls[len(ls) - 1])
 			link = ""
+
+		if not in_tag and len(tag) > 0:
+			# we don't handle nested tags for now
+			if tag[0] == "!" or tag[len(tag) - 1] == "/":
+				pass
+			elif not tag[0] == "/":
+				html_tag = tag
+			else:
+				if len(html) > 0 and html_tag.strip_edges().begins_with("gallery"):
+					var html_str = "".join(html)
+					var lines = html_str.split("\n")
+					for line in lines:
+						links.append(line)
+				html.clear()
+				html_tag = null
+			tag = ""
 
 	return {
 		"extract": "".join(extract),
@@ -168,12 +195,15 @@ static func create_items(title, result):
 
 	if result and result.has("wikitext"):
 		var wikitext = result.wikitext
+
+		Util.t_start()
 		var parsed = _parse_wikitext(wikitext)
+		Util.t_end("_parse_wikitext")
 
 		items.append_array(_create_text_items(title, parsed.extract))
 
 		for link in parsed.links:
-			var target = _to_link_case(link.get_slice("|", 0))
+			var target = _to_link_case(image_name_re.sub(link.get_slice("|", 0), "File:"))
 			var caption = alt_re.search(link)
 
 			if target.begins_with("File:"):
@@ -182,7 +212,7 @@ static func create_items(title, result):
 					"title": target,
 					"text": caption.get_string(1) if caption else target,
 				})
-			else:
+			elif target:
 				var door = _to_link_case(target.get_slice("#", 0))
 				if not doors_used.has(door):
 					doors.append(door)

@@ -72,8 +72,8 @@ func fetch_images(files, context):
 		return
 
 	if len(new_files) > MAX_BATCH_SIZE:
-		_request_queue.append([ "fetch_images", files.slice(MAX_BATCH_SIZE), context ])
-		return
+		_request_queue.append([ "fetch_images", new_files.slice(MAX_BATCH_SIZE), context ])
+		new_files = new_files.slice(0, MAX_BATCH_SIZE)
 
 	# queue if another request is in flight
 	if _request_in_flight:

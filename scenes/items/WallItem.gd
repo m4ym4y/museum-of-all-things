@@ -11,6 +11,8 @@ extends Node3D
 @onready var _ceiling = $Ceiling
 @onready var _light = get_node("Item/SpotLight3D")
 @onready var _frame = get_node("Item/Frame")
+@onready var _animate_item_target = _item_node.position + Vector3(0, 4, 0)
+@onready var _animate_ceiling_target = _ceiling.position - Vector3(0, 2, 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,14 +36,14 @@ func _start_animate():
 	tween.tween_property(
 		_item_node,
 		"position",
-		_item_node.position + Vector3(0, 4, 0),
+		_animate_item_target,
 		tween_time
 	)
 
 	ceiling_tween.tween_property(
 		_ceiling,
 		"position",
-		_ceiling.position - Vector3(0, 2, 0),
+		_animate_ceiling_target,
 		tween_time
 	)
 

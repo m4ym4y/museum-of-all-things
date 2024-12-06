@@ -15,7 +15,7 @@ cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
 
 [node name="ImageItem" type="Sprite3D"]
-visibility_range_end = 35.0
+visibility_range_end = 25.0
 visibility_range_end_margin = 10.0
 visibility_range_fade_mode = 1
 shaded = true
