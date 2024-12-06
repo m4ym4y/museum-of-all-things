@@ -127,7 +127,6 @@ static func _wikitext_to_extract(wikitext):
 
 static func _parse_wikitext(wikitext):
 	var tokens = tokenizer.search_all(wikitext)
-	var extract = []
 	var link = ""
 	var links = []
 
@@ -162,8 +161,6 @@ static func _parse_wikitext(wikitext):
 		elif dl == 0:
 			if html_tag:
 				html.append(t)
-			else:
-				extract.append(t)
 		elif t == depth[dl - 1]:
 			depth.pop_back()
 		elif in_tag:
@@ -175,9 +172,6 @@ static func _parse_wikitext(wikitext):
 
 		if not in_link and len(link) > 0:
 			links.append(["link", link])
-			if not link.to_lower().begins_with("file:"):
-				var ls = link.split("|")
-				extract.append(ls[len(ls) - 1])
 			link = ""
 
 		if not in_template and len(template) > 0:
@@ -200,26 +194,24 @@ static func _parse_wikitext(wikitext):
 				html_tag = null
 			tag = ""
 
-	return {
-		"extract": "".join(extract),
-		"links": links,
-	}
+	return links
 
 static func create_items(title, result):
 	var items = []
 	var doors = []
 	var doors_used = {}
 
-	if result and result.has("wikitext"):
+	if result and result.has("wikitext") and result.has("extract"):
 		var wikitext = result.wikitext
 
 		Util.t_start()
-		var parsed = _parse_wikitext(wikitext)
+		var links = _parse_wikitext(wikitext)
 		Util.t_end("_parse_wikitext")
 
-		items.append_array(_create_text_items(title, parsed.extract))
+		# we are using the extract returned from API until my parser works better
+		items.append_array(_create_text_items(title, result.extract))
 
-		for link_entry in parsed.links:
+		for link_entry in links:
 			var type = link_entry[0]
 			var link = link_entry[1]
 

@@ -13,7 +13,7 @@ const WIKIMEDIA_PREFIX = "https://commons.wikimedia.org/wiki/"
 const WIKIPEDIA_PREFIX = "https://wikipedia.org/wiki/"
 var COMMON_HEADERS
 
-var wikitext_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&redirects=1&titles="
+var wikitext_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions|extracts&explaintext=true&rvprop=content&format=json&redirects=1&titles="
 var images_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=640&iiextmetadatafilter=LicenseShortName|Artist&format=json&redirects=1&titles="
 
 var _request_queue = []
@@ -235,6 +235,8 @@ func _on_wikitext_request_complete(res, ctx, caller_ctx):
 			if page.has("revisions"):
 				var revisions = page.revisions
 				_set_page_field(page.title, "wikitext", revisions[0]["*"])
+			if page.has("extract"):
+				_set_page_field(page.title, "extract", page.extract)
 
 	# handle continues
 	if res.has("continue"):
