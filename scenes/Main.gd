@@ -23,6 +23,7 @@ func _init() -> void:
 func _ready():
   if Util.is_xr():
     _player.get_node("XRToolsPlayerBody").rotate_player(-starting_rotation)
+    _start_game()
   else:
     _player.get_node("Pivot/Camera3D").make_current()
     _player.rotation.y = starting_rotation
