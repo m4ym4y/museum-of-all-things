@@ -98,17 +98,6 @@ func _set_up_lobby(lobby):
 		exit.to_title = title
 		exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit))
 
-func set_up_exhibit(exhibit, params):
-	var generated_results = exhibit.generate(_grid, params)
-	var entry = generated_results.entry
-	var exits = generated_results.exits
-
-	# add a marker at every exit
-	for exit in exits:
-		exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit))
-
-	return generated_results
-
 func _set_current_room_title(title):
 	_current_room_title = title
 
@@ -196,9 +185,14 @@ func _load_exhibit_from_exit(exit):
 		"exit": exit
 	})
 
-func _add_item(exhibit, slots, item_data):
-	var slot = slots.pop_front()
+func _add_item(exhibit, item_data):
+	var slot = exhibit.get_item_slot()
 	if slot == null:
+		exhibit.add_room()
+		if exhibit.has_item_slot():
+			_add_item(exhibit, item_data)
+		else:
+			push_error("unable to add item slots to exhibit.")
 		return
 
 	var item = WallItem.instantiate()
@@ -236,6 +230,11 @@ func _count_image_items(arr):
 			count += 1
 	return count
 
+func _on_exit_added(exit, doors):
+	var linked_exhibit = Util.coalesce(doors.pop_front(), "")
+	exit.to_title = linked_exhibit
+	exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit))
+
 func _on_fetch_complete(_titles, context):
 	# we don't need to do anything to handle a prefetch
 	if context.has("prefetch"):
@@ -262,7 +261,7 @@ func _on_fetch_complete(_titles, context):
 	var new_exhibit = TiledExhibitGenerator.instantiate()
 	add_child(new_exhibit)
 
-	set_up_exhibit(new_exhibit, {
+	new_exhibit.generate(_grid, {
 		"start_pos": Vector3.UP * _next_height,
 		"min_room_dimension": min_room_dimension,
 		"max_room_dimension": max_room_dimension,
@@ -283,18 +282,10 @@ func _on_fetch_complete(_titles, context):
 		notice.position -= new_exhibit.entry.to_dir.rotated(Vector3.UP, PI / 2) * 2
 		new_exhibit.add_child(notice)
 
-	var exits = new_exhibit.exits
-	var slots = new_exhibit.item_slots
-	var linked_exhibits = []
+	new_exhibit.exit_added.connect(_on_exit_added.bind(doors))
 
-	# fill in doors out of the exhibit
-	for e in exits:
-		var linked_exhibit = Util.coalesce(doors.pop_front(), "")
-		e.to_title = linked_exhibit
-		linked_exhibits.append(linked_exhibit)
-
-	var new_hall
-	if backlink:
+	var new_hall = new_exhibit.entry
+	"""if backlink:
 		for exit in new_exhibit.exits:
 			if exit.to_title == hall.to_title:
 				new_hall = exit
@@ -304,6 +295,7 @@ func _on_fetch_complete(_titles, context):
 			new_hall = new_exhibit.entry
 	else:
 		new_hall = new_exhibit.entry
+	"""
 
 	if not _exhibits.has(context.title):
 		_exhibits[context.title] = { "entry": new_exhibit.entry, "exhibit": new_exhibit, "height": _next_height }
@@ -327,7 +319,7 @@ func _on_fetch_complete(_titles, context):
 	for item_data in items:
 		if item_data.type == "image" and item_data.has("title") and item_data.title != "":
 			image_titles.append(item_data.title)
-		item_queue.append(_add_item.bind(new_exhibit, slots, item_data))
+		item_queue.append(_add_item.bind(new_exhibit, item_data))
 	item_queue.append(ExhibitFetcher.fetch_images(image_titles, null))
 	_process_item_queue(item_queue, 0.1)
 

@@ -1,5 +1,7 @@
 extends Node3D
 
+signal exit_added(exit)
+
 @onready var pool_scene = preload("res://scenes/items/Pool.tscn")
 @onready var hall = preload("res://scenes/Hall.tscn")
 @onready var grid_wrapper = preload("res://scenes/util/GridWrapper.tscn")
@@ -10,19 +12,29 @@ extends Node3D
 
 var entry
 var exits = []
-var item_slots: Array:
+
+var _room_count: int:
 	get:
-		return _item_slots.values()
+		return len(_room_list.keys())
 	set(_v):
 		pass
 
-var _item_slots = {}
+var _item_slot_map = {}
+var _item_slots = []
+var _item_slot_idx = 0
 
-var _room_count
+var _y
+var _room_list = {}
+var _branch_point_list = []
 var _raw_grid
 var _grid
 var _floor
 var _no_props
+var _min_room_dimension
+var _max_room_dimension
+
+func _rand_dim():
+	return _rng.randi_range(_min_room_dimension, _max_room_dimension)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -61,36 +73,52 @@ func vec_key(v):
 	return var_to_bytes(v)
 
 func add_item_slot(s):
-	_item_slots[vec_key(s[0])] = s
+	var k = vec_key(s[0])
+	if not _item_slot_map.has(k):
+		_item_slot_map[vec_key(s[0])] = s
+		_item_slots.append(s)
+
+func has_item_slot():
+	return _item_slot_idx < len(_item_slots)
+
+func get_item_slot():
+	if has_item_slot():
+		var slot = _item_slots[_item_slot_idx]
+		_item_slot_idx += 1
+		return slot
+	else:
+		return null
 
 func generate(
 		grid,
 		params,
 	):
+	# set initial fields
+	_min_room_dimension = params.min_room_dimension
+	_max_room_dimension = params.max_room_dimension
+
 	var start_pos = params.start_pos
-	var min_room_dimension = params.min_room_dimension
-	var max_room_dimension = params.max_room_dimension
-	var room_count = params.room_count
 	var title = params.title
 	var prev_title = params.prev_title
 	var hall_type = params.hall_type if params.has("hall_type") else [true, 0]
+	_y = start_pos.y
 
 	_no_props = params.has("no_props") and params.no_props
 
+	# init grid
 	_raw_grid = grid
 	_grid = grid_wrapper.instantiate()
 	_grid.init(_raw_grid)
 	add_child(_grid)
 
+	# init rng
 	_rng = RandomNumberGenerator.new()
 	_rng.seed = hash(title)
 	_title = title
 	_prev_title = prev_title
 	_floor = Util.gen_floor(title)
 
-	var rand_dim = func() -> int:
-		return _rng.randi_range(min_room_dimension, max_room_dimension)
-
+	# init starting hall
 	var starting_hall = hall.instantiate()
 	add_child(starting_hall)
 	starting_hall.init(
@@ -106,111 +134,103 @@ func generate(
 	starting_hall.exit_door.open()
 	starting_hall.from_sign.visible = true
 
+	# initialize public fields
 	entry = starting_hall
-	exits = []
-	_item_slots = {}
-	_room_count = room_count
 
-	var room_width = rand_dim.call()
-	var room_length = rand_dim.call()
+	# now we create the first room
+	var room_width = _rand_dim()
+	var room_length = _rand_dim()
 	var room_center = Vector3(
 		starting_hall.to_pos.x + starting_hall.to_dir.x * (2 + room_width / 2),
-		start_pos.y,
+		_y,
 		starting_hall.to_pos.z + starting_hall.to_dir.z * (2 + room_length / 2),
 	) - (starting_hall.to_dir if hall_type[0] else Vector3.ZERO)
 
-	var next_room_direction
-	var next_room_width
-	var next_room_length
-	var next_room_center
+	var room_obj = _add_to_room_list(room_center, room_width, room_length)
+	var bounds = room_to_bounds(room_center, room_width, room_length)
+	carve_room(bounds[0], bounds[1], _y)
+	#decorate_room(room_obj)
 
-	var room_list = {}
-	var branch_point_list = []
-	var room_entry
-
-	while room_list.size() < room_count:
-		room_entry = {
-			"center": room_center,
-			"width": room_width,
-			"length": room_length
-		}
-		branch_point_list.append(room_entry)
-		room_list[vec_key(room_center)] = room_entry
-
-		var bounds = room_to_bounds(room_center, room_width, room_length)
-		carve_room(bounds[0], bounds[1], start_pos.y)
-
-		var early_terminate = true
-		var try_dirs = DIRECTIONS.duplicate()
-		Util.shuffle(_rng, try_dirs)
-
-		# sometimes just throw in branches to keep em guessing
-		if len(branch_point_list) < 3 or _rng.randi() % 4 != 0:
-			next_room_width = rand_dim.call()
-			next_room_length = rand_dim.call()
-
-			for dir in try_dirs:
-				next_room_direction = dir
-				next_room_center = room_center + Vector3(
-					next_room_direction.x * (room_width / 2 + next_room_width / 2 + 3),
-					0,
-					next_room_direction.z * (room_length / 2 + next_room_length / 2 + 3)
-				)
-
-				var new_bounds = room_to_bounds(next_room_center, next_room_width, next_room_length)
-				if not overlaps_room(new_bounds[0], new_bounds[1], start_pos.y):
-					early_terminate = false
-					break
-
-		if early_terminate:
-			branch_point_list.pop_back()
-			var prev_room = branch_point_list.pop_back()
-			if prev_room == null:
-				break
-
-			room_center = prev_room["center"]
-			room_width = prev_room["width"]
-			room_length = prev_room["length"]
-			continue
-
-		if room_list.size() < room_count:
-			var start_hall = vlt(room_center, next_room_center)
-			var end_hall = vgt(room_center, next_room_center)
-			var hall_width
-			var start_hall_offset
-			var end_hall_offset
-
-			if (start_hall - end_hall).x != 0:
-				hall_width = _rng.randi_range(1, min(room_length, next_room_length))
-				start_hall -= Vector3(0, 0, hall_width / 2)
-				end_hall += Vector3(0, 0, (hall_width - 1) / 2)
-			else:
-				hall_width = _rng.randi_range(1, min(room_width, next_room_width))
-				start_hall -= Vector3(hall_width / 2, 0, 0)
-				end_hall += Vector3((hall_width - 1) / 2, 0, 0)
-
-			carve_room(
-				start_hall,
-				end_hall,
-				start_pos.y
-			)
-
-		room_center = next_room_center
-		room_width = next_room_width
-		room_length = next_room_length
-
-	# add the final room
-	# TODO: restructure the whole weird-ass loop here
-	room_list[vec_key(room_entry.center)] = room_entry
-
-	# ignore starting hall
-	for room in room_list.values():
-		decorate_room(room)
-
-	return {
-		"entry": entry,
-		"exits": exits
+func _add_to_room_list(c, w, l):
+	var room_obj = {
+		"center": c,
+		"width": w,
+		"length": l,
 	}
+	_room_list[vec_key(c)] = room_obj
+	_branch_point_list.append(room_obj)
+	return room_obj
+
+func add_room():
+	if len(_branch_point_list) == 0:
+		push_error("no last room to pull from branch list")
+		return
+
+	var last_room = _branch_point_list[len(_branch_point_list) - 1]
+
+	# prepare directions to try
+	var branch = true
+	var try_dirs = DIRECTIONS.duplicate()
+	Util.shuffle(_rng, try_dirs)
+
+	var room_width
+	var room_length
+	var room_center
+	var room_bounds
+
+	# sometimes skip and throw in branches to keep em guessing
+	#if len(_branch_point_list) < 3 or _rng.randi() % 4 != 0:
+	room_width = _rand_dim()
+	room_length = _rand_dim()
+
+	for dir in try_dirs:
+		# project where the next room will be based on random direction
+		var room_direction = dir
+		room_center = last_room.center + Vector3(
+			room_direction.x * (last_room.width / 2 + room_width / 2 + 3),
+			0,
+			room_direction.z * (last_room.length / 2 + room_length / 2 + 3)
+		)
+
+		# check if we found a valid room placement
+		room_bounds = room_to_bounds(room_center, room_width, room_length)
+		if not overlaps_room(room_bounds[0], room_bounds[1], _y):
+			branch = false
+			break
+
+	# if we decided to branch or cannot find valid placement, branch
+	if branch:
+		#_branch_point_list.pop_back()
+		#if len(_branch_point_list) == 0:
+		push_error("no more rooms to add to the exhibit")
+		return
+		#add_room()
+		#return
+
+	var room_obj = _add_to_room_list(room_center, room_width, room_length)
+	_connect_rooms_with_hall(last_room, room_obj)
+	carve_room(room_bounds[0], room_bounds[1], _y)
+	decorate_room(last_room)
+
+func _connect_rooms_with_hall(last_room, next_room):
+	var start_hall = vlt(last_room.center, next_room.center)
+	var end_hall = vgt(last_room.center, next_room.center)
+	var hall_width
+
+	if (start_hall - end_hall).x != 0:
+		hall_width = _rng.randi_range(1, min(last_room.length, next_room.length))
+		start_hall -= Vector3(0, 0, hall_width / 2)
+		end_hall += Vector3(0, 0, (hall_width - 1) / 2)
+	else:
+		hall_width = _rng.randi_range(1, min(last_room.width, next_room.width))
+		start_hall -= Vector3(hall_width / 2, 0, 0)
+		end_hall += Vector3((hall_width - 1) / 2, 0, 0)
+
+	carve_room(
+		start_hall,
+		end_hall,
+		_y
+	)
 
 func decorate_room(room):
 	var center = room.center
@@ -292,6 +312,7 @@ func decorate_wall_tile(pos):
 			)
 
 			exits.append(new_hall)
+			emit_signal("exit_added", new_hall)
 		# put exhibit items everywhere else
 		else:
 			add_item_slot([slot, hall_dir])
