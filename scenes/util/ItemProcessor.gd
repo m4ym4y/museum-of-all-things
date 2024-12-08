@@ -196,6 +196,13 @@ static func _parse_wikitext(wikitext):
 
 	return links
 
+static func commons_image_to_item(title):
+	return {
+		"type": "image",
+		"title": title,
+		"text": _clean_filename(title),
+	}
+
 static func create_items(title, result, prev_title=""):
 	var items = []
 	var doors = []

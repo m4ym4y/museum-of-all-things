@@ -83,6 +83,8 @@ func _ready() -> void:
 
 	_grid = $Lobby/GridMap
 	ExhibitFetcher.wikitext_complete.connect(_on_fetch_complete)
+	ExhibitFetcher.wikidata_complete.connect(_on_wikidata_complete)
+	ExhibitFetcher.commons_images_complete.connect(_on_commons_images_complete)
 
 func _set_up_lobby(lobby):
 	var exits = lobby.exits
@@ -322,6 +324,13 @@ func _on_fetch_complete(_titles, context):
 		item_queue.append(_add_item.bind(new_exhibit, item_data))
 	item_queue.append(_on_finished_exhibit.bind(new_exhibit))
 	item_queue.push_front(ExhibitFetcher.fetch_images.bind(image_titles, null))
+
+	if result.has("wikidata_entity"):
+		item_queue.push_front(ExhibitFetcher.fetch_wikidata.bind(result.wikidata_entity, {
+			"exhibit": new_exhibit,
+			"queue": item_queue,
+		}))
+
 	_process_item_queue(item_queue, 0.1)
 
 	if backlink:
@@ -329,15 +338,36 @@ func _on_fetch_complete(_titles, context):
 	else:
 		_link_halls(new_hall, hall)
 
+func _on_wikidata_complete(entity, ctx):
+	var result = ExhibitFetcher.get_result(entity)
+	print("got wikidata result. result=%s" % result)
+	if result and result.has("commons_category"):
+		ExhibitFetcher.fetch_commons_images(result.commons_category, ctx)
+
+func _on_commons_images_complete(category, ctx):
+	var result = ExhibitFetcher.get_result(category)
+	if result and result.has("images") and len(result.images) > 0:
+		var images = result.images
+		for image in images:
+			ctx.queue.append(_add_item.bind(
+				ctx.exhibit,
+				ItemProcessor.commons_image_to_item(image)
+			))
+		if not _queue_running:
+			_process_item_queue(ctx.queue, 0.1)
+
 func _on_finished_exhibit(exhibit):
 	if OS.is_debug_build():
 		print("finished exhibit. slots=", len(exhibit._item_slots))
 
+var _queue_running = false
 func _process_item_queue(queue, delay):
 	var callable = queue.pop_front()
 	if not callable:
+		_queue_running = false
 		return
 	else:
+		_queue_running = true
 		callable.call()
 		get_tree().create_timer(delay).timeout.connect(_process_item_queue.bind(queue, delay))
 
