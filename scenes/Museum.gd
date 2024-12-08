@@ -231,7 +231,6 @@ func _count_image_items(arr):
 	return count
 
 func _on_exit_added(exit, doors):
-	print("on exit added")
 	var linked_exhibit = Util.coalesce(doors.pop_front(), "")
 	exit.to_title = linked_exhibit
 	exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit))
@@ -317,7 +316,6 @@ func _on_fetch_complete(_titles, context):
 
 	var item_queue = []
 	var image_titles = []
-	print("creating %s items..." % len(items))
 	for item_data in items:
 		if item_data.type == "image" and item_data.has("title") and item_data.title != "":
 			image_titles.append(item_data.title)
@@ -332,7 +330,8 @@ func _on_fetch_complete(_titles, context):
 		_link_halls(new_hall, hall)
 
 func _on_finished_exhibit(exhibit):
-	print("finished exhibit. slots=", len(exhibit._item_slots))
+	if OS.is_debug_build():
+		print("finished exhibit. slots=", len(exhibit._item_slots))
 
 func _process_item_queue(queue, delay):
 	var callable = queue.pop_front()
