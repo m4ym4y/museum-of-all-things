@@ -223,7 +223,7 @@ func add_room():
 	_create_next_room_candidate(room)
 
 	# branch sometimes
-	if _rng.randi() % 3 == 0:
+	if _rng.randi() % 2 == 0:
 		_create_next_room_candidate(room)
 
 	decorate_room(room)
@@ -234,11 +234,11 @@ func _create_hall_bounds(last_room, next_room):
 	var hall_width
 
 	if (start_hall - end_hall).x != 0:
-		hall_width = _rng.randi_range(1, min(last_room.length, next_room.length))
+		hall_width = _rng.randi_range(1, min(last_room.length, next_room.length) - 1)
 		start_hall -= Vector3(0, 0, hall_width / 2)
 		end_hall += Vector3(0, 0, (hall_width - 1) / 2)
 	else:
-		hall_width = _rng.randi_range(1, min(last_room.width, next_room.width))
+		hall_width = _rng.randi_range(1, min(last_room.width, next_room.width) - 1)
 		start_hall -= Vector3(hall_width / 2, 0, 0)
 		end_hall += Vector3((hall_width - 1) / 2, 0, 0)
 
