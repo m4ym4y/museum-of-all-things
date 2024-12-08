@@ -321,7 +321,7 @@ func _on_fetch_complete(_titles, context):
 			image_titles.append(item_data.title)
 		item_queue.append(_add_item.bind(new_exhibit, item_data))
 	item_queue.append(_on_finished_exhibit.bind(new_exhibit))
-	item_queue.append(ExhibitFetcher.fetch_images(image_titles, null))
+	item_queue.push_front(ExhibitFetcher.fetch_images.bind(image_titles, null))
 	_process_item_queue(item_queue, 0.1)
 
 	if backlink:
