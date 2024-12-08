@@ -25,7 +25,8 @@ var _item_slot_idx = 0
 
 var _y
 var _room_list = {}
-var _branch_point_list = []
+var _next_room_candidates = []
+
 var _raw_grid
 var _grid
 var _floor
@@ -149,40 +150,23 @@ func generate(
 	var room_obj = _add_to_room_list(room_center, room_width, room_length)
 	var bounds = room_to_bounds(room_center, room_width, room_length)
 	carve_room(bounds[0], bounds[1], _y)
-	#decorate_room(room_obj)
+	_create_next_room_candidate(room_obj)
+	decorate_room(room_obj)
 
-func _add_to_room_list(c, w, l):
-	var room_obj = {
-		"center": c,
-		"width": w,
-		"length": l,
-	}
-	_room_list[vec_key(c)] = room_obj
-	_branch_point_list.append(room_obj)
-	return room_obj
-
-func add_room():
-	if len(_branch_point_list) == 0:
-		push_error("no last room to pull from branch list")
-		return
-
-	var last_room = _branch_point_list[len(_branch_point_list) - 1]
-
-	# prepare directions to try
-	var branch = true
-	var try_dirs = DIRECTIONS.duplicate()
-	Util.shuffle(_rng, try_dirs)
-
+func _create_next_room_candidate(last_room):
 	var room_width
 	var room_length
 	var room_center
 	var room_bounds
 
-	# sometimes skip and throw in branches to keep em guessing
-	#if len(_branch_point_list) < 3 or _rng.randi() % 4 != 0:
 	room_width = _rand_dim()
 	room_length = _rand_dim()
 
+	# prepare directions to try
+	var try_dirs = DIRECTIONS.duplicate()
+	Util.shuffle(_rng, try_dirs)
+
+	var failed = true
 	for dir in try_dirs:
 		# project where the next room will be based on random direction
 		var room_direction = dir
@@ -195,24 +179,56 @@ func add_room():
 		# check if we found a valid room placement
 		room_bounds = room_to_bounds(room_center, room_width, room_length)
 		if not overlaps_room(room_bounds[0], room_bounds[1], _y):
-			branch = false
+			failed = false
 			break
 
-	# if we decided to branch or cannot find valid placement, branch
-	if branch:
-		#_branch_point_list.pop_back()
-		#if len(_branch_point_list) == 0:
-		push_error("no more rooms to add to the exhibit")
+	if failed:
 		return
-		#add_room()
-		#return
 
-	var room_obj = _add_to_room_list(room_center, room_width, room_length)
-	_connect_rooms_with_hall(last_room, room_obj)
-	carve_room(room_bounds[0], room_bounds[1], _y)
-	decorate_room(last_room)
+	var room_obj = {
+		"center": room_center,
+		"width": room_width,
+		"length": room_length,
+	}
+	var hall_bounds = _create_hall_bounds(last_room, room_obj)
+	_grid.reserve_zone(hall_bounds)
+	_grid.reserve_zone(room_bounds)
+	room_obj.bounds = room_bounds
+	room_obj.hall = hall_bounds
+	_next_room_candidates.append(room_obj)
 
-func _connect_rooms_with_hall(last_room, next_room):
+func _add_to_room_list(c, w, l):
+	var room_obj = {
+		"center": c,
+		"width": w,
+		"length": l,
+	}
+	_room_list[vec_key(c)] = room_obj
+	return room_obj
+
+func add_room():
+	if len(_next_room_candidates) == 0:
+		push_error("no room candidate to create")
+		return
+
+	var idx = _rng.randi() % len(_next_room_candidates)
+	var room = _next_room_candidates.pop_at(idx)
+
+	_grid.free_reserved_zone(room.center)
+
+	_add_to_room_list(room.center, room.width, room.length)
+	carve_room(room.hall[0], room.hall[1], _y)
+	carve_room(room.bounds[0], room.bounds[1], _y)
+
+	_create_next_room_candidate(room)
+
+	# branch sometimes
+	if _rng.randi() % 3 == 0:
+		_create_next_room_candidate(room)
+
+	decorate_room(room)
+
+func _create_hall_bounds(last_room, next_room):
 	var start_hall = vlt(last_room.center, next_room.center)
 	var end_hall = vgt(last_room.center, next_room.center)
 	var hall_width
@@ -226,11 +242,7 @@ func _connect_rooms_with_hall(last_room, next_room):
 		start_hall -= Vector3(hall_width / 2, 0, 0)
 		end_hall += Vector3((hall_width - 1) / 2, 0, 0)
 
-	carve_room(
-		start_hall,
-		end_hall,
-		_y
-	)
+	return [start_hall, end_hall]
 
 func decorate_room(room):
 	var center = room.center
@@ -330,8 +342,8 @@ func carve_room(corner1, corner2, y):
 	var gz = corner2.z
 	for x in range(lx - 1, gx + 2):
 		for z in range(lz - 1, gz + 2):
+			var c = _grid.get_cell_item(Vector3(x, y, z))
 			if x < lx or z < lz or x > gx or z > gz:
-				var c = _grid.get_cell_item(Vector3(x, y, z))
 				if c == HALL_STAIRS_UP or c == HALL_STAIRS_DOWN or c == HALL_STAIRS_TURN:
 					continue
 				elif c == INTERNAL_HALL:
@@ -341,8 +353,9 @@ func carve_room(corner1, corner2, y):
 					_grid.set_cell_item(Vector3(x, y + 1, z), WALL, 0)
 					_grid.set_cell_item(Vector3(x, y + 2, z), -1, 0)
 			else:
-				_grid.set_cell_item(Vector3(x, y, z), -1, 0)
-				_grid.set_cell_item(Vector3(x, y + 1, z), -1, 0)
+				if c == WALL:
+					_grid.set_cell_item(Vector3(x, y, z), -1, 0)
+					_grid.set_cell_item(Vector3(x, y + 1, z), -1, 0)
 				_grid.set_cell_item(Vector3(x, y + 2, z), CEILING, 0)
 				_grid.set_cell_item(Vector3(x, y - 1, z), _floor, 0)
 
