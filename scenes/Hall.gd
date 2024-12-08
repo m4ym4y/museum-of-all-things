@@ -80,6 +80,10 @@ static func valid_hall_types(grid, hall_start, hall_dir):
 			grid.get_cell_item(past_hall_exit_right - Vector3.UP) != -1 and
 			grid.get_cell_item(past_hall_exit_right) == -1
 		) and
+		not (
+			grid.get_cell_item(past_hall_exit_right - Vector3.UP) == 1 and
+			grid.get_cell_item(past_hall_exit_right) == 1
+		) and
 		Util.safe_overwrite(grid, hall_exit_right)
 	):
 		valid_halls.append([true, FLAT])
