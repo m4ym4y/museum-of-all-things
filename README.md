@@ -1,17 +1,26 @@
 # Wikipedia Museum
 
-![screenshot of the 'insect' room](./docs/2024-11-23-11-1732396145_1271x796.png)
+![screenshot of the 'coffee' exhibit](./docs/screenshot-coffee.png)
 
 Next release coming soon!
-
-[**Visit the previous, web-based, version of the museum here!!**](https://m4ym4y.github.io/wikipedia-museum/)
 
 The goal of this project is to make an interactive 3d museum that is generated
 procedurally, using content from wikipedia to fill exhibits. The museum is
 virtually limitless, allowing you to take doors from one exhibit to another,
 depending on what is linked from that wikipedia article.
 
-![screenshot of the 'fungus' room](./docs/2024-11-23-11-1732420409_1271x795.png)
+![screenshot of the 'baroque painting' exhibit](./docs/screenshot-baroque.png)
+
+The text of the article is also inserted as informative plaques on the wall. You
+can read about the exhibit while looking at the pictures from it. Images are also
+pulled from wikimedia commons in the category corresponding to the article.
+
+![screenshot of the 'marine life' room](docs/screenshot-marine.png)
+
+Every exhibit is filled with hallways to other exhibits, based on the links in the
+current exhibit's wikipedia page. You'll never run out of things to explore!
+
+![screenshot of the 'petra' room](docs/screenshot-petra.png)
 
 ## Credits
 
@@ -20,7 +29,6 @@ All museum content is sourced from Wikipedia.
 - Creator and Programmer: [Maya](https://github.com/m4ym4y)
 - Dramaturg: Emma Bee Pernudi-Moon
 
-![screenshot of the 'USA' room](docs/2024-11-23-11-1732415302_1274x796.png)
 
 ## Plans
 
