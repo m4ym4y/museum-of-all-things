@@ -105,6 +105,10 @@ func fetch_commons_images(category, context):
 	var new_category = _get_uncached_titles([category], WIKIMEDIA_COMMONS_PREFIX)
 
 	if len(new_category) == 0:
+		var result = get_result(category)
+		if result and result.has("images"):
+			for image in result.images:
+				_read_from_cache(image, WIKIMEDIA_COMMONS_PREFIX)
 		emit_signal("commons_images_complete", category, context)
 		return
 

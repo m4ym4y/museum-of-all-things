@@ -3,7 +3,8 @@ extends Node3D
 @onready var NoImageNotice = preload("res://scenes/items/NoImageNotice.tscn")
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
 @onready var DEFAULT_DOORS = [
-	"Baroque painting",
+	#"Baroque painting",
+	"Barbecue sauce",
 	"List of Polish people",
 	"Louvre",
 	"Coffee",
@@ -91,7 +92,8 @@ func _set_up_lobby(lobby):
 	_exhibits["$Lobby"] = lobby
 	lobby.get_node("Introduction").init(INTRODUCTION)
 
-	print("Setting up lobby with %s exits..." % len(exits))
+	if OS.is_debug_build():
+		print("Setting up lobby with %s exits..." % len(exits))
 
 	for exit in exits:
 		var title = DEFAULT_DOORS.pop_front()
@@ -340,7 +342,6 @@ func _on_fetch_complete(_titles, context):
 
 func _on_wikidata_complete(entity, ctx):
 	var result = ExhibitFetcher.get_result(entity)
-	print("got wikidata result. result=%s" % result)
 	if result and result.has("commons_category"):
 		ExhibitFetcher.fetch_commons_images(result.commons_category, ctx)
 
