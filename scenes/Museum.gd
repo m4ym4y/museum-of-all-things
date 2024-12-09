@@ -3,8 +3,7 @@ extends Node3D
 @onready var NoImageNotice = preload("res://scenes/items/NoImageNotice.tscn")
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
 @onready var DEFAULT_DOORS = [
-	#"Baroque painting",
-	"Barbecue sauce",
+	"Baroque painting",
 	"List of Polish people",
 	"Louvre",
 	"Coffee",
