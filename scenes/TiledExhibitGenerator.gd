@@ -31,6 +31,7 @@ var _raw_grid
 var _grid
 var _floor
 var _no_props
+var _exit_limit
 var _min_room_dimension
 var _max_room_dimension
 
@@ -105,6 +106,7 @@ func generate(
   _y = start_pos.y
 
   _no_props = params.has("no_props") and params.no_props
+  _exit_limit = params.exit_limit if params.has("exit_limit") else 1e10
 
   # init grid
   _raw_grid = grid
@@ -313,7 +315,7 @@ func decorate_wall_tile(pos):
     var valid_halls = Hall.valid_hall_types(_grid, wall, hall_dir)
 
     # put an exit everywhere it fits
-    if (len(valid_halls) > 0):
+    if len(valid_halls) > 0 and len(exits) <= _exit_limit:
       var new_hall = hall.instantiate()
       var hall_type = valid_halls[_rng.randi() % len(valid_halls)]
       add_child(new_hall)

@@ -293,6 +293,7 @@ func _on_fetch_complete(_titles, context):
 		"prev_title": prev_title,
 		"no_props": len(items) < 10,
 		"hall_type": hall.hall_type,
+		"exit_limit": len(doors),
 	})
 
 	if _count_image_items(items) < 3:
