@@ -274,6 +274,7 @@ func _on_fetch_complete(_titles, context):
 	var data = ItemProcessor.create_items(context.title, result, prev_title)
 	var doors = data.doors
 	var items = data.items
+	var extra_text = data.extra_text
 
 	_next_height += 20
 	var new_exhibit = TiledExhibitGenerator.instantiate()
@@ -299,6 +300,8 @@ func _on_fetch_complete(_titles, context):
 		notice.rotation.y = Util.vecToRot(new_exhibit.entry.to_dir) - PI / 4
 		notice.position = Util.gridToWorld(new_exhibit.entry.to_pos) + 5 * new_exhibit.entry.to_dir
 		notice.position -= new_exhibit.entry.to_dir.rotated(Vector3.UP, PI / 2) * 2
+		items.append_array(extra_text)
+		extra_text = []
 		new_exhibit.add_child(notice)
 
 	if not _exhibits.has(context.title):
@@ -336,13 +339,18 @@ func _on_fetch_complete(_titles, context):
 			"exhibit": new_exhibit,
 			"title": context.title,
 			"hall": hall,
-			"backlink": backlink
+			"backlink": backlink,
+			"extra_text": extra_text
 		}))
 
 	if backlink:
 		new_exhibit.entry.loader.body_entered.connect(_on_loader_body_entered.bind(new_exhibit.entry, true))
 	else:
 		_link_halls(new_exhibit.entry, hall)
+
+func _queue_extra_text(exhibit, extra_text):
+	for item in extra_text:
+		_queue_item(exhibit.title, _add_item.bind(exhibit, item))
 
 func _link_backlink_to_exit(exhibit, hall):
 	if not is_instance_valid(exhibit) or not is_instance_valid(hall):
@@ -364,17 +372,19 @@ func _on_wikidata_complete(entity, ctx):
 	if result and result.has("commons_category"):
 		ExhibitFetcher.fetch_commons_images(result.commons_category, ctx)
 	else:
-		_on_finished_exhibit(ctx)
+		_queue_extra_text(ctx.exhibit, ctx.extra_text)
+		_queue_item(ctx.title, _on_finished_exhibit.bind(ctx))
 
 func _on_commons_images_complete(category, ctx):
 	var result = ExhibitFetcher.get_result(category)
 	if result and result.has("images") and len(result.images) > 0:
-		var images = ItemProcessor.commons_images_to_items(ctx.title, result.images)
+		var images = ItemProcessor.commons_images_to_items(ctx.title, result.images, ctx.extra_text)
 		for item in images:
 			_queue_item(ctx.title, _add_item.bind(
 				ctx.exhibit,
 				item
 			))
+	_queue_extra_text(ctx.exhibit, ctx.extra_text)
 	_queue_item(ctx.title, _on_finished_exhibit.bind(ctx))
 
 func _on_finished_exhibit(ctx):

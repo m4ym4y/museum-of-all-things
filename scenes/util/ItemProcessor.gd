@@ -196,21 +196,29 @@ static func _parse_wikitext(wikitext):
 
 	return links
 
-static func commons_images_to_items(title, images):
+static func commons_images_to_items(title, images, extra_text):
 	var items = []
+	var rng = RandomNumberGenerator.new()
+	rng.seed = hash(title + ":commons_shuffler")
+	_seeded_shuffle(title + ":commons_images", images)
 
 	for image in images:
+		var il = len(items)
+		if il > 0 and items[il - 1].type != "text":
+			if len(extra_text) > 0 and rng.randi() % 2 == 0:
+				items.append(extra_text.pop_front())
+
 		items.append({
 			"type": "image",
 			"title": image,
 			"text": _clean_filename(image),
 		})
 
-	_seeded_shuffle(title + ":commons_images", items)
 	return items
 
 static func create_items(title, result, prev_title=""):
-	var items = []
+	var text_items = []
+	var image_items = []
 	var doors = []
 	var doors_used = {}
 
@@ -222,7 +230,7 @@ static func create_items(title, result, prev_title=""):
 		Util.t_end("_parse_wikitext")
 
 		# we are using the extract returned from API until my parser works better
-		items.append_array(_create_text_items(title, result.extract))
+		text_items.append_array(_create_text_items(title, result.extract))
 
 		for link_entry in links:
 			var type = link_entry[0]
@@ -232,7 +240,7 @@ static func create_items(title, result, prev_title=""):
 			var caption = alt_re.search(link)
 
 			if target.begins_with("File:"):
-				items.append({
+				image_items.append({
 					"type": "image",
 					"title": target,
 					"text": caption.get_string(1) if caption else _clean_filename(target),
@@ -247,7 +255,7 @@ static func create_items(title, result, prev_title=""):
 							continue
 						if not image_title.begins_with("File:"):
 							image_title = "File:" + image_title
-						items.append({
+						image_items.append({
 							"type": "image",
 							"title": image_title,
 							"text": caption.get_string(1) if caption else _clean_filename(image_title),
@@ -260,14 +268,28 @@ static func create_items(title, result, prev_title=""):
 					doors_used[door] = true
 
 	# keep first item and first door intact
-	var front_item = items.pop_front()
+	var front_text = text_items.pop_front()
 	var front_door = doors.pop_front()
-	_seeded_shuffle(title + ":items", items)
+	_seeded_shuffle(title + ":text_items", text_items)
+	_seeded_shuffle(title + ":image_items", image_items)
 	_seeded_shuffle(title + ":doors", doors, true)
-	items.push_front(front_item)
+	text_items.push_front(front_text)
 	doors.push_front(front_door)
+
+	var rng = RandomNumberGenerator.new()
+	rng.seed = hash(title + ":shuffler")
+
+	# ensure that there aren't too many text items in a row
+	var items = []
+	while len(image_items) > 0:
+		var il = len(items)
+		if il > 0 and items[il - 1].type != "text":
+			if len(text_items) > 0 and rng.randi() % 2 == 0:
+				items.append(text_items.pop_front())
+		items.append(image_items.pop_front())
 
 	return {
 		"doors": doors,
 		"items": items,
+		"extra_text": text_items,
 	}
