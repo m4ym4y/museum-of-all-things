@@ -208,11 +208,12 @@ static func commons_images_to_items(title, images, extra_text):
 			if len(extra_text) > 0 and rng.randi() % 2 == 0:
 				items.append(extra_text.pop_front())
 
-		items.append({
-			"type": "image",
-			"title": image,
-			"text": _clean_filename(image),
-		})
+		if image and IMAGE_REGEX.search(image):
+			items.append({
+				"type": "image",
+				"title": image,
+				"text": _clean_filename(image),
+			})
 
 	return items
 
@@ -239,7 +240,7 @@ static func create_items(title, result, prev_title=""):
 			var target = _to_link_case(image_name_re.sub(link.get_slice("|", 0), "File:"))
 			var caption = alt_re.search(link)
 
-			if target.begins_with("File:"):
+			if target.begins_with("File:") and IMAGE_REGEX.search(target):
 				image_items.append({
 					"type": "image",
 					"title": target,
