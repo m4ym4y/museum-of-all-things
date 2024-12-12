@@ -73,8 +73,8 @@ points = PackedVector3Array(-2, 0, 2, -2, 2, -2, 2, 2, -2, 2, 0, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_gl468"]
 size = Vector3(0.5, 8, 4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8hjjm"]
-size = Vector3(4, 1, 4)
+[sub_resource type="BoxShape3D" id="BoxShape3D_11svc"]
+size = Vector3(4, 4, 4)
 
 [node name="MeshLibrary" type="Node3D"]
 
@@ -258,7 +258,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("ConvexPolygonShape3D_23ryu")
 
 [node name="hall_stair_up" type="MeshInstance3D" parent="."]
-visible = false
 mesh = ExtResource("20_vo6p2")
 surface_material_override/0 = ExtResource("19_4jtqk")
 surface_material_override/1 = ExtResource("12_r4mto")
@@ -318,6 +317,6 @@ shape = SubResource("BoxShape3D_6y7eq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 2, -1.75)
 shape = SubResource("BoxShape3D_c2hvi")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="hall_stair_turn/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("BoxShape3D_8hjjm")
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="hall_stair_turn/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+shape = SubResource("BoxShape3D_11svc")
