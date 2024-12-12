@@ -4,6 +4,7 @@ var gravity = -30
 var crouch_move_speed = 4
 var mouse_sensitivity = 0.002
 var joy_sensitivity = 0.025
+var joy_deadzone = 0.05
 @export var jump_impulse = 13
 
 var starting_height
@@ -82,7 +83,7 @@ func _physics_process(delta):
 
 	#var delta_vec = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
 	var delta_vec = Vector2(-Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y), -Input.get_joy_axis(0, 4))
-	if delta_vec.length() > 0:
+	if delta_vec.length() > joy_deadzone:
 		rotate_y(delta_vec.x * joy_sensitivity)
 		$Pivot.rotate_x(delta_vec.y * joy_sensitivity)
 		$Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
