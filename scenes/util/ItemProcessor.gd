@@ -196,12 +196,18 @@ static func _parse_wikitext(wikitext):
 
 	return links
 
-static func commons_image_to_item(title):
-	return {
-		"type": "image",
-		"title": title,
-		"text": _clean_filename(title),
-	}
+static func commons_images_to_items(title, images):
+	var items = []
+
+	for image in images:
+		items.append({
+			"type": "image",
+			"title": image,
+			"text": _clean_filename(image),
+		})
+
+	_seeded_shuffle(title + ":commons_images", items)
+	return items
 
 static func create_items(title, result, prev_title=""):
 	var items = []

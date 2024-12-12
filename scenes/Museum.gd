@@ -370,11 +370,11 @@ func _on_wikidata_complete(entity, ctx):
 func _on_commons_images_complete(category, ctx):
 	var result = ExhibitFetcher.get_result(category)
 	if result and result.has("images") and len(result.images) > 0:
-		var images = result.images
-		for image in images:
+		var images = ItemProcessor.commons_images_to_items(ctx.title, result.images)
+		for item in images:
 			_queue_item(ctx.title, _add_item.bind(
 				ctx.exhibit,
-				ItemProcessor.commons_image_to_item(image)
+				item
 			))
 	_queue_item(ctx.title, _on_finished_exhibit.bind(ctx))
 
