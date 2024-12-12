@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var NoImageNotice = preload("res://scenes/items/NoImageNotice.tscn")
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
+@onready var QUEUE_DELAY = 0.05
 @onready var DEFAULT_DOORS = [
 	"Luigi",
 	"List of Polish people",
@@ -103,6 +104,7 @@ func _set_up_lobby(lobby):
 
 func _set_current_room_title(title):
 	_current_room_title = title
+	_start_queue()
 
 	var fog_color = Util.gen_fog(_current_room_title)
 	var environment = $WorldEnvironment.environment
@@ -315,27 +317,28 @@ func _on_fetch_complete(_titles, context):
 						continue
 					print("erasing exhibit ", key)
 					old_exhibit.exhibit.queue_free()
+					_global_item_queue_map.erase(key)
 					_exhibits.erase(key)
 					_exhibit_hist.remove_at(e)
 					break
 
-	var item_queue = []
 	var image_titles = []
+	var item_queue = []
 	for item_data in items:
 		if item_data.type == "image" and item_data.has("title") and item_data.title != "":
 			image_titles.append(item_data.title)
 		item_queue.append(_add_item.bind(new_exhibit, item_data))
-	item_queue.push_front(ExhibitFetcher.fetch_images.bind(image_titles, null))
+
+	_queue_item_front(context.title, ExhibitFetcher.fetch_images.bind(image_titles, null))
+	_queue_item(context.title, item_queue)
 
 	if result.has("wikidata_entity"):
-		item_queue.push_front(ExhibitFetcher.fetch_wikidata.bind(result.wikidata_entity, {
+		_queue_item_front(context.title, ExhibitFetcher.fetch_wikidata.bind(result.wikidata_entity, {
 			"exhibit": new_exhibit,
-			"queue": item_queue,
+			"title": context.title,
 			"hall": hall,
 			"backlink": backlink
 		}))
-
-	_process_item_queue(item_queue, 0.1)
 
 	if backlink:
 		new_exhibit.entry.loader.body_entered.connect(_on_loader_body_entered.bind(new_exhibit.entry, true))
@@ -369,13 +372,11 @@ func _on_commons_images_complete(category, ctx):
 	if result and result.has("images") and len(result.images) > 0:
 		var images = result.images
 		for image in images:
-			ctx.queue.append(_add_item.bind(
+			_queue_item(ctx.title, _add_item.bind(
 				ctx.exhibit,
 				ItemProcessor.commons_image_to_item(image)
 			))
-	ctx.queue.append(_on_finished_exhibit.bind(ctx))
-	if not _queue_running:
-		_process_item_queue(ctx.queue, 0.1)
+	_queue_item(ctx.title, _on_finished_exhibit.bind(ctx))
 
 func _on_finished_exhibit(ctx):
 	if not is_instance_valid(ctx.exhibit):
@@ -387,7 +388,10 @@ func _on_finished_exhibit(ctx):
 		_link_backlink_to_exit(ctx.exhibit, ctx.hall)
 
 var _queue_running = false
-func _process_item_queue(queue, delay):
+var _global_item_queue_map = {}
+
+func _process_item_queue():
+	var queue = _global_item_queue_map.get(_current_room_title, [])
 	var callable = queue.pop_front()
 	if not callable:
 		_queue_running = false
@@ -395,7 +399,25 @@ func _process_item_queue(queue, delay):
 	else:
 		_queue_running = true
 		callable.call()
-		get_tree().create_timer(delay).timeout.connect(_process_item_queue.bind(queue, delay))
+		get_tree().create_timer(QUEUE_DELAY).timeout.connect(_process_item_queue.bind())
+
+func _queue_item_front(title, item):
+	_queue_item(title, item, true)
+
+func _queue_item(title, item, front = false):
+	if not _global_item_queue_map.has(title):
+		_global_item_queue_map[title] = []
+	if typeof(item) == TYPE_ARRAY:
+		_global_item_queue_map[title].append_array(item)
+	elif not front:
+		_global_item_queue_map[title].append(item)
+	else:
+		_global_item_queue_map[title].push_front(item)
+	_start_queue()
+
+func _start_queue():
+	if not _queue_running:
+		_process_item_queue()
 
 @export var max_teleport_distance: float = 10.0
 @export var max_exhibits_loaded: int = 2
