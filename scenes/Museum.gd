@@ -246,10 +246,12 @@ func _count_image_items(arr):
 			count += 1
 	return count
 
-func _on_exit_added(exit, doors):
+func _on_exit_added(exit, doors, backlink, new_exhibit, hall):
 	var linked_exhibit = Util.coalesce(doors.pop_front(), "")
 	exit.to_title = linked_exhibit
 	exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit))
+	if is_instance_valid(hall) and backlink and exit.to_title == hall.to_title:
+		_link_halls(hall, exit)
 
 func _on_fetch_complete(_titles, context):
 	# we don't need to do anything to handle a prefetch
@@ -277,7 +279,7 @@ func _on_fetch_complete(_titles, context):
 	var new_exhibit = TiledExhibitGenerator.instantiate()
 	add_child(new_exhibit)
 
-	new_exhibit.exit_added.connect(_on_exit_added.bind(doors))
+	new_exhibit.exit_added.connect(_on_exit_added.bind(doors, backlink, new_exhibit, hall))
 	new_exhibit.generate(_grid, {
 		"start_pos": Vector3.UP * _next_height,
 		"min_room_dimension": min_room_dimension,
