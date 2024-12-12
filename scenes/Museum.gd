@@ -156,11 +156,9 @@ func _load_exhibit_from_entry(entry):
 	var prev_article = Util.coalesce(entry.from_title, "Fungus")
 
 	if entry.from_title == "$Lobby":
-		print("linking back to lobby")
 		_link_backlink_to_exit($Lobby, entry)
 		return
 
-	print("linking article from entry ", entry.from_title, " to ", entry.to_title)
 	if _exhibits.has(prev_article):
 		var exhibit = _exhibits[prev_article].exhibit
 		if is_instance_valid(exhibit):
@@ -315,7 +313,8 @@ func _on_fetch_complete(_titles, context):
 						continue
 					if old_exhibit.exhibit.title == new_exhibit.title:
 						continue
-					print("erasing exhibit ", key)
+					if OS.is_debug_build():
+						print("erasing exhibit ", key)
 					old_exhibit.exhibit.queue_free()
 					_global_item_queue_map.erase(key)
 					_exhibits.erase(key)
@@ -384,7 +383,6 @@ func _on_finished_exhibit(ctx):
 	if OS.is_debug_build():
 		print("finished exhibit. slots=", len(ctx.exhibit._item_slots))
 	if ctx.backlink:
-		print("Linking backlink...")
 		_link_backlink_to_exit(ctx.exhibit, ctx.hall)
 
 var _queue_running = false

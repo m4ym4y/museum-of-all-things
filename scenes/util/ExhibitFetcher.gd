@@ -259,7 +259,6 @@ func _on_request_completed(result, response_code, headers, body, ctx, caller_ctx
 	# wikipedia request must have "query" object.
 	# wikidata does not need to have it
 	elif not ctx.url.begins_with(wikidata_endpoint):
-		print("RETURN TRUE BC NO QUERY")
 		return true
 
 	if ctx.url.begins_with(wikitext_endpoint):
@@ -267,7 +266,6 @@ func _on_request_completed(result, response_code, headers, body, ctx, caller_ctx
 	elif ctx.url.begins_with(images_endpoint):
 		return _on_images_request_complete(res, ctx, caller_ctx)
 	elif ctx.url.begins_with(wikidata_endpoint):
-		print("DISPATCH ON WIKIDATA REQUEST COMPLETE")
 		return _on_wikidata_request_complete(res, ctx, caller_ctx)
 	elif ctx.url.begins_with(wikimedia_commons_images_endpoint):
 		return _on_commons_images_request_complete(res, ctx, caller_ctx)
