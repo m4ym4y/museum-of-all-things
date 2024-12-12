@@ -7,11 +7,13 @@ extends Node3D
 static var max_lines = 4
 var L_ARROW = "←"
 var R_ARROW = "→"
+var _text_value = ""
 
 var text: String:
 	get:
-		return $Text.text
+		return _text_value
 	set(v):
+		_text_value = v
 		$Text.text = v.replace("$", "")
 		call_deferred("_resize_text")
 

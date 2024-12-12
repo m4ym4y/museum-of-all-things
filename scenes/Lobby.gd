@@ -3,6 +3,7 @@ extends Node3D
 @onready var hall_scene = preload("res://scenes/Hall.tscn")
 @onready var _grid = $GridMap
 @onready var exits = []
+@onready var entry = null
 @onready var _rng = RandomNumberGenerator.new()
 
 const FLOOR_WOOD = 0

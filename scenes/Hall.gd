@@ -189,10 +189,14 @@ func init(grid, from_title, to_title, hall_start, hall_dir, _hall_type=[true, FL
 	entry_door.set_open(true, true)
 	exit_door.set_open(false, true)
 
-	_detector.position = Util.gridToWorld((from_pos + to_pos) / 2) + Vector3(0, 4, 0) - position
+	var center_pos = Util.gridToWorld((from_pos + to_pos) / 2) + Vector3(0, 4, 0) - position
+
+	_detector.position = center_pos
 	_detector.monitoring = true
 	_detector.direction_changed.connect(_on_direction_changed)
 	_detector.init(Util.gridToWorld(from_pos), Util.gridToWorld(to_pos))
+
+	loader.position = center_pos
 
 	ExhibitFetcher.wikitext_failed.connect(_on_fetch_failed)
 

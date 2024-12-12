@@ -7,7 +7,7 @@ signal exit_added(exit)
 @onready var grid_wrapper = preload("res://scenes/util/GridWrapper.tscn")
 
 @onready var _rng
-@onready var _title
+@onready var title
 @onready var _prev_title
 
 var entry
@@ -99,7 +99,7 @@ func generate(
 	_max_room_dimension = params.max_room_dimension
 
 	var start_pos = params.start_pos
-	var title = params.title
+	title = params.title
 	var prev_title = params.prev_title
 	var hall_type = params.hall_type if params.has("hall_type") else [true, 0]
 	_y = start_pos.y
@@ -115,7 +115,6 @@ func generate(
 	# init rng
 	_rng = RandomNumberGenerator.new()
 	_rng.seed = hash(title)
-	_title = title
 	_prev_title = prev_title
 	_floor = Util.gen_floor(title)
 
@@ -316,8 +315,8 @@ func decorate_wall_tile(pos):
 			add_child(new_hall)
 			new_hall.init(
 				_raw_grid,
-				_title,
-				_title,
+				title,
+				title,
 				wall,
 				hall_dir,
 				hall_type

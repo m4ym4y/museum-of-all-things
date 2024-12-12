@@ -143,17 +143,27 @@ func _teleport_player(from_hall, to_hall, entry_to_exit=false):
 		else:
 			_load_exhibit_from_entry(to_hall)
 
-func _on_loader_body_entered(body, exit):
+func _on_loader_body_entered(body, hall, backlink=false):
 	if body.is_in_group("Player"):
-		_load_exhibit_from_exit(exit)
+		if backlink:
+			_load_exhibit_from_entry(hall)
+		else:
+			_load_exhibit_from_exit(hall)
 
 func _load_exhibit_from_entry(entry):
 	var prev_article = Util.coalesce(entry.from_title, "Fungus")
 
-	# TODO: relink portals so we don't need this block
-	if _exhibits.has(prev_article):
-		push_error("loading from entry even though prev article was unloaded?")
+	if entry.from_title == "$Lobby":
+		print("linking back to lobby")
+		_link_backlink_to_exit($Lobby, entry)
 		return
+
+	print("linking article from entry ", entry.from_title, " to ", entry.to_title)
+	if _exhibits.has(prev_article):
+		var exhibit = _exhibits[prev_article].exhibit
+		if is_instance_valid(exhibit):
+			_link_backlink_to_exit(exhibit, entry)
+			return
 
 	ExhibitFetcher.fetch([prev_article], {
 		"title": prev_article,
@@ -189,6 +199,9 @@ func _load_exhibit_from_exit(exit):
 	})
 
 func _add_item(exhibit, item_data):
+	if not is_instance_valid(exhibit):
+		return
+
 	var slot = exhibit.get_item_slot()
 	if slot == null:
 		exhibit.add_room()
@@ -286,20 +299,6 @@ func _on_fetch_complete(_titles, context):
 		notice.position -= new_exhibit.entry.to_dir.rotated(Vector3.UP, PI / 2) * 2
 		new_exhibit.add_child(notice)
 
-	var new_hall = new_exhibit.entry
-	# TODO: this logic needs to work again
-	"""if backlink:
-		for exit in new_exhibit.exits:
-			if exit.to_title == hall.to_title:
-				new_hall = exit
-				break
-		if not new_hall:
-			push_error("could not backlink new hall")
-			new_hall = new_exhibit.entry
-	else:
-		new_hall = new_exhibit.entry
-	"""
-
 	if not _exhibits.has(context.title):
 		_exhibits[context.title] = { "entry": new_exhibit.entry, "exhibit": new_exhibit, "height": _next_height }
 		_exhibit_hist.append(context.title)
@@ -310,8 +309,9 @@ func _on_fetch_complete(_titles, context):
 					var old_exhibit = _exhibits[key]
 					if abs(4 * old_exhibit.height - _player.position.y) < 20:
 						continue
-					if abs(4 * old_exhibit.height - new_hall.position.y) < 20:
+					if old_exhibit.exhibit.title == new_exhibit.title:
 						continue
+					print("erasing exhibit ", key)
 					old_exhibit.exhibit.queue_free()
 					_exhibits.erase(key)
 					_exhibit_hist.remove_at(e)
@@ -323,26 +323,44 @@ func _on_fetch_complete(_titles, context):
 		if item_data.type == "image" and item_data.has("title") and item_data.title != "":
 			image_titles.append(item_data.title)
 		item_queue.append(_add_item.bind(new_exhibit, item_data))
-	item_queue.append(_on_finished_exhibit.bind(new_exhibit))
 	item_queue.push_front(ExhibitFetcher.fetch_images.bind(image_titles, null))
 
 	if result.has("wikidata_entity"):
 		item_queue.push_front(ExhibitFetcher.fetch_wikidata.bind(result.wikidata_entity, {
 			"exhibit": new_exhibit,
 			"queue": item_queue,
+			"hall": hall,
+			"backlink": backlink
 		}))
 
 	_process_item_queue(item_queue, 0.1)
 
 	if backlink:
-		_link_halls(hall, new_hall)
+		new_exhibit.entry.loader.body_entered.connect(_on_loader_body_entered.bind(new_exhibit.entry, true))
 	else:
-		_link_halls(new_hall, hall)
+		_link_halls(new_exhibit.entry, hall)
+
+func _link_backlink_to_exit(exhibit, hall):
+	if not is_instance_valid(exhibit) or not is_instance_valid(hall):
+		return
+
+	var new_hall
+	for exit in exhibit.exits:
+		if exit.to_title == hall.to_title:
+			new_hall = exit
+			break
+	if not new_hall and exhibit.entry:
+		push_error("could not backlink new hall")
+		new_hall = exhibit.entry
+	if new_hall:
+		_link_halls(hall, new_hall)
 
 func _on_wikidata_complete(entity, ctx):
 	var result = ExhibitFetcher.get_result(entity)
 	if result and result.has("commons_category"):
 		ExhibitFetcher.fetch_commons_images(result.commons_category, ctx)
+	else:
+		_on_finished_exhibit(ctx)
 
 func _on_commons_images_complete(category, ctx):
 	var result = ExhibitFetcher.get_result(category)
@@ -353,12 +371,18 @@ func _on_commons_images_complete(category, ctx):
 				ctx.exhibit,
 				ItemProcessor.commons_image_to_item(image)
 			))
-		if not _queue_running:
-			_process_item_queue(ctx.queue, 0.1)
+	ctx.queue.append(_on_finished_exhibit.bind(ctx))
+	if not _queue_running:
+		_process_item_queue(ctx.queue, 0.1)
 
-func _on_finished_exhibit(exhibit):
+func _on_finished_exhibit(ctx):
+	if not is_instance_valid(ctx.exhibit):
+		return
 	if OS.is_debug_build():
-		print("finished exhibit. slots=", len(exhibit._item_slots))
+		print("finished exhibit. slots=", len(ctx.exhibit._item_slots))
+	if ctx.backlink:
+		print("Linking backlink...")
+		_link_backlink_to_exit(ctx.exhibit, ctx.hall)
 
 var _queue_running = false
 func _process_item_queue(queue, delay):
