@@ -39,6 +39,9 @@ func _start_game():
   if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+  if not Util.is_xr():
+    _player.init()
+
   game_started = true
   $CanvasLayer.queue_free()
   $Museum.init(_player)

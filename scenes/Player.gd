@@ -9,6 +9,8 @@ var starting_height
 var crouching_height
 var crouch_time = 0.4
 var crouch_speed
+var _enabled = false
+
 @onready var camera = get_node("Pivot/Camera3D")
 
 @export var smooth_movement = false
@@ -25,6 +27,9 @@ func _ready():
 	starting_height = $Pivot.get_position().y
 	crouching_height = starting_height / 3
 	crouch_speed = (starting_height - crouching_height) / crouch_time
+
+func init():
+	_enabled = true
 
 func get_input_dir():
 	var input_dir = Vector3()
@@ -54,6 +59,9 @@ func _unhandled_input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	if not _enabled:
+		return
+
 	velocity.y += gravity * delta
 
 	var fully_crouched = $Pivot.get_position().y <= crouching_height
