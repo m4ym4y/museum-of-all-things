@@ -3,6 +3,7 @@ extends CharacterBody3D
 var gravity = -30
 var crouch_move_speed = 4
 var mouse_sensitivity = 0.002
+var joy_sensitivity = 0.025
 @export var jump_impulse = 13
 
 var starting_height
@@ -47,14 +48,17 @@ var camera_v = Vector2.ZERO
 func _unhandled_input(event):
 	var is_mouse = event is InputEventMouseMotion
 	if is_mouse and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		var delta_x = -event.relative.x * mouse_sensitivity
+		var delta_y = -event.relative.y * mouse_sensitivity
+
 		if not smooth_movement:
-			rotate_y(-event.relative.x * mouse_sensitivity)
-			$Pivot.rotate_x(-event.relative.y * mouse_sensitivity)
+			rotate_y(delta_x)
+			$Pivot.rotate_x(delta_y)
 			$Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
 		else:
 			camera_v += Vector2(
-				clamp(-event.relative.y * mouse_sensitivity, -dampening, dampening),
-				clamp(-event.relative.x * mouse_sensitivity, -dampening, dampening)
+				clamp(delta_y, -dampening, dampening),
+				clamp(delta_x, -dampening, dampening)
 			)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -76,9 +80,17 @@ func _physics_process(delta):
 	set_floor_stop_on_slope_enabled(true)
 	move_and_slide()
 
+	#var delta_vec = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
+	var delta_vec = Vector2(-Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y), -Input.get_joy_axis(0, 4))
+	if delta_vec.length() > 0:
+		rotate_y(delta_vec.x * joy_sensitivity)
+		$Pivot.rotate_x(delta_vec.y * joy_sensitivity)
+		$Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
+
 	if smooth_movement:
 		rotate_y(camera_v.y)
 		$Pivot.rotate_x(camera_v.x)
+		$Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
 		camera_v *= 0.95
 
 	if Input.is_action_pressed("jump") and is_on_floor():
