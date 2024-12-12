@@ -21,6 +21,9 @@ func _init() -> void:
     _player = _player.get_node("XROrigin3D")
 
 func _ready():
+  if OS.has_feature("movie"):
+    $FpsLabel.visible = false
+
   if Util.is_xr():
     _player.get_node("XRToolsPlayerBody").rotate_player(-starting_rotation)
     _start_game()
