@@ -148,6 +148,7 @@ func create_curve_hall(hall_start, hall_dir, is_right=true, level=FLAT):
 	elif level == UP:
 		_grid.set_cell_item(exit_hall + Vector3.UP, HALL_STAIRS_DOWN, exit_ori_neg)
 		_grid.set_cell_item(exit_hall + 2 * Vector3.UP, -1, 0)
+		_grid.set_cell_item(exit_hall, -1, 0)
 		_grid.set_cell_item(exit_hall - Vector3.UP, -1, 0)
 		to_pos = exit_hall + Vector3.UP
 	elif level == DOWN:
