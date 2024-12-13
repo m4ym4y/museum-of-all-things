@@ -13,6 +13,9 @@ var crouch_time = 0.4
 var crouch_speed
 var _enabled = false
 
+var _joy_right_x = JOY_AXIS_RIGHT_X
+var _joy_right_y = JOY_AXIS_RIGHT_Y
+
 @onready var camera = get_node("Pivot/Camera3D")
 
 @export var smooth_movement = false
@@ -26,6 +29,11 @@ var _enabled = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# some strange issue w joystick bindings on linux
+	if OS.get_name() == "Linux":
+		_joy_right_x += 1
+		_joy_right_y += 1
+
 	starting_height = $Pivot.get_position().y
 	crouching_height = starting_height / 3
 	crouch_speed = (starting_height - crouching_height) / crouch_time
@@ -82,7 +90,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 	#var delta_vec = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
-	var delta_vec = Vector2(-Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y), -Input.get_joy_axis(0, 4))
+	var delta_vec = Vector2(-Input.get_joy_axis(0, _joy_right_x), -Input.get_joy_axis(0, _joy_right_y))
 	if delta_vec.length() > joy_deadzone:
 		rotate_y(delta_vec.x * joy_sensitivity)
 		$Pivot.rotate_x(delta_vec.y * joy_sensitivity)
