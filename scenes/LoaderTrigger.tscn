@@ -1,13 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bijq5fqp57yd4"]
-
-[ext_resource type="Script" path="res://scenes/LoaderTrigger.gd" id="1_mti24"]
+[gd_scene load_steps=2 format=3 uid="uid://bijq5fqp57yd4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_asqa7"]
 
 [node name="LoaderTrigger" type="Area3D" groups=["ExhibitItem", "Loader"]]
 collision_layer = 0
 collision_mask = 4
-script = ExtResource("1_mti24")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 2, 0)
