@@ -2,7 +2,7 @@
 
 ![screenshot of the 'coffee' exhibit](./docs/screenshot-coffee.png)
 
-Next release coming soon!
+[You can download a pre-release version of the museum here!](https://github.com/m4ym4y/wikipedia-museum/releases/tag/v0.1.0)
 
 The goal of this project is to make an interactive 3d museum that is generated
 procedurally, using content from wikipedia to fill exhibits. The museum is
