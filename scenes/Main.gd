@@ -22,6 +22,8 @@ func _init() -> void:
     _player = _player.get_node("XROrigin3D")
 
 func _ready():
+  GraphicsManager.init()
+
   if OS.has_feature("movie"):
     $FpsLabel.visible = false
 
@@ -58,23 +60,35 @@ func _pause_game():
     _player.pause()
 
   if game_started:
-    _open_settings_menu()
+    _open_pause_menu()
   else:
     _open_main_menu()
 
 func _open_settings_menu():
   $CanvasLayer/Settings.visible = true
   $CanvasLayer/MainMenu.visible = false
+  $CanvasLayer/PauseMenu.visible = false
 
 func _open_main_menu():
   $CanvasLayer/MainMenu.visible = true
   $CanvasLayer/Settings.visible = false
+  $CanvasLayer/PauseMenu.visible = false
+
+func _open_pause_menu():
+  $CanvasLayer/MainMenu.visible = false
+  $CanvasLayer/Settings.visible = false
+  $CanvasLayer/PauseMenu.visible = true
+  $CanvasLayer/PauseMenu.set_current_room($Museum.get_current_room())
 
 func _on_main_menu_start_pressed():
   _start_game()
 
 func _on_main_menu_settings():
   menu_nav_queue.append(_open_main_menu)
+  _open_settings_menu()
+
+func _on_pause_menu_settings():
+  menu_nav_queue.append(_open_pause_menu)
   _open_settings_menu()
 
 func _on_settings_back():

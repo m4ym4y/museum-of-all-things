@@ -64,7 +64,7 @@ Additionally, every exhibit contains doors to many other interesting exhibits. T
 @onready var _exhibits = {}
 @onready var _backlink_map = {}
 @onready var _next_height = 20
-@onready var _current_room_title = "Lobby"
+@onready var _current_room_title = "$Lobby"
 @export var items_per_room_estimate = 7
 @export var min_rooms_per_exhibit = 2
 
@@ -101,6 +101,9 @@ func _set_up_lobby(lobby):
 			break
 		exit.to_title = title
 		exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit))
+
+func get_current_room():
+	return _current_room_title
 
 func _set_current_room_title(title):
 	_current_room_title = title
