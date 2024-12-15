@@ -44,7 +44,7 @@ static func _static_init():
 	nl_re.compile("\n+")
 	alt_re.compile("alt=(.+?)\\|")
 	#image_field_re.compile("(photo|image\\|?)[^_\\|]*?=(.+?)(\\||$)")
-	image_field_re.compile("[\\|=]\\s*([^|=]+\\.\\w{,4})")
+	image_field_re.compile("[\\|=]\\s*([^\\n|=]+\\.\\w{,4})")
 	#image_field_re.compile("photo")
 	tokenizer.compile("[^\\{\\}\\[\\]<>]+|[\\{\\}\\[\\]<>]")
 	image_name_re.compile("^([iI]mage:|[fF]ile:)")
@@ -252,6 +252,8 @@ static func create_items(title, result, prev_title=""):
 				if len(other_images) > 0:
 					for match in other_images:
 						var image_title = image_name_re.sub(match.get_string(1), "File:")
+						if image_title.find("\n") >= 0:
+							print("newline in file name ", image_title)
 						if not image_title or not IMAGE_REGEX.search(image_title):
 							continue
 						if not image_title.begins_with("File:"):
