@@ -15,7 +15,6 @@ func init():
 	_default_settings_obj = _create_settings_obj()
 	var loaded_settings = _load_settings()
 	if loaded_settings:
-		print("loaded settings ", loaded_settings)
 		_apply_settings(loaded_settings, _default_settings_obj)
 
 func set_fps_limit(value: float):
