@@ -1,4 +1,6 @@
-# Wikipedia Museum
+# Museum of All Things*
+
+*working title
 
 ![screenshot of the 'coffee' exhibit](./docs/screenshot-coffee.png)
 
