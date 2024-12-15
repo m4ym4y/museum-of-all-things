@@ -12,6 +12,7 @@ var _player
 @export var starting_rotation = 3 * PI / 2
 
 @onready var game_started = false
+@onready var menu_nav_queue = []
 
 func _init() -> void:
   _player = XrRoot.instantiate() if Util.is_xr() else Player.instantiate()
@@ -35,20 +36,60 @@ func _ready():
     _player.dampening = smooth_movement_dampening
   _player.position = starting_point
 
+  _pause_game()
+
 func _start_game():
   if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
   if not Util.is_xr():
-    _player.init()
+    _player.start()
 
-  game_started = true
-  $CanvasLayer.queue_free()
-  $Museum.init(_player)
+  $CanvasLayer.visible = false
+
+  if not game_started:
+    game_started = true
+    $Museum.init(_player)
+
+func _pause_game():
+  $CanvasLayer.visible = true
+
+  if not Util.is_xr():
+    _player.pause()
+
+  if game_started:
+    _open_settings_menu()
+  else:
+    _open_main_menu()
+
+func _open_settings_menu():
+  $CanvasLayer/Settings.visible = true
+  $CanvasLayer/MainMenu.visible = false
+
+func _open_main_menu():
+  $CanvasLayer/MainMenu.visible = true
+  $CanvasLayer/Settings.visible = false
+
+func _on_main_menu_start_pressed():
+  _start_game()
+
+func _on_main_menu_settings():
+  menu_nav_queue.append(_open_main_menu)
+  _open_settings_menu()
+
+func _on_settings_back():
+  var prev = menu_nav_queue.pop_back()
+  if prev:
+    prev.call()
+  else:
+    _start_game()
 
 func _input(event):
   if not game_started:
     return
+
+  if event.is_action_pressed("pause"):
+    _pause_game()
 
   if event is InputEventKey and Input.is_key_pressed(KEY_P):
     var vp = get_viewport()
@@ -58,9 +99,6 @@ func _input(event):
   if event.is_action_pressed("click"):
     if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
       Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func _on_button_pressed():
-  _start_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

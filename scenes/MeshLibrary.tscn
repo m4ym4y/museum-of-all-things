@@ -71,7 +71,7 @@ size = Vector3(0.5, 8, 8)
 points = PackedVector3Array(-2, 0, 2, -2, 2, -2, 2, 2, -2, 2, 0, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gl468"]
-size = Vector3(0.5, 8, 4)
+size = Vector3(0.5, 16, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_11svc"]
 size = Vector3(4, 4, 4)

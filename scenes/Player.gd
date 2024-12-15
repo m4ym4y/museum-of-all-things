@@ -38,7 +38,10 @@ func _ready():
 	crouching_height = starting_height / 3
 	crouch_speed = (starting_height - crouching_height) / crouch_time
 
-func init():
+func pause():
+	_enabled = false
+
+func start():
 	_enabled = true
 
 func get_input_dir():
@@ -55,6 +58,9 @@ func get_input_dir():
 
 var camera_v = Vector2.ZERO
 func _unhandled_input(event):
+	if not _enabled:
+		return
+
 	var is_mouse = event is InputEventMouseMotion
 	if is_mouse and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		var delta_x = -event.relative.x * mouse_sensitivity

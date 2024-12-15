@@ -1,18 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnnoct48gjtw6"]
+[gd_scene load_steps=5 format=3 uid="uid://bnnoct48gjtw6"]
 
 [ext_resource type="Script" path="res://scenes/Main.gd" id="1_d7g3n"]
 [ext_resource type="PackedScene" uid="uid://5javxi3uy0ep" path="res://scenes/Museum.tscn" id="1_ivvmh"]
-[ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="4_mqa0m"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_awql0"]
-font_size = 128
-shadow_offset = Vector2(5, 5)
-
-[sub_resource type="LabelSettings" id="LabelSettings_ews3a"]
-font_size = 32
-
-[sub_resource type="LabelSettings" id="LabelSettings_46gfj"]
-font_size = 64
+[ext_resource type="PackedScene" uid="uid://bbp0v2aoglhrr" path="res://scenes/menu/Settings.tscn" id="4_31ns1"]
+[ext_resource type="PackedScene" uid="uid://3q5n8txx3jmm" path="res://scenes/menu/MainMenu.tscn" id="4_elltp"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_d7g3n")
@@ -27,53 +18,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.25098)
+color = Color(0, 0, 0, 0.501961)
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_mqa0m")
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
+[node name="Settings" parent="CanvasLayer" instance=ExtResource("4_31ns1")]
+visible = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "MoAT"
-label_settings = SubResource("LabelSettings_awql0")
-
-[node name="Label2" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Welcome to The Museum of All Things"
-label_settings = SubResource("LabelSettings_ews3a")
-
-[node name="Label3" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = " "
-label_settings = SubResource("LabelSettings_46gfj")
-
-[node name="Button" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Enter the Museum"
-
-[node name="Button2" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Settings"
+[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("4_elltp")]
 
 [node name="FpsLabel" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(1, 1, 1, 0.501961)
 
-[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="resume" from="CanvasLayer/Settings" to="." method="_on_settings_back"]
+[connection signal="settings" from="CanvasLayer/MainMenu" to="." method="_on_main_menu_settings"]
+[connection signal="start" from="CanvasLayer/MainMenu" to="." method="_on_main_menu_start_pressed"]
