@@ -171,11 +171,10 @@ func _create_next_room_candidate(last_room):
   var failed = true
   for dir in try_dirs:
     # project where the next room will be based on random direction
-    var room_direction = dir
     room_center = last_room.center + Vector3(
-      room_direction.x * (last_room.width / 2 + room_width / 2 + 3),
+      dir.x * (last_room.width / 2 + room_width / 2 + (2 if dir.x > 0 else 3)),
       0,
-      room_direction.z * (last_room.length / 2 + room_length / 2 + 3)
+      dir.z * (last_room.length / 2 + room_length / 2 + (2 if dir.z < 0 else 3))
     )
 
     # check if we found a valid room placement
@@ -303,7 +302,12 @@ func decorate_room_center(center, width, length):
           continue
 
         var free_wall = _rng.randi_range(0, 1) == 0
-        var valid_free_wall = len(Util.cell_neighbors(_grid, pos, WALL)) == 0 and len(Util.cell_neighbors(_grid, pos, INTERNAL_HALL)) == 0
+        var valid_bench = len(Util.cell_neighbors(_grid, pos, WALL)) == 0
+        var valid_free_wall = valid_bench and\
+            len(Util.cell_neighbors(_grid, pos, INTERNAL_HALL)) == 0 and\
+            len(Util.cell_neighbors(_grid, pos, HALL_STAIRS_UP)) == 0 and\
+            len(Util.cell_neighbors(_grid, pos, HALL_STAIRS_DOWN)) == 0
+
         if width > 3 or length > 3 and free_wall and valid_free_wall and _room_count > 2:
           var dir = Vector3.RIGHT if width > length else Vector3.FORWARD
           var item_dir = Vector3.FORWARD if width > length else Vector3.RIGHT
@@ -311,7 +315,7 @@ func decorate_room_center(center, width, length):
           _grid.set_cell_item(pos, FREE_WALL, ori)
           bench_slots.push_front([pos - item_dir * 0.075, item_dir])
           bench_slots.append([pos + item_dir * 0.075, -item_dir])
-        else:
+        elif valid_bench:
           _grid.set_cell_item(pos, BENCH, bench_area_ori)
     for slot in bench_slots:
       add_item_slot(slot)
