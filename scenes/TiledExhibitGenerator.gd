@@ -302,11 +302,10 @@ func decorate_room_center(center, width, length):
           continue
 
         var free_wall = _rng.randi_range(0, 1) == 0
-        var valid_bench = len(Util.cell_neighbors(_grid, pos, WALL)) == 0
-        var valid_free_wall = valid_bench and\
-            len(Util.cell_neighbors(_grid, pos, INTERNAL_HALL)) == 0 and\
+        var valid_bench = len(Util.cell_neighbors(_grid, pos, INTERNAL_HALL)) == 0 and\
             len(Util.cell_neighbors(_grid, pos, HALL_STAIRS_UP)) == 0 and\
             len(Util.cell_neighbors(_grid, pos, HALL_STAIRS_DOWN)) == 0
+        var valid_free_wall = valid_bench and len(Util.cell_neighbors(_grid, pos, WALL)) == 0
 
         if width > 3 or length > 3 and free_wall and valid_free_wall and _room_count > 2:
           var dir = Vector3.RIGHT if width > length else Vector3.FORWARD
