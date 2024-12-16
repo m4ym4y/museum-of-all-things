@@ -59,7 +59,7 @@ func gen_item_material(title):
 func gen_plate_style(title):
 	var material = gen_item_material(title)
 	if material == "none":
-		return PLATE_STYLE_LIST[hash(title + ":plate") % len(PLATE_STYLE_LIST)]
+		return "white"
 	return null
 
 var _time_start = 0
