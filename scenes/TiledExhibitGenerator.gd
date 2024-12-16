@@ -172,9 +172,9 @@ func _create_next_room_candidate(last_room):
     # project where the next room will be based on random direction
     var room_direction = dir
     room_center = last_room.center + Vector3(
-      room_direction.x * (last_room.width / 2 + room_width / 2 + 3),
+      room_direction.x * (last_room.width / 2 + room_width / 2 + 2),
       0,
-      room_direction.z * (last_room.length / 2 + room_length / 2 + 3)
+      room_direction.z * (last_room.length / 2 + room_length / 2 + 2)
     )
 
     # check if we found a valid room placement
