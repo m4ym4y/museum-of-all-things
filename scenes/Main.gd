@@ -91,6 +91,16 @@ func _on_pause_menu_settings():
   menu_nav_queue.append(_open_pause_menu)
   _open_settings_menu()
 
+func _on_pause_menu_return_to_lobby():
+  # TODO: set absolute rotation in XR
+  if not Util.is_xr():
+    _player.rotation.y = starting_rotation
+
+  _player.position = starting_point
+  $Museum.reset_to_lobby()
+
+  _start_game()
+
 func _on_settings_back():
   var prev = menu_nav_queue.pop_back()
   if prev:
@@ -102,7 +112,7 @@ func _input(event):
   if not game_started:
     return
 
-  if event.is_action_pressed("pause"):
+  if event.is_action_pressed("pause") and not Util.is_xr():
     _pause_game()
 
   if event is InputEventKey and Input.is_key_pressed(KEY_P):

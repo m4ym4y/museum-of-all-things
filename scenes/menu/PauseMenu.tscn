@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bhi1d8bl668hb"]
 
-[ext_resource type="Script" path="res://scenes/menu/pause_menu.gd" id="1_qk8a1"]
+[ext_resource type="Script" path="res://scenes/menu/PauseMenu.gd" id="1_qk8a1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2s8qn"]
 font_size = 64
@@ -47,6 +47,10 @@ text = "Open Page in Browser
 [node name="Spacer" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
+[node name="Lobby" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return to Lobby"
+
 [node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
@@ -58,5 +62,6 @@ text = "Quit"
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Open" to="." method="_on_open_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Lobby" to="." method="_on_lobby_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

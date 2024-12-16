@@ -105,6 +105,9 @@ func _set_up_lobby(lobby):
 func get_current_room():
 	return _current_room_title
 
+func reset_to_lobby():
+	_set_current_room_title("$Lobby")
+
 func _set_current_room_title(title):
 	_current_room_title = title
 	_start_queue()

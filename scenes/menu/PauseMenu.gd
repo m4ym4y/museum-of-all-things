@@ -2,6 +2,7 @@ extends Control
 
 signal resume
 signal settings
+signal return_to_lobby
 
 @onready var vbox = $MarginContainer/VBoxContainer
 
@@ -20,6 +21,9 @@ func _on_resume_pressed():
 
 func _on_settings_pressed():
 	emit_signal("settings")
+
+func _on_lobby_pressed():
+	emit_signal("return_to_lobby")
 
 func _on_open_pressed():
 	OS.shell_open("https://en.wikipedia.org/wiki/" + current_room)
