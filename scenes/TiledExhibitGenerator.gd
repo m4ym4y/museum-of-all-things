@@ -299,7 +299,7 @@ func decorate_room_center(center, width, length):
     for x in range(c1.x, c2.x + 1):
       for z in range(c1.z, c2.z + 1):
         var pos = Vector3(x, y, z)
-        if _grid.get_cell_item(pos) != -1:
+        if _raw_grid.get_cell_item(pos) != -1:
           continue
 
         var free_wall = _rng.randi_range(0, 1) == 0
