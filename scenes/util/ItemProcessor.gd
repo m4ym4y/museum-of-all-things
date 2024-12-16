@@ -290,6 +290,10 @@ static func create_items(title, result, prev_title=""):
 
 	# ensure that there aren't too many text items in a row
 	var items = []
+
+	if len(text_items) > 0:
+		items.append(text_items.pop_front())
+
 	while len(image_items) > 0:
 		var il = len(items)
 		if il > 0 and items[il - 1].type != "text":

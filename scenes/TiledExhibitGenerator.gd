@@ -152,6 +152,7 @@ func generate(
   var bounds = room_to_bounds(room_center, room_width, room_length)
   carve_room(bounds[0], bounds[1], _y)
   _create_next_room_candidate(room_obj)
+  decorate_entry(starting_hall, room_obj)
   decorate_room(room_obj)
 
 func _create_next_room_candidate(last_room):
@@ -245,6 +246,13 @@ func _create_hall_bounds(last_room, next_room):
 
   return [start_hall, end_hall]
 
+func decorate_entry(starting_hall, room_obj):
+  var free_wall_pos = starting_hall.to_pos + 2 * starting_hall.to_dir
+  var free_wall_ori = Util.vecToOrientation(_grid, starting_hall.to_dir.rotated(Vector3.UP, PI / 2))
+  _grid.set_cell_item(free_wall_pos, FREE_WALL, free_wall_ori)
+  add_item_slot([free_wall_pos - starting_hall.to_dir * 0.075, starting_hall.to_dir])
+  add_item_slot([free_wall_pos + starting_hall.to_dir * 0.075, -starting_hall.to_dir])
+
 func decorate_room(room):
   var center = room.center
   var width = room.width
@@ -291,6 +299,9 @@ func decorate_room_center(center, width, length):
     for x in range(c1.x, c2.x + 1):
       for z in range(c1.z, c2.z + 1):
         var pos = Vector3(x, y, z)
+        if _grid.get_cell_item(pos) != -1:
+          continue
+
         var free_wall = _rng.randi_range(0, 1) == 0
         var valid_free_wall = len(Util.cell_neighbors(_grid, pos, WALL)) == 0 and len(Util.cell_neighbors(_grid, pos, INTERNAL_HALL)) == 0
         if width > 3 or length > 3 and free_wall and valid_free_wall and _room_count > 2:
@@ -306,7 +317,9 @@ func decorate_room_center(center, width, length):
       add_item_slot(slot)
 
 func decorate_wall_tile(pos):
-  # grid.set_cell_item(pos + Vector3(0, 2, 0), MARKER, 0)
+  # we use the raw grid bc we want to ignore reservations here
+  if _raw_grid.get_cell_item(pos) == FREE_WALL:
+    return
 
   var wall_neighbors = Util.cell_neighbors(_grid, pos, WALL)
   for wall in wall_neighbors:
