@@ -181,7 +181,6 @@ func _create_next_room_candidate(last_room):
     # check if we found a valid room placement
     room_bounds = room_to_bounds(room_center, room_width, room_length)
     if not overlaps_room(room_bounds[0], room_bounds[1], _y):
-      print("direction: ", room_direction)
       failed = false
       break
 
