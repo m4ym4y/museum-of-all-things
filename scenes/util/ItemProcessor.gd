@@ -200,6 +200,7 @@ static func commons_images_to_items(title, images, extra_text):
 	var items = []
 	var rng = RandomNumberGenerator.new()
 	var material = Util.gen_item_material(title)
+	var plate = Util.gen_plate_style(title)
 
 	rng.seed = hash(title + ":commons_shuffler")
 	_seeded_shuffle(title + ":commons_images", images)
@@ -214,6 +215,7 @@ static func commons_images_to_items(title, images, extra_text):
 			items.append({
 				"type": "image",
 				"material": material,
+				"plate": plate,
 				"title": image,
 				"text": _clean_filename(image),
 			})
@@ -226,6 +228,7 @@ static func create_items(title, result, prev_title=""):
 	var doors = []
 	var doors_used = {}
 	var material = Util.gen_item_material(title)
+	var plate = Util.gen_plate_style(title)
 
 	if result and result.has("wikitext") and result.has("extract"):
 		var wikitext = result.wikitext
@@ -248,6 +251,7 @@ static func create_items(title, result, prev_title=""):
 				image_items.append({
 					"type": "image",
 					"material": material,
+					"plate": plate,
 					"title": target,
 					"text": caption.get_string(1) if caption else _clean_filename(target),
 				})
@@ -266,6 +270,7 @@ static func create_items(title, result, prev_title=""):
 						image_items.append({
 							"type": "image",
 							"material": material,
+							"plate": plate,
 							"title": image_title,
 							"text": caption.get_string(1) if caption else _clean_filename(image_title),
 						})

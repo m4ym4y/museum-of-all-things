@@ -45,6 +45,7 @@ var FOG_LIST   = [Color.WHITE, Color.WHITE, Color.BLACK ]
 
 # weighted towards wood
 var ITEM_MATERIAL_LIST = ["wood", "wood", "wood", "marble", "none"]
+var PLATE_STYLE_LIST = ["white", "black"]
 
 func gen_floor(title):
 	return FLOOR_LIST[hash(title) % len(FLOOR_LIST)]
@@ -54,6 +55,12 @@ func gen_fog(title):
 
 func gen_item_material(title):
 	return ITEM_MATERIAL_LIST[hash(title + ":material") % len(ITEM_MATERIAL_LIST)]
+
+func gen_plate_style(title):
+	var material = gen_item_material(title)
+	if material == "none":
+		return PLATE_STYLE_LIST[hash(title + ":plate") % len(PLATE_STYLE_LIST)]
+	return null
 
 var _time_start = 0
 func t_start():
