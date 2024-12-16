@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://bijq5fqp57yd4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_asqa7"]
+size = Vector3(1, 2, 1)
 
 [node name="LoaderTrigger" type="Area3D" groups=["ExhibitItem", "Loader"]]
 collision_layer = 0
