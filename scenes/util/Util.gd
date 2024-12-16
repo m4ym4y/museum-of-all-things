@@ -43,11 +43,17 @@ func normalize_url(url):
 var FLOOR_LIST = [FLOOR_WOOD, FLOOR_MARBLE, FLOOR_CARPET]
 var FOG_LIST   = [Color.WHITE, Color.WHITE, Color.BLACK ]
 
+var ITEM_MATERIAL_LIST = ["wood", "marble", "none"]
+
 func gen_floor(title):
 	return FLOOR_LIST[hash(title) % len(FLOOR_LIST)]
 
 func gen_fog(title):
 	return FOG_LIST[hash(title) % len(FOG_LIST)]
+
+func gen_item_material(title):
+	# return ITEM_MATERIAL_LIST[hash(title + ":material") % len(ITEM_MATERIAL_LIST)]
+	return "wood"
 
 var _time_start = 0
 func t_start():

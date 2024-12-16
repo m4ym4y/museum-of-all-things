@@ -56,7 +56,7 @@ static func _seeded_shuffle(seed, arr, bias=false):
 		Util.shuffle(rng, arr)
 	else:
 		Util.biased_shuffle(rng, arr, 2.0)
-
+065
 static func _to_link_case(s):
 	if len(s) > 0:
 		return s[0].to_upper() + s.substr(1)
@@ -199,6 +199,8 @@ static func _parse_wikitext(wikitext):
 static func commons_images_to_items(title, images, extra_text):
 	var items = []
 	var rng = RandomNumberGenerator.new()
+	var material = Util.gen_item_material(title)
+
 	rng.seed = hash(title + ":commons_shuffler")
 	_seeded_shuffle(title + ":commons_images", images)
 
@@ -211,6 +213,7 @@ static func commons_images_to_items(title, images, extra_text):
 		if image and IMAGE_REGEX.search(image):
 			items.append({
 				"type": "image",
+				"material": material,
 				"title": image,
 				"text": _clean_filename(image),
 			})
@@ -222,6 +225,7 @@ static func create_items(title, result, prev_title=""):
 	var image_items = []
 	var doors = []
 	var doors_used = {}
+	var material = Util.gen_item_material(title)
 
 	if result and result.has("wikitext") and result.has("extract"):
 		var wikitext = result.wikitext
@@ -243,6 +247,7 @@ static func create_items(title, result, prev_title=""):
 			if target.begins_with("File:") and IMAGE_REGEX.search(target):
 				image_items.append({
 					"type": "image",
+					"material": material,
 					"title": target,
 					"text": caption.get_string(1) if caption else _clean_filename(target),
 				})
@@ -260,6 +265,7 @@ static func create_items(title, result, prev_title=""):
 							image_title = "File:" + image_title
 						image_items.append({
 							"type": "image",
+							"material": material,
 							"title": image_title,
 							"text": caption.get_string(1) if caption else _clean_filename(image_title),
 						})
