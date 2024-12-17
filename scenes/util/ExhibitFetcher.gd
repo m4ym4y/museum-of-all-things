@@ -157,12 +157,6 @@ func fetch(titles, context):
 		push_error("Too many page requests at once")
 		return
 
-	# queue if another request is in flight
-	if _request_in_flight:
-		_request_queue.append([ "fetch_wikitext", new_titles, context ])
-		return
-	_request_in_flight = true
-
 	var url = wikitext_endpoint + _join_titles(new_titles)
 	var ctx = {
 		"titles": titles,
@@ -310,7 +304,8 @@ func _on_wikitext_request_complete(res, ctx, caller_ctx):
 	else:
 		_cache_all(ctx.new_titles)
 		emit_signal("wikitext_complete", ctx.titles, caller_ctx)
-		return true
+		# wikitext ignores queue, so return false to prevent queue advance after completion
+		return false
 
 func _on_images_request_complete(res, ctx, caller_ctx):
 	# store the information we did get
