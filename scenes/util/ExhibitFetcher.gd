@@ -115,7 +115,7 @@ func fetch_commons_images(category, context):
 		if result and result.has("images"):
 			for image in result.images:
 				_read_from_cache(image, WIKIMEDIA_COMMONS_PREFIX)
-		emit_signal("commons_images_complete", category, context)
+			emit_signal("commons_images_complete", result.images, context)
 		return
 
 	# queue if another request is in flight
@@ -130,7 +130,6 @@ func fetch_commons_images(category, context):
 	var url = wikimedia_commons_images_endpoint + category.uri_encode()
 	var ctx = {
 		"category": category,
-		"image_titles": [],
 		"queue": _request_queue_title
 	}
 
@@ -352,6 +351,8 @@ func _on_wikitext_request_complete(res, ctx, caller_ctx):
 
 func _on_images_request_complete(res, ctx, caller_ctx):
 	# store the information we did get
+	var file_batch = []
+
 	if res.query.has("pages"):
 		var pages = res.query.pages
 		for page_id in pages.keys():
@@ -359,6 +360,7 @@ func _on_images_request_complete(res, ctx, caller_ctx):
 			var file = page.title
 			if not page.has("imageinfo"):
 				continue
+			file_batch.append(_get_original_title(res.query, file))
 			for info in page.imageinfo:
 				if info.has("extmetadata"):
 					var md = info.extmetadata
@@ -368,17 +370,20 @@ func _on_images_request_complete(res, ctx, caller_ctx):
 						_set_page_field(file, "artist", md.Artist.value)
 				if info.has("thumburl"):
 					_set_page_field(file, "src", info.thumburl)
+
+	if len(file_batch) > 0:
+		_cache_all(file_batch)
+		emit_signal("images_complete", file_batch, caller_ctx)
 
 	# handle continues
 	if res.has("continue"):
 		return _dispatch_continue(res.continue, images_endpoint, ctx.new_files, ctx, caller_ctx)
 	else:
-		_cache_all(ctx.new_files)
-		emit_signal("images_complete", ctx.files, caller_ctx)
 		return true
 
 func _on_commons_images_request_complete(res, ctx, caller_ctx):
-	var image_titles = ctx.image_titles
+	var file_batch = []
+
 	if res.query.has("pages"):
 		var pages = res.query.pages
 		for page_id in pages.keys():
@@ -395,16 +400,18 @@ func _on_commons_images_request_complete(res, ctx, caller_ctx):
 						_set_page_field(file, "artist", md.Artist.value)
 				if info.has("thumburl"):
 					_set_page_field(file, "src", info.thumburl)
-				image_titles.append(file)
+				file_batch.append(file)
 				_append_page_field(ctx.category, "images", [ file ])
+
+	if len(file_batch) > 0:
+		_cache_all(file_batch)
+		emit_signal("commons_images_complete", file_batch, caller_ctx)
 
 	# handle continues
 	if res.has("continue"):
 		return _dispatch_continue(res.continue, wikimedia_commons_images_endpoint, ctx.category, ctx, caller_ctx)
 	else:
-		_cache_all(ctx.image_titles, WIKIMEDIA_COMMONS_PREFIX)
 		_cache_all([ ctx.category ], WIKIMEDIA_COMMONS_PREFIX)
-		emit_signal("commons_images_complete", ctx.category, caller_ctx)
 		return true
 
 func _on_wikidata_request_complete(res, ctx, caller_ctx):

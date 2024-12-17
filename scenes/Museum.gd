@@ -383,16 +383,16 @@ func _on_wikidata_complete(entity, ctx):
 		_queue_extra_text(ctx.exhibit, ctx.extra_text)
 		_queue_item(ctx.title, _on_finished_exhibit.bind(ctx))
 
-func _on_commons_images_complete(category, ctx):
-	var result = ExhibitFetcher.get_result(category)
-	if result and result.has("images") and len(result.images) > 0:
-		var images = ItemProcessor.commons_images_to_items(ctx.title, result.images, ctx.extra_text)
-		for item in images:
+func _on_commons_images_complete(images, ctx):
+	if len(images) > 0:
+		var item_data = ItemProcessor.commons_images_to_items(ctx.title, images, ctx.extra_text)
+		for item in item_data:
 			_queue_item(ctx.title, _add_item.bind(
 				ctx.exhibit,
 				item
 			))
-	_queue_extra_text(ctx.exhibit, ctx.extra_text)
+	# for now we do not add all the remaining text if a commons category is present
+	#_queue_extra_text(ctx.exhibit, ctx.extra_text)
 	_queue_item(ctx.title, _on_finished_exhibit.bind(ctx))
 
 func _on_finished_exhibit(ctx):
