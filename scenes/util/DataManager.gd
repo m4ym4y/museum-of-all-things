@@ -5,6 +5,10 @@ signal loaded_image(url: String, image: Image)
 @onready var COMMON_HEADERS = [ "accept: image/png, image/jpeg; charset=utf-8" ]
 @onready var _in_flight = {}
 
+var _texture_load_thread = Thread.new()
+var TEXTURE_QUEUE = "Textures"
+var _fs_lock = Mutex.new()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
   var cache_dir = "user://cache"
@@ -13,6 +17,13 @@ func _ready():
     DirAccess.make_dir_recursive_absolute(cache_dir)
     if OS.is_debug_build():
       print("cache directory created at 'user://cache'")
+  _texture_load_thread.start(_texture_load_thread_loop)
+
+func _texture_load_thread_loop():
+  while true:
+    var item = WorkQueue.process_queue(TEXTURE_QUEUE)
+    var data = item.data if item.has("data") else _read_url(item.url)
+    _create_and_emit_image(item.url, data, item.ctx)
 
 func _get_hash(input: String) -> String:
   var context = HashingContext.new()
@@ -64,14 +75,24 @@ func _write_url(url: String, data: PackedByteArray) -> void:
     push_error("failed to write file ", url)
 
 func _read_url(url: String):
+  _fs_lock.lock()
   var filename = _get_hash(url)
   var f = FileAccess.open("user://cache/" + filename, FileAccess.READ)
   if f:
     var data = f.get_buffer(f.get_length())
     f.close()
+    _fs_lock.unlock()
     return data
   else:
+    _fs_lock.unlock()
     return null
+
+func _url_exists(url: String):
+  _fs_lock.lock()
+  var filename = _get_hash(url)
+  var res = FileAccess.file_exists("user://cache/" + filename)
+  _fs_lock.unlock()
+  return res
 
 func load_json_data(url: String):
   var data = _read_url(url)
@@ -111,9 +132,11 @@ func _emit_image(url, texture, ctx):
   call_deferred("emit_signal", "loaded_image", url, texture, ctx)
 
 func request_image(url, ctx=null):
-  var data = _read_url(url)
-  if data:
-    _create_and_emit_image(url, data, ctx)
+  if _url_exists(url):
+    WorkQueue.add_item(TEXTURE_QUEUE, {
+      "url": url,
+      "ctx": ctx
+    })
     return
 
   if _in_flight.has(url):
@@ -137,9 +160,9 @@ func _on_image_request_complete(result, code, _headers, body, url, request, ctx)
     push_error("failed to fetch image ", code, " ", url)
     return
 
-  _create_and_emit_image(url, body, ctx)
+  WorkQueue.add_item(TEXTURE_QUEUE, {
+    "url": url,
+    "data": body,
+    "ctx": ctx
+  })
   _write_url(url, body)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-  pass
