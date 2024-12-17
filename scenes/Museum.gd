@@ -278,7 +278,14 @@ func _on_fetch_complete(_titles, context):
 	else:
 		prev_title = hall.from_title
 
-	var data = ItemProcessor.create_items(context.title, result, prev_title)
+	ItemProcessor.create_items(context.title, result, prev_title)
+
+	var data
+	while not data:
+		data = await ItemProcessor.items_complete
+		if data.title != context.title:
+			data = null
+
 	var doors = data.doors
 	var items = data.items
 	var extra_text = data.extra_text

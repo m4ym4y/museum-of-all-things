@@ -1,7 +1,8 @@
 extends Node
-class_name ItemProcessor
 
-static var ignore_sections = [
+signal items_complete
+
+var ignore_sections = [
 	"references",
 	"see also",
 	"notes",
@@ -13,26 +14,29 @@ static var ignore_sections = [
 	"sources",
 ]
 
-static var IMAGE_REGEX = RegEx.new()
-static var s2_re = RegEx.new()
-static var template_re = RegEx.new()
-static var links_re = RegEx.new()
-static var extlinks_re = RegEx.new()
-static var em_re = RegEx.new()
-static var tag_re = RegEx.new()
-static var whitespace_re = RegEx.new()
-static var nl_re = RegEx.new()
-static var alt_re = RegEx.new()
-static var tokenizer = RegEx.new()
-static var image_name_re = RegEx.new()
-static var image_field_re = RegEx.new()
+var IMAGE_REGEX = RegEx.new()
+var s2_re = RegEx.new()
+var template_re = RegEx.new()
+var links_re = RegEx.new()
+var extlinks_re = RegEx.new()
+var em_re = RegEx.new()
+var tag_re = RegEx.new()
+var whitespace_re = RegEx.new()
+var nl_re = RegEx.new()
+var alt_re = RegEx.new()
+var tokenizer = RegEx.new()
+var image_name_re = RegEx.new()
+var image_field_re = RegEx.new()
 
-static var max_len_soft = 1000
-static var text_item_fmt = "[color=black][b][font_size=48]%s[/font_size][/b]\n\n%s"
-static var section_fmt = "[p][b][font_size=36]%s[/font_size][/b][/p]\n\n"
-static var p_fmt = "[p]%s[/p]\n\n"
+var max_len_soft = 1000
+var text_item_fmt = "[color=black][b][font_size=48]%s[/font_size][/b]\n\n%s"
+var section_fmt = "[p][b][font_size=36]%s[/font_size][/b][/p]\n\n"
+var p_fmt = "[p]%s[/p]\n\n"
 
-static func _static_init():
+var processor_thread = Thread.new()
+var PROCESSOR_QUEUE = "ItemProcessor"
+
+func _ready():
 	IMAGE_REGEX.compile("\\.(png|jpg|jpeg|webp|svg)$")
 	s2_re.compile("^==[^=]")
 	template_re.compile("\\{\\{.*?\\}\\}")
@@ -48,8 +52,14 @@ static func _static_init():
 	#image_field_re.compile("photo")
 	tokenizer.compile("[^\\{\\}\\[\\]<>]+|[\\{\\}\\[\\]<>]")
 	image_name_re.compile("^([iI]mage:|[fF]ile:)")
+	processor_thread.start(_processor_thread_loop)
 
-static func _seeded_shuffle(seed, arr, bias=false):
+func _processor_thread_loop():
+	while true:
+		var item = WorkQueue.process_queue(PROCESSOR_QUEUE)
+		_create_items(item[0], item[1], item[2])
+
+func _seeded_shuffle(seed, arr, bias=false):
 	var rng = RandomNumberGenerator.new()
 	rng.seed = hash(seed)
 	if not bias:
@@ -57,13 +67,13 @@ static func _seeded_shuffle(seed, arr, bias=false):
 	else:
 		Util.biased_shuffle(rng, arr, 2.0)
 
-static func _to_link_case(s):
+func _to_link_case(s):
 	if len(s) > 0:
 		return s[0].to_upper() + s.substr(1)
 	else:
 		return ""
 
-static func _add_text_item(items, title, subtitle, text):
+func _add_text_item(items, title, subtitle, text):
 	if (
 		not ignore_sections.has(title.to_lower().strip_edges()) and
 		len(text) > 20
@@ -75,14 +85,14 @@ static func _add_text_item(items, title, subtitle, text):
 			"text": text_item_fmt % [title, t]
 		})
 
-static func _clean_section(s):
+func _clean_section(s):
 	return s.replace("=", "").strip_edges()
 
-static var trim_filename_front = len("File:")
-static func _clean_filename(s):
+var trim_filename_front = len("File:")
+func _clean_filename(s):
 	return IMAGE_REGEX.sub(s.substr(trim_filename_front), "")
 
-static func _create_text_items(title, extract):
+func _create_text_items(title, extract):
 	var items = []
 	var lines = extract.split("\n")
 
@@ -115,7 +125,7 @@ static func _create_text_items(title, extract):
 
 	return items
 
-static func _wikitext_to_extract(wikitext):
+func _wikitext_to_extract(wikitext):
 	wikitext = template_re.sub(wikitext, "", true)
 	wikitext = links_re.sub(wikitext, "$2", true)
 	wikitext = extlinks_re.sub(wikitext, "$1", true)
@@ -125,7 +135,7 @@ static func _wikitext_to_extract(wikitext):
 	wikitext = nl_re.sub(wikitext, "\n", true)
 	return wikitext.strip_edges()
 
-static func _parse_wikitext(wikitext):
+func _parse_wikitext(wikitext):
 	var tokens = tokenizer.search_all(wikitext)
 	var link = ""
 	var links = []
@@ -196,7 +206,7 @@ static func _parse_wikitext(wikitext):
 
 	return links
 
-static func commons_images_to_items(title, images, extra_text):
+func commons_images_to_items(title, images, extra_text):
 	var items = []
 	var rng = RandomNumberGenerator.new()
 	var material = Util.gen_item_material(title)
@@ -222,7 +232,10 @@ static func commons_images_to_items(title, images, extra_text):
 
 	return items
 
-static func create_items(title, result, prev_title=""):
+func create_items(title, result, prev_title=""):
+	WorkQueue.add_item(PROCESSOR_QUEUE, [title, result, prev_title])
+
+func _create_items(title, result, prev_title):
 	var text_items = []
 	var image_items = []
 	var doors = []
@@ -306,8 +319,9 @@ static func create_items(title, result, prev_title=""):
 				items.append(text_items.pop_front())
 		items.append(image_items.pop_front())
 
-	return {
+	call_deferred("emit_signal", "items_complete", {
+		"title": title,
 		"doors": doors,
 		"items": items,
 		"extra_text": text_items,
-	}
+	})
