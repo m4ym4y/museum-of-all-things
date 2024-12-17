@@ -78,7 +78,7 @@ func switch_active_queue(title):
 func _advance_queue():
 	_request_queue_lock.lock()
 	var next_fetch = _request_queue_map[_request_queue_title].pop_front()
-	_request_queue_lock.lock()
+	_request_queue_lock.unlock()
 	if next_fetch != null:
 		next_fetch.call()
 
