@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c4tcjfemplpdt"]
 
 [ext_resource type="Script" path="res://scenes/items/TextItem.gd" id="1"]
-[ext_resource type="FontFile" path="res://assets/fonts/CormorantGaramond-Regular.ttf" id="2_24nnb"]
+[ext_resource type="FontFile" uid="uid://g7ngd4oyyd5d" path="res://assets/fonts/CormorantGaramond/CormorantGaramond-Regular.ttf" id="2_24nnb"]
 
 [node name="TextItem" type="Node3D"]
 script = ExtResource("1")
