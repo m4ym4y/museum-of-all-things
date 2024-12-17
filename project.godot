@@ -28,6 +28,7 @@ XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"
 ExhibitFetcher="*res://scenes/util/ExhibitFetcher.gd"
 GraphicsManager="*res://scenes/util/GraphicsManager.gd"
 WorkQueue="*res://scenes/util/ThreadSafeWorkQueue.gd"
+RequestSync="*res://scenes/util/RequestSync.gd"
 
 [display]
 
