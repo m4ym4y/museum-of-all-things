@@ -22,8 +22,6 @@ func _init() -> void:
     _player = _player.get_node("XROrigin3D")
 
 func _ready():
-  GraphicsManager.init()
-
   if OS.has_feature("movie"):
     $FpsLabel.visible = false
 
@@ -31,6 +29,7 @@ func _ready():
     _player.get_node("XRToolsPlayerBody").rotate_player(-starting_rotation)
     _start_game()
   else:
+    GraphicsManager.init()
     _player.get_node("Pivot/Camera3D").make_current()
     _player.rotation.y = starting_rotation
     _player.max_speed = player_speed
