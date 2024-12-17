@@ -8,6 +8,7 @@ signal loaded_image(url: String, image: Image)
 var TEXTURE_QUEUE = "Textures"
 var _fs_lock = Mutex.new()
 var _texture_load_thread_pool_size = 5
+var _texture_load_thread_pool = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +21,7 @@ func _ready():
   for _i in range(_texture_load_thread_pool_size):
     var thread = Thread.new()
     thread.start(_texture_load_thread_loop)
+    _texture_load_thread_pool.append(thread)
 
 func _texture_load_thread_loop():
   while true:

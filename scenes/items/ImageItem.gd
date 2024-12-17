@@ -70,6 +70,8 @@ func _on_image_complete(files, _ctx):
 	if files.has(title):
 		var data = ExhibitFetcher.get_result(title)
 		if data:
+			ExhibitFetcher.images_complete.disconnect(_on_image_complete)
+			ExhibitFetcher.commons_images_complete.disconnect(_on_image_complete)
 			_set_image(data)
 
 func _set_image(data):
@@ -88,9 +90,6 @@ func _set_image(data):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if image_url:
-		$HTTPRequest.request(image_url)
-
 	if not plate_style:
 		pass
 	elif plate_style == "white":
@@ -116,3 +115,4 @@ func init(_title, _width, _height, _text, _plate_style = null):
 		_set_image(data)
 	else:
 		ExhibitFetcher.images_complete.connect(_on_image_complete)
+		ExhibitFetcher.commons_images_complete.connect(_on_image_complete)

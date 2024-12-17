@@ -142,10 +142,13 @@ func _fetch_commons_images(category, context):
 	if len(new_category) == 0:
 		var result = get_result(category)
 		if result and result.has("images"):
+			var complete = true
 			for image in result.images:
-				_read_from_cache(image, WIKIMEDIA_COMMONS_PREFIX)
-			call_deferred("emit_signal", "commons_images_complete", result.images, context)
-		return
+				if not _read_from_cache(image, WIKIMEDIA_COMMONS_PREFIX):
+					complete = false
+			if complete:
+				call_deferred("emit_signal", "commons_images_complete", result.images, context)
+				return
 
 	var url = wikimedia_commons_images_endpoint + category.uri_encode()
 	var ctx = {

@@ -15,8 +15,6 @@ shaded = true
 double_sided = false
 script = ExtResource("1")
 
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
-
 [node name="Label" type="Label3D" parent="."]
 visibility_range_end = 10.0
 visibility_range_end_margin = 1.0
