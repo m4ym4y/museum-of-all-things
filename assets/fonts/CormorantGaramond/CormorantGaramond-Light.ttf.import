@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://doutpgr2ev53b"
-path="res://.godot/imported/NotoSans-ExtraBold.ttf-1f911148813aeefbe5791e2693fff83f.fontdata"
+uid="uid://m731p0kvig1g"
+path="res://.godot/imported/CormorantGaramond-Light.ttf-7d740ea5f32009cd08bf28293df511f5.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/NotoSans-ExtraBold.ttf"
-dest_files=["res://.godot/imported/NotoSans-ExtraBold.ttf-1f911148813aeefbe5791e2693fff83f.fontdata"]
+source_file="res://assets/fonts/CormorantGaramond/CormorantGaramond-Light.ttf"
+dest_files=["res://.godot/imported/CormorantGaramond-Light.ttf-7d740ea5f32009cd08bf28293df511f5.fontdata"]
 
 [params]
 

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dhle3lpkqymeh"
-path="res://.godot/imported/NotoSans-Black.ttf-c0913ca896ad62a6f177358f441d4556.fontdata"
+uid="uid://g7ngd4oyyd5d"
+path="res://.godot/imported/CormorantGaramond-Regular.ttf-a198e632387cacf158d04f81a9250df8.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/NotoSans-Black.ttf"
-dest_files=["res://.godot/imported/NotoSans-Black.ttf-c0913ca896ad62a6f177358f441d4556.fontdata"]
+source_file="res://assets/fonts/CormorantGaramond/CormorantGaramond-Regular.ttf"
+dest_files=["res://.godot/imported/CormorantGaramond-Regular.ttf-a198e632387cacf158d04f81a9250df8.fontdata"]
 
 [params]
 

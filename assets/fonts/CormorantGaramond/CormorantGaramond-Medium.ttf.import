@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://e12gxt4eqmvq"
-path="res://.godot/imported/NotoSans-SemiBoldItalic.ttf-3ab2fcc7c0831301e2344b44a15bbeb2.fontdata"
+uid="uid://cbryppjjel0go"
+path="res://.godot/imported/CormorantGaramond-Medium.ttf-61115cd6eb6e1aa52c0ac18d2025df25.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/NotoSans-SemiBoldItalic.ttf"
-dest_files=["res://.godot/imported/NotoSans-SemiBoldItalic.ttf-3ab2fcc7c0831301e2344b44a15bbeb2.fontdata"]
+source_file="res://assets/fonts/CormorantGaramond/CormorantGaramond-Medium.ttf"
+dest_files=["res://.godot/imported/CormorantGaramond-Medium.ttf-61115cd6eb6e1aa52c0ac18d2025df25.fontdata"]
 
 [params]
 

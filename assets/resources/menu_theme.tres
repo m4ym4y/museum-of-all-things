@@ -1,4 +1,7 @@
-[gd_resource type="Theme" format=3 uid="uid://dgt5fjkytx07d"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dgt5fjkytx07d"]
+
+[ext_resource type="FontFile" uid="uid://bxph8sc2vndn" path="res://assets/fonts/CormorantGaramond/CormorantGaramond-SemiBold.ttf" id="1_eqt3n"]
 
 [resource]
+default_font = ExtResource("1_eqt3n")
 default_font_size = 24

@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scenes/items/Sign.gd" id="1_6w7lf"]
 [ext_resource type="ArrayMesh" uid="uid://gjymylshj4jf" path="res://assets/models/sign.obj" id="1_wmw8d"]
 [ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="2_v8iha"]
-[ext_resource type="FontFile" uid="uid://ctf5uof6a8cb4" path="res://assets/fonts/NotoSans-Regular.ttf" id="3_yboib"]
 [ext_resource type="Material" uid="uid://bm6ehx61ibtab" path="res://assets/textures/sign.tres" id="4_t7w8m"]
+[ext_resource type="FontFile" uid="uid://ctf5uof6a8cb4" path="res://assets/fonts/NotoSans/NotoSans-Regular.ttf" id="5_02wvy"]
 
 [node name="Sign" type="Node3D"]
 script = ExtResource("1_6w7lf")
@@ -22,7 +22,7 @@ visibility_range_end_margin = 1.0
 visibility_range_fade_mode = 1
 pixel_size = 0.002
 modulate = Color(0, 0, 0, 1)
-font = ExtResource("3_yboib")
+font = ExtResource("5_02wvy")
 outline_size = 0
 autowrap_mode = 3
 width = 225.0

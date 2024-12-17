@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c85a26yi0jnh5"
-path="res://.godot/imported/NotoSans-Thin.ttf-2188759e13df35fb6e092e8ee7a77a1c.fontdata"
+uid="uid://dywx3vqxapmq3"
+path="res://.godot/imported/NotoSans-SemiBold.ttf-7bf83f70deee4f9bfad332951b7f56a1.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/NotoSans-Thin.ttf"
-dest_files=["res://.godot/imported/NotoSans-Thin.ttf-2188759e13df35fb6e092e8ee7a77a1c.fontdata"]
+source_file="res://assets/fonts/NotoSans/NotoSans-SemiBold.ttf"
+dest_files=["res://.godot/imported/NotoSans-SemiBold.ttf-7bf83f70deee4f9bfad332951b7f56a1.fontdata"]
 
 [params]
 

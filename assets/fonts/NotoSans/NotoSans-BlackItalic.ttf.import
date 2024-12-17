@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bn3tfx3a6xsvv"
-path="res://.godot/imported/NotoSans-ThinItalic.ttf-f822487ad93f9db4e21769d629f1735a.fontdata"
+uid="uid://kurd3hrjpa3e"
+path="res://.godot/imported/NotoSans-BlackItalic.ttf-5bb9bfdcf1cb2e62c02698ed0b8ef313.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/NotoSans-ThinItalic.ttf"
-dest_files=["res://.godot/imported/NotoSans-ThinItalic.ttf-f822487ad93f9db4e21769d629f1735a.fontdata"]
+source_file="res://assets/fonts/NotoSans/NotoSans-BlackItalic.ttf"
+dest_files=["res://.godot/imported/NotoSans-BlackItalic.ttf-5bb9bfdcf1cb2e62c02698ed0b8ef313.fontdata"]
 
 [params]
 

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bgwtweopbd8ri"
-path="res://.godot/imported/NotoSans-Italic.ttf-d2c91dc116d76e4b8fa114516322c978.fontdata"
+uid="uid://bhd0tqhy0eg47"
+path="res://.godot/imported/NotoSans-LightItalic.ttf-17eb91b8c94589ead38975d8a5dc5a0a.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/NotoSans-Italic.ttf"
-dest_files=["res://.godot/imported/NotoSans-Italic.ttf-d2c91dc116d76e4b8fa114516322c978.fontdata"]
+source_file="res://assets/fonts/NotoSans/NotoSans-LightItalic.ttf"
+dest_files=["res://.godot/imported/NotoSans-LightItalic.ttf-17eb91b8c94589ead38975d8a5dc5a0a.fontdata"]
 
 [params]
 

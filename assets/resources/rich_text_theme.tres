@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cr3fyffqdk4yo"]
+
+[ext_resource type="FontFile" uid="uid://n33gotmdcskb" path="res://assets/fonts/CormorantGaramond/CormorantGaramond-Bold.ttf" id="1_uswt8"]
+
+[resource]
+default_font = ExtResource("1_uswt8")
+default_font_size = 16
+/fonts/bold = ExtResource("1_uswt8")
+/fonts/regular = ExtResource("1_uswt8")

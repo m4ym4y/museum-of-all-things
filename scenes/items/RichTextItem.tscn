@@ -1,13 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://byb3uy8rswlaf"]
 
 [ext_resource type="Script" path="res://scenes/items/RichTextItem.gd" id="1_xha8l"]
+[ext_resource type="Theme" uid="uid://cr3fyffqdk4yo" path="res://assets/resources/rich_text_theme.tres" id="2_k1xr6"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_54vlm"]
 viewport_path = NodePath("SubViewport")
-
-[sub_resource type="Theme" id="Theme_etg41"]
-default_base_scale = 1.0
-default_font_size = 16
 
 [node name="RichTextItem" type="Node3D"]
 script = ExtResource("1_xha8l")
@@ -23,7 +20,6 @@ texture = SubResource("ViewportTexture_54vlm")
 disable_3d = true
 transparent_bg = true
 use_occlusion_culling = true
-canvas_item_default_texture_filter = 2
 size = Vector2i(600, 1000)
 size_2d_override = Vector2i(600, 2500)
 render_target_clear_mode = 2
@@ -50,7 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = SubResource("Theme_etg41")
+theme = ExtResource("2_k1xr6")
 bbcode_enabled = true
 text = "Hello world
 sdfjksd kjsdf jksdfjksf jksdf s

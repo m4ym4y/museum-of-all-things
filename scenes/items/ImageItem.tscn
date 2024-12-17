@@ -1,19 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://coafwtbm10e3b"]
+[gd_scene load_steps=5 format=3 uid="uid://coafwtbm10e3b"]
 
 [ext_resource type="Script" path="res://scenes/items/ImageItem.gd" id="1"]
-[ext_resource type="FontFile" uid="uid://ctf5uof6a8cb4" path="res://assets/fonts/NotoSans-Regular.ttf" id="2"]
+[ext_resource type="FontFile" uid="uid://n33gotmdcskb" path="res://assets/fonts/CormorantGaramond/CormorantGaramond-Bold.ttf" id="2_itcda"]
 [ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="3_bk5br"]
-
-[sub_resource type="FontFile" id="1"]
-fallbacks = Array[Font]([ExtResource("2"), ExtResource("2")])
-subpixel_positioning = 0
-msdf_pixel_range = 14
-msdf_size = 128
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_l88tm"]
 size = Vector3(1, 0.01, 1)
@@ -34,8 +23,9 @@ visibility_range_end_margin = 1.0
 visibility_range_fade_mode = 1
 pixel_size = 0.002
 modulate = Color(0, 0, 0, 1)
-font = SubResource("1")
-outline_size = 6
+outline_modulate = Color(0, 0, 0, 0)
+font = ExtResource("2_itcda")
+outline_size = 0
 autowrap_mode = 3
 width = 900.0
 
