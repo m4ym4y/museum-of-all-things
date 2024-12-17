@@ -24,7 +24,8 @@ var images_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=imag
 var wikidata_endpoint = "https://www.wikidata.org/w/api.php?action=wbgetclaims&property=P373&format=json&entity="
 var wikimedia_commons_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&generator=categorymembers&gcmtype=file&gcmlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&gcmtitle="
 
-var _request_queue = []
+var _request_queue_map = {}
+var _request_queue_title = "$Lobby"
 var _request_in_flight = false
 var _results = {}
 
@@ -40,10 +41,15 @@ func _get_location_header(headers):
 		if header.begins_with(LOCATION_STR):
 			return header.substr(LOCATION_STR.length())
 
+func switch_active_queue(title):
+	if not _request_queue_map.has(title):
+		_request_queue_map[title] = []
+	_request_queue_title = title
+
 # TODO: should the queue batch together all the upcoming requests?
 func _advance_queue():
 	_request_in_flight = false
-	var next_fetch = _request_queue.pop_front()
+	var next_fetch = _request_queue_map[_request_queue_title].pop_front()
 	if next_fetch != null:
 		if next_fetch[0] == "fetch_wikitext":
 			fetch(next_fetch[1], next_fetch[2])
@@ -53,6 +59,9 @@ func _advance_queue():
 			fetch_images(next_fetch[1], next_fetch[2])
 		elif next_fetch[0] == "fetch_commons_images":
 			fetch_commons_images(next_fetch[1], next_fetch[2])
+		elif next_fetch[0] == "fetch_continue":
+			print("DISPATCH CONTINUE FROM QUEUE")
+			_dispatch_continue(next_fetch[1], next_fetch[2], next_fetch[3], next_fetch[4], next_fetch[5])
 		else:
 			push_error("unknown queue item. type=", next_fetch[0])
 
@@ -84,12 +93,19 @@ func fetch_images(files, context):
 		return
 
 	if len(new_files) > MAX_BATCH_SIZE:
-		_request_queue.append([ "fetch_images", new_files.slice(MAX_BATCH_SIZE), context ])
+		_request_queue_map[_request_queue_title].append([
+			"fetch_images",
+			new_files.slice(MAX_BATCH_SIZE), context
+		])
 		new_files = new_files.slice(0, MAX_BATCH_SIZE)
 
 	# queue if another request is in flight
 	if _request_in_flight:
-		_request_queue.append([ "fetch_images", new_files, context ])
+		_request_queue_map[_request_queue_title].append([
+			"fetch_images",
+			new_files,
+			context
+		])
 		return
 	_request_in_flight = true
 
@@ -97,6 +113,7 @@ func fetch_images(files, context):
 	var ctx = {
 		"files": files,
 		"new_files": new_files,
+		"queue": _request_queue_title
 	}
 
 	_dispatch_request(url, ctx, context)
@@ -114,14 +131,19 @@ func fetch_commons_images(category, context):
 
 	# queue if another request is in flight
 	if _request_in_flight:
-		_request_queue.append([ "fetch_commons_images", category, context ])
+		_request_queue_map[_request_queue_title].append([
+			"fetch_commons_images",
+			category,
+			context
+		])
 		return
 	_request_in_flight = true
 
 	var url = wikimedia_commons_images_endpoint + category.uri_encode()
 	var ctx = {
 		"category": category,
-		"image_titles": []
+		"image_titles": [],
+		"queue": _request_queue_title
 	}
 
 	_dispatch_request(url, ctx, context)
@@ -135,7 +157,11 @@ func fetch_wikidata(entity, context):
 
 	# queue if another request is in flight
 	if _request_in_flight:
-		_request_queue.append([ "fetch_wikidata", entity, context ])
+		_request_queue_map[_request_queue_title].append([
+			"fetch_wikidata",
+			entity,
+			context
+		])
 		return
 	_request_in_flight = true
 
@@ -274,7 +300,19 @@ func _dispatch_continue(continue_fields, base_url, titles, ctx, caller_ctx):
 	for field in continue_fields.keys():
 		continue_url += "&" + field + "=" + continue_fields[field].uri_encode()
 	ctx.url = continue_url
-	_dispatch_request(continue_url, ctx, caller_ctx)
+
+	# continue right now if we're still the active article
+	if ctx.queue == _request_queue_title:
+		_dispatch_request(continue_url, ctx, caller_ctx)
+	elif _request_queue_map.has(ctx.queue):
+		_request_queue_map[ctx.queue].append([
+			"fetch_continue",
+			continue_fields,
+			base_url,
+			titles,
+			ctx,
+			caller_ctx,
+		])
 
 func _cache_all(titles, prefix=WIKIPEDIA_PREFIX):
 	for title in titles:
@@ -282,12 +320,32 @@ func _cache_all(titles, prefix=WIKIPEDIA_PREFIX):
 		if result != null:
 			DataManager.save_json_data(prefix + title, result)
 
+func _get_original_title(query, title):
+	if query.has("normalized"):
+		for t in query.normalized:
+			if t.to == title:
+				return t.from
+	if query.has("redirects"):
+		for t in query.redirects:
+			if t.to == title:
+				return t.from
+	return title
+
 func _on_wikitext_request_complete(res, ctx, caller_ctx):
 	# store the information we did get
 	if res.query.has("pages"):
 		var pages = res.query.pages
 		for page_id in pages.keys():
 			var page = pages[page_id]
+
+			# emit failed signal for a missing page
+			if page.has("missing"):
+				var original_title = _get_original_title(res.query, page.title)
+				emit_signal("wikitext_failed", [original_title], "Missing")
+				ctx.new_titles.erase(original_title)
+				ctx.titles.erase(original_title)
+				continue
+
 			if page.has("revisions"):
 				var revisions = page.revisions
 				_set_page_field(page.title, "wikitext", revisions[0]["*"])

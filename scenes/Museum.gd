@@ -110,6 +110,7 @@ func reset_to_lobby():
 
 func _set_current_room_title(title):
 	_current_room_title = title
+	ExhibitFetcher.switch_active_queue(title)
 	_start_queue()
 
 	var fog_color = Util.gen_fog(_current_room_title)
