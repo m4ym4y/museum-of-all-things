@@ -24,6 +24,7 @@ var wikimedia_commons_images_endpoint = "https://commons.wikimedia.org/w/api.php
 var _request_queue_lock = Mutex.new()
 var _request_queue_map = {}
 var _request_queue_title = "$Lobby"
+var _request_queue_finished = false
 
 var _fs_lock = Mutex.new()
 var _results_lock = Mutex.new()
@@ -72,7 +73,8 @@ func switch_active_queue(title):
 	if not _request_queue_map.has(title):
 		_request_queue_map[title] = []
 	_request_queue_title = title
-	_advance_queue()
+	if _request_queue_finished:
+		_advance_queue()
 
 # TODO: should the queue batch together all the upcoming requests?
 func _advance_queue():
@@ -80,7 +82,10 @@ func _advance_queue():
 	var next_fetch = _request_queue_map[_request_queue_title].pop_front()
 	_request_queue_lock.unlock()
 	if next_fetch != null:
+		_request_queue_finished = false
 		next_fetch.call()
+	else:
+		_request_queue_finished = true
 
 func _join_titles(titles):
 	return "|".join(titles.map(func(t): return t.uri_encode()))
