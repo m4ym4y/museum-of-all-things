@@ -5,9 +5,9 @@ signal loaded_image(url: String, image: Image)
 @onready var COMMON_HEADERS = [ "accept: image/png, image/jpeg; charset=utf-8" ]
 @onready var _in_flight = {}
 
-var _texture_load_thread = Thread.new()
 var TEXTURE_QUEUE = "Textures"
 var _fs_lock = Mutex.new()
+var _texture_load_thread_pool_size = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,13 +17,25 @@ func _ready():
     DirAccess.make_dir_recursive_absolute(cache_dir)
     if OS.is_debug_build():
       print("cache directory created at 'user://cache'")
-  _texture_load_thread.start(_texture_load_thread_loop)
+  for _i in range(_texture_load_thread_pool_size):
+    var thread = Thread.new()
+    thread.start(_texture_load_thread_loop)
 
 func _texture_load_thread_loop():
   while true:
     var item = WorkQueue.process_queue(TEXTURE_QUEUE)
-    var data = item.data if item.has("data") else _read_url(item.url)
-    _create_and_emit_image(item.url, data, item.ctx)
+    var data = _read_url(item.url)
+
+    if data:
+      _create_and_emit_image(item.url, data, item.ctx)
+    else:
+      var result = RequestSync.request(item.url, COMMON_HEADERS)
+      if result[0] != OK:
+        push_error("failed to fetch image ", result[1], " ", item.url)
+      else:
+        data = result[3]
+        _write_url(item.url, data)
+        _create_and_emit_image(item.url, data, item.ctx)
 
 func _get_hash(input: String) -> String:
   var context = HashingContext.new()
@@ -132,37 +144,7 @@ func _emit_image(url, texture, ctx):
   call_deferred("emit_signal", "loaded_image", url, texture, ctx)
 
 func request_image(url, ctx=null):
-  if _url_exists(url):
-    WorkQueue.add_item(TEXTURE_QUEUE, {
-      "url": url,
-      "ctx": ctx
-    })
-    return
-
-  if _in_flight.has(url):
-    return
-
-  _in_flight[url] = true
-  var request = HTTPRequest.new()
-  request.request_completed.connect(_on_image_request_complete.bind(url, request, ctx))
-  add_child(request)
-  if OS.is_debug_build():
-    print("fetching image ", url)
-  var error = request.request(url, COMMON_HEADERS)
-  if error != OK:
-    _in_flight.erase(url)
-
-func _on_image_request_complete(result, code, _headers, body, url, request, ctx):
-  _in_flight.erase(url)
-  request.queue_free()
-
-  if result != HTTPRequest.RESULT_SUCCESS:
-    push_error("failed to fetch image ", code, " ", url)
-    return
-
   WorkQueue.add_item(TEXTURE_QUEUE, {
     "url": url,
-    "data": body,
     "ctx": ctx
   })
-  _write_url(url, body)

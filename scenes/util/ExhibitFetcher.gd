@@ -200,9 +200,6 @@ func get_result(title):
 	return res
 
 func _dispatch_request(url, ctx, caller_ctx):
-	if OS.is_debug_build():
-		print("fetching url ", url)
-
 	ctx.url = url
 	var result = RequestSync.request(url)
 

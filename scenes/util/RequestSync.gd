@@ -10,7 +10,10 @@ var COMMON_HEADERS = [
 ]
 
 # TODO: a version where we reuse the http client
-func request(url, json=true):
+func request(url, headers=COMMON_HEADERS):
+	if OS.is_debug_build():
+		print("fetching url ", url)
+
 	var http_client = HTTPClient.new()
 	var host_idx = url.find("/", len(protocol)) # first slash after protocol
 	var host = url.substr(0, host_idx)
@@ -30,7 +33,7 @@ func request(url, json=true):
 	if http_client.get_status() != HTTPClient.STATUS_CONNECTED:
 		return [FAILED, 0, null, null]
 
-	http_client.request(HTTPClient.METHOD_GET, path, COMMON_HEADERS)
+	http_client.request(HTTPClient.METHOD_GET, path, headers)
 
 	while http_client.get_status() == HTTPClient.STATUS_REQUESTING:
 		http_client.poll()
