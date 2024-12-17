@@ -1,7 +1,8 @@
 extends Node3D
 
 #static var max_chars = 2500
-static var max_chars = 1500
+#static var max_chars = 1500
+static var max_chars = 1000
 static var margin_top = 100
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
