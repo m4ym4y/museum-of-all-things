@@ -4,7 +4,7 @@ extends Node3D
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
 @onready var QUEUE_DELAY = 0.05
 @onready var DEFAULT_DOORS = [
-	"Levant",
+	"Baroque painting",
 	"List of Polish people",
 	"Louvre",
 	"Coffee",
