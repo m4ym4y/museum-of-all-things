@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhi1d8bl668hb"]
+[gd_scene load_steps=4 format=3 uid="uid://bhi1d8bl668hb"]
 
 [ext_resource type="Script" path="res://scenes/menu/PauseMenu.gd" id="1_qk8a1"]
+[ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="1_ysejj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2s8qn"]
 font_size = 64
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ysejj")
 script = ExtResource("1_qk8a1")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
