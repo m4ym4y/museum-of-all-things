@@ -26,15 +26,19 @@ func _on_body_exited(body: Node) -> void:
 	if body.is_in_group("Player"):
 		player = null
 
+func _xz(v):
+	return Vector2(v.x, v.z)
+
 func _process(_delta: float) -> void:
 	if player:
 		var player_facing = -player.global_transform.basis.z.normalized()
-		var p = player.global_position + player_facing * project_dir
-		var distance_to_a = point_a - p
-		var distance_to_b = point_b - p
+		var p = _xz(player.global_position + player_facing * project_dir)
+		var distance_to_a = _xz(point_a) - p
+		var distance_to_b = _xz(point_b) - p
 
 		var direction = "exit" if distance_to_b.length() < distance_to_a.length() else "entry"
 
 		if direction != previous_direction:
+			print("DIreCTION cHaNGED ", direction)
 			emit_signal("direction_changed", direction)
 			previous_direction = direction
