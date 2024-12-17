@@ -25,6 +25,7 @@ pixel_size = 0.002
 modulate = Color(0, 0, 0, 1)
 outline_modulate = Color(0, 0, 0, 0)
 font = ExtResource("2_itcda")
+font_size = 48
 outline_size = 0
 autowrap_mode = 3
 width = 900.0
