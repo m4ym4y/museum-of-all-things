@@ -20,6 +20,7 @@ func _load_settings():
 	vbox.get_node("ReflectionQuality").value = e.ssr_max_steps
 	vbox.get_node("EnableReflections").button_pressed = e.ssr_enabled
 	vbox.get_node("EnableFog").button_pressed = e.fog_enabled
+	_refresh_cache_label()
 
 func _on_restore_pressed():
 	GraphicsManager.restore_default_settings()
@@ -54,6 +55,16 @@ func _on_clear_cache_pressed():
 		if not file:
 			break
 		dir.remove(file)
+
+	_refresh_cache_label()
+
+func _refresh_cache_label():
+	var count = 0
+	var dir = DirAccess.open("user://cache")
+	dir.list_dir_begin()
+	while dir.get_next():
+		count += 1
+	$MarginContainer/VBoxContainer/CacheLabel.text = "Cache (%s items)" % count
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

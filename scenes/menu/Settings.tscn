@@ -129,7 +129,7 @@ layout_mode = 2
 text = " 
 "
 
-[node name="Label6" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="CacheLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Cache"
 
