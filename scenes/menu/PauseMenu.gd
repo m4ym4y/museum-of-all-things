@@ -41,9 +41,12 @@ func _on_quit_pressed():
   get_tree().quit()
 
 func _on_ask_quit_pressed():
-  $MarginContainer/VBoxContainer.visible = false
-  $MarginContainer/QuitContainer.visible = true
-  $MarginContainer/QuitContainer/Quit.grab_focus()
+  if not _xr:
+    _on_quit_pressed()
+  else:
+    $MarginContainer/VBoxContainer.visible = false
+    $MarginContainer/QuitContainer.visible = true
+    $MarginContainer/QuitContainer/Quit.grab_focus()
 
 func _on_cancel_quit_pressed():
   $MarginContainer/QuitContainer.visible = false

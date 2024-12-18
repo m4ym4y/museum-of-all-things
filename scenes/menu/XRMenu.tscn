@@ -13,4 +13,4 @@ collision_layer = 5242880
 scene = ExtResource("2_kyyvp")
 viewport_size = Vector2(640, 480)
 unshaded = true
-scene_properties_keys = PackedStringArray()
+scene_properties_keys = PackedStringArray("XrMenuCanvas.gd")
