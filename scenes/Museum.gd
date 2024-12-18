@@ -346,9 +346,6 @@ func _on_fetch_complete(_titles, context):
 			image_titles.append(item_data.title)
 		item_queue.append(_add_item.bind(new_exhibit, item_data))
 
-	_queue_item_front(context.title, ExhibitFetcher.fetch_images.bind(image_titles, null))
-	_queue_item(context.title, item_queue)
-
 	if result.has("wikidata_entity"):
 		_queue_item_front(context.title, ExhibitFetcher.fetch_wikidata.bind(result.wikidata_entity, {
 			"exhibit": new_exhibit,
@@ -357,6 +354,9 @@ func _on_fetch_complete(_titles, context):
 			"backlink": backlink,
 			"extra_text": extra_text
 		}))
+
+	_queue_item_front(context.title, ExhibitFetcher.fetch_images.bind(image_titles, null))
+	_queue_item(context.title, item_queue)
 
 	if backlink:
 		new_exhibit.entry.loader.body_entered.connect(_on_loader_body_entered.bind(new_exhibit.entry, true))

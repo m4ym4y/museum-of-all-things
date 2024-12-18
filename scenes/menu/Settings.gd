@@ -44,6 +44,17 @@ func _on_limit_fps_toggled(toggled_on: bool):
 func _on_enable_fog_toggled(toggled_on: bool):
 	GraphicsManager.get_env().fog_enabled = toggled_on
 
+func _on_clear_cache_pressed():
+	# this is going to be big so we stream it
+	var dir = DirAccess.open("user://cache")
+	dir.list_dir_begin()
+
+	while true:
+		var file = dir.get_next()
+		if not file:
+			break
+		dir.remove(file)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
