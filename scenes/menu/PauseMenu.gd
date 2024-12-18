@@ -14,7 +14,7 @@ func _on_visibility_changed():
 func _ready():
   GlobalMenuEvents.set_current_room.connect(set_current_room)
   set_current_room(current_room)
-  
+
   # opening page in a browser outside VR is confusing
   if _xr:
     $MarginContainer/VBoxContainer/Open.visible = false
@@ -43,10 +43,12 @@ func _on_quit_pressed():
 func _on_ask_quit_pressed():
   $MarginContainer/VBoxContainer.visible = false
   $MarginContainer/QuitContainer.visible = true
+  $MarginContainer/QuitContainer/Quit.grab_focus()
 
 func _on_cancel_quit_pressed():
   $MarginContainer/QuitContainer.visible = false
   $MarginContainer/VBoxContainer.visible = true
+  $MarginContainer/VBoxContainer/Resume.grab_focus()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
