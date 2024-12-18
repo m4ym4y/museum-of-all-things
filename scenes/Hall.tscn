@@ -10,6 +10,7 @@
 script = ExtResource("1_eu127")
 
 [node name="LoaderTrigger" parent="." instance=ExtResource("2_fcpmw")]
+collision_mask = 524288
 monitoring = false
 
 [node name="HallDirectionDetector" parent="." instance=ExtResource("4_y7uhf")]

@@ -18,86 +18,86 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+  pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+  pass
 
 func _start_animate():
-	var player = get_tree().get_first_node_in_group("Player")
-	var tween_time = 0.5
+  var player = get_tree().get_first_node_in_group("Player")
+  var tween_time = 0.5
 
-	if not player or position.distance_to(player.global_position) > 20.0:
-		tween_time = 0
+  if not player or position.distance_to(player.global_position) > 20.0:
+    tween_time = 0
 
-	var tween = create_tween()
-	var light_tween = create_tween()
-	var ceiling_tween = create_tween()
+  var tween = create_tween()
+  var light_tween = create_tween()
+  var ceiling_tween = create_tween()
 
-	tween.tween_property(
-		_item_node,
-		"position",
-		_animate_item_target,
-		tween_time
-	)
+  tween.tween_property(
+    _item_node,
+    "position",
+    _animate_item_target,
+    tween_time
+  )
 
-	ceiling_tween.tween_property(
-		_ceiling,
-		"position",
-		_animate_ceiling_target,
-		tween_time
-	)
+  ceiling_tween.tween_property(
+    _ceiling,
+    "position",
+    _animate_ceiling_target,
+    tween_time
+  )
 
-	light_tween.tween_property(
-		_light,
-		"light_energy",
-		3.0,
-		tween_time
-	)
+  light_tween.tween_property(
+    _light,
+    "light_energy",
+    3.0,
+    tween_time
+  )
 
-	tween.set_trans(Tween.TRANS_LINEAR)
-	tween.set_ease(Tween.EASE_IN_OUT)
+  tween.set_trans(Tween.TRANS_LINEAR)
+  tween.set_ease(Tween.EASE_IN_OUT)
 
-	light_tween.set_trans(Tween.TRANS_LINEAR)
-	light_tween.set_ease(Tween.EASE_IN_OUT)
+  light_tween.set_trans(Tween.TRANS_LINEAR)
+  light_tween.set_ease(Tween.EASE_IN_OUT)
 
-	ceiling_tween.set_trans(Tween.TRANS_LINEAR)
-	ceiling_tween.set_ease(Tween.EASE_IN_OUT)
+  ceiling_tween.set_trans(Tween.TRANS_LINEAR)
+  ceiling_tween.set_ease(Tween.EASE_IN_OUT)
 
 func _on_image_item_loaded():
-	var size = _item.get_image_size()
-	if size.x > size.y:
-		_frame.scale.y = size.y / float(size.x)
-	else:
-		_frame.scale.x = size.x / float(size.y)
-	_frame.position = _item.position
-	_frame.position.z = 0
-	_start_animate()
+  var size = _item.get_image_size()
+  if size.x > size.y:
+    _frame.scale.y = size.y / float(size.x)
+  else:
+    _frame.scale.x = size.x / float(size.y)
+  _frame.position = _item.position
+  _frame.position.z = 0
+  _start_animate()
 
 func init(item_data):
-	if item_data.has("material"):
-		if item_data.material == "marble":
-			$Item/Plaque.material_override = MarbleMaterial
-		elif item_data.material == "none":
-			$Item/Plaque.visible = false
-			_animate_item_target.z -= 0.05
+  if item_data.has("material"):
+    if item_data.material == "marble":
+      $Item/Plaque.material_override = MarbleMaterial
+    elif item_data.material == "none":
+      $Item/Plaque.visible = false
+      _animate_item_target.z -= 0.05
 
-	if item_data.type == "image":
-		_item = ImageItem.instantiate()
-		_item.loaded.connect(_on_image_item_loaded)
-		_item.init(item_data.title, 2, 2, item_data.text, item_data.plate)
-	elif item_data.type == "text":
-		_frame.visible = false
-		_item = TextItem.instantiate()
-		_item.init(item_data.text)
-		_start_animate()
-	elif item_data.type == "rich_text":
-		_frame.visible = false
-		_item = RichTextItem.instantiate()
-		_item.init(item_data.text)
-		_start_animate()
-	else:
-		return
-	_item.position = Vector3(0, 0, 0.07)
-	_item_node.add_child(_item)
+  if item_data.type == "image":
+    _item = ImageItem.instantiate()
+    _item.loaded.connect(_on_image_item_loaded)
+    _item.init(item_data.title, 2, 2, item_data.text, item_data.plate)
+  elif item_data.type == "text":
+    _frame.visible = false
+    _item = TextItem.instantiate()
+    _item.init(item_data.text)
+    _start_animate()
+  elif item_data.type == "rich_text":
+    _frame.visible = false
+    _item = RichTextItem.instantiate()
+    _item.init(item_data.text)
+    _start_animate()
+  else:
+    return
+  _item.position = Vector3(0, 0, 0.07)
+  _item_node.add_child(_item)

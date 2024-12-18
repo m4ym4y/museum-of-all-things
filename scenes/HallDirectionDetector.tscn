@@ -7,7 +7,7 @@ size = Vector3(6, 12, 6)
 
 [node name="HallDirectionDetector" type="Area3D"]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 524288
 monitoring = false
 script = ExtResource("1_2rqy8")
 
