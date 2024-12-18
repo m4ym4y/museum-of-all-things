@@ -11,6 +11,7 @@ var title
 var plate_style
 
 var plate_margin = 0.05
+var max_text_height = 0.5
 
 @onready var plate_black = preload("res://assets/textures/black.tres")
 @onready var plate_white = preload("res://assets/textures/flat_white.tres")
@@ -23,11 +24,16 @@ func get_image_size():
 	return Vector2(_image.get_width(), _image.get_height())
 
 func _update_text_plate():
-	if not plate_style:
-		return
-
 	var aabb = $Label.get_aabb()
 	if aabb.size.length() == 0:
+		return
+
+	if aabb.size.y > max_text_height:
+		$Label.font_size -= 1
+		call_deferred("_update_text_plate")
+		return
+
+	if not plate_style:
 		return
 
 	var plate = $Label/Plate
