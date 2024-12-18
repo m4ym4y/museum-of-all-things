@@ -101,29 +101,37 @@ func _create_text_items(title, extract):
 	var current_title = title
 	var current_subtitle = ""
 	var current_text = ""
+	var current_text_has_content = false
 
 	for line in lines:
 		var over_lim = len(current_text) > max_len_soft
 		if line == "":
 			continue
 		elif s2_re.search(line):
-			_add_text_item(items, current_title, current_subtitle, current_text)
+			if current_text_has_content:
+				_add_text_item(items, current_title, current_subtitle, current_text)
 			current_title = _clean_section(line)
 			current_subtitle = ""
 			current_text = ""
+			current_text_has_content = false
 		else:
 			if line.begins_with("="):
 				var sec = section_fmt % _clean_section(line)
-				if len(current_text) + len(sec) > max_len_soft:
+				if len(current_text) + len(sec) > max_len_soft and current_text_has_content:
 					_add_text_item(items, current_title, current_subtitle, current_text)
 					current_subtitle = _clean_section(line)
 					current_text = ""
+					current_text_has_content = false
 				else:
 					current_text += sec
 			elif not over_lim:
-				current_text += p_fmt % line
+				var stripped = line.strip_edges()
+				if len(stripped) > 0:
+					current_text_has_content = true
+					current_text += p_fmt % stripped
 
-	_add_text_item(items, current_title, current_subtitle, current_text)
+	if current_text_has_content:
+		_add_text_item(items, current_title, current_subtitle, current_text)
 
 	return items
 
