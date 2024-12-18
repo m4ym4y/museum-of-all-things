@@ -151,13 +151,11 @@ func _fetch_commons_images(category, context):
 	if len(new_category) == 0:
 		var result = get_result(category)
 		if result and result.has("images"):
-			var complete = true
 			for image in result.images:
 				if not _read_from_cache(image, WIKIMEDIA_COMMONS_PREFIX):
-					complete = false
-			if complete:
-				call_deferred("emit_signal", "commons_images_complete", result.images, context)
-				return
+					push_error("unable to read image from cache. category=%s image=%s" % [category, image])
+			call_deferred("emit_signal", "commons_images_complete", result.images, context)
+			return
 
 	var url = _get_commons_url(category) + category.uri_encode()
 	var ctx = {
@@ -433,7 +431,7 @@ func _on_commons_images_request_complete(res, ctx, caller_ctx):
 				_append_page_field(ctx.category, "images", [ file ])
 
 	if len(file_batch) > 0:
-		_cache_all(file_batch)
+		_cache_all(file_batch, WIKIMEDIA_COMMONS_PREFIX)
 		call_deferred("emit_signal", "commons_images_complete", file_batch, caller_ctx)
 
 	# handle continues
