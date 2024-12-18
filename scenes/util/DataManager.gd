@@ -4,6 +4,7 @@ signal loaded_image(url: String, image: Image)
 
 @onready var COMMON_HEADERS = [ "accept: image/png, image/jpeg; charset=utf-8" ]
 @onready var _in_flight = {}
+@onready var _xr = Util.is_xr()
 
 var TEXTURE_QUEUE = "Textures"
 var _fs_lock = Mutex.new()
@@ -136,6 +137,10 @@ func _create_and_emit_image(url, data, ctx):
 
   if image.get_width() == 0:
     return null
+
+  # pixelation is more disorienting in vr
+  if _xr:
+    image.generate_mipmaps()
 
   var texture = ImageTexture.create_from_image(image)
   _emit_image(url, texture, ctx)
