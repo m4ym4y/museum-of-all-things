@@ -53,7 +53,7 @@ func _ready():
 	#image_field_re.compile("photo")
 	tokenizer.compile("[^\\{\\}\\[\\]<>]+|[\\{\\}\\[\\]<>]")
 	image_name_re.compile("^([iI]mage:|[fF]ile:)")
-	exclude_image_re.compile("ui icon|-icon\\.|-logo\\.|blue pencil")
+	exclude_image_re.compile("\\bicon\\b|\\blogo\\b|blue pencil")
 	processor_thread.start(_processor_thread_loop)
 
 func _processor_thread_loop():
