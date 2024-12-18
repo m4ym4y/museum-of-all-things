@@ -26,6 +26,7 @@ tracker = &"left_hand"
 
 [node name="XRToolsMovementDirect" type="Node" parent="XROrigin3D/XRController3D_left" groups=["movement_providers"]]
 script = ExtResource("6_mvrkt")
+max_speed = 6.0
 strafe = true
 enabled = false
 

@@ -11,6 +11,6 @@ script = ExtResource("1_vutop")
 screen_size = Vector2(2, 1.5)
 collision_layer = 5242880
 scene = ExtResource("2_kyyvp")
-viewport_size = Vector2(640, 480)
+viewport_size = Vector2(960, 720)
 unshaded = true
 scene_properties_keys = PackedStringArray("XrMenuCanvas.gd")

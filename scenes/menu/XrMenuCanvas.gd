@@ -21,3 +21,11 @@ func _on_pause_menu_settings() -> void:
 func _on_settings_resume() -> void:
   $PauseMenu.visible = true
   $Settings.visible = false
+
+func _on_xr_controls_menu_resume() -> void:
+  $PauseMenu.visible = true
+  $XrControlsMenu.visible = false
+
+func _on_pause_menu_vr_controls() -> void:
+  $PauseMenu.visible = false
+  $XrControlsMenu.visible = true

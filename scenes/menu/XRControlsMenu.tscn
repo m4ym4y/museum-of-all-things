@@ -1,0 +1,126 @@
+[gd_scene load_steps=5 format=3 uid="uid://q1i08nbt6re1"]
+
+[ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="1_slws2"]
+[ext_resource type="Script" path="res://scenes/menu/XrControlsMenu.gd" id="2_reth0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vlir5"]
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_laulw"]
+font_size = 24
+
+[node name="XrControlsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_slws2")
+script = ExtResource("2_reth0")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MainOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MainOptions"]
+layout_mode = 2
+text = "VR Controls"
+label_settings = SubResource("LabelSettings_vlir5")
+
+[node name="Back" type="Button" parent="MarginContainer/VBoxContainer/MainOptions"]
+layout_mode = 2
+text = "Back"
+
+[node name="MovementOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/MovementOptions"]
+layout_mode = 2
+text = " "
+label_settings = SubResource("LabelSettings_laulw")
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/MovementOptions"]
+layout_mode = 2
+text = "Movement Style"
+
+[node name="Styles" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MovementOptions"]
+layout_mode = 2
+
+[node name="Teleportation" type="Button" parent="MarginContainer/VBoxContainer/MovementOptions/Styles"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = "Teleportation (Left Trigger)"
+
+[node name="DirectMovement" type="Button" parent="MarginContainer/VBoxContainer/MovementOptions/Styles"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Direct Movement (Left Analog Stick)"
+
+[node name="Label6" type="Label" parent="MarginContainer/VBoxContainer/MovementOptions"]
+layout_mode = 2
+text = "Direct Movement Speed"
+
+[node name="MovementSpeed" type="HSlider" parent="MarginContainer/VBoxContainer/MovementOptions"]
+layout_mode = 2
+min_value = 0.1
+max_value = 20.0
+step = 0.5
+value = 6.1
+editable = false
+
+[node name="MovementSpeedValue" type="Label" parent="MarginContainer/VBoxContainer/MovementOptions"]
+layout_mode = 2
+text = "6.0"
+horizontal_alignment = 1
+
+[node name="RotationOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="MarginContainer/VBoxContainer/RotationOptions"]
+layout_mode = 2
+text = " "
+label_settings = SubResource("LabelSettings_laulw")
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer/RotationOptions"]
+layout_mode = 2
+text = "Camera Rotation Increment (Right Stick)"
+
+[node name="RotationIncrement" type="HSlider" parent="MarginContainer/VBoxContainer/RotationOptions"]
+layout_mode = 2
+min_value = 5.0
+max_value = 180.0
+step = 5.0
+value = 40.0
+
+[node name="RotationIncrementValue" type="Label" parent="MarginContainer/VBoxContainer/RotationOptions"]
+layout_mode = 2
+text = "40"
+horizontal_alignment = 1
+
+[node name="SmoothRotation" type="CheckBox" parent="MarginContainer/VBoxContainer/RotationOptions"]
+layout_mode = 2
+text = "Smooth Camera Rotation"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MainOptions/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MovementOptions/Styles/Teleportation" to="." method="_on_teleportation_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MovementOptions/Styles/DirectMovement" to="." method="_on_direct_movement_pressed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/MovementOptions/MovementSpeed" to="." method="_on_movement_speed_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/RotationOptions/RotationIncrement" to="." method="_on_rotation_increment_value_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/RotationOptions/SmoothRotation" to="." method="_on_smooth_rotation_toggled"]

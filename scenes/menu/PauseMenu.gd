@@ -2,6 +2,7 @@ extends Control
 
 signal resume
 signal settings
+signal vr_controls
 signal return_to_lobby
 
 @onready var vbox = $MarginContainer/VBoxContainer
@@ -18,6 +19,7 @@ func _ready():
   # opening page in a browser outside VR is confusing
   if _xr:
     $MarginContainer/VBoxContainer/Open.visible = false
+    $MarginContainer/VBoxContainer/VrControls.visible = true
 
 var current_room = "$Lobby"
 func set_current_room(room):
@@ -53,6 +55,5 @@ func _on_cancel_quit_pressed():
   $MarginContainer/VBoxContainer.visible = true
   $MarginContainer/VBoxContainer/Resume.grab_focus()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-  pass
+func _on_vr_controls_pressed() -> void:
+  emit_signal("vr_controls")
