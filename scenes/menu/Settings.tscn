@@ -32,72 +32,100 @@ theme_override_constants/margin_bottom = 100
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="MainOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MainOptions"]
 layout_mode = 2
 text = "Settings"
 label_settings = SubResource("LabelSettings_2yad8")
 
-[node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Back" type="Button" parent="MarginContainer/VBoxContainer/MainOptions"]
 layout_mode = 2
 text = "Back
 "
 
-[node name="Restore" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Restore" type="Button" parent="MarginContainer/VBoxContainer/MainOptions"]
 layout_mode = 2
 text = "Restore Default Settings
 "
 
-[node name="Spacer4" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="ReflectionOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer4" type="Label" parent="MarginContainer/VBoxContainer/ReflectionOptions"]
 layout_mode = 2
 text = " 
 "
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/ReflectionOptions"]
 layout_mode = 2
 text = "Reflection Quality"
 
-[node name="ReflectionQuality" type="HSlider" parent="MarginContainer/VBoxContainer"]
+[node name="ReflectionQuality" type="HSlider" parent="MarginContainer/VBoxContainer/ReflectionOptions"]
 layout_mode = 2
 max_value = 512.0
 step = 16.0
 value = 256.0
 rounded = true
 
-[node name="EnableReflections" type="CheckBox" parent="MarginContainer/VBoxContainer"]
+[node name="EnableReflections" type="CheckBox" parent="MarginContainer/VBoxContainer/ReflectionOptions"]
 layout_mode = 2
 button_pressed = true
 text = "Enable Reflections"
 
-[node name="Spacer" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="RenderDistanceOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Spacer" type="Label" parent="MarginContainer/VBoxContainer/RenderDistanceOptions"]
 layout_mode = 2
 text = " 
 "
 
-[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer"]
-visible = false
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/RenderDistanceOptions"]
 layout_mode = 2
 text = "Render Distance
 "
 
-[node name="RenderDistance" type="HSlider" parent="MarginContainer/VBoxContainer"]
-visible = false
+[node name="RenderDistance" type="HSlider" parent="MarginContainer/VBoxContainer/RenderDistanceOptions"]
 layout_mode = 2
 min_value = 5.0
 max_value = 70.0
 value = 35.0
 
-[node name="Spacer2" type="Label" parent="MarginContainer/VBoxContainer"]
-visible = false
+[node name="FogOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer3" type="Label" parent="MarginContainer/VBoxContainer/FogOptions"]
 layout_mode = 2
 text = " 
 "
 
-[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label5" type="Label" parent="MarginContainer/VBoxContainer/FogOptions"]
+layout_mode = 2
+text = "Fog
+"
+
+[node name="EnableFog" type="CheckBox" parent="MarginContainer/VBoxContainer/FogOptions"]
+layout_mode = 2
+button_pressed = true
+text = "Enable Fog"
+
+[node name="FPSOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer2" type="Label" parent="MarginContainer/VBoxContainer/FPSOptions"]
+layout_mode = 2
+text = " 
+"
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer/FPSOptions"]
 layout_mode = 2
 text = "Maximum FPS
 "
 
-[node name="MaxFPS" type="HSlider" parent="MarginContainer/VBoxContainer"]
+[node name="MaxFPS" type="HSlider" parent="MarginContainer/VBoxContainer/FPSOptions"]
 layout_mode = 2
 min_value = 20.0
 max_value = 240.0
@@ -105,44 +133,32 @@ step = 5.0
 value = 60.0
 rounded = true
 
-[node name="LimitFPS" type="CheckBox" parent="MarginContainer/VBoxContainer"]
+[node name="LimitFPS" type="CheckBox" parent="MarginContainer/VBoxContainer/FPSOptions"]
 layout_mode = 2
 text = "Limit FPS"
 
-[node name="Spacer3" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="CacheOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer5" type="Label" parent="MarginContainer/VBoxContainer/CacheOptions"]
 layout_mode = 2
 text = " 
 "
 
-[node name="Label5" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Fog
-"
-
-[node name="EnableFog" type="CheckBox" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-button_pressed = true
-text = "Enable Fog"
-
-[node name="Spacer5" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = " 
-"
-
-[node name="CacheLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="CacheLabel" type="Label" parent="MarginContainer/VBoxContainer/CacheOptions"]
 layout_mode = 2
 text = "Cache"
 
-[node name="ClearCache" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="ClearCache" type="Button" parent="MarginContainer/VBoxContainer/CacheOptions"]
 layout_mode = 2
 text = "Clear Cache"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Restore" to="." method="_on_restore_pressed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/ReflectionQuality" to="." method="_on_reflection_quality_value_changed"]
-[connection signal="toggled" from="MarginContainer/VBoxContainer/EnableReflections" to="." method="_on_enable_reflections_toggled"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/MaxFPS" to="." method="_on_max_fps_value_changed"]
-[connection signal="toggled" from="MarginContainer/VBoxContainer/LimitFPS" to="." method="_on_limit_fps_toggled"]
-[connection signal="toggled" from="MarginContainer/VBoxContainer/EnableFog" to="." method="_on_enable_fog_toggled"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ClearCache" to="." method="_on_clear_cache_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MainOptions/Back" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MainOptions/Restore" to="." method="_on_restore_pressed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/ReflectionOptions/ReflectionQuality" to="." method="_on_reflection_quality_value_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/ReflectionOptions/EnableReflections" to="." method="_on_enable_reflections_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/FogOptions/EnableFog" to="." method="_on_enable_fog_toggled"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/FPSOptions/MaxFPS" to="." method="_on_max_fps_value_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/FPSOptions/LimitFPS" to="." method="_on_limit_fps_toggled"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CacheOptions/ClearCache" to="." method="_on_clear_cache_pressed"]

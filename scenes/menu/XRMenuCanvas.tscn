@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c02t4nwkigyxa"]
+
+[ext_resource type="PackedScene" uid="uid://bhi1d8bl668hb" path="res://scenes/menu/PauseMenu.tscn" id="1_a2m62"]
+[ext_resource type="PackedScene" uid="uid://bbp0v2aoglhrr" path="res://scenes/menu/Settings.tscn" id="2_kfmr2"]
+
+[node name="XrMenuCanvas" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="PauseMenu" parent="." instance=ExtResource("1_a2m62")]
+visible = false
+
+[node name="Settings" parent="." instance=ExtResource("2_kfmr2")]

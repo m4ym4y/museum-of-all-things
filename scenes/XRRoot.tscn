@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dn526eij58wfs"]
+[gd_scene load_steps=12 format=3 uid="uid://dn526eij58wfs"]
 
 [ext_resource type="Script" path="res://scenes/XRRoot.gd" id="1_t4l57"]
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_v48yd"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://addons/godot-xr-tools/functions/movement_turn.gd" id="6_80eyh"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/functions/movement_direct.gd" id="6_mvrkt"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="7_4wwnr"]
+[ext_resource type="PackedScene" uid="uid://bhue34utfsw0r" path="res://scenes/menu/XRMenu.tscn" id="10_g5s6k"]
 
 [node name="XrRoot" type="Node3D"]
 script = ExtResource("1_t4l57")
@@ -42,6 +43,7 @@ player_material = ExtResource("4_jb2jl")
 hand_material_override = ExtResource("4_jb2jl")
 
 [node name="FunctionPointer" parent="XROrigin3D/XRController3D_left" instance=ExtResource("7_4wwnr")]
+enabled = false
 show_laser = 2
 laser_length = 1
 
@@ -56,9 +58,9 @@ script = ExtResource("6_80eyh")
 turn_mode = 1
 step_turn_angle = 40.0
 
-[node name="FunctionPointer" parent="XROrigin3D/XRController3D_right" instance=ExtResource("7_4wwnr")]
-show_laser = 2
-laser_length = 1
+[node name="XrMenu" parent="XROrigin3D/XRController3D_right" instance=ExtResource("10_g5s6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.06897)
+visible = false
 
 [node name="XRToolsPlayerBody" type="CharacterBody3D" parent="XROrigin3D" groups=["Player"]]
 top_level = true

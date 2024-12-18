@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://u4b0awts0vdi"]
 
-[ext_resource type="MeshLibrary" uid="uid://dn3xjwj3urrq6" path="res://assets/3d_tiles/mesh_library.tres" id="1_3jgkl"]
+[ext_resource type="MeshLibrary" uid="uid://b887fn6f3qg14" path="res://assets/3d_tiles/mesh_library.tres" id="1_3jgkl"]
 [ext_resource type="Script" path="res://scenes/Lobby.gd" id="1_rlemg"]
 [ext_resource type="PackedScene" uid="uid://cnfgmu10ohtpt" path="res://scenes/items/Pool.tscn" id="2_7a848"]
 [ext_resource type="ArrayMesh" uid="uid://be5huwdp6vv03" path="res://assets/models/desk.obj" id="4_y4dxj"]

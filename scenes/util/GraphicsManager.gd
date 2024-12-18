@@ -29,14 +29,19 @@ func enable_fps_limit(enabled: bool):
 
 func get_env():
   # we assume that they modify the settings
+  if not _env:
+    init()
   return _env.environment
 
 func _apply_settings(s, default={}):
   var e = _env.environment
   for field in ["ssr_enabled", "ssr_max_steps", "fog_enabled"]:
     e[field] = s[field] if s.has(field) else default[field]
-  set_fps_limit(s["fps_limit"] if s.has("fps_limit") else default["fps_limit"])
-  enable_fps_limit(s["limit_fps"] if s.has("limit_fps") else default["limit_fps"])
+  if Util.is_xr():
+    e["ssr_enabled"] = false
+  else:
+    set_fps_limit(s["fps_limit"] if s.has("fps_limit") else default["fps_limit"])
+    enable_fps_limit(s["limit_fps"] if s.has("limit_fps") else default["limit_fps"])
 
 func _create_settings_obj():
   var e = _env.environment
