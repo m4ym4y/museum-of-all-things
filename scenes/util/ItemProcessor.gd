@@ -27,6 +27,7 @@ var alt_re = RegEx.new()
 var tokenizer = RegEx.new()
 var image_name_re = RegEx.new()
 var image_field_re = RegEx.new()
+var exclude_image_re = RegEx.new()
 
 var max_len_soft = 1000
 var text_item_fmt = "[color=black][b][font_size=48]%s[/font_size][/b]\n\n%s"
@@ -52,6 +53,7 @@ func _ready():
 	#image_field_re.compile("photo")
 	tokenizer.compile("[^\\{\\}\\[\\]<>]+|[\\{\\}\\[\\]<>]")
 	image_name_re.compile("^([iI]mage:|[fF]ile:)")
+	exclude_image_re.compile("UI Icon|-icon\\.|-logo\\.|Blue pencil")
 	processor_thread.start(_processor_thread_loop)
 
 func _processor_thread_loop():
@@ -221,7 +223,7 @@ func commons_images_to_items(title, images, extra_text):
 			if len(extra_text) > 0 and rng.randi() % 2 == 0:
 				items.append(extra_text.pop_front())
 
-		if image and IMAGE_REGEX.search(image):
+		if image and IMAGE_REGEX.search(image) and not exclude_image_re.search(image):
 			items.append({
 				"type": "image",
 				"material": material,

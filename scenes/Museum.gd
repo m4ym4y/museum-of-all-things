@@ -384,8 +384,11 @@ func _link_backlink_to_exit(exhibit, hall):
 
 func _on_wikidata_complete(entity, ctx):
 	var result = ExhibitFetcher.get_result(entity)
-	if result and result.has("commons_category"):
-		ExhibitFetcher.fetch_commons_images(result.commons_category, ctx)
+	if result and (result.has("commons_category") or result.has("commons_gallery")):
+		if result.has("commons_category"):
+			ExhibitFetcher.fetch_commons_images(result.commons_category, ctx)
+		if result.has("commons_gallery"):
+			ExhibitFetcher.fetch_commons_images(result.commons_gallery, ctx)
 	else:
 		_queue_extra_text(ctx.exhibit, ctx.extra_text)
 		_queue_item(ctx.title, _on_finished_exhibit.bind(ctx))

@@ -15,11 +15,14 @@ const WIKIPEDIA_PREFIX = "https://wikipedia.org/wiki/"
 const WIKIDATA_PREFIX = "https://www.wikidata.org/wiki/"
 
 const WIKIDATA_COMMONS_CATEGORY = "P373"
+const WIKIDATA_COMMONS_GALLERY = "P935"
 
 var wikitext_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions|extracts|pageprops&ppprop=wikibase_item&explaintext=true&rvprop=content&format=json&redirects=1&titles="
 var images_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=640&iiextmetadatafilter=LicenseShortName|Artist&format=json&redirects=1&titles="
-var wikidata_endpoint = "https://www.wikidata.org/w/api.php?action=wbgetclaims&property=P373&format=json&entity="
-var wikimedia_commons_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&generator=categorymembers&gcmtype=file&gcmlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&gcmtitle="
+var wikidata_endpoint = "https://www.wikidata.org/w/api.php?action=wbgetclaims&format=json&entity="
+
+var wikimedia_commons_category_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&generator=categorymembers&gcmtype=file&gcmlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&gcmtitle="
+var wikimedia_commons_gallery_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&generator=images&gimlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&titles="
 
 var _request_queue_lock = Mutex.new()
 var _request_queue_map = {}
@@ -136,6 +139,12 @@ func _fetch_images(files, context):
 
 	_dispatch_request(url, ctx, context)
 
+func _get_commons_url(category):
+	if category.begins_with("Category:"):
+		return wikimedia_commons_category_images_endpoint
+	else:
+		return wikimedia_commons_gallery_images_endpoint
+
 func _fetch_commons_images(category, context):
 	var new_category = _get_uncached_titles([category], WIKIMEDIA_COMMONS_PREFIX)
 
@@ -150,7 +159,7 @@ func _fetch_commons_images(category, context):
 				call_deferred("emit_signal", "commons_images_complete", result.images, context)
 				return
 
-	var url = wikimedia_commons_images_endpoint + category.uri_encode()
+	var url = _get_commons_url(category) + category.uri_encode()
 	var ctx = {
 		"category": category,
 		"queue": _request_queue_title
@@ -290,7 +299,9 @@ func _on_request_completed(result, response_code, headers, body, ctx, caller_ctx
 		return _on_images_request_complete(res, ctx, caller_ctx)
 	elif ctx.url.begins_with(wikidata_endpoint):
 		return _on_wikidata_request_complete(res, ctx, caller_ctx)
-	elif ctx.url.begins_with(wikimedia_commons_images_endpoint):
+	elif ctx.url.begins_with(wikimedia_commons_category_images_endpoint):
+		return _on_commons_images_request_complete(res, ctx, caller_ctx)
+	elif ctx.url.begins_with(wikimedia_commons_gallery_images_endpoint):
 		return _on_commons_images_request_complete(res, ctx, caller_ctx)
 
 func _dispatch_continue(continue_fields, base_url, titles, ctx, caller_ctx):
@@ -427,7 +438,7 @@ func _on_commons_images_request_complete(res, ctx, caller_ctx):
 
 	# handle continues
 	if res.has("continue"):
-		return _dispatch_continue(res.continue, wikimedia_commons_images_endpoint, ctx.category, ctx, caller_ctx)
+		return _dispatch_continue(res.continue, _get_commons_url(ctx.category), ctx.category, ctx, caller_ctx)
 	else:
 		_cache_all([ ctx.category ], WIKIMEDIA_COMMONS_PREFIX)
 		return true
@@ -441,6 +452,12 @@ func _on_wikidata_request_complete(res, ctx, caller_ctx):
 				var claim = claims[0]
 				var value = claim.mainsnak.datavalue.value
 				_set_page_field(ctx.entity, "commons_category", "Category:" + value)
+		if res.claims.has(WIKIDATA_COMMONS_GALLERY):
+			var claims = res.claims[WIKIDATA_COMMONS_GALLERY]
+			if len(claims) > 0:
+				var claim = claims[0]
+				var value = claim.mainsnak.datavalue.value
+				_set_page_field(ctx.entity, "commons_gallery", value)
 
 	_cache_all([ ctx.entity ], WIKIDATA_PREFIX)
 	call_deferred("emit_signal", "wikidata_complete", ctx.entity, caller_ctx)
