@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhi1d8bl668hb"]
+[gd_scene load_steps=5 format=3 uid="uid://bhi1d8bl668hb"]
 
 [ext_resource type="Script" path="res://scenes/menu/PauseMenu.gd" id="1_qk8a1"]
 [ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="1_ysejj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qguvm"]
+font_size = 64
 
 [sub_resource type="LabelSettings" id="LabelSettings_2s8qn"]
 font_size = 64
@@ -27,6 +30,31 @@ theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 100
+
+[node name="QuitContainer" type="VBoxContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/QuitContainer"]
+layout_mode = 2
+text = "Are you sure you want to Quit?"
+label_settings = SubResource("LabelSettings_qguvm")
+autowrap_mode = 2
+
+[node name="Spacer3" type="Label" parent="MarginContainer/QuitContainer"]
+layout_mode = 2
+
+[node name="Quit" type="Button" parent="MarginContainer/QuitContainer"]
+layout_mode = 2
+text = "Yes"
+
+[node name="Spacer2" type="Label" parent="MarginContainer/QuitContainer"]
+layout_mode = 2
+
+[node name="CancelQuit" type="Button" parent="MarginContainer/QuitContainer"]
+layout_mode = 2
+text = "No"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -57,13 +85,18 @@ text = "Return to Lobby"
 layout_mode = 2
 text = "Settings"
 
-[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Spacer2" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AskQuit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="MarginContainer/QuitContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MarginContainer/QuitContainer/CancelQuit" to="." method="_on_cancel_quit_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Open" to="." method="_on_open_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Lobby" to="." method="_on_lobby_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/AskQuit" to="." method="_on_ask_quit_pressed"]

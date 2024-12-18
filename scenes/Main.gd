@@ -13,6 +13,7 @@ var _player
 
 @onready var game_started = false
 @onready var menu_nav_queue = []
+@onready var _xr = Util.is_xr()
 
 func _init() -> void:
   _player = XrRoot.instantiate() if Util.is_xr() else Player.instantiate()
@@ -25,7 +26,7 @@ func _ready():
   if OS.has_feature("movie"):
     $FpsLabel.visible = false
 
-  if Util.is_xr():
+  if _xr:
     _player.get_node("XRToolsPlayerBody").rotate_player(-starting_rotation)
     _start_game()
   else:
@@ -37,13 +38,14 @@ func _ready():
     _player.dampening = smooth_movement_dampening
   _player.position = starting_point
 
-  _pause_game()
+  GlobalMenuEvents.return_to_lobby.connect(_on_pause_menu_return_to_lobby)
+  if not _xr:
+    _pause_game()
 
 func _start_game():
-  if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-    Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-  if not Util.is_xr():
+  if not _xr:
+    if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+      Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
     _player.start()
 
   $CanvasLayer.visible = false
@@ -54,9 +56,7 @@ func _start_game():
 
 func _pause_game():
   $CanvasLayer.visible = true
-
-  if not Util.is_xr():
-    _player.pause()
+  _player.pause()
 
   if game_started:
     _open_pause_menu()
@@ -77,7 +77,6 @@ func _open_pause_menu():
   $CanvasLayer/MainMenu.visible = false
   $CanvasLayer/Settings.visible = false
   $CanvasLayer/PauseMenu.visible = true
-  $CanvasLayer/PauseMenu.set_current_room($Museum.get_current_room())
 
 func _on_main_menu_start_pressed():
   _start_game()
@@ -111,15 +110,15 @@ func _input(event):
   if not game_started:
     return
 
-  if event.is_action_pressed("pause") and not Util.is_xr():
+  if event.is_action_pressed("pause") and not _xr:
     _pause_game()
 
   if event is InputEventKey and Input.is_key_pressed(KEY_P):
     var vp = get_viewport()
     vp.debug_draw = (vp.debug_draw + 1 ) % 4
-  if event.is_action_pressed("ui_cancel"):
+  if event.is_action_pressed("ui_cancel") and not _xr:
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-  if event.is_action_pressed("click"):
+  if event.is_action_pressed("click") and not _xr:
     if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
       Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 

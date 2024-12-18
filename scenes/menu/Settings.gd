@@ -73,3 +73,7 @@ func _refresh_cache_label():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
   pass
+
+
+func _on_pause_menu_settings() -> void:
+  pass # Replace with function body.
