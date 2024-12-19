@@ -7,6 +7,7 @@ signal set_xr_movement_style
 signal set_movement_speed
 signal set_xr_rotation_increment
 signal set_xr_smooth_rotation
+signal load_xr_settings
 
 func emit_hide_menu():
   emit_signal("hide_menu")
@@ -28,3 +29,6 @@ func emit_set_xr_rotation_increment(increment):
 
 func emit_set_xr_smooth_rotation(enabled):
   emit_signal("set_xr_smooth_rotation", enabled)
+
+func emit_load_xr_settings():
+  emit_signal("load_xr_settings")

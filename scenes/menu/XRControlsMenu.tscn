@@ -47,6 +47,10 @@ label_settings = SubResource("LabelSettings_vlir5")
 layout_mode = 2
 text = "Back"
 
+[node name="RestoreDefault" type="Button" parent="MarginContainer/VBoxContainer/MainOptions"]
+layout_mode = 2
+text = "Restore Default Settings"
+
 [node name="MovementOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -119,6 +123,7 @@ layout_mode = 2
 text = "Smooth Camera Rotation"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MainOptions/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MainOptions/RestoreDefault" to="." method="_on_restore_default_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MovementOptions/Styles/Teleportation" to="." method="_on_teleportation_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MovementOptions/Styles/DirectMovement" to="." method="_on_direct_movement_pressed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/MovementOptions/MovementSpeed" to="." method="_on_movement_speed_value_changed"]

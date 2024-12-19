@@ -29,6 +29,7 @@ func _ready():
     GlobalMenuEvents.set_movement_speed.connect(_set_xr_movement_speed)
     GlobalMenuEvents.set_xr_rotation_increment.connect(_set_xr_rotation_increment)
     GlobalMenuEvents.set_xr_smooth_rotation.connect(_set_xr_smooth_rotation)
+    GlobalMenuEvents.emit_load_xr_settings()
 
 var menu_active = false
 var by_button_pressed = false
