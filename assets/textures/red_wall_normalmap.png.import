@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bjn86g5kamcui"
 path.s3tc="res://.godot/imported/red_wall_normalmap.png-b495aa7bad8f5ae1b802a8a316342ac4.s3tc.ctex"
+path.etc2="res://.godot/imported/red_wall_normalmap.png-b495aa7bad8f5ae1b802a8a316342ac4.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/red_wall_normalmap.png"
-dest_files=["res://.godot/imported/red_wall_normalmap.png-b495aa7bad8f5ae1b802a8a316342ac4.s3tc.ctex"]
+dest_files=["res://.godot/imported/red_wall_normalmap.png-b495aa7bad8f5ae1b802a8a316342ac4.s3tc.ctex", "res://.godot/imported/red_wall_normalmap.png-b495aa7bad8f5ae1b802a8a316342ac4.etc2.ctex"]
 
 [params]
 

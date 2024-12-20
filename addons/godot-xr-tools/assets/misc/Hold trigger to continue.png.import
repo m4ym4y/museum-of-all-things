@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ocyj01x5mtt7"
 path.s3tc="res://.godot/imported/Hold trigger to continue.png-ce0a3a4de13c262f7015326bad2cb09d.s3tc.ctex"
+path.etc2="res://.godot/imported/Hold trigger to continue.png-ce0a3a4de13c262f7015326bad2cb09d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/godot-xr-tools/assets/misc/Hold trigger to continue.png"
-dest_files=["res://.godot/imported/Hold trigger to continue.png-ce0a3a4de13c262f7015326bad2cb09d.s3tc.ctex"]
+dest_files=["res://.godot/imported/Hold trigger to continue.png-ce0a3a4de13c262f7015326bad2cb09d.s3tc.ctex", "res://.godot/imported/Hold trigger to continue.png-ce0a3a4de13c262f7015326bad2cb09d.etc2.ctex"]
 
 [params]
 

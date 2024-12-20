@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://clbtsf0ahb3fm"
 path.s3tc="res://.godot/imported/progress_bar.png-2ef3cbffca173889900be004fdeb1700.s3tc.ctex"
+path.etc2="res://.godot/imported/progress_bar.png-2ef3cbffca173889900be004fdeb1700.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/godot-xr-tools/assets/misc/progress_bar.png"
-dest_files=["res://.godot/imported/progress_bar.png-2ef3cbffca173889900be004fdeb1700.s3tc.ctex"]
+dest_files=["res://.godot/imported/progress_bar.png-2ef3cbffca173889900be004fdeb1700.s3tc.ctex", "res://.godot/imported/progress_bar.png-2ef3cbffca173889900be004fdeb1700.etc2.ctex"]
 
 [params]
 

@@ -30,6 +30,7 @@ GraphicsManager="*res://scenes/util/GraphicsManager.gd"
 WorkQueue="*res://scenes/util/ThreadSafeWorkQueue.gd"
 RequestSync="*res://scenes/util/RequestSync.gd"
 ItemProcessor="*res://scenes/util/ItemProcessor.gd"
+GlobalMenuEvents="*res://scenes/util/GlobalMenuEvents.gd"
 
 [display]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b1pjsf60gao30"
 path.s3tc="res://.godot/imported/Carpet008_1K-PNG_Displacement.png-0d0e9043286adbee0b57ab7dc08332a1.s3tc.ctex"
+path.etc2="res://.godot/imported/Carpet008_1K-PNG_Displacement.png-0d0e9043286adbee0b57ab7dc08332a1.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/Carpet008_1K-PNG_Displacement.png"
-dest_files=["res://.godot/imported/Carpet008_1K-PNG_Displacement.png-0d0e9043286adbee0b57ab7dc08332a1.s3tc.ctex"]
+dest_files=["res://.godot/imported/Carpet008_1K-PNG_Displacement.png-0d0e9043286adbee0b57ab7dc08332a1.s3tc.ctex", "res://.godot/imported/Carpet008_1K-PNG_Displacement.png-0d0e9043286adbee0b57ab7dc08332a1.etc2.ctex"]
 
 [params]
 
