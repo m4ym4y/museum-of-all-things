@@ -36,12 +36,14 @@ func _on_resume_pressed():
 
 func _on_reflection_quality_value_changed(value: float):
   GraphicsManager.get_env().ssr_max_steps = int(value)
+  $MarginContainer/VBoxContainer/ReflectionOptions/ReflectionQualityValue.text = str(int(value))
 
 func _on_enable_reflections_toggled(toggled_on: bool):
   GraphicsManager.get_env().ssr_enabled = toggled_on
 
 func _on_max_fps_value_changed(value: float):
   GraphicsManager.set_fps_limit(value)
+  $MarginContainer/VBoxContainer/FPSOptions/MaxFPSValue.text = str(int(value))
 
 func _on_limit_fps_toggled(toggled_on: bool):
   GraphicsManager.enable_fps_limit(toggled_on)

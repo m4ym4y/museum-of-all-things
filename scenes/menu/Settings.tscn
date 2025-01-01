@@ -69,6 +69,11 @@ step = 16.0
 value = 256.0
 rounded = true
 
+[node name="ReflectionQualityValue" type="Label" parent="MarginContainer/VBoxContainer/ReflectionOptions"]
+layout_mode = 2
+text = "256"
+horizontal_alignment = 1
+
 [node name="EnableReflections" type="CheckBox" parent="MarginContainer/VBoxContainer/ReflectionOptions"]
 layout_mode = 2
 button_pressed = true
@@ -132,6 +137,11 @@ max_value = 240.0
 step = 5.0
 value = 60.0
 rounded = true
+
+[node name="MaxFPSValue" type="Label" parent="MarginContainer/VBoxContainer/FPSOptions"]
+layout_mode = 2
+text = "60"
+horizontal_alignment = 1
 
 [node name="LimitFPS" type="CheckBox" parent="MarginContainer/VBoxContainer/FPSOptions"]
 layout_mode = 2
