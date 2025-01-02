@@ -43,6 +43,9 @@ func _on_reflection_quality_value_changed(value: float):
 func _on_enable_reflections_toggled(toggled_on: bool):
   GraphicsManager.get_env().ssr_enabled = toggled_on
 
+func _on_enable_ssil_toggled(toggled_on: bool):
+  GraphicsManager.get_env().ssil_enabled = toggled_on
+
 func _on_max_fps_value_changed(value: float):
   GraphicsManager.set_fps_limit(value)
   _vbox.get_node("FPSOptions/MaxFPSValue").text = str(int(value))

@@ -115,6 +115,10 @@ layout_mode = 2
 button_pressed = true
 text = "Enable Reflections"
 
+[node name="EnableSSIL" type="CheckBox" parent="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions"]
+layout_mode = 2
+text = "Enable Indirect Lighting (SSIL)"
+
 [node name="RenderDistanceOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
@@ -206,6 +210,7 @@ text = "Clear Cache"
 [connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/DisplayOptions/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions/ReflectionQuality" to="." method="_on_reflection_quality_value_changed"]
 [connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions/EnableReflections" to="." method="_on_enable_reflections_toggled"]
+[connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions/EnableSSIL" to="." method="_on_enable_ssil_toggled"]
 [connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/FogOptions/EnableFog" to="." method="_on_enable_fog_toggled"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/VBoxContainer/FPSOptions/MaxFPS" to="." method="_on_max_fps_value_changed"]
 [connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/FPSOptions/LimitFPS" to="." method="_on_limit_fps_toggled"]

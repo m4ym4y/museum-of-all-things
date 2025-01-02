@@ -174,7 +174,6 @@ common/enable_pause_aware_picking=true
 
 occlusion_culling/bvh_build_quality=0
 textures/vram_compression/import_etc2_astc=true
-textures/default_filters/texture_mipmap_bias=2.0
 anti_aliasing/quality/msaa_3d=1
 occlusion_culling/use_occlusion_culling=true
 environment/defaults/default_environment="res://assets/resources/default_env.tres"

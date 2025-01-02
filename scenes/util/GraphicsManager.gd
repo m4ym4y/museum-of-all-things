@@ -48,7 +48,7 @@ func get_env():
 
 func _apply_settings(s, default={}):
   var e = _env.environment
-  for field in ["ssr_enabled", "ssr_max_steps", "fog_enabled"]:
+  for field in ["ssr_enabled", "ssr_max_steps", "fog_enabled", "ssil_enabled"]:
     e[field] = s[field] if s.has(field) else default[field]
   if Util.is_xr():
     e["ssr_enabled"] = false
@@ -63,6 +63,7 @@ func _create_settings_obj():
   return {
     "ssr_enabled": e.ssr_enabled,
     "ssr_max_steps": e.ssr_max_steps,
+    "ssil_enabled": e.ssil_enabled,
     "fog_enabled": e.fog_enabled,
     "fps_limit": fps_limit,
     "limit_fps": limit_fps,
