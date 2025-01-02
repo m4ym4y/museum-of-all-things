@@ -31,8 +31,9 @@ var _joy_right_y = JOY_AXIS_RIGHT_Y
 func _ready():
   # some strange issue w joystick bindings on linux
   if OS.get_name() == "Linux":
-    _joy_right_x += 1
-    _joy_right_y += 1
+    if OS.get_distribution_name() == "Arch Linux":
+      _joy_right_x += 1
+      _joy_right_y += 1
 
   starting_height = $Pivot.get_position().y
   crouching_height = starting_height / 3
