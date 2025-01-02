@@ -56,7 +56,7 @@ func _apply_settings(s, default={}):
     set_fps_limit(s["fps_limit"] if s.has("fps_limit") else default["fps_limit"])
     enable_fps_limit(s["limit_fps"] if s.has("limit_fps") else default["limit_fps"])
     set_fullscreen(s["fullscreen"] if s.has("fullscreen") else default["fullscreen"])
-    set_fullscreen(s["render_scale"] if s.has("render_scale") else default["render_scale"])
+    set_render_scale(s["render_scale"] if s.has("render_scale") else default["render_scale"])
 
 func _create_settings_obj():
   var e = _env.environment
