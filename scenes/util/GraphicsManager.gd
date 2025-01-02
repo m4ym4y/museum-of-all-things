@@ -4,6 +4,8 @@ var _env
 var limit_fps = false
 var fps_limit = 60
 var _default_settings_obj
+var fullscreen = false
+var render_scale = 1.0
 
 func init():
   _env = get_tree().get_nodes_in_group("Environment")[0]
@@ -21,6 +23,17 @@ func set_fps_limit(value: float):
   fps_limit = int(value)
   if limit_fps:
     Engine.set_max_fps(fps_limit)
+
+func set_fullscreen(_fullscreen: bool):
+  fullscreen = _fullscreen
+  if fullscreen:
+    DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+  else:
+    DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+func set_render_scale(scale: float):
+  render_scale = scale
+  get_viewport().scaling_3d_scale = scale
 
 func enable_fps_limit(enabled: bool):
   limit_fps = enabled
@@ -42,6 +55,8 @@ func _apply_settings(s, default={}):
   else:
     set_fps_limit(s["fps_limit"] if s.has("fps_limit") else default["fps_limit"])
     enable_fps_limit(s["limit_fps"] if s.has("limit_fps") else default["limit_fps"])
+    set_fullscreen(s["fullscreen"] if s.has("fullscreen") else default["fullscreen"])
+    set_fullscreen(s["render_scale"] if s.has("render_scale") else default["render_scale"])
 
 func _create_settings_obj():
   var e = _env.environment
@@ -51,6 +66,8 @@ func _create_settings_obj():
     "fog_enabled": e.fog_enabled,
     "fps_limit": fps_limit,
     "limit_fps": limit_fps,
+    "fullscreen": fullscreen,
+    "render_scale": render_scale,
   }
 
 func restore_default_settings():

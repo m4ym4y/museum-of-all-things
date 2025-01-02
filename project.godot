@@ -36,6 +36,8 @@ GlobalMenuEvents="*res://scenes/util/GlobalMenuEvents.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=800
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 window/vsync/vsync_mode=0
 
 [editor]
@@ -172,6 +174,7 @@ common/enable_pause_aware_picking=true
 
 occlusion_culling/bvh_build_quality=0
 textures/vram_compression/import_etc2_astc=true
+textures/default_filters/texture_mipmap_bias=2.0
 anti_aliasing/quality/msaa_3d=1
 occlusion_culling/use_occlusion_culling=true
 environment/defaults/default_environment="res://assets/resources/default_env.tres"
