@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ymekg2f8n1vn"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/OfficeCeiling001_1K-PNG_Color.png" id="1_d3gdi"]
+
+[resource]
+albedo_texture = ExtResource("1_d3gdi")
+metallic = 0.5
+emission_energy_multiplier = 0.59
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
