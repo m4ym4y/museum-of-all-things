@@ -70,6 +70,8 @@ Additionally, every exhibit contains doors to many other interesting exhibits. T
 
 @export var fog_depth = 10.0
 @export var fog_depth_lobby = 20.0
+@export var ambient_light_lobby = 0.4
+@export var ambient_light = 0.2
 
 var _grid
 var _player
@@ -123,8 +125,10 @@ func _set_current_room_title(title):
 
   if _current_room_title == "$Lobby":
     environment.fog_depth_begin = fog_depth_lobby
+    environment.ambient_light_energy = ambient_light_lobby
   else:
     environment.fog_depth_begin = fog_depth
+    environment.ambient_light_energy = ambient_light
 
   if environment.fog_light_color != fog_color:
     var tween = create_tween()
