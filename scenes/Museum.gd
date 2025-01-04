@@ -68,6 +68,9 @@ Additionally, every exhibit contains doors to many other interesting exhibits. T
 @export var items_per_room_estimate = 7
 @export var min_rooms_per_exhibit = 2
 
+@export var fog_depth = 10.0
+@export var fog_depth_lobby = 20.0
+
 var _grid
 var _player
 
@@ -77,6 +80,7 @@ func _init():
 func init(player):
   _player = player
   _set_up_lobby($Lobby)
+  reset_to_lobby()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -116,6 +120,11 @@ func _set_current_room_title(title):
 
   var fog_color = Util.gen_fog(_current_room_title)
   var environment = $WorldEnvironment.environment
+
+  if _current_room_title == "$Lobby":
+    environment.fog_depth_begin = fog_depth_lobby
+  else:
+    environment.fog_depth_begin = fog_depth
 
   if environment.fog_light_color != fog_color:
     var tween = create_tween()

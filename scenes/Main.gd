@@ -8,7 +8,7 @@ var _player
 @export var smooth_movement_dampening = 0.001
 @export var player_speed = 6
 
-@export var starting_point = Vector3(-7, 0, -2)
+@export var starting_point = Vector3(0, 4, 0)
 @export var starting_rotation = 3 * PI / 2
 
 @onready var game_started = false
