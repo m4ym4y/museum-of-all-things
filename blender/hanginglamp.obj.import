@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://q61s7nrmav7w"
+path="res://.godot/imported/hanginglamp.obj-f4151dab4452af46a3437297eea60c69.mesh"
+
+[deps]
+
+files=["res://.godot/imported/hanginglamp.obj-f4151dab4452af46a3437297eea60c69.mesh"]
+
+source_file="res://blender/hanginglamp.obj"
+dest_files=["res://.godot/imported/hanginglamp.obj-f4151dab4452af46a3437297eea60c69.mesh", "res://.godot/imported/hanginglamp.obj-f4151dab4452af46a3437297eea60c69.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
