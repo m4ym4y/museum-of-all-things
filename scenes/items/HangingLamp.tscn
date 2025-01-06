@@ -51,14 +51,12 @@ surface_material_override/1 = ExtResource("2_ahapu")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 light_energy = 3.0
 light_bake_mode = 1
-shadow_enabled = true
 distance_fade_enabled = true
-distance_fade_begin = 20.0
-distance_fade_shadow = 30.0
+distance_fade_begin = 50.0
 distance_fade_length = 5.0
-spot_range = 50.0
+spot_range = 25.0
 spot_attenuation = 0.5
-spot_angle = 90.0
+spot_angle = 60.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 visible = false
