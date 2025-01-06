@@ -9,7 +9,7 @@ var _player
 @export var player_speed = 6
 
 @export var starting_point = Vector3(0, 4, 0)
-@export var starting_rotation = 3 * PI / 2
+@export var starting_rotation = 0 #3 * PI / 2
 
 @onready var game_started = false
 @onready var menu_nav_queue = []
