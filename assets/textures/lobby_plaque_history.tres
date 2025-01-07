@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b0a51311lghkv"]
+
+[ext_resource type="Texture2D" uid="uid://c2k4uan0dvatk" path="res://assets/textures/lobby_plaque_history.png" id="1_yrik3"]
+
+[resource]
+albedo_texture = ExtResource("1_yrik3")
+metallic = 0.25
+roughness = 0.1

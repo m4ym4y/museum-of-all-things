@@ -7,6 +7,10 @@
 albedo_texture = ExtResource("1")
 metallic = 0.25
 roughness = 0.1
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.11
 normal_texture = ExtResource("2_f5vpw")
+clearcoat_roughness = 1.0
+subsurf_scatter_strength = 0.8
 backlight = Color(1, 1, 1, 1)
 uv1_triplanar = true
