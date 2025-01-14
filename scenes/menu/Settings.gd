@@ -25,6 +25,7 @@ func _load_settings():
   _vbox.get_node("DisplayOptions/RenderScale").value = GraphicsManager.render_scale
   _vbox.get_node("ReflectionOptions/ReflectionQuality").value = e.ssr_max_steps
   _vbox.get_node("ReflectionOptions/EnableReflections").button_pressed = e.ssr_enabled
+  _vbox.get_node("ReflectionOptions/EnableSSIL").button_pressed = e.ssil_enabled
   _vbox.get_node("FogOptions/EnableFog").button_pressed = e.fog_enabled
   _refresh_cache_label()
 
