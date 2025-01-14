@@ -1,5 +1,6 @@
 extends Node
 
+signal ui_cancel_pressed
 signal hide_menu
 signal return_to_lobby
 signal set_current_room
@@ -8,6 +9,9 @@ signal set_movement_speed
 signal set_xr_rotation_increment
 signal set_xr_smooth_rotation
 signal load_xr_settings
+
+func emit_ui_cancel_pressed():
+  emit_signal("ui_cancel_pressed")
 
 func emit_hide_menu():
   emit_signal("hide_menu")

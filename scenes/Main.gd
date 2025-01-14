@@ -48,14 +48,13 @@ func _start_game():
       Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
     _player.start()
 
-  $CanvasLayer.visible = false
+  _close_menus()
 
   if not game_started:
     game_started = true
     $Museum.init(_player)
 
 func _pause_game():
-  $CanvasLayer.visible = true
   _player.pause()
 
   if game_started:
@@ -63,17 +62,26 @@ func _pause_game():
   else:
     _open_main_menu()
 
+func _close_menus():
+  $CanvasLayer.visible = false
+  $CanvasLayer/Settings.visible = false
+  $CanvasLayer/MainMenu.visible = false
+  $CanvasLayer/PauseMenu.visible = false
+
 func _open_settings_menu():
+  $CanvasLayer.visible = true
   $CanvasLayer/Settings.visible = true
   $CanvasLayer/MainMenu.visible = false
   $CanvasLayer/PauseMenu.visible = false
 
 func _open_main_menu():
+  $CanvasLayer.visible = true
   $CanvasLayer/MainMenu.visible = true
   $CanvasLayer/Settings.visible = false
   $CanvasLayer/PauseMenu.visible = false
 
 func _open_pause_menu():
+  $CanvasLayer.visible = true
   $CanvasLayer/MainMenu.visible = false
   $CanvasLayer/Settings.visible = false
   $CanvasLayer/PauseMenu.visible = true
@@ -109,6 +117,12 @@ func _on_settings_back():
 func _input(event):
   if not game_started:
     return
+
+  if (
+    Input.is_action_just_pressed("ui_cancel") or
+    Input.is_action_just_pressed("pause")
+  ):
+    GlobalMenuEvents.emit_ui_cancel_pressed()
 
   if event.is_action_pressed("pause") and not _xr:
     _pause_game()

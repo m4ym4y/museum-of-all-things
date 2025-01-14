@@ -14,12 +14,17 @@ func _on_visibility_changed():
 
 func _ready():
   GlobalMenuEvents.set_current_room.connect(set_current_room)
+  GlobalMenuEvents.ui_cancel_pressed.connect(ui_cancel_pressed)
   set_current_room(current_room)
 
   # opening page in a browser outside VR is confusing
   if _xr:
     $MarginContainer/VBoxContainer/Open.visible = false
     $MarginContainer/VBoxContainer/VrControls.visible = true
+
+func ui_cancel_pressed():
+  if visible:
+    call_deferred("_on_resume_pressed")
 
 var current_room = "$Lobby"
 func set_current_room(room):

@@ -6,10 +6,15 @@ signal resume
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+  GlobalMenuEvents.ui_cancel_pressed.connect(ui_cancel_pressed)
   if _xr:
     _vbox.get_node("FPSOptions").visible = false
     _vbox.get_node("ReflectionOptions").visible = false
     _vbox.get_node("DisplayOptions").visible = false
+
+func ui_cancel_pressed():
+  if visible:
+    call_deferred("_on_resume_pressed")
 
 func _on_visibility_changed():
   if visible and is_inside_tree():
