@@ -10,8 +10,8 @@ var COMMON_HEADERS = [
 ]
 
 # TODO: a version where we reuse the http client
-func request(url, headers=COMMON_HEADERS):
-	if OS.is_debug_build():
+func request(url, headers=COMMON_HEADERS, verbose=true):
+	if OS.is_debug_build() and verbose:
 		print("fetching url ", url)
 
 	var http_client = HTTPClient.new()

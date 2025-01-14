@@ -52,7 +52,8 @@ func _network_request_thread_loop():
       _dispatch_request(item[1], item[2], item[3])
 
 func fetch(titles, ctx):
-  WorkQueue.add_item(NETWORK_QUEUE, ["fetch_wikitext", titles, ctx])
+  # queue wikitext fetch in front of queue to improve next exhibit load time
+  WorkQueue.add_item(NETWORK_QUEUE, ["fetch_wikitext", titles, ctx], null, true)
 
 func fetch_images(titles, ctx):
   WorkQueue.add_item(NETWORK_QUEUE, ["fetch_images", titles, ctx])
@@ -290,13 +291,8 @@ func _dispatch_continue(continue_fields, base_url, titles, ctx, caller_ctx):
     continue_url += "&" + field + "=" + continue_fields[field].uri_encode()
   ctx.url = continue_url
 
-  # continue right now if we're still the active article
-  if ctx.queue == WorkQueue.get_current_exhibit():
-    _dispatch_request(continue_url, ctx, caller_ctx)
-    return false
-  else:
-    _fetch_continue(continue_url, ctx, caller_ctx, ctx.queue)
-    return true
+  _fetch_continue(continue_url, ctx, caller_ctx, ctx.queue)
+  return false
 
 func _cache_all(titles, prefix=WIKIPEDIA_PREFIX):
   for title in titles:

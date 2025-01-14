@@ -38,9 +38,9 @@ func add_item(name, item, _exhibit=null, front=false):
 		queue.exhibit_queues[exhibit] = []
 
 	if front:
-		queue.exhibit_queues[exhibit].append(item)
-	else:
 		queue.exhibit_queues[exhibit].push_front(item)
+	else:
+		queue.exhibit_queues[exhibit].append(item)
 	queue.lock.unlock()
 
 func process_queue(name):
