@@ -116,7 +116,7 @@ func _input(event):
   if event is InputEventKey and Input.is_key_pressed(KEY_P):
     var vp = get_viewport()
     vp.debug_draw = (vp.debug_draw + 1 ) % 4
-  if event.is_action_pressed("ui_cancel") and not _xr:
+  if event.is_action_pressed("free_pointer") and not _xr:
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
   if event.is_action_pressed("click") and not _xr:
     if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
