@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://jcho8qa62xrs"]
+
+[ext_resource type="ArrayMesh" uid="uid://drgsdd0ymsi1t" path="res://assets/models/planter.obj" id="1_lbpq0"]
+[ext_resource type="Material" uid="uid://datvvi6j3c0kp" path="res://assets/textures/white.tres" id="2_iqow5"]
+[ext_resource type="Material" uid="uid://dhxahpk8guw31" path="res://assets/textures/dirt.tres" id="3_ny0xs"]
+[ext_resource type="PackedScene" uid="uid://4r06ri8mf5fi" path="res://scenes/items/Plants.tscn" id="4_fcjab"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sg5i6"]
+points = PackedVector3Array(0.75, 0.6, 4, -0.75, 0.6, 4, 0.75, 0, 4, 0.75, 0.6, -4, -0.75, 0, 4, -0.75, 0.6, -4, 0.75, 0, -4, -0.75, 0, -4)
+
+[node name="Planter" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visibility_range_end = 50.0
+mesh = ExtResource("1_lbpq0")
+surface_material_override/0 = ExtResource("2_iqow5")
+surface_material_override/1 = ExtResource("3_ny0xs")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_sg5i6")
+
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]
+aabb = AABB(-1, 0, -4, 2, 2, 8)
+
+[node name="Plants" parent="VisibleOnScreenEnabler3D" instance=ExtResource("4_fcjab")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+area_size = Vector3(1.25, 0, 7.5)

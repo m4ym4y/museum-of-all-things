@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://u4b0awts0vdi"]
+[gd_scene load_steps=22 format=3 uid="uid://u4b0awts0vdi"]
 
 [ext_resource type="MeshLibrary" uid="uid://b887fn6f3qg14" path="res://assets/3d_tiles/mesh_library.tres" id="1_3jgkl"]
 [ext_resource type="Script" path="res://scenes/Lobby.gd" id="1_rlemg"]
@@ -16,6 +16,8 @@
 [ext_resource type="Material" uid="uid://dc5exsvclxgwo" path="res://assets/textures/lobby_plaque_people.tres" id="15_qksdu"]
 [ext_resource type="Material" uid="uid://bb3ysf0f2m7of" path="res://assets/textures/lobby_plaque_media.tres" id="16_gjuab"]
 [ext_resource type="Material" uid="uid://b0a51311lghkv" path="res://assets/textures/lobby_plaque_history.tres" id="16_k4j87"]
+[ext_resource type="PackedScene" uid="uid://jcho8qa62xrs" path="res://scenes/items/Planter.tscn" id="17_wq01r"]
+[ext_resource type="PackedScene" uid="uid://cnfgmu10ohtpt" path="res://scenes/items/Pool.tscn" id="18_l2a2a"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kn81h"]
 points = PackedVector3Array(12.1, 1.115, 0.0499902, 12.1, 1.08499, 0.0499902, 12.1, 1.115, -0.05, -12.1, 1.115, 0.0499902, 11.9981, 0, 0.0249902, 12.0029, 0, 0.0245106, 12.0076, 0, 0.0230912, 12.0124, 0, 0.0207811, 12.0171, 0, 0.0176684, 12.0195, 0, 0.0138802, 12.0218, 0, 0.00956343, 12.0242, 0, 0.00487471, 12.1, 1.08499, -0.05, -12.1, 1.08499, 0.0499902, -12.1, 1.115, -0.05, -12.0005, 0, 0.0249902, 12.0242, 0, -0.00488449, 12.0218, 0, -0.00957322, 12.0195, 0, -0.01389, 12.0171, 0, -0.0176879, 12.0124, 0, -0.0207909, 12.0076, 0, -0.023101, 12.0029, 0, -0.0245204, 11.9981, 0, -0.0250098, -12.1, 1.08499, -0.05, -12.0266, 0, 0.00487471, -12.0242, 0, 0.00956343, -12.0218, 0, 0.0138802, -12.0195, 0, 0.0176684, -12.0147, 0, 0.0207811, -12.01, 0, 0.0230912, -12.0052, 0, 0.0245106, -12.0005, 0, -0.0250098, -12.0052, 0, -0.0245204, -12.01, 0, -0.023101, -12.0147, 0, -0.0207909, -12.0195, 0, -0.0176879, -12.0218, 0, -0.01389, -12.0242, 0, -0.00957322, -12.0266, 0, -0.00488449)
@@ -163,3 +165,33 @@ surface_material_override/0 = ExtResource("16_k4j87")
 [node name="MediaPlaque" parent="." instance=ExtResource("9_puy6x")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15.6449, -4, 61.6875)
 surface_material_override/0 = ExtResource("16_gjuab")
+
+[node name="Planter" parent="." instance=ExtResource("17_wq01r")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5, 8, -29)
+
+[node name="Planter2" parent="." instance=ExtResource("17_wq01r")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 8, -29)
+
+[node name="Planter3" parent="." instance=ExtResource("17_wq01r")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -21, 8, -23)
+
+[node name="Planter4" parent="." instance=ExtResource("17_wq01r")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 21, 8, -23)
+
+[node name="Pool" parent="." instance=ExtResource("18_l2a2a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 12, 6)
+
+[node name="Pool2" parent="." instance=ExtResource("18_l2a2a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 12, 6)
+
+[node name="Planter5" parent="." instance=ExtResource("17_wq01r")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 29, 12, 9)
+
+[node name="Planter6" parent="." instance=ExtResource("17_wq01r")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -29, 12, 9)
+
+[node name="Planter7" parent="." instance=ExtResource("17_wq01r")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, -4, 61)
+
+[node name="Planter8" parent="." instance=ExtResource("17_wq01r")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9, -4, 61)
