@@ -284,6 +284,9 @@ func reset_to_lobby():
   _set_current_room_title("$Lobby")
 
 func _set_current_room_title(title):
+  if title == "$Lobby":
+    _backlink_map.clear()
+
   _current_room_title = title
   WorkQueue.set_current_exhibit(title)
   GlobalMenuEvents.emit_set_current_room(title)
