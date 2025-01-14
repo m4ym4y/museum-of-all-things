@@ -7,7 +7,7 @@ signal images_complete(files, context)
 signal commons_images_complete(category, context)
 
 const MAX_BATCH_SIZE = 50
-const REQUEST_DELAY = 1.0
+const REQUEST_DELAY_MS = 1000
 
 # TODO: wikimedia support, and category support
 const WIKIMEDIA_COMMONS_PREFIX = "https://commons.wikimedia.org/wiki/"
@@ -24,11 +24,6 @@ var wikidata_endpoint = "https://www.wikidata.org/w/api.php?action=wbgetclaims&f
 var wikimedia_commons_category_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&generator=categorymembers&gcmtype=file&gcmlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&gcmtitle="
 var wikimedia_commons_gallery_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&generator=images&gimlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&titles="
 
-var _request_queue_lock = Mutex.new()
-var _request_queue_map = {}
-var _request_queue_title = "$Lobby"
-var _request_queue_finished = false
-
 var _fs_lock = Mutex.new()
 var _results_lock = Mutex.new()
 var _results = {}
@@ -40,7 +35,7 @@ func _ready():
   _network_request_thread.start(_network_request_thread_loop)
 
 func _delayed_advance_queue():
-  get_tree().create_timer(REQUEST_DELAY).timeout.connect(_advance_queue)
+  OS.delay_msec(REQUEST_DELAY_MS)
 
 func _network_request_thread_loop():
   while true:
@@ -53,6 +48,8 @@ func _network_request_thread_loop():
       _fetch_commons_images(item[1], item[2])
     elif item[0] == "fetch_wikidata":
       _fetch_wikidata(item[1], item[2])
+    elif item[0] == "fetch_continue":
+      _dispatch_request(item[1], item[2], item[3])
 
 func fetch(titles, ctx):
   WorkQueue.add_item(NETWORK_QUEUE, ["fetch_wikitext", titles, ctx])
@@ -66,29 +63,14 @@ func fetch_wikidata(titles, ctx):
 func fetch_commons_images(titles, ctx):
   WorkQueue.add_item(NETWORK_QUEUE, ["fetch_commons_images", titles, ctx])
 
+func _fetch_continue(url, ctx, caller_ctx, queue):
+  WorkQueue.add_item(NETWORK_QUEUE, ["fetch_continue", url, ctx, caller_ctx], queue)
+
 const LOCATION_STR = "location: "
 func _get_location_header(headers):
   for header in headers:
     if header.begins_with(LOCATION_STR):
       return header.substr(LOCATION_STR.length())
-
-func switch_active_queue(title):
-  if not _request_queue_map.has(title):
-    _request_queue_map[title] = []
-  _request_queue_title = title
-  if _request_queue_finished:
-    _advance_queue()
-
-# TODO: should the queue batch together all the upcoming requests?
-func _advance_queue():
-  _request_queue_lock.lock()
-  var next_fetch = _request_queue_map[_request_queue_title].pop_front()
-  _request_queue_lock.unlock()
-  if next_fetch != null:
-    _request_queue_finished = false
-    next_fetch.call()
-  else:
-    _request_queue_finished = true
 
 func _join_titles(titles):
   return "|".join(titles.map(func(t): return t.uri_encode()))
@@ -122,19 +104,14 @@ func _fetch_images(files, context):
     return
 
   if len(new_files) > MAX_BATCH_SIZE:
-    _request_queue_lock.lock()
-    _request_queue_map[_request_queue_title].append(fetch_images.bind(
-      new_files.slice(MAX_BATCH_SIZE),
-      context
-    ))
-    _request_queue_lock.unlock()
+    fetch_images(new_files.slice(MAX_BATCH_SIZE), context)
     new_files = new_files.slice(0, MAX_BATCH_SIZE)
 
   var url = images_endpoint + _join_titles(new_files)
   var ctx = {
     "files": files,
     "new_files": new_files,
-    "queue": _request_queue_title
+    "queue": WorkQueue.get_current_exhibit()
   }
 
   _dispatch_request(url, ctx, context)
@@ -160,7 +137,7 @@ func _fetch_commons_images(category, context):
   var url = _get_commons_url(category) + category.uri_encode()
   var ctx = {
     "category": category,
-    "queue": _request_queue_title
+    "queue": WorkQueue.get_current_exhibit()
   }
 
   _dispatch_request(url, ctx, context)
@@ -220,7 +197,7 @@ func _dispatch_request(url, ctx, caller_ctx):
 
   if result[0] != OK:
     push_error("failed to send http request ", result[0], " ", url)
-    call_deferred("_delayed_advance_queue")
+    _delayed_advance_queue()
   else:
     _on_request_completed_wrapper(result[0], result[1], result[2], result[3], ctx, caller_ctx)
 
@@ -260,7 +237,7 @@ func _normalize_article_title(title):
 
 func _on_request_completed_wrapper(result, response_code, headers, body, ctx, caller_ctx):
   if _on_request_completed(result, response_code, headers, body, ctx, caller_ctx):
-    call_deferred("_delayed_advance_queue")
+    _delayed_advance_queue()
 
 func _on_request_completed(result, response_code, headers, body, ctx, caller_ctx):
   if result != 0 or response_code != 200:
@@ -314,14 +291,11 @@ func _dispatch_continue(continue_fields, base_url, titles, ctx, caller_ctx):
   ctx.url = continue_url
 
   # continue right now if we're still the active article
-  if ctx.queue == _request_queue_title:
+  if ctx.queue == WorkQueue.get_current_exhibit():
     _dispatch_request(continue_url, ctx, caller_ctx)
     return false
-  elif _request_queue_map.has(ctx.queue):
-    var continue_call = _dispatch_request.bind(continue_url, ctx, caller_ctx)
-    _request_queue_lock.lock()
-    _request_queue_map[ctx.queue].append(continue_call)
-    _request_queue_lock.unlock()
+  else:
+    _fetch_continue(continue_url, ctx, caller_ctx, ctx.queue)
     return true
 
 func _cache_all(titles, prefix=WIKIPEDIA_PREFIX):

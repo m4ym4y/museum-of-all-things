@@ -285,21 +285,12 @@ func reset_to_lobby():
 
 func _set_current_room_title(title):
   _current_room_title = title
-  ExhibitFetcher.switch_active_queue(title)
+  WorkQueue.set_current_exhibit(title)
   GlobalMenuEvents.emit_set_current_room(title)
   _start_queue()
 
   var fog_color = Util.gen_fog(_current_room_title)
   var environment = $WorldEnvironment.environment
-
-  """
-  if _current_room_title == "$Lobby":
-    environment.fog_depth_begin = fog_depth_lobby
-    environment.ambient_light_energy = ambient_light_lobby
-  else:
-    environment.fog_depth_begin = fog_depth
-    environment.ambient_light_energy = ambient_light
-  """
 
   if environment.fog_light_color != fog_color:
     var tween = create_tween()
