@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://240t0ia2vgup"]
+
+[ext_resource type="ArrayMesh" uid="uid://blqsbuit050n4" path="res://assets/models/railing_rail.obj" id="1_dt1v5"]
+[ext_resource type="Script" path="res://scenes/items/DynamicRailing.gd" id="1_uu2ce"]
+[ext_resource type="Material" uid="uid://c7c48j23p78pk" path="res://assets/textures/wood_2.tres" id="2_3cjgm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7812f"]
+size = Vector3(4.1, 1.1, 0.1)
+
+[node name="DynamicRailing" type="Node3D"]
+script = ExtResource("1_uu2ce")
+
+[node name="Railing" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("1_dt1v5")
+surface_material_override/0 = ExtResource("2_3cjgm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+shape = SubResource("BoxShape3D_7812f")

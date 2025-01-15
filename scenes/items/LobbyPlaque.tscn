@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvk8hcw5x5lmc"]
+[gd_scene load_steps=6 format=3 uid="uid://bvk8hcw5x5lmc"]
 
 [ext_resource type="ArrayMesh" uid="uid://dfalfeatlgtod" path="res://assets/models/lobby_plaque.obj" id="1_bvcej"]
 [ext_resource type="ArrayMesh" uid="uid://roqc52kigyn" path="res://assets/models/hanginglamp.obj" id="2_ummoj"]
 [ext_resource type="Material" uid="uid://4bp64rsyyvv5" path="res://assets/textures/lamp.tres" id="3_uy0li"]
 [ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="4_c6clx"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pkvds"]
+points = PackedVector3Array(-0.875, 0, -0.1, -0.875, 0, 0.1, -0.875, 3, -0.1, 0.875, 0, -0.1, 0.875, 0, 0.1, -0.875, 3, 0.1, 0.875, 3, -0.1, 0.875, 3, 0.1)
 
 [node name="LobbyPlaque" type="MeshInstance3D"]
 mesh = ExtResource("1_bvcej")
@@ -21,3 +24,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.37975, 1.3236)
 mesh = ExtResource("2_ummoj")
 surface_material_override/0 = ExtResource("3_uy0li")
 surface_material_override/1 = ExtResource("4_c6clx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pkvds")
