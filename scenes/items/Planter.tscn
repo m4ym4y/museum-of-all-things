@@ -21,9 +21,6 @@ surface_material_override/1 = ExtResource("3_ny0xs")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_sg5i6")
 
-[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]
-aabb = AABB(-1, 0, -4, 2, 2, 8)
-
-[node name="Plants" parent="VisibleOnScreenEnabler3D" instance=ExtResource("4_fcjab")]
+[node name="Plants" parent="." instance=ExtResource("4_fcjab")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 area_size = Vector3(1.25, 0, 7.5)

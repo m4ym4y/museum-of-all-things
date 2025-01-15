@@ -47,6 +47,9 @@ func process_queue(name):
 	var queue = _get_queue(name)
 
 	while true:
+		if not is_instance_valid(self):
+			return
+
 		var exhibit = get_current_exhibit()
 		queue.lock.lock()
 		var item

@@ -162,6 +162,7 @@ func _create_next_room_candidate(last_room):
   var room_length
   var room_center
   var room_bounds
+  var next_room_dir
 
   room_width = _rand_dim()
   room_length = _rand_dim()
@@ -182,6 +183,7 @@ func _create_next_room_candidate(last_room):
     # check if we found a valid room placement
     room_bounds = room_to_bounds(room_center, room_width, room_length)
     if not overlaps_room(room_bounds[0], room_bounds[1], _y):
+      next_room_dir = dir
       failed = false
       break
 
@@ -194,6 +196,9 @@ func _create_next_room_candidate(last_room):
     "length": room_length,
   }
   var hall_bounds = _create_hall_bounds(last_room, room_obj)
+
+  decorate_reserved_walls(last_room, hall_bounds, next_room_dir)
+
   _grid.reserve_zone(hall_bounds)
   _grid.reserve_zone(room_bounds)
   room_obj.bounds = room_bounds
@@ -283,33 +288,51 @@ func decorate_room(room):
   if !Engine.is_editor_hint() and not _no_props:
     decorate_room_center(center, width, length)
 
-  # if width > 2 and length > 2:
-  #  decorate_reserved_walls(c1, c2, y)
+func decorate_reserved_walls(last_room, hall_bounds, dir):
+  var hall_bounds_width = hall_bounds[1].x - hall_bounds[0].x
+  var hall_bounds_length = hall_bounds[1].z - hall_bounds[0].z
+  var planter_pos
+  var planter_rot = Vector3(0, 0, 0)
 
-func decorate_reserved_walls(c1, c2, y):
-  for wall in [
-    [Vector3((c1.x + c2.x) / 2.0, y, c1.z), Vector3.FORWARD],
-    [Vector3((c1.x + c2.x) / 2.0, y, c2.z), Vector3.BACK],
-    [Vector3(c1.x, y, (c1.z + c2.z) / 2.0), Vector3.LEFT],
-    [Vector3(c2.x, y, (c1.z + c2.z) / 2.0), Vector3.RIGHT],
-  ]:
-    var cell = wall[0]
-    var dir = wall[1]
-    if _grid.get_cell_item(Vector3i(cell)) == RESERVED_VAL:
-      var planter = planter_scene.instantiate()
-      planter.position = Util.gridToWorld(cell) + dir
-      if abs(dir.z) > 0:
-        planter.rotation.y = PI / 2
-      add_child(planter)
+  if abs(dir.x) > 0:
+    if abs(hall_bounds_length) < 1:
+      return
+    planter_pos = Vector3(
+      last_room.center.x + (last_room.width / 2) * dir.x,
+      _y,
+      (hall_bounds[1].z + hall_bounds[0].z) / 2.0
+    )
+  else:
+    if abs(hall_bounds_width) < 1:
+      return
+    planter_rot.y = PI / 2
+    planter_pos = Vector3(
+      (hall_bounds[1].x + hall_bounds[0].x) / 2.0,
+      _y,
+      last_room.center.z + (last_room.length / 2 + 1) * dir.z,
+    )
+
+  var planter = planter_scene.instantiate()
+  planter.rotation = planter_rot
+  planter.position = Util.gridToWorld(planter_pos) + dir
+  add_child(planter)
 
 func decorate_room_center(center, width, length):
-  if width > 3 and length > 3 and _rng.randi_range(0, 2) == 0:
-    var pool = pool_scene.instantiate()
+  if width > 3 and length > 3:
     var bounds = room_to_bounds(center, width, length)
     var true_center = (bounds[0] + bounds[1]) / 2
-    pool.position = Util.gridToWorld(true_center)
-    add_child(pool)
-    return
+    var roll = _rng.randi_range(0, 3)
+    if roll == 0:
+      var pool = pool_scene.instantiate()
+      pool.position = Util.gridToWorld(true_center)
+      add_child(pool)
+      return
+    elif roll == 1:
+      var planter = planter_scene.instantiate()
+      planter.position = Util.gridToWorld(true_center)
+      planter.rotation.y = PI / 2 if length > width else 0
+      add_child(planter)
+      return
 
   var bench_area_bounds = null
   var bench_area_ori = 0
@@ -391,7 +414,7 @@ func carve_room(corner1, corner2, y):
   var lz = corner1.z
   var gz = corner2.z
 
-  # _clear_scenery_in_area(Vector3(lx, 0, lz), Vector3(gx, 0, gz))
+  _clear_scenery_in_area(Vector3(lx, 0, lz), Vector3(gx, 0, gz))
 
   for x in range(lx - 1, gx + 2):
     for z in range(lz - 1, gz + 2):
