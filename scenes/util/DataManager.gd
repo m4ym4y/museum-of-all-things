@@ -24,9 +24,17 @@ func _ready():
     thread.start(_texture_load_thread_loop)
     _texture_load_thread_pool.append(thread)
 
+func _exit_tree():
+  WorkQueue.set_quitting()
+  for thread in _texture_load_thread_pool:
+    thread.wait_to_finish()
+
 func _texture_load_thread_loop():
-  while true:
+  while not WorkQueue.get_quitting():
     var item = WorkQueue.process_queue(TEXTURE_QUEUE)
+    if not item:
+      continue
+
     var data = _read_url(item.url)
 
     if data:

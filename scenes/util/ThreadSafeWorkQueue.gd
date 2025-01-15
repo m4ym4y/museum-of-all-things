@@ -4,7 +4,17 @@ var QUEUE_WAIT_TIMEOUT_MS = 50
 var _global_queue_lock = Mutex.new()
 var _current_exhibit_lock = Mutex.new()
 var _current_exhibit = "$Lobby"
+var _quitting = false
 var _queue_map = {}
+
+func _exit_tree():
+	set_quitting()
+
+func set_quitting():
+	_quitting = true
+
+func get_quitting():
+	return _quitting
 
 func set_current_exhibit(title):
 	_current_exhibit_lock.lock()
@@ -47,8 +57,8 @@ func process_queue(name):
 	var queue = _get_queue(name)
 
 	while true:
-		if not is_instance_valid(self):
-			return
+		if _quitting:
+			return null
 
 		var exhibit = get_current_exhibit()
 		queue.lock.lock()

@@ -56,10 +56,15 @@ func _ready():
   exclude_image_re.compile("\\bicon\\b|\\blogo\\b|blue pencil")
   processor_thread.start(_processor_thread_loop)
 
+func _exit_tree():
+  WorkQueue.set_quitting()
+  processor_thread.wait_to_finish()
+
 func _processor_thread_loop():
-  while true:
+  while not WorkQueue.get_quitting():
     var item = WorkQueue.process_queue(PROCESSOR_QUEUE)
-    _create_items(item[0], item[1], item[2])
+    if item:
+      _create_items(item[0], item[1], item[2])
 
 func _seeded_shuffle(seed, arr, bias=false):
   var rng = RandomNumberGenerator.new()

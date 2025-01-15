@@ -34,13 +34,19 @@ var NETWORK_QUEUE = "Network"
 func _ready():
   _network_request_thread.start(_network_request_thread_loop)
 
+func _exit_tree():
+  WorkQueue.set_quitting()
+  _network_request_thread.wait_to_finish()
+
 func _delayed_advance_queue():
   OS.delay_msec(REQUEST_DELAY_MS)
 
 func _network_request_thread_loop():
-  while true:
+  while not WorkQueue.get_quitting():
     var item = WorkQueue.process_queue(NETWORK_QUEUE)
-    if item[0] == "fetch_wikitext":
+    if not item:
+      continue
+    elif item[0] == "fetch_wikitext":
       _fetch_wikitext(item[1], item[2])
     elif item[0] == "fetch_images":
       _fetch_images(item[1], item[2])
