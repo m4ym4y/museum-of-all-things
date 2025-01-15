@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c1nju0758gjqe"]
+
+[ext_resource type="Texture2D" uid="uid://c8a14x5v5tayo" path="res://assets/textures/terminal.png" id="1_f1hdl"]
+
+[resource]
+shading_mode = 0
+albedo_texture = ExtResource("1_f1hdl")

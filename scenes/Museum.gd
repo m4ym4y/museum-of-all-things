@@ -263,7 +263,7 @@ func _get_lobby_exit_zone(exit):
 
 func _set_up_lobby(lobby):
   var exits = lobby.exits
-  _exhibits["$Lobby"] = lobby
+  _exhibits["$Lobby"] = { "exhibit": lobby, "height": 0 }
   lobby.get_node("Introduction").init(INTRODUCTION)
 
   if OS.is_debug_build():
