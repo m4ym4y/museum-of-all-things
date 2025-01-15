@@ -3,6 +3,7 @@ extends Node3D
 signal exit_added(exit)
 
 @onready var pool_scene = preload("res://scenes/items/Pool.tscn")
+@onready var planter_scene = preload("res://scenes/items/Planter.tscn")
 @onready var hall = preload("res://scenes/Hall.tscn")
 @onready var grid_wrapper = preload("res://scenes/util/GridWrapper.tscn")
 
@@ -46,6 +47,7 @@ func _process(delta: float) -> void:
   pass
 
 const FLOOR_WOOD = 0
+const RESERVED_VAL = 1
 const FLOOR_CARPET = 11
 const FLOOR_MARBLE = 12
 
@@ -220,7 +222,6 @@ func add_room():
   _add_to_room_list(room.center, room.width, room.length)
   carve_room(room.hall[0], room.hall[1], _y)
   carve_room(room.bounds[0], room.bounds[1], _y)
-
   _create_next_room_candidate(room)
 
   # branch sometimes
@@ -228,6 +229,15 @@ func add_room():
     _create_next_room_candidate(room)
 
   decorate_room(room)
+
+func _clear_scenery_in_area(h1, h2):
+  var wh1 = Util.gridToWorld(h1)
+  var wh2 = Util.gridToWorld(h2)
+  for c in get_children():
+    if c.is_in_group("Scenery"):
+      var p = c.global_position
+      if p.x >= wh1.x and p.x <= wh2.x and p.z >= wh1.z and p.z <= wh2.z:
+        c.queue_free()
 
 func _create_hall_bounds(last_room, next_room):
   var start_hall = vlt(last_room.center, next_room.center)
@@ -257,9 +267,6 @@ func decorate_room(room):
   var width = room.width
   var length = room.length
 
-  if !Engine.is_editor_hint() and not _no_props:
-    decorate_room_center(center, width, length)
-
   var bounds = room_to_bounds(center, width, length)
   var c1 = bounds[0]
   var c2 = bounds[1]
@@ -272,6 +279,28 @@ func decorate_room(room):
   for x in [c1.x, c2.x]:
     for z in range(c1.z, c2.z + 1):
       decorate_wall_tile(Vector3(x, y, z))
+
+  if !Engine.is_editor_hint() and not _no_props:
+    decorate_room_center(center, width, length)
+
+  # if width > 2 and length > 2:
+  #  decorate_reserved_walls(c1, c2, y)
+
+func decorate_reserved_walls(c1, c2, y):
+  for wall in [
+    [Vector3((c1.x + c2.x) / 2.0, y, c1.z), Vector3.FORWARD],
+    [Vector3((c1.x + c2.x) / 2.0, y, c2.z), Vector3.BACK],
+    [Vector3(c1.x, y, (c1.z + c2.z) / 2.0), Vector3.LEFT],
+    [Vector3(c2.x, y, (c1.z + c2.z) / 2.0), Vector3.RIGHT],
+  ]:
+    var cell = wall[0]
+    var dir = wall[1]
+    if _grid.get_cell_item(Vector3i(cell)) == RESERVED_VAL:
+      var planter = planter_scene.instantiate()
+      planter.position = Util.gridToWorld(cell) + dir
+      if abs(dir.z) > 0:
+        planter.rotation.y = PI / 2
+      add_child(planter)
 
 func decorate_room_center(center, width, length):
   if width > 3 and length > 3 and _rng.randi_range(0, 2) == 0:
@@ -302,10 +331,10 @@ func decorate_room_center(center, width, length):
           continue
 
         var free_wall = _rng.randi_range(0, 1) == 0
-        var valid_bench = len(Util.cell_neighbors(_grid, pos, INTERNAL_HALL)) == 0 and\
-            len(Util.cell_neighbors(_grid, pos, HALL_STAIRS_UP)) == 0 and\
-            len(Util.cell_neighbors(_grid, pos, HALL_STAIRS_DOWN)) == 0
-        var valid_free_wall = valid_bench and len(Util.cell_neighbors(_grid, pos, WALL)) == 0
+        var valid_bench = len(Util.cell_neighbors(_raw_grid, pos, INTERNAL_HALL)) == 0 and\
+            len(Util.cell_neighbors(_raw_grid, pos, HALL_STAIRS_UP)) == 0 and\
+            len(Util.cell_neighbors(_raw_grid, pos, HALL_STAIRS_DOWN)) == 0
+        var valid_free_wall = valid_bench and len(Util.cell_neighbors(_raw_grid, pos, WALL)) == 0
 
         if width > 3 or length > 3 and free_wall and valid_free_wall and _room_count > 2:
           var dir = Vector3.RIGHT if width > length else Vector3.FORWARD
@@ -361,6 +390,9 @@ func carve_room(corner1, corner2, y):
   var gx = corner2.x
   var lz = corner1.z
   var gz = corner2.z
+
+  # _clear_scenery_in_area(Vector3(lx, 0, lz), Vector3(gx, 0, gz))
+
   for x in range(lx - 1, gx + 2):
     for z in range(lz - 1, gz + 2):
       var c = _grid.get_cell_item(Vector3(x, y, z))

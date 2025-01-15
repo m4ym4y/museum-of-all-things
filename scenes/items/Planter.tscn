@@ -8,7 +8,7 @@
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sg5i6"]
 points = PackedVector3Array(0.75, 0.6, 4, -0.75, 0.6, 4, 0.75, 0, 4, 0.75, 0.6, -4, -0.75, 0, 4, -0.75, 0.6, -4, 0.75, 0, -4, -0.75, 0, -4)
 
-[node name="Planter" type="Node3D"]
+[node name="Planter" type="Node3D" groups=["Scenery"]]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visibility_range_end = 50.0
