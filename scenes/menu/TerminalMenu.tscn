@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://crfgn0ehls7w7"]
+
+[ext_resource type="FontFile" uid="uid://81fevjg70kl3" path="res://assets/fonts/NotoSansMono/static/NotoSansMono-Bold.ttf" id="1_8vlbg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mawx1"]
+font = ExtResource("1_8vlbg")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[node name="TerminalMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Welcome to the MoAT Custom Exhibit Terminal
+
+You may access a specific exhibit by typing it in below.
+Alternatively, you may ask for a random exhibit.
+
+Hit \"E\" on your keyboard to interact with the terminal, or press Y/△ if you are using a controller.
+
+"
+label_settings = SubResource("LabelSettings_mawx1")
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_8vlbg")
+theme_override_font_sizes/font_size = 32
+text = "Enter Exhibit Name"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_8vlbg")
+theme_override_font_sizes/font_size = 32
+text = "Go to Random Exhibit"
