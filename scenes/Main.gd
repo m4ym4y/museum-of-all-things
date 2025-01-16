@@ -132,7 +132,7 @@ func _input(event):
     vp.debug_draw = (vp.debug_draw + 1 ) % 4
   if event.is_action_pressed("free_pointer") and not _xr:
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-  if event.is_action_pressed("click") and not _xr:
+  if event.is_action_pressed("click") and not _xr and not $CanvasLayer.visible:
     if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
       Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
