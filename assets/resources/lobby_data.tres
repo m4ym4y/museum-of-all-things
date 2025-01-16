@@ -8,7 +8,7 @@ script = ExtResource("2_y4oc8")
 name = "Technology"
 corner_1 = Vector2(-68, -44)
 corner_2 = Vector2(-32, -8)
-exhibits = PackedStringArray("Control Car", "Minox", "Transistor", "Pottery", "Godot (game engine)", "Pasteurization", "Nuclear weapons testing", "Adhesive", "Aqueduct (water supply)", "3D rendering", "Airplane", "Simple Machine", "Printing press", "Birth control", "Microscopy", "Video game console", "Trebuchet", "Animal husbandry", "Oldowan")
+exhibits = PackedStringArray("Control car", "Minox", "Transistor", "Pottery", "Godot (game engine)", "Pasteurization", "Nuclear weapons testing", "Adhesive", "Aqueduct (water supply)", "3D rendering", "Airplane", "Simple machine", "Printing press", "Birth control", "Microscopy", "Video game console", "Trebuchet", "Animal husbandry", "Oldowan")
 
 [sub_resource type="Resource" id="Resource_ooopd"]
 script = ExtResource("2_y4oc8")
