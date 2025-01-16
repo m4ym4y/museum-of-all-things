@@ -2,201 +2,9 @@ extends Node3D
 
 @onready var NoImageNotice = preload("res://scenes/items/NoImageNotice.tscn")
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
+@onready var StaticData = preload("res://assets/resources/lobby_data.tres")
+
 @onready var QUEUE_DELAY = 0.05
-@onready var DEFAULT_DOORS = [
-
-  [ # 0, Technology
-    "Control Car",
-    "Minox",
-    "Transistor",
-    "Pottery",
-    "Godot (game engine)",
-    "Pasteurization",
-    "Nuclear weapons testing",
-    "Adhesive",
-    "Aqueduct (water supply)",
-    "3D rendering",
-    "Airplane",
-    "Simple Machine",
-    "Printing press",
-    "Birth control",
-    "Microscopy",
-    "Video game console",
-    "Trebuchet",
-    "Animal husbandry",
-    "Oldowan",
-  ],
-
-  [ # 1, Culture
-    "Clown",
-    "Dragon",
-    "Convenience store",
-    "High five",
-    "Goncharov (meme)",
-    "Coffee",
-    "Soup",
-    "The Backrooms",
-    "Tarot",
-    "K-pop",
-    "Go (game)",
-    "Hinduism",
-    "Dandy",
-    "Golem",
-    "Sea Shanty",
-    "Advertising",
-    "Flood Myth",
-    "Monk"
-  ],
-
-  [ # 2, Science
-    "Fungus",
-    "Dinosaur",
-    "Marine Life",
-    "Earth",
-    "Arabia quadrangle",
-    "Rat",
-    "Shrimp",
-    "Breadfruit",
-    "Data and information visualization",
-    "Gold",
-    "Adansonia",
-    "Human",
-    "Pendulum",
-    "Sexual dimorphism",
-    "Light",
-    "Cheese",
-    "Brassica oleracea",
-    "Wetlands",
-    "Slow loris",
-    "Butterfly",
-    "Jupiter",
-    "Soil",
-    "Fractal",
-    "Eye",
-  ],
-
-  [ # 3, Geography
-    "USA",
-    "Antartica",
-    "Patagonia",
-    "Tibet",
-    "Persepolis",
-    "Petra",
-    "Taipei 101",
-    "Breast-shaped hill",
-    "Architecture of Liverpool",
-    "Chongqing",
-    "Pitcairn Islands",
-    "Mariana Trench",
-    "Trans-Siberian Railway",
-    "Lancaster, Ohio",
-    "Lake Chad",
-    "Senegal",
-    "Bora Bora",
-    "Landes de Gascogne",
-    "Mount Kilimanjaro",
-    "Canberra",
-    "Amazon rainforest",
-    "River Wharfe",
-    "Uruk",
-    "Black Stone",
-  ],
-
-  [ # 4, Art
-    "Baroque painting",
-    "Arts in the Philippines",
-    "Armenian Architecture",
-    "Pablo Picasso",
-    "Louvre",
-    "Joan Miró",
-    "Ai Weiwei",
-    "Frida Kahlo",
-    "Käthe Kollwitz",
-    "Thomas Kinkade",
-    "Edgar Degas",
-    "Cave painting",
-    "Michelangelo",
-    "Francisco Goya",
-    "Fauvism",
-    "Graffiti",
-    "Ancient Greek sculpture",
-    "M. C. Escher",
-  ],
-
-  [ # 5, People
-    "List of Polish people",
-    "Albert Einstein",
-    "Freddy Mercury",
-    "Kobe Bryant",
-    "Genghis Khan",
-    "Rasputin",
-    "Public Universal Friend",
-    "Tupac Shakur",
-    "Luigi Mangione",
-    "William Shakespeare",
-    "Linus Pauling",
-    "Danny Devito",
-    "J. R. R. Tolkien",
-    "Mary Shelley",
-    "Alexandria Ocasio-Cortez",
-    "Ibn Battuta",
-    "Martin Luther",
-    "Martin Luther King Jr.",
-  ],
-
-  [ # 6, History
-    "History of Germany",
-    "Chernobyl disaster",
-    "Titanic",
-    "Counterculture of the 1960s",
-    "Unethical human experimentation in the United States",
-    "COVID-19 pandemic",
-    "Central Intelligence Agency",
-    "Islamic Golden Age",
-    "Moon landing",
-    "1906 San Francisco earthquake",
-    "Hannibal's crossing of the Alps",
-    "Drake-Kendrick Lamar feud",
-    "History of photography",
-    "Dave Matthews Band bus incident",
-    "Blood libel",
-    "Oyo Empire",
-    "Piracy",
-    "2019-2020 Hong Kong protests",
-  ],
-
-  [ # 7, Media
-    "Bible",
-    "The Beatles",
-    "The Matrix",
-    "Odyssey",
-    "Gilgamesh",
-    "Waiting for Godot",
-    "Homestuck",
-    "Star Trek",
-    "Barbie (film)",
-    "Neon Genesis Evangelion",
-    "Hamlet",
-    "Catan",
-    "Twitter",
-    "Vogue (magazine)",
-    "Steamboat Willie",
-    "The Count of Monte Cristo",
-    "Wikipedia",
-    "Minecraft",
-  ],
-]
-
-@onready var LOBBY_ZONES = [
-	[Vector2(-68, -44), Vector2(-32, -8)],
-	[Vector2(32, -44), Vector2(68, -8)],
-	[Vector2(-44, -92), Vector2(-8, -36)],
-	[Vector2(8, -92), Vector2(44, -36)],
-	[Vector2(-72, 12), Vector2(-36, 48)],
-	[Vector2(36, 12), Vector2(72, 48)],
-	[Vector2(-48, 60), Vector2(-12, 96)],
-	[Vector2(12, 60), Vector2(48, 96)],
-]
 
 @onready var INTRODUCTION = {
   "type": "rich_text",
@@ -255,25 +63,38 @@ func _ready() -> void:
 func _get_lobby_exit_zone(exit):
   var ex = Util.gridToWorld(exit.from_pos).x
   var ez = Util.gridToWorld(exit.from_pos).z
-  for z in range(len(LOBBY_ZONES)):
-    var cz = LOBBY_ZONES[z]
-    if ex >= cz[0].x and ex <= cz[1].x and ez >= cz[0].y and ez <= cz[1].y:
-      return z
-  return -1
+  for w in StaticData.wings:
+    var c1 = w.corner_1
+    var c2 = w.corner_2
+    if ex >= c1.x and ex <= c2.x and ez >= c1.y and ez <= c2.y:
+      return w
+  return null
 
 func _set_up_lobby(lobby):
   var exits = lobby.exits
   _exhibits["$Lobby"] = { "exhibit": lobby, "height": 0 }
-  lobby.get_node("Introduction").init(INTRODUCTION)
+  lobby.get_node("Introduction").init({
+    "type": "rich_text",
+    "material": "marble",
+    "text": StaticData.introduction_text
+  })
 
   if OS.is_debug_build():
     print("Setting up lobby with %s exits..." % len(exits))
 
+  var wing_indices = {}
+
   for exit in exits:
-    var zone = _get_lobby_exit_zone(exit)
-    var title = DEFAULT_DOORS[zone].pop_front() if zone >= 0 else "$Lobby"
-    if not title:
-      title = "$Lobby"
+    var wing = _get_lobby_exit_zone(exit)
+    var title = "$Lobby"
+
+    if wing:
+      if not wing_indices.has(wing.name):
+        wing_indices[wing.name] = -1
+      wing_indices[wing.name] += 1
+      if wing_indices[wing.name] < len(wing.exhibits):
+        title = wing.exhibits[wing_indices[wing.name]]
+
     exit.to_title = title
     exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit))
 
