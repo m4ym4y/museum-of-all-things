@@ -115,10 +115,6 @@ layout_mode = 2
 button_pressed = true
 text = "Enable Reflections"
 
-[node name="EnableSSIL" type="CheckBox" parent="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions"]
-layout_mode = 2
-text = "Enable Indirect Lighting (SSIL)"
-
 [node name="RenderDistanceOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
@@ -138,6 +134,33 @@ layout_mode = 2
 min_value = 5.0
 max_value = 70.0
 value = 35.0
+
+[node name="LightOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/LightOptions"]
+layout_mode = 2
+text = " 
+"
+
+[node name="Label2" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/LightOptions"]
+layout_mode = 2
+text = "Ambient Light Level"
+
+[node name="AmbientLight" type="HSlider" parent="ScrollContainer/MarginContainer/VBoxContainer/LightOptions"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 0.2
+
+[node name="AmbientLightValue" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/LightOptions"]
+layout_mode = 2
+text = "0.2"
+horizontal_alignment = 1
+
+[node name="EnableSSIL" type="CheckBox" parent="ScrollContainer/MarginContainer/VBoxContainer/LightOptions"]
+layout_mode = 2
+text = "Enable Indirect Lighting (SSIL)"
 
 [node name="FogOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -210,7 +233,8 @@ text = "Clear Cache"
 [connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/DisplayOptions/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions/ReflectionQuality" to="." method="_on_reflection_quality_value_changed"]
 [connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions/EnableReflections" to="." method="_on_enable_reflections_toggled"]
-[connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions/EnableSSIL" to="." method="_on_enable_ssil_toggled"]
+[connection signal="value_changed" from="ScrollContainer/MarginContainer/VBoxContainer/LightOptions/AmbientLight" to="." method="_on_ambient_light_value_changed"]
+[connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/LightOptions/EnableSSIL" to="." method="_on_enable_ssil_toggled"]
 [connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/FogOptions/EnableFog" to="." method="_on_enable_fog_toggled"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/VBoxContainer/FPSOptions/MaxFPS" to="." method="_on_max_fps_value_changed"]
 [connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/FPSOptions/LimitFPS" to="." method="_on_limit_fps_toggled"]

@@ -30,7 +30,8 @@ func _load_settings():
   _vbox.get_node("DisplayOptions/RenderScale").value = GraphicsManager.render_scale
   _vbox.get_node("ReflectionOptions/ReflectionQuality").value = e.ssr_max_steps
   _vbox.get_node("ReflectionOptions/EnableReflections").button_pressed = e.ssr_enabled
-  _vbox.get_node("ReflectionOptions/EnableSSIL").button_pressed = e.ssil_enabled
+  _vbox.get_node("LightOptions/AmbientLight").value = e.ambient_light_energy
+  _vbox.get_node("LightOptions/EnableSSIL").button_pressed = e.ssil_enabled
   _vbox.get_node("FogOptions/EnableFog").button_pressed = e.fog_enabled
   _refresh_cache_label()
 
@@ -51,6 +52,10 @@ func _on_enable_reflections_toggled(toggled_on: bool):
 
 func _on_enable_ssil_toggled(toggled_on: bool):
   GraphicsManager.get_env().ssil_enabled = toggled_on
+
+func _on_ambient_light_value_changed(value: float):
+  GraphicsManager.get_env().ambient_light_energy = value
+  _vbox.get_node("LightOptions/AmbientLightValue").text = "%3.2f" % value
 
 func _on_max_fps_value_changed(value: float):
   GraphicsManager.set_fps_limit(value)
