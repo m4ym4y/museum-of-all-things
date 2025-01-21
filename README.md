@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://github.com/m4ym4y/museum-of-all-things/raw/main/assets/logo/moat_logo_large.png" />
+  <img src="https://github.com/m4ym4y/museum-of-all-things/raw/main/docs/logo_with_margin.png" />
 </p>
 
 
