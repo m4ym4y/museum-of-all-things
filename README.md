@@ -1,6 +1,4 @@
-# Museum of All Things*
-
-*working title
+![museum of all things logo large](./assets/logo/moat_logo_large.png)
 
 ![screenshot of the 'coffee' exhibit](./docs/screenshot-coffee.png)
 
