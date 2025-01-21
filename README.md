@@ -1,4 +1,9 @@
-![museum of all things logo large](./assets/logo/moat_logo_large.png)
+
+<p align="center">
+  <img src="https://github.com/m4ym4y/museum-of-all-things/raw/main/assets/logo/moat_logo_large.png" />
+</p>
+
+
 
 ![screenshot of the 'coffee' exhibit](./docs/screenshot-coffee.png)
 
