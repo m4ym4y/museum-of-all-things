@@ -9,7 +9,7 @@ script = ExtResource("1_vutop")
 
 [node name="Viewport2Din3D" parent="." instance=ExtResource("1_gouu8")]
 screen_size = Vector2(2, 1.5)
-collision_layer = 5242880
+collision_layer = 0
 scene = ExtResource("2_kyyvp")
 viewport_size = Vector2(960, 720)
 unshaded = true

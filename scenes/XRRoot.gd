@@ -30,6 +30,7 @@ func _ready():
     GlobalMenuEvents.set_xr_rotation_increment.connect(_set_xr_rotation_increment)
     GlobalMenuEvents.set_xr_smooth_rotation.connect(_set_xr_smooth_rotation)
     GlobalMenuEvents.emit_load_xr_settings()
+    left_controller.get_node("FunctionPointer/Laser").visibility_changed.connect(_laser_visible_changed)
 
 var menu_active = false
 var by_button_pressed = false
@@ -53,18 +54,18 @@ func _set_xr_rotation_increment(increment):
 func _set_xr_smooth_rotation(enabled):
   right_controller.get_node("XRToolsMovementTurn").turn_mode = XRToolsMovementTurn.TurnMode.SMOOTH if enabled else XRToolsMovementTurn.TurnMode.SNAP
 
+func _laser_visible_changed():
+  if movement_style == "teleportation":
+    left_controller.get_node("FunctionTeleport").enabled = not left_controller.get_node("FunctionPointer/Laser").visible
+
 func _hide_menu():
   menu_active = false
-  left_controller.get_node("FunctionPointer").enabled = false
-  if movement_style == "teleportation":
-    left_controller.get_node("FunctionTeleport").enabled = true
+  right_controller.get_node("XrMenu").disable_collision()
   right_controller.get_node("XrMenu").visible = false
 
 func _show_menu():
   menu_active = true
-  left_controller.get_node("FunctionPointer").enabled = true
-  if movement_style == "teleportation":
-    left_controller.get_node("FunctionTeleport").enabled = false
+  right_controller.get_node("XrMenu").enable_collision()
   right_controller.get_node("XrMenu").visible = true
 
 func _physics_process(delta: float) -> void:

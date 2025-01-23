@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bhi1d8bl668hb" path="res://scenes/menu/PauseMenu.tscn" id="1_a2m62"]
 [ext_resource type="Script" path="res://scenes/menu/XrMenuCanvas.gd" id="1_ow7im"]
 [ext_resource type="PackedScene" uid="uid://bbp0v2aoglhrr" path="res://scenes/menu/Settings.tscn" id="2_kfmr2"]
-[ext_resource type="PackedScene" uid="uid://q1i08nbt6re1" path="res://scenes/menu/XRControlsMenu.tscn" id="4_0kw4h"]
+[ext_resource type="PackedScene" uid="uid://c3ljfgt8nv5v" path="res://scenes/menu/XRControlsMenu.tscn" id="4_0kw4h"]
 
 [node name="XrMenuCanvas" type="CanvasLayer"]
 script = ExtResource("1_ow7im")

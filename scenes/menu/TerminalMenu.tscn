@@ -62,7 +62,6 @@ theme_override_font_sizes/font_size = 32
 text = "Go to Random Exhibit"
 
 [node name="SearchPage" type="VBoxContainer" parent="MarginContainer"]
-visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/SearchPage"]
@@ -93,6 +92,13 @@ theme_override_fonts/font = ExtResource("1_8vlbg")
 theme_override_font_sizes/font_size = 32
 text = "Confirm"
 
+[node name="Reset" type="Button" parent="MarginContainer/SearchPage"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_8vlbg")
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
 [node name="ResultPage" type="VBoxContainer" parent="MarginContainer"]
 visible = false
 layout_mode = 2
@@ -121,6 +127,7 @@ theme_override_font_sizes/font_size = 32
 text = "OK / Exit"
 
 [node name="ErrorPage" type="VBoxContainer" parent="MarginContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/ErrorPage"]
@@ -158,5 +165,6 @@ texture = ExtResource("2_go2dw")
 [connection signal="pressed" from="MarginContainer/StartPage/EnterExhibit" to="." method="_go_to_search_page"]
 [connection signal="pressed" from="MarginContainer/StartPage/RandomExhibit" to="." method="_get_random_page"]
 [connection signal="pressed" from="MarginContainer/SearchPage/SearchExhibit" to="." method="_search_exhibit"]
+[connection signal="pressed" from="MarginContainer/SearchPage/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="MarginContainer/ResultPage/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="MarginContainer/ErrorPage/Reset" to="." method="_on_reset_pressed"]

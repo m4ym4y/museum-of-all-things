@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dn526eij58wfs"]
+[gd_scene load_steps=13 format=3 uid="uid://dn526eij58wfs"]
 
 [ext_resource type="Script" path="res://scenes/XRRoot.gd" id="1_t4l57"]
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_v48yd"]
@@ -11,6 +11,10 @@
 [ext_resource type="Script" path="res://addons/godot-xr-tools/functions/movement_direct.gd" id="6_mvrkt"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="7_4wwnr"]
 [ext_resource type="PackedScene" uid="uid://bhue34utfsw0r" path="res://scenes/menu/XRMenu.tscn" id="10_g5s6k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ne1gf"]
+shading_mode = 0
+albedo_color = Color(0.46, 0.946, 1, 1)
 
 [node name="XrRoot" type="Node3D"]
 script = ExtResource("1_t4l57")
@@ -44,9 +48,10 @@ player_material = ExtResource("4_jb2jl")
 hand_material_override = ExtResource("4_jb2jl")
 
 [node name="FunctionPointer" parent="XROrigin3D/XRController3D_left" instance=ExtResource("7_4wwnr")]
-enabled = false
+distance = 5.0
 show_laser = 2
 laser_length = 1
+laser_material = SubResource("StandardMaterial3D_ne1gf")
 
 [node name="XRController3D_right" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"

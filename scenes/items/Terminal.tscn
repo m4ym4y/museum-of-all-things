@@ -51,6 +51,7 @@ width = 850.0
 [node name="Viewport2Din3D" parent="." instance=ExtResource("5_er78e")]
 transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, -0.00611465, 1.50795, 0.375204)
 screen_size = Vector2(2, 2)
+collision_layer = 5242880
 scene = ExtResource("6_06qyf")
 viewport_size = Vector2(800, 800)
 unshaded = true
