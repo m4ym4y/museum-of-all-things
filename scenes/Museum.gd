@@ -168,6 +168,9 @@ func _teleport_player(from_hall, to_hall, entry_to_exit=false):
       _load_exhibit_from_entry(to_hall)
 
 func _on_loader_body_entered(body, hall, backlink=false):
+  if hall.to_title == "" or hall.to_title == _current_room_title:
+    return
+
   if body.is_in_group("Player"):
     if backlink:
       _load_exhibit_from_entry(hall)
