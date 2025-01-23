@@ -144,11 +144,11 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 29.861
 surface_material_override/0 = ExtResource("15_qksdu")
 
 [node name="HistoryPlaque" parent="." instance=ExtResource("9_puy6x")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 15.3551, -4, 61.6875)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15.355, -4, 61.688)
 surface_material_override/0 = ExtResource("16_k4j87")
 
 [node name="MediaPlaque" parent="." instance=ExtResource("9_puy6x")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15.6449, -4, 61.6875)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 15.645, -4, 61.688)
 surface_material_override/0 = ExtResource("16_gjuab")
 
 [node name="Planter" parent="." instance=ExtResource("17_wq01r")]

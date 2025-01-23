@@ -26,13 +26,13 @@
      showguides="true"
      inkscape:zoom="2.8284271"
      inkscape:cx="412.95036"
-     inkscape:cy="580.18111"
-     inkscape:window-width="1749"
+     inkscape:cy="580.18112"
+     inkscape:window-width="2516"
      inkscape:window-height="1373"
-     inkscape:window-x="783"
+     inkscape:window-x="16"
      inkscape:window-y="39"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:export-bgcolor="#ffffff00">
     <inkscape:grid
@@ -56,12 +56,13 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:none">
+     style="display:inline">
     <g
        id="g5"
        inkscape:export-filename="../../prog/wikipedia-museum/assets/logo/moat_logo_large.png"
        inkscape:export-xdpi="321.99454"
-       inkscape:export-ydpi="321.99454">
+       inkscape:export-ydpi="321.99454"
+       style="display:inline">
       <g
          id="g4"
          transform="translate(0,70.564671)">
