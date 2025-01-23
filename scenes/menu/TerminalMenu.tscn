@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://crfgn0ehls7w7"]
+[gd_scene load_steps=6 format=3 uid="uid://crfgn0ehls7w7"]
 
+[ext_resource type="Script" path="res://scenes/menu/TerminalMenu.gd" id="1_3ulr5"]
 [ext_resource type="FontFile" uid="uid://81fevjg70kl3" path="res://assets/fonts/NotoSansMono/static/NotoSansMono-Bold.ttf" id="1_8vlbg"]
+[ext_resource type="Texture2D" uid="uid://djxbiu7sjen2u" path="res://assets/logo/moat_logo_small.png" id="2_go2dw"]
+[ext_resource type="FontFile" uid="uid://tbendthemd68" path="res://assets/fonts/NotoSansMono/static/NotoSansMono-Regular.ttf" id="2_vd2bc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mawx1"]
 font = ExtResource("1_8vlbg")
@@ -14,21 +17,29 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_3ulr5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="StartPage" type="VBoxContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/StartPage"]
 layout_mode = 2
 text = "Welcome to the MoAT Custom Exhibit Terminal
 
-You may access a specific exhibit by typing it in below.
-Alternatively, you may ask for a random exhibit.
+You may access a specific exhibit by selecting \"Enter Exhibit Name.\" Alternatively, you may ask for a random exhibit.
 
 Hit \"E\" on your keyboard to interact with the terminal, or press Y/△ if you are using a controller.
 
@@ -36,16 +47,116 @@ Hit \"E\" on your keyboard to interact with the terminal, or press Y/△ if you 
 label_settings = SubResource("LabelSettings_mawx1")
 autowrap_mode = 3
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="EnterExhibit" type="Button" parent="MarginContainer/StartPage"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_fonts/font = ExtResource("1_8vlbg")
 theme_override_font_sizes/font_size = 32
 text = "Enter Exhibit Name"
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="RandomExhibit" type="Button" parent="MarginContainer/StartPage"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_fonts/font = ExtResource("1_8vlbg")
 theme_override_font_sizes/font_size = 32
 text = "Go to Random Exhibit"
+
+[node name="SearchPage" type="VBoxContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/SearchPage"]
+layout_mode = 2
+text = "Enter the title of the exhibit you would like to acccess. A path will be routed and the door will open to the best matching exhibit.
+
+"
+label_settings = SubResource("LabelSettings_mawx1")
+autowrap_mode = 3
+
+[node name="ExhibitTitle" type="LineEdit" parent="MarginContainer/SearchPage"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vd2bc")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "Enter exhibit title"
+
+[node name="Label2" type="Label" parent="MarginContainer/SearchPage"]
+layout_mode = 2
+text = "
+"
+label_settings = SubResource("LabelSettings_mawx1")
+autowrap_mode = 3
+
+[node name="SearchExhibit" type="Button" parent="MarginContainer/SearchPage"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_8vlbg")
+theme_override_font_sizes/font_size = 32
+text = "Confirm"
+
+[node name="ResultPage" type="VBoxContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="ResultLabel" type="Label" parent="MarginContainer/ResultPage"]
+layout_mode = 2
+text = "Exhibit Found: \"\"
+"
+label_settings = SubResource("LabelSettings_mawx1")
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/ResultPage"]
+layout_mode = 2
+text = "
+Proceed to your right to access this exhibit, or return to the terminal's main menu to access a different exhibit.
+
+"
+label_settings = SubResource("LabelSettings_mawx1")
+autowrap_mode = 3
+
+[node name="Reset" type="Button" parent="MarginContainer/ResultPage"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_8vlbg")
+theme_override_font_sizes/font_size = 32
+text = "OK / Exit"
+
+[node name="ErrorPage" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ErrorPage"]
+layout_mode = 2
+text = "We were unable to locate the exhibit that you requested. Please try a different exhibit.
+
+"
+label_settings = SubResource("LabelSettings_mawx1")
+autowrap_mode = 3
+
+[node name="Reset" type="Button" parent="MarginContainer/ErrorPage"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_8vlbg")
+theme_override_font_sizes/font_size = 32
+text = "OK / Exit"
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="MoatLogoSmall" type="Sprite2D" parent="Control"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_go2dw")
+
+[connection signal="pressed" from="MarginContainer/StartPage/EnterExhibit" to="." method="_go_to_search_page"]
+[connection signal="pressed" from="MarginContainer/StartPage/RandomExhibit" to="." method="_get_random_page"]
+[connection signal="pressed" from="MarginContainer/SearchPage/SearchExhibit" to="." method="_search_exhibit"]
+[connection signal="pressed" from="MarginContainer/ResultPage/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="MarginContainer/ErrorPage/Reset" to="." method="_on_reset_pressed"]

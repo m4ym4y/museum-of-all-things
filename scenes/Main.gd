@@ -39,6 +39,8 @@ func _ready():
   _player.position = starting_point
 
   GlobalMenuEvents.return_to_lobby.connect(_on_pause_menu_return_to_lobby)
+  GlobalMenuEvents.open_terminal_menu.connect(_use_terminal)
+
   if not _xr:
     _pause_game()
 
@@ -58,33 +60,43 @@ func _pause_game():
   _player.pause()
 
   if game_started:
+    if $CanvasLayer.visible:
+      return
     _open_pause_menu()
   else:
     _open_main_menu()
+
+func _use_terminal():
+  _player.pause()
+  Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+  _open_terminal_menu()
 
 func _close_menus():
   $CanvasLayer.visible = false
   $CanvasLayer/Settings.visible = false
   $CanvasLayer/MainMenu.visible = false
   $CanvasLayer/PauseMenu.visible = false
+  $CanvasLayer/PopupTerminalMenu.visible = false
 
 func _open_settings_menu():
+  _close_menus()
   $CanvasLayer.visible = true
   $CanvasLayer/Settings.visible = true
-  $CanvasLayer/MainMenu.visible = false
-  $CanvasLayer/PauseMenu.visible = false
 
 func _open_main_menu():
+  _close_menus()
   $CanvasLayer.visible = true
   $CanvasLayer/MainMenu.visible = true
-  $CanvasLayer/Settings.visible = false
-  $CanvasLayer/PauseMenu.visible = false
 
 func _open_pause_menu():
+  _close_menus()
   $CanvasLayer.visible = true
-  $CanvasLayer/MainMenu.visible = false
-  $CanvasLayer/Settings.visible = false
   $CanvasLayer/PauseMenu.visible = true
+
+func _open_terminal_menu():
+  _close_menus()
+  $CanvasLayer.visible = true
+  $CanvasLayer/PopupTerminalMenu.visible = true
 
 func _on_main_menu_start_pressed():
   _start_game()

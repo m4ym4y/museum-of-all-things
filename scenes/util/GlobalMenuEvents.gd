@@ -9,6 +9,10 @@ signal set_movement_speed
 signal set_xr_rotation_increment
 signal set_xr_smooth_rotation
 signal load_xr_settings
+signal open_terminal_menu
+signal terminal_result_ready(error: bool, page: String)
+signal set_custom_door(title: String)
+signal reset_custom_door
 
 func emit_ui_cancel_pressed():
   emit_signal("ui_cancel_pressed")
@@ -36,3 +40,15 @@ func emit_set_xr_smooth_rotation(enabled):
 
 func emit_load_xr_settings():
   emit_signal("load_xr_settings")
+
+func emit_open_terminal_menu():
+  emit_signal("open_terminal_menu")
+
+func emit_terminal_result_ready(error: bool, page: String):
+  emit_signal("terminal_result_ready", error, page)
+
+func emit_set_custom_door(title: String):
+  emit_signal("set_custom_door", title)
+
+func emit_reset_custom_door():
+  emit_signal("reset_custom_door")

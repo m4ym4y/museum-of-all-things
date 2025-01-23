@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnnoct48gjtw6"]
+[gd_scene load_steps=7 format=3 uid="uid://bnnoct48gjtw6"]
 
 [ext_resource type="Script" path="res://scenes/Main.gd" id="1_d7g3n"]
 [ext_resource type="PackedScene" uid="uid://5javxi3uy0ep" path="res://scenes/Museum.tscn" id="1_ivvmh"]
 [ext_resource type="PackedScene" uid="uid://bbp0v2aoglhrr" path="res://scenes/menu/Settings.tscn" id="4_31ns1"]
 [ext_resource type="PackedScene" uid="uid://3q5n8txx3jmm" path="res://scenes/menu/MainMenu.tscn" id="4_elltp"]
 [ext_resource type="PackedScene" uid="uid://bhi1d8bl668hb" path="res://scenes/menu/PauseMenu.tscn" id="5_boks6"]
+[ext_resource type="PackedScene" uid="uid://b575vo2u5rw0p" path="res://scenes/menu/PopupTerminalMenu.tscn" id="6_cjdwp"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_d7g3n")
@@ -14,6 +15,7 @@ script = ExtResource("1_d7g3n")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = -6
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,6 +31,9 @@ visible = false
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("5_boks6")]
 visible = false
 
+[node name="PopupTerminalMenu" parent="CanvasLayer" instance=ExtResource("6_cjdwp")]
+visible = false
+
 [node name="FpsLabel" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
@@ -40,3 +45,4 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.501961)
 [connection signal="resume" from="CanvasLayer/PauseMenu" to="." method="_on_main_menu_start_pressed"]
 [connection signal="return_to_lobby" from="CanvasLayer/PauseMenu" to="." method="_on_pause_menu_return_to_lobby"]
 [connection signal="settings" from="CanvasLayer/PauseMenu" to="." method="_on_pause_menu_settings"]
+[connection signal="resume" from="CanvasLayer/PopupTerminalMenu" to="." method="_on_main_menu_start_pressed"]

@@ -1,5 +1,7 @@
 extends Node
 
+signal search_complete(title, context)
+signal random_complete(title, context)
 signal wikitext_complete(titles, context)
 signal wikitext_failed(titles, message)
 signal wikidata_complete(ids, context)
@@ -16,6 +18,9 @@ const WIKIDATA_PREFIX = "https://www.wikidata.org/wiki/"
 
 const WIKIDATA_COMMONS_CATEGORY = "P373"
 const WIKIDATA_COMMONS_GALLERY = "P935"
+
+var search_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srprop=title&srsearch="
+var random_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&generator=random&grnnamespace=0&prop=info"
 
 var wikitext_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions|extracts|pageprops&ppprop=wikibase_item&explaintext=true&rvprop=content&format=json&redirects=1&titles="
 var images_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=640&iiextmetadatafilter=LicenseShortName|Artist&format=json&redirects=1&titles="
@@ -48,6 +53,10 @@ func _network_request_thread_loop():
       continue
     elif item[0] == "fetch_wikitext":
       _fetch_wikitext(item[1], item[2])
+    elif item[0] == "fetch_search":
+      _fetch_search(item[1], item[2])
+    elif item[0] == "fetch_random":
+      _fetch_random(item[1])
     elif item[0] == "fetch_images":
       _fetch_images(item[1], item[2])
     elif item[0] == "fetch_commons_images":
@@ -60,6 +69,12 @@ func _network_request_thread_loop():
 func fetch(titles, ctx):
   # queue wikitext fetch in front of queue to improve next exhibit load time
   WorkQueue.add_item(NETWORK_QUEUE, ["fetch_wikitext", titles, ctx], null, true)
+
+func fetch_search(title, ctx):
+  WorkQueue.add_item(NETWORK_QUEUE, ["fetch_search", title, ctx], null, true)
+
+func fetch_random(ctx):
+  WorkQueue.add_item(NETWORK_QUEUE, ["fetch_random", ctx], null, true)
 
 func fetch_images(titles, ctx):
   WorkQueue.add_item(NETWORK_QUEUE, ["fetch_images", titles, ctx])
@@ -161,6 +176,16 @@ func _fetch_wikidata(entity, context):
     "entity": entity
   }
 
+  _dispatch_request(url, ctx, context)
+
+func _fetch_search(title, context):
+  var url = search_endpoint + title.uri_encode()
+  var ctx = {}
+  _dispatch_request(url, ctx, context)
+
+func _fetch_random(context):
+  var url = random_endpoint
+  var ctx = {}
   _dispatch_request(url, ctx, context)
 
 func _fetch_wikitext(titles, context):
@@ -285,6 +310,10 @@ func _on_request_completed(result, response_code, headers, body, ctx, caller_ctx
     return _on_commons_images_request_complete(res, ctx, caller_ctx)
   elif ctx.url.begins_with(wikimedia_commons_gallery_images_endpoint):
     return _on_commons_images_request_complete(res, ctx, caller_ctx)
+  elif ctx.url.begins_with(search_endpoint):
+    return _on_search_request_complete(res, ctx, caller_ctx)
+  elif ctx.url.begins_with(random_endpoint):
+    return _on_random_request_complete(res, ctx, caller_ctx)
 
 func _dispatch_continue(continue_fields, base_url, titles, ctx, caller_ctx):
   var continue_url = base_url
@@ -435,4 +464,23 @@ func _on_wikidata_request_complete(res, ctx, caller_ctx):
 
   _cache_all([ ctx.entity ], WIKIDATA_PREFIX)
   call_deferred("emit_signal", "wikidata_complete", ctx.entity, caller_ctx)
+  return true
+
+func _on_search_request_complete(res, ctx, caller_ctx):
+  if res.query.has("search"):
+    if len(res.query.search) > 0:
+      var result_title = res.query.search[0].title
+      call_deferred("emit_signal", "search_complete", result_title, caller_ctx)
+      return true
+  call_deferred("emit_signal", "search_complete", null, caller_ctx)
+  return true
+
+func _on_random_request_complete(res, ctx, caller_ctx):
+  if res.query.has("pages"):
+    var pages = res.query.pages
+    for page_id in pages.keys():
+      var result_title = pages[page_id].title
+      call_deferred("emit_signal", "random_complete", result_title, caller_ctx)
+      return true
+  call_deferred("emit_signal", "random_complete", null, caller_ctx)
   return true

@@ -42,6 +42,7 @@ Additionally, every exhibit contains doors to many other interesting exhibits. T
 
 var _grid
 var _player
+var _custom_door
 
 func _init():
   RenderingServer.set_debug_generate_wireframes(true)
@@ -59,6 +60,8 @@ func _ready() -> void:
   ExhibitFetcher.wikitext_complete.connect(_on_fetch_complete)
   ExhibitFetcher.wikidata_complete.connect(_on_wikidata_complete)
   ExhibitFetcher.commons_images_complete.connect(_on_commons_images_complete)
+  GlobalMenuEvents.reset_custom_door.connect(_reset_custom_door)
+  GlobalMenuEvents.set_custom_door.connect(_set_custom_door)
 
 func _get_lobby_exit_zone(exit):
   var ex = Util.gridToWorld(exit.from_pos).x
@@ -86,20 +89,32 @@ func _set_up_lobby(lobby):
 
   for exit in exits:
     var wing = _get_lobby_exit_zone(exit)
-    var title = "$Lobby"
 
     if wing:
       if not wing_indices.has(wing.name):
         wing_indices[wing.name] = -1
       wing_indices[wing.name] += 1
       if wing_indices[wing.name] < len(wing.exhibits):
-        title = wing.exhibits[wing_indices[wing.name]]
+        exit.to_title = wing.exhibits[wing_indices[wing.name]]
 
-    exit.to_title = title
+    elif not _custom_door:
+      _custom_door = exit
+      _custom_door.entry_door.set_open(false, true)
+      _custom_door.to_sign.visible = false
+
     exit.loader.body_entered.connect(_on_loader_body_entered.bind(exit))
 
 func get_current_room():
   return _current_room_title
+
+func _set_custom_door(title):
+  if _custom_door and is_instance_valid(_custom_door):
+    _custom_door.to_title = title
+    _custom_door.entry_door.set_open(true)
+
+func _reset_custom_door(title):
+  if _custom_door and is_instance_valid(_custom_door):
+    _custom_door.entry_door.set_open(false)
 
 func reset_to_lobby():
   _set_current_room_title("$Lobby")

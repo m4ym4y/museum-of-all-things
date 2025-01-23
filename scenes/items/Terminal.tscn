@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0q0v3m0c8n23"]
+[gd_scene load_steps=10 format=3 uid="uid://b0q0v3m0c8n23"]
 
 [ext_resource type="ArrayMesh" uid="uid://djjbfyif8liyl" path="res://assets/models/terminal.obj" id="1_dkram"]
 [ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://assets/textures/wood.tres" id="2_d4rh8"]
@@ -6,9 +6,13 @@
 [ext_resource type="FontFile" uid="uid://81fevjg70kl3" path="res://assets/fonts/NotoSansMono/static/NotoSansMono-Bold.ttf" id="4_2tlk5"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="5_er78e"]
 [ext_resource type="PackedScene" uid="uid://crfgn0ehls7w7" path="res://scenes/menu/TerminalMenu.tscn" id="6_06qyf"]
+[ext_resource type="Script" path="res://scenes/items/TerminalInteractZone.gd" id="7_8cvwe"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7hqr0"]
 radius = 0.75
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pwdyk"]
+size = Vector3(1, 1, 0.1)
 
 [node name="Terminal" type="Node3D"]
 
@@ -50,4 +54,13 @@ screen_size = Vector2(2, 2)
 scene = ExtResource("6_06qyf")
 viewport_size = Vector2(800, 800)
 unshaded = true
-scene_properties_keys = PackedStringArray()
+scene_properties_keys = PackedStringArray("TerminalMenu.gd")
+
+[node name="TerminalInteractZone" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("7_8cvwe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TerminalInteractZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50674, 0.43771)
+shape = SubResource("BoxShape3D_pwdyk")
