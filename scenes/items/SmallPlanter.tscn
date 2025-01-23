@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://ba1s3cmbt8idk"]
+
+[ext_resource type="ArrayMesh" uid="uid://drgsdd0ymsi1t" path="res://assets/models/planter.obj" id="1_rqa18"]
+[ext_resource type="Material" uid="uid://datvvi6j3c0kp" path="res://assets/textures/white.tres" id="2_auvs0"]
+[ext_resource type="Material" uid="uid://dhxahpk8guw31" path="res://assets/textures/dirt.tres" id="3_p4dr5"]
+[ext_resource type="PackedScene" uid="uid://4r06ri8mf5fi" path="res://scenes/items/Plants.tscn" id="4_uihfg"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sg5i6"]
+points = PackedVector3Array(0.75, 0.6, 4, -0.75, 0.6, 4, 0.75, 0, 4, 0.75, 0.6, -4, -0.75, 0, 4, -0.75, 0.6, -4, 0.75, 0, -4, -0.75, 0, -4)
+
+[node name="Planter" type="Node3D" groups=["Scenery"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, 0)
+visibility_range_end = 50.0
+mesh = ExtResource("1_rqa18")
+surface_material_override/0 = ExtResource("2_auvs0")
+surface_material_override/1 = ExtResource("3_p4dr5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_sg5i6")
+
+[node name="Plants" parent="." instance=ExtResource("4_uihfg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+area_size = Vector3(1.25, 0, 3.5)
+instance_count = 60

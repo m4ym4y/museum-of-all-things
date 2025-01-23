@@ -4,6 +4,7 @@ signal exit_added(exit)
 
 @onready var pool_scene = preload("res://scenes/items/Pool.tscn")
 @onready var planter_scene = preload("res://scenes/items/Planter.tscn")
+@onready var small_planter_scene = preload("res://scenes/items/SmallPlanter.tscn")
 @onready var hall = preload("res://scenes/Hall.tscn")
 @onready var grid_wrapper = preload("res://scenes/util/GridWrapper.tscn")
 
@@ -312,7 +313,7 @@ func decorate_reserved_walls(last_room, hall_bounds, dir):
       last_room.center.z + (last_room.length / 2 + 1) * dir.z,
     )
 
-  var planter = planter_scene.instantiate()
+  var planter = small_planter_scene.instantiate()
   planter.rotation = planter_rot
   planter.position = Util.gridToWorld(planter_pos) + dir
   add_child(planter)
