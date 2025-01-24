@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://y1oelsib8v3i"]
+[gd_scene load_steps=9 format=3 uid="uid://y1oelsib8v3i"]
 
 [ext_resource type="Script" path="res://scenes/items/WallItem.gd" id="1_5qdg2"]
 [ext_resource type="Material" uid="uid://c7c48j23p78pk" path="res://assets/textures/wood_2.tres" id="2_u80il"]
@@ -11,10 +11,6 @@
 [sub_resource type="BoxMesh" id="BoxMesh_e6b5o"]
 material = ExtResource("2_u80il")
 size = Vector3(2.5, 4, 0.1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_u0b5x"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2olvn"]
 
 [node name="WallItem" type="Node3D" groups=["ExhibitItem"]]
 script = ExtResource("1_5qdg2")
@@ -48,15 +44,6 @@ visibility_range_fade_mode = 1
 mesh = ExtResource("3_k5t3j")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("4_1bj2r")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Item/Frame"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.06)
-visible = false
-visibility_range_end = 25.0
-visibility_range_end_margin = 10.0
-visibility_range_fade_mode = 1
-mesh = SubResource("PlaneMesh_u0b5x")
-surface_material_override/0 = SubResource("StandardMaterial3D_2olvn")
 
 [node name="Ceiling" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)

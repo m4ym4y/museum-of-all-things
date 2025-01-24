@@ -47,8 +47,9 @@ func _on_image_loaded(url, image, _ctx):
 
   DataManager.loaded_image.disconnect(_on_image_loaded)
   _image = image
-  #texture = _image
-  material_override.set_shader_parameter("texture_albedo", _image)
+  if _image.get_size().length() > 0:
+    texture.set_size_override(_image.get_size())
+    material_override.set_shader_parameter("texture_albedo", _image)
 
   var label = $Label
   label.text = Util.strip_markup(text)

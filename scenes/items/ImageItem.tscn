@@ -1,21 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://coafwtbm10e3b"]
+[gd_scene load_steps=7 format=3 uid="uid://coafwtbm10e3b"]
 
 [ext_resource type="Script" path="res://scenes/items/ImageItem.gd" id="1"]
 [ext_resource type="Material" uid="uid://bo6slff4n6kyo" path="res://assets/textures/image_item.tres" id="1_r0d5r"]
 [ext_resource type="FontFile" uid="uid://n33gotmdcskb" path="res://assets/fonts/CormorantGaramond/CormorantGaramond-Bold.ttf" id="2_itcda"]
 [ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="3_bk5br"]
 
+[sub_resource type="ImageTexture" id="ImageTexture_6bjse"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_l88tm"]
 size = Vector3(1, 0.01, 1)
 
 [node name="ImageItem" type="Sprite3D"]
 material_override = ExtResource("1_r0d5r")
-visibility_range_end = 25.0
-visibility_range_end_margin = 10.0
+visibility_range_end = 34.0
+visibility_range_end_margin = 1.0
 visibility_range_fade_mode = 1
 transparent = false
 shaded = true
 double_sided = false
+texture = SubResource("ImageTexture_6bjse")
 script = ExtResource("1")
 
 [node name="Label" type="Label3D" parent="."]
