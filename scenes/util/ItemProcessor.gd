@@ -188,6 +188,13 @@ func _parse_wikitext(wikitext):
         html.append(t)
     elif t == depth[dl - 1]:
       depth.pop_back()
+      # recalc whether we're in a link/tag/etc
+      # not the nicest looking but it works
+      dc = depth_chars.get(t)
+      dl = len(depth)
+      in_link = dl > 1 and depth[0] == "]" and depth[1] == "]"
+      in_tag = dl > 0 and depth[dl - 1] == ">"
+      in_template = dl > 1 and depth[0] == "}" and depth[1] == "}"
     elif in_tag:
       tag += t
     elif in_link:
@@ -214,6 +221,7 @@ func _parse_wikitext(wikitext):
           var html_str = "".join(html)
           var lines = html_str.split("\n")
           for line in lines:
+            print('adding link in gallery: ', line)
             links.append(["link", line])
         html.clear()
         html_tag = null
