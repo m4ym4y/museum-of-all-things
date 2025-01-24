@@ -67,6 +67,7 @@ func _start_animate():
 
 func _on_image_item_loaded():
   var size = _item.get_image_size()
+  print("got image size: ", size)
   if size.x > size.y:
     _frame.scale.y = size.y / float(size.x)
   else:
@@ -86,7 +87,7 @@ func init(item_data):
   if item_data.type == "image":
     _item = ImageItem.instantiate()
     _item.loaded.connect(_on_image_item_loaded)
-    _item.init(item_data.title, 2, 2, item_data.text, item_data.plate)
+    _item.init(item_data.title, item_data.text, item_data.plate)
   elif item_data.type == "text":
     _frame.visible = false
     _item = TextItem.instantiate()

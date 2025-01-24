@@ -1,11 +1,9 @@
-extends Sprite3D
+extends MeshInstance3D
 
 signal loaded
 
 var image_url
 var _image
-var width
-var height
 var text
 var title
 var plate_style
@@ -49,7 +47,6 @@ func _on_image_loaded(url, image, _ctx):
   _image = image
   var size = _image.get_size()
   if size.length() > 0:
-    texture.set_size_override(size)
     material_override.set_shader_parameter("texture_albedo", _image)
 
   var label = $Label
@@ -62,17 +59,14 @@ func _on_image_loaded(url, image, _ctx):
   var fh = float(h)
 
   if w != 0:
-    pixel_size = min(
-      float(width) / fw,
-      float(height) / fh
-    )
-
     var height = 2.0 if h > w else 2.0 * (fh / fw)
-    # var to_image_bottom = width * (float(image.get_width) / float(image.get_height))
+    var width = 2.0 if w > h else 2.0 * (fw / fh)
 
+    mesh.size = Vector2(width, height)
     label.position.y = (-height / 2.0) - 0.2
-    # label.translation.y = -width - 0.1
     label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+
+    visible = true
     emit_signal("loaded")
 
 func _on_image_complete(files, _ctx):
@@ -110,9 +104,7 @@ func _ready():
     $Label.outline_modulate = text_black
     $Label/Plate.material_override = plate_black
 
-func init(_title, _width, _height, _text, _plate_style = null):
-  width = _width
-  height = _height
+func init(_title, _text, _plate_style = null):
   text = _text
   title = _title
   plate_style = _plate_style
