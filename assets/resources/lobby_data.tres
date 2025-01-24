@@ -61,9 +61,8 @@ exhibits = PackedStringArray("Bible", "The Beatles", "The Matrix", "Odyssey", "G
 
 [resource]
 script = ExtResource("1_3ssej")
-introduction_text = "[center][color=black][b][font_size=75]MoAT[/font_size]
-
-[font_size=50]Welcome to the Museum of All Things[/font_size][/b]
+introduction_text = "[center][color=black]
+[img=500]res://assets/logo/moat_logo_large.png[/img]
 
 [font_size=25]This museum contains all of wikipedia, and is free for you to explore. Each exhibit has been assembled using the images and text contained in its corresponding wikipedia page.
 
