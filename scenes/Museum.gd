@@ -254,6 +254,9 @@ func _init_item(exhibit, item, data):
     item.init(data)
 
 func _link_halls(entry, exit):
+  if entry.linked_hall == exit and exit.linked_hall == entry:
+    return
+
   for hall in [entry, exit]:
     Util.clear_listeners(hall, "on_player_toward_exit")
     Util.clear_listeners(hall, "on_player_toward_entry")
@@ -261,6 +264,9 @@ func _link_halls(entry, exit):
   _backlink_map[exit.to_title] = exit.from_title
   exit.on_player_toward_exit.connect(_teleport_player.bind(exit, entry))
   entry.on_player_toward_entry.connect(_teleport_player.bind(entry, exit, true))
+  exit.linked_hall = entry
+  entry.linked_hall = exit
+
   if exit.player_in_hall and exit.player_direction == "exit":
     _teleport_player(exit, entry)
   elif entry.player_in_hall and entry.player_direction == "entry":

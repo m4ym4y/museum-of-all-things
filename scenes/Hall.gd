@@ -48,6 +48,7 @@ var to_title: String:
 
 var to_pos
 var to_dir
+var linked_hall
 
 static var UP = 1
 static var FLAT = 0
