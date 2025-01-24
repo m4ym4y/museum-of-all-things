@@ -13,12 +13,12 @@ var _texture_load_thread_pool = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-  var cache_dir = "user://cache"
+  var cache_dir = CacheControl.cache_dir
   var dir = DirAccess.open(cache_dir)
   if not dir:
     DirAccess.make_dir_recursive_absolute(cache_dir)
     if OS.is_debug_build():
-      print("cache directory created at 'user://cache'")
+      print("cache directory created at '%s'" + cache_dir)
   for _i in range(_texture_load_thread_pool_size):
     var thread = Thread.new()
     thread.start(_texture_load_thread_loop)
@@ -90,20 +90,30 @@ func _detect_image_type(data: PackedByteArray) -> String:
 func _write_url(url: String, data: PackedByteArray) -> void:
   #TODO: acquire lock?
   var filename = _get_hash(url)
-  var f = FileAccess.open("user://cache/" + filename, FileAccess.WRITE)
+  var f = FileAccess.open(CacheControl.cache_dir + filename, FileAccess.WRITE)
   if f:
     f.store_buffer(data)
     f.close()
   else:
     push_error("failed to write file ", url)
 
+func _touch_file(path):
+  var f = FileAccess.open(path, FileAccess.WRITE)
+  if f:
+    f.close()
+
 func _read_url(url: String):
   _fs_lock.lock()
   var filename = _get_hash(url)
-  var f = FileAccess.open("user://cache/" + filename, FileAccess.READ)
+  var file_path = CacheControl.cache_dir + filename
+  var f = FileAccess.open(file_path, FileAccess.READ)
   if f:
     var data = f.get_buffer(f.get_length())
     f.close()
+
+    # update the last used date so it isn't cleared by cache cleaner
+    _touch_file(file_path)
+
     _fs_lock.unlock()
     return data
   else:
@@ -113,7 +123,7 @@ func _read_url(url: String):
 func _url_exists(url: String):
   _fs_lock.lock()
   var filename = _get_hash(url)
-  var res = FileAccess.file_exists("user://cache/" + filename)
+  var res = FileAccess.file_exists(CacheControl.cache_dir + filename)
   _fs_lock.unlock()
   return res
 

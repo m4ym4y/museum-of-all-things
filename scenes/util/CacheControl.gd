@@ -1,7 +1,7 @@
 extends Node
 class_name CacheControl
 
-static var cache_dir = "user://cache"
+static var cache_dir = "user://cache/"
 
 static func clear_cache():
   var dir = DirAccess.open(cache_dir)
@@ -22,7 +22,7 @@ static func get_cache_size():
   var count = 0
   while file:
     count += 1
-    var handle = FileAccess.open("user://cache/" + file, FileAccess.READ)
+    var handle = FileAccess.open(cache_dir + file, FileAccess.READ)
     if handle:
       total_length += handle.get_length()
       handle.close()
@@ -41,7 +41,7 @@ static func cull_cache_to_size(max_size: int, target_size: int):
   var file_array = []
   var total_length = 0
   while file:
-    var file_path = cache_dir + "/" + file
+    var file_path = cache_dir + file
     var handle = FileAccess.open(file_path, FileAccess.READ)
     if handle:
       var file_len = handle.get_length()
