@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brq68qn5tredh"
-path="res://.godot/imported/logo.svg-4666cd88697f0116079fdd8bd9b178bc.ctex"
+uid="uid://cf7dy454eb0db"
+path="res://.godot/imported/moat_logo_large_white.png-b569efb5819ed9d7e8b595efb921958a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://inkscape/logo.svg"
-dest_files=["res://.godot/imported/logo.svg-4666cd88697f0116079fdd8bd9b178bc.ctex"]
+source_file="res://assets/logo/moat_logo_large_white.png"
+dest_files=["res://.godot/imported/moat_logo_large_white.png-b569efb5819ed9d7e8b595efb921958a.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

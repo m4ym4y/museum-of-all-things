@@ -1,14 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://3q5n8txx3jmm"]
+[gd_scene load_steps=5 format=3 uid="uid://3q5n8txx3jmm"]
 
 [ext_resource type="Script" path="res://scenes/menu/MainMenu.gd" id="1_cmhx0"]
 [ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="1_dwey2"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_awql0"]
-font_size = 128
-shadow_offset = Vector2(5, 5)
-
-[sub_resource type="LabelSettings" id="LabelSettings_ews3a"]
-font_size = 32
+[ext_resource type="Texture2D" uid="uid://cf7dy454eb0db" path="res://assets/logo/moat_logo_large_white.png" id="3_5dpwh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_46gfj"]
 font_size = 64
@@ -39,15 +33,10 @@ theme_override_constants/margin_bottom = 100
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "MoAT"
-label_settings = SubResource("LabelSettings_awql0")
-
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Welcome to The Museum of All Things"
-label_settings = SubResource("LabelSettings_ews3a")
+texture = ExtResource("3_5dpwh")
+stretch_mode = 3
 
 [node name="Label3" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
