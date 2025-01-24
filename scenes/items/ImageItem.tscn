@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="3_bk5br"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_6bjse"]
+resource_local_to_scene = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_l88tm"]
 size = Vector3(1, 0.01, 1)
