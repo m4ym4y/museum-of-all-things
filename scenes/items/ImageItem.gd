@@ -105,12 +105,10 @@ func _ready():
     $Label.modulate = text_black
     $Label.outline_modulate = text_clear
     $Label/Plate.material_override = plate_white
-    $Label.font_size = 32
   elif plate_style == "black":
     $Label.modulate = text_white
     $Label.outline_modulate = text_black
     $Label/Plate.material_override = plate_black
-    $Label.font_size = 32
 
 func init(_title, _width, _height, _text, _plate_style = null):
   width = _width
