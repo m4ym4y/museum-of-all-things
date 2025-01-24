@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://btdrwyul4s0cv"]
+
+[ext_resource type="Script" path="res://scenes/CacheCleaner.gd" id="1_f4y30"]
+
+[node name="CacheCleaner" type="Node"]
+script = ExtResource("1_f4y30")
+max_cache_size = 4e+09
+target_cache_size = 2e+09

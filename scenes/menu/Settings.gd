@@ -68,25 +68,12 @@ func _on_enable_fog_toggled(toggled_on: bool):
   GraphicsManager.get_env().fog_enabled = toggled_on
 
 func _on_clear_cache_pressed():
-  # this is going to be big so we stream it
-  var dir = DirAccess.open("user://cache")
-  dir.list_dir_begin()
-
-  while true:
-    var file = dir.get_next()
-    if not file:
-      break
-    dir.remove(file)
-
+  CacheControl.clear_cache()
   _refresh_cache_label()
 
 func _refresh_cache_label():
-  var count = 0
-  var dir = DirAccess.open("user://cache")
-  dir.list_dir_begin()
-  while dir.get_next():
-    count += 1
-  _vbox.get_node("CacheOptions/CacheLabel").text = "Cache (%s items)" % count
+  var result = CacheControl.get_cache_size()
+  _vbox.get_node("CacheOptions/CacheLabel").text = "Cache (%s items, %3.2f GB)" % [result.count, result.size / 1000000000.0]
 
 func _on_fullscreen_toggled(toggled_on: bool):
   GraphicsManager.set_fullscreen(toggled_on)
