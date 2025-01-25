@@ -143,6 +143,9 @@ func _input(event):
   ):
     GlobalMenuEvents.emit_ui_cancel_pressed()
 
+  if Input.is_action_just_pressed("show_fps"):
+    $FpsLabel.visible = not $FpsLabel.visible
+
   if event.is_action_pressed("pause") and not _xr:
     _pause_game()
 
