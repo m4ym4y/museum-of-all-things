@@ -12,6 +12,7 @@ func _ready() -> void:
     _vbox.get_node("FPSOptions").visible = false
     _vbox.get_node("ReflectionOptions").visible = false
     _vbox.get_node("DisplayOptions").visible = false
+    _vbox.get_node("PostProcessingOptions").visible = false
 
 func ui_cancel_pressed():
   if visible:
