@@ -67,7 +67,6 @@ func _start_animate():
 
 func _on_image_item_loaded():
   var size = _item.get_image_size()
-  print("got image size: ", size)
   if size.x > size.y:
     _frame.scale.y = size.y / float(size.x)
   else:

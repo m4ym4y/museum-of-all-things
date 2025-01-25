@@ -63,7 +63,7 @@ func _on_image_loaded(url, image, _ctx):
     var width = 2.0 if w > h else 2.0 * (fw / fh)
 
     mesh.size = Vector2(width, height)
-    label.position.y = (-height / 2.0) - 0.2
+    label.position.z = (height / 2.0) + 0.2
     label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 
     visible = true
