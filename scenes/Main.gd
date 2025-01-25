@@ -30,6 +30,7 @@ func _ready():
     _player.get_node("XRToolsPlayerBody").rotate_player(-starting_rotation)
     _start_game()
   else:
+    GraphicsManager.change_post_processing.connect(_change_post_processing)
     GraphicsManager.init()
     _player.get_node("Pivot/Camera3D").make_current()
     _player.rotation.y = starting_rotation
@@ -43,6 +44,12 @@ func _ready():
 
   if not _xr:
     _pause_game()
+
+func _change_post_processing(post_processing: String):
+  if post_processing == "crt":
+    $CRTPostProcessing.visible = true
+  else:
+    $CRTPostProcessing.visible = false
 
 func _start_game():
   if not _xr:

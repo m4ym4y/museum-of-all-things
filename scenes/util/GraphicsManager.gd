@@ -1,11 +1,14 @@
 extends Node
 
+signal change_post_processing(post_processing: String)
+
 var _env
 var limit_fps = false
 var fps_limit = 60
 var _default_settings_obj
 var fullscreen = false
 var render_scale = 1.0
+var post_processing = "none"
 
 func init():
   _env = get_tree().get_nodes_in_group("Environment")[0]
@@ -35,6 +38,10 @@ func set_render_scale(scale: float):
   render_scale = scale
   get_viewport().scaling_3d_scale = scale
 
+func set_post_processing(_post_processing: String):
+  post_processing = _post_processing
+  emit_signal("change_post_processing", post_processing)
+
 func enable_fps_limit(enabled: bool):
   limit_fps = enabled
   if limit_fps:
@@ -57,6 +64,7 @@ func _apply_settings(s, default={}):
     enable_fps_limit(s["limit_fps"] if s.has("limit_fps") else default["limit_fps"])
     set_fullscreen(s["fullscreen"] if s.has("fullscreen") else default["fullscreen"])
     set_render_scale(s["render_scale"] if s.has("render_scale") else default["render_scale"])
+    set_post_processing(s["post_processing"] if s.has("post_processing") else default["post_processing"])
 
 func _create_settings_obj():
   var e = _env.environment
@@ -70,6 +78,7 @@ func _create_settings_obj():
     "limit_fps": limit_fps,
     "fullscreen": fullscreen,
     "render_scale": render_scale,
+    "post_processing": post_processing,
   }
 
 func restore_default_settings():

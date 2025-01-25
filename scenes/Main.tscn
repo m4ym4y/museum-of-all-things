@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnnoct48gjtw6"]
+[gd_scene load_steps=9 format=3 uid="uid://bnnoct48gjtw6"]
 
 [ext_resource type="Script" path="res://scenes/Main.gd" id="1_d7g3n"]
 [ext_resource type="PackedScene" uid="uid://5javxi3uy0ep" path="res://scenes/Museum.tscn" id="1_ivvmh"]
+[ext_resource type="Material" uid="uid://dy8pkb3g1hrd4" path="res://assets/textures/post_process_crt.tres" id="3_vde54"]
 [ext_resource type="PackedScene" uid="uid://bbp0v2aoglhrr" path="res://scenes/menu/Settings.tscn" id="4_31ns1"]
 [ext_resource type="PackedScene" uid="uid://3q5n8txx3jmm" path="res://scenes/menu/MainMenu.tscn" id="4_elltp"]
 [ext_resource type="PackedScene" uid="uid://bhi1d8bl668hb" path="res://scenes/menu/PauseMenu.tscn" id="5_boks6"]
@@ -12,6 +13,17 @@
 script = ExtResource("1_d7g3n")
 
 [node name="Museum" parent="." instance=ExtResource("1_ivvmh")]
+
+[node name="CRTPostProcessing" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CRTPostProcessing"]
+material = ExtResource("3_vde54")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -210,6 +210,27 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Limit FPS"
 
+[node name="PostProcessingOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer3" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/PostProcessingOptions"]
+layout_mode = 2
+text = " 
+"
+
+[node name="Label5" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/PostProcessingOptions"]
+layout_mode = 2
+text = "Post-Processing Effect
+"
+
+[node name="PostProcessingEffect" type="OptionButton" parent="ScrollContainer/MarginContainer/VBoxContainer/PostProcessingOptions"]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "None"
+popup/item_1/text = "CRT Filter"
+popup/item_1/id = 1
+
 [node name="CacheOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -238,4 +259,5 @@ text = "Clear Cache"
 [connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/FogOptions/EnableFog" to="." method="_on_enable_fog_toggled"]
 [connection signal="value_changed" from="ScrollContainer/MarginContainer/VBoxContainer/FPSOptions/MaxFPS" to="." method="_on_max_fps_value_changed"]
 [connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/FPSOptions/LimitFPS" to="." method="_on_limit_fps_toggled"]
+[connection signal="item_selected" from="ScrollContainer/MarginContainer/VBoxContainer/PostProcessingOptions/PostProcessingEffect" to="." method="_on_post_processing_effect_item_selected"]
 [connection signal="pressed" from="ScrollContainer/MarginContainer/VBoxContainer/CacheOptions/ClearCache" to="." method="_on_clear_cache_pressed"]

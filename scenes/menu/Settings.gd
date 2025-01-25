@@ -3,6 +3,7 @@ extends Control
 signal resume
 @onready var _vbox = $ScrollContainer/MarginContainer/VBoxContainer
 @onready var _xr = Util.is_xr()
+@onready var post_processing_options = ["none", "crt"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,6 +34,11 @@ func _load_settings():
   _vbox.get_node("LightOptions/AmbientLight").value = e.ambient_light_energy
   _vbox.get_node("LightOptions/EnableSSIL").button_pressed = e.ssil_enabled
   _vbox.get_node("FogOptions/EnableFog").button_pressed = e.fog_enabled
+
+  var post_processing = GraphicsManager.post_processing
+  var idx = post_processing_options.find(post_processing)
+  _vbox.get_node("PostProcessingOptions/PostProcessingEffect").select(idx if idx >= 0 else 0)
+
   _refresh_cache_label()
 
 func _on_restore_pressed():
@@ -84,3 +90,6 @@ func _on_render_scale_value_changed(value: float):
 
 func _on_pause_menu_settings() -> void:
   pass # Replace with function body.
+
+func _on_post_processing_effect_item_selected(index: int):
+  GraphicsManager.set_post_processing(post_processing_options[index])
