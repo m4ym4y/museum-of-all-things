@@ -136,7 +136,6 @@ func generate(
   )
 
   starting_hall.entry_door.set_open(false, true)
-  starting_hall.exit_door.open()
   starting_hall.from_sign.visible = true
 
   # initialize public fields

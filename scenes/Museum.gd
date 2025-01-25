@@ -144,6 +144,24 @@ func _set_current_room_title(title):
     tween.set_trans(Tween.TRANS_LINEAR)
     tween.set_ease(Tween.EASE_IN_OUT)
 
+func _teleport(from_hall, to_hall, entry_to_exit=false):
+  _prepare_halls_for_teleport(from_hall, to_hall, entry_to_exit)
+
+func _prepare_halls_for_teleport(from_hall, to_hall, entry_to_exit=false):
+  from_hall.entry_door.set_open(false)
+  from_hall.exit_door.set_open(false)
+  to_hall.entry_door.set_open(false, true)
+  to_hall.exit_door.set_open(false, true)
+
+  var timer = $TeleportTimer
+  Util.clear_listeners(timer, "timeout")
+  timer.stop()
+  timer.timeout.connect(
+    _teleport_player.bind(from_hall, to_hall, entry_to_exit),
+    ConnectFlags.CONNECT_ONE_SHOT
+  )
+  timer.start(HallDoor.animation_duration)
+
 func _teleport_player(from_hall, to_hall, entry_to_exit=false):
   if is_instance_valid(from_hall) and is_instance_valid(to_hall):
     var pos = _player.global_position if not _xr else _player.get_node("XRCamera3D").global_position
@@ -157,6 +175,12 @@ func _teleport_player(from_hall, to_hall, entry_to_exit=false):
       _player.global_rotation.y += rot_diff
     else:
       _player.get_node("XRToolsPlayerBody").rotate_player(-rot_diff)
+
+    if entry_to_exit:
+      to_hall.entry_door.set_open(true)
+    else:
+      to_hall.exit_door.set_open(true)
+
     _set_current_room_title(from_hall.from_title if entry_to_exit else from_hall.to_title)
   elif is_instance_valid(from_hall):
     if entry_to_exit:
@@ -262,15 +286,15 @@ func _link_halls(entry, exit):
     Util.clear_listeners(hall, "on_player_toward_entry")
 
   _backlink_map[exit.to_title] = exit.from_title
-  exit.on_player_toward_exit.connect(_teleport_player.bind(exit, entry))
-  entry.on_player_toward_entry.connect(_teleport_player.bind(entry, exit, true))
+  exit.on_player_toward_exit.connect(_teleport.bind(exit, entry))
+  entry.on_player_toward_entry.connect(_teleport.bind(entry, exit, true))
   exit.linked_hall = entry
   entry.linked_hall = exit
 
   if exit.player_in_hall and exit.player_direction == "exit":
-    _teleport_player(exit, entry)
+    _teleport(exit, entry)
   elif entry.player_in_hall and entry.player_direction == "entry":
-    _teleport_player(entry, exit, true)
+    _teleport(entry, exit, true)
 
 func _count_image_items(arr):
   var count = 0

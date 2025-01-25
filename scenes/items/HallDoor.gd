@@ -1,4 +1,7 @@
 extends Node3D
+class_name HallDoor
+
+static var animation_duration = 0.25
 
 @onready var _door = $Door
 @onready var _open = false
@@ -22,8 +25,10 @@ func set_open(open = true, instant = false):
 			_door,
 			"position",
 			_open_pos if open else _closed_pos,
-			1.0
+			animation_duration
 		)
+		tween.set_trans(Tween.TRANS_LINEAR)
+		tween.set_ease(Tween.EASE_IN_OUT)
 	else:
 		_door.position = _open_pos if open else _closed_pos
 
@@ -44,7 +49,7 @@ func set_message(msg, instant = false):
 			label_pivot,
 			"rotation:z",
 			label_pivot.rotation.z + PI,
-			2.5
+			animation_duration
 		)
 	else:
 		_label_tween = null

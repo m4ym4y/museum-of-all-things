@@ -43,3 +43,5 @@ max_room_dimension = 4
 environment = SubResource("Environment_g30yg")
 
 [node name="Lobby" parent="." instance=ExtResource("3_exsdv")]
+
+[node name="TeleportTimer" type="Timer" parent="."]
