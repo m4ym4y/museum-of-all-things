@@ -44,7 +44,7 @@ var FLOOR_LIST = [FLOOR_WOOD, FLOOR_MARBLE, FLOOR_CARPET]
 var FOG_LIST   = [Color.WHITE, Color.WHITE, Color.BLACK ]
 
 # weighted towards wood
-var ITEM_MATERIAL_LIST = ["wood", "wood", "wood", "marble", "none"]
+var ITEM_MATERIAL_LIST = ["wood", "marble", "none"]
 var PLATE_STYLE_LIST = ["white", "black"]
 
 func gen_floor(title):
