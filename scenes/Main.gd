@@ -149,9 +149,6 @@ func _input(event):
   if event.is_action_pressed("pause") and not _xr:
     _pause_game()
 
-  if event is InputEventKey and Input.is_key_pressed(KEY_P):
-    var vp = get_viewport()
-    vp.debug_draw = (vp.debug_draw + 1 ) % 4
   if event.is_action_pressed("free_pointer") and not _xr:
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
   if event.is_action_pressed("click") and not _xr and not $CanvasLayer.visible:
