@@ -51,14 +51,16 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_fonts/font = ExtResource("1_8vlbg")
 theme_override_font_sizes/font_size = 32
-text = "Enter Exhibit Name"
+text = "Enter Exhibit Name "
+alignment = 0
 
 [node name="RandomExhibit" type="Button" parent="MarginContainer/StartPage"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_fonts/font = ExtResource("1_8vlbg")
 theme_override_font_sizes/font_size = 32
-text = "Go to Random Exhibit"
+text = "Go to Random Exhibit "
+alignment = 0
 
 [node name="SearchPage" type="VBoxContainer" parent="MarginContainer"]
 visible = false
