@@ -383,7 +383,7 @@ func decorate_wall_tile(pos):
     var valid_halls = Hall.valid_hall_types(_grid, wall, hall_dir)
 
     # put an exit everywhere it fits
-    if len(valid_halls) > 0 and len(exits) <= _exit_limit:
+    if len(valid_halls) > 0 and len(exits) < _exit_limit:
       var new_hall = hall.instantiate()
       var hall_type = valid_halls[_rng.randi() % len(valid_halls)]
       add_child(new_hall)
