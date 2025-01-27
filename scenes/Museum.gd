@@ -50,6 +50,13 @@ func _init():
 func init(player):
   _player = player
   _set_up_lobby($Lobby)
+
+  # wish there were a better way, but for now
+  # this is all I can think of to let the player
+  # know the floor type they're on
+  if _player.has_method("set_grid"):
+    _player.set_grid($Lobby/GridMap)
+
   reset_to_lobby()
 
 # Called when the node enters the scene tree for the first time.

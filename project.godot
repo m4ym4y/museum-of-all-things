@@ -15,10 +15,6 @@ run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://icon.png"
 
-[audio]
-
-general/text_to_speech=true
-
 [autoload]
 
 DataManager="*res://scenes/util/DataManager.gd"

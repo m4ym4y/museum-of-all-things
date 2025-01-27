@@ -17,17 +17,20 @@ var _joy_right_x = JOY_AXIS_RIGHT_X
 var _joy_right_y = JOY_AXIS_RIGHT_Y
 
 @onready var camera = get_node("Pivot/Camera3D")
+@onready var _footsteps = {
+  "hard": $FootstepsHard,
+  "soft": $FootstepsSoft
+}
+
+var _default_floor_type = "hard"
+var _floor_material_map = {
+  11: "soft", # carpet
+}
 
 @export var smooth_movement = false
 @export var dampening = 0.01
 @export var max_speed = 8
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
   # some strange issue w joystick bindings on linux
   if OS.get_name() == "Linux":
@@ -38,6 +41,11 @@ func _ready():
   starting_height = $Pivot.get_position().y
   crouching_height = starting_height / 3
   crouch_speed = (starting_height - crouching_height) / crouch_time
+
+# set grid so we can read floor type on it
+var _grid
+func set_grid(grid):
+  _grid = grid
 
 func pause():
   _enabled = false
@@ -109,6 +117,8 @@ func _physics_process(delta):
     $Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
     camera_v *= 0.95
 
+  _play_footsteps()
+
   if Input.is_action_pressed("jump") and is_on_floor():
     velocity.y = jump_impulse
     pass
@@ -122,3 +132,28 @@ func _physics_process(delta):
     var collider = $Pivot/Camera3D/RayCast3D.get_collider()
     if collider and collider.has_method("interact"):
       collider.interact()
+
+func _play_footsteps():
+  if not _grid:
+    return
+
+  var flat_velocity = Vector2(velocity.x, velocity.z).length()
+
+  if is_on_floor() and flat_velocity > 0:
+    var floor_cell = _grid.local_to_map(_grid.to_local(position)) - Vector3i.UP
+    var floor_cell_type = _grid.get_cell_item(floor_cell)
+    var step_type = _floor_material_map.get(
+      floor_cell_type,
+      _default_floor_type
+    )
+
+    for step in _footsteps.keys():
+      if step == step_type:
+        _footsteps[step].pitch_scale = flat_velocity / max_speed
+        if not _footsteps[step].playing:
+          _footsteps[step].play()
+      else:
+        _footsteps[step].stop()
+  else:
+    for step in _footsteps.keys():
+      _footsteps[step].stop()

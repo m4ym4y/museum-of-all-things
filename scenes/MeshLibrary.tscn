@@ -667,6 +667,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("ConvexPolygonShape3D_23ryu")
 
 [node name="hall_stair_up" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("ArrayMesh_deo5o")
 surface_material_override/0 = ExtResource("19_4jtqk")
 surface_material_override/1 = ExtResource("12_r4mto")

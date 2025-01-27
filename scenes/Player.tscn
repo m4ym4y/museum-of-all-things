@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bw5yn00va6hxl"]
+[gd_scene load_steps=6 format=3 uid="uid://bw5yn00va6hxl"]
 
 [ext_resource type="Script" path="res://scenes/Player.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://dgvb4rgq7wbl" path="res://assets/sound/steps_2.mp3" id="2_e5vsf"]
+[ext_resource type="AudioStream" uid="uid://do2av7rtfs66a" path="res://assets/sound/steps_3.mp3" id="3_1u35d"]
 
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(0.6, 0.2, 0.6)
@@ -33,3 +35,12 @@ shape = SubResource("1")
 [node name="CollisionShape2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("2")
+
+[node name="FloorCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.476292, 0)
+
+[node name="FootstepsHard" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_e5vsf")
+
+[node name="FootstepsSoft" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1u35d")
