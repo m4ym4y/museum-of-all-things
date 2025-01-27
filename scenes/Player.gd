@@ -140,7 +140,7 @@ func _play_footsteps():
   var flat_velocity = Vector2(velocity.x, velocity.z).length()
 
   if is_on_floor() and flat_velocity > 0:
-    var floor_cell = _grid.local_to_map(_grid.to_local(position)) - Vector3i.UP
+    var floor_cell = Util.worldToGrid(position) - Vector3.UP
     var floor_cell_type = _grid.get_cell_item(floor_cell)
     var step_type = _floor_material_map.get(
       floor_cell_type,

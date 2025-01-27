@@ -22,6 +22,9 @@ func vecToOrientation(grid, vec):
 func gridToWorld(vec):
   return 4 * vec
 
+func worldToGrid(vec):
+  return (vec / 4.0).round()
+
 func coalesce(a, b):
   return a if a else b
 
