@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func _on_visibility_changed():
   if visible:
-    $MarginContainer/VBoxContainer/Start.grab_focus()
+    $MarginContainer/VBoxContainer/HBoxContainer/Start.grab_focus()
 
 func _on_start_pressed():
   emit_signal("start")
