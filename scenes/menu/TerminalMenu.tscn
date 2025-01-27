@@ -32,7 +32,6 @@ theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
 [node name="StartPage" type="VBoxContainer" parent="MarginContainer"]
-visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/StartPage"]
@@ -62,6 +61,7 @@ theme_override_font_sizes/font_size = 32
 text = "Go to Random Exhibit"
 
 [node name="SearchPage" type="VBoxContainer" parent="MarginContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/SearchPage"]
@@ -157,6 +157,7 @@ offset_left = -40.0
 offset_top = -40.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 1
 
 [node name="MoatLogoSmall" type="Sprite2D" parent="Control"]
 scale = Vector2(0.5, 0.5)

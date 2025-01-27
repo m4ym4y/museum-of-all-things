@@ -24,11 +24,6 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
-z_index = -3
-layout_mode = 2
-color = Color(0, 0, 0, 1)
-
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
@@ -37,10 +32,18 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
 [node name="TerminalMenu" parent="MarginContainer/MarginContainer" instance=ExtResource("1_jucp8")]
+z_index = 1
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/MarginContainer"]
 z_index = -2
 layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+z_index = -3
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="resume" from="MarginContainer/MarginContainer/TerminalMenu" to="." method="_on_terminal_menu_resume"]
