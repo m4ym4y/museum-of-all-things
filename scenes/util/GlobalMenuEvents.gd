@@ -1,6 +1,7 @@
 extends Node
 
 signal ui_cancel_pressed
+signal ui_accept_pressed
 signal hide_menu
 signal return_to_lobby
 signal set_current_room
@@ -16,6 +17,9 @@ signal reset_custom_door
 
 func emit_ui_cancel_pressed():
   emit_signal("ui_cancel_pressed")
+
+func emit_ui_accept_pressed():
+  emit_signal("ui_accept_pressed")
 
 func emit_hide_menu():
   emit_signal("hide_menu")

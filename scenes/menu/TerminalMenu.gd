@@ -7,6 +7,7 @@ func _ready() -> void:
 	GlobalMenuEvents.open_terminal_menu.connect(reset)
 	GlobalMenuEvents.terminal_result_ready.connect(_on_terminal_result_ready)
 	GlobalMenuEvents.ui_cancel_pressed.connect(_resume)
+	GlobalMenuEvents.ui_accept_pressed.connect(_handle_accept)
 	ExhibitFetcher.search_complete.connect(_show_page_result)
 	ExhibitFetcher.random_complete.connect(_show_page_result)
 	reset()
@@ -35,6 +36,10 @@ func _get_random_page():
 	GlobalMenuEvents.emit_reset_custom_door()
 	ExhibitFetcher.fetch_random(null)
 
+func _handle_accept():
+	if $MarginContainer/SearchPage/ExhibitTitle.has_focus():
+		_search_exhibit()
+
 func _search_exhibit():
 	var search_text = $MarginContainer/SearchPage/ExhibitTitle.text
 	if len(search_text) > 0:
@@ -42,6 +47,7 @@ func _search_exhibit():
 		ExhibitFetcher.fetch_search($MarginContainer/SearchPage/ExhibitTitle.text, null)
 
 func _show_page_result(page, _ctx):
+	$MarginContainer/SearchPage/ExhibitTitle.text = ""
 	_on_terminal_result_ready(not page, page)
 
 func _on_terminal_result_ready(error: bool, page: String):

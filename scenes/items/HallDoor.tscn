@@ -12,6 +12,7 @@ size = Vector3(4, 4, 0.05)
 points = PackedVector3Array(2, 2, 0.025, 2, 2, -0.025, -2, 2, 0.025, 2, -2, 0.025, 2, -2, -0.025, -2, 2, -0.025, -2, -2, 0.025, -2, -2, -0.025)
 
 [node name="HallDoor" type="Node3D"]
+transform = Transform3D(0.999999, 0.00108824, -0.000152183, -0.00108825, 0.999999, -3.98627e-05, 0.000152141, 4.00259e-05, 1, 0, 0, 0)
 script = ExtResource("1_elymj")
 
 [node name="Door" type="Node3D" parent="."]

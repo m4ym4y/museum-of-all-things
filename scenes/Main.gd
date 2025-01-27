@@ -137,11 +137,11 @@ func _input(event):
   if not game_started:
     return
 
-  if (
-    Input.is_action_just_pressed("ui_cancel") or
-    Input.is_action_just_pressed("pause")
-  ):
+  if Input.is_action_just_pressed("ui_cancel"):
     GlobalMenuEvents.emit_ui_cancel_pressed()
+
+  if Input.is_action_just_pressed("ui_accept"):
+    GlobalMenuEvents.emit_ui_accept_pressed()
 
   if Input.is_action_just_pressed("show_fps"):
     $FpsLabel.visible = not $FpsLabel.visible
