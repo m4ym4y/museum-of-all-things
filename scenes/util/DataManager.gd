@@ -88,7 +88,7 @@ func _detect_image_type(data: PackedByteArray) -> String:
   return "Unknown"
 
 func _write_url(url: String, data: PackedByteArray) -> void:
-  #TODO: acquire lock?
+  _fs_lock.lock()
   var filename = _get_hash(url)
   var f = FileAccess.open(CacheControl.cache_dir + filename, FileAccess.WRITE)
   if f:
@@ -96,6 +96,7 @@ func _write_url(url: String, data: PackedByteArray) -> void:
     f.close()
   else:
     push_error("failed to write file ", url)
+  _fs_lock.unlock()
 
 func _read_url(url: String):
   _fs_lock.lock()
