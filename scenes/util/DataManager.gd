@@ -97,11 +97,6 @@ func _write_url(url: String, data: PackedByteArray) -> void:
   else:
     push_error("failed to write file ", url)
 
-func _touch_file(path):
-  var f = FileAccess.open(path, FileAccess.WRITE)
-  if f:
-    f.close()
-
 func _read_url(url: String):
   _fs_lock.lock()
   var filename = _get_hash(url)
@@ -110,10 +105,6 @@ func _read_url(url: String):
   if f:
     var data = f.get_buffer(f.get_length())
     f.close()
-
-    # update the last used date so it isn't cleared by cache cleaner
-    _touch_file(file_path)
-
     _fs_lock.unlock()
     return data
   else:
