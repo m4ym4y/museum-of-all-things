@@ -1,6 +1,5 @@
 extends Node3D
 
-@onready var CustomDoorMaterial = preload("res://assets/textures/marble21.tres")
 @onready var NoImageNotice = preload("res://scenes/items/NoImageNotice.tscn")
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
 @onready var StaticData = preload("res://assets/resources/lobby_data.tres")
@@ -100,7 +99,6 @@ func _set_up_lobby(lobby):
 
     elif not _custom_door:
       _custom_door = exit
-      _custom_door.entry_door.get_node("Door").set_material_override(CustomDoorMaterial)
       _custom_door.entry_door.set_open(false, true)
       _custom_door.to_sign.visible = false
 
