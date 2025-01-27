@@ -180,6 +180,7 @@ func _teleport_player(from_hall, to_hall, entry_to_exit=false):
       to_hall.entry_door.set_open(true)
     else:
       to_hall.exit_door.set_open(true)
+      from_hall.entry_door.set_open(true, false)
 
     _set_current_room_title(from_hall.from_title if entry_to_exit else from_hall.to_title)
   elif is_instance_valid(from_hall):
