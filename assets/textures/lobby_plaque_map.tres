@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bj7n7q60eccke"]
+
+[ext_resource type="Texture2D" uid="uid://cu3vmu0s0jbl4" path="res://assets/textures/lobby_plaque_map.png" id="1_3j8nc"]
+
+[resource]
+albedo_texture = ExtResource("1_3j8nc")
