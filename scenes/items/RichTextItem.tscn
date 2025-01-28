@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://byb3uy8rswlaf"]
+[gd_scene load_steps=3 format=3 uid="uid://byb3uy8rswlaf"]
 
 [ext_resource type="Script" path="res://scenes/items/RichTextItem.gd" id="1_xha8l"]
 [ext_resource type="Theme" uid="uid://cr3fyffqdk4yo" path="res://assets/resources/rich_text_theme.tres" id="2_k1xr6"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_54vlm"]
-viewport_path = NodePath("SubViewport")
 
 [node name="RichTextItem" type="Node3D"]
 script = ExtResource("1_xha8l")
@@ -14,7 +11,6 @@ visibility_range_end = 30.0
 visibility_range_end_margin = 3.0
 visibility_range_fade_mode = 1
 pixel_size = 0.004
-texture = SubResource("ViewportTexture_54vlm")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
@@ -48,9 +44,5 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_k1xr6")
 bbcode_enabled = true
-text = "Hello world
-sdfjksd kjsdf jksdfjksf jksdf s
-fs jkfsfjk sfjk sdjkfsjdk fjksd fsd
-fs djkfsdkjf sjkdfsjkd"
 fit_content = true
 scroll_active = false

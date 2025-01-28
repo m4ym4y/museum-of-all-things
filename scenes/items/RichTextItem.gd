@@ -15,6 +15,10 @@ func init(text):
 func _center_vertically(label):
   # Ensure the SubViewport is sized
   var viewport_size = $SubViewport.size
+  
+  # Get mipmapped image from viewport
+  #get_tree().create_timer(0.05).timeout.connect(_set_texture)
+  call_deferred("_set_texture")
 
   # Get the content height from the RichTextLabel
   var content_height = label.get_content_height()
@@ -31,3 +35,11 @@ func _center_vertically(label):
 
   # Set the position of the RichTextLabel
   label.position.y = y_position
+
+func _set_texture():
+  await get_tree().process_frame
+  var viewport_image = $SubViewport.get_texture().get_image()
+  viewport_image.generate_mipmaps()
+  var viewport_texture = ImageTexture.create_from_image(viewport_image)
+  $Sprite3D.texture = viewport_texture
+  $SubViewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
