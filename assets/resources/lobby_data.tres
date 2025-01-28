@@ -64,7 +64,7 @@ script = ExtResource("1_3ssej")
 introduction_text = "[center][color=black]
 [img=500]res://assets/logo/moat_logo_large.png[/img]
 
-[font_size=18]
+[font_size=14][fill]
 Welcome to the Museum of All Things! All guests are welcome here, whether you're manifesting in this space through a 2 dimensional window or via Virtual Reality. This museum is different from any you've visited in the physical world, so it may take a moment to get your bearings.
 
 Right now you are in the museum's lobby, tailored to give you a pleasant starting point on your visit. If you ever wish to return here, you may open your museum menu (via \"Escape,\" \"Start,\" or by hitting \"Y\" on your right-hand controller in Virtual Reality) and select \"Return to Lobby.\"
