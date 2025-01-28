@@ -5,6 +5,7 @@ extends Node3D
 @onready var RichTextItem = preload("res://scenes/items/RichTextItem.tscn")
 
 @onready var MarbleMaterial = preload("res://assets/textures/marble21.tres")
+@onready var WhiteMaterial = preload("res://assets/textures/flat_white.tres")
 @onready var WoodMaterial = preload("res://assets/textures/wood_2.tres")
 @onready var BlackMaterial = preload("res://assets/textures/black.tres")
 
@@ -79,6 +80,8 @@ func init(item_data):
   if item_data.has("material"):
     if item_data.material == "marble":
       $Item/Plaque.material_override = MarbleMaterial
+    if item_data.material == "white":
+      $Item/Plaque.material_override = WhiteMaterial
     elif item_data.material == "none":
       $Item/Plaque.visible = false
       _animate_item_target.z -= 0.05

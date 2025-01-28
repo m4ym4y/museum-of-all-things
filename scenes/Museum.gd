@@ -85,7 +85,7 @@ func _set_up_lobby(lobby):
   _exhibits["$Lobby"] = { "exhibit": lobby, "height": 0 }
   lobby.get_node("Introduction").init({
     "type": "rich_text",
-    "material": "marble",
+    "material": "white",
     "text": StaticData.introduction_text
   })
 
