@@ -30,7 +30,7 @@ omni_range = 4.0
 
 [node name="WaterAmbience1Reverb" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_naukb")
-volume_db = -15.0
+volume_db = -12.0
 autoplay = true
 max_distance = 20.0
 bus = &"Ambience"

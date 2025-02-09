@@ -39,3 +39,4 @@ shape = SubResource("2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.476292, 0)
 
 [node name="FootstepPlayer" parent="." instance=ExtResource("2_1mcm1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11465, 0)
