@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://e4gbj14px83a"
+path="res://.godot/imported/MoAT Footsteps Carpet 5.ogg-60e5a0f49096599e440e598f5316dadf.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Audio Library Vorbis/Footsteps/Carpet/MoAT Footsteps Carpet 5.ogg"
+dest_files=["res://.godot/imported/MoAT Footsteps Carpet 5.ogg-60e5a0f49096599e440e598f5316dadf.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

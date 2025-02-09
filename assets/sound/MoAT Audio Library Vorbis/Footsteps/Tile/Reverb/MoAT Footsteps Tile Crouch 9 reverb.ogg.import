@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cj2qhnvxf80a8"
+path="res://.godot/imported/MoAT Footsteps Tile Crouch 9 reverb.ogg-786bb0b7d29fac787357e1d3657cbdf4.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Audio Library Vorbis/Footsteps/Tile/Reverb/MoAT Footsteps Tile Crouch 9 reverb.ogg"
+dest_files=["res://.godot/imported/MoAT Footsteps Tile Crouch 9 reverb.ogg-786bb0b7d29fac787357e1d3657cbdf4.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

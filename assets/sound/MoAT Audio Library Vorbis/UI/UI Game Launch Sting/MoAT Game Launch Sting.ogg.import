@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b1h0hsbf5yxji"
+path="res://.godot/imported/MoAT Game Launch Sting.ogg-82009acd61dddfa5d5b4dc1acd1a71b1.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Audio Library Vorbis/UI/UI Game Launch Sting/MoAT Game Launch Sting.ogg"
+dest_files=["res://.godot/imported/MoAT Game Launch Sting.ogg-82009acd61dddfa5d5b4dc1acd1a71b1.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

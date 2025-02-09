@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://diwbyk2d2xjb5"
+path="res://.godot/imported/MoAT Footsteps Tile 4 reverb.ogg-6ae710cddc4c102e143c2b66e301733d.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Audio Library Vorbis/Footsteps/Tile/Reverb/MoAT Footsteps Tile 4 reverb.ogg"
+dest_files=["res://.godot/imported/MoAT Footsteps Tile 4 reverb.ogg-6ae710cddc4c102e143c2b66e301733d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

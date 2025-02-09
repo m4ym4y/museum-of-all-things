@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bqcfvu6srdtt6"
+path="res://.godot/imported/Moat Water Footsteps a 5.ogg-1389175093f2faa4ea05386318fe9738.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Audio Library Vorbis/Footsteps/Water/Reverb/Moat Water Footsteps a 5.ogg"
+dest_files=["res://.godot/imported/Moat Water Footsteps a 5.ogg-1389175093f2faa4ea05386318fe9738.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

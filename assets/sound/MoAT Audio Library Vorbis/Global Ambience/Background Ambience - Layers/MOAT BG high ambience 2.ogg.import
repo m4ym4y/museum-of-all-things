@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cxftcsxb3nv27"
+path="res://.godot/imported/MOAT BG high ambience 2.ogg-b9125343c2e357b7fb4b8a2f46f9ec2a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Audio Library Vorbis/Global Ambience/Background Ambience - Layers/MOAT BG high ambience 2.ogg"
+dest_files=["res://.godot/imported/MOAT BG high ambience 2.ogg-b9125343c2e357b7fb4b8a2f46f9ec2a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

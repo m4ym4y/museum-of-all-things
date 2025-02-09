@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://chhwl8obdjbba"
+path="res://.godot/imported/MoAT Global ambience 1.ogg-e00d793a8ec2790021ae6579c7b6f665.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Audio Library Vorbis/Global Ambience/MoAT Global ambience 1.ogg"
+dest_files=["res://.godot/imported/MoAT Global ambience 1.ogg-e00d793a8ec2790021ae6579c7b6f665.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

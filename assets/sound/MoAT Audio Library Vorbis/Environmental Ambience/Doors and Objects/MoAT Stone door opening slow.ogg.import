@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://fkaq83dsa6av"
+path="res://.godot/imported/MoAT Stone door opening slow.ogg-c1f3eaa94dd162d8458d6b0d7ffc38fe.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Audio Library Vorbis/Environmental Ambience/Doors and Objects/MoAT Stone door opening slow.ogg"
+dest_files=["res://.godot/imported/MoAT Stone door opening slow.ogg-c1f3eaa94dd162d8458d6b0d7ffc38fe.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

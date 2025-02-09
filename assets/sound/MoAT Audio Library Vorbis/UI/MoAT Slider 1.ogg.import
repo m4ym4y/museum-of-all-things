@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://wr3cs0ptevmt"
+path="res://.godot/imported/MoAT Slider 1.ogg-bdea83c84a7647406bf5de75c15b587c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Audio Library Vorbis/UI/MoAT Slider 1.ogg"
+dest_files=["res://.godot/imported/MoAT Slider 1.ogg-bdea83c84a7647406bf5de75c15b587c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

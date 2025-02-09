@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://hktaos2fgon5"
+path="res://.godot/imported/MoAT UI Select 10.ogg-809846a7824327de96354a8670f9c7ef.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Audio Library Vorbis/UI/MoAT UI Select 10.ogg"
+dest_files=["res://.godot/imported/MoAT UI Select 10.ogg-809846a7824327de96354a8670f9c7ef.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cmg8sjsanbjga"
+path="res://.godot/imported/MoAT Switch 3.ogg-6a659e9487f03b4b6a0e8c4bdd5fbaed.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Audio Library Vorbis/UI/MoAT Switch 3.ogg"
+dest_files=["res://.godot/imported/MoAT Switch 3.ogg-6a659e9487f03b4b6a0e8c4bdd5fbaed.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

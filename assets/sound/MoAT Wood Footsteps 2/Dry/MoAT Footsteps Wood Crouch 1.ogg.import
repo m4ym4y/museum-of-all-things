@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dgwb608uame67"
+path="res://.godot/imported/MoAT Footsteps Wood Crouch 1.ogg-a6977cce171d4bed5658d1e54e637573.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Wood Footsteps 2/Dry/MoAT Footsteps Wood Crouch 1.ogg"
+dest_files=["res://.godot/imported/MoAT Footsteps Wood Crouch 1.ogg-a6977cce171d4bed5658d1e54e637573.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

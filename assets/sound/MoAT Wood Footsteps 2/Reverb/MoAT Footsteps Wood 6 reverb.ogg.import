@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://br5d4h2mq5hht"
+path="res://.godot/imported/MoAT Footsteps Wood 6 reverb.ogg-01b4bdf47deae8268c12add26f367e29.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Wood Footsteps 2/Reverb/MoAT Footsteps Wood 6 reverb.ogg"
+dest_files=["res://.godot/imported/MoAT Footsteps Wood 6 reverb.ogg-01b4bdf47deae8268c12add26f367e29.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

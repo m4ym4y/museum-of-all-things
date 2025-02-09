@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ds1b87lsyvkyv"
+path="res://.godot/imported/MoAT Footsteps Wood 4.ogg-5c7c8161c54d349efe06b346b710817c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Wood Footsteps 2/Dry/MoAT Footsteps Wood 4.ogg"
+dest_files=["res://.godot/imported/MoAT Footsteps Wood 4.ogg-5c7c8161c54d349efe06b346b710817c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

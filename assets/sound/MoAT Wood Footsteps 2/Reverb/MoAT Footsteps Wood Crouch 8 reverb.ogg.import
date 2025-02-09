@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ddidc8wbjm3ke"
+path="res://.godot/imported/MoAT Footsteps Wood Crouch 8 reverb.ogg-2a8388fdcf74cb4d84a48fdb37a13fe9.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Wood Footsteps 2/Reverb/MoAT Footsteps Wood Crouch 8 reverb.ogg"
+dest_files=["res://.godot/imported/MoAT Footsteps Wood Crouch 8 reverb.ogg-2a8388fdcf74cb4d84a48fdb37a13fe9.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b7w17130bi4mh"
+path="res://.godot/imported/MoAT Footsteps Tile Crouch 4.ogg-3e39c28e759277d8dafb57cee117848a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Audio Library Vorbis/Footsteps/Tile/Dry/MoAT Footsteps Tile Crouch 4.ogg"
+dest_files=["res://.godot/imported/MoAT Footsteps Tile Crouch 4.ogg-3e39c28e759277d8dafb57cee117848a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

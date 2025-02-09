@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://jcmkxoubj6hu"
+path="res://.godot/imported/Moat Water Footsteps Heavy Compiled.ogg-b655205012d3cb558d3c3cfee6e55028.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Audio Library Vorbis/Footsteps/Water/Reverb/Moat Water Footsteps Heavy Compiled.ogg"
+dest_files=["res://.godot/imported/Moat Water Footsteps Heavy Compiled.ogg-b655205012d3cb558d3c3cfee6e55028.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

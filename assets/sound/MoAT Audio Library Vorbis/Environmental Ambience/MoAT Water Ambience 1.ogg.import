@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://df4wknlyq0w53"
+path="res://.godot/imported/MoAT Water Ambience 1.ogg-2361bdb2452fb7280736b581630676a0.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/MoAT Audio Library Vorbis/Environmental Ambience/MoAT Water Ambience 1.ogg"
+dest_files=["res://.godot/imported/MoAT Water Ambience 1.ogg-2361bdb2452fb7280736b581630676a0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
