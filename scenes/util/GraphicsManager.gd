@@ -2,6 +2,8 @@ extends Node
 
 signal change_post_processing(post_processing: String)
 
+const _settings_ns = "graphics"
+
 var _env
 var limit_fps = false
 var fps_limit = 60
@@ -18,7 +20,7 @@ func init():
     return
 
   _default_settings_obj = _create_settings_obj()
-  var loaded_settings = _load_settings()
+  var loaded_settings = SettingsManager.get_settings(_settings_ns)
   if loaded_settings:
     _apply_settings(loaded_settings, _default_settings_obj)
 
@@ -85,16 +87,4 @@ func restore_default_settings():
   _apply_settings(_default_settings_obj)
 
 func save_settings():
-  var s = _create_settings_obj()
-  var json_text = JSON.stringify(s)
-  var file = FileAccess.open("user://settings.json", FileAccess.WRITE)
-  file.store_string(json_text)
-  file.close()
-
-func _load_settings():
-  var file = FileAccess.open("user://settings.json", FileAccess.READ)
-  if not file:
-    return null
-  var json_text = file.get_as_text()
-  file.close()
-  return JSON.parse_string(json_text)
+  SettingsManager.save_settings(_settings_ns, _create_settings_obj())

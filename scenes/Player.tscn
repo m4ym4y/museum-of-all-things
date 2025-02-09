@@ -41,6 +41,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.476292, 0)
 
 [node name="FootstepsHard" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_e5vsf")
+bus = &"Sound"
 
 [node name="FootstepsSoft" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_1u35d")
+bus = &"Sound"

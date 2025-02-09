@@ -3,6 +3,7 @@ extends Control
 signal resume
 
 @onready var vbox = $MarginContainer/VBoxContainer
+const _settings_ns = "xr_controls"
 var _default_settings
 
 func _ready():
@@ -10,7 +11,7 @@ func _ready():
 
 func _load_xr_settings():
   _default_settings = _create_settings_obj()
-  var settings = _load_settings()
+  var settings = SettingsManager.get_settings(_settings_ns)
   _apply_settings(settings)
 
 func _apply_settings(settings):
@@ -28,14 +29,6 @@ func _apply_settings(settings):
   if settings.has("smooth_rotation"):
     vbox.get_node("RotationOptions/SmoothRotation").button_pressed = settings.smooth_rotation
 
-func _load_settings():
-  var file = FileAccess.open("user://vr_settings.json", FileAccess.READ)
-  if not file:
-    return null
-  var json_text = file.get_as_text()
-  file.close()
-  return JSON.parse_string(json_text)
-
 func _create_settings_obj():
   return {
     "movement_style": "teleportation" if vbox.get_node("MovementOptions/Styles/Teleportation").disabled else "direct",
@@ -45,11 +38,7 @@ func _create_settings_obj():
   }
 
 func _save_settings():
-  var s = _create_settings_obj()
-  var json_text = JSON.stringify(s)
-  var file = FileAccess.open("user://vr_settings.json", FileAccess.WRITE)
-  file.store_string(json_text)
-  file.close()
+  SettingsManager.save_settings(_settings_ns, _create_settings_obj())
 
 func _on_back_pressed() -> void:
   _save_settings()

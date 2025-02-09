@@ -27,6 +27,7 @@ WorkQueue="*res://scenes/util/ThreadSafeWorkQueue.gd"
 RequestSync="*res://scenes/util/RequestSync.gd"
 ItemProcessor="*res://scenes/util/ItemProcessor.gd"
 GlobalMenuEvents="*res://scenes/util/GlobalMenuEvents.gd"
+SettingsManager="*res://scenes/util/SettingsManager.gd"
 
 [display]
 
@@ -38,7 +39,7 @@ window/vsync/vsync_mode=0
 
 [editor]
 
-movie_writer/movie_file="/home/maya/Videos/custom_exhibit.avi"
+movie_writer/movie_file="/home/maya/Videos/speed_run.avi"
 naming/scene_name_casing=1
 naming/script_name_casing=1
 
@@ -163,6 +164,16 @@ free_pointer={
 show_fps={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":96,"key_label":0,"unicode":96,"location":0,"echo":false,"script":null)
+]
+}
+menu_right={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":10,"pressure":0.0,"pressed":false,"script":null)
+]
+}
+menu_left={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":9,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
 

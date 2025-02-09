@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbp0v2aoglhrr"]
+[gd_scene load_steps=7 format=3 uid="uid://bw3fu2y38n3yk"]
 
 [ext_resource type="Script" path="res://scenes/menu/Settings.gd" id="1_4scry"]
 [ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="1_v0h4s"]
-[ext_resource type="Script" path="res://scenes/menu/ScrollContainer.gd" id="3_dlr0f"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_2yad8"]
-font_size = 64
+[ext_resource type="PackedScene" uid="uid://bbp0v2aoglhrr" path="res://scenes/menu/GraphicsSettings.tscn" id="2_whl1p"]
+[ext_resource type="Script" path="res://scenes/menu/ScrollContainer.gd" id="3_ds06t"]
+[ext_resource type="PackedScene" uid="uid://c3ljfgt8nv5v" path="res://scenes/menu/XRControlsMenu.tscn" id="3_s7rjb"]
+[ext_resource type="PackedScene" uid="uid://f0jxppprskc3" path="res://scenes/menu/DataSettings.tscn" id="5_mo3yx"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -25,239 +25,45 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 follow_focus = true
-script = ExtResource("3_dlr0f")
+horizontal_scroll_mode = 0
+script = ExtResource("3_ds06t")
 
-[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TabBar" type="TabBar" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+current_tab = 0
+tab_alignment = 1
+tab_count = 4
+tab_0/title = "Graphics"
+tab_1/title = "Audio"
+tab_2/title = "Controls"
+tab_3/title = "Data"
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 100
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="MainOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="GraphicsSettings" parent="ScrollContainer/VBoxContainer/MarginContainer" instance=ExtResource("2_whl1p")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/MainOptions"]
-layout_mode = 2
-text = "Settings"
-label_settings = SubResource("LabelSettings_2yad8")
-
-[node name="Back" type="Button" parent="ScrollContainer/MarginContainer/VBoxContainer/MainOptions"]
-layout_mode = 2
-text = "Back
-"
-
-[node name="Restore" type="Button" parent="ScrollContainer/MarginContainer/VBoxContainer/MainOptions"]
-layout_mode = 2
-text = "Restore Default Settings
-"
-
-[node name="DisplayOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Spacer4" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/DisplayOptions"]
-layout_mode = 2
-text = " 
-"
-
-[node name="Label" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/DisplayOptions"]
-layout_mode = 2
-text = "Render Scale"
-
-[node name="RenderScale" type="HSlider" parent="ScrollContainer/MarginContainer/VBoxContainer/DisplayOptions"]
-layout_mode = 2
-min_value = 0.1
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="RenderScaleValue" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/DisplayOptions"]
-layout_mode = 2
-text = "1.0
-"
-horizontal_alignment = 1
-
-[node name="Fullscreen" type="CheckBox" parent="ScrollContainer/MarginContainer/VBoxContainer/DisplayOptions"]
-layout_mode = 2
-text = "Fullscreen"
-
-[node name="ReflectionOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Spacer4" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions"]
-layout_mode = 2
-text = " 
-"
-
-[node name="Label2" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions"]
-layout_mode = 2
-text = "Reflection Quality"
-
-[node name="ReflectionQuality" type="HSlider" parent="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions"]
-layout_mode = 2
-max_value = 512.0
-step = 16.0
-value = 256.0
-rounded = true
-
-[node name="ReflectionQualityValue" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions"]
-layout_mode = 2
-text = "256"
-horizontal_alignment = 1
-
-[node name="EnableReflections" type="CheckBox" parent="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions"]
-layout_mode = 2
-button_pressed = true
-text = "Enable Reflections"
-
-[node name="RenderDistanceOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="DataSettings" parent="ScrollContainer/VBoxContainer/MarginContainer" instance=ExtResource("5_mo3yx")]
 visible = false
 layout_mode = 2
 
-[node name="Spacer" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/RenderDistanceOptions"]
+[node name="XrControlsMenu" parent="ScrollContainer/VBoxContainer/MarginContainer" instance=ExtResource("3_s7rjb")]
+visible = false
 layout_mode = 2
-text = " 
-"
-
-[node name="Label3" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/RenderDistanceOptions"]
-layout_mode = 2
-text = "Render Distance
-"
-
-[node name="RenderDistance" type="HSlider" parent="ScrollContainer/MarginContainer/VBoxContainer/RenderDistanceOptions"]
-layout_mode = 2
-min_value = 5.0
-max_value = 70.0
-value = 35.0
-
-[node name="LightOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Spacer" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/LightOptions"]
-layout_mode = 2
-text = " 
-"
-
-[node name="Label2" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/LightOptions"]
-layout_mode = 2
-text = "Ambient Light Level"
-
-[node name="AmbientLight" type="HSlider" parent="ScrollContainer/MarginContainer/VBoxContainer/LightOptions"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-value = 0.2
-
-[node name="AmbientLightValue" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/LightOptions"]
-layout_mode = 2
-text = "0.2"
-horizontal_alignment = 1
-
-[node name="EnableSSIL" type="CheckBox" parent="ScrollContainer/MarginContainer/VBoxContainer/LightOptions"]
-layout_mode = 2
-text = "Enable Indirect Lighting (SSIL)"
-
-[node name="FogOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Spacer3" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/FogOptions"]
-layout_mode = 2
-text = " 
-"
-
-[node name="Label5" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/FogOptions"]
-layout_mode = 2
-text = "Fog
-"
-
-[node name="EnableFog" type="CheckBox" parent="ScrollContainer/MarginContainer/VBoxContainer/FogOptions"]
-layout_mode = 2
-button_pressed = true
-text = "Enable Fog"
-
-[node name="FPSOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Spacer2" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/FPSOptions"]
-layout_mode = 2
-text = " 
-"
-
-[node name="Label4" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/FPSOptions"]
-layout_mode = 2
-text = "Maximum FPS
-"
-
-[node name="MaxFPS" type="HSlider" parent="ScrollContainer/MarginContainer/VBoxContainer/FPSOptions"]
-layout_mode = 2
-min_value = 20.0
-max_value = 240.0
-step = 5.0
-value = 60.0
-rounded = true
-
-[node name="MaxFPSValue" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/FPSOptions"]
-layout_mode = 2
-text = "60"
-horizontal_alignment = 1
-
-[node name="LimitFPS" type="CheckBox" parent="ScrollContainer/MarginContainer/VBoxContainer/FPSOptions"]
-layout_mode = 2
-text = "Limit FPS"
-
-[node name="PostProcessingOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Spacer3" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/PostProcessingOptions"]
-layout_mode = 2
-text = " 
-"
-
-[node name="Label5" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/PostProcessingOptions"]
-layout_mode = 2
-text = "Post-Processing Effect
-"
-
-[node name="PostProcessingEffect" type="OptionButton" parent="ScrollContainer/MarginContainer/VBoxContainer/PostProcessingOptions"]
-layout_mode = 2
-selected = 0
-item_count = 2
-popup/item_0/text = "None"
-popup/item_1/text = "CRT Filter"
-popup/item_1/id = 1
-
-[node name="CacheOptions" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Spacer5" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/CacheOptions"]
-layout_mode = 2
-text = " 
-"
-
-[node name="CacheLabel" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer/CacheOptions"]
-layout_mode = 2
-text = "Cache"
-
-[node name="ClearCache" type="Button" parent="ScrollContainer/MarginContainer/VBoxContainer/CacheOptions"]
-layout_mode = 2
-text = "Clear Cache"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="pressed" from="ScrollContainer/MarginContainer/VBoxContainer/MainOptions/Back" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="ScrollContainer/MarginContainer/VBoxContainer/MainOptions/Restore" to="." method="_on_restore_pressed"]
-[connection signal="value_changed" from="ScrollContainer/MarginContainer/VBoxContainer/DisplayOptions/RenderScale" to="." method="_on_render_scale_value_changed"]
-[connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/DisplayOptions/Fullscreen" to="." method="_on_fullscreen_toggled"]
-[connection signal="value_changed" from="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions/ReflectionQuality" to="." method="_on_reflection_quality_value_changed"]
-[connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/ReflectionOptions/EnableReflections" to="." method="_on_enable_reflections_toggled"]
-[connection signal="value_changed" from="ScrollContainer/MarginContainer/VBoxContainer/LightOptions/AmbientLight" to="." method="_on_ambient_light_value_changed"]
-[connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/LightOptions/EnableSSIL" to="." method="_on_enable_ssil_toggled"]
-[connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/FogOptions/EnableFog" to="." method="_on_enable_fog_toggled"]
-[connection signal="value_changed" from="ScrollContainer/MarginContainer/VBoxContainer/FPSOptions/MaxFPS" to="." method="_on_max_fps_value_changed"]
-[connection signal="toggled" from="ScrollContainer/MarginContainer/VBoxContainer/FPSOptions/LimitFPS" to="." method="_on_limit_fps_toggled"]
-[connection signal="item_selected" from="ScrollContainer/MarginContainer/VBoxContainer/PostProcessingOptions/PostProcessingEffect" to="." method="_on_post_processing_effect_item_selected"]
-[connection signal="pressed" from="ScrollContainer/MarginContainer/VBoxContainer/CacheOptions/ClearCache" to="." method="_on_clear_cache_pressed"]
+[connection signal="tab_changed" from="ScrollContainer/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
+[connection signal="tab_clicked" from="ScrollContainer/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_clicked"]
+[connection signal="resume" from="ScrollContainer/VBoxContainer/MarginContainer/GraphicsSettings" to="." method="_on_resume"]
+[connection signal="resume" from="ScrollContainer/VBoxContainer/MarginContainer/DataSettings" to="." method="_on_resume"]
+[connection signal="resume" from="ScrollContainer/VBoxContainer/MarginContainer/XrControlsMenu" to="." method="_on_resume"]

@@ -2,6 +2,8 @@ extends Node
 
 signal ui_cancel_pressed
 signal ui_accept_pressed
+signal menu_right_pressed
+signal menu_left_pressed
 signal hide_menu
 signal return_to_lobby
 signal set_current_room
@@ -20,6 +22,12 @@ func emit_ui_cancel_pressed():
 
 func emit_ui_accept_pressed():
   emit_signal("ui_accept_pressed")
+
+func emit_menu_right_pressed():
+  emit_signal("menu_right_pressed")
+
+func emit_menu_left_pressed():
+  emit_signal("menu_left_pressed")
 
 func emit_hide_menu():
   emit_signal("hide_menu")
