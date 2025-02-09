@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxfoujgkv1e2y"]
+
+[ext_resource type="AudioStream" uid="uid://dgvb4rgq7wbl" path="res://assets/sound/steps_2.mp3" id="1_g5uht"]
+[ext_resource type="Script" path="res://scenes/FootstepPlayer.gd" id="1_oq4ik"]
+[ext_resource type="AudioStream" uid="uid://do2av7rtfs66a" path="res://assets/sound/steps_3.mp3" id="2_7swru"]
+
+[node name="FootstepPlayer" type="Node3D"]
+script = ExtResource("1_oq4ik")
+
+[node name="FootstepsHard" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_g5uht")
+bus = &"Sound"
+
+[node name="FootstepsSoft" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_7swru")
+bus = &"Sound"
