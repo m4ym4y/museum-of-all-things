@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bw3fu2y38n3yk"]
+[gd_scene load_steps=8 format=3 uid="uid://bw3fu2y38n3yk"]
 
 [ext_resource type="Script" path="res://scenes/menu/Settings.gd" id="1_4scry"]
 [ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="1_v0h4s"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/menu/ScrollContainer.gd" id="3_ds06t"]
 [ext_resource type="PackedScene" uid="uid://c3ljfgt8nv5v" path="res://scenes/menu/XRControlsMenu.tscn" id="3_s7rjb"]
 [ext_resource type="PackedScene" uid="uid://f0jxppprskc3" path="res://scenes/menu/DataSettings.tscn" id="5_mo3yx"]
+[ext_resource type="PackedScene" uid="uid://cah8jnesp3dgx" path="res://scenes/menu/AudioSettings.tscn" id="5_yolm2"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -28,12 +29,21 @@ follow_focus = true
 horizontal_scroll_mode = 0
 script = ExtResource("3_ds06t")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TabBar" type="TabBar" parent="ScrollContainer/VBoxContainer"]
+[node name="TabBar" type="TabBar" parent="ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 current_tab = 0
 tab_alignment = 1
@@ -43,27 +53,32 @@ tab_1/title = "Audio"
 tab_2/title = "Controls"
 tab_3/title = "Data"
 
-[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
 
-[node name="GraphicsSettings" parent="ScrollContainer/VBoxContainer/MarginContainer" instance=ExtResource("2_whl1p")]
+[node name="GraphicsSettings" parent="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer" instance=ExtResource("2_whl1p")]
 layout_mode = 2
 
-[node name="DataSettings" parent="ScrollContainer/VBoxContainer/MarginContainer" instance=ExtResource("5_mo3yx")]
+[node name="AudioSettings" parent="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer" instance=ExtResource("5_yolm2")]
 visible = false
 layout_mode = 2
 
-[node name="XrControlsMenu" parent="ScrollContainer/VBoxContainer/MarginContainer" instance=ExtResource("3_s7rjb")]
+[node name="DataSettings" parent="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer" instance=ExtResource("5_mo3yx")]
+visible = false
+layout_mode = 2
+
+[node name="XrControlsMenu" parent="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer" instance=ExtResource("3_s7rjb")]
 visible = false
 layout_mode = 2
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="tab_changed" from="ScrollContainer/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
-[connection signal="tab_clicked" from="ScrollContainer/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_clicked"]
-[connection signal="resume" from="ScrollContainer/VBoxContainer/MarginContainer/GraphicsSettings" to="." method="_on_resume"]
-[connection signal="resume" from="ScrollContainer/VBoxContainer/MarginContainer/DataSettings" to="." method="_on_resume"]
-[connection signal="resume" from="ScrollContainer/VBoxContainer/MarginContainer/XrControlsMenu" to="." method="_on_resume"]
+[connection signal="tab_changed" from="ScrollContainer/MarginContainer/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
+[connection signal="tab_clicked" from="ScrollContainer/MarginContainer/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_clicked"]
+[connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/GraphicsSettings" to="." method="_on_resume"]
+[connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/AudioSettings" to="." method="_on_resume"]
+[connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/DataSettings" to="." method="_on_resume"]
+[connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/XrControlsMenu" to="." method="_on_resume"]

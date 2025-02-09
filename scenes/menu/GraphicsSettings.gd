@@ -1,4 +1,4 @@
-extends Control
+extends VBoxContainer
 
 signal resume
 @onready var _vbox = self

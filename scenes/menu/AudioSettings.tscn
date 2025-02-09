@@ -1,0 +1,86 @@
+[gd_scene load_steps=4 format=3 uid="uid://cah8jnesp3dgx"]
+
+[ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="1_uck0y"]
+[ext_resource type="Script" path="res://scenes/menu/AudioSettings.gd" id="2_o66du"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_giwmb"]
+font_size = 64
+
+[node name="AudioSettings" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_uck0y")
+script = ExtResource("2_o66du")
+
+[node name="MainOptions" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainOptions"]
+layout_mode = 2
+text = "Audio Settings"
+label_settings = SubResource("LabelSettings_giwmb")
+
+[node name="Back" type="Button" parent="MainOptions"]
+layout_mode = 2
+text = "Back
+"
+
+[node name="VolumeOptions" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VolumeOptions"]
+layout_mode = 2
+text = " "
+
+[node name="Label4" type="Label" parent="VolumeOptions"]
+layout_mode = 2
+text = "Global Volume"
+
+[node name="GlobalVolume" type="HSlider" parent="VolumeOptions"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="GlobalValue" type="Label" parent="VolumeOptions"]
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="VolumeOptions"]
+layout_mode = 2
+text = "Sound Effects Volume"
+
+[node name="SoundVolume" type="HSlider" parent="VolumeOptions"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SoundValue" type="Label" parent="VolumeOptions"]
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="VolumeOptions"]
+layout_mode = 2
+text = "Ambience Volume"
+
+[node name="AmbienceVolume" type="HSlider" parent="VolumeOptions"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="AmbienceValue" type="Label" parent="VolumeOptions"]
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MainOptions/Back" to="." method="_on_resume"]
+[connection signal="value_changed" from="VolumeOptions/GlobalVolume" to="." method="_on_global_volume_changed"]
+[connection signal="value_changed" from="VolumeOptions/SoundVolume" to="." method="_on_sound_volume_changed"]
+[connection signal="value_changed" from="VolumeOptions/AmbienceVolume" to="." method="_on_ambience_volume_changed"]
