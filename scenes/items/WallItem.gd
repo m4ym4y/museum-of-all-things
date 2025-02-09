@@ -31,6 +31,8 @@ func _start_animate():
 
   if not player or position.distance_to(player.global_position) > 20.0:
     tween_time = 0
+  else:
+    $SlideSound.play()
 
   var tween = create_tween()
   var light_tween = create_tween()

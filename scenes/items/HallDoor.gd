@@ -29,6 +29,8 @@ func set_open(open = true, instant = false):
 		)
 		tween.set_trans(Tween.TRANS_LINEAR)
 		tween.set_ease(Tween.EASE_IN_OUT)
+		if open:
+			$OpenSound.play()
 	else:
 		_door.position = _open_pos if open else _closed_pos
 

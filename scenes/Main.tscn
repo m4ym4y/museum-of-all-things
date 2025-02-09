@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnnoct48gjtw6"]
+[gd_scene load_steps=10 format=3 uid="uid://bnnoct48gjtw6"]
 
 [ext_resource type="Script" path="res://scenes/Main.gd" id="1_d7g3n"]
 [ext_resource type="PackedScene" uid="uid://5javxi3uy0ep" path="res://scenes/Museum.tscn" id="1_ivvmh"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bhi1d8bl668hb" path="res://scenes/menu/PauseMenu.tscn" id="5_boks6"]
 [ext_resource type="PackedScene" uid="uid://b575vo2u5rw0p" path="res://scenes/menu/PopupTerminalMenu.tscn" id="6_cjdwp"]
 [ext_resource type="PackedScene" uid="uid://btdrwyul4s0cv" path="res://scenes/CacheCleaner.tscn" id="7_lsl8e"]
+[ext_resource type="AudioStream" uid="uid://b1h0hsbf5yxji" path="res://assets/sound/UI/UI Game Launch Sting/Game Launch Sting.ogg" id="9_ketwq"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_d7g3n")
@@ -57,6 +58,10 @@ scale = Vector2(1, 1.0203)
 theme_override_colors/font_color = Color(1, 1, 1, 0.501961)
 
 [node name="CacheCleaner" parent="." instance=ExtResource("7_lsl8e")]
+
+[node name="GameLaunchSting" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_ketwq")
+bus = &"Music"
 
 [connection signal="resume" from="CanvasLayer/Settings" to="." method="_on_settings_back"]
 [connection signal="settings" from="CanvasLayer/MainMenu" to="." method="_on_main_menu_settings"]

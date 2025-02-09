@@ -42,8 +42,13 @@ func _ready():
   GlobalMenuEvents.return_to_lobby.connect(_on_pause_menu_return_to_lobby)
   GlobalMenuEvents.open_terminal_menu.connect(_use_terminal)
 
+  call_deferred("_play_sting")
+
   if not _xr:
     _pause_game()
+
+func _play_sting():
+  $GameLaunchSting.play()
 
 func _change_post_processing(post_processing: String):
   if post_processing == "crt":

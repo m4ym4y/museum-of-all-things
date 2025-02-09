@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy7vwbnkk3yj1"]
+[gd_scene load_steps=8 format=3 uid="uid://cy7vwbnkk3yj1"]
 
 [ext_resource type="Script" path="res://scenes/items/HallDoor.gd" id="1_elymj"]
 [ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://assets/textures/wood.tres" id="2_duu5k"]
+[ext_resource type="AudioStream" uid="uid://duvaewxoqrnoe" path="res://assets/sound/Environmental Ambience/Doors and Objects/Stone Door Opening Alt.ogg" id="2_lfmdy"]
 [ext_resource type="ArrayMesh" uid="uid://wbso87dqiion" path="res://assets/models/hall_lock.obj" id="3_mhnho"]
 [ext_resource type="Material" uid="uid://duhitdhs7gf8p" path="res://assets/textures/hall_lock.tres" id="4_87ha0"]
 
@@ -14,6 +15,11 @@ points = PackedVector3Array(2, 2, 0.025, 2, 2, -0.025, -2, 2, 0.025, 2, -2, 0.02
 [node name="HallDoor" type="Node3D"]
 transform = Transform3D(0.999999, 0.00108824, -0.000152183, -0.00108825, 0.999999, -3.98627e-05, 0.000152141, 4.00259e-05, 1, 0, 0, 0)
 script = ExtResource("1_elymj")
+
+[node name="OpenSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_lfmdy")
+pitch_scale = 2.0
+bus = &"Sound"
 
 [node name="Door" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

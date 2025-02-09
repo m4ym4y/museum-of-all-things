@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnfgmu10ohtpt"]
+[gd_scene load_steps=7 format=3 uid="uid://cnfgmu10ohtpt"]
 
 [ext_resource type="ArrayMesh" uid="uid://dru3nkgfut6o4" path="res://assets/models/pool.obj" id="1_8j43i"]
 [ext_resource type="Script" path="res://scenes/items/pool.gd" id="1_ao6a7"]
 [ext_resource type="Material" uid="uid://datvvi6j3c0kp" path="res://assets/textures/white.tres" id="2_jqyjj"]
 [ext_resource type="PackedScene" uid="uid://bfyy27kell8ig" path="res://scenes/items/Water.tscn" id="3_cd5xv"]
+[ext_resource type="AudioStream" uid="uid://ce3pxtgko3tgd" path="res://assets/sound/Environmental Ambience/Water Ambience 1 Reverb.ogg" id="5_naukb"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_smwvp"]
 data = PackedVector3Array(-2.4946, 0.6, 2.4946, -2.4946, 0.6, -2.4946, -2.4946, 0.038, 2.4946, -2.4946, 0.038, 2.4946, -2.4946, 0.6, -2.4946, -2.4946, 0.038, -2.4946, 3, 0.6, 3, 3, 0, 3, -3, 0.6, 3, -3, 0.6, 3, 3, 0, 3, -3, 0, 3, -3, 0.6, 3, -3, 0, 3, -3, 0.6, -3, -3, 0.6, -3, -3, 0, 3, -3, 0, -3, 3, 0, -3, -3, 0, -3, 3, 0, 3, 3, 0, 3, -3, 0, -3, -3, 0, 3, 3, 0.6, -3, 3, 0, -3, 3, 0.6, 3, 3, 0.6, 3, 3, 0, -3, 3, 0, 3, -3, 0.6, -3, -3, 0, -3, 3, 0.6, -3, 3, 0.6, -3, -3, 0, -3, 3, 0, -3, -2.4946, 0.6, 2.4946, 2.4946, 0.6, 2.4946, -3, 0.6, 3, -3, 0.6, 3, 2.4946, 0.6, 2.4946, 3, 0.6, 3, 2.4946, 0.6, 2.4946, 2.4946, 0.6, -2.4946, 3, 0.6, 3, 3, 0.6, 3, 2.4946, 0.6, -2.4946, 3, 0.6, -3, -2.4946, 0.6, -2.4946, -2.4946, 0.6, 2.4946, -3, 0.6, -3, -3, 0.6, -3, -2.4946, 0.6, 2.4946, -3, 0.6, 3, 2.4946, 0.6, -2.4946, -2.4946, 0.6, -2.4946, 3, 0.6, -3, 3, 0.6, -3, -2.4946, 0.6, -2.4946, -3, 0.6, -3, -2.4946, 0.038, -2.4946, 2.4946, 0.038, -2.4946, -2.4946, 0.038, 2.4946, -2.4946, 0.038, 2.4946, 2.4946, 0.038, -2.4946, 2.4946, 0.038, 2.4946, 2.4946, 0.6, 2.4946, -2.4946, 0.6, 2.4946, 2.4946, 0.038, 2.4946, 2.4946, 0.038, 2.4946, -2.4946, 0.6, 2.4946, -2.4946, 0.038, 2.4946, -2.4946, 0.6, -2.4946, 2.4946, 0.6, -2.4946, -2.4946, 0.038, -2.4946, -2.4946, 0.038, -2.4946, 2.4946, 0.6, -2.4946, 2.4946, 0.038, -2.4946, 2.4946, 0.6, -2.4946, 2.4946, 0.6, 2.4946, 2.4946, 0.038, -2.4946, 2.4946, 0.038, -2.4946, 2.4946, 0.6, 2.4946, 2.4946, 0.038, 2.4946)
@@ -26,3 +27,10 @@ transform = Transform3D(2.8, 0, 0, 0, 1, 0, 0, 0, 2.8, 0, 0.323462, 0)
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55963, 0)
 omni_range = 4.0
+
+[node name="WaterAmbience1Reverb" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_naukb")
+volume_db = -15.0
+autoplay = true
+max_distance = 20.0
+bus = &"Ambience"

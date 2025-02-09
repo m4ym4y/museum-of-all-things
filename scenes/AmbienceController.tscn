@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b67kdt23qph25"]
+
+[ext_resource type="Script" path="res://scenes/AmbienceController.gd" id="1_l37vc"]
+
+[node name="AmbienceController" type="Node3D"]
+script = ExtResource("1_l37vc")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 25.0
