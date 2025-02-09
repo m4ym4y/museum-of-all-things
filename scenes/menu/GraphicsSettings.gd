@@ -4,6 +4,7 @@ signal resume
 @onready var _vbox = self
 @onready var _xr = Util.is_xr()
 @onready var post_processing_options = ["none", "crt"]
+var _loaded_settings = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,14 +21,16 @@ func ui_cancel_pressed():
 func _on_visibility_changed():
   if visible and is_inside_tree():
     _load_settings()
+  elif _loaded_settings and not visible:
+    GraphicsManager.save_settings()
 
 func _load_settings():
   var e = GraphicsManager.get_env()
+  _loaded_settings = true
 
   _vbox.get_node("FPSOptions/MaxFPS").value = GraphicsManager.fps_limit
   _vbox.get_node("FPSOptions/LimitFPS").button_pressed = GraphicsManager.limit_fps
   _vbox.get_node("DisplayOptions/Fullscreen").button_pressed = GraphicsManager.fullscreen
-  _vbox.get_node("DisplayOptions/RenderScale").value = GraphicsManager.render_scale
   _vbox.get_node("ReflectionOptions/ReflectionQuality").value = e.ssr_max_steps
   _vbox.get_node("ReflectionOptions/EnableReflections").button_pressed = e.ssr_enabled
   _vbox.get_node("LightOptions/AmbientLight").value = e.ambient_light_energy

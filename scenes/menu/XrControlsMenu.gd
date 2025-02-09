@@ -5,6 +5,7 @@ signal resume
 @onready var vbox = $MarginContainer/VBoxContainer
 const _settings_ns = "xr_controls"
 var _default_settings
+var _loaded_settings = false
 
 func _ready():
   GlobalMenuEvents.load_xr_settings.connect(_load_xr_settings)
@@ -12,7 +13,12 @@ func _ready():
 func _load_xr_settings():
   _default_settings = _create_settings_obj()
   var settings = SettingsManager.get_settings(_settings_ns)
+  _loaded_settings = true
   _apply_settings(settings)
+
+func _on_visibility_changed():
+  if _loaded_settings and not visible:
+    _save_settings()
 
 func _apply_settings(settings):
   if not settings:

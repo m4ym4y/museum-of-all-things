@@ -80,7 +80,25 @@ layout_mode = 2
 text = "100%"
 horizontal_alignment = 1
 
+[node name="Label5" type="Label" parent="VolumeOptions"]
+layout_mode = 2
+text = "Music Volume
+"
+
+[node name="MusicVolume" type="HSlider" parent="VolumeOptions"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MusicValue" type="Label" parent="VolumeOptions"]
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 1
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MainOptions/Back" to="." method="_on_resume"]
 [connection signal="value_changed" from="VolumeOptions/GlobalVolume" to="." method="_on_global_volume_changed"]
 [connection signal="value_changed" from="VolumeOptions/SoundVolume" to="." method="_on_sound_volume_changed"]
 [connection signal="value_changed" from="VolumeOptions/AmbienceVolume" to="." method="_on_ambience_volume_changed"]
+[connection signal="value_changed" from="VolumeOptions/MusicVolume" to="." method="_on_music_volume_changed"]
