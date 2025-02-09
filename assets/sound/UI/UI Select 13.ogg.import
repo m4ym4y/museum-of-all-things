@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dasynq4b1c3c8"
+path="res://.godot/imported/UI Select 13.ogg-9851567f0b19e9241d3336c36ff3708f.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/UI/UI Select 13.ogg"
+dest_files=["res://.godot/imported/UI Select 13.ogg-9851567f0b19e9241d3336c36ff3708f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

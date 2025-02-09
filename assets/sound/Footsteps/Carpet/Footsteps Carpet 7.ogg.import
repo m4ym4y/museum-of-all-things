@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cve04hq3sfb80"
+path="res://.godot/imported/Footsteps Carpet 7.ogg-1f63a2f77a99ed8401826542f3a41294.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Footsteps/Carpet/Footsteps Carpet 7.ogg"
+dest_files=["res://.godot/imported/Footsteps Carpet 7.ogg-1f63a2f77a99ed8401826542f3a41294.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

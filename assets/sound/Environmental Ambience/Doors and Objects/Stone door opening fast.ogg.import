@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dhiabjdnmfcpb"
+path="res://.godot/imported/Stone door opening fast.ogg-4ebc80c5309be82f372b97e0eb45a71b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Environmental Ambience/Doors and Objects/Stone door opening fast.ogg"
+dest_files=["res://.godot/imported/Stone door opening fast.ogg-4ebc80c5309be82f372b97e0eb45a71b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

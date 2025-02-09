@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dd5ypr35kktbb"
+path="res://.godot/imported/Dirt Footsteps Crouch 2.ogg-0a5527d5121764738eadf6701c0f150f.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Footsteps/Dirt/Dirt Footsteps Crouch 2.ogg"
+dest_files=["res://.godot/imported/Dirt Footsteps Crouch 2.ogg-0a5527d5121764738eadf6701c0f150f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

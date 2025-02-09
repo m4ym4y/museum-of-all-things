@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dsvykuf3g6h4w"
+path="res://.godot/imported/Water Footsteps a 6.ogg-3a321be33826117be6c69fedaec75c8c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Footsteps/Water/Reverb/Water Footsteps a 6.ogg"
+dest_files=["res://.godot/imported/Water Footsteps a 6.ogg-3a321be33826117be6c69fedaec75c8c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

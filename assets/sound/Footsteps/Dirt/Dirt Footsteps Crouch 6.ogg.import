@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dn6jaf4ackleh"
+path="res://.godot/imported/Dirt Footsteps Crouch 6.ogg-aa95ace127fbf676ce55fb06af02e67a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Footsteps/Dirt/Dirt Footsteps Crouch 6.ogg"
+dest_files=["res://.godot/imported/Dirt Footsteps Crouch 6.ogg-aa95ace127fbf676ce55fb06af02e67a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

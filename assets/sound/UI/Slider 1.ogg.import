@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://wr3cs0ptevmt"
+path="res://.godot/imported/Slider 1.ogg-55c1c69b2d692ac4ddceac5e8b8afa1c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/UI/Slider 1.ogg"
+dest_files=["res://.godot/imported/Slider 1.ogg-55c1c69b2d692ac4ddceac5e8b8afa1c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

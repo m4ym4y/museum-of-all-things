@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b1h0hsbf5yxji"
+path="res://.godot/imported/Game Launch Sting.ogg-b7f42eb7d987df24e0057c73ac99d91e.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/UI/UI Game Launch Sting/Game Launch Sting.ogg"
+dest_files=["res://.godot/imported/Game Launch Sting.ogg-b7f42eb7d987df24e0057c73ac99d91e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

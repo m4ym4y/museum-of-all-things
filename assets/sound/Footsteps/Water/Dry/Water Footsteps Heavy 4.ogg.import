@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://drd8vu8koh04m"
+path="res://.godot/imported/Water Footsteps Heavy 4.ogg-3e93d540f9e1394b3f017ce7b736456b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Footsteps/Water/Dry/Water Footsteps Heavy 4.ogg"
+dest_files=["res://.godot/imported/Water Footsteps Heavy 4.ogg-3e93d540f9e1394b3f017ce7b736456b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

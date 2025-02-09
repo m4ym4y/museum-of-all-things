@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://chnfp4wcyfceq"
+path="res://.godot/imported/Footsteps Wood Crouch 2 reverb.ogg-a91766721e560d68017bbd4978c7392b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Footsteps/Wood/Reverb/Footsteps Wood Crouch 2 reverb.ogg"
+dest_files=["res://.godot/imported/Footsteps Wood Crouch 2 reverb.ogg-a91766721e560d68017bbd4978c7392b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b7w17130bi4mh"
+path="res://.godot/imported/Footsteps Tile Crouch 4.ogg-c232b66554153926b18ee368ded2b78f.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Footsteps/Tile/Dry/Footsteps Tile Crouch 4.ogg"
+dest_files=["res://.godot/imported/Footsteps Tile Crouch 4.ogg-c232b66554153926b18ee368ded2b78f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dbx6pc8wcw8f1"
+path="res://.godot/imported/Footsteps Tile 2.ogg-f9cb2aeaa8b3ea0ccca86e7b08b58b32.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Footsteps/Tile/Dry/Footsteps Tile 2.ogg"
+dest_files=["res://.godot/imported/Footsteps Tile 2.ogg-f9cb2aeaa8b3ea0ccca86e7b08b58b32.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

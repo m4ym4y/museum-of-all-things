@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ba30u23n86rcj"
+path="res://.godot/imported/Object Slide 3.ogg-44142e01f7c42952f1655d9a83d010bd.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Environmental Ambience/Doors and Objects/Object Slide 3.ogg"
+dest_files=["res://.godot/imported/Object Slide 3.ogg-44142e01f7c42952f1655d9a83d010bd.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

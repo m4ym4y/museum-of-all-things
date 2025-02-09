@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://3rvmj1jccfr8"
+path="res://.godot/imported/Footsteps Tile 6 reverb.ogg-a2a164f061b2544c7a380046cfc25506.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Footsteps/Tile/Reverb/Footsteps Tile 6 reverb.ogg"
+dest_files=["res://.godot/imported/Footsteps Tile 6 reverb.ogg-a2a164f061b2544c7a380046cfc25506.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

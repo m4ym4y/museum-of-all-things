@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b44yncf2j2pnt"
+path="res://.godot/imported/Cricket Loop.ogg-a7e68b6a2492eba940d2ec848d92049a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Easter Eggs/Cricket Loop.ogg"
+dest_files=["res://.godot/imported/Cricket Loop.ogg-a7e68b6a2492eba940d2ec848d92049a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cevyeonebtbd6"
+path="res://.godot/imported/UI notification 2.ogg-aab4547e1bb0668346764ef6176332b2.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/UI/UI notification 2.ogg"
+dest_files=["res://.godot/imported/UI notification 2.ogg-aab4547e1bb0668346764ef6176332b2.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

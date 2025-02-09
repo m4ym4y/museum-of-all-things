@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bvyfc6dbi6t81"
+path="res://.godot/imported/Footsteps Wood 3 reverb.ogg-bb60bbec7469074208af1c432b90d0fa.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Footsteps/Wood/Reverb/Footsteps Wood 3 reverb.ogg"
+dest_files=["res://.godot/imported/Footsteps Wood 3 reverb.ogg-bb60bbec7469074208af1c432b90d0fa.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

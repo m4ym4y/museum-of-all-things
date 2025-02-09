@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cmaful5los4ub"
+path="res://.godot/imported/Footsteps Wood Crouch 10.ogg-4b4e52fd8f8ff1e947e6aa73c16bc1fe.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Footsteps/Wood/Dry/Footsteps Wood Crouch 10.ogg"
+dest_files=["res://.godot/imported/Footsteps Wood Crouch 10.ogg-4b4e52fd8f8ff1e947e6aa73c16bc1fe.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

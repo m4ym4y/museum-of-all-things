@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://wg3i1vxfl85m"
+path="res://.godot/imported/MOAT BG low ambience 3.ogg-f65378b6e1c7f9a577e70bbb48bf4486.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Global Ambience/Background Ambience - Layers/MOAT BG low ambience 3.ogg"
+dest_files=["res://.godot/imported/MOAT BG low ambience 3.ogg-f65378b6e1c7f9a577e70bbb48bf4486.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

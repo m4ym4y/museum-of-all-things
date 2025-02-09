@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dkpk2q4ksl1rf"
+path="res://.godot/imported/Global ambience 4.ogg-26fa38fbf59a9971c4e04da526826a9b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Global Ambience/Global ambience 4.ogg"
+dest_files=["res://.godot/imported/Global ambience 4.ogg-26fa38fbf59a9971c4e04da526826a9b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

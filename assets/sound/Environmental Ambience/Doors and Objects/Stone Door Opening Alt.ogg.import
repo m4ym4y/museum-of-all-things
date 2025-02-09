@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://duvaewxoqrnoe"
+path="res://.godot/imported/Stone Door Opening Alt.ogg-87ee5d62beaa6d6e243c46880ffde783.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Environmental Ambience/Doors and Objects/Stone Door Opening Alt.ogg"
+dest_files=["res://.godot/imported/Stone Door Opening Alt.ogg-87ee5d62beaa6d6e243c46880ffde783.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

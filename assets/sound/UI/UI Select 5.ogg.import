@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cow16pfqqv2lp"
+path="res://.godot/imported/UI Select 5.ogg-4b2dc80246242c489d836ac4784537ca.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/UI/UI Select 5.ogg"
+dest_files=["res://.godot/imported/UI Select 5.ogg-4b2dc80246242c489d836ac4784537ca.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c5ogvtkvubgrc"
+path="res://.godot/imported/Footsteps Tile Crouch 3 reverb.ogg-13cbf7c724f4d977e13e6998ebd0a3fd.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Footsteps/Tile/Reverb/Footsteps Tile Crouch 3 reverb.ogg"
+dest_files=["res://.godot/imported/Footsteps Tile Crouch 3 reverb.ogg-13cbf7c724f4d977e13e6998ebd0a3fd.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

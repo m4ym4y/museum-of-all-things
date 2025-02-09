@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://crypawtuebavy"
+path="res://.godot/imported/UI Select 3.ogg-c836c365000310e7f9dd57753e134bc0.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/UI/UI Select 3.ogg"
+dest_files=["res://.godot/imported/UI Select 3.ogg-c836c365000310e7f9dd57753e134bc0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
