@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://5javxi3uy0ep"]
+[gd_scene load_steps=6 format=3 uid="uid://5javxi3uy0ep"]
 
 [ext_resource type="Script" path="res://scenes/Museum.gd" id="1_7pjtd"]
 [ext_resource type="PackedScene" uid="uid://u4b0awts0vdi" path="res://scenes/Lobby.tscn" id="3_exsdv"]
 [ext_resource type="PackedScene" uid="uid://b67kdt23qph25" path="res://scenes/AmbienceController.tscn" id="3_udk7u"]
+[ext_resource type="PackedScene" uid="uid://dcr63oanyv85b" path="res://scenes/MusicController.tscn" id="4_uv22m"]
 
 [sub_resource type="Environment" id="Environment_g30yg"]
 background_mode = 1
@@ -48,3 +49,7 @@ environment = SubResource("Environment_g30yg")
 [node name="TeleportTimer" type="Timer" parent="."]
 
 [node name="AmbienceController" parent="." instance=ExtResource("3_udk7u")]
+
+[node name="MusicController" parent="." instance=ExtResource("4_uv22m")]
+min_space = 25.0
+max_space = 35.0
