@@ -79,7 +79,7 @@ func _physics_process(delta):
   _last_position = global_position
 
   if not _on_floor:
-    if _last_on_floor:
+    if _last_on_floor and _distance_from_last_step > _step_length / 2.0:
       _play_footstep()
     _last_in_water = false
     _distance_from_last_step = 0.0

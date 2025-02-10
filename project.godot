@@ -39,7 +39,7 @@ window/vsync/vsync_mode=0
 
 [editor]
 
-movie_writer/movie_file="/home/maya/Videos/speed_run.avi"
+movie_writer/movie_file="/home/maya/Videos/opening.avi"
 naming/scene_name_casing=1
 naming/script_name_casing=1
 
