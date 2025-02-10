@@ -51,5 +51,3 @@ environment = SubResource("Environment_g30yg")
 [node name="AmbienceController" parent="." instance=ExtResource("3_udk7u")]
 
 [node name="MusicController" parent="." instance=ExtResource("4_uv22m")]
-min_space = 25.0
-max_space = 35.0
