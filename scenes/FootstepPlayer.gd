@@ -80,7 +80,6 @@ func _physics_process(delta):
 
   if not _on_floor:
     if _last_on_floor:
-      print("playing jump step")
       _play_footstep()
     _last_in_water = false
     _distance_from_last_step = 0.0
@@ -90,7 +89,6 @@ func _physics_process(delta):
   if _on_floor and not _last_on_floor:
     _last_on_floor = _on_floor
     _distance_from_last_step = 0.0
-    print("playing land step")
     _play_footstep()
     return
 
@@ -100,12 +98,10 @@ func _physics_process(delta):
   # we've stopped, so play a step
   if _distance_from_last_step > _step_length / 2.0 and step == 0:
     _distance_from_last_step = 0.0
-    print("playing stop step")
     _play_footstep()
   # otherwise play a step if our distance from last step exceeds step len
   elif _distance_from_last_step > _step_length:
     _distance_from_last_step = 0.0
-    print("playing step step")
     _play_footstep()
 
 func _clean_up_player(player):
@@ -139,6 +135,7 @@ func _play_footstep():
 
   var step_player = AudioStreamPlayer.new()
   step_player.stream = step_sfx
+  step_player.bus = &"Sound"
   step_player.finished.connect(_clean_up_player.bind(step_player))
   add_child(step_player)
   step_player.play()
