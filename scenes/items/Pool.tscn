@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnfgmu10ohtpt"]
+[gd_scene load_steps=8 format=3 uid="uid://cnfgmu10ohtpt"]
 
 [ext_resource type="ArrayMesh" uid="uid://dru3nkgfut6o4" path="res://assets/models/pool.obj" id="1_8j43i"]
 [ext_resource type="Script" path="res://scenes/items/pool.gd" id="1_ao6a7"]
@@ -8,6 +8,9 @@
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_smwvp"]
 data = PackedVector3Array(-2.4946, 0.6, 2.4946, -2.4946, 0.6, -2.4946, -2.4946, 0.038, 2.4946, -2.4946, 0.038, 2.4946, -2.4946, 0.6, -2.4946, -2.4946, 0.038, -2.4946, 3, 0.6, 3, 3, 0, 3, -3, 0.6, 3, -3, 0.6, 3, 3, 0, 3, -3, 0, 3, -3, 0.6, 3, -3, 0, 3, -3, 0.6, -3, -3, 0.6, -3, -3, 0, 3, -3, 0, -3, 3, 0, -3, -3, 0, -3, 3, 0, 3, 3, 0, 3, -3, 0, -3, -3, 0, 3, 3, 0.6, -3, 3, 0, -3, 3, 0.6, 3, 3, 0.6, 3, 3, 0, -3, 3, 0, 3, -3, 0.6, -3, -3, 0, -3, 3, 0.6, -3, 3, 0.6, -3, -3, 0, -3, 3, 0, -3, -2.4946, 0.6, 2.4946, 2.4946, 0.6, 2.4946, -3, 0.6, 3, -3, 0.6, 3, 2.4946, 0.6, 2.4946, 3, 0.6, 3, 2.4946, 0.6, 2.4946, 2.4946, 0.6, -2.4946, 3, 0.6, 3, 3, 0.6, 3, 2.4946, 0.6, -2.4946, 3, 0.6, -3, -2.4946, 0.6, -2.4946, -2.4946, 0.6, 2.4946, -3, 0.6, -3, -3, 0.6, -3, -2.4946, 0.6, 2.4946, -3, 0.6, 3, 2.4946, 0.6, -2.4946, -2.4946, 0.6, -2.4946, 3, 0.6, -3, 3, 0.6, -3, -2.4946, 0.6, -2.4946, -3, 0.6, -3, -2.4946, 0.038, -2.4946, 2.4946, 0.038, -2.4946, -2.4946, 0.038, 2.4946, -2.4946, 0.038, 2.4946, 2.4946, 0.038, -2.4946, 2.4946, 0.038, 2.4946, 2.4946, 0.6, 2.4946, -2.4946, 0.6, 2.4946, 2.4946, 0.038, 2.4946, 2.4946, 0.038, 2.4946, -2.4946, 0.6, 2.4946, -2.4946, 0.038, 2.4946, -2.4946, 0.6, -2.4946, 2.4946, 0.6, -2.4946, -2.4946, 0.038, -2.4946, -2.4946, 0.038, -2.4946, 2.4946, 0.6, -2.4946, 2.4946, 0.038, -2.4946, 2.4946, 0.6, -2.4946, 2.4946, 0.6, 2.4946, 2.4946, 0.038, -2.4946, 2.4946, 0.038, -2.4946, 2.4946, 0.6, 2.4946, 2.4946, 0.038, 2.4946)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gmt1v"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
 
 [node name="Pool" type="Node3D"]
 script = ExtResource("1_ao6a7")
@@ -23,6 +26,13 @@ shape = SubResource("ConcavePolygonShape3D_smwvp")
 
 [node name="Water" parent="." instance=ExtResource("3_cd5xv")]
 transform = Transform3D(2.8, 0, 0, 0, 1, 0, 0, 0, 2.8, 0, 0.323462, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Water" groups=["footstep_water"]]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_gmt1v")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55963, 0)

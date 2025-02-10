@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/items/HallDoor.gd" id="1_elymj"]
 [ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://assets/textures/wood.tres" id="2_duu5k"]
-[ext_resource type="AudioStream" uid="uid://duvaewxoqrnoe" path="res://assets/sound/Environmental Ambience/Doors and Objects/Stone Door Opening Alt.ogg" id="2_lfmdy"]
+[ext_resource type="AudioStream" uid="uid://ctjfp58v8k6hl" path="res://assets/sound/Environmental Ambience/Doors and Objects/QuickDoor click 1.ogg" id="2_t4orf"]
 [ext_resource type="ArrayMesh" uid="uid://wbso87dqiion" path="res://assets/models/hall_lock.obj" id="3_mhnho"]
 [ext_resource type="Material" uid="uid://duhitdhs7gf8p" path="res://assets/textures/hall_lock.tres" id="4_87ha0"]
 
@@ -17,7 +17,7 @@ transform = Transform3D(0.999999, 0.00108824, -0.000152183, -0.00108825, 0.99999
 script = ExtResource("1_elymj")
 
 [node name="OpenSound" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_lfmdy")
+stream = ExtResource("2_t4orf")
 pitch_scale = 2.0
 bus = &"Sound"
 

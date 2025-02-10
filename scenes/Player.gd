@@ -35,7 +35,7 @@ func _ready():
 
 # set grid so we can read floor type on it
 func set_grid(grid):
-  $FootstepPlayer.init(grid)
+  $FootstepPlayer.init(grid, max_speed)
 
 func pause():
   _enabled = false
@@ -107,7 +107,7 @@ func _physics_process(delta):
     $Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
     camera_v *= 0.95
 
-  $FootstepPlayer.play_footsteps(is_on_floor(), velocity, max_speed)
+  $FootstepPlayer.set_on_floor(is_on_floor())
 
   if Input.is_action_pressed("jump") and is_on_floor():
     velocity.y = jump_impulse

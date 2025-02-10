@@ -17,7 +17,9 @@ mesh = ExtResource("1_rqa18")
 surface_material_override/0 = ExtResource("2_auvs0")
 surface_material_override/1 = ExtResource("3_p4dr5")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" groups=["footstep_dirt"]]
+collision_layer = 3
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_sg5i6")

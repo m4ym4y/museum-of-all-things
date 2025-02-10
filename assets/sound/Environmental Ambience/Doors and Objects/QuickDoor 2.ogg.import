@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cmpj1bwdpbuya"
+path="res://.godot/imported/QuickDoor 2.ogg-040a82666d3d2c709dca43f19365a2d0.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Environmental Ambience/Doors and Objects/QuickDoor 2.ogg"
+dest_files=["res://.godot/imported/QuickDoor 2.ogg-040a82666d3d2c709dca43f19365a2d0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
