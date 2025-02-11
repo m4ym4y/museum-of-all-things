@@ -213,22 +213,6 @@ popup/item_0/text = "None"
 popup/item_1/text = "CRT Filter"
 popup/item_1/id = 1
 
-[node name="CacheOptions" type="VBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="Spacer5" type="Label" parent="CacheOptions"]
-layout_mode = 2
-text = " 
-"
-
-[node name="CacheLabel" type="Label" parent="CacheOptions"]
-layout_mode = 2
-text = "Cache"
-
-[node name="ClearCache" type="Button" parent="CacheOptions"]
-layout_mode = 2
-text = "Clear Cache"
-
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MainOptions/Back" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MainOptions/Restore" to="." method="_on_restore_pressed"]
