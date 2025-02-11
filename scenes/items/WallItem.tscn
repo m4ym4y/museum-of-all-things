@@ -19,7 +19,7 @@ script = ExtResource("1_5qdg2")
 [node name="Item" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1, 0)
 
-[node name="Plaque" type="MeshInstance3D" parent="Item"]
+[node name="Plaque" type="MeshInstance3D" parent="Item" groups=["render_distance"]]
 visibility_range_end = 35.0
 visibility_range_end_margin = 10.0
 visibility_range_fade_mode = 1
@@ -37,7 +37,7 @@ spot_angle = 25.0
 
 [node name="Frame" type="Node3D" parent="Item"]
 
-[node name="Frame" type="MeshInstance3D" parent="Item/Frame"]
+[node name="Frame" type="MeshInstance3D" parent="Item/Frame" groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 visibility_range_end = 25.0
 visibility_range_end_margin = 10.0
@@ -49,7 +49,7 @@ surface_material_override/0 = ExtResource("4_1bj2r")
 [node name="Ceiling" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ceiling"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ceiling" groups=["render_distance"]]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3, 3.5)
 visibility_range_end = 30.0
 visibility_range_end_margin = 5.0

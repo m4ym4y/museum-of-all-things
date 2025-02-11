@@ -9,7 +9,7 @@ viewport_path = NodePath("SubViewport")
 [node name="RichTextItem" type="Node3D"]
 script = ExtResource("1_xha8l")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." groups=["render_distance"]]
 visibility_range_end = 30.0
 visibility_range_end_margin = 3.0
 visibility_range_fade_mode = 1

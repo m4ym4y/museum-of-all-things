@@ -9,13 +9,13 @@
 [node name="Sign" type="Node3D"]
 script = ExtResource("1_6w7lf")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." groups=["render_distance"]]
 visibility_range_end = 30.0
 mesh = ExtResource("1_wmw8d")
 surface_material_override/0 = ExtResource("2_v8iha")
 surface_material_override/1 = ExtResource("4_t7w8m")
 
-[node name="Text" type="Label3D" parent="."]
+[node name="Text" type="Label3D" parent="." groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 0.975149, 0.221548, 0, -0.221548, 0.975149, 0, 1.65964, 0.00901261)
 visibility_range_end = 10.0
 visibility_range_end_margin = 1.0
@@ -27,7 +27,7 @@ outline_size = 0
 autowrap_mode = 3
 width = 225.0
 
-[node name="Arrow" type="Label3D" parent="."]
+[node name="Arrow" type="Label3D" parent="." groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 0.975149, 0.221548, 0, -0.221548, 0.975149, 0, 1.36368, 0.0782965)
 visibility_range_end = 10.0
 visibility_range_end_margin = 1.0

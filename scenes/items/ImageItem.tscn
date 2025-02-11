@@ -11,7 +11,7 @@ resource_local_to_scene = true
 [sub_resource type="BoxMesh" id="BoxMesh_l88tm"]
 size = Vector3(1, 0.01, 1)
 
-[node name="ImageItem" type="MeshInstance3D"]
+[node name="ImageItem" type="MeshInstance3D" groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 visible = false
 material_override = ExtResource("1_r0d5r")
@@ -22,7 +22,7 @@ mesh = SubResource("PlaneMesh_37r57")
 surface_material_override/0 = ExtResource("1_r0d5r")
 script = ExtResource("1")
 
-[node name="Label" type="Label3D" parent="."]
+[node name="Label" type="Label3D" parent="." groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 visibility_range_end = 10.0
 visibility_range_end_margin = 1.0
@@ -36,7 +36,7 @@ outline_size = 0
 autowrap_mode = 3
 width = 900.0
 
-[node name="Plate" type="MeshInstance3D" parent="Label"]
+[node name="Plate" type="MeshInstance3D" parent="Label" groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.009)
 visible = false
 visibility_range_end = 25.0

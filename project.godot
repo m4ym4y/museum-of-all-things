@@ -61,6 +61,7 @@ camera=true
 [global_group]
 
 Environment=""
+render_distance="nodes affected by render distance setting"
 
 [gui]
 

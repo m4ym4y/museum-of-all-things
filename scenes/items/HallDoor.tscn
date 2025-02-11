@@ -36,8 +36,9 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Door/DoorMesh/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_pncmq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Door"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door" groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.03)
+visibility_range_end = 15.0
 mesh = ExtResource("3_mhnho")
 skeleton = NodePath("../DoorMesh")
 surface_material_override/0 = ExtResource("4_87ha0")
@@ -45,8 +46,9 @@ surface_material_override/0 = ExtResource("4_87ha0")
 [node name="LabelPivot" type="Node3D" parent="Door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.04)
 
-[node name="Label1" type="Label3D" parent="Door/LabelPivot"]
+[node name="Label1" type="Label3D" parent="Door/LabelPivot" groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+visibility_range_end_margin = 10.0
 pixel_size = 0.001
 modulate = Color(0, 0, 0, 1)
 text = "Preparing Exhibit..."
@@ -55,8 +57,9 @@ outline_size = 0
 autowrap_mode = 3
 width = 850.0
 
-[node name="Label2" type="Label3D" parent="Door/LabelPivot"]
+[node name="Label2" type="Label3D" parent="Door/LabelPivot" groups=["render_distance"]]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, -0.3, 0)
+visibility_range_end = 10.0
 pixel_size = 0.001
 modulate = Color(0, 0, 0, 1)
 text = "Error Loading Exhibit."

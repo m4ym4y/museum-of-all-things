@@ -28,6 +28,7 @@ func _load_settings():
   var e = GraphicsManager.get_env()
   _loaded_settings = true
 
+  _vbox.get_node("RenderDistanceOptions/RenderDistance").value = GraphicsManager.render_distance_multiplier
   _vbox.get_node("FPSOptions/MaxFPS").value = GraphicsManager.fps_limit
   _vbox.get_node("FPSOptions/LimitFPS").button_pressed = GraphicsManager.limit_fps
   _vbox.get_node("DisplayOptions/Fullscreen").button_pressed = GraphicsManager.fullscreen
@@ -36,7 +37,6 @@ func _load_settings():
   _vbox.get_node("LightOptions/AmbientLight").value = e.ambient_light_energy
   _vbox.get_node("LightOptions/EnableSSIL").button_pressed = e.ssil_enabled
   _vbox.get_node("FogOptions/EnableFog").button_pressed = e.fog_enabled
-
   var post_processing = GraphicsManager.post_processing
   var idx = post_processing_options.find(post_processing)
   _vbox.get_node("PostProcessingOptions/PostProcessingEffect").select(idx if idx >= 0 else 0)
@@ -85,3 +85,7 @@ func _on_pause_menu_settings() -> void:
 
 func _on_post_processing_effect_item_selected(index: int):
   GraphicsManager.set_post_processing(post_processing_options[index])
+
+func _on_render_distance_value_changed(value: float):
+  $RenderDistanceOptions/RenderDistanceValue.text = "%dm" % int(value * 30)
+  GraphicsManager.set_render_distance_multiplier(value)

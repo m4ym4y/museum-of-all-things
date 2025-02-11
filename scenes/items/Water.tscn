@@ -55,7 +55,7 @@ shader_parameter/wave = SubResource("NoiseTexture2D_7cxrp")
 shader_parameter/texture_normal = SubResource("NoiseTexture2D_xwo4q")
 shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_ysuxp")
 
-[node name="Water" type="MeshInstance3D"]
+[node name="Water" type="MeshInstance3D" groups=["render_distance"]]
 cast_shadow = 0
 lod_bias = 0.001
 visibility_range_end = 18.0

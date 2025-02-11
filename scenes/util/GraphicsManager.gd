@@ -11,6 +11,7 @@ var _default_settings_obj
 var fullscreen = false
 var render_scale = 1.0
 var post_processing = "none"
+var render_distance_multiplier = 2.5
 
 func init():
   _env = get_tree().get_nodes_in_group("Environment")[0]
@@ -49,6 +50,18 @@ func enable_fps_limit(enabled: bool):
   if limit_fps:
     Engine.set_max_fps(fps_limit)
 
+func set_render_distance_multiplier(value: float):
+  var last_distance = render_distance_multiplier
+  render_distance_multiplier = value
+  if not is_equal_approx(last_distance, render_distance_multiplier):
+    for node in get_tree().get_nodes_in_group("render_distance"):
+      node.visibility_range_end *= render_distance_multiplier / last_distance
+
+func _on_node_added(node: Node) -> void:
+  if not is_equal_approx(render_distance_multiplier, 1.0):
+    if node.is_in_group("render_distance"):
+      node.visibility_range_end *= render_distance_multiplier
+
 func get_env():
   # we assume that they modify the settings
   if not _env:
@@ -67,6 +80,7 @@ func _apply_settings(s, default={}):
     set_fullscreen(s["fullscreen"] if s.has("fullscreen") else default["fullscreen"])
     set_render_scale(s["render_scale"] if s.has("render_scale") else default["render_scale"])
     set_post_processing(s["post_processing"] if s.has("post_processing") else default["post_processing"])
+    set_render_distance_multiplier(s["render_distance_multiplier"] if s.has("render_distance_multiplier") else default["render_distance_multiplier"])
 
 func _create_settings_obj():
   var e = _env.environment
@@ -81,6 +95,7 @@ func _create_settings_obj():
     "fullscreen": fullscreen,
     "render_scale": render_scale,
     "post_processing": post_processing,
+    "render_distance_multiplier": render_distance_multiplier,
   }
 
 func restore_default_settings():
@@ -88,3 +103,6 @@ func restore_default_settings():
 
 func save_settings():
   SettingsManager.save_settings(_settings_ns, _create_settings_obj())
+
+func _ready() -> void:
+  get_tree().node_added.connect(_on_node_added)

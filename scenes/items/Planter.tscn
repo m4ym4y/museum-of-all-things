@@ -10,7 +10,7 @@ points = PackedVector3Array(0.75, 0.6, 4, -0.75, 0.6, 4, 0.75, 0, 4, 0.75, 0.6, 
 
 [node name="Planter" type="Node3D" groups=["Scenery"]]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." groups=["render_distance"]]
 visibility_range_end = 50.0
 mesh = ExtResource("1_lbpq0")
 surface_material_override/0 = ExtResource("2_iqow5")

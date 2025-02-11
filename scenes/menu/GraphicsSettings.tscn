@@ -92,26 +92,6 @@ layout_mode = 2
 button_pressed = true
 text = "Enable Reflections"
 
-[node name="RenderDistanceOptions" type="VBoxContainer" parent="."]
-visible = false
-layout_mode = 2
-
-[node name="Spacer" type="Label" parent="RenderDistanceOptions"]
-layout_mode = 2
-text = " 
-"
-
-[node name="Label3" type="Label" parent="RenderDistanceOptions"]
-layout_mode = 2
-text = "Render Distance
-"
-
-[node name="RenderDistance" type="HSlider" parent="RenderDistanceOptions"]
-layout_mode = 2
-min_value = 5.0
-max_value = 70.0
-value = 35.0
-
 [node name="LightOptions" type="VBoxContainer" parent="."]
 layout_mode = 2
 
@@ -138,6 +118,31 @@ horizontal_alignment = 1
 [node name="EnableSSIL" type="CheckBox" parent="LightOptions"]
 layout_mode = 2
 text = "Enable Indirect Lighting (SSIL)"
+
+[node name="RenderDistanceOptions" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Spacer" type="Label" parent="RenderDistanceOptions"]
+layout_mode = 2
+text = " 
+"
+
+[node name="Label3" type="Label" parent="RenderDistanceOptions"]
+layout_mode = 2
+text = "Render Distance
+"
+
+[node name="RenderDistance" type="HSlider" parent="RenderDistanceOptions"]
+layout_mode = 2
+min_value = 0.5
+max_value = 5.0
+step = 0.5
+value = 1.5
+
+[node name="RenderDistanceValue" type="Label" parent="RenderDistanceOptions"]
+layout_mode = 2
+text = "x1"
+horizontal_alignment = 1
 
 [node name="FogOptions" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -233,6 +238,7 @@ text = "Clear Cache"
 [connection signal="toggled" from="ReflectionOptions/EnableReflections" to="." method="_on_enable_reflections_toggled"]
 [connection signal="value_changed" from="LightOptions/AmbientLight" to="." method="_on_ambient_light_value_changed"]
 [connection signal="toggled" from="LightOptions/EnableSSIL" to="." method="_on_enable_ssil_toggled"]
+[connection signal="value_changed" from="RenderDistanceOptions/RenderDistance" to="." method="_on_render_distance_value_changed"]
 [connection signal="toggled" from="FogOptions/EnableFog" to="." method="_on_enable_fog_toggled"]
 [connection signal="value_changed" from="FPSOptions/MaxFPS" to="." method="_on_max_fps_value_changed"]
 [connection signal="toggled" from="FPSOptions/LimitFPS" to="." method="_on_limit_fps_toggled"]
