@@ -32,6 +32,7 @@ func _load_settings():
   _vbox.get_node("FPSOptions/MaxFPS").value = GraphicsManager.fps_limit
   _vbox.get_node("FPSOptions/LimitFPS").button_pressed = GraphicsManager.limit_fps
   _vbox.get_node("DisplayOptions/Fullscreen").button_pressed = GraphicsManager.fullscreen
+  _vbox.get_node("DisplayOptions/RenderScale").value = GraphicsManager.render_scale
   _vbox.get_node("ReflectionOptions/ReflectionQuality").value = e.ssr_max_steps
   _vbox.get_node("ReflectionOptions/EnableReflections").button_pressed = e.ssr_enabled
   _vbox.get_node("LightOptions/AmbientLight").value = e.ambient_light_energy
