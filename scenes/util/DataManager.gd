@@ -148,9 +148,7 @@ func _create_and_emit_image(url, data, ctx):
   if image.get_width() == 0:
     return null
 
-  # pixelation is more disorienting in vr
-  if _xr:
-    image.generate_mipmaps()
+  image.generate_mipmaps()
 
   var texture = ImageTexture.create_from_image(image)
   _emit_image(url, texture, ctx)
