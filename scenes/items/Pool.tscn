@@ -24,7 +24,7 @@ surface_material_override/0 = ExtResource("2_jqyjj")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_smwvp")
 
-[node name="Water" parent="." groups=["render_distance"] instance=ExtResource("3_cd5xv")]
+[node name="Water" parent="." instance=ExtResource("3_cd5xv")]
 transform = Transform3D(2.8, 0, 0, 0, 1, 0, 0, 0, 2.8, 0, 0.323462, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Water" groups=["footstep_water"]]
