@@ -1,10 +1,14 @@
 extends Node3D
 
 @onready var tracks = [
-  preload("res://assets/sound/Music/Music - 1.ogg"),
-  preload("res://assets/sound/Music/Music - 2.ogg"),
-  preload("res://assets/sound/Music/Music - 3.ogg"),
-  preload("res://assets/sound/Music/Music - 4.ogg"),
+  preload("res://assets/sound/Music/MoAT Track 1 - Waiting on the Weather.ogg"),
+  preload("res://assets/sound/Music/MoAT Track 2 - Comfort on the way.ogg"),
+  preload("res://assets/sound/Music/MoAT Track 3 - Life is Older Than You Knew.ogg"),
+  preload("res://assets/sound/Music/MoAT Track 4 - Blue Sky Inside.ogg"),
+  preload("res://assets/sound/Music/MoAT Track 5 - Waiting for a ride.ogg"),
+  preload("res://assets/sound/Music/MoAT Track 6 - Memory In Passing.ogg"),
+  preload("res://assets/sound/Music/MoAT Track 7 - Blue Sky Outside.ogg"),
+  preload("res://assets/sound/Music/MoAT Track 8 - Stillness After Closing.ogg"),
 ]
 
 @export var min_space_start: float = 20.0

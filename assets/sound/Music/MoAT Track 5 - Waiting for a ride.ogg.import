@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cnfycai3r4uxf"
+path="res://.godot/imported/MoAT Track 5 - Waiting for a ride.ogg-14bb475b0a5a00724be521e9e31245dc.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Music/MoAT Track 5 - Waiting for a ride.ogg"
+dest_files=["res://.godot/imported/MoAT Track 5 - Waiting for a ride.ogg-14bb475b0a5a00724be521e9e31245dc.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

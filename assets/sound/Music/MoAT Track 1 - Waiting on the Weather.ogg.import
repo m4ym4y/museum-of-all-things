@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dc63nxkf3opk6"
+path="res://.godot/imported/MoAT Track 1 - Waiting on the Weather.ogg-7259378748e995287ffba8c06dc452cf.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Music/MoAT Track 1 - Waiting on the Weather.ogg"
+dest_files=["res://.godot/imported/MoAT Track 1 - Waiting on the Weather.ogg-7259378748e995287ffba8c06dc452cf.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

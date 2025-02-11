@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dm3w5uypiq417"
+path="res://.godot/imported/MoAT Track 2 - Comfort on the way.ogg-170c390e3fe1fe925090acd5f02de3a4.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Music/MoAT Track 2 - Comfort on the way.ogg"
+dest_files=["res://.godot/imported/MoAT Track 2 - Comfort on the way.ogg-170c390e3fe1fe925090acd5f02de3a4.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

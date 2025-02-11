@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dtnajeixklbsy"
+path="res://.godot/imported/MoAT Track 8 - Stillness After Closing.ogg-ba679889306e5d7f50cd7204dacfbf85.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Music/MoAT Track 8 - Stillness After Closing.ogg"
+dest_files=["res://.godot/imported/MoAT Track 8 - Stillness After Closing.ogg-ba679889306e5d7f50cd7204dacfbf85.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

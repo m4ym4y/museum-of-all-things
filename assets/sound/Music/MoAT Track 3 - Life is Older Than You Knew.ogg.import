@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b5n0xnmo2okjw"
+path="res://.godot/imported/MoAT Track 3 - Life is Older Than You Knew.ogg-619f8a775fcb0179c825a996fa55c7a7.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Music/MoAT Track 3 - Life is Older Than You Knew.ogg"
+dest_files=["res://.godot/imported/MoAT Track 3 - Life is Older Than You Knew.ogg-619f8a775fcb0179c825a996fa55c7a7.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
