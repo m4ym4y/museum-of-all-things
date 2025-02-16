@@ -74,7 +74,7 @@ func _physics_process(delta):
 
   if not _on_floor:
     if _last_on_floor and _distance_from_last_step > _step_length / 2.0:
-      _play_footstep()
+      call_deferred("_play_footstep")
     _last_in_water = false
     _distance_from_last_step = 0.0
     _last_on_floor = _on_floor
@@ -83,7 +83,7 @@ func _physics_process(delta):
   if _on_floor and not _last_on_floor:
     _last_on_floor = _on_floor
     _distance_from_last_step = 0.0
-    _play_footstep()
+    call_deferred("_play_footstep")
     return
 
   _last_on_floor = _on_floor
@@ -92,11 +92,11 @@ func _physics_process(delta):
   # we've stopped, so play a step
   if _distance_from_last_step > _step_length / 2.0 and step == 0:
     _distance_from_last_step = 0.0
-    _play_footstep()
+    call_deferred("_play_footstep")
   # otherwise play a step if our distance from last step exceeds step len
   elif _distance_from_last_step > _step_length:
     _distance_from_last_step = 0.0
-    _play_footstep()
+    call_deferred("_play_footstep")
 
 func _clean_up_player(player):
   player.queue_free()
