@@ -18,8 +18,8 @@ func _create_player(res):
   audio.volume_db = -80.0
   audio.autoplay = true
   audio.bus = &"Ambience"
-  audio.play()
   add_child(audio)
+  audio.play()
   return audio
 
 func _fade_between(audio1, res2, duration):
