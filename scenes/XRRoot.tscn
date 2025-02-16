@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dn526eij58wfs"]
+[gd_scene load_steps=14 format=3 uid="uid://dn526eij58wfs"]
 
 [ext_resource type="Script" path="res://scenes/XRRoot.gd" id="1_t4l57"]
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_v48yd"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://addons/godot-xr-tools/functions/movement_direct.gd" id="6_mvrkt"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="7_4wwnr"]
 [ext_resource type="PackedScene" uid="uid://bhue34utfsw0r" path="res://scenes/menu/XRMenu.tscn" id="10_g5s6k"]
+[ext_resource type="PackedScene" uid="uid://dxfoujgkv1e2y" path="res://scenes/FootstepPlayer.tscn" id="12_drak2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ne1gf"]
 shading_mode = 0
@@ -72,3 +73,5 @@ visible = false
 top_level = true
 collision_layer = 524288
 script = ExtResource("4_l0d4h")
+
+[node name="FootstepPlayer" parent="XROrigin3D/XRToolsPlayerBody" instance=ExtResource("12_drak2")]
