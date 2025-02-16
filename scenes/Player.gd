@@ -118,4 +118,3 @@ func _physics_process(delta):
     var collider = $Pivot/Camera3D/RayCast3D.get_collider()
     if collider and collider.has_method("interact"):
       collider.interact()
-

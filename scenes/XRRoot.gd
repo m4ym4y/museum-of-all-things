@@ -69,7 +69,7 @@ func _show_menu():
   right_controller.get_node("XrMenu").visible = true
 
 func _physics_process(delta: float) -> void:
-  $XRToolsPlayerBody/FootstepPlayer.set_on_floor($XRToolsPlayerBody.is_on_floor())
+  $XROrigin3D/XRToolsPlayerBody/FootstepPlayer.set_on_floor($XROrigin3D/XRToolsPlayerBody.is_on_floor())
   if right_controller and right_controller.is_button_pressed("by_button") and not by_button_pressed:
     by_button_pressed = true
     if not menu_active:
