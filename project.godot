@@ -29,6 +29,7 @@ ItemProcessor="*res://scenes/util/ItemProcessor.gd"
 GlobalMenuEvents="*res://scenes/util/GlobalMenuEvents.gd"
 SettingsManager="*res://scenes/util/SettingsManager.gd"
 UISoundManager="*res://scenes/util/UISoundManager.tscn"
+GlobalGridAccess="*res://scenes/util/GlobalGridAccess.gd"
 
 [display]
 

@@ -58,18 +58,12 @@ var _floor_material_map = {
 
 @export var _step_length: float = 3.5
 
-var _grid
-var _max_speed = 0
 var _on_floor = false
 var _distance_from_last_step = 0.0
 var _step_idx = 0
 var _last_in_water = false
 var _last_on_floor = false
 @onready var _last_position = global_position
-
-func init(grid, max_speed):
-  _grid = grid
-  _max_speed = max_speed
 
 func set_on_floor(on_floor):
   _on_floor = on_floor
@@ -108,7 +102,8 @@ func _clean_up_player(player):
   player.queue_free()
 
 func _play_footstep():
-  if not _grid:
+  var grid = GlobalGridAccess.get_grid()
+  if not grid:
     return
 
   var step_type
@@ -119,7 +114,7 @@ func _play_footstep():
     step_type = "water"
   else:
     var floor_cell = Util.worldToGrid(global_position) - Vector3.UP
-    var floor_cell_type = _grid.get_cell_item(floor_cell)
+    var floor_cell_type = grid.get_cell_item(floor_cell)
     step_type = _floor_material_map.get(
       floor_cell_type,
       _default_floor_type

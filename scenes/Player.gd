@@ -33,10 +33,6 @@ func _ready():
   crouching_height = starting_height / 3
   crouch_speed = (starting_height - crouching_height) / crouch_time
 
-# set grid so we can read floor type on it
-func set_grid(grid):
-  $FootstepPlayer.init(grid, max_speed)
-
 func pause():
   _enabled = false
 
