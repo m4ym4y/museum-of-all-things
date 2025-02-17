@@ -20,7 +20,9 @@ var _joy_right_y = JOY_AXIS_RIGHT_Y
 
 @export var smooth_movement = false
 @export var dampening = 0.01
-@export var max_speed = 8
+@export var max_speed_walk = 7
+@export var max_speed_dash = 11
+@export var max_speed = max_speed_walk
 
 func _ready():
   # some strange issue w joystick bindings on linux
@@ -80,6 +82,12 @@ func _physics_process(delta):
 
   var fully_crouched = $Pivot.get_position().y <= crouching_height
   var fully_standing = $Pivot.get_position().y >= starting_height
+
+  if fully_standing and Input.is_action_pressed("dash"):
+    max_speed = max_speed_dash
+  else:
+    max_speed = max_speed_walk
+
   var speed = max_speed if fully_standing else crouch_move_speed
   var input = Input.get_vector("strafe_left", "strafe_right", "move_forward", "move_back")
   var desired_velocity = transform.basis * Vector3(input.x, 0, input.y) * speed
