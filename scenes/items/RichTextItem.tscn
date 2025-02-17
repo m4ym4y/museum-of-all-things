@@ -48,9 +48,5 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_k1xr6")
 bbcode_enabled = true
-text = "Hello world
-sdfjksd kjsdf jksdfjksf jksdf s
-fs jkfsfjk sfjk sdjkfsjdk fjksd fsd
-fs djkfsdkjf sjkdfsjkd"
 fit_content = true
 scroll_active = false
