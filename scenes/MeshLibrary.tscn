@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://do2hoycmvhwx5"]
+[gd_scene load_steps=57 format=4 uid="uid://do2hoycmvhwx5"]
 
 [ext_resource type="Texture2D" uid="uid://dwkqvnh45q8ms" path="res://assets/textures/wood.png" id="1_warsw"]
 [ext_resource type="Material" uid="uid://x4bq1qrai2w2" path="res://assets/textures/carpet.tres" id="2_hh216"]
@@ -236,6 +236,9 @@ size = Vector3(0.5, 4, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c2hvi"]
 size = Vector3(3.5, 4, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1mvt4"]
+size = Vector3(4, 0.1, 4)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_pfy8d"]
 lightmap_size_hint = Vector2i(238, 242)
@@ -563,6 +566,10 @@ shape = SubResource("BoxShape3D_6y7eq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 2, -1.75)
 shape = SubResource("BoxShape3D_c2hvi")
 
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="internal_hall_turn/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.95, 0)
+shape = SubResource("BoxShape3D_1mvt4")
+
 [node name="internal_hall" type="MeshInstance3D" parent="."]
 visible = false
 mesh = SubResource("ArrayMesh_pfy8d")
@@ -578,6 +585,10 @@ shape = SubResource("BoxShape3D_i18nf")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="internal_hall/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 2, 0)
 shape = SubResource("BoxShape3D_i18nf")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="internal_hall/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.95, 0)
+shape = SubResource("BoxShape3D_1mvt4")
 
 [node name="marker" type="MeshInstance3D" parent="."]
 visible = false
@@ -685,6 +696,10 @@ shape = SubResource("BoxShape3D_gl468")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 4, 0)
 shape = SubResource("BoxShape3D_gl468")
 
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="hall_stair_up/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9, 0)
+shape = SubResource("ConvexPolygonShape3D_23ryu")
+
 [node name="hall_stair_down" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2, 0)
 visible = false
@@ -704,6 +719,10 @@ shape = SubResource("BoxShape3D_gl468")
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="hall_stair_down/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 4, 0)
 shape = SubResource("BoxShape3D_gl468")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="hall_stair_down/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9, 0)
+shape = SubResource("ConvexPolygonShape3D_23ryu")
 
 [node name="hall_stair_turn" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -730,3 +749,7 @@ shape = SubResource("BoxShape3D_c2hvi")
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="hall_stair_turn/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 shape = SubResource("BoxShape3D_11svc")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="hall_stair_turn/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.95, 0)
+shape = SubResource("BoxShape3D_1mvt4")

@@ -29,9 +29,6 @@ fog_light_color = Color(1, 1, 1, 1)
 fog_density = 1.0
 fog_depth_curve = 0.5945
 fog_depth_end = 294.3
-volumetric_fog_density = 0.0
-volumetric_fog_albedo = Color(0, 0, 0, 1)
-volumetric_fog_length = 32.0
 volumetric_fog_temporal_reprojection_enabled = false
 volumetric_fog_temporal_reprojection_amount = 0.5
 
