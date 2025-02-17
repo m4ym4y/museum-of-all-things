@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bhi1d8bl668hb" path="res://scenes/menu/PauseMenu.tscn" id="1_a2m62"]
 [ext_resource type="Script" path="res://scenes/menu/XrMenuCanvas.gd" id="1_ow7im"]
-[ext_resource type="PackedScene" uid="uid://bbp0v2aoglhrr" path="res://scenes/menu/GraphicsSettings.tscn" id="2_kfmr2"]
+[ext_resource type="PackedScene" uid="uid://bw3fu2y38n3yk" path="res://scenes/menu/Settings.tscn" id="3_qn784"]
 
 [node name="XrMenuCanvas" type="CanvasLayer"]
 script = ExtResource("1_ow7im")
@@ -17,11 +17,10 @@ color = Color(0, 0, 0, 0.501961)
 
 [node name="PauseMenu" parent="." instance=ExtResource("1_a2m62")]
 
-[node name="Settings" parent="." instance=ExtResource("2_kfmr2")]
+[node name="Settings" parent="." instance=ExtResource("3_qn784")]
 visible = false
 
 [connection signal="resume" from="PauseMenu" to="." method="_on_pause_menu_resume"]
 [connection signal="return_to_lobby" from="PauseMenu" to="." method="_on_pause_menu_return_to_lobby"]
 [connection signal="settings" from="PauseMenu" to="." method="_on_pause_menu_settings"]
 [connection signal="vr_controls" from="PauseMenu" to="." method="_on_pause_menu_vr_controls"]
-[connection signal="resume" from="Settings" to="." method="_on_settings_resume"]

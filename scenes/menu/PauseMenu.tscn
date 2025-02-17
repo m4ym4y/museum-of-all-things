@@ -16,6 +16,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
 theme = ExtResource("1_ysejj")
 script = ExtResource("1_qk8a1")
 
@@ -84,12 +86,6 @@ text = "Return to Lobby"
 layout_mode = 2
 text = "Settings"
 
-[node name="VrControls" type="Button" parent="MarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-text = "VR Controls
-"
-
 [node name="Spacer2" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -104,5 +100,4 @@ text = "Quit"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Open" to="." method="_on_open_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Lobby" to="." method="_on_lobby_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VrControls" to="." method="_on_vr_controls_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/AskQuit" to="." method="_on_ask_quit_pressed"]
