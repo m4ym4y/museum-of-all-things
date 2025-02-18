@@ -56,7 +56,7 @@ var _floor_material_map = {
   11: "soft", # carpet
 }
 
-@export var _step_length: float = 3.5
+@export var _step_length: float = 3.0
 
 var _on_floor = false
 var _distance_from_last_step = 0.0

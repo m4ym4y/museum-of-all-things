@@ -20,8 +20,8 @@ var _joy_right_y = JOY_AXIS_RIGHT_Y
 
 @export var smooth_movement = false
 @export var dampening = 0.01
-@export var max_speed_walk = 7
-@export var max_speed_dash = 11
+@export var max_speed_walk = 5
+@export var max_speed_dash = 10
 @export var max_speed = max_speed_walk
 
 func _ready():
