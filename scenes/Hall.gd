@@ -91,20 +91,6 @@ static func valid_hall_types(grid, hall_start, hall_dir):
     valid_halls.append([true, UP])
     valid_halls.append([true, DOWN])
 
-  # let's just comment this out until left halls work...
-  """
-  if (
-    not (
-      grid.get_cell_item(past_hall_exit_left - Vector3.UP) != -1 and
-      grid.get_cell_item(past_hall_exit_left) == -1
-    ) and
-    Util.safe_overwrite(grid, hall_exit_left)
-  ):
-    valid_halls.append([false, FLAT])
-    valid_halls.append([false, UP])
-    valid_halls.append([false, DOWN])
-  """
-
   return valid_halls
 
 func create_curve_hall(hall_start, hall_dir, is_right=true, level=FLAT):
