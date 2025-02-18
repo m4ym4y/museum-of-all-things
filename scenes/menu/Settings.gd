@@ -14,8 +14,6 @@ signal resume
 
 func _ready():
   GlobalMenuEvents.ui_cancel_pressed.connect(_on_resume)
-  GlobalMenuEvents.menu_left_pressed.connect(_on_tab_left)
-  GlobalMenuEvents.menu_right_pressed.connect(_on_tab_right)
   for i in range(_tab_scenes.size()):
     if _tab_scenes[i] == null:
       _tab_bar.set_tab_disabled(i, true)

@@ -145,12 +145,6 @@ func _input(event):
   if Input.is_action_just_pressed("ui_accept"):
     GlobalMenuEvents.emit_ui_accept_pressed()
 
-  if Input.is_action_just_pressed("menu_left"):
-    GlobalMenuEvents.emit_menu_left_pressed()
-
-  if Input.is_action_just_pressed("menu_right"):
-    GlobalMenuEvents.emit_menu_right_pressed()
-
   if Input.is_action_just_pressed("ui_cancel") and $CanvasLayer.visible:
     GlobalMenuEvents.emit_ui_cancel_pressed()
 
