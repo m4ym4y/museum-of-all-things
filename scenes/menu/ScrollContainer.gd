@@ -9,9 +9,6 @@ var enabled = false
 func _ready():
   if not Util.is_xr():
     enabled = true
-    if OS.get_name() == "Linux":
-      if OS.get_distribution_name() == "Arch Linux":
-        joystick_axis += 1
 
 func _process(delta: float) -> void:
   if not enabled:

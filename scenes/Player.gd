@@ -25,12 +25,6 @@ var _joy_right_y = JOY_AXIS_RIGHT_Y
 @export var max_speed = max_speed_walk
 
 func _ready():
-  # some strange issue w joystick bindings on linux
-  if OS.get_name() == "Linux":
-    if OS.get_distribution_name() == "Arch Linux":
-      _joy_right_x += 1
-      _joy_right_y += 1
-
   starting_height = $Pivot.get_position().y
   crouching_height = starting_height / 3
   crouch_speed = (starting_height - crouching_height) / crouch_time
