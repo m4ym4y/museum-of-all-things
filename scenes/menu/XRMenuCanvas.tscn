@@ -24,3 +24,4 @@ visible = false
 [connection signal="return_to_lobby" from="PauseMenu" to="." method="_on_pause_menu_return_to_lobby"]
 [connection signal="settings" from="PauseMenu" to="." method="_on_pause_menu_settings"]
 [connection signal="vr_controls" from="PauseMenu" to="." method="_on_pause_menu_vr_controls"]
+[connection signal="resume" from="Settings" to="." method="_on_settings_resume"]

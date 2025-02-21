@@ -37,7 +37,6 @@ layout_mode = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/QuitContainer"]
-visible = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Are you sure you want to Quit?"
