@@ -44,5 +44,33 @@ text = "Cache"
 layout_mode = 2
 text = "Clear Cache"
 
+[node name="Spacer6" type="Label" parent="CacheOptions"]
+layout_mode = 2
+text = " 
+"
+
+[node name="CacheLabel2" type="Label" parent="CacheOptions"]
+layout_mode = 2
+text = "Cache Size Limit"
+
+[node name="CacheSizeLimit" type="HSlider" parent="CacheOptions"]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 4.0
+allow_greater = true
+
+[node name="CacheSizeLimitValue" type="Label" parent="CacheOptions"]
+layout_mode = 2
+text = "4 Gb"
+horizontal_alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="CacheOptions"]
+layout_mode = 2
+button_pressed = true
+text = "Automatically limit cache size (on quit)"
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MainOptions/Back" to="." method="_on_back_pressed"]
+[connection signal="value_changed" from="CacheOptions/CacheSizeLimit" to="." method="_on_cache_size_limit_value_changed"]
+[connection signal="toggled" from="CacheOptions/CheckBox" to="." method="_check_box_toggled"]

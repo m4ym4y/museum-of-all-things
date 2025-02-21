@@ -8,6 +8,7 @@ var _loaded_settings = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+  _load_settings()
   if _xr:
     _vbox.get_node("FPSOptions").visible = false
     _vbox.get_node("ReflectionOptions").visible = false

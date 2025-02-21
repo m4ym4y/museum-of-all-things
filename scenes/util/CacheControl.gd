@@ -3,6 +3,13 @@ class_name CacheControl
 
 static var cache_dir = "user://cache/"
 
+static func auto_limit_cache_enabled():
+  var settings = SettingsManager.get_settings("data")
+  if settings:
+    return settings.auto_limit_cache
+  else:
+    return true
+
 static func clear_cache():
   var dir = DirAccess.open(cache_dir)
   dir.list_dir_begin()
