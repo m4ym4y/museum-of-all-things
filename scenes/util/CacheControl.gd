@@ -1,16 +1,43 @@
 extends Node
-class_name CacheControl
 
-static var cache_dir = "user://cache/"
+signal cache_size_result(cache_info)
 
-static func auto_limit_cache_enabled():
+var cache_dir = "user://cache/"
+var _cache_stat_thread = Thread.new()
+var CACHE_STAT_QUEUE = "CacheStat"
+var _cache_size_info = { "count": 0, "size": 0 }
+var _last_stat_time = 0
+var _max_stat_age = 2000
+
+func _ready():
+  _cache_stat_thread.start(_cache_stat_loop)
+
+func _exit_tree():
+  WorkQueue.set_quitting()
+  _cache_stat_thread.wait_to_finish()
+
+func _cache_stat_loop():
+  while not WorkQueue.get_quitting():
+    var item = WorkQueue.process_queue(CACHE_STAT_QUEUE)
+    if item and len(item) > 0 and item[0] == "size":
+      if Time.get_ticks_msec() - _last_stat_time < _max_stat_age:
+        call_deferred("_emit_cache_size")
+      else:
+        _cache_size_info = _get_cache_size()
+        _last_stat_time = Time.get_ticks_msec()
+        call_deferred("_emit_cache_size")
+
+func _emit_cache_size():
+  emit_signal("cache_size_result", _cache_size_info)
+
+func auto_limit_cache_enabled():
   var settings = SettingsManager.get_settings("data")
   if settings:
     return settings.auto_limit_cache
   else:
     return true
 
-static func clear_cache():
+func clear_cache():
   var dir = DirAccess.open(cache_dir)
   dir.list_dir_begin()
 
@@ -20,7 +47,10 @@ static func clear_cache():
       break
     dir.remove(file)
 
-static func get_cache_size():
+func calculate_cache_size():
+  WorkQueue.add_item(CACHE_STAT_QUEUE, ["size"])
+
+func _get_cache_size():
   var dir = DirAccess.open(cache_dir)
   dir.list_dir_begin()
 
@@ -40,7 +70,7 @@ static func get_cache_size():
     "size": total_length
   }
 
-static func cull_cache_to_size(max_size: int, target_size: int):
+func cull_cache_to_size(max_size: int, target_size: int):
   var dir = DirAccess.open(cache_dir)
   dir.list_dir_begin()
 

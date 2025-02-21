@@ -10,6 +10,7 @@ func _on_back_pressed():
   emit_signal("resume")
 
 func _ready():
+  CacheControl.cache_size_result.connect(_show_cache_size)
   var settings = SettingsManager.get_settings(_data_ns)
   _loaded_settings = true
   if settings:
@@ -36,7 +37,10 @@ func _on_visibility_changed():
     _save_settings()
 
 func _refresh_cache_label():
-  var result = CacheControl.get_cache_size()
+  CacheControl.calculate_cache_size()
+  $CacheOptions/CacheLabel.text = "Cache (calculating size...)"
+
+func _show_cache_size(result):
   $CacheOptions/CacheLabel.text = "Cache (%s items, %3.2f GB)" % [result.count, result.size / 1000000000.0]
 
 func _on_clear_cache_pressed():
