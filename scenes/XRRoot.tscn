@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://scenes/XRRoot.gd" id="1_t4l57"]
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_v48yd"]
-[ext_resource type="PackedScene" uid="uid://fiul51tsyoop" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="3_gm17t"]
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="4_6uron"]
 [ext_resource type="Material" uid="uid://b20jn7y6kh1ct" path="res://assets/textures/player_ghost.tres" id="4_jb2jl"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/player/player_body.gd" id="4_l0d4h"]
@@ -10,6 +9,7 @@
 [ext_resource type="Script" path="res://addons/godot-xr-tools/functions/movement_turn.gd" id="6_80eyh"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/functions/movement_direct.gd" id="6_mvrkt"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="7_4wwnr"]
+[ext_resource type="PackedScene" uid="uid://df81b1yyaj2" path="res://scenes/FunctionTeleportOverride.tscn" id="7_q0d1l"]
 [ext_resource type="PackedScene" uid="uid://bhue34utfsw0r" path="res://scenes/menu/XRMenu.tscn" id="10_g5s6k"]
 [ext_resource type="PackedScene" uid="uid://dxfoujgkv1e2y" path="res://scenes/FootstepPlayer.tscn" id="12_drak2"]
 
@@ -35,16 +35,6 @@ max_speed = 5.0
 strafe = true
 enabled = false
 
-[node name="FunctionTeleport" parent="XROrigin3D/XRController3D_left" instance=ExtResource("3_gm17t")]
-can_teleport_color = Color(1, 1, 1, 1)
-cant_teleport_color = Color(0.501961, 0.501961, 0.501961, 1)
-no_collision_color = Color(0.501961, 0.501961, 0.501961, 1)
-strength = 10.0
-max_slope = 45.0
-collision_mask = 1
-valid_teleport_mask = 4294901761
-player_material = ExtResource("4_jb2jl")
-
 [node name="LeftHand" parent="XROrigin3D/XRController3D_left" instance=ExtResource("4_6uron")]
 hand_material_override = ExtResource("4_jb2jl")
 
@@ -53,6 +43,15 @@ distance = 5.0
 show_laser = 2
 laser_length = 1
 laser_material = SubResource("StandardMaterial3D_ne1gf")
+
+[node name="FunctionTeleport" parent="XROrigin3D/XRController3D_left" instance=ExtResource("7_q0d1l")]
+can_teleport_color = Color(1, 1, 1, 1)
+cant_teleport_color = Color(0.572989, 0.572988, 0.572988, 1)
+no_collision_color = Color(0.572549, 0.572549, 0.572549, 1)
+strength = 10.0
+max_slope = 80.0
+collision_mask = 1
+valid_teleport_mask = 4294901761
 
 [node name="XRController3D_right" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"

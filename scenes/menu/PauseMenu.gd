@@ -20,7 +20,6 @@ func _ready():
   # opening page in a browser outside VR is confusing
   if _xr:
     $MarginContainer/VBoxContainer/Open.visible = false
-    $MarginContainer/VBoxContainer/VrControls.visible = true
 
 func ui_cancel_pressed():
   if visible:

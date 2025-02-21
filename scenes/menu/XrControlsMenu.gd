@@ -2,7 +2,7 @@ extends VBoxContainer
 
 signal resume
 
-@onready var vbox = $MarginContainer/VBoxContainer
+@onready var vbox = self
 const _settings_ns = "xr_controls"
 var _default_settings
 var _loaded_settings = false
