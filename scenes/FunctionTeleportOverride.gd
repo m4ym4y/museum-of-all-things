@@ -1,8 +1,6 @@
 @tool
 @icon("res://addons/godot-xr-tools/editor/icons/function.svg")
-class_name XRToolsFunctionTeleport
 extends Node3D
-
 
 ## XR Tools Function Teleport Script
 ##
@@ -80,10 +78,8 @@ const _DefaultMaterial := preload("res://addons/godot-xr-tools/materials/capsule
 ## Valid teleport layer mask
 @export_flags_3d_physics var valid_teleport_mask : int = DEFAULT_MASK
 
-
 ## Player capsule material (ignored for custom player scenes)
-var player_material : StandardMaterial3D = _DefaultMaterial :  set = set_player_material
-
+@export var player_material : StandardMaterial3D = _DefaultMaterial :  set = set_player_material
 
 var is_on_floor : bool = true
 var is_teleporting : bool = false

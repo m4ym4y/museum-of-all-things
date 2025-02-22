@@ -17,7 +17,8 @@
 shading_mode = 0
 albedo_color = Color(0.46, 0.946, 1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vfstw"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_roh25"]
+transparency = 1
 albedo_color = Color(1, 1, 1, 0)
 
 [node name="XrRoot" type="Node3D"]
@@ -55,7 +56,8 @@ strength = 10.0
 max_slope = 80.0
 collision_mask = 1
 valid_teleport_mask = 4294901761
-player_material = SubResource("StandardMaterial3D_vfstw")
+player_material = SubResource("StandardMaterial3D_roh25")
+player_material = SubResource("StandardMaterial3D_roh25")
 
 [node name="XRController3D_right" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
