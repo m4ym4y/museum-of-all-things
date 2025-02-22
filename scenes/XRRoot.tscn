@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dn526eij58wfs"]
+[gd_scene load_steps=15 format=3 uid="uid://dn526eij58wfs"]
 
 [ext_resource type="Script" path="res://scenes/XRRoot.gd" id="1_t4l57"]
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_v48yd"]
@@ -16,6 +16,9 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ne1gf"]
 shading_mode = 0
 albedo_color = Color(0.46, 0.946, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vfstw"]
+albedo_color = Color(1, 1, 1, 0)
 
 [node name="XrRoot" type="Node3D"]
 script = ExtResource("1_t4l57")
@@ -52,6 +55,7 @@ strength = 10.0
 max_slope = 80.0
 collision_mask = 1
 valid_teleport_mask = 4294901761
+player_material = SubResource("StandardMaterial3D_vfstw")
 
 [node name="XRController3D_right" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
