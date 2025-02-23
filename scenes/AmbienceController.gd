@@ -31,10 +31,10 @@ var _ambience_events_weighted = [
   [1, preload("res://assets/sound/Easter Eggs/Peepers 1.ogg")],
   [5, preload("res://assets/sound/Easter Eggs/Cricket Loop.ogg")],
   [5, preload("res://assets/sound/Easter Eggs/Easter Eggs pen drop 1.ogg")],
-  [15, preload("res://assets/sound/Easter Eggs/Random Ambience 1.ogg")],
-  [15, preload("res://assets/sound/Easter Eggs/Random Ambience 2.ogg")],
-  [15, preload("res://assets/sound/Easter Eggs/Random Ambience 3.ogg")],
-  [15, preload("res://assets/sound/Easter Eggs/Random Ambience 4.ogg")],
+  [10, preload("res://assets/sound/Easter Eggs/Random Ambience 1.ogg")],
+  [10, preload("res://assets/sound/Easter Eggs/Random Ambience 2.ogg")],
+  [10, preload("res://assets/sound/Easter Eggs/Random Ambience 3.ogg")],
+  [10, preload("res://assets/sound/Easter Eggs/Random Ambience 4.ogg")],
 ]
 
 func _ambience_voice_timer():
