@@ -27,16 +27,16 @@ extends Node3D
     preload("res://assets/sound/Footsteps/Carpet/Footsteps Carpet 11.ogg"),
   ],
   "water": [
-    preload("res://assets/sound/Footsteps/Water/Reverb/Water Footsteps Heavy 1.ogg"),
-    preload("res://assets/sound/Footsteps/Water/Reverb/Water Footsteps Heavy 2.ogg"),
-    preload("res://assets/sound/Footsteps/Water/Reverb/Water Footsteps Heavy 3.ogg"),
-    preload("res://assets/sound/Footsteps/Water/Reverb/Water Footsteps Heavy 4.ogg"),
-    preload("res://assets/sound/Footsteps/Water/Reverb/Water Footsteps Heavy 5.ogg"),
-    preload("res://assets/sound/Footsteps/Water/Reverb/Water Footsteps Heavy 6.ogg"),
-    preload("res://assets/sound/Footsteps/Water/Reverb/Water Footsteps Heavy 7.ogg"),
-    preload("res://assets/sound/Footsteps/Water/Reverb/Water Footsteps Heavy 8.ogg"),
-    preload("res://assets/sound/Footsteps/Water/Reverb/Water Footsteps Heavy 9.ogg"),
-    preload("res://assets/sound/Footsteps/Water/Reverb/Water Footsteps Heavy 10.ogg"),
+    preload("res://assets/sound/Footsteps/Water/Water Footsteps Heavy 1.ogg"),
+    preload("res://assets/sound/Footsteps/Water/Water Footsteps Heavy 2.ogg"),
+    preload("res://assets/sound/Footsteps/Water/Water Footsteps Heavy 3.ogg"),
+    preload("res://assets/sound/Footsteps/Water/Water Footsteps Heavy 4.ogg"),
+    preload("res://assets/sound/Footsteps/Water/Water Footsteps Heavy 5.ogg"),
+    preload("res://assets/sound/Footsteps/Water/Water Footsteps Heavy 6.ogg"),
+    preload("res://assets/sound/Footsteps/Water/Water Footsteps Heavy 7.ogg"),
+    preload("res://assets/sound/Footsteps/Water/Water Footsteps Heavy 8.ogg"),
+    preload("res://assets/sound/Footsteps/Water/Water Footsteps Heavy 9.ogg"),
+    preload("res://assets/sound/Footsteps/Water/Water Footsteps Heavy 10.ogg"),
   ],
   "dirt": [
     preload("res://assets/sound/Footsteps/Dirt/Dirt Footsteps 1.ogg"),
@@ -47,9 +47,14 @@ extends Node3D
     preload("res://assets/sound/Footsteps/Dirt/Dirt Footsteps 6.ogg"),
     preload("res://assets/sound/Footsteps/Dirt/Dirt Footsteps 7.ogg"),
   ],
+  "leaves": [
+    preload("res://assets/sound/Environmental Ambience/Leaves 1.ogg"),
+    preload("res://assets/sound/Environmental Ambience/Leaves 2.ogg"),
+    preload("res://assets/sound/Environmental Ambience/Leaves 3.ogg"),
+  ],
 }
 
-@onready var water_enter_sound = preload("res://assets/sound/Footsteps/Water/Reverb/Player Enters Water 2.ogg")
+@onready var water_enter_sound = preload("res://assets/sound/Footsteps/Water/Player Enters Water 2.ogg")
 
 var _default_floor_type = "hard"
 var _floor_material_map = {
@@ -101,14 +106,16 @@ func _physics_process(delta):
 func _clean_up_player(player):
   player.queue_free()
 
-func _play_footstep():
+func _play_footstep(override_type=null):
   var grid = GlobalGridAccess.get_grid()
   if not grid:
     return
 
   var step_type
   var obj = $FloorCast.get_collider()
-  if obj and obj.is_in_group("footstep_dirt"):
+  if override_type:
+    step_type = override_type
+  elif obj and obj.is_in_group("footstep_dirt"):
     step_type = "dirt"
   elif obj and obj.is_in_group("footstep_water"):
     step_type = "water"

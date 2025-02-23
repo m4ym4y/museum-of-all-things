@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://djwdo34gyk414"
-path="res://.godot/imported/MoAT Peepers 1.ogg-68b5211da75359ad4aea786341cb852e.oggvorbisstr"
+path="res://.godot/imported/Peepers 1.ogg-f843751eb65c0b182e14211b930aa040.oggvorbisstr"
 
 [deps]
 
-source_file="res://assets/sound/Easter Eggs/MoAT Peepers 1.ogg"
-dest_files=["res://.godot/imported/MoAT Peepers 1.ogg-68b5211da75359ad4aea786341cb852e.oggvorbisstr"]
+source_file="res://assets/sound/Easter Eggs/Peepers 1.ogg"
+dest_files=["res://.godot/imported/Peepers 1.ogg-f843751eb65c0b182e14211b930aa040.oggvorbisstr"]
 
 [params]
 

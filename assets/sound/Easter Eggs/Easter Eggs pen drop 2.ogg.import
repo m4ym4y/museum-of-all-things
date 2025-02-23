@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://bnusfoob0rhpf"
-path="res://.godot/imported/MoAT Easter Eggs pen drop 2.ogg-4385fb7095daa823b6befd9d88939116.oggvorbisstr"
+path="res://.godot/imported/Easter Eggs pen drop 2.ogg-78ea41e54081d49e6d726447dbe39e0a.oggvorbisstr"
 
 [deps]
 
-source_file="res://assets/sound/Easter Eggs/MoAT Easter Eggs pen drop 2.ogg"
-dest_files=["res://.godot/imported/MoAT Easter Eggs pen drop 2.ogg-4385fb7095daa823b6befd9d88939116.oggvorbisstr"]
+source_file="res://assets/sound/Easter Eggs/Easter Eggs pen drop 2.ogg"
+dest_files=["res://.godot/imported/Easter Eggs pen drop 2.ogg-78ea41e54081d49e6d726447dbe39e0a.oggvorbisstr"]
 
 [params]
 

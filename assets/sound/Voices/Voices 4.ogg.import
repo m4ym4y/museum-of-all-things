@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://dv1spt2nctcom"
-path="res://.godot/imported/MoAT Voices 4.ogg-708e324475555cb9d30fac93a68a76f1.oggvorbisstr"
+path="res://.godot/imported/Voices 4.ogg-140a115ec804678a64eab3294ede5680.oggvorbisstr"
 
 [deps]
 
-source_file="res://assets/sound/Voices/MoAT Voices 4.ogg"
-dest_files=["res://.godot/imported/MoAT Voices 4.ogg-708e324475555cb9d30fac93a68a76f1.oggvorbisstr"]
+source_file="res://assets/sound/Voices/Voices 4.ogg"
+dest_files=["res://.godot/imported/Voices 4.ogg-140a115ec804678a64eab3294ede5680.oggvorbisstr"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://c1rhr1bx6g7o4"
-path="res://.godot/imported/MoAT Bird Flapping 1.ogg-763080fa7cc5410d41ba362c794647be.oggvorbisstr"
+path="res://.godot/imported/Bird Flapping 1.ogg-a0190350933515717f4c9b09e2b5c80c.oggvorbisstr"
 
 [deps]
 
-source_file="res://assets/sound/Easter Eggs/MoAT Bird Flapping 1.ogg"
-dest_files=["res://.godot/imported/MoAT Bird Flapping 1.ogg-763080fa7cc5410d41ba362c794647be.oggvorbisstr"]
+source_file="res://assets/sound/Easter Eggs/Bird Flapping 1.ogg"
+dest_files=["res://.godot/imported/Bird Flapping 1.ogg-a0190350933515717f4c9b09e2b5c80c.oggvorbisstr"]
 
 [params]
 

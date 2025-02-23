@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://bboj4f76kwbhq"
-path="res://.godot/imported/MoAT Bird Cry 1.ogg-8070298154ccd690390ba81f4c193cd9.oggvorbisstr"
+path="res://.godot/imported/Bird Cry 1.ogg-51d435e8fa069463b459c22db2861a64.oggvorbisstr"
 
 [deps]
 
-source_file="res://assets/sound/Easter Eggs/MoAT Bird Cry 1.ogg"
-dest_files=["res://.godot/imported/MoAT Bird Cry 1.ogg-8070298154ccd690390ba81f4c193cd9.oggvorbisstr"]
+source_file="res://assets/sound/Easter Eggs/Bird Cry 1.ogg"
+dest_files=["res://.godot/imported/Bird Cry 1.ogg-51d435e8fa069463b459c22db2861a64.oggvorbisstr"]
 
 [params]
 
