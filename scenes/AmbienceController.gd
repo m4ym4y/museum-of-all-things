@@ -38,14 +38,12 @@ var _ambience_events_weighted = [
 ]
 
 func _ambience_voice_timer():
-  print("ambience voice timer")
   get_tree().create_timer(randi_range(_ambient_voice_space_min, _ambient_voice_space_max)).timeout.connect(_play_ambience_voice)
 
 func _ambience_event_timer():
   get_tree().create_timer(randi_range(_ambience_event_space_min, _ambience_event_space_max)).timeout.connect(_play_ambience_event)
 
 func _play_ambience_voice():
-  print("playing ambience voice")
   var player = _create_player(_ambient_voices[randi() % len(_ambient_voices)], 0.0)
   player.finished.connect(_clean_player.bind(player))
   player.finished.connect(_ambience_voice_timer)
