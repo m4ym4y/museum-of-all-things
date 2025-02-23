@@ -31,6 +31,12 @@ func _ready():
     GlobalMenuEvents.set_xr_smooth_rotation.connect(_set_xr_smooth_rotation)
     GlobalMenuEvents.emit_load_xr_settings()
     left_controller.get_node("FunctionPointer/Laser").visibility_changed.connect(_laser_visible_changed)
+  else:
+    $FailedVrAccept.popup()
+    get_tree().paused = true
+
+func _failed_vr_accept_confirmed():
+  get_tree().quit()
 
 var menu_active = false
 var by_button_pressed = false

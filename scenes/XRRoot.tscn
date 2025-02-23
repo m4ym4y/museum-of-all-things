@@ -80,3 +80,15 @@ collision_layer = 524288
 script = ExtResource("4_l0d4h")
 
 [node name="FootstepPlayer" parent="XROrigin3D/XRToolsPlayerBody" instance=ExtResource("12_drak2")]
+
+[node name="FailedVrAccept" type="AcceptDialog" parent="."]
+process_mode = 3
+initial_position = 2
+dialog_text = "Failed to initialize OpenXR!
+
+Make sure you have a VR headet plugged in and an OpenXR provider configured.
+
+If you didn't mean to use VR, download a non-OpenXR version of the Musem of All Things."
+dialog_close_on_escape = false
+
+[connection signal="confirmed" from="FailedVrAccept" to="." method="_failed_vr_accept_confirmed"]
