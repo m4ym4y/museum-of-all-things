@@ -26,11 +26,11 @@ var _ambient_voices = [
 var _ambience_event_space_min = 30
 var _ambience_event_space_max = 180
 var _ambience_events_weighted = [
-  [1, preload("res://assets/sound/Easter Eggs/Bird Cry 1.ogg")],
-  [1, preload("res://assets/sound/Easter Eggs/Bird Flapping 1.ogg")],
-  [1, preload("res://assets/sound/Easter Eggs/Peepers 1.ogg")],
-  [5, preload("res://assets/sound/Easter Eggs/Cricket Loop.ogg")],
-  [5, preload("res://assets/sound/Easter Eggs/Easter Eggs pen drop 1.ogg")],
+  [1,  preload("res://assets/sound/Easter Eggs/Bird Cry 1.ogg")],
+  [1,  preload("res://assets/sound/Easter Eggs/Bird Flapping 1.ogg")],
+  [1,  preload("res://assets/sound/Easter Eggs/Peepers 1.ogg")],
+  [5,  preload("res://assets/sound/Easter Eggs/Cricket Loop.ogg")],
+  [5,  preload("res://assets/sound/Easter Eggs/Easter Eggs pen drop 1.ogg")],
   [10, preload("res://assets/sound/Easter Eggs/Random Ambience 1.ogg")],
   [10, preload("res://assets/sound/Easter Eggs/Random Ambience 2.ogg")],
   [10, preload("res://assets/sound/Easter Eggs/Random Ambience 3.ogg")],
@@ -44,11 +44,12 @@ func _ambience_event_timer():
   get_tree().create_timer(randi_range(_ambience_event_space_min, _ambience_event_space_max)).timeout.connect(_play_ambience_event)
 
 func _play_ambience_voice():
+  _ambience_voice_timer()
   var player = _create_player(_ambient_voices[randi() % len(_ambient_voices)])
   player.finished.connect(_clean_player.bind(player))
-  _ambience_voice_timer()
 
 func _play_ambience_event():
+  _ambience_event_timer()
   var weight_sum = 0
   for ev in _ambience_events_weighted:
     weight_sum += ev[0]
@@ -59,7 +60,6 @@ func _play_ambience_event():
       var player = _create_player(ev[1])
       player.finished.connect(_clean_player.bind(player))
       break
-  _ambience_event_timer
 
 func _random_track():
   return _ambience_tracks[randi() % len(_ambience_tracks)]
