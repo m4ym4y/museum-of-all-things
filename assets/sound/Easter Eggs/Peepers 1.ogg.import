@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://djwdo34gyk414"
+path="res://.godot/imported/MoAT Peepers 1.ogg-68b5211da75359ad4aea786341cb852e.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Easter Eggs/MoAT Peepers 1.ogg"
+dest_files=["res://.godot/imported/MoAT Peepers 1.ogg-68b5211da75359ad4aea786341cb852e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

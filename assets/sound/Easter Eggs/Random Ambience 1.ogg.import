@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dbha53qo3i0qt"
+path="res://.godot/imported/MoAT Random Ambience 1.ogg-0bab7fd131cc01538c43c19bcd2ed866.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Easter Eggs/MoAT Random Ambience 1.ogg"
+dest_files=["res://.godot/imported/MoAT Random Ambience 1.ogg-0bab7fd131cc01538c43c19bcd2ed866.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

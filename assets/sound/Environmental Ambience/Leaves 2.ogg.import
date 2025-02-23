@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://n4k8avf7n6xm"
+path="res://.godot/imported/MoAT Leaves 2.ogg-91332a7bd6d5428c1db9250778ea89bb.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Environmental Ambience/MoAT Leaves 2.ogg"
+dest_files=["res://.godot/imported/MoAT Leaves 2.ogg-91332a7bd6d5428c1db9250778ea89bb.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

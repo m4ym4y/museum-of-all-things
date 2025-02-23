@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://db4wuvvl3i3kj"
+path="res://.godot/imported/MoAT Voices 5.ogg-69965ff282d6630282fb0e9b859a9883.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Voices/MoAT Voices 5.ogg"
+dest_files=["res://.godot/imported/MoAT Voices 5.ogg-69965ff282d6630282fb0e9b859a9883.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

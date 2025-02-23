@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c1rhr1bx6g7o4"
+path="res://.godot/imported/MoAT Bird Flapping 1.ogg-763080fa7cc5410d41ba362c794647be.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Easter Eggs/MoAT Bird Flapping 1.ogg"
+dest_files=["res://.godot/imported/MoAT Bird Flapping 1.ogg-763080fa7cc5410d41ba362c794647be.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

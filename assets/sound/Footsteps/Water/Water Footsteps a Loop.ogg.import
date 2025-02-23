@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://co4kg2h80g4fs"
+path="res://.godot/imported/Water Footsteps a Loop.ogg-ab4e3a8ab16f89dc54c3c3105864e52a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Footsteps/Water/Water Footsteps a Loop.ogg"
+dest_files=["res://.godot/imported/Water Footsteps a Loop.ogg-ab4e3a8ab16f89dc54c3c3105864e52a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

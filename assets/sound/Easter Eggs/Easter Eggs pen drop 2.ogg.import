@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bnusfoob0rhpf"
+path="res://.godot/imported/MoAT Easter Eggs pen drop 2.ogg-4385fb7095daa823b6befd9d88939116.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sound/Easter Eggs/MoAT Easter Eggs pen drop 2.ogg"
+dest_files=["res://.godot/imported/MoAT Easter Eggs pen drop 2.ogg-4385fb7095daa823b6befd9d88939116.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
