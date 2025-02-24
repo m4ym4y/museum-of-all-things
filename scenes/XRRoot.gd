@@ -19,7 +19,7 @@ func _ready():
     get_viewport().use_xr = true
 
     # turn off v-sync
-    # OS.vsync_enabled = false
+    DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
     # put our physics in sync with our expected frame rate:
     Engine.physics_ticks_per_second = 90

@@ -86,7 +86,7 @@ func _apply_settings(s, default={}):
     set_fullscreen(s["fullscreen"] if s.has("fullscreen") else default["fullscreen"])
     set_render_scale(s["render_scale"] if s.has("render_scale") else default["render_scale"])
     set_post_processing(s["post_processing"] if s.has("post_processing") else default["post_processing"])
-    set_render_distance_multiplier(s["render_distance_multiplier"] if s.has("render_distance_multiplier") else default["render_distance_multiplier"])
+  set_render_distance_multiplier(s["render_distance_multiplier"] if s.has("render_distance_multiplier") else default["render_distance_multiplier"])
 
 func _create_settings_obj():
   var e = _env.environment
