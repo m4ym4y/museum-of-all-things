@@ -6,7 +6,7 @@ var cache_dir = "user://cache/"
 var global_cache_dir = ProjectSettings.globalize_path(cache_dir)
 var _cache_stat_thread = Thread.new()
 var CACHE_STAT_QUEUE = "CacheStat"
-var _cache_size_info = { "count": 0, "size": 0 }
+var _cache_size_info = 0
 var _last_stat_time = 0
 var _max_stat_age = 2000
 
@@ -99,6 +99,11 @@ func _get_cache_size_windows():
 func cull_cache_to_size(max_size: int, target_size: int):
   var dir = DirAccess.open(cache_dir)
   dir.list_dir_begin()
+
+  # do a fast check first using OS stat command
+  var os_cache_size = _get_cache_size()
+  if os_cache_size < max_size:
+    return
 
   var file = dir.get_next()
   var file_array = []
