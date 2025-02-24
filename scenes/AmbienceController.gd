@@ -38,13 +38,21 @@ var _ambience_events_weighted = [
 ]
 
 func _ambience_voice_timer():
-  get_tree().create_timer(randi_range(_ambient_voice_space_min, _ambient_voice_space_max)).timeout.connect(_play_ambience_voice)
+  var delay = randi_range(_ambient_voice_space_min, _ambient_voice_space_max)
+  if OS.is_debug_build():
+    print("ambient voice delay=", delay)
+  get_tree().create_timer(delay).timeout.connect(_play_ambience_voice)
 
 func _ambience_event_timer():
-  get_tree().create_timer(randi_range(_ambience_event_space_min, _ambience_event_space_max)).timeout.connect(_play_ambience_event)
+  var delay = randi_range(_ambience_event_space_min, _ambience_event_space_max)
+  if OS.is_debug_build():
+    print("ambient event delay=", delay)
+  get_tree().create_timer(delay).timeout.connect(_play_ambience_event)
 
 func _play_ambience_voice():
   var player = _create_player(_ambient_voices[randi() % len(_ambient_voices)], 0.0)
+  if OS.is_debug_build():
+    print("playing ambience voice. src=", player.stream.resource_path)
   player.finished.connect(_clean_player.bind(player))
   player.finished.connect(_ambience_voice_timer)
 
@@ -59,6 +67,8 @@ func _play_ambience_event():
     if choice <= 0:
       var player = _create_player(ev[1], 0.0)
       player.finished.connect(_clean_player.bind(player))
+      if OS.is_debug_build():
+        print("playing ambience event. src=", player.stream.resource_path)
       break
 
 func _random_track():
