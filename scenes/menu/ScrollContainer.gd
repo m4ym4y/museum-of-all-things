@@ -19,5 +19,5 @@ func _process(delta: float) -> void:
   if abs(joy_input) < joypad_deadzone:
     return
 
-  scroll_vertical += joy_input * scroll_speed * delta
-  scroll_vertical = clamp(scroll_vertical, 0, get_v_scroll_bar().max_value)
+  scroll_vertical = round(scroll_vertical + joy_input * scroll_speed * delta)
+  scroll_vertical = clamp(scroll_vertical, 0.0, get_v_scroll_bar().max_value)
