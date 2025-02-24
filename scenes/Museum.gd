@@ -1,6 +1,5 @@
 extends Node3D
 
-@onready var NoImageNotice = preload("res://scenes/items/NoImageNotice.tscn")
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
 @onready var StaticData = preload("res://assets/resources/lobby_data.tres")
 
@@ -341,15 +340,6 @@ func _on_fetch_complete(_titles, context):
     "hall_type": hall.hall_type,
     "exit_limit": len(doors),
   })
-
-  if _count_image_items(items) < 3:
-    var notice = NoImageNotice.instantiate()
-    notice.rotation.y = Util.vecToRot(new_exhibit.entry.to_dir) - PI / 4
-    notice.position = Util.gridToWorld(new_exhibit.entry.to_pos) + 5 * new_exhibit.entry.to_dir
-    notice.position -= new_exhibit.entry.to_dir.rotated(Vector3.UP, PI / 2) * 2
-    items.append_array(extra_text)
-    extra_text = []
-    new_exhibit.add_child(notice)
 
   if not _exhibits.has(context.title):
     _exhibits[context.title] = { "entry": new_exhibit.entry, "exhibit": new_exhibit, "height": _next_height }
