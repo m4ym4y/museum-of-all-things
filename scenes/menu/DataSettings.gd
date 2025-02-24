@@ -41,7 +41,7 @@ func _refresh_cache_label():
   $CacheOptions/CacheLabel.text = "Cache (calculating size...)"
 
 func _show_cache_size(result):
-  $CacheOptions/CacheLabel.text = "Cache (%s items, %3.2f GB)" % [result.count, result.size / 1000000000.0]
+  $CacheOptions/CacheLabel.text = "Cache (%3.2f GB)" % [result / 1000000000.0]
 
 func _on_clear_cache_pressed():
   CacheControl.clear_cache()

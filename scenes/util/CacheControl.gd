@@ -3,6 +3,7 @@ extends Node
 signal cache_size_result(cache_info)
 
 var cache_dir = "user://cache/"
+var global_cache_dir = ProjectSettings.globalize_path(cache_dir)
 var _cache_stat_thread = Thread.new()
 var CACHE_STAT_QUEUE = "CacheStat"
 var _cache_size_info = { "count": 0, "size": 0 }
@@ -51,6 +52,12 @@ func calculate_cache_size():
   WorkQueue.add_item(CACHE_STAT_QUEUE, ["size"])
 
 func _get_cache_size():
+  if OS.get_name() == "Windows":
+    return _get_cache_size_windows()
+  else:
+    return _get_cache_size_unix()
+
+func _get_cache_size_os_agnostic():
   var dir = DirAccess.open(cache_dir)
   dir.list_dir_begin()
 
@@ -64,11 +71,30 @@ func _get_cache_size():
       total_length += handle.get_length()
       handle.close()
     file = dir.get_next()
+  return total_length
 
-  return {
-    "count": count,
-    "size": total_length
-  }
+func _get_cache_size_unix():
+  var output = []
+  OS.execute("du", ["-sb", global_cache_dir], output)
+  if output.size() > 0:
+    var parts = output[0].strip_edges().split("\t")
+    if parts.size() > 1:
+      return int(parts[0])
+  return -1
+
+func _get_cache_size_windows():
+  var output = []
+  var command = "powershell"
+  var args = [
+    "-command",
+    "(Get-ChildItem -Path '" + global_cache_dir + "' -Recurse | Measure-Object -Property Length -Sum).Sum"
+  ]
+
+  OS.execute(command, args, output)
+
+  if output.size() > 0:
+    return int(output[0].strip_edges())
+  return -1
 
 func cull_cache_to_size(max_size: int, target_size: int):
   var dir = DirAccess.open(cache_dir)
