@@ -188,6 +188,10 @@ layout_mode = 2
 text = "60"
 horizontal_alignment = 1
 
+[node name="VSync" type="CheckBox" parent="FPSOptions"]
+layout_mode = 2
+text = "Enable V-Sync"
+
 [node name="LimitFPS" type="CheckBox" parent="FPSOptions"]
 layout_mode = 2
 text = "Limit FPS"
@@ -225,5 +229,6 @@ popup/item_1/id = 1
 [connection signal="value_changed" from="RenderDistanceOptions/RenderDistance" to="." method="_on_render_distance_value_changed"]
 [connection signal="toggled" from="FogOptions/EnableFog" to="." method="_on_enable_fog_toggled"]
 [connection signal="value_changed" from="FPSOptions/MaxFPS" to="." method="_on_max_fps_value_changed"]
+[connection signal="toggled" from="FPSOptions/VSync" to="." method="_on_vsync_toggled"]
 [connection signal="toggled" from="FPSOptions/LimitFPS" to="." method="_on_limit_fps_toggled"]
 [connection signal="item_selected" from="PostProcessingOptions/PostProcessingEffect" to="." method="_on_post_processing_effect_item_selected"]

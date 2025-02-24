@@ -32,6 +32,7 @@ func _load_settings():
   _vbox.get_node("RenderDistanceOptions/RenderDistance").value = GraphicsManager.render_distance_multiplier
   _vbox.get_node("FPSOptions/MaxFPS").value = GraphicsManager.fps_limit
   _vbox.get_node("FPSOptions/LimitFPS").button_pressed = GraphicsManager.limit_fps
+  _vbox.get_node("FPSOptions/VSync").button_pressed = GraphicsManager.vsync_enabled
   _vbox.get_node("DisplayOptions/Fullscreen").button_pressed = GraphicsManager.fullscreen
   _vbox.get_node("DisplayOptions/RenderScale").value = GraphicsManager.render_scale
   _vbox.get_node("ReflectionOptions/ReflectionQuality").value = e.ssr_max_steps
@@ -71,6 +72,9 @@ func _on_max_fps_value_changed(value: float):
 
 func _on_limit_fps_toggled(toggled_on: bool):
   GraphicsManager.enable_fps_limit(toggled_on)
+
+func _on_vsync_toggled(toggled_on: bool):
+  GraphicsManager.set_vsync_enabled(toggled_on)
 
 func _on_enable_fog_toggled(toggled_on: bool):
   GraphicsManager.get_env().fog_enabled = toggled_on

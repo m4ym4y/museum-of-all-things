@@ -12,6 +12,7 @@ var fullscreen = false
 var render_scale = 1.0
 var post_processing = "none"
 var render_distance_multiplier = 2.5
+var vsync_enabled = true
 
 func init():
   _env = get_tree().get_nodes_in_group("Environment")[0]
@@ -57,6 +58,10 @@ func set_render_distance_multiplier(value: float):
     for node in get_tree().get_nodes_in_group("render_distance"):
       node.visibility_range_end *= render_distance_multiplier / last_distance
 
+func set_vsync_enabled(_vsync_enabled: bool):
+  vsync_enabled = _vsync_enabled
+  DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if vsync_enabled else DisplayServer.VSYNC_DISABLED)
+
 func _on_node_added(node: Node) -> void:
   if not is_equal_approx(render_distance_multiplier, 1.0):
     if node.is_in_group("render_distance"):
@@ -75,6 +80,7 @@ func _apply_settings(s, default={}):
   if Util.is_xr():
     e["ssr_enabled"] = false
   else:
+    set_vsync_enabled(s["vsync_enabled"] if s.has("vsync_enabled") else default["vsync_enabled"])
     set_fps_limit(s["fps_limit"] if s.has("fps_limit") else default["fps_limit"])
     enable_fps_limit(s["limit_fps"] if s.has("limit_fps") else default["limit_fps"])
     set_fullscreen(s["fullscreen"] if s.has("fullscreen") else default["fullscreen"])
@@ -95,6 +101,7 @@ func _create_settings_obj():
     "fullscreen": fullscreen,
     "render_scale": render_scale,
     "post_processing": post_processing,
+    "vsync_enabled": vsync_enabled,
     "render_distance_multiplier": render_distance_multiplier,
   }
 
