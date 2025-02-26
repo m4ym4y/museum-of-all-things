@@ -68,6 +68,7 @@ render_distance="nodes affected by render distance setting"
 
 [gui]
 
+theme/default_font_generate_mipmaps=true
 common/drop_mouse_on_gui_input_disabled=true
 
 [input]

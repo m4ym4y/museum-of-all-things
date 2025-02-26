@@ -14,7 +14,7 @@ dest_files=["res://.godot/imported/NotoSansMono_SemiCondensed-Bold.ttf-5eaf09c41
 
 Rendering=null
 antialiasing=1
-generate_mipmaps=false
+generate_mipmaps=true
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8

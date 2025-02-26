@@ -306,4 +306,5 @@ starting_text = "The museum is currently unstaffed. Please refer to signage for 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.95369, -17.999)
 pixel_size = 0.005
+texture_filter = 5
 texture = ExtResource("29_kkkm5")
