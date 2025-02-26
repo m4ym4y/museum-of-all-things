@@ -5,3 +5,4 @@
 [resource]
 albedo_texture = ExtResource("1_nnruk")
 roughness = 0.1
+texture_filter = 5
