@@ -184,6 +184,16 @@ toggle_fullscreen={
 ]
 }
 
+[internationalization]
+
+locale/translation_remaps={
+"res://assets/textures/lobby_plaque_intro_1.png": PackedStringArray("res://assets/textures/lobby_plaque_intro_1.fr.png:fr")
+}
+locale/translations=PackedStringArray("res://assets/translations/fr.po")
+locale/test="fr"
+locale/locale_filter_mode=1
+locale/language_filter=["fr"]
+
 [layer_names]
 
 3d_physics/layer_1="Static World"

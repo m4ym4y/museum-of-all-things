@@ -1,0 +1,13 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Language: fr\n"
+
+msgid "Enter the Museum"
+msgstr "Entrer dans le Musée"
+
+msgid "Settings"
+msgstr "Paramètres"
+
+msgid "Quit"
+msgstr "Quitter"
