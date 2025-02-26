@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxfoujgkv1e2y"]
+[gd_scene load_steps=3 format=3 uid="uid://dxfoujgkv1e2y"]
 
 [ext_resource type="Script" path="res://scenes/FootstepPlayer.gd" id="1_oq4ik"]
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_3tw63"]
 
 [node name="FootstepPlayer" type="Node3D"]
 script = ExtResource("1_oq4ik")
@@ -8,3 +10,7 @@ script = ExtResource("1_oq4ik")
 [node name="FloorCast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.476292, 0)
 collision_mask = 2
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamPolyphonic_3tw63")
+bus = &"Sound"

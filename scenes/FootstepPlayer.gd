@@ -54,6 +54,7 @@ extends Node3D
   ],
 }
 
+@onready var audio_stream_player_3d: AudioStreamPlayer3D = $AudioStreamPlayer3D
 @onready var water_enter_sound = preload("res://assets/sound/Footsteps/Water/Player Enters Water 2.ogg")
 
 var _default_floor_type = "hard"
@@ -70,6 +71,9 @@ var _last_in_water = false
 var _last_on_floor = false
 @onready var _last_position = global_position
 
+func _ready() -> void:
+  audio_stream_player_3d.play()
+    
 func set_on_floor(on_floor):
   _on_floor = on_floor
 
@@ -103,9 +107,6 @@ func _physics_process(delta):
     _distance_from_last_step = 0.0
     call_deferred("_play_footstep")
 
-func _clean_up_player(player):
-  player.queue_free()
-
 func _play_footstep(override_type=null):
   var grid = GlobalGridAccess.get_grid()
   if not grid:
@@ -135,11 +136,7 @@ func _play_footstep(override_type=null):
   else:
     step_sfx = step_sfx_list[randi() % len(step_sfx_list)]
 
-  var step_player = AudioStreamPlayer.new()
-  step_player.stream = step_sfx
-  step_player.bus = &"Sound"
-  step_player.finished.connect(_clean_up_player.bind(step_player))
-  add_child(step_player)
-  step_player.play()
+  var playback: AudioStreamPlaybackPolyphonic = audio_stream_player_3d.get_stream_playback()
+  playback.play_stream(step_sfx, 0.0, randf_range(-5.0, 0.0), randf_range(0.725, 1.15))
 
   _last_in_water = step_type == "water"
