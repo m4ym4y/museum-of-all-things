@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://ychsh5rigt5i"]
+
+[ext_resource type="Script" path="res://scenes/menu/GameplaySettings.gd" id="1_uetrg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kfvnr"]
+font_size = 64
+
+[node name="GameplaySettings" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uetrg")
+
+[node name="MainOptions" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainOptions"]
+layout_mode = 2
+text = "Gameplay Settings"
+label_settings = SubResource("LabelSettings_kfvnr")
+
+[node name="Back" type="Button" parent="MainOptions"]
+layout_mode = 2
+text = "Back
+"
+
+[node name="ControlsLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Controls"
+
+[node name="MappingContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="MainOptions/Back" to="." method="_on_resume"]

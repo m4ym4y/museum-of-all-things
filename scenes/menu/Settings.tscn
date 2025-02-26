@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bw3fu2y38n3yk"]
+[gd_scene load_steps=9 format=3 uid="uid://bw3fu2y38n3yk"]
 
 [ext_resource type="Script" path="res://scenes/menu/Settings.gd" id="1_4scry"]
 [ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="1_v0h4s"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c3ljfgt8nv5v" path="res://scenes/menu/XRControlsMenu.tscn" id="3_s7rjb"]
 [ext_resource type="PackedScene" uid="uid://f0jxppprskc3" path="res://scenes/menu/DataSettings.tscn" id="5_mo3yx"]
 [ext_resource type="PackedScene" uid="uid://cah8jnesp3dgx" path="res://scenes/menu/AudioSettings.tscn" id="5_yolm2"]
+[ext_resource type="PackedScene" uid="uid://ychsh5rigt5i" path="res://scenes/menu/GameplaySettings.tscn" id="8_xtrup"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -47,11 +48,12 @@ size_flags_vertical = 3
 layout_mode = 2
 current_tab = 0
 tab_alignment = 1
-tab_count = 4
+tab_count = 5
 tab_0/title = "Graphics"
 tab_1/title = "Audio"
 tab_2/title = "Controls"
 tab_3/title = "Data"
+tab_4/title = "Gameplay"
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -75,6 +77,10 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="GameplaySettings" parent="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer" instance=ExtResource("8_xtrup")]
+visible = false
+layout_mode = 2
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="tab_changed" from="ScrollContainer/MarginContainer/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
 [connection signal="tab_clicked" from="ScrollContainer/MarginContainer/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_clicked"]
@@ -82,3 +88,4 @@ layout_mode = 2
 [connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/AudioSettings" to="." method="_on_resume"]
 [connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/DataSettings" to="." method="_on_resume"]
 [connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/XrControlsMenu" to="." method="_on_resume"]
+[connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/GameplaySettings" to="." method="_on_resume"]
