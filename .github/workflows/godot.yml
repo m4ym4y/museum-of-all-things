@@ -1,0 +1,79 @@
+name: "Godot Export"
+on:
+  workflow_dispatch:
+  pull_request:
+  release:
+    types:
+      - released
+
+env:
+  GODOT_VERSION: 4.3
+  EXPORT_NAME: MuseumOfAllThings
+
+jobs:
+  export:
+    name: Export
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache Godot Engine downloads
+        id: cache-godot
+        uses: actions/cache@v4
+        with:
+          path: |
+            export/godot
+            export/editor_data/export_templates/${{ env.GODOT_VERSION }}.stable
+          key: godot-${{ env.GODOT_VERSION }}
+
+      - name: Download Godot Engine from GitHub release
+        id: download
+        if: steps.cache-godot.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p export && cd export
+
+          # Download Godot Engine itself
+          wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip && \
+          unzip Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip && \
+          mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 godot
+
+          # Download export templates
+          mkdir -p editor_data/export_templates
+          wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz && \
+          unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz && \
+          mv templates editor_data/export_templates/${GODOT_VERSION}.stable
+
+      - name: Export PCK file
+        run: |
+          cd export
+
+          # Tell Godot Engine to be self-contained
+          touch ._sc_
+
+          # NOTE: export filename is relative to the project path
+          ./godot --verbose --headless --path ../ --export-pack "Linux" ./export/${EXPORT_NAME}.pck
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.EXPORT_NAME }}
+          path: export/${{ env.EXPORT_NAME }}.pck
+
+  release:
+    permissions: write-all
+    name: Release
+    needs: export
+    if: ${{ github.event_name == 'release' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download PCK file artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.EXPORT_NAME }}
+
+      - name: Upload PCK file to release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload '${{ github.ref_name }}' ${{ env.EXPORT_NAME }}.pck --repo '${{ github.repository }}'
