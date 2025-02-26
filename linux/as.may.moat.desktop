@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Museum of All Things
+Comment=Explore an infinite 3D museum
+Categories=Game;
+Icon=as.may.moat
+Exec=godot-runner
+Type=Application
+Terminal=false
+Keywords=Wikipedia;VR;3D;Godot;simulation;immersive;
