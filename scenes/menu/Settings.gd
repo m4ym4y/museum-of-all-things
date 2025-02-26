@@ -9,7 +9,8 @@ signal resume
   _vbox.get_node("GraphicsSettings"),
   _vbox.get_node("AudioSettings"),
   _vbox.get_node("XrControlsMenu") if _xr else null,
-  _vbox.get_node("DataSettings")
+  _vbox.get_node("DataSettings"),
+  _vbox.get_node("GameplaySettings")
 ]
 
 func _ready():
