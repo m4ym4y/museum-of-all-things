@@ -12,8 +12,11 @@ var current_joy_event : InputEvent = null
 
 func _ready() -> void:
   set_process_input(false)
-  keyboard_button.toggled.connect(func(val : bool): update_state(val, keyboard_button))
-  joypad_button.toggled.connect(func(val : bool): update_state(val, joypad_button))
+  keyboard_button.toggled.connect(func(val : bool): _on_button_toggled_aux(val, keyboard_button))
+  joypad_button.toggled.connect(func(val : bool): _on_button_toggled_aux(val, joypad_button))
+  
+  keyboard_button.focus_exited.connect(func(): _on_focus_exited_aux(keyboard_button))
+  joypad_button.focus_exited.connect(func(): _on_focus_exited_aux(joypad_button))
 
 func update_action() -> void:
   action_label.text = " " + action_str.replace("_", " ").capitalize()
@@ -22,12 +25,12 @@ func update_action() -> void:
     if current_keyboard_event and current_joy_event:
       break
     if input_event is InputEventKey or\
-     input_event is InputEventMouseButton and not current_keyboard_event:
-      current_keyboard_event = input_event
+      input_event is InputEventMouseButton and not current_keyboard_event:
+        current_keyboard_event = input_event
     
     elif input_event is InputEventJoypadButton or\
-     input_event is InputEventJoypadMotion and not current_joy_event:
-      current_joy_event = input_event
+      input_event is InputEventJoypadMotion and not current_joy_event:
+        current_joy_event = input_event
   
   keyboard_button.text = current_keyboard_event.as_text().get_slice(" (", 0)
 
@@ -36,22 +39,27 @@ func update_action() -> void:
   elif current_joy_event and current_joy_event is InputEventJoypadMotion:
     joypad_button.text = joy_motion_to_text(current_joy_event.axis, current_joy_event.axis_value)
     
-func update_state(button_state : bool, button : Button) -> void:
+func _on_button_toggled_aux(button_state : bool, button : Button) -> void:
   set_process_input(button_state)
   if button_state:
     button.text = "..."
   else:
     update_action()
 
+func _on_focus_exited_aux(button : Button) -> void:
+  button.button_pressed = false
+  set_process_input(joypad_button.pressed or joypad_button.pressed)
+  update_action()
+
 func _input(event: InputEvent) -> void:
   if current_keyboard_event != event and\
-   (event is InputEventKey or event is InputEventMouseButton) and\
-   keyboard_button.button_pressed:
-    remap_action_keyboard(event)
+    (event is InputEventKey or event is InputEventMouseButton) and\
+    keyboard_button.button_pressed:
+      remap_action_keyboard(event)
   elif current_joy_event != event and\
-   (event is InputEventJoypadButton or event is InputEventJoypadMotion) and\
-   joypad_button.button_pressed:
-    remap_action_joypad(event)
+    (event is InputEventJoypadButton or event is InputEventJoypadMotion) and\
+    joypad_button.button_pressed:
+      remap_action_joypad(event)
 
 func remap_action_keyboard(event : InputEvent) -> void:
   InputMap.action_erase_event(action_str, current_keyboard_event)
@@ -90,7 +98,7 @@ func joy_motion_to_text(axis : int, axis_value : float) -> String:
     [5, _]:
       return "RT"
       
-  return "Unknown"
+  return "Axis %d %1.1f" % [axis, axis_value]
 
 func joy_button_to_text(button_index : int) -> String:
   match button_index:
@@ -106,4 +114,4 @@ func joy_button_to_text(button_index : int) -> String:
       return "LB"
     JOY_BUTTON_RIGHT_SHOULDER:
       return "RB"
-  return "Unknown"
+  return "Button %d" % button_index

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c3ljfgt8nv5v" path="res://scenes/menu/XRControlsMenu.tscn" id="3_s7rjb"]
 [ext_resource type="PackedScene" uid="uid://f0jxppprskc3" path="res://scenes/menu/DataSettings.tscn" id="5_mo3yx"]
 [ext_resource type="PackedScene" uid="uid://cah8jnesp3dgx" path="res://scenes/menu/AudioSettings.tscn" id="5_yolm2"]
-[ext_resource type="PackedScene" uid="uid://ychsh5rigt5i" path="res://scenes/menu/GameplaySettings.tscn" id="8_xtrup"]
+[ext_resource type="PackedScene" uid="uid://ychsh5rigt5i" path="res://scenes/menu/ControlSettings.tscn" id="8_xtrup"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -77,7 +77,7 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="GameplaySettings" parent="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer" instance=ExtResource("8_xtrup")]
+[node name="ControlSettings" parent="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer" instance=ExtResource("8_xtrup")]
 visible = false
 layout_mode = 2
 
@@ -88,4 +88,4 @@ layout_mode = 2
 [connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/AudioSettings" to="." method="_on_resume"]
 [connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/DataSettings" to="." method="_on_resume"]
 [connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/XrControlsMenu" to="." method="_on_resume"]
-[connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/GameplaySettings" to="." method="_on_resume"]
+[connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/ControlSettings" to="." method="_on_resume"]
