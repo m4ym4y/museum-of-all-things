@@ -34,7 +34,7 @@ func clear_listeners(n, sig_name):
     c.signal.disconnect(c.callable)
 
 func is_xr():
-  return ProjectSettings.get_setting("xr/openxr/enabled")
+  return ProjectSettings.get_setting_with_override("xr/openxr/enabled")
 
 func normalize_url(url):
   if url.begins_with('//'):
