@@ -137,6 +137,6 @@ func _play_footstep(override_type=null):
     step_sfx = step_sfx_list[randi() % len(step_sfx_list)]
 
   var playback: AudioStreamPlaybackPolyphonic = audio_stream_player_3d.get_stream_playback()
-  playback.play_stream(step_sfx, 0.0, randf_range(-5.0, 0.0), randf_range(0.725, 1.15))
+  playback.play_stream(step_sfx)
 
   _last_in_water = step_type == "water"
