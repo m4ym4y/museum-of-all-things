@@ -22,8 +22,8 @@ modules:
         path: .
 
       - type: file
-        url: https://github.com/cassidyjames/museum-of-all-things/releases/download/1.0.0/MuseumOfAllThings.pck
-        sha256: 8003bc2b3c330acb630ba8030fc1f5de6e4f1bbbe0b5f232b1374b3dee1fcfcb
+        url: https://github.com/m4ym4y/museum-of-all-things/releases/download/v1.0.0/MuseumOfAllThings.pck
+        sha256: a800c512f962106432cd1b7fe0dcc885e0cf89dcaea5979fb2b022228fcd16cc
 
     build-commands:
       - install -Dm644 MuseumOfAllThings.pck ${FLATPAK_DEST}/bin/godot-runner.pck
