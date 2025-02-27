@@ -8,28 +8,28 @@ script = ExtResource("2_y4oc8")
 name = "Tecnologia"
 corner_1 = Vector2(-68, -44)
 corner_2 = Vector2(-32, -8)
-exhibits = PackedStringArray("Carro de controle", "Minox", "Transistor", "Cerâmica", "Godot (motor de jogo)", "Pasteurização", "Testes de armas nucleares", "Adesivo", "Aqueduto (abastecimento de água)", "Renderização 3D", "Avião", "Máquina simples", "Prensa tipográfica", "Controle de natalidade", "Microscopia", "Console de videogame", "Trebuchet", "Domesticação de animais", "Oldowan")
+exhibits = PackedStringArray("Linux", "Redes", "Transistores", "Cerâmica", "Jogos eletrônicos", "Processos industriais", "Testes de armas nucleares", "Adesivos", "Aquedutos", "Computação gráfica 3D", "Aviões", "Máquinas simples", "Manufatura", "Automação industrial", "Microscopia", "Consolas de jogos", "Erros de computador", "Listas de exploração espacial", "Listas de armas")
 
 [sub_resource type="Resource" id="Resource_ooopd"]
 script = ExtResource("2_y4oc8")
 name = "Cultura"
 corner_1 = Vector2(32, -44)
 corner_2 = Vector2(68, -8)
-exhibits = PackedStringArray("Palhaço", "Dragão", "Loja de conveniência", "High five", "Goncharov (meme)", "Café", "Sopa", "The Backrooms", "Tarô", "K-pop", "Go (jogo)", "Hinduísmo", "Dândi", "Golem", "Canção marítima", "Publicidade", "Mito do dilúvio", "Monge")
+exhibits = PackedStringArray("Palhaços", "Dragões", "Cartunistas", "Atores", "Internet - O Filme", "Café", "Sopa", "Bananas", "Música", "Piscina", "El Chavo del Ocho", "Festas juninas no Brasil", "Religião", "Quilombos", "Arte moderna", "Publicidade", "Mito do dilúvio", "Desportos")
 
 [sub_resource type="Resource" id="Resource_m2ope"]
 script = ExtResource("2_y4oc8")
 name = "Ciência"
 corner_1 = Vector2(-44, -92)
 corner_2 = Vector2(-8, -36)
-exhibits = PackedStringArray("Fungo", "Dinossauro", "Vida marinha", "Terra", "Quadrângulo da Arábia", "Rato", "Camarão", "Fruta-pão", "Visualização de dados e informações", "Ouro", "Adansonia", "Humano", "Pêndulo", "Dimorfismo sexual", "Luz", "Queijo", "Brassica oleracea", "Zonas úmidas", "Loris", "Borboleta", "Júpiter", "Solo", "Fractal", "Olho")
+exhibits = PackedStringArray("Fungos", "Dinossauros", "Vida marinha", "Terra", "Teorias científicas", "Paradoxos", "Cães", "Medicina", "Dados", "Metais", "Adansonia", "Humanos", "Pêndulos", "Dimorfismo sexual", "Luz", "Queijos", "Brassica oleracea", "Chuva", "Método científico", "Borboletas", "Sistema Solar", "Solo", "Fractais", "Olho")
 
 [sub_resource type="Resource" id="Resource_opuc1"]
 script = ExtResource("2_y4oc8")
 name = "Geografia"
 corner_1 = Vector2(8, -92)
 corner_2 = Vector2(44, -36)
-exhibits = PackedStringArray("EUA", "Antártida", "Patagônia", "Tibete", "Persépolis", "Petra", "Taipei 101", "Colina em forma de seio", "Arquitetura de Liverpool", "Chongqing", "Ilhas Pitcairn", "Fossa das Marianas", "Ferrovia Transiberiana", "Lancaster, Ohio", "Lago Chade", "Senegal", "Bora Bora", "Landes de Gascogne", "Monte Kilimanjaro", "Camberra", "Floresta Amazônica", "Rio Wharfe", "Uruk", "Pedra Negra")
+exhibits = PackedStringArray("Brazil", "Antártida", "Patagônia", "Tibete", "Persépolis", "Petra", "Vulcões", "Caatinga", "Mata Atlântica", "Montanhas", "Geografia da África", "Europa", "Ferrovias", "Geografia da Ásia", "Regiões das Américas", "Geografia da Oceania", "China", "Rochas", "Península Ibérica", "Oceanos", "Floresta Amazônica", "Geologia", "Desertos", "Mapas")
 
 [sub_resource type="Resource" id="Resource_qiy1c"]
 script = ExtResource("2_y4oc8")
@@ -48,7 +48,7 @@ exhibits = PackedStringArray("Lista de poloneses", "Albert Einstein", "Freddie M
 [sub_resource type="Resource" id="Resource_bycfx"]
 script = ExtResource("2_y4oc8")
 name = "História"
-corner_1 = Vector2(-48, 60)
+corner_1 = Vector2(-48, 60)Z
 corner_2 = Vector2(-12, 96)
 exhibits = PackedStringArray("História da Alemanha", "Desastre de Chernobyl", "Titanic", "Contracultura dos anos 1960", "Experimentação humana antiética nos Estados Unidos", "Pandemia de COVID-19", "Agência Central de Inteligência", "Era de Ouro Islâmica", "Pouso na Lua", "Terremoto de São Francisco de 1906", "Travessia dos Alpes por Aníbal", "Rivalidade Drake-Kendrick Lamar", "História da fotografia", "Incidente do ônibus do Dave Matthews Band", "Libelo de sangue", "Império de Oyo", "Pirataria", "Protestos em Hong Kong 2019-2020")
 
