@@ -37,6 +37,11 @@ text = "Remap Inputs"
 [node name="MappingContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
+[node name="TipLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Tip: if you are struggling with the default \"WASD\" movement, try setting \"Move forward\" to a mouse click.
+This way, you can enjoy most of the museum with your mouse alone. "
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MainOptions/Back" to="." method="_on_resume"]
 [connection signal="pressed" from="MainOptions/RestoreDefaultsButton" to="." method="_on_restore_defaults_button_pressed"]
