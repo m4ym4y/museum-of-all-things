@@ -33,9 +33,9 @@ func populate_map_buttons() -> void:
         action_panel.name = action_str + " Panel"
         mapping_container.add_child(action_panel)
         action_panel.update_action()
-        action_panel.joypad_button_updated.connect(on_joypad_button_updated)
+        action_panel.joypad_button_updated.connect(joypad_button_update)
 
-func on_joypad_button_updated(event : InputEvent) -> void:
+func joypad_button_update(event : InputEvent) -> void:
   if current_joypad_id != event.device:
     for action_panel in mapping_container.get_children():
       if action_panel.current_joypad_event.device and\
@@ -43,7 +43,14 @@ func on_joypad_button_updated(event : InputEvent) -> void:
         action_panel.current_joypad_event.device = event.device
         action_panel.update_action()
     current_joypad_id = event.device
-  
+
+func update_all_maps_label():
+  for action_panel in mapping_container.get_children():
+    action_panel.current_keyboard_event = null
+    action_panel.current_joypad_event = null
+    action_panel.update_action()
+    
+
 func _create_settings_obj() -> Dictionary:
     var save_dict := {}
     for action_panel in mapping_container.get_children():
@@ -106,3 +113,8 @@ func _save_settings() -> void:
 func _on_resume() -> void:
     _save_settings()
     emit_signal("resume")
+
+
+func _on_restore_defaults_button_pressed() -> void:
+  InputMap.load_from_project_settings()
+  update_all_maps_label()

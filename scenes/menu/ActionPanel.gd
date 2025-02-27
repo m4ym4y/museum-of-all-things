@@ -105,8 +105,7 @@ func joy_motion_to_text(event : InputEventJoypadMotion) -> String:
 
 
 func joy_button_to_text(event : InputEventJoypadButton) -> String:
-  var connected_joypads := Input.get_connected_joypads()
-  var joypad_name := Input.get_joy_name(max(connected_joypads[0], event.device)) if connected_joypads != [] else ""
+  var joypad_name := Input.get_joy_name(event.device)
   var brand := "Xbox"
   match joypad_name:
     "PS", "PlayStation":

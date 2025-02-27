@@ -26,6 +26,10 @@ layout_mode = 2
 text = "Back
 "
 
+[node name="RestoreDefaultsButton" type="Button" parent="MainOptions"]
+layout_mode = 2
+text = "Restore Defaults"
+
 [node name="ControlsLabel" type="Label" parent="."]
 layout_mode = 2
 text = "Remap Inputs"
@@ -35,3 +39,4 @@ layout_mode = 2
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MainOptions/Back" to="." method="_on_resume"]
+[connection signal="pressed" from="MainOptions/RestoreDefaultsButton" to="." method="_on_restore_defaults_button_pressed"]

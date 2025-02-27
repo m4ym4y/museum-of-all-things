@@ -52,8 +52,8 @@ tab_count = 5
 tab_0/title = "Graphics"
 tab_1/title = "Audio"
 tab_2/title = "Controls"
-tab_3/title = "Data"
-tab_4/title = "Gameplay"
+tab_3/title = "Controls"
+tab_4/title = "Data"
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
