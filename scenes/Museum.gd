@@ -12,10 +12,13 @@ extends Node3D
 @onready var _exhibit_hist = []
 @onready var _exhibits = {}
 @onready var _backlink_map = {}
-@onready var _next_height = 20
 @onready var _current_room_title = "$Lobby"
 @export var items_per_room_estimate = 7
 @export var min_rooms_per_exhibit = 2
+
+var _starting_height = 40
+var _height_increment = 20
+var _used_exhibit_heights = {}
 
 @export var fog_depth = 10.0
 @export var fog_depth_lobby = 20.0
@@ -44,6 +47,18 @@ func _ready() -> void:
   ExhibitFetcher.commons_images_complete.connect(_on_commons_images_complete)
   GlobalMenuEvents.reset_custom_door.connect(_reset_custom_door)
   GlobalMenuEvents.set_custom_door.connect(_set_custom_door)
+
+func _get_free_exhibit_height() -> int:
+  var height = _starting_height
+  while _used_exhibit_heights.has(height):
+    height += _height_increment
+  _used_exhibit_heights[height] = true
+  if OS.is_debug_build():
+    print("placing exhibit at height=", height)
+  return height
+
+func _release_exhibit_height(height: int) -> void:
+  _used_exhibit_heights.erase(height)
 
 func _get_lobby_exit_zone(exit):
   var ex = Util.gridToWorld(exit.from_pos).x
@@ -219,6 +234,7 @@ func _load_exhibit_from_exit(exit):
       return
     else:
       # TODO: erase orphaned backlinks
+      _release_exhibit_height(_exhibits[next_article].height)
       _exhibits[next_article].exhibit.queue_free()
       _exhibits.erase(next_article)
       var i = _exhibit_hist.find(next_article)
@@ -320,14 +336,14 @@ func _on_fetch_complete(_titles, context):
   var doors = data.doors
   var items = data.items
   var extra_text = data.extra_text
+  var exhibit_height = _get_free_exhibit_height()
 
-  _next_height += 20
   var new_exhibit = TiledExhibitGenerator.instantiate()
   add_child(new_exhibit)
 
   new_exhibit.exit_added.connect(_on_exit_added.bind(doors, backlink, new_exhibit, hall))
   new_exhibit.generate(_grid, {
-    "start_pos": Vector3.UP * _next_height,
+    "start_pos": Vector3.UP * exhibit_height,
     "min_room_dimension": min_room_dimension,
     "max_room_dimension": max_room_dimension,
     "room_count": max(
@@ -342,7 +358,7 @@ func _on_fetch_complete(_titles, context):
   })
 
   if not _exhibits.has(context.title):
-    _exhibits[context.title] = { "entry": new_exhibit.entry, "exhibit": new_exhibit, "height": _next_height }
+    _exhibits[context.title] = { "entry": new_exhibit.entry, "exhibit": new_exhibit, "height": exhibit_height }
     _exhibit_hist.append(context.title)
     if len(_exhibit_hist) > max_exhibits_loaded:
       for e in range(len(_exhibit_hist)):
@@ -356,6 +372,7 @@ func _on_fetch_complete(_titles, context):
           if OS.is_debug_build():
             print("erasing exhibit ", key)
           old_exhibit.exhibit.queue_free()
+          _release_exhibit_height(_exhibits[key].height)
           _global_item_queue_map.erase(key)
           _exhibits.erase(key)
           _exhibit_hist.remove_at(e)
