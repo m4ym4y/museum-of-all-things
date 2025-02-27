@@ -74,8 +74,7 @@ text = "Resume"
 
 [node name="Open" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Open Page in Browser
-"
+text = "Open Page in Browser"
 
 [node name="Spacer" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

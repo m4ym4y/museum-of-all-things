@@ -180,12 +180,13 @@ dash={
 [internationalization]
 
 locale/translation_remaps={
+"res://assets/resources/lobby_data.tres": PackedStringArray("res://assets/resources/lobby_data_pt.tres:pt"),
 "res://assets/textures/lobby_plaque_intro_1.png": PackedStringArray("res://assets/textures/lobby_plaque_intro_1.fr.png:fr")
 }
-locale/translations=PackedStringArray("res://assets/translations/fr.po")
-locale/test="fr"
-locale/locale_filter_mode=1
-locale/language_filter=["fr"]
+locale/translations=PackedStringArray("res://assets/translations/fr.po", "res://assets/translations/pt.po", "res://assets/translations/en.po")
+locale/test="en"
+locale/locale_filter_mode=0
+locale/language_filter=["en"]
 
 [layer_names]
 

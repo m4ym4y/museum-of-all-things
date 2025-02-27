@@ -25,8 +25,7 @@ label_settings = SubResource("LabelSettings_giwmb")
 
 [node name="Back" type="Button" parent="MainOptions"]
 layout_mode = 2
-text = "Back
-"
+text = "Back"
 
 [node name="VolumeOptions" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -82,8 +81,7 @@ horizontal_alignment = 1
 
 [node name="Label5" type="Label" parent="VolumeOptions"]
 layout_mode = 2
-text = "Music Volume
-"
+text = "Music Volume"
 
 [node name="MusicVolume" type="HSlider" parent="VolumeOptions"]
 layout_mode = 2

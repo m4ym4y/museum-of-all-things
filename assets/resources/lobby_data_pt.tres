@@ -1,0 +1,79 @@
+[gd_resource type="Resource" script_class="LobbyData" load_steps=11 format=3 uid="uid://34yga2226k3j"]
+
+[ext_resource type="Script" path="res://resource_definitions/LobbyData.gd" id="1_3ssej"]
+[ext_resource type="Script" path="res://resource_definitions/LobbyWing.gd" id="2_y4oc8"]
+
+[sub_resource type="Resource" id="Resource_pgwi2"]
+script = ExtResource("2_y4oc8")
+name = "Tecnologia"
+corner_1 = Vector2(-68, -44)
+corner_2 = Vector2(-32, -8)
+exhibits = PackedStringArray("Carro de controle", "Minox", "Transistor", "Cerâmica", "Godot (motor de jogo)", "Pasteurização", "Testes de armas nucleares", "Adesivo", "Aqueduto (abastecimento de água)", "Renderização 3D", "Avião", "Máquina simples", "Prensa tipográfica", "Controle de natalidade", "Microscopia", "Console de videogame", "Trebuchet", "Domesticação de animais", "Oldowan")
+
+[sub_resource type="Resource" id="Resource_ooopd"]
+script = ExtResource("2_y4oc8")
+name = "Cultura"
+corner_1 = Vector2(32, -44)
+corner_2 = Vector2(68, -8)
+exhibits = PackedStringArray("Palhaço", "Dragão", "Loja de conveniência", "High five", "Goncharov (meme)", "Café", "Sopa", "The Backrooms", "Tarô", "K-pop", "Go (jogo)", "Hinduísmo", "Dândi", "Golem", "Canção marítima", "Publicidade", "Mito do dilúvio", "Monge")
+
+[sub_resource type="Resource" id="Resource_m2ope"]
+script = ExtResource("2_y4oc8")
+name = "Ciência"
+corner_1 = Vector2(-44, -92)
+corner_2 = Vector2(-8, -36)
+exhibits = PackedStringArray("Fungo", "Dinossauro", "Vida marinha", "Terra", "Quadrângulo da Arábia", "Rato", "Camarão", "Fruta-pão", "Visualização de dados e informações", "Ouro", "Adansonia", "Humano", "Pêndulo", "Dimorfismo sexual", "Luz", "Queijo", "Brassica oleracea", "Zonas úmidas", "Loris", "Borboleta", "Júpiter", "Solo", "Fractal", "Olho")
+
+[sub_resource type="Resource" id="Resource_opuc1"]
+script = ExtResource("2_y4oc8")
+name = "Geografia"
+corner_1 = Vector2(8, -92)
+corner_2 = Vector2(44, -36)
+exhibits = PackedStringArray("EUA", "Antártida", "Patagônia", "Tibete", "Persépolis", "Petra", "Taipei 101", "Colina em forma de seio", "Arquitetura de Liverpool", "Chongqing", "Ilhas Pitcairn", "Fossa das Marianas", "Ferrovia Transiberiana", "Lancaster, Ohio", "Lago Chade", "Senegal", "Bora Bora", "Landes de Gascogne", "Monte Kilimanjaro", "Camberra", "Floresta Amazônica", "Rio Wharfe", "Uruk", "Pedra Negra")
+
+[sub_resource type="Resource" id="Resource_qiy1c"]
+script = ExtResource("2_y4oc8")
+name = "Arte"
+corner_1 = Vector2(-72, 12)
+corner_2 = Vector2(-36, 48)
+exhibits = PackedStringArray("Pintura Barroca", "Artes nas Filipinas", "Arquitetura Armênia", "Pablo Picasso", "Louvre", "Joan Miró", "Ai Weiwei", "Frida Kahlo", "Käthe Kollwitz", "Thomas Kinkade", "Edgar Degas", "Pintura rupestre", "Michelangelo", "Francisco Goya", "Fauvismo", "Grafite", "Escultura da Grécia Antiga", "M. C. Escher")
+
+[sub_resource type="Resource" id="Resource_l5mfx"]
+script = ExtResource("2_y4oc8")
+name = "Pessoas"
+corner_1 = Vector2(36, 12)
+corner_2 = Vector2(72, 48)
+exhibits = PackedStringArray("Lista de poloneses", "Albert Einstein", "Freddie Mercury", "Kobe Bryant", "Genghis Khan", "Rasputin", "Amigo Universal Público", "Tupac Shakur", "Luigi Mangione", "William Shakespeare", "Linus Pauling", "Danny DeVito", "J. R. R. Tolkien", "Mary Shelley", "Alexandria Ocasio-Cortez", "Ibn Battuta", "Martinho Lutero", "Martin Luther King Jr.")
+
+[sub_resource type="Resource" id="Resource_bycfx"]
+script = ExtResource("2_y4oc8")
+name = "História"
+corner_1 = Vector2(-48, 60)
+corner_2 = Vector2(-12, 96)
+exhibits = PackedStringArray("História da Alemanha", "Desastre de Chernobyl", "Titanic", "Contracultura dos anos 1960", "Experimentação humana antiética nos Estados Unidos", "Pandemia de COVID-19", "Agência Central de Inteligência", "Era de Ouro Islâmica", "Pouso na Lua", "Terremoto de São Francisco de 1906", "Travessia dos Alpes por Aníbal", "Rivalidade Drake-Kendrick Lamar", "História da fotografia", "Incidente do ônibus do Dave Matthews Band", "Libelo de sangue", "Império de Oyo", "Pirataria", "Protestos em Hong Kong 2019-2020")
+
+[sub_resource type="Resource" id="Resource_yimja"]
+script = ExtResource("2_y4oc8")
+name = "Mídia"
+corner_1 = Vector2(12, 60)
+corner_2 = Vector2(48, 96)
+exhibits = PackedStringArray("Bíblia", "The Beatles", "Matrix", "Odisseia", "Gilgamesh", "Esperando Godot", "Homestuck", "Star Trek", "Barbie (filme)", "Neon Genesis Evangelion", "Hamlet", "Catan", "Twitter", "Vogue (revista)", "Steamboat Willie", "O Conde de Monte Cristo", "Wikipédia", "Minecraft")
+
+[resource]
+script = ExtResource("1_3ssej")
+introduction_text = "[center][color=black]
+[img=500]res://assets/logo/moat_logo_large.png[/img]
+
+[font_size=14][fill]
+Bem-vindo ao Museu de Todas as Coisas! Todos os visitantes são bem-vindos aqui, seja você se manifestando neste espaço através de uma janela 2D ou via Realidade Virtual. Este museu é diferente de qualquer outro que você tenha visitado no mundo físico, então pode levar um momento para se orientar.
+
+Agora você está no saguão do museu, adaptado para lhe dar um ponto de partida agradável em sua visita. Se você desejar retornar aqui, pode abrir seu menu do museu (via \"Escape\", \"Start\" ou pressionando \"Y\" no seu controle direito em Realidade Virtual) e selecionar \"Retornar ao Saguão\".
+
+O saguão é dividido em áreas por assunto, que são marcadas por placas e indicadas nos mapas no hall de entrada. Em cada uma dessas áreas, você encontrará muitos corredores com uma variedade de exposições fascinantes. Essas exposições são possíveis graças às imagens e dados textuais da Wikipédia e Wikimedia Commons. Qualquer tópico com uma página na Wikipédia também pode ser acessado como uma exposição neste museu.
+
+Além disso, cada exposição contém muitos corredores conectando-a a outras exposições. Esses corredores são determinados com base nos links no artigo da Wikipédia da exposição atual. Você pode mover-se de exposição em exposição infinitamente, seguindo sua curiosidade.
+
+Se você preferir ir direto para um assunto específico, pode acessar o terminal de busca, no final do hall de entrada diretamente atrás de você. Simplesmente digite seu tópico de interesse na interface do terminal, e ele criará um corredor para você ir direto até lá.
+
+[b]Tenha uma ótima visita![\\b]"
+wings = Array[ExtResource("2_y4oc8")]([SubResource("Resource_pgwi2"), SubResource("Resource_ooopd"), SubResource("Resource_m2ope"), SubResource("Resource_opuc1"), SubResource("Resource_qiy1c"), SubResource("Resource_l5mfx"), SubResource("Resource_bycfx"), SubResource("Resource_yimja")])

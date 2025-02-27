@@ -60,6 +60,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Quit"
 
+[node name="Language" type="OptionButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "English"
+popup/item_1/text = "Portuguese"
+popup/item_1/id = 1
+
 [node name="FadeIn" type="ColorRect" parent="."]
 z_index = 2
 layout_mode = 1
@@ -85,3 +93,4 @@ color = Color(0, 0, 0, 0)
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_button_pressed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/Language" to="." method="_on_language_item_selected"]

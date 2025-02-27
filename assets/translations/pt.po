@@ -1,0 +1,192 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Language: pt\n"
+
+msgid "Enter the Museum"
+msgstr "Entrar no Museu"
+
+msgid "Settings"
+msgstr "Configurações"
+
+msgid "Quit"
+msgstr "Sair"
+msgid "The museum is currently unstaffed. Please refer to signage for information."
+msgstr "O museu está atualmente sem funcionários. Por favor, consulte a sinalização para informações."
+
+msgid "English"
+msgstr "Inglês"
+
+msgid "Portuguese"
+msgstr "Português"
+
+msgid "French"
+msgstr "Francês"
+
+msgid "Are you sure you want to Quit?"
+msgstr "Tem certeza que deseja sair?"
+
+msgid "Yes"
+msgstr "Sim"
+
+msgid "No"
+msgstr "Não"
+
+msgid "Paused"
+msgstr "Pausado"
+
+msgid "Resume"
+msgstr "Continuar"
+
+msgid "Return to Lobby"
+msgstr "Voltar ao Saguão"
+
+msgid "Enter Exhibit Name"
+msgstr "Digite o Nome da Exposição"
+
+msgid "Go to Random Exhibit"
+msgstr "Ir para Exposição Aleatória"
+
+msgid "Enter exhibit title"
+msgstr "Digite o título da exposição"
+
+msgid "Confirm"
+msgstr "Confirmar"
+
+msgid "Back"
+msgstr "Voltar"
+
+msgid "Exhibit Found: \"\""
+msgstr "Exposição Encontrada: \"\""
+
+msgid "OK / Exit"
+msgstr "OK / Sair"
+
+msgid "VR Controls"
+msgstr "Controles VR"
+
+msgid "Restore Default Settings"
+msgstr "Restaurar Configurações Padrão"
+
+msgid "Movement Style"
+msgstr "Estilo de Movimento"
+
+msgid "Teleportation (Left Trigger)"
+msgstr "Teletransporte (Gatilho Esquerdo)"
+
+msgid "Direct Movement (Left Analog Stick)"
+msgstr "Movimento Direto (Analógico Esquerdo)"
+
+msgid "Direct Movement Speed"
+msgstr "Velocidade do Movimento Direto"
+
+msgid "Camera Rotation Increment (Right Stick)"
+msgstr "Incremento de Rotação da Câmera (Analógico Direito)"
+
+msgid "Smooth Camera Rotation"
+msgstr "Rotação Suave da Câmera"
+
+msgid "Preparing Exhibit..."
+msgstr "Preparando Exposição..."
+
+msgid "Error Loading Exhibit."
+msgstr "Erro ao Carregar Exposição."
+
+msgid "Data Settings"
+msgstr "Configurações de Dados"
+
+msgid "Cache"
+msgstr "Cache"
+
+msgid "Clear Cache"
+msgstr "Limpar Cache"
+
+msgid "Cache Size Limit"
+msgstr "Limite de Tamanho do Cache"
+
+msgid "Automatically limit cache size (on quit)"
+msgstr "Limitar automaticamente o tamanho do cache (ao sair)"
+
+msgid "Graphics Settings"
+msgstr "Configurações Gráficas"
+
+msgid "Render Scale"
+msgstr "Escala de Renderização"
+
+msgid "Fullscreen"
+msgstr "Tela Cheia"
+
+msgid "Reflection Quality"
+msgstr "Qualidade dos Reflexos"
+
+msgid "Enable Reflections"
+msgstr "Ativar Reflexos"
+
+msgid "Ambient Light Level"
+msgstr "Nível de Luz Ambiente"
+
+msgid "Enable Indirect Lighting (SSIL)"
+msgstr "Ativar Iluminação Indireta (SSIL)"
+
+msgid "Enable Fog"
+msgstr "Ativar Névoa"
+
+msgid "Enable V-Sync"
+msgstr "Ativar V-Sync"
+
+msgid "Limit FPS"
+msgstr "Limitar FPS"
+
+msgid "None"
+msgstr "Nenhum"
+
+msgid "CRT Filter"
+msgstr "Filtro CRT"
+
+msgid "Audio Settings"
+msgstr "Configurações de Áudio"
+
+msgid "Global Volume"
+msgstr "Volume Global"
+
+msgid "Sound Effects Volume"
+msgstr "Volume dos Efeitos Sonoros"
+
+msgid "Ambience Volume"
+msgstr "Volume do Ambiente"
+
+msgid "Enter VR"
+msgstr "Entrar em VR"
+
+msgid "Snap turning:"
+msgstr "Rotação instantânea:"
+
+msgid "Y axis dead zone"
+msgstr "Zona morta do eixo Y"
+
+msgid "X axis dead zone"
+msgstr "Zona morta do eixo X"
+
+msgid "Haptics Scale"
+msgstr "Escala de Vibração"
+
+msgid "Apply"
+msgstr "Aplicar"
+
+msgid "Reset"
+msgstr "Redefinir"
+
+msgid "Height adjust:"
+msgstr "Ajuste de altura:"
+
+msgid "WebXR primary:"
+msgstr "WebXR primário:"
+
+msgid "Auto"
+msgstr "Automático"
+
+msgid "Thumbstick"
+msgstr "Analógico"
+
+msgid "Trackpad"
+msgstr "Trackpad"
