@@ -13,8 +13,8 @@ var crouch_time = 0.4
 var crouch_speed
 var _enabled = false
 
-var _joy_right_x = JOY_AXIS_RIGHT_X + 1
-var _joy_right_y = JOY_AXIS_RIGHT_Y + 1
+var _joy_right_x = JOY_AXIS_RIGHT_X
+var _joy_right_y = JOY_AXIS_RIGHT_Y
 
 @onready var camera = get_node("Pivot/Camera3D")
 
