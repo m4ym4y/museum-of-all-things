@@ -17,6 +17,7 @@ var remappable_actions_str := [
     "crouch",
     "interact",
 ]
+var current_joypad_id := 0
 
 func _ready() -> void:
     populate_map_buttons()
@@ -32,7 +33,17 @@ func populate_map_buttons() -> void:
         action_panel.name = action_str + " Panel"
         mapping_container.add_child(action_panel)
         action_panel.update_action()
+        action_panel.joypad_button_updated.connect(on_joypad_button_updated)
 
+func on_joypad_button_updated(event : InputEvent) -> void:
+  if current_joypad_id != event.device:
+    for action_panel in mapping_container.get_children():
+      if action_panel.current_joypad_event.device and\
+       action_panel.current_joypad_event.device != event.device:
+        action_panel.current_joypad_event.device = event.device
+        action_panel.update_action()
+    current_joypad_id = event.device
+  
 func _create_settings_obj() -> Dictionary:
     var save_dict := {}
     for action_panel in mapping_container.get_children():
@@ -40,14 +51,15 @@ func _create_settings_obj() -> Dictionary:
         var save_event_key := []
 
         if action_panel.current_keyboard_event is InputEventKey:
-            save_event_key = [0, action_panel.current_keyboard_event.keycode]
+            save_event_key = [0, [action_panel.current_keyboard_event.device, action_panel.current_keyboard_event.keycode,
+            action_panel.current_keyboard_event.physical_keycode, action_panel.current_keyboard_event.unicode]]
         elif action_panel.current_keyboard_event is InputEventMouseButton:
             save_event_key = [1, action_panel.current_keyboard_event.button_index]
         
-        if action_panel.current_joy_event is InputEventJoypadButton:
-            save_event_joy = [0, action_panel.current_joy_event.button_index]
-        elif action_panel.current_joy_event is InputEventJoypadMotion:
-            save_event_joy = [1, [action_panel.current_joy_event.axis, signf(action_panel.current_joy_event.axis_value)]]
+        if action_panel.current_joypad_event is InputEventJoypadButton:
+            save_event_joy = [0, action_panel.current_joypad_event.button_index]
+        elif action_panel.current_joypad_event is InputEventJoypadMotion:
+            save_event_joy = [1, [action_panel.current_joypad_event.axis, signf(action_panel.current_joypad_event.axis_value)]]
         
         save_dict[action_panel.action_str] = {"key_event" : save_event_key, "joy_event" : save_event_joy}
     return save_dict
@@ -62,17 +74,17 @@ func load_settings_obj(dict : Dictionary) -> void:
         
         if dict[elt]["key_event"][0] == 0:
             event_key = InputEventKey.new()
-            event_key.keycode = dict[elt]["key_event"][1]
-            event_key.pressed = true
+            event_key.device = dict[elt]["key_event"][1][0]
+            event_key.keycode = dict[elt]["key_event"][1][1]
+            event_key.physical_keycode = dict[elt]["key_event"][1][2]
+            event_key.unicode = dict[elt]["key_event"][1][3]
         elif dict[elt]["key_event"][0] == 1:
             event_key = InputEventMouseButton.new()
             event_key.button_index = dict[elt]["key_event"][1]
-            event_key.pressed = true
         
         if dict[elt]["joy_event"][0] == 0:
             event_joy = InputEventJoypadButton.new()
             event_joy.button_index = dict[elt]["joy_event"][1]
-            event_joy.pressed = true
         elif dict[elt]["joy_event"][0] == 1:
             event_joy = InputEventJoypadMotion.new()
             event_joy.axis = dict[elt]["joy_event"][1][0]
