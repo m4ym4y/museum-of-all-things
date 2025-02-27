@@ -1,6 +1,8 @@
 # Code made with love and care by Mymy/TuTiuTe
 extends PanelContainer
 
+signal joypad_button_updated(event : InputEvent)
+
 var action_str := ""
 
 @onready var action_label: Label = $HBoxContainer/ActionLabel
@@ -8,7 +10,7 @@ var action_str := ""
 @onready var joypad_button: Button = $HBoxContainer/HBoxContainer/JoypadButton
 
 var current_keyboard_event : InputEvent = null
-var current_joy_event : InputEvent = null
+var current_joypad_event : InputEvent = null
 
 func _ready() -> void:
   set_process_input(false)
@@ -22,22 +24,22 @@ func update_action() -> void:
   action_label.text = " " + action_str.replace("_", " ").capitalize()
 
   for input_event in InputMap.action_get_events(action_str):
-    if current_keyboard_event and current_joy_event:
+    if current_keyboard_event and current_joypad_event:
       break
     if input_event is InputEventKey or\
       input_event is InputEventMouseButton and not current_keyboard_event:
         current_keyboard_event = input_event
     
     elif input_event is InputEventJoypadButton or\
-      input_event is InputEventJoypadMotion and not current_joy_event:
-        current_joy_event = input_event
+      input_event is InputEventJoypadMotion and not current_joypad_event:
+        current_joypad_event = input_event
   
   keyboard_button.text = current_keyboard_event.as_text().get_slice(" (", 0)
 
-  if current_joy_event and current_joy_event is InputEventJoypadButton:
-    joypad_button.text = joy_button_to_text(current_joy_event.button_index)
-  elif current_joy_event and current_joy_event is InputEventJoypadMotion:
-    joypad_button.text = joy_motion_to_text(current_joy_event.axis, current_joy_event.axis_value)
+  if current_joypad_event and current_joypad_event is InputEventJoypadButton:
+    joypad_button.text = joy_button_to_text(current_joypad_event)
+  elif current_joypad_event and current_joypad_event is InputEventJoypadMotion:
+    joypad_button.text = joy_motion_to_text(current_joypad_event)
     
 func _on_button_toggled_aux(button_state : bool, button : Button) -> void:
   set_process_input(button_state)
@@ -45,6 +47,7 @@ func _on_button_toggled_aux(button_state : bool, button : Button) -> void:
     button.text = "..."
   else:
     update_action()
+  joypad_button_updated.emit(current_joypad_event)
 
 func _on_focus_exited_aux(button : Button) -> void:
   button.button_pressed = false
@@ -56,7 +59,7 @@ func _input(event: InputEvent) -> void:
     (event is InputEventKey or event is InputEventMouseButton) and\
     keyboard_button.button_pressed:
       remap_action_keyboard(event)
-  elif current_joy_event != event and\
+  elif current_joypad_event != event and\
     (event is InputEventJoypadButton or event is InputEventJoypadMotion) and\
     joypad_button.button_pressed:
       remap_action_joypad(event)
@@ -68,13 +71,13 @@ func remap_action_keyboard(event : InputEvent) -> void:
   keyboard_button.button_pressed = false
 
 func remap_action_joypad(event : InputEvent) -> void:
-  InputMap.action_erase_event(action_str, current_joy_event)
+  InputMap.action_erase_event(action_str, current_joypad_event)
   InputMap.action_add_event(action_str, event)
-  current_joy_event = event
+  current_joypad_event = event
   joypad_button.button_pressed = false
     
-func joy_motion_to_text(axis : int, axis_value : float) -> String:
-  match [axis, signf(axis_value)]:
+func joy_motion_to_text(event : InputEventJoypadMotion) -> String:
+  match [event.axis, signf(event.axis_value)]:
     [0, -1.0]:
       return "L Stick Left"
     [0, 1.0]:
@@ -98,20 +101,17 @@ func joy_motion_to_text(axis : int, axis_value : float) -> String:
     [5, _]:
       return "RT"
       
-  return "Axis %d %1.1f" % [axis, axis_value]
+  return "Axis %d %1.1f" % [event.axis, event.axis_value]
 
-func joy_button_to_text(button_index : int) -> String:
-  match button_index:
-    JOY_BUTTON_A:
-      return "A"
-    JOY_BUTTON_B:
-      return "B"
-    JOY_BUTTON_X:
-      return "X"
-    JOY_BUTTON_Y:
-      return "Y"
-    JOY_BUTTON_LEFT_SHOULDER:
-      return "LB"
-    JOY_BUTTON_RIGHT_SHOULDER:
-      return "RB"
-  return "Button %d" % button_index
+
+func joy_button_to_text(event : InputEventJoypadButton) -> String:
+  var connected_joypads := Input.get_connected_joypads()
+  var joypad_name := Input.get_joy_name(max(connected_joypads[0], event.device)) if connected_joypads != [] else ""
+  var brand := "Xbox"
+  match joypad_name:
+    "PS", "PlayStation":
+      brand = "Sony"
+    "Nintendo":
+      brand = "Nintendo"
+  return event.as_text().get_slice(brand + " ", 1).get_slice(",", 0).rstrip(")")
+  #return "Button %d" % event.button_index
