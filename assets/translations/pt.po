@@ -190,3 +190,24 @@ msgstr "Analógico"
 
 msgid "Trackpad"
 msgstr "Trackpad"
+
+msgid "Open Page in Browser"
+msgstr "Abrir Página no Navegador"
+
+msgid " - Paused"
+msgstr " - Pausado"
+
+msgid "Maximum FPS"
+msgstr "FPS Máximo"
+
+msgid "Post-Processing Effect"
+msgstr "Efeito de Pós-Processamento"
+
+msgid "Graphics"
+msgstr "Gráficos"
+
+msgid "Audio"
+msgstr "Áudio"
+
+msgid "Data"
+msgstr "Dados"

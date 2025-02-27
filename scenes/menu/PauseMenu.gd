@@ -28,7 +28,7 @@ func ui_cancel_pressed():
 var current_room = "$Lobby"
 func set_current_room(room):
   current_room = room
-  vbox.get_node("Title").text = current_room.replace("$", "") + (" - Paused" if not _xr else "")
+  vbox.get_node("Title").text = current_room.replace("$", "") + (tr(" - Paused") if not _xr else "")
   vbox.get_node("Open").disabled = current_room.begins_with("$")
 
 func _on_resume_pressed():
