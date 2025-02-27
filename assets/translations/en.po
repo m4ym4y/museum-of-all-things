@@ -1,0 +1,193 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Language: en\n"
+
+msgid "Enter the Museum"
+msgstr "Enter the Museum"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Quit"
+msgstr "Quit"
+
+msgid "The museum is currently unstaffed. Please refer to signage for information."
+msgstr "The museum is currently unstaffed. Please refer to signage for information."
+
+msgid "English"
+msgstr "English"
+
+msgid "Portuguese"
+msgstr "Portuguese"
+
+msgid "French"
+msgstr "French"
+
+msgid "Are you sure you want to Quit?"
+msgstr "Are you sure you want to Quit?"
+
+msgid "Yes"
+msgstr "Yes"
+
+msgid "No"
+msgstr "No"
+
+msgid "Paused"
+msgstr "Paused"
+
+msgid "Resume"
+msgstr "Resume"
+
+msgid "Return to Lobby"
+msgstr "Return to Lobby"
+
+msgid "Enter Exhibit Name"
+msgstr "Enter Exhibit Name"
+
+msgid "Go to Random Exhibit"
+msgstr "Go to Random Exhibit"
+
+msgid "Enter exhibit title"
+msgstr "Enter exhibit title"
+
+msgid "Confirm"
+msgstr "Confirm"
+
+msgid "Back"
+msgstr "Back"
+
+msgid "Exhibit Found: \"\""
+msgstr "Exhibit Found: \"\""
+
+msgid "OK / Exit"
+msgstr "OK / Exit"
+
+msgid "VR Controls"
+msgstr "VR Controls"
+
+msgid "Restore Default Settings"
+msgstr "Restore Default Settings"
+
+msgid "Movement Style"
+msgstr "Movement Style"
+
+msgid "Teleportation (Left Trigger)"
+msgstr "Teleportation (Left Trigger)"
+
+msgid "Direct Movement (Left Analog Stick)"
+msgstr "Direct Movement (Left Analog Stick)"
+
+msgid "Direct Movement Speed"
+msgstr "Direct Movement Speed"
+
+msgid "Camera Rotation Increment (Right Stick)"
+msgstr "Camera Rotation Increment (Right Stick)"
+
+msgid "Smooth Camera Rotation"
+msgstr "Smooth Camera Rotation"
+
+msgid "Preparing Exhibit..."
+msgstr "Preparing Exhibit..."
+
+msgid "Error Loading Exhibit."
+msgstr "Error Loading Exhibit."
+
+msgid "Data Settings"
+msgstr "Data Settings"
+
+msgid "Cache"
+msgstr "Cache"
+
+msgid "Clear Cache"
+msgstr "Clear Cache"
+
+msgid "Cache Size Limit"
+msgstr "Cache Size Limit"
+
+msgid "Automatically limit cache size (on quit)"
+msgstr "Automatically limit cache size (on quit)"
+
+msgid "Graphics Settings"
+msgstr "Graphics Settings"
+
+msgid "Render Scale"
+msgstr "Render Scale"
+
+msgid "Fullscreen"
+msgstr "Fullscreen"
+
+msgid "Reflection Quality"
+msgstr "Reflection Quality"
+
+msgid "Enable Reflections"
+msgstr "Enable Reflections"
+
+msgid "Ambient Light Level"
+msgstr "Ambient Light Level"
+
+msgid "Enable Indirect Lighting (SSIL)"
+msgstr "Enable Indirect Lighting (SSIL)"
+
+msgid "Enable Fog"
+msgstr "Enable Fog"
+
+msgid "Enable V-Sync"
+msgstr "Enable V-Sync"
+
+msgid "Limit FPS"
+msgstr "Limit FPS"
+
+msgid "None"
+msgstr "None"
+
+msgid "CRT Filter"
+msgstr "CRT Filter"
+
+msgid "Audio Settings"
+msgstr "Audio Settings"
+
+msgid "Global Volume"
+msgstr "Global Volume"
+
+msgid "Sound Effects Volume"
+msgstr "Sound Effects Volume"
+
+msgid "Ambience Volume"
+msgstr "Ambience Volume"
+
+msgid "Enter VR"
+msgstr "Enter VR"
+
+msgid "Snap turning:"
+msgstr "Snap turning:"
+
+msgid "Y axis dead zone"
+msgstr "Y axis dead zone"
+
+msgid "X axis dead zone"
+msgstr "X axis dead zone"
+
+msgid "Haptics Scale"
+msgstr "Haptics Scale"
+
+msgid "Apply"
+msgstr "Apply"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Height adjust:"
+msgstr "Height adjust:"
+
+msgid "WebXR primary:"
+msgstr "WebXR primary:"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Thumbstick"
+msgstr "Thumbstick"
+
+msgid "Trackpad"
+msgstr "Trackpad"

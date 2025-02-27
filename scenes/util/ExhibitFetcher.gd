@@ -10,25 +10,27 @@ signal commons_images_complete(category, context)
 
 const MAX_BATCH_SIZE = 50
 const REQUEST_DELAY_MS = 1000
+var lang = TranslationServer.get_locale()
 const COMMONS_IMAGE_LIMIT = 2500
 
 # TODO: wikimedia support, and category support
 const WIKIMEDIA_COMMONS_PREFIX = "https://commons.wikimedia.org/wiki/"
-const WIKIPEDIA_PREFIX = "https://fr.wikipedia.org/wiki/"
+var WIKIPEDIA_PREFIX = "https://" + lang + ".wikipedia.org/wiki/"
 const WIKIDATA_PREFIX = "https://www.wikidata.org/wiki/"
 
 const WIKIDATA_COMMONS_CATEGORY = "P373"
 const WIKIDATA_COMMONS_GALLERY = "P935"
 
-var search_endpoint = "https://fr.wikipedia.org/w/api.php?action=query&format=json&list=search&srprop=title&srsearch="
-var random_endpoint = "https://fr.wikipedia.org/w/api.php?action=query&format=json&generator=random&grnnamespace=0&prop=info"
 
-var wikitext_endpoint = "https://fr.wikipedia.org/w/api.php?action=query&prop=revisions|extracts|pageprops&ppprop=wikibase_item&explaintext=true&rvprop=content&format=json&redirects=1&titles="
-var images_endpoint = "https://fr.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=640&iiextmetadatafilter=LicenseShortName|Artist&format=json&redirects=1&titles="
-var wikidata_endpoint = "https://www.wikidata.org/w/api.php?action=wbgetclaims&uselang=fr&format=json&entity="
+var search_endpoint = "https://" + lang + ".wikipedia.org/w/api.php?action=query&format=json&list=search&srprop=title&srsearch="
+var random_endpoint = "https://" + lang + ".wikipedia.org/w/api.php?action=query&format=json&generator=random&grnnamespace=0&prop=info"
 
-var wikimedia_commons_category_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=fr&generator=categorymembers&gcmtype=file&gcmlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&gcmtitle="
-var wikimedia_commons_gallery_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=fr&generator=images&gimlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&titles="
+var wikitext_endpoint = "https://" + lang + ".wikipedia.org/w/api.php?action=query&prop=revisions|extracts|pageprops&ppprop=wikibase_item&explaintext=true&rvprop=content&format=json&redirects=1&titles="
+var images_endpoint = "https://" + lang + ".wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=640&iiextmetadatafilter=LicenseShortName|Artist&format=json&redirects=1&titles="
+var wikidata_endpoint = "https://www.wikidata.org/w/api.php?action=wbgetclaims&uselang=" + lang + "&format=json&entity="
+
+var wikimedia_commons_category_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=" + lang + "&generator=categorymembers&gcmtype=file&gcmlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&gcmtitle="
+var wikimedia_commons_gallery_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=" + lang + "&generator=images&gimlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&titles="
 
 var _fs_lock = Mutex.new()
 var _results_lock = Mutex.new()
@@ -98,7 +100,7 @@ func _get_location_header(headers):
 func _join_titles(titles):
   return "|".join(titles.map(func(t): return t.uri_encode()))
 
-func _read_from_cache(title, prefix=WIKIPEDIA_PREFIX):
+func _read_from_cache(title, prefix = WIKIPEDIA_PREFIX):
   _fs_lock.lock()
   var json = DataManager.load_json_data(prefix + title)
   _fs_lock.unlock()
@@ -108,7 +110,7 @@ func _read_from_cache(title, prefix=WIKIPEDIA_PREFIX):
     _results_lock.unlock()
   return json
 
-func _get_uncached_titles(titles, prefix=WIKIPEDIA_PREFIX):
+func _get_uncached_titles(titles, prefix = WIKIPEDIA_PREFIX):
   var new_titles = []
   for title in titles:
     if title == "":
@@ -330,7 +332,7 @@ func _dispatch_continue(continue_fields, base_url, titles, ctx, caller_ctx):
   _fetch_continue(continue_url, ctx, caller_ctx, ctx.queue)
   return false
 
-func _cache_all(titles, prefix=WIKIPEDIA_PREFIX):
+func _cache_all(titles, prefix = WIKIPEDIA_PREFIX):
   for title in titles:
     var result = get_result(title)
     if result != null:
@@ -434,7 +436,7 @@ func _on_commons_images_request_complete(res, ctx, caller_ctx):
         if info.has("thumburl"):
           _set_page_field(file, "src", info.thumburl)
         file_batch.append(file)
-        _append_page_field(ctx.category, "images", [ file ])
+        _append_page_field(ctx.category, "images", [file])
 
   if len(file_batch) > 0:
     _cache_all(file_batch, WIKIMEDIA_COMMONS_PREFIX)
@@ -444,7 +446,7 @@ func _on_commons_images_request_complete(res, ctx, caller_ctx):
   if res.has("continue") and len(get_result(ctx.category).images) <= COMMONS_IMAGE_LIMIT:
     return _dispatch_continue(res.continue, _get_commons_url(ctx.category), ctx.category, ctx, caller_ctx)
   else:
-    _cache_all([ ctx.category ], WIKIMEDIA_COMMONS_PREFIX)
+    _cache_all([ctx.category], WIKIMEDIA_COMMONS_PREFIX)
     return true
 
 func _on_wikidata_request_complete(res, ctx, caller_ctx):
@@ -463,7 +465,7 @@ func _on_wikidata_request_complete(res, ctx, caller_ctx):
         var value = claim.mainsnak.datavalue.value
         _set_page_field(ctx.entity, "commons_gallery", value)
 
-  _cache_all([ ctx.entity ], WIKIDATA_PREFIX)
+  _cache_all([ctx.entity], WIKIDATA_PREFIX)
   call_deferred("emit_signal", "wikidata_complete", ctx.entity, caller_ctx)
   return true
 

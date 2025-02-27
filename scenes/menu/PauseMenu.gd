@@ -41,7 +41,8 @@ func _on_lobby_pressed():
   emit_signal("return_to_lobby")
 
 func _on_open_pressed():
-  OS.shell_open("https://fr.wikipedia.org/wiki/" + current_room)
+  var lang = TranslationServer.get_locale()
+  OS.shell_open("https://" + lang + ".wikipedia.org/wiki/" + current_room)
 
 func _on_quit_pressed():
   get_tree().quit()

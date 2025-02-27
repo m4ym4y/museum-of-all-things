@@ -26,20 +26,18 @@ label_settings = SubResource("LabelSettings_2yad8")
 
 [node name="Back" type="Button" parent="MainOptions"]
 layout_mode = 2
-text = "Back
-"
+text = "Back"
 
 [node name="Restore" type="Button" parent="MainOptions"]
 layout_mode = 2
-text = "Restore Default Settings
-"
+text = "Restore Default Settings"
 
 [node name="DisplayOptions" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="Spacer4" type="Label" parent="DisplayOptions"]
 layout_mode = 2
-text = " 
+text = "
 "
 
 [node name="Label" type="Label" parent="DisplayOptions"]
@@ -68,7 +66,7 @@ layout_mode = 2
 
 [node name="Spacer4" type="Label" parent="ReflectionOptions"]
 layout_mode = 2
-text = " 
+text = "
 "
 
 [node name="Label2" type="Label" parent="ReflectionOptions"]
@@ -97,7 +95,7 @@ layout_mode = 2
 
 [node name="Spacer" type="Label" parent="LightOptions"]
 layout_mode = 2
-text = " 
+text = "
 "
 
 [node name="Label2" type="Label" parent="LightOptions"]
@@ -124,13 +122,12 @@ layout_mode = 2
 
 [node name="Spacer" type="Label" parent="RenderDistanceOptions"]
 layout_mode = 2
-text = " 
+text = "
 "
 
 [node name="Label3" type="Label" parent="RenderDistanceOptions"]
 layout_mode = 2
-text = "Render Distance
-"
+text = "Render Distance"
 
 [node name="RenderDistance" type="HSlider" parent="RenderDistanceOptions"]
 layout_mode = 2
@@ -149,13 +146,12 @@ layout_mode = 2
 
 [node name="Spacer3" type="Label" parent="FogOptions"]
 layout_mode = 2
-text = " 
+text = "
 "
 
 [node name="Label5" type="Label" parent="FogOptions"]
 layout_mode = 2
-text = "Fog
-"
+text = "Fog"
 
 [node name="EnableFog" type="CheckBox" parent="FogOptions"]
 layout_mode = 2
@@ -167,13 +163,12 @@ layout_mode = 2
 
 [node name="Spacer2" type="Label" parent="FPSOptions"]
 layout_mode = 2
-text = " 
+text = "
 "
 
 [node name="Label4" type="Label" parent="FPSOptions"]
 layout_mode = 2
-text = "Maximum FPS
-"
+text = "Maximum FPS"
 
 [node name="MaxFPS" type="HSlider" parent="FPSOptions"]
 layout_mode = 2
@@ -201,13 +196,12 @@ layout_mode = 2
 
 [node name="Spacer3" type="Label" parent="PostProcessingOptions"]
 layout_mode = 2
-text = " 
+text = "
 "
 
 [node name="Label5" type="Label" parent="PostProcessingOptions"]
 layout_mode = 2
-text = "Post-Processing Effect
-"
+text = "Post-Processing Effect"
 
 [node name="PostProcessingEffect" type="OptionButton" parent="PostProcessingOptions"]
 layout_mode = 2
