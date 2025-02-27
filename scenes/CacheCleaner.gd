@@ -7,7 +7,7 @@ func _exit_tree():
   if CacheControl.auto_limit_cache_enabled():
     Util.t_start()
     var settings = SettingsManager.get_settings("data")
-    if settings.has("cache_limit_size"):
+    if settings and settings.has("cache_limit_size"):
       CacheControl.cull_cache_to_size(
         settings.cache_limit_size,
         settings.cache_limit_size / 2
