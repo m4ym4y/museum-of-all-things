@@ -364,9 +364,10 @@ func _on_fetch_complete(_titles, context):
   var image_titles = []
   var item_queue = []
   for item_data in items:
-    if item_data.type == "image" and item_data.has("title") and item_data.title != "":
-      image_titles.append(item_data.title)
-    item_queue.append(_add_item.bind(new_exhibit, item_data))
+    if item_data:
+      if item_data.type == "image" and item_data.has("title") and item_data.title != "":
+        image_titles.append(item_data.title)
+      item_queue.append(_add_item.bind(new_exhibit, item_data))
 
   if result.has("wikidata_entity"):
     _queue_item_front(context.title, ExhibitFetcher.fetch_wikidata.bind(result.wikidata_entity, {
