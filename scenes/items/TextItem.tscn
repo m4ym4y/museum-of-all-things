@@ -11,6 +11,7 @@ visibility_range_end = 18.0
 visibility_range_end_margin = 5.0
 visibility_range_fade_mode = 1
 pixel_size = 0.001
+texture_filter = 5
 modulate = Color(0, 0, 0, 1)
 font = ExtResource("2_24nnb")
 font_size = 64

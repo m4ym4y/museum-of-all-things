@@ -4,5 +4,5 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if not light:
-		$OmniLight3D.queue_free()
+  if not light:
+    $OmniLight3D.queue_free()

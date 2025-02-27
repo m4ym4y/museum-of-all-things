@@ -7,3 +7,4 @@ albedo_texture = ExtResource("1_whm4d")
 albedo_texture_force_srgb = true
 metallic = 0.25
 roughness = 0.1
+texture_filter = 5
