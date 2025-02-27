@@ -71,6 +71,9 @@ func remap_action_keyboard(event : InputEvent) -> void:
   keyboard_button.button_pressed = false
 
 func remap_action_joypad(event : InputEvent) -> void:
+  if event is InputEventJoypadMotion and abs(event.axis_value) < 0.5:
+    return
+  print(event.as_text())
   InputMap.action_erase_event(action_str, current_joypad_event)
   InputMap.action_add_event(action_str, event)
   current_joypad_event = event
@@ -83,9 +86,9 @@ func joy_motion_to_text(event : InputEventJoypadMotion) -> String:
     [0, 1.0]:
       return "L Stick Right"
     [1, -1.0]:
-      return "L Stick Down"
-    [1, 1.0]:
       return "L Stick Up"
+    [1, 1.0]:
+      return "L Stick Down"
     
     [2, -1.0]:
       return "R Stick Left"
@@ -107,10 +110,9 @@ func joy_motion_to_text(event : InputEventJoypadMotion) -> String:
 func joy_button_to_text(event : InputEventJoypadButton) -> String:
   var joypad_name := Input.get_joy_name(event.device)
   var brand := "Xbox"
-  match joypad_name:
-    "PS", "PlayStation":
+  if "PS" in joypad_name or "PlayStation" in joypad_name:
       brand = "Sony"
-    "Nintendo":
+  elif "Nintendo" in joypad_name:
       brand = "Nintendo"
-  return event.as_text().get_slice(brand + " ", 1).get_slice(",", 0).rstrip(")")
+  return event.as_text().get_slice("(", 1).get_slice(brand + " ", 1).get_slice(",", 0).rstrip(")")
   #return "Button %d" % event.button_index
