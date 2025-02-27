@@ -1,4 +1,4 @@
-name: "Godot Export"
+name: "Godot"
 on:
   workflow_dispatch:
   pull_request:
@@ -23,57 +23,90 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            export/godot
-            export/editor_data/export_templates/${{ env.GODOT_VERSION }}.stable
+            tools/godot
+            tools/editor_data/export_templates/${{ env.GODOT_VERSION }}.stable
+            tools/._sc_
           key: godot-${{ env.GODOT_VERSION }}
 
-      - name: Download Godot Engine from GitHub release
+      - name: Download Godot Engine
         id: download
         if: steps.cache-godot.outputs.cache-hit != 'true'
         run: |
-          mkdir -p export && cd export
+          mkdir -p tools && cd tools
 
-          # Download Godot Engine itself
+          # Download binary from official GitHub release
           wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip && \
           unzip Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip && \
           mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 godot
 
-          # Download export templates
+          # Download export templates from official GitHub release
           mkdir -p editor_data/export_templates
           wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz && \
           unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz && \
           mv templates editor_data/export_templates/${GODOT_VERSION}.stable
 
-      - name: Export PCK file
-        run: |
-          cd export
-
           # Tell Godot Engine to be self-contained
           touch ._sc_
 
-          # NOTE: export filename is relative to the project path
-          ./godot --verbose --headless --path ../ --export-pack "Linux" ./export/${EXPORT_NAME}.pck
+      - name: Ensure path exists
+        run: mkdir -p dist
 
-      - name: Upload artifact
+      - name: Export PCK
+        run: |
+          ./tools/godot --verbose --headless --export-pack \
+          "Linux" ./dist/${EXPORT_NAME}.pck
+
+      - name: Upload PCK
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.EXPORT_NAME }}
-          path: export/${{ env.EXPORT_NAME }}.pck
+          name: PCK
+          path: dist/${{ env.EXPORT_NAME }}.pck
+
+      - name: Export Linux
+        run: |
+          ./tools/godot --verbose --headless --export-release \
+          "Linux" ./dist/${EXPORT_NAME}_Linux.x86_64
+
+      - name: Upload Linux
+        uses: actions/upload-artifact@v4
+        with:
+          name: Linux
+          path: dist/${{ env.EXPORT_NAME }}_Linux.x86_64
+
+      - name: Export Windows Desktop
+        run: |
+          ./tools/godot --verbose --headless --export-release \
+          "Windows Desktop" ./dist/${EXPORT_NAME}.exe
+
+      - name: Upload Windows Desktop
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows Desktop
+          path: dist/${{ env.EXPORT_NAME }}.exe
+
+      - name: Export macOS
+        run: |
+          ./tools/godot --verbose --headless --export-release \
+          "macOS" ./dist/${EXPORT_NAME}_OSX.zip
+
+      - name: Upload macOS
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS
+          path: dist/${{ env.EXPORT_NAME }}_OSX.zip
 
   release:
-    permissions: write-all
-    name: Release
+    name: Attach to Release
     needs: export
+    permissions: write-all
     if: ${{ github.event_name == 'release' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Download PCK file artifact
+      - name: Download artifacts
         uses: actions/download-artifact@v4
-        with:
-          name: ${{ env.EXPORT_NAME }}
 
-      - name: Upload PCK file to release
+      - name: Upload artifacts to release
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          gh release upload '${{ github.ref_name }}' ${{ env.EXPORT_NAME }}.pck --repo '${{ github.repository }}'
+          gh release upload '${{ github.ref_name }}' * --repo '${{ github.repository }}'
