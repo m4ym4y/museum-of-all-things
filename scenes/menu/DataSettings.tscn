@@ -72,5 +72,6 @@ text = "Automatically limit cache size (on quit)"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MainOptions/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="CacheOptions/ClearCache" to="." method="_on_clear_cache_pressed"]
 [connection signal="value_changed" from="CacheOptions/CacheSizeLimit" to="." method="_on_cache_size_limit_value_changed"]
 [connection signal="toggled" from="CacheOptions/CheckBox" to="." method="_check_box_toggled"]

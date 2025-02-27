@@ -37,8 +37,8 @@ func _on_visibility_changed():
     _save_settings()
 
 func _refresh_cache_label():
-  CacheControl.calculate_cache_size()
   $CacheOptions/CacheLabel.text = "Cache (calculating size...)"
+  CacheControl.calculate_cache_size()
 
 func _show_cache_size(result):
   $CacheOptions/CacheLabel.text = "Cache (%3.2f GB)" % [result / 1000000000.0]
