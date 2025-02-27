@@ -73,11 +73,15 @@ func remap_action_keyboard(event : InputEvent) -> void:
 func remap_action_joypad(event : InputEvent) -> void:
   if event is InputEventJoypadMotion and abs(event.axis_value) < 0.5:
     return
-  print(event.as_text())
   InputMap.action_erase_event(action_str, current_joypad_event)
   InputMap.action_add_event(action_str, event)
   current_joypad_event = event
   joypad_button.button_pressed = false
+  joypad_button.release_focus()
+  await get_tree().process_frame 
+  # Although a little hacky, makes it so the button does not get retriggered when
+  # remapping the accept button
+  joypad_button.grab_focus()
     
 func joy_motion_to_text(event : InputEventJoypadMotion) -> String:
   match [event.axis, signf(event.axis_value)]:
