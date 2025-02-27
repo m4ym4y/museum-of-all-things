@@ -3,3 +3,10 @@ dist/
 .import/
 *.translation
 .mono/
+
+# Flatpak
+.flatpak-builder/
+repo/
+
+# CI
+tools/
