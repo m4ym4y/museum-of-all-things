@@ -73,7 +73,7 @@ var _last_on_floor = false
 
 func _ready() -> void:
   audio_stream_player_3d.play()
-    
+
 func set_on_floor(on_floor):
   _on_floor = on_floor
 
