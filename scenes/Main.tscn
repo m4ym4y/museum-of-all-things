@@ -63,6 +63,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.501961)
 stream = ExtResource("9_ketwq")
 bus = &"Music"
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 11.5449, 0)
+visible = false
+light_energy = 0.35
+sky_mode = 1
+
 [connection signal="resume" from="CanvasLayer/Settings" to="." method="_on_settings_back"]
 [connection signal="settings" from="CanvasLayer/MainMenu" to="." method="_on_main_menu_settings"]
 [connection signal="start" from="CanvasLayer/MainMenu" to="." method="_on_main_menu_start_pressed"]

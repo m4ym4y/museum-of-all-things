@@ -44,6 +44,8 @@ func _ready():
 
   call_deferred("_play_sting")
 
+  $DirectionalLight3D.visible = Util.is_compatibility_renderer()
+
   if not _xr:
     _pause_game()
 

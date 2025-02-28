@@ -52,12 +52,17 @@ func _start_animate():
     tween_time
   )
 
-  light_tween.tween_property(
-    _light,
-    "light_energy",
-    3.0,
-    tween_time
-  )
+  if Util.is_compatibility_renderer():
+    # On the compatibility renderer, this will get faded in by the GraphicsManager.
+    light_tween.kill()
+    _light.visible = false
+  else:
+    light_tween.tween_property(
+      _light,
+      "light_energy",
+      3.0,
+      tween_time
+    )
 
   tween.set_trans(Tween.TRANS_LINEAR)
   tween.set_ease(Tween.EASE_IN_OUT)

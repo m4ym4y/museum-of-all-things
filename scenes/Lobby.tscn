@@ -66,71 +66,93 @@ visible = false
 
 [node name="HangingLamp20" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 18, 19)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp19" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 18, 20)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 18, 6)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp2" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 18, 6)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp3" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, -2)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp4" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 18, -26)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp5" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 18, -26)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp6" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.038475, 18, -26)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp7" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.9986, 18, -13.6373)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp8" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 18, -14)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp9" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 18, -2)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp10" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 18, -2)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp11" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 18, 18)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp12" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 18, 18)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp13" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 18, 43)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp14" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 18, 43)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp15" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 18, 19)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp16" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66, 18, 18)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp17" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43, 18, 42)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp18" parent="Node3D" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66, 18, 42)
+skip_managed_light_direction_test = true
 
 [node name="Node3D2" type="Node3D" parent="."]
 
 [node name="HangingLamp2" parent="Node3D2" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 18)
+skip_managed_light_direction_test = true
 
 [node name="HangingLamp" parent="Node3D2" instance=ExtResource("4_mxxac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, -12)
+skip_managed_light_direction_test = true
 
 [node name="MeasurerEditorOnly" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -3, 96)

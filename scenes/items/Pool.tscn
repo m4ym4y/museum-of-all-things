@@ -34,7 +34,7 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Water/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_gmt1v")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." groups=["managed_light"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55963, 0)
 omni_range = 4.0
 
