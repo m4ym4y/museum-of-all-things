@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=4 uid="uid://c84fe50xnlbgc"]
+[gd_scene load_steps=7 format=4 uid="uid://c84fe50xnlbgc"]
 
+[ext_resource type="Script" path="res://scenes/items/HangingLamp.gd" id="1_j6sji"]
 [ext_resource type="Material" uid="uid://4bp64rsyyvv5" path="res://assets/textures/lamp.tres" id="2_0hmyb"]
 [ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="2_ahapu"]
 
@@ -40,6 +41,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [node name="HangingLamp" type="Node3D"]
+script = ExtResource("1_j6sji")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000166535, 0.00803399, 0.00124025)
@@ -47,7 +49,7 @@ mesh = SubResource("ArrayMesh_87qcc")
 surface_material_override/0 = ExtResource("2_0hmyb")
 surface_material_override/1 = ExtResource("2_ahapu")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
+[node name="SpotLight3D" type="SpotLight3D" parent="." groups=["managed_light"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 light_energy = 3.0
 light_bake_mode = 1
@@ -57,8 +59,3 @@ distance_fade_length = 5.0
 spot_range = 25.0
 spot_attenuation = 0.5
 spot_angle = 60.0
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-visible = false
-omni_range = 50.0
-omni_attenuation = 0.5

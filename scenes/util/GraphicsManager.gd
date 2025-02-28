@@ -4,6 +4,10 @@ signal change_post_processing(post_processing: String)
 
 const _settings_ns = "graphics"
 
+const MANAGED_LIGHTS_MAX := 8
+const MANAGED_LIGHTS_DIRECTION_THRESHOLD := -0.2
+const MANAGED_LIGHTS_FREQUENCY := 1.0
+
 var _env
 var limit_fps = false
 var fps_limit = 60
@@ -13,6 +17,7 @@ var render_scale = 1.0
 var post_processing = "none"
 var render_distance_multiplier = 2.5
 var vsync_enabled = true
+var light_timer: Timer
 
 func init():
   _env = get_tree().get_nodes_in_group("Environment")[0]
@@ -113,3 +118,72 @@ func save_settings():
 
 func _ready() -> void:
   get_tree().node_added.connect(_on_node_added)
+
+  # When using the compatibility renderer, we need to manage the number of lights.
+  if Util.is_compatibility_renderer():
+    light_timer = Timer.new()
+    add_child(light_timer)
+    light_timer.wait_time = MANAGED_LIGHTS_FREQUENCY
+    light_timer.timeout.connect(_manage_lights)
+    light_timer.start()
+
+func _manage_lights() -> void:
+  var camera: Camera3D = get_viewport().get_camera_3d()
+  var lights = get_tree().get_nodes_in_group("managed_light")
+
+  var light_data := []
+  for light in lights:
+    var p: Vector3 = light.global_position
+
+    # For spotlights, we check a spot half the range in front of the light.
+    if light is SpotLight3D:
+      p = p + (-light.global_transform.basis.z * (light.spot_range / 2.0))
+
+    var v: Vector3 = p - camera.global_position
+
+    if not light.is_in_group('managed_light_skip_direction_test'):
+      var camera_dot = v.normalized().dot(-camera.global_transform.basis.z)
+      if camera_dot < MANAGED_LIGHTS_DIRECTION_THRESHOLD:
+        # This light is behind the player, so turn it off, and move on.
+        _toggle_managed_light(light, false)
+        continue
+
+    var d := {
+      'light': light,
+      'distance': v.length(),
+    }
+    light_data.push_back(d)
+
+  light_data.sort_custom(func (a, b): return a['distance'] < b['distance'])
+
+  var enabled := 0
+  for d in light_data:
+    var light: Light3D = d['light']
+    if enabled < MANAGED_LIGHTS_MAX:
+      _toggle_managed_light(light, true)
+      enabled += 1
+    else:
+      _toggle_managed_light(light, false)
+
+  print_verbose("Enabled %s lights out of %s total" % [enabled, lights.size()])
+
+func _toggle_managed_light(light, enable) -> void:
+  if light.visible == enable:
+    return
+
+  var tween := get_tree().create_tween()
+  var light_energy: float = light.light_energy
+
+  if is_zero_approx(light_energy):
+    light_energy = 3.0
+
+  if enable:
+    light.light_energy = 0.0
+    light.visible = true
+
+  tween.tween_property(light, "light_energy", light_energy if enable else 0.0, MANAGED_LIGHTS_FREQUENCY * 0.5)
+  tween.tween_callback(func ():
+    light.visible = enable
+    light.light_energy = light_energy
+  )
+
