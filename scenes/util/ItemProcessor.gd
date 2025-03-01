@@ -221,7 +221,6 @@ func _parse_wikitext(wikitext):
           var html_str = "".join(html)
           var lines = html_str.split("\n")
           for line in lines:
-            print('adding link in gallery: ', line)
             links.append(["link", line])
         html.clear()
         html_tag = null
