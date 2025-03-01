@@ -30,6 +30,7 @@ var _mouse_sensitivity_factor = 1.0
 func _ready():
   GlobalMenuEvents.set_invert_y.connect(_set_invert_y)
   GlobalMenuEvents.set_mouse_sensitivity.connect(_set_mouse_sensitivity)
+  GlobalMenuEvents.set_joypad_deadzone.connect(_set_joy_deadzone)
 
   starting_height = $Pivot.get_position().y
   crouching_height = starting_height / 3
@@ -40,6 +41,9 @@ func _set_invert_y(enabled):
 
 func _set_mouse_sensitivity(factor):
   _mouse_sensitivity_factor = factor
+
+func _set_joy_deadzone(value):
+  joy_deadzone = value
 
 func pause():
   _enabled = false

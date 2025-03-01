@@ -71,8 +71,9 @@ func _create_settings_obj() -> Dictionary:
 
   return {
     "bindings": bindings_dict,
-    "mouse_sensitivity": $MouseSettings/Sensitivity.value,
-    "mouse_invert_y": $MouseSettings/InvertY.button_pressed,
+    "mouse_sensitivity": $MouseOptions/Sensitivity.value,
+    "mouse_invert_y": $MouseOptions/InvertY.button_pressed,
+    "joypad_deadzone": $JoyOptions/Deadzone.value,
   }
 
 func load_settings_obj(settings : Dictionary) -> void:
@@ -80,10 +81,13 @@ func load_settings_obj(settings : Dictionary) -> void:
     return
 
   if settings.has("mouse_sensitivity"):
-    $MouseSettings/Sensitivity.value = settings.mouse_sensitivity
+    $MouseOptions/Sensitivity.value = settings.mouse_sensitivity
 
   if settings.has("mouse_invert_y"):
-    $MouseSettings/InvertY.button_pressed = settings.mouse_invert_y
+    $MouseOptions/InvertY.button_pressed = settings.mouse_invert_y
+
+  if settings.has("joypad_deadzone"):
+    $JoyOptions/Deadzone.value = settings.joypad_deadzone
 
   if settings.has("bindings"):
     var bindings = settings.bindings
@@ -132,12 +136,17 @@ func _on_resume() -> void:
 func _on_restore_defaults_button_pressed() -> void:
   InputMap.load_from_project_settings()
   update_all_maps_label()
-  $MouseSettings/InvertY.button_pressed = false
-  $MouseSettings/Sensitivity.value = 1.0
+  $MouseOptions/InvertY.button_pressed = false
+  $MouseOptions/Sensitivity.value = 1.0
+  $JoyOptions/Deadzone.value = 0.05
 
 func _on_invert_y_toggled(toggled_on: bool):
   GlobalMenuEvents.emit_set_invert_y(toggled_on)
 
 func _on_sensitivity_value_changed(value: float):
-  $MouseSettings/SensitivityValue.text = str(int(value * 100)) + "%"
+  $MouseOptions/SensitivityValue.text = str(int(value * 100)) + "%"
   GlobalMenuEvents.emit_set_mouse_sensitivity(value)
+
+func _on_deadzone_value_changed(value: float):
+  $JoyOptions/DeadzoneValue.text = str(int(value * 100)) + "%"
+  GlobalMenuEvents.emit_set_joypad_deadzone(value)

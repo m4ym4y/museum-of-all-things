@@ -16,6 +16,7 @@ signal set_custom_door(title: String)
 signal reset_custom_door
 signal set_invert_y(enabled: bool)
 signal set_mouse_sensitivity(factor: float)
+signal set_joypad_deadzone(value: float)
 
 func emit_ui_cancel_pressed():
   emit_signal("ui_cancel_pressed")
@@ -64,3 +65,6 @@ func emit_set_invert_y(enabled: bool):
 
 func emit_set_mouse_sensitivity(factor: float):
   emit_signal("set_mouse_sensitivity", factor)
+
+func emit_set_joypad_deadzone(value: float):
+  emit_signal("set_joypad_deadzone", value)
