@@ -28,7 +28,7 @@ text = "Back
 
 [node name="RestoreDefaultsButton" type="Button" parent="MainOptions"]
 layout_mode = 2
-text = "Restore Defaults"
+text = "Restore Default Settings"
 
 [node name="ControlsLabel" type="Label" parent="."]
 layout_mode = 2
