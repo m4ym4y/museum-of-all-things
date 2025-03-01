@@ -21,6 +21,9 @@ func _ready():
   if _xr:
     $MarginContainer/VBoxContainer/Open.visible = false
 
+  if Util.is_web():
+    %AskQuit.visible = false
+
 func ui_cancel_pressed():
   if visible:
     call_deferred("_on_resume_pressed")
