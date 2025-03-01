@@ -51,7 +51,7 @@ func update_all_maps_label():
     action_panel.update_action()
 
 func _create_settings_obj() -> Dictionary:
-  var save_dict := {}
+  var bindings_dict := {}
   for action_panel in mapping_container.get_children():
     var save_event_joy := []
     var save_event_key := []
@@ -67,34 +67,40 @@ func _create_settings_obj() -> Dictionary:
     elif action_panel.current_joypad_event is InputEventJoypadMotion:
       save_event_joy = [1, [action_panel.current_joypad_event.axis, signf(action_panel.current_joypad_event.axis_value)]]
     
-    save_dict[action_panel.action_str] = {"key_event" : save_event_key, "joy_event" : save_event_joy}
-  return save_dict
+    bindings_dict[action_panel.action_str] = {"key_event" : save_event_key, "joy_event" : save_event_joy}
+  return {
+    "bindings": bindings_dict,
+  }
 
-func load_settings_obj(dict : Dictionary) -> void:
-  for elt in dict:
+func load_settings_obj(settings : Dictionary) -> void:
+  if not settings or not settings.has("bindings"):
+    return
+  var bindings = settings.bindings
+
+  for elt in bindings:
     var action_panel : PanelContainer = mapping_container.get_node_or_null(elt + " Panel")
     if not action_panel:
       continue
     var event_key : InputEvent = null
     var event_joy : InputEvent = null
     
-    if dict[elt]["key_event"][0] == 0:
+    if bindings[elt]["key_event"][0] == 0:
       event_key = InputEventKey.new()
-      event_key.device = dict[elt]["key_event"][1][0]
-      event_key.keycode = dict[elt]["key_event"][1][1]
-      event_key.physical_keycode = dict[elt]["key_event"][1][2]
-      event_key.unicode = dict[elt]["key_event"][1][3]
-    elif dict[elt]["key_event"][0] == 1:
+      event_key.device = bindings[elt]["key_event"][1][0]
+      event_key.keycode = bindings[elt]["key_event"][1][1]
+      event_key.physical_keycode = bindings[elt]["key_event"][1][2]
+      event_key.unicode = bindings[elt]["key_event"][1][3]
+    elif bindings[elt]["key_event"][0] == 1:
       event_key = InputEventMouseButton.new()
-      event_key.button_index = dict[elt]["key_event"][1]
+      event_key.button_index = bindings[elt]["key_event"][1]
     
-    if dict[elt]["joy_event"][0] == 0:
+    if bindings[elt]["joy_event"][0] == 0:
       event_joy = InputEventJoypadButton.new()
-      event_joy.button_index = dict[elt]["joy_event"][1]
-    elif dict[elt]["joy_event"][0] == 1:
+      event_joy.button_index = bindings[elt]["joy_event"][1]
+    elif bindings[elt]["joy_event"][0] == 1:
       event_joy = InputEventJoypadMotion.new()
-      event_joy.axis = dict[elt]["joy_event"][1][0]
-      event_joy.axis_value = dict[elt]["joy_event"][1][1]
+      event_joy.axis = bindings[elt]["joy_event"][1][0]
+      event_joy.axis_value = bindings[elt]["joy_event"][1][1]
     
     if event_key:
       action_panel.remap_action_keyboard(event_key, false)
