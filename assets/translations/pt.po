@@ -211,3 +211,21 @@ msgstr "Áudio"
 
 msgid "Data"
 msgstr "Dados"
+
+msgid "Controls"
+msgstr "Controles"
+
+msgid "Control Settings"
+msgstr "Configurações de Controle"
+
+msgid "Mouse Sensitivity"
+msgstr "Sensibilidade do Mouse"
+
+msgid "Invert Y-axis"
+msgstr "Inverter Eixo Y"
+
+msgid "Remap Inputs"
+msgstr "Remapear Entradas"
+
+msgid "Joypad Camera Deadzone"
+msgstr "Zona morta da câmera no controle"

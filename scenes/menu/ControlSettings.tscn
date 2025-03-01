@@ -39,8 +39,7 @@ text = " "
 
 [node name="Label" type="Label" parent="MouseOptions"]
 layout_mode = 2
-text = "Mouse Sensitivity
-"
+text = "Mouse Sensitivity"
 
 [node name="Sensitivity" type="HSlider" parent="MouseOptions"]
 layout_mode = 2
@@ -78,8 +77,7 @@ text = " "
 
 [node name="Label" type="Label" parent="JoyOptions"]
 layout_mode = 2
-text = "Joypad Camera Deadzone
-"
+text = "Joypad Camera Deadzone"
 
 [node name="Deadzone" type="HSlider" parent="JoyOptions"]
 layout_mode = 2
