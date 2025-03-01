@@ -14,6 +14,8 @@ signal open_terminal_menu
 signal terminal_result_ready(error: bool, page: String)
 signal set_custom_door(title: String)
 signal reset_custom_door
+signal set_invert_y(enabled: bool)
+signal set_mouse_sensitivity(factor: float)
 
 func emit_ui_cancel_pressed():
   emit_signal("ui_cancel_pressed")
@@ -56,3 +58,9 @@ func emit_set_custom_door(title: String):
 
 func emit_reset_custom_door():
   emit_signal("reset_custom_door")
+
+func emit_set_invert_y(enabled: bool):
+  emit_signal("set_invert_y", enabled)
+
+func emit_set_mouse_sensitivity(factor: float):
+  emit_signal("set_mouse_sensitivity", factor)

@@ -68,45 +68,55 @@ func _create_settings_obj() -> Dictionary:
       save_event_joy = [1, [action_panel.current_joypad_event.axis, signf(action_panel.current_joypad_event.axis_value)]]
     
     bindings_dict[action_panel.action_str] = {"key_event" : save_event_key, "joy_event" : save_event_joy}
+
   return {
     "bindings": bindings_dict,
+    "mouse_sensitivity": $MouseSettings/Sensitivity.value,
+    "mouse_invert_y": $MouseSettings/InvertY.button_pressed,
   }
 
 func load_settings_obj(settings : Dictionary) -> void:
-  if not settings or not settings.has("bindings"):
+  if not settings:
     return
-  var bindings = settings.bindings
 
-  for elt in bindings:
-    var action_panel : PanelContainer = mapping_container.get_node_or_null(elt + " Panel")
-    if not action_panel:
-      continue
-    var event_key : InputEvent = null
-    var event_joy : InputEvent = null
-    
-    if bindings[elt]["key_event"][0] == 0:
-      event_key = InputEventKey.new()
-      event_key.device = bindings[elt]["key_event"][1][0]
-      event_key.keycode = bindings[elt]["key_event"][1][1]
-      event_key.physical_keycode = bindings[elt]["key_event"][1][2]
-      event_key.unicode = bindings[elt]["key_event"][1][3]
-    elif bindings[elt]["key_event"][0] == 1:
-      event_key = InputEventMouseButton.new()
-      event_key.button_index = bindings[elt]["key_event"][1]
-    
-    if bindings[elt]["joy_event"][0] == 0:
-      event_joy = InputEventJoypadButton.new()
-      event_joy.button_index = bindings[elt]["joy_event"][1]
-    elif bindings[elt]["joy_event"][0] == 1:
-      event_joy = InputEventJoypadMotion.new()
-      event_joy.axis = bindings[elt]["joy_event"][1][0]
-      event_joy.axis_value = bindings[elt]["joy_event"][1][1]
-    
-    if event_key:
-      action_panel.remap_action_keyboard(event_key, false)
-    if event_joy:
-      action_panel.remap_action_joypad(event_joy, false)
-    action_panel.update_action()
+  if settings.has("mouse_sensitivity"):
+    $MouseSettings/Sensitivity.value = settings.mouse_sensitivity
+
+  if settings.has("mouse_invert_y"):
+    $MouseSettings/InvertY.button_pressed = settings.mouse_invert_y
+
+  if settings.has("bindings"):
+    var bindings = settings.bindings
+    for elt in bindings:
+      var action_panel : PanelContainer = mapping_container.get_node_or_null(elt + " Panel")
+      if not action_panel:
+        continue
+      var event_key : InputEvent = null
+      var event_joy : InputEvent = null
+      
+      if bindings[elt]["key_event"][0] == 0:
+        event_key = InputEventKey.new()
+        event_key.device = bindings[elt]["key_event"][1][0]
+        event_key.keycode = bindings[elt]["key_event"][1][1]
+        event_key.physical_keycode = bindings[elt]["key_event"][1][2]
+        event_key.unicode = bindings[elt]["key_event"][1][3]
+      elif bindings[elt]["key_event"][0] == 1:
+        event_key = InputEventMouseButton.new()
+        event_key.button_index = bindings[elt]["key_event"][1]
+      
+      if bindings[elt]["joy_event"][0] == 0:
+        event_joy = InputEventJoypadButton.new()
+        event_joy.button_index = bindings[elt]["joy_event"][1]
+      elif bindings[elt]["joy_event"][0] == 1:
+        event_joy = InputEventJoypadMotion.new()
+        event_joy.axis = bindings[elt]["joy_event"][1][0]
+        event_joy.axis_value = bindings[elt]["joy_event"][1][1]
+      
+      if event_key:
+        action_panel.remap_action_keyboard(event_key, false)
+      if event_joy:
+        action_panel.remap_action_joypad(event_joy, false)
+      action_panel.update_action()
 
 func _on_visibility_changed() -> void:
   if _loaded_settings and not visible:
@@ -122,3 +132,12 @@ func _on_resume() -> void:
 func _on_restore_defaults_button_pressed() -> void:
   InputMap.load_from_project_settings()
   update_all_maps_label()
+  $MouseSettings/InvertY.button_pressed = false
+  $MouseSettings/Sensitivity.value = 1.0
+
+func _on_invert_y_toggled(toggled_on: bool):
+  GlobalMenuEvents.emit_set_invert_y(toggled_on)
+
+func _on_sensitivity_value_changed(value: float):
+  $MouseSettings/SensitivityValue.text = str(int(value * 100)) + "%"
+  GlobalMenuEvents.emit_set_mouse_sensitivity(value)

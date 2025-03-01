@@ -24,10 +24,22 @@ var _joy_right_y = JOY_AXIS_RIGHT_Y
 @export var max_speed_dash = 10
 @export var max_speed = max_speed_walk
 
+var _invert_y = false
+var _mouse_sensitivity_factor = 1.0
+
 func _ready():
+  GlobalMenuEvents.set_invert_y.connect(_set_invert_y)
+  GlobalMenuEvents.set_mouse_sensitivity.connect(_set_mouse_sensitivity)
+
   starting_height = $Pivot.get_position().y
   crouching_height = starting_height / 3
   crouch_speed = (starting_height - crouching_height) / crouch_time
+
+func _set_invert_y(enabled):
+  _invert_y = enabled
+
+func _set_mouse_sensitivity(factor):
+  _mouse_sensitivity_factor = factor
 
 func pause():
   _enabled = false
@@ -54,8 +66,8 @@ func _unhandled_input(event):
 
   var is_mouse = event is InputEventMouseMotion
   if is_mouse and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-    var delta_x = -event.relative.x * mouse_sensitivity
-    var delta_y = -event.relative.y * mouse_sensitivity
+    var delta_x = -event.relative.x * mouse_sensitivity * _mouse_sensitivity_factor
+    var delta_y = -event.relative.y * mouse_sensitivity * _mouse_sensitivity_factor * (-1 if _invert_y else 1)
 
     if not smooth_movement:
       rotate_y(delta_x)
