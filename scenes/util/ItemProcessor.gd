@@ -34,7 +34,7 @@ var text_item_fmt = "[color=black][b][font_size=48]%s[/font_size][/b]\n\n%s"
 var section_fmt = "[p][b][font_size=36]%s[/font_size][/b][/p]\n\n"
 var p_fmt = "[p]%s[/p]\n\n"
 
-var processor_thread = Thread.new()
+var processor_thread: Thread
 var PROCESSOR_QUEUE = "ItemProcessor"
 
 func _ready():
@@ -54,14 +54,25 @@ func _ready():
   tokenizer.compile("[^\\{\\}\\[\\]<>]+|[\\{\\}\\[\\]<>]")
   image_name_re.compile("^([iI]mage:|[fF]ile:)")
   exclude_image_re.compile("\\bicon\\b|\\blogo\\b|blue pencil")
-  processor_thread.start(_processor_thread_loop)
+
+  if Util.is_using_threads():
+    processor_thread = Thread.new()
+    processor_thread.start(_processor_thread_loop)
 
 func _exit_tree():
   WorkQueue.set_quitting()
-  processor_thread.wait_to_finish()
+  if processor_thread:
+    processor_thread.wait_to_finish()
 
 func _processor_thread_loop():
   while not WorkQueue.get_quitting():
+    _processor_thread_item()
+
+func _process(delta: float) -> void:
+  if not Util.is_using_threads():
+    _processor_thread_item()
+
+func _processor_thread_item():
     var item = WorkQueue.process_queue(PROCESSOR_QUEUE)
     if item:
       _create_items(item[0], item[1], item[2])
