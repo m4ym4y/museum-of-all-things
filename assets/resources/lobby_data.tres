@@ -36,7 +36,7 @@ script = ExtResource("2_y4oc8")
 name = "Art"
 corner_1 = Vector2(-72, 12)
 corner_2 = Vector2(-36, 48)
-exhibits = PackedStringArray("Baroque painting", "Arts in the Philippines", "Armenian Architecture", "Pablo Picasso", "Louvre", "Joan Miró", "Ai Weiwei", "Frida Kahlo", "Käthe Kollwitz", "Thomas Kinkade", "Edgar Degas", "Cave painting", "Michelangelo", "Francisco Goya", "Fauvism", "Graffiti", "Ancient Greek sculpture", "M. C. Escher")
+exhibits = PackedStringArray("Baroque painting", "Arts in the Philippines", "Armenian Architecture", "Pablo Picasso", "Louvre", "Joan Miró", "Ai Weiwei", "Frida Kahlo", "Käthe Kollwitz", "Frank Lloyd Wright", "Edgar Degas", "Cave painting", "Michelangelo", "Francisco Goya", "Fauvism", "Graffiti", "Ancient Greek sculpture", "M. C. Escher", "Georges Seurat")
 
 [sub_resource type="Resource" id="Resource_l5mfx"]
 script = ExtResource("2_y4oc8")
