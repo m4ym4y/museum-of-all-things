@@ -39,3 +39,12 @@ modulate = Color(0, 0, 0, 1)
 text = "←"
 font_size = 165
 outline_size = 6
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." groups=["managed_light", "managed_light_skip_direction_test"]]
+transform = Transform3D(1, 0, 0, 0, 0.915354, 0.402651, 0, -0.402651, 0.915354, 0.00160336, 2.02423, 1.21375)
+light_energy = 2.0
+distance_fade_enabled = true
+distance_fade_begin = 30.0
+spot_range = 1.42758
+spot_attenuation = 0.5
+spot_angle = 23.2438
