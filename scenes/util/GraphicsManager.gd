@@ -186,4 +186,3 @@ func _toggle_managed_light(light, enable) -> void:
     light.visible = enable
     light.light_energy = light_energy
   )
-
