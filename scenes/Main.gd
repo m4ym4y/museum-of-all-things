@@ -143,8 +143,9 @@ func _on_settings_back():
 func _input(event):
 
   if Input.is_action_pressed("toggle_fullscreen"):
-    $CanvasLayer/Settings/ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/GraphicsSettings/DisplayOptions/Fullscreen.button_pressed = not GraphicsManager.fullscreen
-
+    # '%' is a unique name property of a node (since 4.0)
+    var fullscreen = $CanvasLayer/Settings/%GraphicsSettings/%Fullscreen
+    fullscreen.button_pressed = not GraphicsManager.fullscreen
 
   if not game_started:
     return
