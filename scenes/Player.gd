@@ -23,6 +23,10 @@ var _joy_right_y = JOY_AXIS_RIGHT_Y
 @export var max_speed_walk = 5
 @export var max_speed_dash = 10
 @export var max_speed = max_speed_walk
+var head_float_sin_angle : float = 0
+var is_walking : bool = false
+@onready var fully_crouched : bool = false
+@onready var fully_standing : bool = false
 
 var _invert_y = false
 var _mouse_sensitivity_factor = 1.0
@@ -72,6 +76,7 @@ func _unhandled_input(event):
   if is_mouse and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
     var delta_x = -event.relative.x * mouse_sensitivity * _mouse_sensitivity_factor
     var delta_y = -event.relative.y * mouse_sensitivity * _mouse_sensitivity_factor * (-1 if _invert_y else 1)
+    var delta_z = -event.relative.x * (mouse_sensitivity * _mouse_sensitivity_factor) / 8 * (-1 if _invert_y else 1)
 
     if not smooth_movement:
       rotate_y(delta_x)
@@ -82,6 +87,27 @@ func _unhandled_input(event):
         clamp(delta_y, -dampening, dampening),
         clamp(delta_x, -dampening, dampening)
       )
+    $Pivot.rotation.z += delta_z
+
+
+func _process(delta: float) -> void:
+    $Pivot.rotation.z = lerpf($Pivot.rotation.z, 0, 0.1)
+    
+    ##Has the $Pivot position is being corrected every frame, just set the camera pos instead
+    if is_walking :
+      var ang_add_amnt : float = 10
+      $Pivot/Camera3D.position.y += 0.025 * sin(head_float_sin_angle)
+    
+      if fully_standing :
+        if Input.is_action_pressed("dash"):
+            ang_add_amnt = 20
+      else :
+        ang_add_amnt = 5
+    
+      head_float_sin_angle += ang_add_amnt * delta
+    else :
+       $Pivot/Camera3D.position.y = lerpf($Pivot/Camera3D.position.y, 0, 0.1) 
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -90,8 +116,8 @@ func _physics_process(delta):
 
   velocity.y += gravity * delta
 
-  var fully_crouched = $Pivot.get_position().y <= crouching_height
-  var fully_standing = $Pivot.get_position().y >= starting_height
+  fully_crouched = $Pivot.get_position().y <= crouching_height
+  fully_standing = $Pivot.get_position().y >= starting_height
 
   if fully_standing and Input.is_action_pressed("dash"):
     max_speed = max_speed_dash
@@ -102,10 +128,14 @@ func _physics_process(delta):
   var input = Input.get_vector("strafe_left", "strafe_right", "move_forward", "move_back")
   var desired_velocity = transform.basis * Vector3(input.x, 0, input.y) * speed
 
-  velocity.x = desired_velocity.x
-  velocity.z = desired_velocity.z
+  velocity.x = lerpf(velocity.x, desired_velocity.x, 0.15)
+  velocity.z = lerpf(velocity.z, desired_velocity.z, 0.15)
   set_up_direction(Vector3.UP)
   set_floor_stop_on_slope_enabled(true)
+
+  ##Get if the player is moving
+  is_walking = velocity.x < -1 or velocity.x > 1 or velocity.z < -1 or velocity.z > 1
+
   move_and_slide()
 
   #var delta_vec = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
@@ -123,9 +153,13 @@ func _physics_process(delta):
 
   $FootstepPlayer.set_on_floor(is_on_floor())
 
+
   if Input.is_action_pressed("jump") and is_on_floor():
     velocity.y = jump_impulse
-    pass
+    ##Add some horizontal vel just for the sake of yes
+    velocity.x *= 2
+    velocity.z *= 2
+
 
   if Input.is_action_pressed("crouch") and not fully_crouched:
     $Pivot.global_translate(Vector3(0, -crouch_speed * delta, 0))
