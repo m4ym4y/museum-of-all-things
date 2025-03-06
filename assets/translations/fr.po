@@ -11,3 +11,222 @@ msgstr "Paramètres"
 
 msgid "Quit"
 msgstr "Quitter"
+
+msgid "The museum is currently unstaffed. Please refer to signage for information."
+msgstr "Le musée n'a pas d'employé. Veuillez vous référer aux panneaux d'information."
+
+msgid "English"
+msgstr "Anglais"
+
+msgid "Portuguese"
+msgstr "Portugais"
+
+msgid "French"
+msgstr "Français"
+
+msgid "Are you sure you want to Quit?"
+msgstr "Êtes vous sûr•e de vouloir quitter ?"
+
+msgid "Yes"
+msgstr "Oui"
+
+msgid "No"
+msgstr "Non"
+
+msgid "Paused"
+msgstr "En pause"
+
+msgid "Resume"
+msgstr "Reprendre"
+
+msgid "Return to Lobby"
+msgstr "Retourner à l'accueil"
+
+msgid "Enter Exhibit Name"
+msgstr "Entrez le nom de l'exposition"
+
+msgid "Go to Random Exhibit"
+msgstr "Se rendre à une exposition aléatoire"
+
+msgid "Enter exhibit title"
+msgstr "Entrez le titre de l'exposition"
+
+msgid "Confirm"
+msgstr "Confirmer"
+
+msgid "Back"
+msgstr "Retour"
+
+msgid "Exhibit Found: \"\""
+msgstr "Exposition trouvée : \"\""
+
+msgid "OK / Exit"
+msgstr "OK / Quitter"
+
+msgid "VR Controls"
+msgstr "Contrôles VR"
+
+msgid "Restore Default Settings"
+msgstr "Restaurer les paramètres par défaut"
+
+msgid "Movement Style"
+msgstr "Style de mouvement"
+
+msgid "Teleportation (Left Trigger)"
+msgstr "Téléportation (Gachette Gauche)"
+
+msgid "Direct Movement (Left Analog Stick)"
+msgstr "Mouvement direct (Joystick Gauche)"
+
+msgid "Direct Movement Speed"
+msgstr "Vitesse de mouvement direct"
+
+msgid "Camera Rotation Increment (Right Stick)"
+msgstr "Sensibilité de la caméra (Joystick Droit)"
+
+msgid "Smooth Camera Rotation"
+msgstr "Rotation en douceur"
+
+msgid "Preparing Exhibit..."
+msgstr "Préparation de l'exposition..."
+
+msgid "Error Loading Exhibit."
+msgstr "Erreur de chargement de l'exposition."
+
+msgid "Data Settings"
+msgstr "Paramètres de cache"
+
+msgid "Cache"
+msgstr "Cache"
+
+msgid "Clear Cache"
+msgstr "Vider le cache"
+
+msgid "Cache Size Limit"
+msgstr "Taille maximum du cache"
+
+msgid "Automatically limit cache size (on quit)"
+msgstr "Limiter automatiquement la taille du cache (à la fermeture)"
+
+msgid "Graphics Settings"
+msgstr "Paramètres graphiques"
+
+msgid "Render Scale"
+msgstr "Échelle de rendu"
+
+msgid "Fullscreen"
+msgstr "Plein écran"
+
+msgid "Reflection Quality"
+msgstr "Qualité des reflets"
+
+msgid "Enable Reflections"
+msgstr "Activer les reflets"
+
+msgid "Ambient Light Level"
+msgstr "Luminosité ambiante"
+
+msgid "Enable Indirect Lighting (SSIL)"
+msgstr "Activer la lumière indirecte (SSIL)"
+
+msgid "Enable Fog"
+msgstr "Activer le brouillard"
+
+msgid "Enable V-Sync"
+msgstr "Activer la synchronisation verticale"
+
+msgid "Limit FPS"
+msgstr "Limiter les FPS"
+
+msgid "None"
+msgstr "Aucun"
+
+msgid "CRT Filter"
+msgstr "Filtre CRT"
+
+msgid "Audio Settings"
+msgstr "Paramètres audio"
+
+msgid "Global Volume"
+msgstr "Volume global"
+
+msgid "Sound Effects Volume"
+msgstr "Volume des effets"
+
+msgid "Ambience Volume"
+msgstr "Volume de l'environnement"
+
+msgid "Enter VR"
+msgstr "Entrer en VR"
+
+msgid "Snap turning:"
+msgstr "Rotation instantanée :"
+
+msgid "Y axis dead zone"
+msgstr "Zone morte de l'axe Y"
+
+msgid "X axis dead zone"
+msgstr "Zone morte de l'axe X"
+
+msgid "Haptics Scale"
+msgstr "Intensité des vibrations"
+
+msgid "Apply"
+msgstr "Appliquer"
+
+msgid "Reset"
+msgstr "Réinitialiser"
+
+msgid "Height adjust:"
+msgstr "Ajustement de la hauteur :"
+
+msgid "WebXR primary:"
+msgstr "WebXR primaire :"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Thumbstick"
+msgstr "Joystick"
+
+msgid "Trackpad"
+msgstr "Trackpad"
+
+msgid "Open Page in Browser"
+msgstr "Ouvrir la page dans le navigateur"
+
+msgid " - Paused"
+msgstr " - En pause"
+
+msgid "Maximum FPS"
+msgstr "Nombre maximum de FPS"
+
+msgid "Post-Processing Effect"
+msgstr "Effet de post-processing"
+
+msgid "Graphics"
+msgstr "Graphiques"
+
+msgid "Audio"
+msgstr "Audio"
+
+msgid "Data"
+msgstr "Cache"
+
+msgid "Controls"
+msgstr "Contrôles"
+
+msgid "Control Settings"
+msgstr "Paramètres de contrôle"
+
+msgid "Mouse Sensitivity"
+msgstr "Sensibilité de la souris"
+
+msgid "Invert Y-axis"
+msgstr "Inverser l'axe Y"
+
+msgid "Remap Inputs"
+msgstr "Réassigner les entrées"
+
+msgid "Joypad Camera Deadzone"
+msgstr "Zone morte de la caméra de contrôle"
