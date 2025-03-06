@@ -34,7 +34,18 @@ func clear_listeners(n, sig_name):
     c.signal.disconnect(c.callable)
 
 func is_xr():
-  return ProjectSettings.get_setting("xr/openxr/enabled")
+  return ProjectSettings.get_setting_with_override("xr/openxr/enabled")
+
+func is_compatibility_renderer():
+  var rendering_method: String
+  if RenderingServer.has_method('get_current_rendering_method'):
+    # This will work on Godot 4.4+, and won't need the `call()` workaround either.
+    rendering_method = RenderingServer.call('get_current_rendering_method')
+  else:
+    # Not 100% reliable, because it won't be accurate if the `--rendering-method` CLI argument was used.
+    rendering_method = ProjectSettings.get_setting_with_override('rendering/renderer/rendering_method')
+
+  return rendering_method == 'gl_compatibility'
 
 func normalize_url(url):
   if url.begins_with('//'):

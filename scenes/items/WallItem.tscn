@@ -27,7 +27,7 @@ mesh = SubResource("BoxMesh_e6b5o")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("3_2kvyw")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Item"]
+[node name="SpotLight3D" type="SpotLight3D" parent="Item" groups=["managed_light"]]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 5, 3.5)
 light_energy = 0.0
 distance_fade_enabled = true
