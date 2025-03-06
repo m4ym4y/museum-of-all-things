@@ -45,6 +45,7 @@ window/stretch/aspect="expand"
 movie_writer/movie_file="/home/maya/Videos/opening.avi"
 naming/scene_name_casing=1
 naming/script_name_casing=1
+export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 
