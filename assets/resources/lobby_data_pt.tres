@@ -57,7 +57,7 @@ script = ExtResource("2_y4oc8")
 name = "Mídia"
 corner_1 = Vector2(12, 60)
 corner_2 = Vector2(48, 96)
-exhibits = PackedStringArray("Bíblia", "The Beatles", "Matrix", "Odisseia", "Ainda Estou Aqui (filme de 2024)", "Esperando Godot", "Undertale", "Star Trek", "Barbie (filme)", "Neon Genesis Evangelion", "Hamlet", "Catan", "Twitter", "Auto da Compadecida", "Monty Python", "O Conde de Monte Cristo", "Wikipédia", "Minecraft")
+exhibits = PackedStringArray("Bíblia", "The Beatles", "Matrix", "Odisseia", "Ainda Estou Aqui (filme de 2024)", "Esperando Godot", "Undertale", "Star Trek", "Barbie (filme)", "Neon Genesis Evangelion", "Hamlet", "OneShot", "Twitter", "Auto da Compadecida", "Monty Python", "O Conde de Monte Cristo", "Wikipédia", "Minecraft")
 
 [resource]
 script = ExtResource("1_3ssej")
