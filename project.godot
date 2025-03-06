@@ -183,7 +183,7 @@ dash={
 [internationalization]
 
 locale/translation_remaps={
-"res://assets/resources/lobby_data.tres": PackedStringArray("res://assets/resources/lobby_data_pt.tres:pt"),
+"res://assets/resources/lobby_data.tres": PackedStringArray("res://assets/resources/lobby_data_pt.tres:pt", "res://assets/resources/lobby_data_fr.tres:fr"),
 "res://assets/textures/lobby_plaque_intro_1.png": PackedStringArray()
 }
 locale/translations=PackedStringArray("res://assets/translations/fr.po", "res://assets/translations/pt.po", "res://assets/translations/en.po")

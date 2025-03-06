@@ -63,10 +63,12 @@ text = "Quit"
 [node name="Language" type="OptionButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 selected = 0
-item_count = 2
+item_count = 3
 popup/item_0/text = "English"
 popup/item_1/text = "Portuguese"
 popup/item_1/id = 1
+popup/item_2/text = "French"
+popup/item_2/id = 2
 
 [node name="FadeIn" type="ColorRect" parent="."]
 z_index = 2
