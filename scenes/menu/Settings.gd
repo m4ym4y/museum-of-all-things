@@ -10,6 +10,7 @@ signal resume
   _vbox.get_node("AudioSettings"),
   _vbox.get_node("XrControlsMenu") if _xr else null,
   _vbox.get_node("ControlSettings") if not _xr else null,
+  _vbox.get_node("FontSettings"),
   _vbox.get_node("DataSettings"),
 ]
 
@@ -41,7 +42,7 @@ func _on_tab_left():
 func _on_tab_right():
   if visible:
     _tab_bar.select_previous_available()
-
+    
 func _on_resume():
   if visible:
     emit_signal("resume")

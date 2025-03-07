@@ -11,6 +11,8 @@ func init(text):
   var t = Util.strip_markup(text)
   label.text = t
   call_deferred("_center_vertically", label)
+  #label.add_theme_font_override("font",load_system_font(font_path))
+
 
 func _center_vertically(label):
   # Ensure the SubViewport is sized

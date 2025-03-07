@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://csyhd0yh2exjh"]
+
+[ext_resource type="Script" path="res://scenes/menu/FontSettings.gd" id="1_2bb4n"]
+[ext_resource type="Texture2D" uid="uid://cgg87r2cj7eb8" path="res://assets/textures/up_arrow.png" id="2_epigm"]
+[ext_resource type="Texture2D" uid="uid://capl0owt277ac" path="res://assets/textures/down_arrow.png" id="3_eb7rb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6eray"]
+font_size = 64
+
+[node name="FontSettings" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2bb4n")
+
+[node name="MainOptions" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainOptions"]
+layout_mode = 2
+text = "Font Settings"
+label_settings = SubResource("LabelSettings_6eray")
+
+[node name="Back" type="Button" parent="MainOptions"]
+layout_mode = 2
+text = "Back
+"
+
+[node name="RestoreDefaultsButton" type="Button" parent="MainOptions"]
+layout_mode = 2
+text = "Restore Default Settings"
+
+[node name="Spacer" type="Label" parent="."]
+layout_mode = 2
+text = " "
+
+[node name="FontsLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Set Fonts"
+
+[node name="Search" type="LineEdit" parent="."]
+layout_mode = 2
+placeholder_text = "Search..."
+
+[node name="ListFonts" type="CheckButton" parent="Search"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_right = 18.0
+offset_bottom = 45.0
+grow_horizontal = 0
+scale = Vector2(0.8, 0.8)
+theme_override_icons/checked = ExtResource("2_epigm")
+theme_override_icons/unchecked = ExtResource("3_eb7rb")
+button_pressed = true
+text = "Hide"
+icon_alignment = 1
+
+[node name="FontsContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="JoyOptions" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Spacer" type="Label" parent="JoyOptions"]
+layout_mode = 2
+text = " "
+
+[node name="Label" type="Label" parent="JoyOptions"]
+layout_mode = 2
+text = "Preview
+"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="text_changed" from="Search" to="." method="_on_search_text_changed"]
+[connection signal="toggled" from="Search/ListFonts" to="." method="_on_list_fonts_toggled"]

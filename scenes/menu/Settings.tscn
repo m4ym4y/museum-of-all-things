@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bw3fu2y38n3yk"]
+[gd_scene load_steps=10 format=3 uid="uid://bw3fu2y38n3yk"]
 
 [ext_resource type="Script" path="res://scenes/menu/Settings.gd" id="1_4scry"]
 [ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="1_v0h4s"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://f0jxppprskc3" path="res://scenes/menu/DataSettings.tscn" id="5_mo3yx"]
 [ext_resource type="PackedScene" uid="uid://cah8jnesp3dgx" path="res://scenes/menu/AudioSettings.tscn" id="5_yolm2"]
 [ext_resource type="PackedScene" uid="uid://ychsh5rigt5i" path="res://scenes/menu/ControlSettings.tscn" id="8_xtrup"]
+[ext_resource type="PackedScene" uid="uid://csyhd0yh2exjh" path="res://scenes/menu/FontSettings.tscn" id="9_ybau6"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -18,6 +19,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_v0h4s")
 script = ExtResource("1_4scry")
+metadata/_edit_vertical_guides_ = [-144.0]
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
@@ -48,12 +50,13 @@ size_flags_vertical = 3
 layout_mode = 2
 current_tab = 0
 tab_alignment = 1
-tab_count = 5
+tab_count = 6
 tab_0/title = "Graphics"
 tab_1/title = "Audio"
 tab_2/title = "Controls"
 tab_3/title = "Controls"
-tab_4/title = "Data"
+tab_4/title = "Fonts"
+tab_5/title = "Data"
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -81,6 +84,10 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="FontSettings" parent="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer" instance=ExtResource("9_ybau6")]
+visible = false
+layout_mode = 2
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="tab_changed" from="ScrollContainer/MarginContainer/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
 [connection signal="tab_clicked" from="ScrollContainer/MarginContainer/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_clicked"]
@@ -89,3 +96,4 @@ layout_mode = 2
 [connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/DataSettings" to="." method="_on_resume"]
 [connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/XrControlsMenu" to="." method="_on_resume"]
 [connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/ControlSettings" to="." method="_on_resume"]
+[connection signal="resume" from="ScrollContainer/MarginContainer/VBoxContainer/MarginContainer/FontSettings" to="." method="_on_resume"]
