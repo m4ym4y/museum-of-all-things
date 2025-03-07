@@ -63,7 +63,9 @@ func _on_enable_ssil_toggled(toggled_on: bool):
   GraphicsManager.get_env().ssil_enabled = toggled_on
 
 func _on_ambient_light_value_changed(value: float):
-  GraphicsManager.get_env().ambient_light_energy = value
+  #GlobalMenuEvents.emit_ambient_light_energy_change(value)
+  GraphicsManager.emit_ambient_light_energy_change(value)
+  #GraphicsManager.get_env().ambient_light_energy = value
   _vbox.get_node("LightOptions/AmbientLightValue").text = "%3.2f" % value
 
 func _on_max_fps_value_changed(value: float):
