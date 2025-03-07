@@ -143,9 +143,7 @@ func _on_settings_back():
 func _input(event):
 
   if Input.is_action_pressed("toggle_fullscreen"):
-    # '%' is a unique name property of a node (since 4.0)
-    var fullscreen = $CanvasLayer/Settings/%GraphicsSettings/%Fullscreen
-    fullscreen.button_pressed = not GraphicsManager.fullscreen
+    GlobalMenuEvents.emit_on_fullscreen_toggled(not GraphicsManager.fullscreen)
 
   if not game_started:
     return
@@ -162,7 +160,6 @@ func _input(event):
   if event.is_action_pressed("pause") and not _xr:
     _pause_game()
 
-  
   if event.is_action_pressed("free_pointer") and not _xr:
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
   if event.is_action_pressed("click") and not _xr and not $CanvasLayer.visible:

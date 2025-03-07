@@ -8,6 +8,7 @@ var _loaded_settings = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+  GlobalMenuEvents._on_fullscreen_toggled.connect(_on_fullscreen_toggled)
   _load_settings()
   if _xr:
     _vbox.get_node("FPSOptions").visible = false
@@ -81,6 +82,7 @@ func _on_enable_fog_toggled(toggled_on: bool):
 
 func _on_fullscreen_toggled(toggled_on: bool):
   GraphicsManager.set_fullscreen(toggled_on)
+  _vbox.get_node("DisplayOptions/Fullscreen").set_pressed_no_signal(toggled_on)
 
 func _on_render_scale_value_changed(value: float):
   GraphicsManager.set_render_scale(value)
