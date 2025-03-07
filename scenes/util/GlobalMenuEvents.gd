@@ -4,6 +4,7 @@ signal ui_cancel_pressed
 signal ui_accept_pressed
 signal hide_menu
 signal return_to_lobby
+signal _on_fullscreen_toggled(enabled: bool)
 signal set_current_room
 signal set_xr_movement_style
 signal set_movement_speed
@@ -32,6 +33,9 @@ func emit_return_to_lobby():
 
 func emit_set_current_room(room):
   emit_signal("set_current_room", room)
+
+func emit_on_fullscreen_toggled(enabled):
+  emit_signal("_on_fullscreen_toggled", enabled)
 
 func emit_set_xr_movement_style(style):
   emit_signal("set_xr_movement_style", style)
