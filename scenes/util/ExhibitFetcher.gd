@@ -20,15 +20,15 @@ const WIKIDATA_PREFIX = "https://www.wikidata.org/wiki/"
 const WIKIDATA_COMMONS_CATEGORY = "P373"
 const WIKIDATA_COMMONS_GALLERY = "P935"
 
-var search_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srprop=title&srsearch="
-var random_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&generator=random&grnnamespace=0&prop=info"
+var search_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srprop=title&origin=*&srsearch="
+var random_endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&generator=random&grnnamespace=0&prop=info&origin=*"
 
-var wikitext_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions|extracts|pageprops&ppprop=wikibase_item&explaintext=true&rvprop=content&format=json&redirects=1&titles="
-var images_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=640&iiextmetadatafilter=LicenseShortName|Artist&format=json&redirects=1&titles="
-var wikidata_endpoint = "https://www.wikidata.org/w/api.php?action=wbgetclaims&format=json&entity="
+var wikitext_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions|extracts|pageprops&ppprop=wikibase_item&explaintext=true&rvprop=content&format=json&redirects=1&origin=*&titles="
+var images_endpoint = "https://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=640&iiextmetadatafilter=LicenseShortName|Artist&format=json&redirects=1&origin=*&titles="
+var wikidata_endpoint = "https://www.wikidata.org/w/api.php?action=wbgetclaims&format=json&origin=*&entity="
 
-var wikimedia_commons_category_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&generator=categorymembers&gcmtype=file&gcmlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&gcmtitle="
-var wikimedia_commons_gallery_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&generator=images&gimlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&titles="
+var wikimedia_commons_category_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&generator=categorymembers&gcmtype=file&gcmlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&origin=*&gcmtitle="
+var wikimedia_commons_gallery_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&generator=images&gimlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&origin=*&titles="
 
 var _fs_lock = Mutex.new()
 var _results_lock = Mutex.new()

@@ -205,7 +205,6 @@ tls/certificate_bundle_override="res://assets/certs/cacert.crt"
 
 [physics]
 
-3d/run_on_separate_thread=true
 common/physics_interpolation=true
 common/enable_pause_aware_picking=true
 

@@ -40,7 +40,9 @@ func _texture_load_thread_loop():
     if data:
       _create_and_emit_image(item.url, data, item.ctx)
     else:
-      var result = RequestSync.request(item.url, COMMON_HEADERS)
+      var request_url = item.url
+      request_url += ('&' if '?' in request_url else '?') + "origin=*"
+      var result = RequestSync.request(request_url, COMMON_HEADERS)
       if result[0] != OK:
         push_error("failed to fetch image ", result[1], " ", item.url)
       else:
