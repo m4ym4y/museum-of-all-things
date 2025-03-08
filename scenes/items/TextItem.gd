@@ -14,6 +14,7 @@ func _ready():
 func init(text):
   var t = Util.strip_markup(text).substr(0, max_chars)
   $Label.text = t if len(t) < max_chars else t + "..."
+ 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
