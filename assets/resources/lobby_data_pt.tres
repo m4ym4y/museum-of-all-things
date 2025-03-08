@@ -1,0 +1,79 @@
+[gd_resource type="Resource" script_class="LobbyData" load_steps=11 format=3 uid="uid://34yga2226k3j"]
+
+[ext_resource type="Script" path="res://resource_definitions/LobbyData.gd" id="1_3ssej"]
+[ext_resource type="Script" path="res://resource_definitions/LobbyWing.gd" id="2_y4oc8"]
+
+[sub_resource type="Resource" id="Resource_pgwi2"]
+script = ExtResource("2_y4oc8")
+name = "Tecnologia"
+corner_1 = Vector2(-68, -44)
+corner_2 = Vector2(-32, -8)
+exhibits = PackedStringArray("Linux", "Redes", "Transistores", "Cerâmica", "Jogos eletrônicos", "Processo industrial", "Teste de arma nuclear", "Adesivos", "Aquedutos", "OpenGL", "Aviões", "Máquinas simples", "Manufatura", "Automação industrial", "Microscopia", "Consolas de jogos", "Problema do ano 2038", "Foguete espacial", "Listas de armas")
+
+[sub_resource type="Resource" id="Resource_ooopd"]
+script = ExtResource("2_y4oc8")
+name = "Cultura"
+corner_1 = Vector2(32, -44)
+corner_2 = Vector2(68, -8)
+exhibits = PackedStringArray("Palhaços", "Dragões", "Cartunistas", "Atores", "Cantores", "Café", "Sopa", "Bananas", "Música", "Piscina", "El Chavo del Ocho", "Festas juninas no Brasil", "Religião", "Quilombos", "Arte moderna", "Publicidade", "Mito do dilúvio", "Desportos")
+
+[sub_resource type="Resource" id="Resource_m2ope"]
+script = ExtResource("2_y4oc8")
+name = "Ciência"
+corner_1 = Vector2(-44, -92)
+corner_2 = Vector2(-8, -36)
+exhibits = PackedStringArray("Fungos", "Dinossauros", "Vida marinha", "Terra", "Teorias científicas", "Paradoxos", "Cães", "Medicina", "Dados", "Metais", "Adansonia", "Humanos", "Pêndulo", "Dimorfismo sexual", "Luz", "Queijos", "Brassica oleracea", "Chuva", "Método científico", "Borboletas", "Sistema Solar", "Solo", "Fractais", "Olho")
+
+[sub_resource type="Resource" id="Resource_opuc1"]
+script = ExtResource("2_y4oc8")
+name = "Geografia"
+corner_1 = Vector2(8, -92)
+corner_2 = Vector2(44, -36)
+exhibits = PackedStringArray("Brazil", "Antártida", "Patagônia", "Tibete", "Persépolis", "Petra", "Vulcões", "Caatinga", "Mata Atlântica", "Montanhas", "Geografia da África", "Europa", "Ferrovias", "Geografia da Ásia", "América do Sul", "Geografia da Oceania", "China", "Rochas", "Península Ibérica", "Oceanos", "Floresta Amazônica", "Geologia", "Desertos", "Mapas")
+
+[sub_resource type="Resource" id="Resource_qiy1c"]
+script = ExtResource("2_y4oc8")
+name = "Arte"
+corner_1 = Vector2(-72, 12)
+corner_2 = Vector2(-36, 48)
+exhibits = PackedStringArray("Barroco", "Artes das Filipinas", "Arquitetura", "Pablo Picasso", "Louvre", "Joan Miró", "Ai Weiwei", "Frida Kahlo", "Käthe Kollwitz", "Artes do Brasil", "Edgar Degas", "Arquitetura rupestre", "Michelangelo", "Pintura do Brasil", "Renascimento", "Grafite", "Escultura da Grécia Antiga", "Laerte Coutinho")
+
+[sub_resource type="Resource" id="Resource_l5mfx"]
+script = ExtResource("2_y4oc8")
+name = "Pessoas"
+corner_1 = Vector2(36, 12)
+corner_2 = Vector2(72, 48)
+exhibits = PackedStringArray("Brasileiros", "Albert Einstein", "Freddie Mercury", "Santos Dumont", "Getúlio Vargas", "Karl Marx", "Ulysses Guimarães", "Tupac Shakur", "Luiz Inácio Lula da Silva", "William Shakespeare", "Cientistas", "Paulo Freire", "Machado de Assis", "Leonel Brizola", "Zumbi dos Palmares", "Carmen Miranda", "Martinho Lutero", "Martin Luther King Jr.", "Fernanda Torres", "Fernanda Torres")
+
+[sub_resource type="Resource" id="Resource_bycfx"]
+script = ExtResource("2_y4oc8")
+name = "História"
+corner_1 = Vector2(-48, 60)
+corner_2 = Vector2(-12, 96)
+exhibits = PackedStringArray("História da Alemanha", "Nova República", "Titanic", "Contracultura da década de 1960", "Golpe de Estado no Chile em 1973", "Pandemia de COVID-19", "Ditadura militar no Brasil (1964–1985)", "Revolução Francesa", "Revolução Russa de 1917", "História mundial", "Colonialismo", "História da matemática", "História da fotografia", "Incidente Dave Matthews Band", "Libelo de sangue", "Império de Oyo", "Pirataria", "História da Palestina")
+
+[sub_resource type="Resource" id="Resource_yimja"]
+script = ExtResource("2_y4oc8")
+name = "Mídia"
+corner_1 = Vector2(12, 60)
+corner_2 = Vector2(48, 96)
+exhibits = PackedStringArray("Bíblia", "The Beatles", "Matrix", "Odisseia", "Ainda Estou Aqui (filme de 2024)", "Esperando Godot", "Undertale", "Star Trek", "Barbie (filme)", "Neon Genesis Evangelion", "Hamlet", "OneShot", "Twitter", "Auto da Compadecida", "Monty Python", "O Conde de Monte Cristo", "Wikipédia", "Minecraft")
+
+[resource]
+script = ExtResource("1_3ssej")
+introduction_text = "[center][color=black]
+[img=500]res://assets/logo/moat_logo_large.png[/img]
+
+[font_size=14][fill]
+Bem-vindo ao Museu de Todas as Coisas! Todos os visitantes são bem-vindos aqui, seja você se manifestando neste espaço através de uma janela 2D ou via Realidade Virtual. Este museu é diferente de qualquer outro que você tenha visitado no mundo físico, então pode levar um momento para se orientar.
+
+Agora você está no saguão do museu, adaptado para lhe dar um ponto de partida agradável em sua visita. Se você desejar retornar aqui, pode abrir seu menu do museu (via \"Escape\", \"Start\" ou pressionando \"Y\" no seu controle direito em Realidade Virtual) e selecionar \"Retornar ao Saguão\".
+
+O saguão é dividido em áreas por assunto, que são marcadas por placas e indicadas nos mapas no hall de entrada. Em cada uma dessas áreas, você encontrará muitos corredores com uma variedade de exposições fascinantes. Essas exposições são possíveis graças às imagens e dados textuais da Wikipédia e Wikimedia Commons. Qualquer tópico com uma página na Wikipédia também pode ser acessado como uma exposição neste museu.
+
+Além disso, cada exposição contém muitos corredores conectando-a a outras exposições. Esses corredores são determinados com base nos links no artigo da Wikipédia da exposição atual. Você pode mover-se de exposição em exposição infinitamente, seguindo sua curiosidade.
+
+Se você preferir ir direto para um assunto específico, pode acessar o terminal de busca, no final do hall de entrada diretamente atrás de você. Simplesmente digite seu tópico de interesse na interface do terminal, e ele criará um corredor para você ir direto até lá.
+
+[b]Tenha uma ótima visita![\\b]"
+wings = Array[ExtResource("2_y4oc8")]([SubResource("Resource_pgwi2"), SubResource("Resource_ooopd"), SubResource("Resource_m2ope"), SubResource("Resource_opuc1"), SubResource("Resource_qiy1c"), SubResource("Resource_l5mfx"), SubResource("Resource_bycfx"), SubResource("Resource_yimja")])

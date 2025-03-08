@@ -6,6 +6,7 @@ signal settings
 var fade_in_start = Color(0.0, 0.0, 0.0, 1.0)
 var fade_in_end = Color(0.0, 0.0, 0.0, 0.0)
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   _on_visibility_changed()
@@ -36,3 +37,14 @@ func _on_quit_button_pressed():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
   pass
+
+func _on_language_item_selected(index: int) -> void:
+  if index == 0:
+    TranslationServer.set_locale("en")
+    ExhibitFetcher.set_language("en")
+  if index == 1:
+    TranslationServer.set_locale("pt")
+    ExhibitFetcher.set_language("pt")
+  if index == 2:
+    TranslationServer.set_locale("fr")
+    ExhibitFetcher.set_language("fr")

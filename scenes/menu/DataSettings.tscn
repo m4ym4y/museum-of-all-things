@@ -25,15 +25,14 @@ label_settings = SubResource("LabelSettings_ktlel")
 
 [node name="Back" type="Button" parent="MainOptions"]
 layout_mode = 2
-text = "Back
-"
+text = "Back"
 
 [node name="CacheOptions" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="Spacer5" type="Label" parent="CacheOptions"]
 layout_mode = 2
-text = " 
+text = "
 "
 
 [node name="CacheLabel" type="Label" parent="CacheOptions"]
@@ -46,7 +45,7 @@ text = "Clear Cache"
 
 [node name="Spacer6" type="Label" parent="CacheOptions"]
 layout_mode = 2
-text = " 
+text = "
 "
 
 [node name="CacheLabel2" type="Label" parent="CacheOptions"]

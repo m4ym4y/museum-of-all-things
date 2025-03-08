@@ -28,7 +28,7 @@ func ui_cancel_pressed():
 var current_room = "$Lobby"
 func set_current_room(room):
   current_room = room
-  vbox.get_node("Title").text = current_room.replace("$", "") + (" - Paused" if not _xr else "")
+  vbox.get_node("Title").text = current_room.replace("$", "") + (tr(" - Paused") if not _xr else "")
   vbox.get_node("Open").disabled = current_room.begins_with("$")
 
 func _on_resume_pressed():
@@ -41,7 +41,8 @@ func _on_lobby_pressed():
   emit_signal("return_to_lobby")
 
 func _on_open_pressed():
-  OS.shell_open("https://en.wikipedia.org/wiki/" + current_room)
+  var lang = TranslationServer.get_locale()
+  OS.shell_open("https://" + lang + ".wikipedia.org/wiki/" + current_room)
 
 func _on_quit_pressed():
   get_tree().quit()
