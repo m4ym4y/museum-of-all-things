@@ -109,4 +109,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          gh release upload '${{ github.ref_name }}' * --repo '${{ github.repository }}'
+          gh release upload '${{ github.ref_name }}' */* --repo '${{ github.repository }}'
