@@ -16,7 +16,6 @@ var remappable_actions_str := [
   "jump",
   "crouch",
   "interact",
-  "toggle_fullscreen",
 ]
 var current_joypad_id := 0
 
