@@ -4,12 +4,10 @@ extends Node3D
 @export var arrow: bool = true
 @export var arrow_left: bool = true
 
-
 static var max_lines = 4
 var L_ARROW = "←"
 var R_ARROW = "→"
 var _text_value = ""
-
 
 var text: String:
   get:

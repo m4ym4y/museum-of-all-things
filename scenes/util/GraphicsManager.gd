@@ -3,7 +3,6 @@ extends Node
 signal change_post_processing(post_processing: String)
 signal ambient_light_energy_change(ambient_light_energy: float)
 
-
 const _settings_ns = "graphics"
 
 const MANAGED_LIGHTS_MAX := 8

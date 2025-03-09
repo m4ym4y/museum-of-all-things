@@ -4,7 +4,6 @@ signal ui_cancel_pressed
 signal ui_accept_pressed
 signal hide_menu
 signal return_to_lobby
-#signal ambient_light_energy_change(ambient_light_energy: float)
 signal set_current_room
 signal set_xr_movement_style
 signal set_movement_speed
@@ -30,9 +29,6 @@ func emit_hide_menu():
 
 func emit_return_to_lobby():
   emit_signal("return_to_lobby")
-
-func emit_ambient_light_energy_change(value: float):
-    emit_signal("ambient_light_energy_change", value)
 
 func emit_set_current_room(room):
   emit_signal("set_current_room", room)
