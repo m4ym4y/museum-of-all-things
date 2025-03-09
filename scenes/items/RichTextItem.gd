@@ -11,6 +11,7 @@ func init(text):
   var t = Util.strip_markup(text)
   label.text = t
   call_deferred("_center_vertically", label)
+  _replace_with_mipmapped_texture.call_deferred()
 
 func _center_vertically(label):
   # Ensure the SubViewport is sized
@@ -31,3 +32,15 @@ func _center_vertically(label):
 
   # Set the position of the RichTextLabel
   label.position.y = y_position
+
+static var num_images_pending = 0
+func _replace_with_mipmapped_texture():
+  num_images_pending += 1
+  for _i in range(num_images_pending): # Hacky way to wait at least 1 frame, and only have one image processed per frame
+    await RenderingServer.frame_post_draw
+  var img: Image = $SubViewport.get_texture().get_image() # Synchronous readpixels 🤢, wait for 4.4 and use https://github.com/godotengine/godot/pull/100110
+  img.convert(Image.FORMAT_LA8); # Assume grayscale, use less vram
+  img.generate_mipmaps()
+  $Sprite3D.texture = ImageTexture.create_from_image(img)
+  $SubViewport.queue_free() # Remove the viewport to free its render target
+  num_images_pending -= 1
