@@ -5,7 +5,14 @@
 [resource]
 albedo_texture = ExtResource("1_hojva")
 emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 0.2
-emission_on_uv2 = true
+emission_energy_multiplier = 0.07
+emission_operator = 1
 emission_texture = ExtResource("1_hojva")
+subsurf_scatter_strength = 1.0
+subsurf_scatter_skin_mode = true
+subsurf_scatter_texture = ExtResource("1_hojva")
+subsurf_scatter_transmittance_depth = 0.668
+subsurf_scatter_transmittance_boost = 1.0
 backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("1_hojva")
+uv2_offset = Vector3(0, 20, 0)

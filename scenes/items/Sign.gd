@@ -28,7 +28,13 @@ func _resize_text():
   while t.font.get_string_size(t.text, t.horizontal_alignment, -1, t.font_size).x > t.width * max_lines:
     t.font_size -= 1
 
+func _ambient_light_energy_change(ambient_light_energy: float):
+  var emissive_material = $MeshInstance3D.get_active_material(1)
+  emissive_material.emission_enabled = true if ambient_light_energy == 0 else false
+  $MeshInstance3D.set_surface_override_material(1, emissive_material)
+
 func _ready():
+  GraphicsManager.ambient_light_energy_change.connect(_ambient_light_energy_change)
   if starting_text:
     text = starting_text
   if not arrow:

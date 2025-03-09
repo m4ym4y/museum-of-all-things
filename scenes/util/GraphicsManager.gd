@@ -1,6 +1,7 @@
 extends Node
 
 signal change_post_processing(post_processing: String)
+signal ambient_light_energy_change(ambient_light_energy: float)
 
 const _settings_ns = "graphics"
 
@@ -30,6 +31,10 @@ func init():
   var loaded_settings = SettingsManager.get_settings(_settings_ns)
   if loaded_settings:
     _apply_settings(loaded_settings, _default_settings_obj)
+
+func emit_ambient_light_energy_change(value: float):
+    _env.environment.ambient_light_energy = value
+    emit_signal("ambient_light_energy_change", value)
 
 func set_fps_limit(value: float):
   fps_limit = int(value)
