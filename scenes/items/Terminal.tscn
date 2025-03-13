@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://81fevjg70kl3" path="res://assets/fonts/NotoSansMono/static/NotoSansMono-Bold.ttf" id="4_2tlk5"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="5_er78e"]
 [ext_resource type="PackedScene" uid="uid://crfgn0ehls7w7" path="res://scenes/menu/TerminalMenu.tscn" id="6_06qyf"]
-[ext_resource type="Script" path="res://scenes/items/TerminalInteractZone.gd" id="7_8cvwe"]
+[ext_resource type="Script" uid="uid://c27vw8tgjg8pf" path="res://scenes/items/TerminalInteractZone.gd" id="7_8cvwe"]
 [ext_resource type="AudioStream" uid="uid://gung6qd7trsl" path="res://assets/sound/UI/UI Terminal/UI Terminal Loop.ogg" id="8_tvv16"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7hqr0"]

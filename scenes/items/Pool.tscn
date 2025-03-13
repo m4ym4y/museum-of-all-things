@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cnfgmu10ohtpt"]
 
 [ext_resource type="ArrayMesh" uid="uid://dru3nkgfut6o4" path="res://assets/models/pool.obj" id="1_8j43i"]
-[ext_resource type="Script" path="res://scenes/items/pool.gd" id="1_ao6a7"]
+[ext_resource type="Script" uid="uid://b2j2833mkodcj" path="res://scenes/items/pool.gd" id="1_ao6a7"]
 [ext_resource type="Material" uid="uid://datvvi6j3c0kp" path="res://assets/textures/white.tres" id="2_jqyjj"]
 [ext_resource type="PackedScene" uid="uid://bfyy27kell8ig" path="res://scenes/items/Water.tscn" id="3_cd5xv"]
 [ext_resource type="AudioStream" uid="uid://ce3pxtgko3tgd" path="res://assets/sound/Environmental Ambience/Water Ambience 1 Reverb.ogg" id="5_naukb"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d11xwkqf1h74w"]
 
-[ext_resource type="Script" path="res://scenes/items/FogWall.gd" id="1_o32al"]
+[ext_resource type="Script" uid="uid://bo331wqnlwpcv" path="res://scenes/items/FogWall.gd" id="1_o32al"]
 
 [sub_resource type="FogMaterial" id="FogMaterial_m3gin"]
 emission = Color(1, 1, 1, 1)

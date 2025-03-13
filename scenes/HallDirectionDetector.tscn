@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://df28hj6wi4fdx"]
 
-[ext_resource type="Script" path="res://scenes/HallDirectionDetector.gd" id="1_2rqy8"]
+[ext_resource type="Script" uid="uid://17h6jw846scy" path="res://scenes/HallDirectionDetector.gd" id="1_2rqy8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hgtki"]
 size = Vector3(6, 12, 6)

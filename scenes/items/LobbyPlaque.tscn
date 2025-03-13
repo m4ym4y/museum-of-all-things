@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bvk8hcw5x5lmc"]
 
 [ext_resource type="ArrayMesh" uid="uid://dfalfeatlgtod" path="res://assets/models/lobby_plaque.obj" id="1_bvcej"]
-[ext_resource type="Script" path="res://scenes/items/LobbyPlaque.gd" id="2_5h8yj"]
+[ext_resource type="Script" uid="uid://dy7sdjyq5gu5e" path="res://scenes/items/LobbyPlaque.gd" id="2_5h8yj"]
 [ext_resource type="ArrayMesh" uid="uid://roqc52kigyn" path="res://assets/models/hanginglamp.obj" id="2_ummoj"]
 [ext_resource type="Material" uid="uid://4bp64rsyyvv5" path="res://assets/textures/lamp.tres" id="3_uy0li"]
 [ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="4_c6clx"]

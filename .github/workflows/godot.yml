@@ -7,7 +7,7 @@ on:
       - released
 
 env:
-  GODOT_VERSION: 4.3-stable
+  GODOT_VERSION: 4.4-stable
   EXPORT_NAME: MuseumOfAllThings
 
 jobs:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://240t0ia2vgup"]
 
 [ext_resource type="ArrayMesh" uid="uid://blqsbuit050n4" path="res://assets/models/railing_rail.obj" id="1_dt1v5"]
-[ext_resource type="Script" path="res://scenes/items/DynamicRailing.gd" id="1_uu2ce"]
+[ext_resource type="Script" uid="uid://dooyykc06go26" path="res://scenes/items/DynamicRailing.gd" id="1_uu2ce"]
 [ext_resource type="Material" uid="uid://c7c48j23p78pk" path="res://assets/textures/wood_2.tres" id="2_3cjgm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7812f"]

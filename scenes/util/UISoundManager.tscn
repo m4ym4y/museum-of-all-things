@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://wah4e58yonwg"]
 
-[ext_resource type="Script" path="res://scenes/util/UISoundManager.gd" id="1_ln8n4"]
+[ext_resource type="Script" uid="uid://dk8bsshlffybp" path="res://scenes/util/UISoundManager.gd" id="1_ln8n4"]
 [ext_resource type="AudioStream" uid="uid://hqfhrs53pa4f" path="res://assets/sound/UI/UI hover.ogg" id="2_132u1"]
 [ext_resource type="AudioStream" uid="uid://cow16pfqqv2lp" path="res://assets/sound/UI/UI Select 5.ogg" id="2_hsbum"]
 [ext_resource type="AudioStream" uid="uid://dk5wqpi3k371j" path="res://assets/sound/UI/Switch 2.ogg" id="2_w65nc"]

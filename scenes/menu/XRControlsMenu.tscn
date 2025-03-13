@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c3ljfgt8nv5v"]
 
 [ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="1_slws2"]
-[ext_resource type="Script" path="res://scenes/menu/XrControlsMenu.gd" id="2_reth0"]
+[ext_resource type="Script" uid="uid://y7ofjhhh1u34" path="res://scenes/menu/XrControlsMenu.gd" id="2_reth0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vlir5"]
 font_size = 64

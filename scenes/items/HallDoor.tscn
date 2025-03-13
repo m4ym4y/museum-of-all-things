@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cy7vwbnkk3yj1"]
 
-[ext_resource type="Script" path="res://scenes/items/HallDoor.gd" id="1_elymj"]
+[ext_resource type="Script" uid="uid://iy1c1r1qcxu3" path="res://scenes/items/HallDoor.gd" id="1_elymj"]
 [ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://assets/textures/wood.tres" id="2_duu5k"]
 [ext_resource type="AudioStream" uid="uid://ctjfp58v8k6hl" path="res://assets/sound/Environmental Ambience/Doors and Objects/QuickDoor click 1.ogg" id="2_t4orf"]
 [ext_resource type="ArrayMesh" uid="uid://wbso87dqiion" path="res://assets/models/hall_lock.obj" id="3_mhnho"]

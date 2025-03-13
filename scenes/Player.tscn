@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bw5yn00va6hxl"]
 
-[ext_resource type="Script" path="res://scenes/Player.gd" id="1"]
+[ext_resource type="Script" uid="uid://b4w1fxbmkdcgh" path="res://scenes/Player.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dxfoujgkv1e2y" path="res://scenes/FootstepPlayer.tscn" id="2_1mcm1"]
 
 [sub_resource type="BoxShape3D" id="1"]

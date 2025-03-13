@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Museum of All Things"
 run/main_scene="res://scenes/Main.tscn"
-config/features=PackedStringArray("4.3")
+config/features=PackedStringArray("4.4")
 config/icon="res://icon.png"
 
 [autoload]
@@ -205,8 +205,6 @@ tls/certificate_bundle_override="res://assets/certs/cacert.crt"
 
 [physics]
 
-3d/run_on_separate_thread=true
-common/physics_interpolation=true
 common/enable_pause_aware_picking=true
 
 [rendering]
@@ -214,8 +212,8 @@ common/enable_pause_aware_picking=true
 occlusion_culling/bvh_build_quality=0
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
-limits/opengl/max_renderable_lights=16
 anti_aliasing/quality/msaa_3d=1
+limits/opengl/max_renderable_lights=16
 occlusion_culling/use_occlusion_culling=true
 environment/defaults/default_environment="res://assets/resources/default_env.tres"
 
