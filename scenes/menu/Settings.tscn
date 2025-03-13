@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://bw3fu2y38n3yk"]
 
-[ext_resource type="Script" path="res://scenes/menu/Settings.gd" id="1_4scry"]
+[ext_resource type="Script" uid="uid://dhbgcci74snev" path="res://scenes/menu/Settings.gd" id="1_4scry"]
 [ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="1_v0h4s"]
 [ext_resource type="PackedScene" uid="uid://bbp0v2aoglhrr" path="res://scenes/menu/GraphicsSettings.tscn" id="2_whl1p"]
-[ext_resource type="Script" path="res://scenes/menu/ScrollContainer.gd" id="3_ds06t"]
+[ext_resource type="Script" uid="uid://utm4rrhvoshr" path="res://scenes/menu/ScrollContainer.gd" id="3_ds06t"]
 [ext_resource type="PackedScene" uid="uid://c3ljfgt8nv5v" path="res://scenes/menu/XRControlsMenu.tscn" id="3_s7rjb"]
 [ext_resource type="PackedScene" uid="uid://f0jxppprskc3" path="res://scenes/menu/DataSettings.tscn" id="5_mo3yx"]
 [ext_resource type="PackedScene" uid="uid://cah8jnesp3dgx" path="res://scenes/menu/AudioSettings.tscn" id="5_yolm2"]

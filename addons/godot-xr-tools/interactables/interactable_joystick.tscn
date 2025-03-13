@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://dmq5wrl5p3n7q"]
 
-[ext_resource path="res://addons/godot-xr-tools/interactables/interactable_joystick.gd" type="Script" id=1]
+[ext_resource type="Script" uid="uid://b6bb5u0wofoem" path="res://addons/godot-xr-tools/interactables/interactable_joystick.gd" id="1"]
 
 [node name="InteractableJoystick" type="Spatial"]
-script = ExtResource( 1 )
+script = ExtResource("1")

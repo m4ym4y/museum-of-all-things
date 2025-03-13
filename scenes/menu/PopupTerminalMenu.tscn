@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b575vo2u5rw0p"]
 
-[ext_resource type="Script" path="res://scenes/menu/PopupTerminalMenu.gd" id="1_hdtak"]
+[ext_resource type="Script" uid="uid://dojga7ao2corc" path="res://scenes/menu/PopupTerminalMenu.gd" id="1_hdtak"]
 [ext_resource type="PackedScene" uid="uid://crfgn0ehls7w7" path="res://scenes/menu/TerminalMenu.tscn" id="1_jucp8"]
 
 [node name="PopupTerminalMenu" type="Control"]

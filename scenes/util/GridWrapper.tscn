@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bpi6fgwyfw5hc"]
 
-[ext_resource type="Script" path="res://scenes/util/GridWrapper.gd" id="1_s0kke"]
+[ext_resource type="Script" uid="uid://dh5uhkug81kn6" path="res://scenes/util/GridWrapper.gd" id="1_s0kke"]
 
 [node name="GridWrapper" type="Node"]
 script = ExtResource("1_s0kke")

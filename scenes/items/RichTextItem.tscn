@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://byb3uy8rswlaf"]
 
-[ext_resource type="Script" path="res://scenes/items/RichTextItem.gd" id="1_xha8l"]
+[ext_resource type="Script" uid="uid://dbf5cmxi6qsaj" path="res://scenes/items/RichTextItem.gd" id="1_xha8l"]
 [ext_resource type="Theme" uid="uid://cr3fyffqdk4yo" path="res://assets/resources/rich_text_theme.tres" id="2_k1xr6"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_54vlm"]

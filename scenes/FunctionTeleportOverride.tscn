@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://df81b1yyaj2"]
 
-[ext_resource type="Script" path="res://scenes/FunctionTeleportOverride.gd" id="1_uuxul"]
-[ext_resource type="Material" uid="uid://ysy1wq5x6mow" path="res://addons/godot-xr-tools/materials/capsule.tres" id="2_oh2k6"]
+[ext_resource type="Script" uid="uid://cttsmoo75htyb" path="res://scenes/FunctionTeleportOverride.gd" id="1_uuxul"]
+[ext_resource type="Material" path="res://addons/godot-xr-tools/materials/capsule.tres" id="2_oh2k6"]
 [ext_resource type="Material" uid="uid://bk72wfw25ff0v" path="res://addons/godot-xr-tools/materials/teleport.tres" id="3_eawpw"]
 [ext_resource type="Material" path="res://addons/godot-xr-tools/materials/target.tres" id="4_knmxa"]
 
