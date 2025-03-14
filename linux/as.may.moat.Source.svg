@@ -28,6 +28,18 @@
   <defs
      id="defs3">
     <linearGradient
+       id="linearGradient2"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#f6f5f4;stop-opacity:1"
+         offset="0"
+         id="stop1" />
+      <stop
+         style="stop-color:#deddda;stop-opacity:1"
+         offset="1"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
        id="linearGradient57"
        inkscape:collect="always">
       <stop
@@ -193,27 +205,27 @@
       <stop
          id="stop30"
          offset="0"
-         style="stop-color:#c0bfbc;stop-opacity:1" />
+         style="stop-color:#9a9996;stop-opacity:1" />
       <stop
-         style="stop-color:#ffffff;stop-opacity:1"
+         style="stop-color:#f6f5f4;stop-opacity:1"
          offset="0.03571429"
          id="stop31" />
       <stop
          id="stop32"
          offset="0.07136531"
-         style="stop-color:#deddda;stop-opacity:1" />
+         style="stop-color:#c0bfbc;stop-opacity:1" />
       <stop
-         style="stop-color:#deddda;stop-opacity:1"
+         style="stop-color:#c0bfbc;stop-opacity:1"
          offset="0.9285714"
          id="stop33" />
       <stop
          id="stop38"
          offset="0.96428573"
-         style="stop-color:#ffffff;stop-opacity:1" />
+         style="stop-color:#f6f5f4;stop-opacity:1" />
       <stop
          id="stop39"
          offset="1"
-         style="stop-color:#c0bfbc;stop-opacity:1" />
+         style="stop-color:#9a9996;stop-opacity:1" />
     </linearGradient>
     <linearGradient
        inkscape:collect="always"
@@ -929,7 +941,7 @@
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient44"
+       xlink:href="#linearGradient2"
        id="linearGradient61"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.23214284,0,0,0.32236843,-8.5669091,432.87043)"
@@ -976,9 +988,9 @@
      borderopacity="0.25490196"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.3851761"
-     inkscape:cx="71.192751"
-     inkscape:cy="77.396269"
+     inkscape:zoom="5.6021439"
+     inkscape:cx="81.040403"
+     inkscape:cy="141.73145"
      inkscape:current-layer="layer9"
      showgrid="false"
      inkscape:grid-bbox="true"
@@ -997,7 +1009,7 @@
      guidetolerance="13"
      inkscape:window-maximized="1"
      inkscape:pagecheckerboard="false"
-     showguides="true"
+     showguides="false"
      inkscape:guide-bbox="true"
      inkscape:locked="false"
      inkscape:measure-start="0,0"
