@@ -70,16 +70,16 @@
             <rect fill-opacity="0.3" height="153.6" width="153.6" x="-12.8" y="-12.8"/>
         </g>
     </mask>
-    <radialGradient id="q" cx="63.879951" cy="179.42601" gradientTransform="matrix(0 1.099756 -1.011454 0 253.36116 -30.177834)" gradientUnits="userSpaceOnUse" r="40.381851">
+    <radialGradient id="q" cx="63.879951" cy="179.42601" gradientTransform="matrix(0 0.647437 -1.011454 0 253.36116 -1.283737)" gradientUnits="userSpaceOnUse" r="40.381851">
         <stop offset="0" stop-color="#ffeba3"/>
-        <stop offset="1" stop-color="#ffbe6f" stop-opacity="0"/>
+        <stop offset="1" stop-color="#ffd66f" stop-opacity="0"/>
     </radialGradient>
     <clipPath id="r">
         <rect height="152" width="192"/>
     </clipPath>
     <mask id="s">
         <g filter="url(#a)">
-            <rect fill-opacity="0.2" height="153.6" width="153.6" x="-12.8" y="-12.8"/>
+            <rect fill-opacity="0.1" height="153.6" width="153.6" x="-12.8" y="-12.8"/>
         </g>
     </mask>
     <radialGradient id="t" cx="64" cy="238" gradientTransform="matrix(1 0 0 1.111111 8 -182.444445)" gradientUnits="userSpaceOnUse" r="36">
