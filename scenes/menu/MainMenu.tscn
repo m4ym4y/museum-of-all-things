@@ -50,6 +50,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Enter the Museum"
 
+[node name="StartWebXR" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Enter the Museum in VR (WebXR)"
+
 [node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -88,5 +95,6 @@ color = Color(0, 0, 0, 0)
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/StartWebXR" to="." method="_on_start_web_xr_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_button_pressed"]
