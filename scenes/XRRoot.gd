@@ -11,32 +11,54 @@ signal set_xr_smooth_rotation
 """
 
 func _ready():
-  var interface = XRServer.find_interface("OpenXR")
-  print("initializing XR interface OpenXR...")
-  if interface and interface.initialize():
-    print("initialized")
-    # turn the main viewport into an ARVR viewport:
-    get_viewport().use_xr = true
+  if Util.is_openxr():
+    var interface = XRServer.find_interface("OpenXR")
+    print("initializing XR interface OpenXR...")
+    if interface and interface.initialize():
+      print("initialized")
+      # turn the main viewport into an ARVR viewport:
+      get_viewport().use_xr = true
 
-    # turn off v-sync
-    DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+      # turn off v-sync
+      DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
-    # put our physics in sync with our expected frame rate:
-    Engine.physics_ticks_per_second = 90
+      # put our physics in sync with our expected frame rate:
+      Engine.physics_ticks_per_second = 90
+    else:
+      $FailedVrAccept.popup()
+      get_tree().paused = true
+      return
 
-    GlobalMenuEvents.hide_menu.connect(_hide_menu)
-    GlobalMenuEvents.set_xr_movement_style.connect(_set_xr_movement_style)
-    GlobalMenuEvents.set_movement_speed.connect(_set_xr_movement_speed)
-    GlobalMenuEvents.set_xr_rotation_increment.connect(_set_xr_rotation_increment)
-    GlobalMenuEvents.set_xr_smooth_rotation.connect(_set_xr_smooth_rotation)
-    GlobalMenuEvents.emit_load_xr_settings()
-    left_controller.get_node("FunctionPointer/Laser").visibility_changed.connect(_laser_visible_changed)
-  else:
-    $FailedVrAccept.popup()
-    get_tree().paused = true
+  if Util.is_webxr():
+    var interface = XRServer.find_interface("WebXR")
+
+    # WebXR is less powerful than when running natively in OpenXR, so target 72 FPS.
+    interface.set_display_refresh_rate(72)
+    Engine.physics_ticks_per_second = 72
+
+    XRToolsUserSettings.webxr_primary_changed.connect(_on_webxr_primary_changed)
+    _on_webxr_primary_changed(XRToolsUserSettings.get_real_webxr_primary())
+
+  # Things we need for both OpenXR and WebXR.
+  GlobalMenuEvents.hide_menu.connect(_hide_menu)
+  GlobalMenuEvents.set_xr_movement_style.connect(_set_xr_movement_style)
+  GlobalMenuEvents.set_movement_speed.connect(_set_xr_movement_speed)
+  GlobalMenuEvents.set_xr_rotation_increment.connect(_set_xr_rotation_increment)
+  GlobalMenuEvents.set_xr_smooth_rotation.connect(_set_xr_smooth_rotation)
+  GlobalMenuEvents.emit_load_xr_settings()
+  left_controller.get_node("FunctionPointer/Laser").visibility_changed.connect(_laser_visible_changed)
 
 func _failed_vr_accept_confirmed():
   get_tree().quit()
+
+func _on_webxr_primary_changed(webxr_primary: int):
+  # Default to thumbstick.
+  if webxr_primary == 0:
+    webxr_primary = XRToolsUserSettings.WebXRPrimary.THUMBSTICK
+
+  var action_name = XRToolsUserSettings.get_webxr_primary_action(webxr_primary)
+  %XRToolsMovementDirect.input_action = action_name
+  %XRToolsMovementTurn.input_action = action_name
 
 var menu_active = false
 var by_button_pressed = false
