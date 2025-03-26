@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://u4b0awts0vdi"]
+[gd_scene load_steps=33 format=3 uid="uid://u4b0awts0vdi"]
 
 [ext_resource type="MeshLibrary" uid="uid://b887fn6f3qg14" path="res://assets/3d_tiles/mesh_library.tres" id="1_3jgkl"]
 [ext_resource type="Script" uid="uid://dmep55064the2" path="res://scenes/Lobby.gd" id="1_rlemg"]
@@ -10,7 +10,6 @@
 [ext_resource type="Material" uid="uid://dj21xhwws6h6v" path="res://assets/textures/lobby_plaque_geography.tres" id="12_cdts7"]
 [ext_resource type="Material" uid="uid://cp5aagufkbhhx" path="res://assets/textures/lobby_plaque_culture.tres" id="13_cdudg"]
 [ext_resource type="Material" uid="uid://nogb0j2alxq0" path="res://assets/textures/lobby_plaque_search.tres" id="14_3v6js"]
-[ext_resource type="Material" uid="uid://hj1smq8ltjl7" path="res://assets/textures/lobby_plaque_art.tres" id="14_k68om"]
 [ext_resource type="Material" uid="uid://bnrh77nguyhys" path="res://assets/textures/lobby_plaque_map_left.tres" id="15_mj6xj"]
 [ext_resource type="Material" uid="uid://dc5exsvclxgwo" path="res://assets/textures/lobby_plaque_people.tres" id="15_qksdu"]
 [ext_resource type="Material" uid="uid://qof0qv3uoc3p" path="res://assets/textures/lobby_plaque_map_right.tres" id="16_650xq"]
@@ -163,49 +162,68 @@ surface_material_override/0 = SubResource("StandardMaterial3D_yxybk")
 [node name="TechnologyPlaque" parent="." instance=ExtResource("9_puy6x")]
 transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, -21.7753, 8, -11.7071)
 surface_material_override/0 = ExtResource("10_6bi3p")
+title_text = "Technology"
+subtitle_text = "Featured Technology Exhibits"
 
 [node name="SciencePlaque" parent="." instance=ExtResource("9_puy6x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3987, 8, -29.4574)
 surface_material_override/0 = ExtResource("10_i1nmy")
+title_text = "Science"
+subtitle_text = "Featured Science Exhibits"
 
 [node name="GeographyPlaque" parent="." instance=ExtResource("9_puy6x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1396, 8.04952, -29.6114)
 surface_material_override/0 = ExtResource("12_cdts7")
+title_text = "Geography"
+subtitle_text = "Featured Geography Exhibits"
 
 [node name="CulturePlaque" parent="." instance=ExtResource("9_puy6x")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 21.9679, 8, -16.5121)
 surface_material_override/0 = ExtResource("13_cdudg")
+title_color = Color(0, 0, 0, 1)
+title_text = "Culture"
+subtitle_text = "Featured Culture Exhibits"
 
 [node name="ArtPlaque" parent="." instance=ExtResource("9_puy6x")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -30.07, 12, 15.359)
-surface_material_override/0 = ExtResource("14_k68om")
+title_color = Color(0, 0, 0, 1)
 
 [node name="PeoplePlaque" parent="." instance=ExtResource("9_puy6x")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 29.8611, 12, 15.1478)
 surface_material_override/0 = ExtResource("15_qksdu")
+title_text = "People"
+subtitle_text = "Featured People Exhibits"
 
 [node name="HistoryPlaque" parent="." instance=ExtResource("9_puy6x")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15.355, -4, 61.688)
 surface_material_override/0 = ExtResource("16_k4j87")
+title_text = "History"
+subtitle_text = "Featured History Exhibits"
 
 [node name="MediaPlaque" parent="." instance=ExtResource("9_puy6x")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 15.645, -4, 61.688)
 surface_material_override/0 = ExtResource("16_gjuab")
+title_text = "Media"
+subtitle_text = "Featured Media Exhibits"
 
 [node name="SearchPlaque" parent="." instance=ExtResource("9_puy6x")]
 transform = Transform3D(-1, 0, -1.19209e-07, 0, 1, 0, 1.19209e-07, 0, -1, -3.10138, 4, 41.7071)
 skeleton = NodePath("../MediaPlaque")
 surface_material_override/0 = ExtResource("14_3v6js")
+title_text = "Search"
+subtitle_text = "Featured Search Exhibits"
 
 [node name="MapPlaqueLeft" parent="." instance=ExtResource("9_puy6x")]
 transform = Transform3D(-2.82129e-07, 0, 1, 0, 1, 0, -1, 0, -2.82129e-07, -5.52838, 4, 24)
 skeleton = NodePath("../MediaPlaque")
 surface_material_override/0 = ExtResource("15_mj6xj")
+hide_titles = true
 
 [node name="MapPlaqueRight" parent="." instance=ExtResource("9_puy6x")]
 transform = Transform3D(1.94707e-07, 0, -1, 0, 1, 0, 1, 0, 1.94707e-07, 5.62599, 4, -2)
 skeleton = NodePath("../MediaPlaque")
 surface_material_override/0 = ExtResource("16_650xq")
+hide_titles = true
 
 [node name="Planter" parent="." instance=ExtResource("17_wq01r")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5, 8, -29)
@@ -297,11 +315,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 40)
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -3.374, 4, -15.5)
 skeleton = NodePath("../MediaPlaque")
 surface_material_override/0 = ExtResource("24_hub3o")
+hide_titles = true
 
 [node name="IntroPlaque2" parent="." instance=ExtResource("9_puy6x")]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 3.374, 4, -15.5)
 skeleton = NodePath("../MediaPlaque")
 surface_material_override/0 = ExtResource("16_xr0c4")
+hide_titles = true
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.24854, -16)
