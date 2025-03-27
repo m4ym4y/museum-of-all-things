@@ -9,11 +9,6 @@ extends MeshInstance3D
 
 var max_title_length_px = 320
 
-func _resize_title():
-  var t = $Title
-  while t.font.get_string_size(t.text, t.horizontal_alignment, -1, t.font_size).x > max_title_length_px:
-    t.font_size -= 1
-
 func _ready() -> void:
   if no_light:
     $MeshInstance3D.visible = false
@@ -27,4 +22,4 @@ func _ready() -> void:
     $Title.text = title_text
     $Subtitle.modulate = title_color
     $Subtitle.text = subtitle_text
-    _resize_title()
+    Util.resizeTextToPx($Title, max_title_length_px)
