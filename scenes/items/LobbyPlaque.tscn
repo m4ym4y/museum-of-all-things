@@ -34,8 +34,10 @@ surface_material_override/1 = ExtResource("4_c6clx")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_pkvds")
 
-[node name="Title" type="Label3D" parent="."]
+[node name="Title" type="Label3D" parent="." groups=["render_distance"]]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.519002, 1.14703, 0.101)
+visibility_range_end = 50.0
+visibility_range_end_margin = 3.0
 shaded = true
 double_sided = false
 text = "Art"
@@ -44,8 +46,10 @@ font_size = 100
 outline_size = 0
 horizontal_alignment = 0
 
-[node name="Subtitle" type="Label3D" parent="."]
+[node name="Subtitle" type="Label3D" parent="." groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71677, 0.814791, 0.101)
+visibility_range_end = 40.0
+visibility_range_end_margin = 3.0
 shaded = true
 double_sided = false
 text = "Featured Art Exhibits"

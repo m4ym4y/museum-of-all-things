@@ -40,8 +40,10 @@ surface_material_override/1 = ExtResource("6_l4t2p")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_pkvds")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24522, 0.101)
+visibility_range_end = 30.0
+visibility_range_end_margin = 3.0
 pixel_size = 0.002
 shaded = true
 double_sided = false
@@ -53,8 +55,6 @@ transparent_bg = true
 handle_input_locally = false
 size = Vector2i(760, 1000)
 size_2d_override = Vector2i(760, 1000)
-render_target_clear_mode = 2
-render_target_update_mode = 1
 
 [node name="Control" type="Control" parent="SubViewport"]
 custom_minimum_size = Vector2(380, 500)

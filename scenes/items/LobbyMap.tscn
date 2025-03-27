@@ -35,8 +35,10 @@ surface_material_override/1 = ExtResource("6_jocsy")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_pkvds")
 
-[node name="Science" type="Label3D" parent="."]
+[node name="Science" type="Label3D" parent="." groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48983, 2.33151, 0.101)
+visibility_range_end = 30.0
+visibility_range_end_margin = 3.0
 pixel_size = 0.002
 shaded = true
 double_sided = false
@@ -46,8 +48,10 @@ outline_size = 0
 horizontal_alignment = 0
 vertical_alignment = 0
 
-[node name="Technology" type="Label3D" parent="."]
+[node name="Technology" type="Label3D" parent="." groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.728822, 1.77699, 0.101)
+visibility_range_end = 30.0
+visibility_range_end_margin = 3.0
 pixel_size = 0.002
 shaded = true
 double_sided = false
@@ -57,8 +61,10 @@ outline_size = 0
 horizontal_alignment = 0
 vertical_alignment = 0
 
-[node name="Geography" type="Label3D" parent="."]
+[node name="Geography" type="Label3D" parent="." groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0913131, 2.33151, 0.101)
+visibility_range_end = 30.0
+visibility_range_end_margin = 3.0
 pixel_size = 0.002
 shaded = true
 double_sided = false
@@ -68,8 +74,10 @@ outline_size = 0
 horizontal_alignment = 0
 vertical_alignment = 0
 
-[node name="Culture" type="Label3D" parent="."]
+[node name="Culture" type="Label3D" parent="." groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.365743, 1.77302, 0.101)
+visibility_range_end = 30.0
+visibility_range_end_margin = 3.0
 pixel_size = 0.002
 shaded = true
 double_sided = false
@@ -80,8 +88,10 @@ outline_size = 0
 horizontal_alignment = 0
 vertical_alignment = 0
 
-[node name="Art" type="Label3D" parent="."]
+[node name="Art" type="Label3D" parent="." groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.770093, 1.19445, 0.101)
+visibility_range_end = 30.0
+visibility_range_end_margin = 3.0
 pixel_size = 0.002
 shaded = true
 double_sided = false
@@ -92,8 +102,10 @@ outline_size = 0
 horizontal_alignment = 0
 vertical_alignment = 0
 
-[node name="People" type="Label3D" parent="."]
+[node name="People" type="Label3D" parent="." groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.432821, 1.20533, 0.101)
+visibility_range_end = 30.0
+visibility_range_end_margin = 3.0
 pixel_size = 0.002
 shaded = true
 double_sided = false
@@ -103,8 +115,10 @@ outline_size = 0
 horizontal_alignment = 0
 vertical_alignment = 0
 
-[node name="Media" type="Label3D" parent="."]
+[node name="Media" type="Label3D" parent="." groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.137419, 0.631715, 0.101)
+visibility_range_end = 30.0
+visibility_range_end_margin = 3.0
 pixel_size = 0.002
 shaded = true
 double_sided = false
@@ -114,8 +128,10 @@ outline_size = 0
 horizontal_alignment = 0
 vertical_alignment = 0
 
-[node name="History" type="Label3D" parent="."]
+[node name="History" type="Label3D" parent="." groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494867, 0.631715, 0.101)
+visibility_range_end = 30.0
+visibility_range_end_margin = 3.0
 pixel_size = 0.002
 shaded = true
 double_sided = false
@@ -125,8 +141,10 @@ outline_size = 0
 horizontal_alignment = 0
 vertical_alignment = 0
 
-[node name="Search" type="Label3D" parent="."]
+[node name="Search" type="Label3D" parent="." groups=["render_distance"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000550359, 0.879817, 0.101)
+visibility_range_end = 30.0
+visibility_range_end_margin = 3.0
 pixel_size = 0.002
 shaded = true
 double_sided = false
