@@ -1,0 +1,140 @@
+[gd_scene load_steps=10 format=3 uid="uid://bduykqqplkh44"]
+
+[ext_resource type="ArrayMesh" uid="uid://dfalfeatlgtod" path="res://assets/models/lobby_plaque.obj" id="1_3mpu0"]
+[ext_resource type="Material" uid="uid://bj7n7q60eccke" path="res://assets/textures/lobby_plaque_map.tres" id="2_8ufn8"]
+[ext_resource type="Script" uid="uid://s5l1akumtnus" path="res://scenes/items/LobbyMap.gd" id="3_md5jq"]
+[ext_resource type="PackedScene" uid="uid://gb0hi6hfnjyo" path="res://scenes/items/LogoSprite.tscn" id="4_3mpu0"]
+[ext_resource type="ArrayMesh" uid="uid://roqc52kigyn" path="res://assets/models/hanginglamp.obj" id="4_srsjo"]
+[ext_resource type="Material" uid="uid://4bp64rsyyvv5" path="res://assets/textures/lamp.tres" id="5_bjucp"]
+[ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="6_jocsy"]
+[ext_resource type="FontFile" uid="uid://siqgqfck828j" path="res://assets/fonts/NotoSans/NotoSans-Bold.ttf" id="7_udqax"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pkvds"]
+points = PackedVector3Array(-0.875, 0, -0.1, -0.875, 0, 0.1, -0.875, 3, -0.1, 0.875, 0, -0.1, 0.875, 0, 0.1, -0.875, 3, 0.1, 0.875, 3, -0.1, 0.875, 3, 0.1)
+
+[node name="LobbyMap" type="MeshInstance3D"]
+mesh = ExtResource("1_3mpu0")
+surface_material_override/0 = ExtResource("2_8ufn8")
+script = ExtResource("3_md5jq")
+
+[node name="LogoSprite" parent="." instance=ExtResource("4_3mpu0")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 1, 0, 2.657, 0.101)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." groups=["managed_light", "managed_light_skip_direction_test"]]
+transform = Transform3D(1, 0, 0, 0, 0.216542, 0.976273, 0, -0.976273, 0.216542, 0.00160336, 4.4339, 1.21375)
+light_energy = 2.0
+distance_fade_enabled = true
+distance_fade_begin = 30.0
+spot_attenuation = 0.5
+spot_angle = 37.73
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.37975, 1.3236)
+mesh = ExtResource("4_srsjo")
+surface_material_override/0 = ExtResource("5_bjucp")
+surface_material_override/1 = ExtResource("6_jocsy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pkvds")
+
+[node name="Science" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48983, 2.33151, 0.101)
+pixel_size = 0.002
+shaded = true
+double_sided = false
+text = "Science"
+font = ExtResource("7_udqax")
+outline_size = 0
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="Technology" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.728822, 1.77699, 0.101)
+pixel_size = 0.002
+shaded = true
+double_sided = false
+text = "Technology"
+font = ExtResource("7_udqax")
+outline_size = 0
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="Geography" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0913131, 2.33151, 0.101)
+pixel_size = 0.002
+shaded = true
+double_sided = false
+text = "Geography"
+font = ExtResource("7_udqax")
+outline_size = 0
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="Culture" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.365743, 1.77302, 0.101)
+pixel_size = 0.002
+shaded = true
+double_sided = false
+modulate = Color(0, 0, 0, 1)
+text = "Culture"
+font = ExtResource("7_udqax")
+outline_size = 0
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="Art" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.770093, 1.19445, 0.101)
+pixel_size = 0.002
+shaded = true
+double_sided = false
+modulate = Color(0, 0, 0, 1)
+text = "Art"
+font = ExtResource("7_udqax")
+outline_size = 0
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="People" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.432821, 1.20533, 0.101)
+pixel_size = 0.002
+shaded = true
+double_sided = false
+text = "People"
+font = ExtResource("7_udqax")
+outline_size = 0
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="Media" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.137419, 0.631715, 0.101)
+pixel_size = 0.002
+shaded = true
+double_sided = false
+text = "Media"
+font = ExtResource("7_udqax")
+outline_size = 0
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="History" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494867, 0.631715, 0.101)
+pixel_size = 0.002
+shaded = true
+double_sided = false
+text = "History"
+font = ExtResource("7_udqax")
+outline_size = 0
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="Search" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000550359, 0.879817, 0.101)
+pixel_size = 0.002
+shaded = true
+double_sided = false
+text = "Search"
+font = ExtResource("7_udqax")
+font_size = 30
+outline_size = 0

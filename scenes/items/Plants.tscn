@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://4r06ri8mf5fi"]
 
-[ext_resource type="Script" path="res://scenes/items/Plants.gd" id="1_mjejk"]
+[ext_resource type="Script" uid="uid://bq0ueqrqnpw08" path="res://scenes/items/Plants.gd" id="1_mjejk"]
 [ext_resource type="ArrayMesh" uid="uid://cbssc2o71q40a" path="res://assets/models/leaf.obj" id="2_yrcbn"]
 [ext_resource type="Material" uid="uid://dw2xm7kuspl2k" path="res://assets/textures/leaf.tres" id="3_8ivkc"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://crfgn0ehls7w7"]
 
-[ext_resource type="Script" path="res://scenes/menu/TerminalMenu.gd" id="1_3ulr5"]
+[ext_resource type="Script" uid="uid://b1bbc30yehajv" path="res://scenes/menu/TerminalMenu.gd" id="1_3ulr5"]
 [ext_resource type="FontFile" uid="uid://81fevjg70kl3" path="res://assets/fonts/NotoSansMono/static/NotoSansMono-Bold.ttf" id="1_8vlbg"]
 [ext_resource type="Texture2D" uid="uid://djxbiu7sjen2u" path="res://assets/logo/moat_logo_small.png" id="2_go2dw"]
 [ext_resource type="FontFile" uid="uid://tbendthemd68" path="res://assets/fonts/NotoSansMono/static/NotoSansMono-Regular.ttf" id="2_vd2bc"]

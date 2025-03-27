@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://3q5n8txx3jmm"]
 
-[ext_resource type="Script" path="res://scenes/menu/MainMenu.gd" id="1_cmhx0"]
+[ext_resource type="Script" uid="uid://dvi1pswxc3j03" path="res://scenes/menu/MainMenu.gd" id="1_cmhx0"]
 [ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="1_dwey2"]
-[ext_resource type="Texture2D" uid="uid://dgfyxj62mioye" path="res://assets/logo/moat_logo_large_funky.png" id="3_vuiv8"]
+[ext_resource type="Texture2D" uid="uid://bd8k7cfn33sco" path="res://assets/logo/moat_logo_large_funky_no_sub.png" id="3_uwj7d"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_46gfj"]
 font_size = 64
@@ -36,8 +36,25 @@ alignment = 1
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 z_index = 1
 layout_mode = 2
-texture = ExtResource("3_vuiv8")
+texture = ExtResource("3_uwj7d")
 stretch_mode = 3
+
+[node name="Subtitle" type="Label" parent="MarginContainer/VBoxContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -301.5
+offset_top = 35.0
+offset_right = 301.5
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 58
+text = "The Museum of All Things"
+horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

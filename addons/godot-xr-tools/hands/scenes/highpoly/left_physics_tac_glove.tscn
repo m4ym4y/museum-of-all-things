@@ -5,8 +5,8 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://dl8yf7ipqotd1" path="res://addons/godot-xr-tools/hands/animations/left/hand_blend_tree.tres" id="3"]
 [ext_resource type="Resource" uid="uid://dertgu7k8alls" path="res://addons/godot-xr-tools/hands/poses/pose_default_left.tres" id="3_rnhp7"]
 [ext_resource type="Material" uid="uid://dogla70w8hvo8" path="res://addons/godot-xr-tools/hands/materials/glove_caucasian_dark_camo.tres" id="4"]
-[ext_resource type="Script" path="res://addons/godot-xr-tools/hands/hand_physics_bone.gd" id="5"]
-[ext_resource type="Script" path="res://addons/godot-xr-tools/hands/physics_hand.gd" id="6"]
+[ext_resource type="Script" uid="uid://ue4y5bawt1og" path="res://addons/godot-xr-tools/hands/hand_physics_bone.gd" id="5"]
+[ext_resource type="Script" uid="uid://0ivkasgajcp4" path="res://addons/godot-xr-tools/hands/physics_hand.gd" id="6"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mq2ds"]
 animation = &"Grip"
@@ -37,7 +37,7 @@ nodes/OpenHand/node = SubResource("AnimationNodeAnimation_2ih7n")
 nodes/OpenHand/position = Vector2(-600, 100)
 nodes/Trigger/node = SubResource("AnimationNodeBlend2_02eq5")
 nodes/Trigger/position = Vector2(-360, 20)
-node_connections = [&"output", 0, &"Grip", &"Grip", 0, &"Trigger", &"Grip", 1, &"ClosedHand2", &"Trigger", 0, &"OpenHand", &"Trigger", 1, &"ClosedHand1"]
+node_connections = [&"Grip", 0, &"Trigger", &"Grip", 1, &"ClosedHand2", &"Trigger", 0, &"OpenHand", &"Trigger", 1, &"ClosedHand1", &"output", 0, &"Grip"]
 
 [node name="LeftPhysicsHand" type="Node3D"]
 script = ExtResource("6")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bbp0v2aoglhrr"]
 
 [ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="1_1c701"]
-[ext_resource type="Script" path="res://scenes/menu/GraphicsSettings.gd" id="2_lsij7"]
+[ext_resource type="Script" uid="uid://dtoqm3qrwbc3f" path="res://scenes/menu/GraphicsSettings.gd" id="2_lsij7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2yad8"]
 font_size = 64
@@ -208,6 +208,7 @@ layout_mode = 2
 selected = 0
 item_count = 2
 popup/item_0/text = "None"
+popup/item_0/id = 0
 popup/item_1/text = "CRT Filter"
 popup/item_1/id = 1
 

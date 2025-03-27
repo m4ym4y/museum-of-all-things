@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://gb0hi6hfnjyo"]
+
+[ext_resource type="Texture2D" uid="uid://ccsvrkan42fc6" path="res://assets/logo/moat_logo_large_no_sub.png" id="1_81xlm"]
+[ext_resource type="FontFile" uid="uid://cbryppjjel0go" path="res://assets/fonts/CormorantGaramond/CormorantGaramond-Medium.ttf" id="2_81xlm"]
+
+[node name="LogoSprite" type="Node3D"]
+
+[node name="Logo" type="Sprite3D" parent="."]
+shaded = true
+double_sided = false
+texture = ExtResource("1_81xlm")
+
+[node name="Subtitle" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.763, 0)
+shaded = true
+double_sided = false
+modulate = Color(0, 0, 0, 1)
+text = "The Museum of All Things"
+font = ExtResource("2_81xlm")
+font_size = 126
+outline_size = 0

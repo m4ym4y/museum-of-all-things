@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dxfoujgkv1e2y"]
 
-[ext_resource type="Script" path="res://scenes/FootstepPlayer.gd" id="1_oq4ik"]
+[ext_resource type="Script" uid="uid://uq32c3gmuu8g" path="res://scenes/FootstepPlayer.gd" id="1_oq4ik"]
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_3tw63"]
 

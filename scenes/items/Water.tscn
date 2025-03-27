@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bfyy27kell8ig"]
 
-[ext_resource type="Shader" path="res://shaders/water.gdshader" id="1_ddbfe"]
+[ext_resource type="Shader" uid="uid://de83r6xpm46lm" path="res://shaders/water.gdshader" id="1_ddbfe"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_h5ib4"]
 subdivide_width = 30
@@ -46,14 +46,14 @@ shader_parameter/albedo2 = Color(0, 0.624993, 0.9593, 1)
 shader_parameter/metallic = 0.25
 shader_parameter/alpha = 0.75
 shader_parameter/roughness = 0.0
+shader_parameter/wave = SubResource("NoiseTexture2D_7cxrp")
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_xwo4q")
+shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_ysuxp")
 shader_parameter/wave_direction = Vector2(2, 0)
 shader_parameter/wave_direction2 = Vector2(0, 1)
 shader_parameter/time_scale = 0.05
 shader_parameter/noise_scale = 10.0
 shader_parameter/height_scale = 0.15
-shader_parameter/wave = SubResource("NoiseTexture2D_7cxrp")
-shader_parameter/texture_normal = SubResource("NoiseTexture2D_xwo4q")
-shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_ysuxp")
 
 [node name="Water" type="MeshInstance3D" groups=["render_distance"]]
 cast_shadow = 0

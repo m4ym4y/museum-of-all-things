@@ -7,7 +7,7 @@ on:
       - released
 
 env:
-  GODOT_VERSION: 4.3
+  GODOT_VERSION: 4.4-stable
   EXPORT_NAME: MuseumOfAllThings
 
 jobs:
@@ -18,13 +18,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Get export template directory name
+        run: |
+          echo "GODOT_TEMPLATE_VERSION=${GODOT_VERSION//-/.}" >> $GITHUB_ENV
+
       - name: Cache Godot Engine downloads
         id: cache-godot
         uses: actions/cache@v4
         with:
           path: |
             tools/godot
-            tools/editor_data/export_templates/${{ env.GODOT_VERSION }}.stable
+            tools/editor_data/export_templates/${{ env.GODOT_TEMPLATE_VERSION }}
             tools/._sc_
           key: godot-${{ env.GODOT_VERSION }}
 
@@ -35,18 +39,22 @@ jobs:
           mkdir -p tools && cd tools
 
           # Download binary from official GitHub release
-          wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip && \
-          unzip Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip && \
-          mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 godot
+          wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_linux.x86_64.zip && \
+          unzip Godot_v${GODOT_VERSION}_linux.x86_64.zip && \
+          mv Godot_v${GODOT_VERSION}_linux.x86_64 godot
 
           # Download export templates from official GitHub release
           mkdir -p editor_data/export_templates
-          wget https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz && \
-          unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz && \
-          mv templates editor_data/export_templates/${GODOT_VERSION}.stable
+          wget https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_export_templates.tpz && \
+          unzip Godot_v${GODOT_VERSION}_export_templates.tpz && \
+          mv templates editor_data/export_templates/${GODOT_TEMPLATE_VERSION}
 
           # Tell Godot Engine to be self-contained
           touch ._sc_
+
+      - name: Import project
+        run: |
+          ./tools/godot --import --headless --verbose
 
       - name: Ensure path exists
         run: mkdir -p dist
@@ -109,4 +117,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          gh release upload '${{ github.ref_name }}' * --repo '${{ github.repository }}'
+          gh release upload '${{ github.ref_name }}' */* --repo '${{ github.repository }}'

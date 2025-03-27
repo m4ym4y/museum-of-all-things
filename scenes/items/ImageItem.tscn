@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://coafwtbm10e3b"]
 
-[ext_resource type="Script" path="res://scenes/items/ImageItem.gd" id="1"]
+[ext_resource type="Script" uid="uid://b08ko1vigis4g" path="res://scenes/items/ImageItem.gd" id="1"]
 [ext_resource type="Material" uid="uid://bo6slff4n6kyo" path="res://assets/textures/image_item.tres" id="1_r0d5r"]
 [ext_resource type="FontFile" uid="uid://n33gotmdcskb" path="res://assets/fonts/CormorantGaramond/CormorantGaramond-Bold.ttf" id="2_itcda"]
 [ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="3_bk5br"]

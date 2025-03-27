@@ -141,6 +141,10 @@ func _on_settings_back():
     _start_game()
 
 func _input(event):
+
+  if Input.is_action_pressed("toggle_fullscreen"):
+    GlobalMenuEvents.emit_on_fullscreen_toggled(not GraphicsManager.fullscreen)
+
   if not game_started:
     return
 

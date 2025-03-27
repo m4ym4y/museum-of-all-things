@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://c84fe50xnlbgc"]
 
-[ext_resource type="Script" path="res://scenes/items/HangingLamp.gd" id="1_j6sji"]
+[ext_resource type="Script" uid="uid://bd4osj55hu432" path="res://scenes/items/HangingLamp.gd" id="1_j6sji"]
 [ext_resource type="Material" uid="uid://4bp64rsyyvv5" path="res://assets/textures/lamp.tres" id="2_0hmyb"]
 [ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="2_ahapu"]
 

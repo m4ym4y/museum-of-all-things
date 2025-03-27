@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://0bvu3kq7qnal"]
 
-[ext_resource type="Script" path="res://scenes/Hall.gd" id="1_eu127"]
+[ext_resource type="Script" uid="uid://bo4f3knbgepfa" path="res://scenes/Hall.gd" id="1_eu127"]
 [ext_resource type="PackedScene" uid="uid://bijq5fqp57yd4" path="res://scenes/LoaderTrigger.tscn" id="2_fcpmw"]
 [ext_resource type="PackedScene" uid="uid://cy7vwbnkk3yj1" path="res://scenes/items/HallDoor.tscn" id="3_1akbl"]
 [ext_resource type="PackedScene" uid="uid://df28hj6wi4fdx" path="res://scenes/HallDirectionDetector.tscn" id="4_y7uhf"]
