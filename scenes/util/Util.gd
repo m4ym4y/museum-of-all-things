@@ -15,6 +15,10 @@ func vecToRot(vec):
     return PI / 2
   return 0.0
 
+func resizeTextToPx(t, px):
+  while t.font.get_string_size(t.text, t.horizontal_alignment, -1, t.font_size).x > px:
+    t.font_size -= 1
+
 func vecToOrientation(grid, vec):
   var vec_basis = Basis.looking_at(vec.normalized())
   return grid.get_orthogonal_index_from_basis(vec_basis)
