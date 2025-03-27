@@ -10,7 +10,7 @@ signal resume
   _vbox.get_node("AudioSettings"),
   _vbox.get_node("XrControlsMenu") if _xr else null,
   _vbox.get_node("ControlSettings") if not _xr else null,
-  _vbox.get_node("DataSettings"),
+  _vbox.get_node("DataSettings") if not Util.is_web() else null,
 ]
 
 func _ready():

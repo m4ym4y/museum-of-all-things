@@ -37,11 +37,30 @@ func clear_listeners(n, sig_name):
   for c in list:
     c.signal.disconnect(c.callable)
 
-func is_xr():
+func is_openxr():
   return ProjectSettings.get_setting_with_override("xr/openxr/enabled")
+
+func is_webxr():
+  var webxr_interface: WebXRInterface = XRServer.find_interface("WebXR")
+  return webxr_interface and webxr_interface.is_initialized()
+
+func is_xr():
+  return is_openxr() or is_webxr()
+
+func is_web():
+  return OS.get_name() == "Web"
+
+func is_using_threads():
+  return OS.has_feature("threads")
 
 func is_compatibility_renderer():
   return RenderingServer.get_current_rendering_method() == 'gl_compatibility'
+
+func delay_msec(msecs):
+  # Will only delay if we're not on the main thread.
+  if OS.get_thread_caller_id() == OS.get_main_thread_id():
+    return
+  OS.delay_msec(msecs)
 
 func normalize_url(url):
   if url.begins_with('//'):
