@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvk8hcw5x5lmc"]
+[gd_scene load_steps=9 format=3 uid="uid://bvk8hcw5x5lmc"]
 
 [ext_resource type="ArrayMesh" uid="uid://dfalfeatlgtod" path="res://assets/models/lobby_plaque.obj" id="1_bvcej"]
 [ext_resource type="Script" uid="uid://dy7sdjyq5gu5e" path="res://scenes/items/LobbyPlaque.gd" id="2_5h8yj"]
-[ext_resource type="Material" uid="uid://hj1smq8ltjl7" path="res://assets/textures/lobby_plaque_art.tres" id="2_qyd8x"]
 [ext_resource type="ArrayMesh" uid="uid://roqc52kigyn" path="res://assets/models/hanginglamp.obj" id="2_ummoj"]
 [ext_resource type="Material" uid="uid://4bp64rsyyvv5" path="res://assets/textures/lamp.tres" id="3_uy0li"]
 [ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="4_c6clx"]
@@ -14,7 +13,6 @@ points = PackedVector3Array(-0.875, 0, -0.1, -0.875, 0, 0.1, -0.875, 3, -0.1, 0.
 
 [node name="LobbyPlaque" type="MeshInstance3D"]
 mesh = ExtResource("1_bvcej")
-surface_material_override/0 = ExtResource("2_qyd8x")
 script = ExtResource("2_5h8yj")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." groups=["managed_light", "managed_light_skip_direction_test"]]
