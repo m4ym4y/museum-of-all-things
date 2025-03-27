@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://u4b0awts0vdi"]
+[gd_scene load_steps=33 format=3 uid="uid://u4b0awts0vdi"]
 
 [ext_resource type="MeshLibrary" uid="uid://b887fn6f3qg14" path="res://assets/3d_tiles/mesh_library.tres" id="1_3jgkl"]
 [ext_resource type="Script" uid="uid://dmep55064the2" path="res://scenes/Lobby.gd" id="1_rlemg"]
@@ -16,18 +16,17 @@
 [ext_resource type="PackedScene" uid="uid://240t0ia2vgup" path="res://scenes/items/DynamicRailing.tscn" id="16_f83fe"]
 [ext_resource type="Material" uid="uid://bb3ysf0f2m7of" path="res://assets/textures/lobby_plaque_media.tres" id="16_gjuab"]
 [ext_resource type="Material" uid="uid://b0a51311lghkv" path="res://assets/textures/lobby_plaque_history.tres" id="16_k4j87"]
-[ext_resource type="Material" uid="uid://o2nudy1rngbf" path="res://assets/textures/lobby_plaque_intro_2.tres" id="16_xr0c4"]
 [ext_resource type="PackedScene" uid="uid://b0q0v3m0c8n23" path="res://scenes/items/Terminal.tscn" id="17_3gjxr"]
 [ext_resource type="PackedScene" uid="uid://jcho8qa62xrs" path="res://scenes/items/Planter.tscn" id="17_wq01r"]
 [ext_resource type="PackedScene" uid="uid://cnfgmu10ohtpt" path="res://scenes/items/Pool.tscn" id="18_l2a2a"]
 [ext_resource type="ArrayMesh" uid="uid://bb5kffwpyyhlh" path="res://assets/models/arch.obj" id="19_hqvoj"]
 [ext_resource type="Material" uid="uid://x8q20urpssf8" path="res://assets/textures/flat_white.tres" id="20_5iy3b"]
 [ext_resource type="PackedScene" uid="uid://ba1s3cmbt8idk" path="res://scenes/items/SmallPlanter.tscn" id="21_k8d5u"]
-[ext_resource type="Material" uid="uid://dhkvnkuhuw31c" path="res://assets/textures/lobby_plaque_intro_1.tres" id="24_hub3o"]
 [ext_resource type="ArrayMesh" uid="uid://be5huwdp6vv03" path="res://assets/models/desk.obj" id="26_x7xh4"]
 [ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://assets/textures/wood.tres" id="27_wy5wh"]
 [ext_resource type="PackedScene" uid="uid://bduykqqplkh44" path="res://scenes/items/LobbyMap.tscn" id="28_fw7ru"]
 [ext_resource type="PackedScene" uid="uid://c5wpeqr3s3lw4" path="res://scenes/items/Sign.tscn" id="28_v471r"]
+[ext_resource type="PackedScene" uid="uid://brfwcf0et4c42" path="res://scenes/items/LobbyInfo.tscn" id="29_fj722"]
 [ext_resource type="Texture2D" uid="uid://crmsq8a4sjtb8" path="res://assets/logo/moat_logo_large.png" id="29_kkkm5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rlv5a"]
@@ -300,18 +299,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, 40)
 [node name="Planter12" parent="." instance=ExtResource("21_k8d5u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 40)
 
-[node name="IntroPlaque1" parent="." instance=ExtResource("9_puy6x")]
-transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -3.374, 4, -15.5)
-skeleton = NodePath("../MediaPlaque")
-surface_material_override/0 = ExtResource("24_hub3o")
-hide_titles = true
-
-[node name="IntroPlaque2" parent="." instance=ExtResource("9_puy6x")]
-transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 3.374, 4, -15.5)
-skeleton = NodePath("../MediaPlaque")
-surface_material_override/0 = ExtResource("16_xr0c4")
-hide_titles = true
-
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.24854, -16)
 mesh = ExtResource("26_x7xh4")
@@ -347,3 +334,25 @@ surface_material_override/0 = ExtResource("15_mj6xj")
 [node name="MapRight" parent="." instance=ExtResource("28_fw7ru")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.62, 4, -2)
 surface_material_override/0 = ExtResource("16_650xq")
+
+[node name="LobbyInfo1" parent="." instance=ExtResource("29_fj722")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -3.37, 4, -15.5)
+text = "[b]Welcome to the Museum of All Things![/b]
+
+[fill]This museum is different from any you've visited in the physical world, so it may take a moment to get your bearings.[/fill]
+
+[b]The Lobby[/b]
+
+[fill]Right now you are in the museum's lobby, tailored to give you a pleasant starting point on your visit. If you ever wish to return here, you may simply open your museum menu (via \"Escape,\" \"Start,\" or by hitting \"Y\" on your right-hand controller in Virtual Reality) and select \"Return to Lobby.\"
+
+The lobby is divided into areas by subject, which are marked by signs and indicated on the maps in the entry hall behind you. In each of these areas, you will find many hallways into a range of fascinating exhibits.[/fill]"
+
+[node name="LobbyInfo2" parent="." instance=ExtResource("29_fj722")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 3.37, 4, -15.5)
+text = "[b]Museum Exhibits[/b]
+
+[fill]Exhibits are not made by hand-- they are generated procedurally by pulling images and textual data from Wikipedia and Wikimedia commons. This means any topic with a Wikipedia page can also be accessed as an exhibit in this museum!
+
+Furthermore, each exhibit contains many hallways connecting it to other exhibits. These hallways are determined based on the links in the current exhibit's Wikipedia article. You can move from exhibit to exhibit endlessly, following your curiosity.
+
+If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.[/fill]"

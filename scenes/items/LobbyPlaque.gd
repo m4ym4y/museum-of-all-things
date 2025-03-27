@@ -22,4 +22,5 @@ func _ready() -> void:
     $Title.text = title_text
     $Subtitle.modulate = title_color
     $Subtitle.text = subtitle_text
-    Util.resizeTextToPx($Title, max_title_length_px)
+    if not Engine.is_editor_hint():
+      Util.resizeTextToPx($Title, max_title_length_px)

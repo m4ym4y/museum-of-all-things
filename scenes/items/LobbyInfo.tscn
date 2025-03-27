@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=3 uid="uid://brfwcf0et4c42"]
+
+[ext_resource type="ArrayMesh" uid="uid://dfalfeatlgtod" path="res://assets/models/lobby_plaque.obj" id="1_eagnn"]
+[ext_resource type="Material" uid="uid://b2iqa8ync4w35" path="res://assets/textures/lobby_plaque_intro_blank.tres" id="2_ggvd3"]
+[ext_resource type="Script" uid="uid://cdxoggtmwb7xm" path="res://scenes/items/LobbyInfo.gd" id="3_r0mvh"]
+[ext_resource type="ArrayMesh" uid="uid://roqc52kigyn" path="res://assets/models/hanginglamp.obj" id="4_0cdve"]
+[ext_resource type="Material" uid="uid://4bp64rsyyvv5" path="res://assets/textures/lamp.tres" id="5_mr4b4"]
+[ext_resource type="Theme" uid="uid://cr3fyffqdk4yo" path="res://assets/resources/rich_text_theme.tres" id="6_hobfn"]
+[ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="6_l4t2p"]
+[ext_resource type="FontFile" uid="uid://cbryppjjel0go" path="res://assets/fonts/CormorantGaramond/CormorantGaramond-Medium.ttf" id="7_ggvd3"]
+[ext_resource type="FontFile" uid="uid://n33gotmdcskb" path="res://assets/fonts/CormorantGaramond/CormorantGaramond-Bold.ttf" id="8_ggvd3"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pkvds"]
+points = PackedVector3Array(-0.875, 0, -0.1, -0.875, 0, 0.1, -0.875, 3, -0.1, 0.875, 0, -0.1, 0.875, 0, 0.1, -0.875, 3, 0.1, 0.875, 3, -0.1, 0.875, 3, 0.1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ty80d"]
+viewport_path = NodePath("SubViewport")
+
+[node name="LobbyInfo" type="MeshInstance3D"]
+mesh = ExtResource("1_eagnn")
+surface_material_override/0 = ExtResource("2_ggvd3")
+script = ExtResource("3_r0mvh")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." groups=["managed_light", "managed_light_skip_direction_test"]]
+transform = Transform3D(1, 0, 0, 0, 0.216542, 0.976273, 0, -0.976273, 0.216542, 0.00160336, 4.4339, 1.21375)
+light_energy = 2.0
+distance_fade_enabled = true
+distance_fade_begin = 30.0
+spot_attenuation = 0.5
+spot_angle = 37.73
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.37975, 1.3236)
+mesh = ExtResource("4_0cdve")
+surface_material_override/0 = ExtResource("5_mr4b4")
+surface_material_override/1 = ExtResource("6_l4t2p")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_pkvds")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24522, 0.101)
+pixel_size = 0.002
+shaded = true
+double_sided = false
+texture = SubResource("ViewportTexture_ty80d")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(760, 1000)
+size_2d_override = Vector2i(760, 1000)
+render_target_clear_mode = 2
+render_target_update_mode = 1
+
+[node name="Control" type="Control" parent="SubViewport"]
+custom_minimum_size = Vector2(380, 500)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_hobfn")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_ggvd3")
+theme_override_fonts/bold_font = ExtResource("8_ggvd3")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 48
+bbcode_enabled = true
+text = "[Replace me]"
+fit_content = true
