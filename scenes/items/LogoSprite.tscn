@@ -5,12 +5,12 @@
 
 [node name="LogoSprite" type="Node3D"]
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Logo" type="Sprite3D" parent="."]
 shaded = true
 double_sided = false
 texture = ExtResource("1_81xlm")
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Subtitle" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.763, 0)
 shaded = true
 double_sided = false
