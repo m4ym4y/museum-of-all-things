@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="LobbyData" load_steps=11 format=3 uid="uid://34yga2226k3j"]
 
-[ext_resource type="Script" path="res://resource_definitions/LobbyData.gd" id="1_3ssej"]
-[ext_resource type="Script" path="res://resource_definitions/LobbyWing.gd" id="2_y4oc8"]
+[ext_resource type="Script" uid="uid://cn1negedb2bs0" path="res://resource_definitions/LobbyData.gd" id="1_3ssej"]
+[ext_resource type="Script" uid="uid://f25eumukex5p" path="res://resource_definitions/LobbyWing.gd" id="2_y4oc8"]
 
 [sub_resource type="Resource" id="Resource_pgwi2"]
 script = ExtResource("2_y4oc8")
@@ -22,7 +22,7 @@ script = ExtResource("2_y4oc8")
 name = "Science"
 corner_1 = Vector2(-44, -92)
 corner_2 = Vector2(-8, -36)
-exhibits = PackedStringArray("Fungi", "Dinosaures", "Biodiversité marine", "Terre", "Quadrangle d'Arabia", "Rat", "Crevette", "Arbre à pain", "Visualisation de données", "Or", "Baobab", "Homo sapiens", "Pendule (physique)", "Dimorphisme sexuel", "Lumière", "Fromage", "Chou commun", "Zone humide", "Nycticèbes", "Papillon", "Jupiter (planète)", "Sol (pédologie)", "Fractale", "Œil")
+exhibits = PackedStringArray("Fungi", "Dinosaures", "Biodiversité marine", "Terre", "Quadrangle d\'Arabia", "Rat", "Crevette", "Arbre à pain", "Visualisation de données", "Or", "Baobab", "Homo sapiens", "Pendule (physique)", "Dimorphisme sexuel", "Lumière", "Fromage", "Chou commun", "Zone humide", "Nycticèbes", "Papillon", "Jupiter (planète)", "Sol (pédologie)", "Fractale", "Œil")
 
 [sub_resource type="Resource" id="Resource_opuc1"]
 script = ExtResource("2_y4oc8")
@@ -50,7 +50,7 @@ script = ExtResource("2_y4oc8")
 name = "Histoire"
 corner_1 = Vector2(-48, 60)
 corner_2 = Vector2(-12, 96)
-exhibits = PackedStringArray("Histoire de l'Allemagne", "Catastrophe nucléaire de Tchernobyl", "Titanic", "Contre-culture des années 1960", "Code de Nuremberg", "Pandémie de Covid-19", "Central Intelligence Agency", "Âge d'or de l'Islam", "Alunissage", "Séisme de 1906 à San Francisco", "Passage des Alpes par Hannibal", "Drake–Kendrick Lamar feud", "Histoire de la photographie", "Dave Matthews Band (incident à Chicago)", "Accusation de meurtre rituel", "Royaume d'Oyo", "Piraterie", "Manifestations de 2019-2020 à Hong Kong")
+exhibits = PackedStringArray("Histoire de l\'Allemagne", "Catastrophe nucléaire de Tchernobyl", "Titanic", "Contre-culture des années 1960", "Code de Nuremberg", "Pandémie de Covid-19", "Central Intelligence Agency", "Âge d\'or de l\'Islam", "Alunissage", "Séisme de 1906 à San Francisco", "Passage des Alpes par Hannibal", "Drake–Kendrick Lamar feud", "Histoire de la photographie", "Dave Matthews Band (incident à Chicago)", "Accusation de meurtre rituel", "Royaume d\'Oyo", "Piraterie", "Manifestations de 2019-2020 à Hong Kong")
 
 [sub_resource type="Resource" id="Resource_yimja"]
 script = ExtResource("2_y4oc8")

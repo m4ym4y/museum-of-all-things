@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="LobbyData" load_steps=11 format=3 uid="uid://34yga2226k3j"]
 
-[ext_resource type="Script" path="res://resource_definitions/LobbyData.gd" id="1_3ssej"]
-[ext_resource type="Script" path="res://resource_definitions/LobbyWing.gd" id="2_y4oc8"]
+[ext_resource type="Script" uid="uid://cn1negedb2bs0" path="res://resource_definitions/LobbyData.gd" id="1_3ssej"]
+[ext_resource type="Script" uid="uid://f25eumukex5p" path="res://resource_definitions/LobbyWing.gd" id="2_y4oc8"]
 
 [sub_resource type="Resource" id="Resource_pgwi2"]
 script = ExtResource("2_y4oc8")
