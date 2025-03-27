@@ -1,6 +1,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
+"Project-Id-Version: Museum of All Things\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
 "Language: pt\n"
 
 msgid "Enter the Museum"
@@ -229,3 +233,96 @@ msgstr "Remapear Entradas"
 
 msgid "Joypad Camera Deadzone"
 msgstr "Zona morta da câmera no controle"
+
+msgid "Technology"
+msgstr "Tecnologia"
+
+msgid "Featured Technology Exhibits"
+msgstr "Exposições de Tecnologia exibidas"
+
+msgid "Science"
+msgstr "Ciência"
+
+msgid "Featured Science Exhibits"
+msgstr "Exposições de Ciência exibidas"
+
+msgid "Geography"
+msgstr "Geografia"
+
+msgid "Featured Geography Exhibits"
+msgstr "Exposições de Geografia exibidas"
+
+msgid "Culture"
+msgstr "Cultura"
+
+msgid "Featured Culture Exhibits"
+msgstr "Exposições de Cultura exibidas"
+
+msgid "Art"
+msgstr "Arte"
+
+msgid "Featured Art Exhibits"
+msgstr "Exposições de Arte exibidas"
+
+msgid "People"
+msgstr "Pessoas"
+
+msgid "Featured People Exhibits"
+msgstr "Exposições de Pessoas exibidas"
+
+msgid "History"
+msgstr "História"
+
+msgid "Featured History Exhibits"
+msgstr "Exposições de História exibidas"
+
+msgid "Media"
+msgstr "Mídia"
+
+msgid "Featured Media Exhibits"
+msgstr "Exposições de Mídia exibidas"
+
+msgid "Search"
+msgstr "Procura"
+
+msgid "Featured Search Exhibits"
+msgstr "Exposições Procuradas exibidas"
+
+#: scenes/Lobby.tscn
+msgid ""
+"[b]Welcome to the Museum of All Things![/b]\n"
+"\n"
+"[fill]This museum is different from any you've visited in the physical world, so it may take a moment to get your bearings.[/fill]\n"
+"\n"
+"[b]The Lobby[/b]\n"
+"\n"
+"[fill]Right now you are in the museum's lobby, tailored to give you a pleasant starting point on your visit. If you ever wish to return here, you may simply open your museum menu (via \"Escape,\" \"Start,\" or by hitting \"Y\" on your right-hand controller in Virtual Reality) and select \"Return to Lobby.\"\n"
+"\n"
+"The lobby is divided into areas by subject, which are marked by signs and indicated on the maps in the entry hall behind you. In each of these areas, you will find many hallways into a range of fascinating exhibits.[/fill]"
+msgstr ""
+"[b]Bem-vindo ao museu de todas as coisas![/b]\n"
+"\n"
+"[fill]Esse museu é diferente de qualquer museu que você possa ter visitado no mundo real, então tenha um momento para se acostumar.[/fill]\n"
+"\n"
+"[b]O saguão[/b]\n"
+"\n"
+"[fill]No momento, você está no saguão do museu, adaptado para fornecer um ponto de partida agradável em sua visita. Se você desejar voltar aqui, pode simplesmente abrir o menu (via \"Esc\", \"Start\", ou apertando \"y\" no seu controle de realidade virtual direito) e selecione \"Voltar ao Saguão.\"\n"
+"\n"
+"O saguão é dividido em áreas por assunto, marcadas por sinais e indicadas nos mapas no saguão de entrada atrás de você. Em cada uma dessas áreas, você encontrará muitos corredores em uma variedade de exposições fascinantes.[/fill]"
+
+msgid ""
+"[b]Museum Exhibits[/b]\n"
+"\n"
+"[fill]Exhibits are not made by hand-- they are generated procedurally by pulling images and textual data from Wikipedia and Wikimedia commons. This means any topic with a Wikipedia page can also be accessed as an exhibit in this museum!\n"
+"\n"
+"Furthermore, each exhibit contains many hallways connecting it to other exhibits. These hallways are determined based on the links in the current exhibit's Wikipedia article. You can move from exhibit to exhibit endlessly, following your curiosity.\n"
+"\n"
+"If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.[/fill]"
+msgstr ""
+"[b]Exibições do museu[/b]\n"
+"\n"
+"[fill]As exposições não são feitas à mão, ​​elas são geradas proceduralmente, extraindo imagens e textos da Wikipedia e Wikimedia Commons. Isso significa que qualquer tópico com uma página da Wikipedia também pode teoricamente ser acessado como uma exposição neste museu!\n"
+"\n"
+"Além disso, cada exposição contém muitos corredores que o conectam a outras exposições. Esses corredores são determinados com base nos links no artigo da Wikipedia da exposição atual. Você mudar de exibição para exibição infinitamente, de acordo com sua curiosidade.\n"
+"\n"
+"Se você preferir ir direto para um assunto específico, você pode acessar o terminal de pesquisa, no final do saguão de entrada diretamente atrás de você. Basta digitar no seu tópico de interesse na interface e ele criará um corredor para você caminhar diretamente até lá.[/fill]"

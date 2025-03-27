@@ -230,3 +230,86 @@ msgstr "Réassigner les entrées"
 
 msgid "Joypad Camera Deadzone"
 msgstr "Zone morte de la caméra de contrôle"
+
+msgid "Technology"
+msgstr "Technology"
+
+msgid "Featured Technology Exhibits"
+msgstr "Featured Technology Exhibits"
+
+msgid "Science"
+msgstr "Science"
+
+msgid "Featured Science Exhibits"
+msgstr "Featured Science Exhibits"
+
+msgid "Geography"
+msgstr "Geography"
+
+msgid "Featured Geography Exhibits"
+msgstr "Featured Geography Exhibits"
+
+msgid "Culture"
+msgstr "Culture"
+
+msgid "Featured Culture Exhibits"
+msgstr "Featured Culture Exhibits"
+
+msgid "Art"
+msgstr "Art"
+
+msgid "Featured Art Exhibits"
+msgstr "Featured Art Exhibits"
+
+msgid "People"
+msgstr "People"
+
+msgid "Featured People Exhibits"
+msgstr "Featured People Exhibits"
+
+msgid "History"
+msgstr "History"
+
+msgid "Featured History Exhibits"
+msgstr "Featured History Exhibits"
+
+msgid "Media"
+msgstr "Media"
+
+msgid "Featured Media Exhibits"
+msgstr "Featured Media Exhibits"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Featured Search Exhibits"
+msgstr "Featured Search Exhibits"
+
+msgid ""
+"[b]Welcome to the Museum of All Things![/b]\n"
+"\n"
+"[fill]This museum is different from any you've visited in the physical world, so it may take a moment to get your bearings.[/fill]\n"
+"\n"
+"[b]The Lobby[/b]\n"
+"\n"
+"[fill]Right now you are in the museum's lobby, tailored to give you a pleasant starting point on your visit. If you ever wish to return here, you may simply open your museum menu (via \"Escape,\" \"Start,\" or by hitting \"Y\" on your right-hand controller in Virtual Reality) and select \"Return to Lobby.\"\n"
+"\n"
+"The lobby is divided into areas by subject, which are marked by signs and indicated on the maps in the entry hall behind you. In each of these areas, you will find many hallways into a range of fascinating exhibits.[/fill]"
+msgstr ""
+
+msgid ""
+"[b]Museum Exhibits[/b]\n"
+"\n"
+"[fill]Exhibits are not made by hand-- they are generated procedurally by pulling images and textual data from Wikipedia and Wikimedia commons. This means any topic with a Wikipedia page can also be accessed as an exhibit in this museum!\n"
+"\n"
+"Furthermore, each exhibit contains many hallways connecting it to other exhibits. These hallways are determined based on the links in the current exhibit's Wikipedia article. You can move from exhibit to exhibit endlessly, following your curiosity.\n"
+"\n"
+"If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.[/fill]"
+msgstr ""
+"[b]Museum Exhibits[/b]\n"
+"\n"
+"[fill]Exhibits are not made by hand-- they are generated procedurally by pulling images and textual data from Wikipedia and Wikimedia commons. This means any topic with a Wikipedia page can also be accessed as an exhibit in this museum!\n"
+"\n"
+"Furthermore, each exhibit contains many hallways connecting it to other exhibits. These hallways are determined based on the links in the current exhibit's Wikipedia article. You can move from exhibit to exhibit endlessly, following your curiosity.\n"
+"\n"
+"If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.[/fill]"

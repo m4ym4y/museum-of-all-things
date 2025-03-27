@@ -39,12 +39,6 @@ func _process(delta: float) -> void:
   pass
 
 func _on_language_item_selected(index: int) -> void:
-  if index == 0:
-    TranslationServer.set_locale("en")
-    ExhibitFetcher.set_language("en")
-  if index == 1:
-    TranslationServer.set_locale("pt")
-    ExhibitFetcher.set_language("pt")
-  if index == 2:
-    TranslationServer.set_locale("fr")
-    ExhibitFetcher.set_language("fr")
+  var language = ["en", "pt", "fr"][index]
+  TranslationServer.set_locale(language)
+  ExhibitFetcher.set_language(language)
