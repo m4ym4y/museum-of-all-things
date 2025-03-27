@@ -1,6 +1,6 @@
 extends MeshInstance3D
 
-var max_length_title = 160
+var max_length_title = 120
 var max_search_length = 100
 
 func _ready() -> void:

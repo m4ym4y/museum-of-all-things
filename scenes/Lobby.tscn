@@ -333,8 +333,6 @@ shape = SubResource("BoxShape3D_d38nf")
 [node name="Sign" parent="." instance=ExtResource("28_v471r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -16.5967)
 starting_text = "The museum is currently unstaffed. Please refer to signage for information."
-arrow = null
-arrow_left = null
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.95369, -17.999)
