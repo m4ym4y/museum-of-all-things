@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://brfwcf0et4c42"]
+[gd_scene load_steps=12 format=3 uid="uid://brfwcf0et4c42"]
 
 [ext_resource type="ArrayMesh" uid="uid://dfalfeatlgtod" path="res://assets/models/lobby_plaque.obj" id="1_eagnn"]
 [ext_resource type="Material" uid="uid://b2iqa8ync4w35" path="res://assets/textures/lobby_plaque_intro_blank.tres" id="2_ggvd3"]
@@ -9,7 +9,6 @@
 [ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="6_l4t2p"]
 [ext_resource type="FontFile" uid="uid://cbryppjjel0go" path="res://assets/fonts/CormorantGaramond/CormorantGaramond-Medium.ttf" id="7_ggvd3"]
 [ext_resource type="FontFile" uid="uid://n33gotmdcskb" path="res://assets/fonts/CormorantGaramond/CormorantGaramond-Bold.ttf" id="8_ggvd3"]
-[ext_resource type="PackedScene" uid="uid://gb0hi6hfnjyo" path="res://scenes/items/LogoSprite.tscn" id="10_0cdve"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pkvds"]
 points = PackedVector3Array(-0.875, 0, -0.1, -0.875, 0, 0.1, -0.875, 3, -0.1, 0.875, 0, -0.1, 0.875, 0, 0.1, -0.875, 3, 0.1, 0.875, 3, -0.1, 0.875, 3, 0.1)
@@ -21,9 +20,6 @@ viewport_path = NodePath("SubViewport")
 mesh = ExtResource("1_eagnn")
 surface_material_override/0 = ExtResource("2_ggvd3")
 script = ExtResource("3_r0mvh")
-
-[node name="LogoSprite" parent="." instance=ExtResource("10_0cdve")]
-transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 1, -0.000408292, 2.61896, 0.101)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." groups=["managed_light", "managed_light_skip_direction_test"]]
 transform = Transform3D(1, 0, 0, 0, 0.216542, 0.976273, 0, -0.976273, 0.216542, 0.00160336, 4.4339, 1.21375)

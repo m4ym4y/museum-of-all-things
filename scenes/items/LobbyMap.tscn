@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bduykqqplkh44"]
+[gd_scene load_steps=9 format=3 uid="uid://bduykqqplkh44"]
 
 [ext_resource type="ArrayMesh" uid="uid://dfalfeatlgtod" path="res://assets/models/lobby_plaque.obj" id="1_3mpu0"]
 [ext_resource type="Material" uid="uid://bj7n7q60eccke" path="res://assets/textures/lobby_plaque_map.tres" id="2_8ufn8"]
 [ext_resource type="Script" uid="uid://s5l1akumtnus" path="res://scenes/items/LobbyMap.gd" id="3_md5jq"]
-[ext_resource type="PackedScene" uid="uid://gb0hi6hfnjyo" path="res://scenes/items/LogoSprite.tscn" id="4_3mpu0"]
 [ext_resource type="ArrayMesh" uid="uid://roqc52kigyn" path="res://assets/models/hanginglamp.obj" id="4_srsjo"]
 [ext_resource type="Material" uid="uid://4bp64rsyyvv5" path="res://assets/textures/lamp.tres" id="5_bjucp"]
 [ext_resource type="Material" uid="uid://me7rtp53de2k" path="res://assets/textures/black.tres" id="6_jocsy"]
@@ -16,9 +15,6 @@ points = PackedVector3Array(-0.875, 0, -0.1, -0.875, 0, 0.1, -0.875, 3, -0.1, 0.
 mesh = ExtResource("1_3mpu0")
 surface_material_override/0 = ExtResource("2_8ufn8")
 script = ExtResource("3_md5jq")
-
-[node name="LogoSprite" parent="." instance=ExtResource("4_3mpu0")]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 1, 0, 2.657, 0.101)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." groups=["managed_light", "managed_light_skip_direction_test"]]
 transform = Transform3D(1, 0, 0, 0, 0.216542, 0.976273, 0, -0.976273, 0.216542, 0.00160336, 4.4339, 1.21375)

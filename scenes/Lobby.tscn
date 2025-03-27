@@ -26,8 +26,8 @@
 [ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://assets/textures/wood.tres" id="27_wy5wh"]
 [ext_resource type="PackedScene" uid="uid://bduykqqplkh44" path="res://scenes/items/LobbyMap.tscn" id="28_fw7ru"]
 [ext_resource type="PackedScene" uid="uid://c5wpeqr3s3lw4" path="res://scenes/items/Sign.tscn" id="28_v471r"]
-[ext_resource type="PackedScene" uid="uid://gb0hi6hfnjyo" path="res://scenes/items/LogoSprite.tscn" id="29_eoks5"]
 [ext_resource type="PackedScene" uid="uid://brfwcf0et4c42" path="res://scenes/items/LobbyInfo.tscn" id="29_fj722"]
+[ext_resource type="Texture2D" uid="uid://crmsq8a4sjtb8" path="res://assets/logo/moat_logo_large.png" id="29_kkkm5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rlv5a"]
 size = Vector3(5, 5, 5)
@@ -321,6 +321,12 @@ shape = SubResource("BoxShape3D_d38nf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -16.5967)
 starting_text = "The museum is currently unstaffed. Please refer to signage for information."
 
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.95369, -17.999)
+pixel_size = 0.005
+texture_filter = 5
+texture = ExtResource("29_kkkm5")
+
 [node name="MapLeft" parent="." instance=ExtResource("28_fw7ru")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.5, 4, 24)
 surface_material_override/0 = ExtResource("15_mj6xj")
@@ -350,6 +356,3 @@ text = "[b]Museum Exhibits[/b]
 Furthermore, each exhibit contains many hallways connecting it to other exhibits. These hallways are determined based on the links in the current exhibit's Wikipedia article. You can move from exhibit to exhibit endlessly, following your curiosity.
 
 If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.[/fill]"
-
-[node name="LogoSprite" parent="." instance=ExtResource("29_eoks5")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 6.95, -17.999)
