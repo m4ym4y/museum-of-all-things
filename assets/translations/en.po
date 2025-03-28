@@ -250,6 +250,8 @@ msgstr "Search"
 msgid "Featured Search Exhibits"
 msgstr "Featured Search Exhibits"
 
+### scenes/Lobby.tscn Section
+
 msgid ""
 "[b]Welcome to the Museum of All Things![/b]\n"
 "\n"
@@ -287,3 +289,64 @@ msgstr ""
 "Furthermore, each exhibit contains many hallways connecting it to other exhibits. These hallways are determined based on the links in the current exhibit's Wikipedia article. You can move from exhibit to exhibit endlessly, following your curiosity.\n"
 "\n"
 "If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.[/fill]"
+
+### scenes/menu/TerminalMenu.tscn Section
+
+msgid ""
+"Welcome to the MoAT Custom Exhibit Terminal\n"
+"\n"
+"You may access a specific exhibit by selecting \"Enter Exhibit Name.\" Alternatively, you may ask for a random exhibit.\n"
+"\n"
+"Hit \"E\" on your keyboard to interact with the terminal, or press Y/△ if you are using a controller.\n"
+"\n"
+msgstr ""
+"Welcome to the MoAT Custom Exhibit Terminal\n"
+"\n"
+"You may access a specific exhibit by selecting \"Enter Exhibit Name.\" Alternatively, you may ask for a random exhibit.\n"
+"\n"
+"Hit \"E\" on your keyboard to interact with the terminal, or press Y/△ if you are using a controller.\n"
+"\n"
+
+msgid "Enter Exhibit Name "
+msgstr "Enter Exhibit Name "
+
+msgid "Go to Random Exhibit "
+msgstr "Go to Random Exhibit "
+
+msgid ""
+"Enter the title of the exhibit you would like to acccess. A path will be routed and the door will open to the best matching exhibit.\n"
+"\n"
+msgstr ""
+"Enter the title of the exhibit you would like to acccess. A path will be routed and the door will open to the best matching exhibit.\n"
+"\n"
+
+msgid "Enter exhibit title"
+msgstr "Enter exhibit title"
+
+msgid "Confirm"
+msgstr "Confirm"
+
+msgid "Back"
+msgstr "Back"
+
+msgid "Exhibit Found: \"\"\n"
+msgstr "Exhibit Found: \"\"\n"
+
+msgid ""
+"\n"
+"Proceed to your right to access this exhibit, or return to the terminal's main menu to access a different exhibit.\n"
+"\n"
+msgstr ""
+"\n"
+"Proceed to your right to access this exhibit, or return to the terminal's main menu to access a different exhibit.\n"
+"\n"
+
+msgid "OK / Exit"
+msgstr "OK / Exit"
+
+msgid ""
+"We were unable to locate the exhibit that you requested. Please try a different exhibit.\n"
+"\n"
+msgstr ""
+"We were unable to locate the exhibit that you requested. Please try a different exhibit.\n"
+"\n"
