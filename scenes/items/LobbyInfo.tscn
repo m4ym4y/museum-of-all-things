@@ -47,6 +47,7 @@ visibility_range_end_margin = 3.0
 pixel_size = 0.002
 shaded = true
 double_sided = false
+texture_filter = 5
 texture = SubResource("ViewportTexture_ty80d")
 
 [node name="SubViewport" type="SubViewport" parent="."]
