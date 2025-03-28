@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://u4b0awts0vdi"]
+[gd_scene load_steps=34 format=3 uid="uid://u4b0awts0vdi"]
 
 [ext_resource type="MeshLibrary" uid="uid://b887fn6f3qg14" path="res://assets/3d_tiles/mesh_library.tres" id="1_3jgkl"]
 [ext_resource type="Script" uid="uid://dmep55064the2" path="res://scenes/Lobby.gd" id="1_rlemg"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://y1oelsib8v3i" path="res://scenes/items/WallItem.tscn" id="7_c644f"]
 [ext_resource type="PackedScene" uid="uid://bvk8hcw5x5lmc" path="res://scenes/items/LobbyPlaque.tscn" id="9_puy6x"]
 [ext_resource type="Material" uid="uid://bbso1uvsrdw6f" path="res://assets/textures/lobby_plaque_technology.tres" id="10_6bi3p"]
+[ext_resource type="Material" uid="uid://hj1smq8ltjl7" path="res://assets/textures/lobby_plaque_art.tres" id="10_fj722"]
 [ext_resource type="Material" uid="uid://ctsgmjnd4tref" path="res://assets/textures/lobby_plaque_science.tres" id="10_i1nmy"]
 [ext_resource type="Material" uid="uid://dj21xhwws6h6v" path="res://assets/textures/lobby_plaque_geography.tres" id="12_cdts7"]
 [ext_resource type="Material" uid="uid://cp5aagufkbhhx" path="res://assets/textures/lobby_plaque_culture.tres" id="13_cdudg"]
@@ -26,8 +27,8 @@
 [ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://assets/textures/wood.tres" id="27_wy5wh"]
 [ext_resource type="PackedScene" uid="uid://bduykqqplkh44" path="res://scenes/items/LobbyMap.tscn" id="28_fw7ru"]
 [ext_resource type="PackedScene" uid="uid://c5wpeqr3s3lw4" path="res://scenes/items/Sign.tscn" id="28_v471r"]
-[ext_resource type="PackedScene" uid="uid://gb0hi6hfnjyo" path="res://scenes/items/LogoSprite.tscn" id="29_eoks5"]
 [ext_resource type="PackedScene" uid="uid://brfwcf0et4c42" path="res://scenes/items/LobbyInfo.tscn" id="29_fj722"]
+[ext_resource type="Texture2D" uid="uid://crmsq8a4sjtb8" path="res://assets/logo/moat_logo_large.png" id="29_kkkm5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rlv5a"]
 size = Vector3(5, 5, 5)
@@ -186,6 +187,7 @@ subtitle_text = "Featured Culture Exhibits"
 
 [node name="ArtPlaque" parent="." instance=ExtResource("9_puy6x")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -30.07, 12, 15.359)
+surface_material_override/0 = ExtResource("10_fj722")
 title_color = Color(0, 0, 0, 1)
 
 [node name="PeoplePlaque" parent="." instance=ExtResource("9_puy6x")]
@@ -321,6 +323,12 @@ shape = SubResource("BoxShape3D_d38nf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -16.5967)
 starting_text = "The museum is currently unstaffed. Please refer to signage for information."
 
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.95369, -17.999)
+pixel_size = 0.005
+texture_filter = 5
+texture = ExtResource("29_kkkm5")
+
 [node name="MapLeft" parent="." instance=ExtResource("28_fw7ru")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.5, 4, 24)
 surface_material_override/0 = ExtResource("15_mj6xj")
@@ -350,6 +358,3 @@ text = "[b]Museum Exhibits[/b]
 Furthermore, each exhibit contains many hallways connecting it to other exhibits. These hallways are determined based on the links in the current exhibit's Wikipedia article. You can move from exhibit to exhibit endlessly, following your curiosity.
 
 If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.[/fill]"
-
-[node name="LogoSprite" parent="." instance=ExtResource("29_eoks5")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 6.95, -17.999)
