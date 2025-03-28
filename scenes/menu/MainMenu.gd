@@ -11,6 +11,9 @@ func _ready() -> void:
   _on_visibility_changed()
   call_deferred("_start_fade_in")
 
+  if Util.is_web():
+    %Quit.visible = false
+
 func _on_visibility_changed():
   if visible:
     $MarginContainer/VBoxContainer/Start.grab_focus()
