@@ -11,6 +11,10 @@ func init(text):
   var t = Util.strip_markup(text)
   label.text = t
   call_deferred("_center_vertically", label)
+  MipmapThread.get_viewport_texture_with_mipmaps.call_deferred($SubViewport, func(texture):
+    $Sprite3D.texture = texture
+    $SubViewport.queue_free()
+  )
 
 func _center_vertically(label):
   # Ensure the SubViewport is sized
