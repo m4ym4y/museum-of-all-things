@@ -44,9 +44,7 @@ func get_mipmapped_texture_async(texture: Texture2D, callback: Callable):
   var rid = texture.get_rid()
   var format = RenderingServer.texture_get_format(rid)
   var rd_rid = RenderingServer.texture_get_rd_texture(rid)
-  #print("Requesting download of ", rd_rid)
   RenderingServer.get_rendering_device().texture_get_data_async(rd_rid, 0, func(array) -> void:
-    #print("Download complete: ", array.size())
     queue_work(func() -> void:
       var img = Image.create_from_data(width, height, false, format, array)
       img.generate_mipmaps()
