@@ -288,7 +288,8 @@ msgstr "Procura"
 msgid "Featured Search Exhibits"
 msgstr "Exposições Procuradas exibidas"
 
-#: scenes/Lobby.tscn
+### scenes/Lobby.tscn Section
+
 msgid ""
 "[b]Welcome to the Museum of All Things![/b]\n"
 "\n"
@@ -319,10 +320,71 @@ msgid ""
 "\n"
 "If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.[/fill]"
 msgstr ""
-"[b]Exibições do museu[/b]\n"
+"[b]Exposições do museu[/b]\n"
 "\n"
 "[fill]As exposições não são feitas à mão, ​​elas são geradas proceduralmente, extraindo imagens e textos da Wikipedia e Wikimedia Commons. Isso significa que qualquer tópico com uma página da Wikipedia também pode teoricamente ser acessado como uma exposição neste museu!\n"
 "\n"
-"Além disso, cada exposição contém muitos corredores que o conectam a outras exposições. Esses corredores são determinados com base nos links no artigo da Wikipedia da exposição atual. Você mudar de exibição para exibição infinitamente, de acordo com sua curiosidade.\n"
+"Além disso, cada exposição contém muitos corredores que o conectam a outras exposições. Esses corredores são determinados com base nos links no artigo da Wikipedia da exposição atual. Você mudar de exposição para exposição infinitamente, de acordo com sua curiosidade.\n"
 "\n"
 "Se você preferir ir direto para um assunto específico, você pode acessar o terminal de pesquisa, no final do saguão de entrada diretamente atrás de você. Basta digitar no seu tópico de interesse na interface e ele criará um corredor para você caminhar diretamente até lá.[/fill]"
+
+### scenes/menu/TerminalMenu.tscn Section
+
+msgid ""
+"Welcome to the MoAT Custom Exhibit Terminal\n"
+"\n"
+"You may access a specific exhibit by selecting \"Enter Exhibit Name.\" Alternatively, you may ask for a random exhibit.\n"
+"\n"
+"Hit \"E\" on your keyboard to interact with the terminal, or press Y/△ if you are using a controller.\n"
+"\n"
+msgstr ""
+"Bem-vindo ao terminal de exposições personalizadas do MoAT (Museu de todas as coisas)\n"
+"\n"
+"Você pode acessar uma exposição específica selecionando \"Digite o nome da exposição.\" Você também pode selecionar uma exposição aleatória.\n"
+"\n"
+"Aperte \"E\" no seu teclado para interagir com o terminal, ou aperte Y/△ se você está usando um controle.\n"
+"\n"
+
+msgid "Enter Exhibit Name "
+msgstr "Digite o nome da exposição "
+
+msgid "Go to Random Exhibit "
+msgstr "Ir para uma exposição aleatória "
+
+msgid ""
+"Enter the title of the exhibit you would like to acccess. A path will be routed and the door will open to the best matching exhibit.\n"
+"\n"
+msgstr ""
+"Digite o título da exposição que você deseja acessar. Um caminho será criado, e a porta irá abrir para a melhor exposição correspondente.\n"
+"\n"
+
+msgid "Enter exhibit title"
+msgstr "Digite o título da exposisão"
+
+msgid "Confirm"
+msgstr "Confirmar"
+
+msgid "Back"
+msgstr "Voltar"
+
+msgid "Exhibit Found: \"\"\n"
+msgstr "Exposição achada: \"\"\n"
+
+msgid ""
+"\n"
+"Proceed to your right to access this exhibit, or return to the terminal's main menu to access a different exhibit.\n"
+"\n"
+msgstr ""
+"\n"
+"Prossiga para a direita para acessar sua exposição, ou volte ao menu do terminal para acessar uma exposição diferente.\n"
+"\n"
+
+msgid "OK / Exit"
+msgstr "Ok / Saída"
+
+msgid ""
+"We were unable to locate the exhibit that you requested. Please try a different exhibit.\n"
+"\n"
+msgstr ""
+"Não conseguimos achar a exposição que você pediu; Por favor tente uma exposição diferente.\n"
+"\n"
