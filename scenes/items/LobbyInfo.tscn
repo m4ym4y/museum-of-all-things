@@ -56,6 +56,7 @@ transparent_bg = true
 handle_input_locally = false
 size = Vector2i(760, 1000)
 size_2d_override = Vector2i(760, 1000)
+render_target_update_mode = 1
 
 [node name="Control" type="Control" parent="SubViewport"]
 custom_minimum_size = Vector2(380, 500)

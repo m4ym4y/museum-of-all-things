@@ -6,7 +6,6 @@ signal settings
 var fade_in_start = Color(0.0, 0.0, 0.0, 1.0)
 var fade_in_end = Color(0.0, 0.0, 0.0, 0.0)
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   _on_visibility_changed()
@@ -42,3 +41,4 @@ func _on_language_item_selected(index: int) -> void:
   var language = ["en", "pt", "fr"][index]
   TranslationServer.set_locale(language)
   ExhibitFetcher.set_language(language)
+  GlobalMenuEvents.emit_set_language(language)
