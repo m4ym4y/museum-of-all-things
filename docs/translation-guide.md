@@ -87,7 +87,16 @@ This guide will walk you through the steps required to add a new language to the
 
 ## 7. Submit your pull request!
 
-- If you are unfamiliar with this process, refer to [this guide by GitHub!](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork)
+- [Commit your changes](https://github.com/git-guides/git-commit) and [push them](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository) to your fork of the Museum of All Things repo. The files that you'll want to commit are:
+
+```
+README.md
+project.godot
+assets/translations/<your wikipedia subdomain>.po
+assets/translations/lobby_data_<your wikipedia subdomain>.po
+```
+
+- Open a pull request to [the main Museum of All Things repository.](https://github.com/m4ym4y/museum-of-all-things) If you are unfamiliar with this process, refer to [this guide by GitHub!](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork)
 
 - I'll pretty much take it from here! Keep an eye on your pull request and your github notifications in case there are changes that need to be made, but I will merge your pull request and package it in the next release!
 
