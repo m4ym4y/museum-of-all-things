@@ -35,11 +35,12 @@ localization in other languages.~~
 
 [**Are you interested in adding your language to the Museum of All Things? Click Here!!**](docs/translation-guide.md)
 
-There are now many contributors to this project! Feel free to support any pull
+There are now many contributors to this project! Feel free to submit any pull
 request and I will review it. I am more likely to accept PRs that are bugfixes or
 optimizations/visual upgrades. As for things that affect the creative direction
 of the museum I am still a bit precious about controlling that roadmap myself so
-no guarantees that those types of changes will be merged.
+no guarantees that those types of changes will be merged. If you are unsure, file
+an issue and we can discuss it before you put too much work in.
 
 ### Currently supported languages (On main branch -- may not reflect latest release)
 
