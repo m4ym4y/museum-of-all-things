@@ -28,7 +28,9 @@ This guide will walk you through the steps required to add a new language to the
 
 - Now copy the file `assets/resources/lobby_data.tres` to `assets/resources/lobby_data_<your wikipedia subdomain>.tres` (e.g. `assets/resources/lobby_data_es.tres` for Spanish)
 
-- Open the file you've created in your text editor of choice.
+- Open the file you've created in your text editor of choice. **OR** you can open your forked & cloned repo in the [Godot editor](https://godotengine.org/) and open your file there to edit these values, as shown below (Make sure you are editing `assets/resources/lobby_data_<your wikipedia subdomain>.tres`, NOT `assets/resources/lobby_data.tres`):
+
+![editing lobby data in the godot editor](./lobby-data-edit.png)
 
 - This file is broken into blocks by topic. You'll go through these blocks and first translate the `name` (e.g. `Technology`) to your language.
 
