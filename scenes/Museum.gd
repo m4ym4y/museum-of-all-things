@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var TiledExhibitGenerator = preload("res://scenes/TiledExhibitGenerator.tscn")
 @onready var StaticData = preload("res://assets/resources/lobby_data.tres")
+var _lobby_data_path = "res://assets/resources/lobby_data.tres"
 
 @onready var QUEUE_DELAY = 0.05
 
@@ -47,6 +48,7 @@ func _ready() -> void:
   ExhibitFetcher.commons_images_complete.connect(_on_commons_images_complete)
   GlobalMenuEvents.reset_custom_door.connect(_reset_custom_door)
   GlobalMenuEvents.set_custom_door.connect(_set_custom_door)
+  GlobalMenuEvents.set_language.connect(_on_change_language)
 
 func _get_free_exhibit_height() -> int:
   var height = _starting_height
@@ -69,6 +71,15 @@ func _get_lobby_exit_zone(exit):
     if ex >= c1.x and ex <= c2.x and ez >= c1.y and ez <= c2.y:
       return w
   return null
+
+func _on_change_language(_lang = ""):
+  # This is only safe to do if we're in the lobby
+  if _current_room_title == "$Lobby":
+    for exhibit in _exhibits.keys():
+      if exhibit != "$Lobby":
+        _erase_exhibit(exhibit)
+    StaticData = ResourceLoader.load(_lobby_data_path, "", ResourceLoader.CACHE_MODE_IGNORE)
+    _set_up_lobby($Lobby)
 
 func _set_up_lobby(lobby):
   var exits = lobby.exits
@@ -143,6 +154,9 @@ func _teleport(from_hall, to_hall, entry_to_exit=false):
   _prepare_halls_for_teleport(from_hall, to_hall, entry_to_exit)
 
 func _prepare_halls_for_teleport(from_hall, to_hall, entry_to_exit=false):
+  if not is_instance_valid(from_hall) or not is_instance_valid(to_hall):
+    return
+
   from_hall.entry_door.set_open(false)
   from_hall.exit_door.set_open(false)
   to_hall.entry_door.set_open(false, true)
@@ -234,12 +248,7 @@ func _load_exhibit_from_exit(exit):
       return
     else:
       # TODO: erase orphaned backlinks
-      _release_exhibit_height(_exhibits[next_article].height)
-      _exhibits[next_article].exhibit.queue_free()
-      _exhibits.erase(next_article)
-      var i = _exhibit_hist.find(next_article)
-      if i >= 0:
-        _exhibit_hist.remove_at(i)
+      _erase_exhibit(next_article)
 
   ExhibitFetcher.fetch([next_article], {
     "title": next_article,
@@ -307,6 +316,17 @@ func _on_exit_added(exit, doors, backlink, new_exhibit, hall):
   if is_instance_valid(hall) and backlink and exit.to_title == hall.to_title:
     _link_halls(hall, exit)
 
+func _erase_exhibit(key):
+  if OS.is_debug_build():
+    print("erasing exhibit ", key)
+  _exhibits[key].exhibit.queue_free()
+  _release_exhibit_height(_exhibits[key].height)
+  _global_item_queue_map.erase(key)
+  _exhibits.erase(key)
+  var i = _exhibit_hist.find(key)
+  if i >= 0:
+    _exhibit_hist.remove_at(i)
+
 func _on_fetch_complete(_titles, context):
   # we don't need to do anything to handle a prefetch
   if context.has("prefetch"):
@@ -369,13 +389,7 @@ func _on_fetch_complete(_titles, context):
             continue
           if old_exhibit.exhibit.title == new_exhibit.title:
             continue
-          if OS.is_debug_build():
-            print("erasing exhibit ", key)
-          old_exhibit.exhibit.queue_free()
-          _release_exhibit_height(_exhibits[key].height)
-          _global_item_queue_map.erase(key)
-          _exhibits.erase(key)
-          _exhibit_hist.remove_at(e)
+          _erase_exhibit(key)
           break
 
   var image_titles = []
