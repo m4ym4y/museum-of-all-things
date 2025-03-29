@@ -32,6 +32,7 @@ UISoundManager="*res://scenes/util/UISoundManager.tscn"
 GlobalGridAccess="*res://scenes/util/GlobalGridAccess.gd"
 CacheControl="*res://scenes/util/CacheControl.gd"
 MipmapThread="*res://scenes/util/MipmapThread.gd"
+LanguageManager="*res://scenes/util/LanguageManager.gd"
 
 [display]
 

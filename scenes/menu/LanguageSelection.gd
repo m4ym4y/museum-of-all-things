@@ -6,8 +6,13 @@ const LANGUAGES = [
   "fr",
 ]
 
+func _ready():
+  var locale = LanguageManager.get_locale()
+  var idx = LANGUAGES.find(locale)
+  if idx >= 0:
+    select(idx)
+  item_selected.connect(_on_language_item_selected)
+
 func _on_language_item_selected(index: int) -> void:
-  var language = LANGUAGES[index]
-  TranslationServer.set_locale(language)
-  ExhibitFetcher.set_language(language)
-  GlobalMenuEvents.emit_set_language(language)
+  var locale = LANGUAGES[index]
+  LanguageManager.set_locale(locale)

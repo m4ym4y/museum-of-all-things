@@ -12,5 +12,3 @@ popup/item_1/id = 1
 popup/item_2/text = "French"
 popup/item_2/id = 2
 script = ExtResource("1_vdrqe")
-
-[connection signal="item_selected" from="." to="." method="_on_language_item_selected"]
