@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://3q5n8txx3jmm"]
+[gd_scene load_steps=6 format=3 uid="uid://3q5n8txx3jmm"]
 
 [ext_resource type="Script" uid="uid://dvi1pswxc3j03" path="res://scenes/menu/MainMenu.gd" id="1_cmhx0"]
 [ext_resource type="Theme" uid="uid://dgt5fjkytx07d" path="res://assets/resources/menu_theme.tres" id="1_dwey2"]
 [ext_resource type="Texture2D" uid="uid://dgfyxj62mioye" path="res://assets/logo/moat_logo_large_funky.png" id="3_vuiv8"]
+[ext_resource type="PackedScene" uid="uid://cv3acpc23tjw0" path="res://scenes/menu/LanguageSelection.tscn" id="4_2nud1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_46gfj"]
 font_size = 64
@@ -60,16 +61,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Quit"
 
-[node name="Language" type="OptionButton" parent="MarginContainer/VBoxContainer"]
+[node name="Language" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_2nud1")]
 layout_mode = 2
-selected = 0
-item_count = 3
-popup/item_0/text = "English"
-popup/item_0/id = 0
-popup/item_1/text = "Portuguese"
-popup/item_1/id = 1
-popup/item_2/text = "French"
-popup/item_2/id = 2
 
 [node name="FadeIn" type="ColorRect" parent="."]
 z_index = 2
@@ -96,4 +89,3 @@ color = Color(0, 0, 0, 0)
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_button_pressed"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/Language" to="." method="_on_language_item_selected"]

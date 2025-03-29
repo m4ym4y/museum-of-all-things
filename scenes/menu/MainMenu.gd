@@ -36,9 +36,3 @@ func _on_quit_button_pressed():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
   pass
-
-func _on_language_item_selected(index: int) -> void:
-  var language = ["en", "pt", "fr"][index]
-  TranslationServer.set_locale(language)
-  ExhibitFetcher.set_language(language)
-  GlobalMenuEvents.emit_set_language(language)

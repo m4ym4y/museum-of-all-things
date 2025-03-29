@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv3acpc23tjw0"]
+
+[ext_resource type="Script" uid="uid://bim2pdhskx2p3" path="res://scenes/menu/LanguageSelection.gd" id="1_vdrqe"]
+
+[node name="Language" type="OptionButton"]
+selected = 0
+item_count = 3
+popup/item_0/text = "English"
+popup/item_0/id = 0
+popup/item_1/text = "Portuguese"
+popup/item_1/id = 1
+popup/item_2/text = "French"
+popup/item_2/id = 2
+script = ExtResource("1_vdrqe")
+
+[connection signal="item_selected" from="." to="." method="_on_language_item_selected"]
