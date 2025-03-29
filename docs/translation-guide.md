@@ -6,6 +6,8 @@ You do not need to know how to write code in order to do this! :)
 
 This guide will walk you through the steps required to add a new language to the Museum of All Things. You can always [message me](https://may.as), and you can refer to the [original pull request adding multi-language functionality](https://github.com/m4ym4y/museum-of-all-things/pull/59) for some more insights on the process.
 
+As another example, here's [the PR adding Spanish](https://github.com/m4ym4y/museum-of-all-things/pull/97)
+
 ## 0. Get your language's wikipedia subdomain
 
 - Go to the wikipedia instance for your language. For instance, if you are translating to Spanish, this would be `es`, as in `es.wikipedia.org`.
