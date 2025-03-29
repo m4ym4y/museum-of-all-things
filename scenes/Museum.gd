@@ -84,11 +84,6 @@ func _on_change_language(_lang = ""):
 func _set_up_lobby(lobby):
   var exits = lobby.exits
   _exhibits["$Lobby"] = { "exhibit": lobby, "height": 0 }
-  lobby.get_node("Introduction").init({
-    "type": "rich_text",
-    "material": "white",
-    "text": StaticData.introduction_text
-  })
 
   if OS.is_debug_build():
     print("Setting up lobby with %s exits..." % len(exits))
