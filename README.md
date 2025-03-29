@@ -29,16 +29,30 @@ You may file feature requests, but keep in mind that I'm a solo developer
 distributing a free project. I'll prioritize whatever I have time for and feel
 motivated to work on.
 
-I do not currently have any policy for allowing outside contributors to the
+~~I do not currently have any policy for allowing outside contributors to the
 codebase. I might change that in the future, particularly if I pursue
-localization in other languages.
+localization in other languages.~~
+
+[**Are you interested in adding your language to the Museum of All Things? Click Here!!**](docs/translation-guide.md)
+
+There are now many contributors to this project! Feel free to support any pull
+request and I will review it. I am more likely to accept PRs that are bugfixes or
+optimizations/visual upgrades. As for things that affect the creative direction
+of the museum I am still a bit precious about controlling that roadmap myself so
+no guarantees that those types of changes will be merged.
+
+### Currently supported languages (On main branch -- may not reflect latest release)
+
+- English
+- Portuguese
+- French
 
 ## Roadmap for Future Updates (Not in any order)
 
 - Multiplayer (this one is big; don't expect it anytime soon)
 - Greater variety in theming and exhibit layouts
 - Support for more media types, such as audio or 3d models
-- Support for more Wikipedia languages other than English
+- ~~Support for more Wikipedia languages other than English~~ [Thank you so much to daviirodrig and all others who helped!](https://github.com/m4ym4y/museum-of-all-things/pull/59)
 
 ## Credits
 
