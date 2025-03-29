@@ -34,7 +34,7 @@ This guide will walk you through the steps required to add a new language to the
 
 - This file is broken into blocks by topic. You'll go through these blocks and first translate the `name` (e.g. `Technology`) to your language.
 
-- For each block, once you've translated the `name`, go through the quoted strings in `exhibits` and translate each of these article titles into the corresponding article in your language. **Don't reorder these blocks!!**
+- For each block, once you've translated the `name`, go through the quoted strings in `exhibits` (or the elements of the `Exhibits` list if you are in the godot editor) and translate each of these article titles into the corresponding article in your language. **Don't reorder these blocks!!**
 
 - Make sure all the articles in the list exist in your language (this is more important for niche articles or less popular languages on wikipedia), and the list is exactly the same length as the original.
 
