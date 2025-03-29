@@ -48,9 +48,13 @@ This guide will walk you through the steps required to add a new language to the
 
 - Select the `Translations` sub-tab (you may already be in this tab)
 
+![translations interface in godot](./localization-translations.png)
+
 - Click `Add...` on the right, and select the `assets/translations/<your wikipedia subdomain>.po` file that you created in step 2.
 
 - Select the `Remaps` sub-tab
+
+![translations remap interface in godot](./localization-remaps.png)
 
 - Under `Resources`, select `assets/resources/lobby_data.tres`
 
@@ -68,6 +72,7 @@ This guide will walk you through the steps required to add a new language to the
 
 - Navigate the lobby and check:
 
+    - [ ] Are all of the menus translated? (Main menu, pause menu, settings)
     - [ ] Are the information signs at the front desk translated?
     - [ ] Are the labels on the maps in the lobby translated?
     - [ ] Are the wing signs in the lobby (e.g. "Art - Featured Art Exhibits") translated?
