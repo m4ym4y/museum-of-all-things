@@ -46,6 +46,7 @@ no guarantees that those types of changes will be merged.
 - English
 - Portuguese
 - French
+- Spanish
 
 ## Roadmap for Future Updates (Not in any order)
 

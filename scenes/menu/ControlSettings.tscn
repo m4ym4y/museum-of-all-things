@@ -23,8 +23,7 @@ label_settings = SubResource("LabelSettings_kfvnr")
 
 [node name="Back" type="Button" parent="MainOptions"]
 layout_mode = 2
-text = "Back
-"
+text = "Back"
 
 [node name="RestoreDefaultsButton" type="Button" parent="MainOptions"]
 layout_mode = 2
