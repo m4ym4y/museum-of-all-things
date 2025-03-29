@@ -4,11 +4,7 @@
 
 [node name="Language" type="OptionButton"]
 selected = 0
-item_count = 3
+item_count = 1
 popup/item_0/text = "English"
 popup/item_0/id = 0
-popup/item_1/text = "Portuguese"
-popup/item_1/id = 1
-popup/item_2/text = "French"
-popup/item_2/id = 2
 script = ExtResource("1_vdrqe")
