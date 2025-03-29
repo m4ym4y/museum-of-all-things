@@ -16,7 +16,8 @@ func vecToRot(vec):
   return 0.0
 
 func resizeTextToPx(t, px):
-  while t.font.get_string_size(t.text, t.horizontal_alignment, -1, t.font_size).x > px:
+  var msg = TranslationServer.translate(t.text)
+  while t.font.get_string_size(msg, t.horizontal_alignment, -1, t.font_size).x > px:
     t.font_size -= 1
 
 func vecToOrientation(grid, vec):
