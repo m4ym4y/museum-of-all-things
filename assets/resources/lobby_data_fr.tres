@@ -61,19 +61,4 @@ exhibits = PackedStringArray("Bible", "The Beatles", "Matrix (film)", "Odyssée"
 
 [resource]
 script = ExtResource("1_3ssej")
-introduction_text = "[center][color=black]
-[img=500]res://assets/logo/moat_logo_large.png[/img]
-
-[font_size=14][fill]
-Bienvenue au Museum of All Things ! Tous les visiteurs sont les bienvenus ici, que vous vous manifestiez dans cet espace à travers une fenêtre en deux dimensions ou via la Réalité Virtuelle. Ce musée est différent de tout autre que vous avez visité dans le monde physique, il vous faudra donc peut-être un moment pour vous orienter.
-
-En ce moment, vous êtes dans le hall d'entrée du musée, conçu pour vous offrir un point de départ agréable à votre visite. Si vous souhaitez y revenir à tout moment, vous pouvez ouvrir le menu du musée (via \"Échap,\" \"Start,\" ou en appuyant sur \"Y\" sur votre contrôleur droit en Réalité Virtuelle) et sélectionner \"Retour au Hall d'entrée.\"
-
-Le hall d'entrée est divisé en zones thématiques, signalées par des panneaux et indiquées sur les cartes du hall principal. Dans chacune de ces zones, vous trouverez de nombreux couloirs menant à une variété d'expositions fascinantes. Ces expositions sont rendues possibles grâce à l'intégration d'images et de données textuelles issues de Wikipedia et de Wikimedia Commons. Tout sujet disposant d'une page Wikipedia peut également être consulté en tant qu'exposition dans ce musée.
-
-De plus, chaque exposition contient de nombreux couloirs la reliant à d'autres expositions. Ces connexions sont établies en fonction des liens présents dans l'article Wikipedia de l'exposition actuelle. Vous pouvez ainsi naviguer d'une exposition à l'autre à l'infini, en suivant votre curiosité.
-
-Si vous préférez accéder directement à un sujet en particulier, vous pouvez utiliser le terminal de recherche, situé au bout du hall d'entrée, juste derrière vous. Il vous suffit d'entrer votre sujet d'intérêt dans l'interface du terminal, et un couloir sera créé pour vous y conduire directement.
-
-[b]Bonne visite ![\\b]"
 wings = Array[ExtResource("2_y4oc8")]([SubResource("Resource_pgwi2"), SubResource("Resource_ooopd"), SubResource("Resource_m2ope"), SubResource("Resource_opuc1"), SubResource("Resource_qiy1c"), SubResource("Resource_l5mfx"), SubResource("Resource_bycfx"), SubResource("Resource_yimja")])

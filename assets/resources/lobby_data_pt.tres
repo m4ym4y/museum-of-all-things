@@ -61,19 +61,4 @@ exhibits = PackedStringArray("Bíblia", "The Beatles", "Matrix", "Odisseia", "Ai
 
 [resource]
 script = ExtResource("1_3ssej")
-introduction_text = "[center][color=black]
-[img=500]res://assets/logo/moat_logo_large.png[/img]
-
-[font_size=14][fill]
-Bem-vindo ao Museu de Todas as Coisas! Todos os visitantes são bem-vindos aqui, seja você se manifestando neste espaço através de uma janela 2D ou via Realidade Virtual. Este museu é diferente de qualquer outro que você tenha visitado no mundo físico, então pode levar um momento para se orientar.
-
-Agora você está no saguão do museu, adaptado para lhe dar um ponto de partida agradável em sua visita. Se você desejar retornar aqui, pode abrir seu menu do museu (via \"Escape\", \"Start\" ou pressionando \"Y\" no seu controle direito em Realidade Virtual) e selecionar \"Retornar ao Saguão\".
-
-O saguão é dividido em áreas por assunto, que são marcadas por placas e indicadas nos mapas no hall de entrada. Em cada uma dessas áreas, você encontrará muitos corredores com uma variedade de exposições fascinantes. Essas exposições são possíveis graças às imagens e dados textuais da Wikipédia e Wikimedia Commons. Qualquer tópico com uma página na Wikipédia também pode ser acessado como uma exposição neste museu.
-
-Além disso, cada exposição contém muitos corredores conectando-a a outras exposições. Esses corredores são determinados com base nos links no artigo da Wikipédia da exposição atual. Você pode mover-se de exposição em exposição infinitamente, seguindo sua curiosidade.
-
-Se você preferir ir direto para um assunto específico, pode acessar o terminal de busca, no final do hall de entrada diretamente atrás de você. Simplesmente digite seu tópico de interesse na interface do terminal, e ele criará um corredor para você ir direto até lá.
-
-[b]Tenha uma ótima visita![\\b]"
 wings = Array[ExtResource("2_y4oc8")]([SubResource("Resource_pgwi2"), SubResource("Resource_ooopd"), SubResource("Resource_m2ope"), SubResource("Resource_opuc1"), SubResource("Resource_qiy1c"), SubResource("Resource_l5mfx"), SubResource("Resource_bycfx"), SubResource("Resource_yimja")])

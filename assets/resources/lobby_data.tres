@@ -61,19 +61,4 @@ exhibits = PackedStringArray("Bible", "The Beatles", "The Matrix", "Odyssey", "G
 
 [resource]
 script = ExtResource("1_3ssej")
-introduction_text = "[center][color=black]
-[img=500]res://assets/logo/moat_logo_large.png[/img]
-
-[font_size=14][fill]
-Welcome to the Museum of All Things! All guests are welcome here, whether you're manifesting in this space through a 2 dimensional window or via Virtual Reality. This museum is different from any you've visited in the physical world, so it may take a moment to get your bearings.
-
-Right now you are in the museum's lobby, tailored to give you a pleasant starting point on your visit. If you ever wish to return here, you may open your museum menu (via \"Escape,\" \"Start,\" or by hitting \"Y\" on your right-hand controller in Virtual Reality) and select \"Return to Lobby.\"
-
-The lobby is divided into areas by subject, which are marked by signs and indicated on the maps in the entry hall. In each of these areas, you will find many hallways into a range of fascinating exhibits. These exhibits are made possible by pulling images and textual data from Wikipedia and Wikimedia commons. Any topic with a Wikipedia page can also be accessed as an exhibit in this museum.
-
-Furthermore, every exhibit contains many hallways connecting it to other exhibits. These hallways are determined based on the links in the current exhibit's Wikipedia article. You can move from exhibit to exhibit endlessly, following your curiosity.
-
-If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.
-
-[b]Have a wonderful visit![\\b]"
 wings = Array[ExtResource("2_y4oc8")]([SubResource("Resource_pgwi2"), SubResource("Resource_ooopd"), SubResource("Resource_m2ope"), SubResource("Resource_opuc1"), SubResource("Resource_qiy1c"), SubResource("Resource_l5mfx"), SubResource("Resource_bycfx"), SubResource("Resource_yimja")])
