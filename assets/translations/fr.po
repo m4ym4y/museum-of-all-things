@@ -129,6 +129,12 @@ msgstr "Luminosité ambiante"
 msgid "Enable Indirect Lighting (SSIL)"
 msgstr "Activer la lumière indirecte (SSIL)"
 
+msgid "Render Distance"
+msgstr "Distance de rendu"
+
+msgid "Fog"
+msgstr "Brouillard"
+
 msgid "Enable Fog"
 msgstr "Activer le brouillard"
 

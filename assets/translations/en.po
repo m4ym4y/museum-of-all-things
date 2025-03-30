@@ -133,6 +133,15 @@ msgstr "Ambient Light Level"
 msgid "Enable Indirect Lighting (SSIL)"
 msgstr "Enable Indirect Lighting (SSIL)"
 
+msgid "Render Distance"
+msgstr "Render Distance"
+
+msgid "Fog"
+msgstr "Fog"
+
+msgid "Maximum FPS"
+msgstr "Maximum FPS"
+
 msgid "Enable Fog"
 msgstr "Enable Fog"
 
@@ -141,6 +150,9 @@ msgstr "Enable V-Sync"
 
 msgid "Limit FPS"
 msgstr "Limit FPS"
+
+msgid "Post-Processing Effect"
+msgstr "Post-Processing Effect"
 
 msgid "None"
 msgstr "None"

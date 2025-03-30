@@ -132,6 +132,12 @@ msgstr "Nível de Luz Ambiente"
 msgid "Enable Indirect Lighting (SSIL)"
 msgstr "Ativar Iluminação Indireta (SSIL)"
 
+msgid "Render Distance"
+msgstr "Distância de Renderização"
+
+msgid "Fog"
+msgstr "Névoa"
+
 msgid "Enable Fog"
 msgstr "Ativar Névoa"
 

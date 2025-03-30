@@ -133,6 +133,12 @@ msgstr "Nivel de Luz Ambiental"
 msgid "Enable Indirect Lighting (SSIL)"
 msgstr "Activar Iluminación Indirecta (SSIL)"
 
+msgid "Render Distance"
+msgstr "Distancia de Renderizado"
+
+msgid "Fog"
+msgstr "Niebla"
+
 msgid "Enable Fog"
 msgstr "Activar Niebla"
 
@@ -141,6 +147,9 @@ msgstr "Activar V-Sync"
 
 msgid "Limit FPS"
 msgstr "Limitar FPS"
+
+msgid "Post-Processing Effect"
+msgstr "Efecto de Posprocesamiento"
 
 msgid "None"
 msgstr "Ninguno"
