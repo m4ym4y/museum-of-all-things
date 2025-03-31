@@ -1,0 +1,416 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Museum of All Things\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+"Language: ja\n"
+
+msgid "Enter the Museum"
+msgstr "入る"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Quit"
+msgstr "終了"
+
+msgid "The museum is currently unstaffed. Please refer to signage for information."
+msgstr "現在、館内にはスタッフがおりません。案内表示をご参照ください。"
+
+# Language options
+msgid "English"
+msgstr "English"
+
+msgid "Spanish"
+msgstr "Español"
+
+msgid "Portuguese"
+msgstr "Português"
+
+msgid "French"
+msgstr "Français"
+
+msgid "Japanese"
+msgstr "日本語"
+
+msgid "Are you sure you want to Quit?"
+msgstr "本当に終了しますか？"
+
+msgid "Yes"
+msgstr "はい"
+
+msgid "No"
+msgstr "いいえ"
+
+msgid "Open Page in Browser"
+msgstr "ブラウザで開く"
+
+msgid "Paused"  # Doesn't apply due to the coded part (Eg. "Lobby -" before "Paused")
+msgstr "（ポーズ中）"
+
+msgid "Resume"
+msgstr "もどる"
+
+msgid "Return to Lobby"
+msgstr "ロビーに戻る"
+
+msgid "Enter Exhibit Name"
+msgstr "展示を名前で検索する"
+
+msgid "Go to Random Exhibit"
+msgstr "ランダムな展示を見る"
+
+msgid "Enter exhibit title"
+msgstr "展示名を入力"
+
+msgid "Confirm"
+msgstr "決定"
+
+msgid "Back"
+msgstr "戻る"
+
+msgid "Exhibit Found: \"\""
+msgstr "展示が見つかりました：\"\""
+
+msgid "OK / Exit"
+msgstr "閉じる"
+
+# VR Settings
+msgid "VR Controls"
+msgstr "VR操作"
+
+msgid "Restore Default Settings"
+msgstr "デフォルトに戻す"
+
+msgid "Movement Style"
+msgstr "動き方"
+
+msgid "Teleportation (Left Trigger)"
+msgstr "テレポート（左トリガー）"
+
+msgid "Direct Movement (Left Analog Stick)" 
+msgstr "直接移動 (左アナログスティック)"
+
+msgid "Direct Movement Speed" 
+msgstr "移動速度（直接移動）"
+
+msgid "Camera Rotation Increment (Right Stick)"
+msgstr "カメラ回転角度 (右アナログスティック)"
+
+msgid "Smooth Camera Rotation"
+msgstr "スムーズターン"
+
+msgid "Preparing Exhibit..."
+msgstr "準備中"
+
+msgid "Error Loading Exhibit."
+msgstr "展示をご用意できませんでした。"
+
+msgid "Data Settings"
+msgstr "データ設定"
+
+msgid "Cache"   # Currently not applied (probably due to the values that follow)
+msgstr "キャッシュ"
+
+msgid "Clear Cache"
+msgstr "キャッシュをクリア"
+
+msgid "Cache Size Limit"
+msgstr "キャッシュの最大容量"
+
+msgid "Automatically limit cache size (on quit)"
+msgstr "終了時にキャッシュ容量を自動で最適化する"
+
+# Graphics Settings
+msgid "Graphics Settings"
+msgstr "グラフィック設定"
+
+msgid "Render Scale"
+msgstr "レンダースケール"
+
+msgid "Fullscreen"
+msgstr "フルスクリーン"
+
+msgid "Reflection Quality"
+msgstr "反射の精度"
+
+msgid "Enable Reflections"
+msgstr "光の反射を有効化"
+
+msgid "Ambient Light Level"
+msgstr "館内の明るさ"
+
+msgid "Enable Indirect Lighting (SSIL)"
+msgstr "間接照明（SSIL）を有効化"
+
+msgid "Render Distance"
+msgstr "描画距離"
+
+msgid "Fog"
+msgstr "フォグ"
+
+msgid "Maximum FPS"
+msgstr "最大フレームレート"
+
+msgid "Enable Fog"
+msgstr "フォグを有効化"
+
+msgid "Enable V-Sync"
+msgstr "V-Syncを有効化"
+
+msgid "Limit FPS"
+msgstr "FPSを制限する"
+
+msgid "Post-Processing Effect"
+msgstr "ポストプロセス"
+
+msgid "None"
+msgstr "なし"
+
+msgid "CRT Filter"
+msgstr "ブラウン管フィルター"
+
+# Control Settings
+msgid "Control Settings"
+msgstr "操作設定"
+
+msgid "Mouse Sensitivity"
+msgstr "マウス感度"
+
+msgid "Invert Y-axis"
+msgstr "Y軸を反転させる"
+
+msgid "Remap Inputs"
+msgstr "ボタン割り当ての変更"
+
+msgid "Move Forward"
+msgstr "前"
+
+msgid "Move Back"
+msgstr "後ろ"
+
+msgid "Strafe Left"
+msgstr "左"
+
+msgid "Strafe Right"
+msgstr "右"
+
+msgid "Jump"
+msgstr "ジャンプ"
+
+msgid "Crouch"
+msgstr "しゃがみ"
+
+msgid "Interact"
+msgstr "調べる"
+
+msgid "Joypad Camera Deadzone"
+msgstr "カメラ操作のデッドゾーン"
+
+msgid "Audio Settings"
+msgstr "オーディオ設定"
+
+msgid "Global Volume"
+msgstr "マスター"
+
+msgid "Sound Effects Volume"
+msgstr "効果音"
+
+msgid "Ambience Volume"
+msgstr "環境音"
+
+msgid "Music Volume"
+msgstr "音楽"
+
+msgid "Enter VR"
+msgstr "VRモード"
+
+msgid "Snap turning:"
+msgstr "スナップ回転："
+
+msgid "Y axis dead zone"
+msgstr "Y軸デッドゾーン"
+
+msgid "X axis dead zone"
+msgstr "X軸デッドゾーン"
+
+msgid "Haptics Scale"
+msgstr "触覚フィードバック強度"
+
+msgid "Apply"
+msgstr "適用"
+
+msgid "Reset"
+msgstr "リセット"
+
+msgid "Height adjust:"
+msgstr "高さの調整："
+
+msgid "WebXR primary:"
+msgstr "WebXRメインデバイス"
+
+msgid "Auto"
+msgstr "オート"
+
+msgid "Thumbstick"
+msgstr "アナログスティック"
+
+msgid "Trackpad"
+msgstr "トラックパッド"
+
+msgid "Technology"
+msgstr "Technology"
+
+msgid "Featured Technology Exhibits"
+msgstr "「テクノロジー」\nに関する注目の展示"
+
+msgid "Science"
+msgstr "Science"
+
+msgid "Featured Science Exhibits"
+msgstr "「サイエンス」\nに関する注目の展示"
+
+msgid "Geography"
+msgstr "Geography"
+
+msgid "Featured Geography Exhibits"
+msgstr "「地理」\nに関する注目の展示"
+
+msgid "Culture"
+msgstr "Culture"
+
+msgid "Featured Culture Exhibits"
+msgstr "「文化・カルチャー」\nに関する注目の展示"
+
+msgid "Art"
+msgstr "Art"
+
+msgid "Featured Art Exhibits"
+msgstr "「美術・アート」\nに関する注目の展示"
+
+msgid "People"
+msgstr "People"
+
+msgid "Featured People Exhibits"
+msgstr "「人物」\nに関する注目の展示"
+
+msgid "History"
+msgstr "History"
+
+msgid "Featured History Exhibits"
+msgstr "「歴史」\nに関する注目の展示"
+
+msgid "Media"
+msgstr "Media"
+
+msgid "Featured Media Exhibits"
+msgstr "「メディア」\nに関する注目の展示"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Featured Search Exhibits"
+msgstr "検索"
+
+### scenes/Lobby.tscn Section
+
+msgid ""
+"[b]Welcome to the Museum of All Things![/b]\n"
+"\n"
+"[fill]This museum is different from any you've visited in the physical world, so it may take a moment to get your bearings.[/fill]\n"
+"\n"
+"[b]The Lobby[/b]\n"
+"\n"
+"[fill]Right now you are in the museum's lobby, tailored to give you a pleasant starting point on your visit. If you ever wish to return here, you may simply open your museum menu (via \"Escape,\" \"Start,\" or by hitting \"Y\" on your right-hand controller in Virtual Reality) and select \"Return to Lobby.\"\n"
+"\n"
+"The lobby is divided into areas by subject, which are marked by signs and indicated on the maps in the entry hall behind you. In each of these areas, you will find many hallways into a range of fascinating exhibits.[/fill]"
+msgstr ""
+"[b]MoAT へようこそ。[/b]\n"　
+"\n"
+"[fill]ここは、あらゆるモノや事柄を展示する博物館。[/fill]\n[fill]あなたがこれまで訪れたどの博物館とも異なる空間です。[/fill]\n"
+"\n"
+"[b]ロビーについて[/b]\n"
+"\n"
+"[fill]現在地は、出発地点となる当館のロビーです。 ロビーに戻りたい場合は、キーボードの「Esc」キー、コントローラーの場合は「Start」ボタン、VRの場合は右コントローラーの「Y」ボタンを押してメニューを開き、「ロビーに戻る」を選択してください。\n"
+"\n"
+"このロビーは、展示カテゴリごとにエリアが分かれています。各エリアの入り口には案内があり、それぞれの位置は後ろにある案内マップに表示されています。各エリアからは無数の通路が伸びており、どれも厳選された展示へと繋がっています。[/fill]"
+
+msgid ""
+"[b]Museum Exhibits[/b]\n"
+"\n"
+"[fill]Exhibits are not made by hand-- they are generated procedurally by pulling images and textual data from Wikipedia and Wikimedia commons. This means any topic with a Wikipedia page can also be accessed as an exhibit in this museum!\n"
+"\n"
+"Furthermore, each exhibit contains many hallways connecting it to other exhibits. These hallways are determined based on the links in the current exhibit's Wikipedia article. You can move from exhibit to exhibit endlessly, following your curiosity.\n"
+"\n"
+"If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.[/fill]"
+msgstr ""
+"[b]展示について[/b]\n"
+"\n"
+"[fill]当館の展示は、すべてウィキペディアおよびウィキメディア・コモンズから抽出したテキストや画像データを基に自動的に生成されています。つまり、ウィキペディアに記事がある事柄なら、どんなものでも当館の展示としてご覧いただけます。\n"
+"\n"
+"それぞれの展示室には、他の展示へと繋がる通路がいくつも伸びています。これらの通路は、ウィキペディアの記事にある内部リンクを元に生成されています。お好きなように、心ゆくまで通路を辿り、さまざまな展示をご覧いただけます。\n"
+"\n"
+"特定の展示をお探しの場合は、後ろの通路反対側にある検索ターミナルをご利用いただけます。端末の指示に従ってお探しの展示を検索してください。展示が見つかると、そこへ繋がる通路が開きます。[/fill]"
+
+### scenes/menu/TerminalMenu.tscn Section
+
+msgid ""
+"Welcome to the MoAT Custom Exhibit Terminal\n"
+"\n"
+"You may access a specific exhibit by selecting \"Enter Exhibit Name.\" Alternatively, you may ask for a random exhibit.\n"
+"\n"
+"Hit \"E\" on your keyboard to interact with the terminal, or press Y/△ if you are using a controller.\n"
+"\n"
+msgstr ""
+"こちらは、館内検索ターミナルです。\n"
+"\n"
+"「展示を名前で検索する」を選択して、特定の展示を検索できます。また、ランダムな展示にアクセスすることも可能です。\n"
+"\n"
+"キーボードの「E」キー（コントローラーの場合は「Y」または「△」）を押してご利用ください。\n"
+"\n"
+
+msgid "Enter Exhibit Name "
+msgstr "展示を名前で検索する "
+
+msgid "Go to Random Exhibit "
+msgstr "ランダムな展示を見る "
+
+msgid ""
+"Enter the title of the exhibit you would like to acccess. A path will be routed and the door will open to the best matching exhibit.\n"
+"\n"
+msgstr ""
+"検索したい展示の名前をご入力ください。\n展示が見つかると、右側のドアが開き、通路が生成されます。\n"
+"\n"
+
+msgid "Enter exhibit title"
+msgstr "展示名を入力"
+
+msgid "Confirm"
+msgstr "決定"
+
+msgid "Back"
+msgstr "戻る"
+
+msgid "Exhibit Found: \"\"\n"
+msgstr "展示が見つかりました：\"\"\n"
+
+msgid ""
+"\n"
+"Proceed to your right to access this exhibit, or return to the terminal's main menu to access a different exhibit.\n"
+"\n"
+msgstr ""
+"\n"
+"右側の通路にお進みください。別の展示を検索する場合は、\nターミナルのメインメニューに戻り、もう一度検索してください。\n"
+"\n"
+
+msgid "OK / Exit"
+msgstr "閉じる"
+
+msgid ""
+"We were unable to locate the exhibit that you requested. Please try a different exhibit.\n"
+"\n"
+msgstr ""
+"お探しの展示は見つかりませんでした。もう一度お試しください。\n"
+"\n"

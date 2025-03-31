@@ -42,6 +42,10 @@ window/subwindows/embed_subwindows=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[dotnet]
+
+project/assembly_name="Museum of All Things"
+
 [editor]
 
 movie_writer/movie_file="/home/maya/Videos/opening.avi"
@@ -190,10 +194,10 @@ toggle_fullscreen={
 [internationalization]
 
 locale/translation_remaps={
-"res://assets/resources/lobby_data.tres": PackedStringArray("res://assets/resources/lobby_data_pt.tres:pt", "res://assets/resources/lobby_data_fr.tres:fr", "res://assets/resources/lobby_data_es.tres:es"),
+"res://assets/resources/lobby_data.tres": PackedStringArray("res://assets/resources/lobby_data_pt.tres:pt", "res://assets/resources/lobby_data_fr.tres:fr", "res://assets/resources/lobby_data_es.tres:es", "res://assets/resources/lobby_data_ja.tres:ja"),
 "res://assets/textures/lobby_plaque_intro_1.png": PackedStringArray()
 }
-locale/translations=PackedStringArray("res://assets/translations/fr.po", "res://assets/translations/pt.po", "res://assets/translations/en.po", "res://assets/translations/es.po")
+locale/translations=PackedStringArray("res://assets/translations/fr.po", "res://assets/translations/pt.po", "res://assets/translations/en.po", "res://assets/translations/es.po", "res://assets/translations/ja.po")
 locale/test="en"
 locale/locale_filter_mode=0
 locale/language_filter=["en"]

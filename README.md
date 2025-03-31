@@ -48,6 +48,7 @@ an issue and we can discuss it before you put too much work in.
 - Portuguese
 - French
 - Spanish
+- Japanese
 
 ## Roadmap for Future Updates (Not in any order)
 

@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="LobbyData" load_steps=11 format=3 uid="uid://34yga2226k3j"]
+
+[ext_resource type="Script" uid="uid://bdc8jjijlgjox" path="res://resource_definitions/LobbyData.gd" id="1_3ssej"]
+[ext_resource type="Script" uid="uid://ch3nm32ndlrbh" path="res://resource_definitions/LobbyWing.gd" id="2_y4oc8"]
+
+[sub_resource type="Resource" id="Resource_pgwi2"]
+script = ExtResource("2_y4oc8")
+name = "Technology"
+corner_1 = Vector2(-68, -44)
+corner_2 = Vector2(-32, -8)
+exhibits = PackedStringArray("制御者", "ミノックス", "トランジスタ", "陶磁器", "Godot (ゲームエンジン)", "パスチャライゼーション", "核実験", "接着剤", "ローマ水道", "3次元コンピュータグラフィックス", "飛行機", "単純機械", "印刷機", "避妊", "顕微鏡", "ゲーム機", "トレビュシェット", "畜産", "オルドワン石器")
+
+[sub_resource type="Resource" id="Resource_ooopd"]
+script = ExtResource("2_y4oc8")
+name = "Culture"
+corner_1 = Vector2(32, -44)
+corner_2 = Vector2(68, -8)
+exhibits = PackedStringArray("道化師", "竜", "コンビニエンスストア", "ハイタッチ", "ゴンチャロフ (1973年の映画)", "コーヒー", "スープ", "The Backrooms", "タロット", "K-POP", "囲碁", "ヒンドゥー教", "ダンディ", "ゴーレム", "シーシャンティ", "広告", "大洪水", "修道士")
+
+[sub_resource type="Resource" id="Resource_m2ope"]
+script = ExtResource("2_y4oc8")
+name = "Science"
+corner_1 = Vector2(-44, -92)
+corner_2 = Vector2(-8, -36)
+exhibits = PackedStringArray("菌類", "恐竜", "海洋生態系", "地球", "火星の人面岩", "ネズミ", "エビ", "パンノキ", "可視化", "金", "バオバブ", "ヒト", "振り子", "性的二形", "光", "チーズ", "ヤセイカンラン", "湿地", "スローロリス", "チョウ", "木星", "土壌", "フラクタル", "目")
+
+[sub_resource type="Resource" id="Resource_opuc1"]
+script = ExtResource("2_y4oc8")
+name = "Geography"
+corner_1 = Vector2(8, -92)
+corner_2 = Vector2(44, -36)
+exhibits = PackedStringArray("アメリカ合衆国", "南極大陸", "パタゴニア", "チベット", "ペルセポリス", "ペトラ", "台北101", "おっぱい形の山", "リヴァプール", "重慶市", "ピトケアン諸島", "マリアナ海溝", "シベリア鉄道", "フェアフィールド郡 (オハイオ州)", "チャド湖", "セネガル", "ボラボラ島", "ピレネー国立公園", "キリマンジャロ", "キャンベラ", "アマゾン熱帯雨林", "ヨークシャー", "ウルク (メソポタミア)", "黒石")
+
+[sub_resource type="Resource" id="Resource_qiy1c"]
+script = ExtResource("2_y4oc8")
+name = "Art"
+corner_1 = Vector2(-72, 12)
+corner_2 = Vector2(-36, 48)
+exhibits = PackedStringArray("バロック絵画", "フィリピンの漫画", "聖ステファノス修道院", "パブロ・ピカソ", "ルーヴル美術館", "ジョアン・ミロ", "艾未未", "フリーダ・カーロ", "ケーテ・コルヴィッツ", "フランク・ロイド・ライト", "エドガー・ドガ", "洞窟壁画", "ミケランジェロ・ブオナローティ", "フランシスコ・デ・ゴヤ", "フォーヴィスム", "グラフィティ", "古代ギリシアの彫刻", "マウリッツ・エッシャー", "ジョルジュ・スーラ")
+
+[sub_resource type="Resource" id="Resource_l5mfx"]
+script = ExtResource("2_y4oc8")
+name = "People"
+corner_1 = Vector2(36, 12)
+corner_2 = Vector2(72, 48)
+exhibits = PackedStringArray("ポーランド人の一覧", "アルベルト・アインシュタイン", "フレディ・マーキュリー", "コービー・ブライアント", "チンギス・カン", "グリゴリー・ラスプーチン", "ジョージ・フォックス", "2パック", "平塚らいてう", "ウィリアム・シェイクスピア", "ライナス・ポーリング", "ダニー・デヴィート", "J・R・R・トールキン", "メアリー・シェリー", "アレクサンドリア・オカシオ＝コルテス", "イブン・バットゥータ", "マルティン・ルター", "マーティン・ルーサー・キング・ジュニア")
+
+[sub_resource type="Resource" id="Resource_bycfx"]
+script = ExtResource("2_y4oc8")
+name = "History"
+corner_1 = Vector2(-48, 60)
+corner_2 = Vector2(-12, 96)
+exhibits = PackedStringArray("ドイツの歴史", "チェルノブイリ原子力発電所事故", "タイタニック (客船)", "1960年代のカウンターカルチャー", "アメリカ合衆国における人体実験", "新型コロナウイルス感染症の世界的流行 (2019年-)", "中央情報局", "イスラーム黄金時代", "月面着陸", "サンフランシスコ地震", "ハンニバルのアルプス越え", "地下鉄サリン事件", "写真史", "デイヴ・マシューズ・バンドのツアーバス事件", "血の中傷", "オヨ王国", "海賊", "2019年-2020年香港民主化デモ")
+
+[sub_resource type="Resource" id="Resource_yimja"]
+script = ExtResource("2_y4oc8")
+name = "Media"
+corner_1 = Vector2(12, 60)
+corner_2 = Vector2(48, 96)
+exhibits = PackedStringArray("聖書", "ビートルズ", "マトリックス (映画)", "オデュッセイア", "ギルガメシュ叙事詩", "ゴドーを待ちながら", "Homestuck", "スタートレック", "バービー (映画)", "新世紀エヴァンゲリオン", "ハムレット", "カタンの開拓者たち", "Twitter", "ヴォーグ (雑誌)", "蒸気船ウィリー", "モンテ・クリスト伯", "ウィキペディア", "Minecraft")
+
+[resource]
+script = ExtResource("1_3ssej")
+wings = Array[ExtResource("2_y4oc8")]([SubResource("Resource_pgwi2"), SubResource("Resource_ooopd"), SubResource("Resource_m2ope"), SubResource("Resource_opuc1"), SubResource("Resource_qiy1c"), SubResource("Resource_l5mfx"), SubResource("Resource_bycfx"), SubResource("Resource_yimja")])
