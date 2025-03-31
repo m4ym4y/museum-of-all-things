@@ -19,7 +19,6 @@ msgstr "終了"
 msgid "The museum is currently unstaffed. Please refer to signage for information."
 msgstr "現在、館内にはスタッフがおりません。案内表示をご参照ください。"
 
-# Language options
 msgid "English"
 msgstr "English"
 
@@ -47,7 +46,10 @@ msgstr "いいえ"
 msgid "Open Page in Browser"
 msgstr "ブラウザで開く"
 
-msgid "Paused"  # Doesn't apply due to the coded part (Eg. "Lobby -" before "Paused")
+msgid "Lobby"
+msgstr "ロビー"
+
+msgid " - Paused"
 msgstr "（ポーズ中）"
 
 msgid "Resume"
@@ -108,11 +110,23 @@ msgstr "準備中"
 msgid "Error Loading Exhibit."
 msgstr "展示をご用意できませんでした。"
 
+msgid "Graphics"
+msgstr "グラフィックス"
+
+msgid "Audio"
+msgstr "オーディオ"
+
+msgid "Data"
+msgstr "データ"
+
+msgid "Controls"
+msgstr "操作"
+
 msgid "Data Settings"
 msgstr "データ設定"
 
-msgid "Cache"   # Currently not applied (probably due to the values that follow)
-msgstr "キャッシュ"
+msgid "Cache (- GB)"   
+msgstr "キャッシュ（~ GB）"
 
 msgid "Clear Cache"
 msgstr "キャッシュをクリア"
