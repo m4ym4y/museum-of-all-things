@@ -37,5 +37,6 @@ pixel_size = 0.002
 texture_filter = 5
 modulate = Color(0, 0, 0, 1)
 text = "←"
+font = ExtResource("5_02wvy")
 font_size = 165
 outline_size = 6
