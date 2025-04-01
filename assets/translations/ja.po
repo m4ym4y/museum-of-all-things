@@ -49,8 +49,14 @@ msgstr "ブラウザで開く"
 msgid "Lobby"
 msgstr "ロビー"
 
+msgid "Paused"
+msgstr "（ポーズ中）"
+
 msgid " - Paused"
 msgstr "（ポーズ中）"
+
+msgid "Lobby"
+msgstr "ロビー"
 
 msgid "Resume"
 msgstr "もどる"
@@ -125,8 +131,8 @@ msgstr "操作"
 msgid "Data Settings"
 msgstr "データ設定"
 
-msgid "Cache (- GB)"   
-msgstr "キャッシュ（~ GB）"
+msgid "Cache"   
+msgstr "キャッシュ"
 
 msgid "Clear Cache"
 msgstr "キャッシュをクリア"
