@@ -22,11 +22,17 @@ msgstr "The museum is currently unstaffed. Please refer to signage for informati
 msgid "English"
 msgstr "English"
 
+msgid "Spanish"
+msgstr "Español"
+
 msgid "Portuguese"
-msgstr "Portuguese"
+msgstr "Português"
 
 msgid "French"
-msgstr "French"
+msgstr "Français"
+
+msgid "Japanese"
+msgstr "日本語"
 
 msgid "Are you sure you want to Quit?"
 msgstr "Are you sure you want to Quit?"
@@ -37,8 +43,17 @@ msgstr "Yes"
 msgid "No"
 msgstr "No"
 
+msgid "Open Page in Browser"
+msgstr "Open Page in Browser"
+
 msgid "Paused"
 msgstr "Paused"
+
+msgid " - Paused"
+msgstr "- Paused"
+
+msgid "Lobby"
+msgstr "Lobby"
 
 msgid "Resume"
 msgstr "Resume"
@@ -97,10 +112,22 @@ msgstr "Preparing Exhibit..."
 msgid "Error Loading Exhibit."
 msgstr "Error Loading Exhibit."
 
+msgid "Graphics"
+msgstr "Graphics"
+
+msgid "Audio"
+msgstr "Audio"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Controls"
+msgstr "Controls"
+
 msgid "Data Settings"
 msgstr "Data Settings"
 
-msgid "Cache"
+msgid "Cache" ### Currently not applied (probably due to the values that follow)
 msgstr "Cache"
 
 msgid "Clear Cache"
@@ -133,6 +160,15 @@ msgstr "Ambient Light Level"
 msgid "Enable Indirect Lighting (SSIL)"
 msgstr "Enable Indirect Lighting (SSIL)"
 
+msgid "Render Distance"
+msgstr "Render Distance"
+
+msgid "Fog"
+msgstr "Fog"
+
+msgid "Maximum FPS"
+msgstr "Maximum FPS"
+
 msgid "Enable Fog"
 msgstr "Enable Fog"
 
@@ -142,11 +178,50 @@ msgstr "Enable V-Sync"
 msgid "Limit FPS"
 msgstr "Limit FPS"
 
+msgid "Post-Processing Effect"
+msgstr "Post-Processing Effect"
+
 msgid "None"
 msgstr "None"
 
 msgid "CRT Filter"
 msgstr "CRT Filter"
+
+msgid "Control Settings"
+msgstr "Control Settings"
+
+msgid "Mouse Sensitivity"
+msgstr "Mouse Sensitivity"
+
+msgid "Invert Y-axis"
+msgstr "Invert Y-axis"
+
+msgid "Remap Inputs"
+msgstr "Remap Inputs"
+
+msgid "Move Forward"
+msgstr "Move Forward"
+
+msgid "Move Back"
+msgstr "Move Back"
+
+msgid "Strafe Left"
+msgstr "Strafe Left"
+
+msgid "Strafe Right"
+msgstr "Strafe Right"
+
+msgid "Jump"
+msgstr "Jump"
+
+msgid "Crouch"
+msgstr "Crouch"
+
+msgid "Interact"
+msgstr "Interact"
+
+msgid "Joypad Camera Deadzone"
+msgstr "Joypad Camera Deadzone"
 
 msgid "Audio Settings"
 msgstr "Audio Settings"
@@ -159,6 +234,9 @@ msgstr "Sound Effects Volume"
 
 msgid "Ambience Volume"
 msgstr "Ambience Volume"
+
+msgid "Music Volume"
+msgstr "Music Volume"
 
 msgid "Enter VR"
 msgstr "Enter VR"
