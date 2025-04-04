@@ -20,11 +20,21 @@ var remappable_actions_str := [
 var current_joypad_id := 0
 
 func _ready() -> void:
+  if Util.is_web():
+    _update_web_default_controls()
+
   populate_map_buttons()
   var settings = SettingsManager.get_settings(_control_ns)
   _loaded_settings = true
   if settings:
     load_settings_obj(settings)
+
+func _update_web_default_controls():
+  # Change the default for crouch on the web to C rather than CTRL.
+  for input_event in InputMap.action_get_events("crouch"):
+    if input_event is InputEventKey:
+      if input_event.physical_keycode == KEY_CTRL:
+        input_event.physical_keycode = KEY_C
 
 func populate_map_buttons() -> void:
   for action_str in remappable_actions_str:
@@ -135,6 +145,8 @@ func _on_resume() -> void:
 
 func _on_restore_defaults_button_pressed() -> void:
   InputMap.load_from_project_settings()
+  if Util.is_web():
+    _update_web_default_controls()
   update_all_maps_label()
   $MouseOptions/InvertY.button_pressed = false
   $MouseOptions/Sensitivity.value = 1.0

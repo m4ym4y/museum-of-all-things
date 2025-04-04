@@ -28,7 +28,7 @@ func request(url, headers=COMMON_HEADERS, verbose=true):
     http_client.get_status() == HTTPClient.STATUS_RESOLVING
   ):
     http_client.poll()
-    OS.delay_msec(DELAY_MS)
+    Util.delay_msec(DELAY_MS)
 
   if http_client.get_status() != HTTPClient.STATUS_CONNECTED:
     return [FAILED, 0, null, null]
@@ -37,7 +37,7 @@ func request(url, headers=COMMON_HEADERS, verbose=true):
 
   while http_client.get_status() == HTTPClient.STATUS_REQUESTING:
     http_client.poll()
-    OS.delay_msec(DELAY_MS)
+    Util.delay_msec(DELAY_MS)
 
   if http_client.get_status() != HTTPClient.STATUS_BODY:
     return [FAILED, 0, null, null]
@@ -48,8 +48,37 @@ func request(url, headers=COMMON_HEADERS, verbose=true):
     var chunk = http_client.read_response_body_chunk()
     if chunk.size() > 0:
       response.append_array(chunk)
-    OS.delay_msec(DELAY_MS)
+    Util.delay_msec(DELAY_MS)
 
   var response_code = http_client.get_response_code()
   var response_headers = http_client.get_response_headers()
   return [OK, response_code, response_headers, response]
+
+class ResponseAsync:
+  signal completed (result)
+
+func request_async(url, headers=COMMON_HEADERS, verbose=true):
+  if OS.is_debug_build() and verbose:
+    print("fetching url ", url)
+
+  if Util.is_web():
+    # Headers don't always work from the web, let's just not send any.
+    headers = []
+
+  var resp = ResponseAsync.new()
+
+  var req = HTTPRequest.new()
+  req.use_threads = Util.is_using_threads() and not Util.is_web()
+  req.request_completed.connect(_on_async_request_completed.bind(req, resp))
+
+  var do_request = func(parent):
+    parent.add_child(req)
+    req.request(url, headers)
+
+  do_request.call_deferred(self)
+
+  return resp
+
+func _on_async_request_completed(result, response_code, headers, body, req, resp):
+  resp.completed.emit([result, response_code, headers, body])
+  req.queue_free()
