@@ -42,6 +42,7 @@ color = Color(0, 0, 0, 0.501961)
 visible = false
 
 [node name="MainMenu" parent="CanvasLayer" instance=ExtResource("4_elltp")]
+unique_name_in_owner = true
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("5_boks6")]
 visible = false
@@ -72,6 +73,7 @@ sky_mode = 1
 [connection signal="resume" from="CanvasLayer/Settings" to="." method="_on_settings_back"]
 [connection signal="settings" from="CanvasLayer/MainMenu" to="." method="_on_main_menu_settings"]
 [connection signal="start" from="CanvasLayer/MainMenu" to="." method="_on_main_menu_start_pressed"]
+[connection signal="start_webxr" from="CanvasLayer/MainMenu" to="." method="_on_main_menu_start_webxr"]
 [connection signal="resume" from="CanvasLayer/PauseMenu" to="." method="_on_main_menu_start_pressed"]
 [connection signal="return_to_lobby" from="CanvasLayer/PauseMenu" to="." method="_on_pause_menu_return_to_lobby"]
 [connection signal="settings" from="CanvasLayer/PauseMenu" to="." method="_on_pause_menu_settings"]

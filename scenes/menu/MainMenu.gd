@@ -1,6 +1,7 @@
 extends Control
 
 signal start
+signal start_webxr
 signal settings
 
 var fade_in_start = Color(0.0, 0.0, 0.0, 1.0)
@@ -11,9 +12,15 @@ func _ready() -> void:
   _on_visibility_changed()
   call_deferred("_start_fade_in")
 
+  if Util.is_web():
+    %Quit.visible = false
+
 func _on_visibility_changed():
   if visible:
     $MarginContainer/VBoxContainer/Start.grab_focus()
+
+func set_webxr_enabled(p_enabled):
+  %StartWebXR.visible = p_enabled
 
 func _start_fade_in():
   $FadeIn.color = fade_in_start
@@ -26,6 +33,9 @@ func _start_fade_in():
 
 func _on_start_pressed():
   emit_signal("start")
+
+func _on_start_web_xr_pressed() -> void:
+  emit_signal("start_webxr")
 
 func _on_settings_pressed():
   emit_signal("settings")

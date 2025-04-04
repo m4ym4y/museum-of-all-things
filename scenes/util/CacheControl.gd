@@ -4,29 +4,41 @@ signal cache_size_result(cache_info)
 
 var cache_dir = "user://cache/"
 var global_cache_dir = ProjectSettings.globalize_path(cache_dir)
-var _cache_stat_thread = Thread.new()
+var _cache_stat_thread: Thread
+var _cache_stat_timer: Timer
 var CACHE_STAT_QUEUE = "CacheStat"
 var _cache_size_info = 0
 var _last_stat_time = 0
 var _max_stat_age = 2000
 
 func _ready():
-  _cache_stat_thread.start(_cache_stat_loop)
+  if Util.is_using_threads():
+    _cache_stat_thread = Thread.new()
+    _cache_stat_thread.start(_cache_stat_loop)
+  elif not Util.is_web():
+    _cache_stat_timer = Timer.new()
+    add_child(_cache_stat_timer)
+    _cache_stat_timer.timeout.connect(_cache_stat_item)
+    _cache_stat_timer.start()
 
 func _exit_tree():
   WorkQueue.set_quitting()
-  _cache_stat_thread.wait_to_finish()
+  if _cache_stat_thread:
+    _cache_stat_thread.wait_to_finish()
 
 func _cache_stat_loop():
   while not WorkQueue.get_quitting():
-    var item = WorkQueue.process_queue(CACHE_STAT_QUEUE)
-    if item and len(item) > 0 and item[0] == "size":
-      if Time.get_ticks_msec() - _last_stat_time < _max_stat_age:
-        call_deferred("_emit_cache_size")
-      else:
-        _cache_size_info = _get_cache_size()
-        _last_stat_time = Time.get_ticks_msec()
-        call_deferred("_emit_cache_size")
+    _cache_stat_item()
+
+func _cache_stat_item():
+  var item = WorkQueue.process_queue(CACHE_STAT_QUEUE)
+  if item and len(item) > 0 and item[0] == "size":
+    if Time.get_ticks_msec() - _last_stat_time < _max_stat_age:
+      call_deferred("_emit_cache_size")
+    else:
+      _cache_size_info = _get_cache_size()
+      _last_stat_time = Time.get_ticks_msec()
+      call_deferred("_emit_cache_size")
 
 func _emit_cache_size():
   emit_signal("cache_size_result", _cache_size_info)
@@ -49,10 +61,13 @@ func clear_cache():
     dir.remove(file)
 
 func calculate_cache_size():
-  WorkQueue.add_item(CACHE_STAT_QUEUE, ["size"])
+  if not Util.is_web():
+    WorkQueue.add_item(CACHE_STAT_QUEUE, ["size"])
 
 func _get_cache_size():
-  if OS.get_name() == "Windows":
+  if Util.is_web():
+    return -1
+  elif OS.get_name() == "Windows":
     return _get_cache_size_windows()
   else:
     return _get_cache_size_unix()
