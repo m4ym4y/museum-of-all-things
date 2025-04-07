@@ -52,6 +52,17 @@ jobs:
           # Tell Godot Engine to be self-contained
           touch ._sc_
 
+      - name: Set up OpenJDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+        if: github.event_name != 'pull_request'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        if: github.event_name != 'pull_request'
+
       - name: Import project
         run: |
           ./tools/godot --import --headless --verbose
@@ -137,6 +148,25 @@ jobs:
         with:
           name: Web
           path: dist/${{ env.EXPORT_NAME }}_Web.zip
+
+      - name: Export Meta Quest
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android-release.keystore
+
+          export GODOT_ANDROID_KEYSTORE_RELEASE_PATH=android-release.keystore
+          export GODOT_ANDROID_KEYSTORE_RELEASE_USER="${{ secrets.ANDROID_KEYSTORE_USER }}"
+          export GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD="${{ secrets.ANDROID_KEYSTORE_PASSWORD }}"
+
+          ./tools/godot --verbose --headless --install-android-build-template --export-release \
+          "Meta Quest" ./dist/${{ env.EXPORT_NAME }}_Quest.apk
+        if: github.event_name != 'pull_request'
+
+      - name: Upload Meta Quest
+        uses: actions/upload-artifact@v4
+        with:
+          name: Meta Quest
+          path: dist/${{ env.EXPORT_NAME }}_Quest.apk
+        if: github.event_name != 'pull_request'
 
   release:
     name: Attach to Release
