@@ -241,4 +241,4 @@ openxr/reference_space=2
 shaders/enabled=true
 openxr/foveation_level.meta_quest=3
 openxr/foveation_dynamic.meta_quest=true
-openxr/enabled.meta_quest=true
+openxr/enabled.openxr=true
