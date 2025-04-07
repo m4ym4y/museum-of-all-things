@@ -57,7 +57,7 @@ jobs:
           ./tools/godot --import --headless --verbose
 
       - name: Ensure path exists
-        run: mkdir -p dist
+        run: mkdir -p dist/web
 
       - name: Export PCK
         run: |
@@ -81,6 +81,17 @@ jobs:
           name: Linux
           path: dist/${{ env.EXPORT_NAME }}_Linux.x86_64
 
+      - name: Export Linux (OpenXR)
+        run: |
+          ./tools/godot --verbose --headless --export-release \
+          "Linux (OpenXR)" ./dist/${EXPORT_NAME}_Linux_OpenXR.x86_64
+
+      - name: Upload Linux (OpenXR)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Linux (OpenXR)
+          path: dist/${{ env.EXPORT_NAME }}_Linux_OpenXR.x86_64
+
       - name: Export Windows Desktop
         run: |
           ./tools/godot --verbose --headless --export-release \
@@ -92,6 +103,17 @@ jobs:
           name: Windows Desktop
           path: dist/${{ env.EXPORT_NAME }}.exe
 
+      - name: Export Windows Desktop (OpenXR)
+        run: |
+          ./tools/godot --verbose --headless --export-release \
+          "Windows Desktop (OpenXR)" ./dist/${EXPORT_NAME}_OpenXR.exe
+
+      - name: Upload Windows Desktop (OpenXR)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows Desktop (OpenXR)
+          path: dist/${{ env.EXPORT_NAME }}_OpenXR.exe
+
       - name: Export macOS
         run: |
           ./tools/godot --verbose --headless --export-release \
@@ -102,6 +124,19 @@ jobs:
         with:
           name: macOS
           path: dist/${{ env.EXPORT_NAME }}_OSX.zip
+
+      - name: Export Web
+        run: |
+          ./tools/godot --verbose --headless --export-release \
+          "Web" ./dist/web/index.html
+
+          (cd dist/web && zip -r ../${{ env.EXPORT_NAME }}_Web.zip *)
+
+      - name: Upload Web
+        uses: actions/upload-artifact@v4
+        with:
+          name: Web
+          path: dist/${{ env.EXPORT_NAME }}_Web.zip
 
   release:
     name: Attach to Release
