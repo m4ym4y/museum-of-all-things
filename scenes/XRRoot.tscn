@@ -34,6 +34,7 @@ script = ExtResource("1_t4l57")
 tracker = &"left_hand"
 
 [node name="XRToolsMovementDirect" type="Node" parent="XROrigin3D/XRController3D_left" groups=["movement_providers"]]
+unique_name_in_owner = true
 script = ExtResource("6_mvrkt")
 max_speed = 5.0
 strafe = true
@@ -66,6 +67,7 @@ tracker = &"right_hand"
 hand_material_override = ExtResource("4_jb2jl")
 
 [node name="XRToolsMovementTurn" type="Node" parent="XROrigin3D/XRController3D_right" groups=["movement_providers"]]
+unique_name_in_owner = true
 script = ExtResource("6_80eyh")
 turn_mode = 1
 step_turn_angle = 40.0
