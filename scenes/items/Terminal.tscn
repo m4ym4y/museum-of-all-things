@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0q0v3m0c8n23"]
+[gd_scene load_steps=13 format=3 uid="uid://b0q0v3m0c8n23"]
 
+[ext_resource type="Script" uid="uid://bpk62hhktfded" path="res://scenes/items/Terminal.gd" id="1_d5on5"]
 [ext_resource type="ArrayMesh" uid="uid://djjbfyif8liyl" path="res://assets/models/terminal.obj" id="1_dkram"]
 [ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://assets/textures/wood.tres" id="2_d4rh8"]
 [ext_resource type="Material" uid="uid://c1nju0758gjqe" path="res://assets/textures/terminal.tres" id="3_060p5"]
@@ -8,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://crfgn0ehls7w7" path="res://scenes/menu/TerminalMenu.tscn" id="6_06qyf"]
 [ext_resource type="Script" uid="uid://c27vw8tgjg8pf" path="res://scenes/items/TerminalInteractZone.gd" id="7_8cvwe"]
 [ext_resource type="AudioStream" uid="uid://gung6qd7trsl" path="res://assets/sound/UI/UI Terminal/UI Terminal Loop.ogg" id="8_tvv16"]
+[ext_resource type="PackedScene" uid="uid://dgdb1texynduw" path="res://addons/godot-xr-tools/objects/virtual_keyboard.tscn" id="9_vdd87"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7hqr0"]
 radius = 0.75
@@ -16,6 +18,7 @@ radius = 0.75
 size = Vector3(1, 1, 0.1)
 
 [node name="Terminal" type="Node3D"]
+script = ExtResource("1_d5on5")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_dkram")
@@ -72,3 +75,7 @@ stream = ExtResource("8_tvv16")
 autoplay = true
 max_distance = 10.0
 bus = &"Ambience"
+
+[node name="VirtualKeyboard" parent="." instance=ExtResource("9_vdd87")]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0.0771947, 0.704447, 1.02629)
+visible = false

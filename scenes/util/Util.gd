@@ -57,6 +57,9 @@ func is_using_threads():
 func is_compatibility_renderer():
   return RenderingServer.get_current_rendering_method() == 'gl_compatibility'
 
+func is_meta_quest():
+  return OS.has_feature("meta_quest")
+
 func delay_msec(msecs):
   # Will only delay if we're not on the main thread.
   if OS.get_thread_caller_id() == OS.get_main_thread_id():
