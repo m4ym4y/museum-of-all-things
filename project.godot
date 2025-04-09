@@ -14,6 +14,7 @@ config/name="Museum of All Things"
 run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.4")
 config/icon="res://icon.png"
+run/main_scene.meta_quest="uid://dyw0howbtdh86"
 
 [autoload]
 

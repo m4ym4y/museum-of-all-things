@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyw0howbtdh86"]
+
+[ext_resource type="Script" path="res://scenes/SplashVR.gd" id="1_4enco"]
+[ext_resource type="Texture2D" uid="uid://ds63c2nyaeggl" path="res://vr_splash.png" id="1_dp6s2"]
+
+[sub_resource type="Environment" id="Environment_cgbrl"]
+background_mode = 1
+ambient_light_source = 1
+reflected_light_source = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_lshak"]
+size = Vector2(4.3, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e6017"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_dp6s2")
+
+[node name="SplashVR" type="Node3D"]
+script = ExtResource("1_4enco")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cgbrl")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45519e-11, 1.5, -5)
+mesh = SubResource("QuadMesh_lshak")
+surface_material_override/0 = SubResource("StandardMaterial3D_e6017")
+
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
