@@ -12,7 +12,7 @@
   <description>
     <p>Visit the Museum of All Things, a nearly-infinite virtual museum generated from Wikipedia!</p>
     <p>You can find exhibits on millions of topics, from the Architecture of Liverpool to Zoroastrianism. Search for the topic you want to learn about, or just wander from topic to topic as your curiosity dictates!</p>
-    <p>If you have an OpenXR-compatible headset, you can also visit the MoAT in VR! (Currently, the Oculus Quest is not supported)</p>
+    <!--p>If you have an OpenXR-compatible headset, you can also visit the MoAT in VR! (Currently, the Oculus Quest is not supported)</p-->
     <p>How does it work? The breadth of the museum is made possible by downloading text and images from Wikipedia and Wikimedia Commons. Every exhibit in the museum corresponds to a Wikipedia article. The walls of the exhibit are covered in images and text from the article, and hallways lead out to other exhibits based on the article's links.</p>
     <p>The museum is greatly inspired by educational videos that I watched as a kid, and the liminal spaces produced by early CGI. I want to recapture the promise that the internet can be a place of endless learning and exploration. I hope you enjoy your time exploring the Museum of All Things!</p>
   </description>
@@ -61,6 +61,19 @@
   </screenshots>
 
   <releases>
+    <release version="v1.0.1" date="2025-02-27">
+      <description>
+        <p>This version fixes some issues that people spotted after release! v1.0.1 has 5 contributors on it now!! Thank you so so much to everyone who's been helping out :)</p>
+        <ul>
+          <li>Use physical keybinds instead of soft keybinds, to support other keyboard layouts (thank you @akien-mga !)</li>
+          <li>Caps the number of wikimedia commons images that can be loaded into an exhibit at 2500</li>
+          <li>Fix the clear cache button in the data menu</li>
+          <li>Keep exhibits relatively close to the origin-- this fixes a bug that would cause collisions to break after playing for a while</li>
+          <li>Footstep player uses polyphonic stream player (thanks @arcaneenergy !)</li>
+          <li>Mipmap text labels (not exhibit text plaques yet) and add anisotropic filtering (thanks @stoofin !)</li>
+        </ul>
+      </description>
+    </release>
     <release version="v1.0.0" date="2025-02-23">
       <description>
         <p>Initial release version</p>
