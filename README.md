@@ -49,6 +49,7 @@ an issue and we can discuss it before you put too much work in.
 - French
 - Spanish
 - Japanese
+- German
 
 ## Roadmap for Future Updates (Not in any order)
 
