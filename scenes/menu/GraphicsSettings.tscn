@@ -42,6 +42,56 @@ text = "
 
 [node name="Label" type="Label" parent="DisplayOptions"]
 layout_mode = 2
+text = "Scaling mode"
+
+[node name="ScaleMode" type="OptionButton" parent="DisplayOptions"]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Bilinear"
+popup/item_0/id = 0
+popup/item_1/text = "AMD FSR 1"
+popup/item_1/id = 1
+popup/item_2/text = "AMD FSR 2"
+popup/item_2/id = 2
+
+[node name="Label2" type="Label" parent="DisplayOptions" groups=["fsr_options"]]
+layout_mode = 2
+text = "FSR quality mode"
+
+[node name="FSRQuality" type="OptionButton" parent="DisplayOptions" groups=["fsr_options"]]
+layout_mode = 2
+selected = 0
+item_count = 5
+popup/item_0/text = "Ultra quality"
+popup/item_0/id = 0
+popup/item_1/text = "Quality"
+popup/item_1/id = 1
+popup/item_2/text = "Balanced"
+popup/item_2/id = 2
+popup/item_3/text = "Performance"
+popup/item_3/id = 3
+popup/item_4/text = "Ultra performance"
+popup/item_4/id = 4
+
+[node name="Label3" type="Label" parent="DisplayOptions" groups=["fsr_options"]]
+layout_mode = 2
+text = "FSR Sharpness"
+
+[node name="SharpnessScale" type="HSlider" parent="DisplayOptions" groups=["fsr_options"]]
+layout_mode = 2
+max_value = 2.0
+step = 0.05
+value = 0.2
+
+[node name="SharpnessScaleValue" type="Label" parent="DisplayOptions" groups=["fsr_options"]]
+layout_mode = 2
+text = "0.2
+"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="DisplayOptions"]
+layout_mode = 2
 text = "Render Scale"
 
 [node name="RenderScale" type="HSlider" parent="DisplayOptions"]
@@ -53,7 +103,7 @@ value = 1.0
 
 [node name="RenderScaleValue" type="Label" parent="DisplayOptions"]
 layout_mode = 2
-text = "1.0
+text = "100 %
 "
 horizontal_alignment = 1
 
@@ -215,6 +265,9 @@ popup/item_1/id = 1
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MainOptions/Back" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MainOptions/Restore" to="." method="_on_restore_pressed"]
+[connection signal="item_selected" from="DisplayOptions/ScaleMode" to="." method="_on_scale_mode_value_changed"]
+[connection signal="item_selected" from="DisplayOptions/FSRQuality" to="." method="_on_fsr_quality_item_selected"]
+[connection signal="value_changed" from="DisplayOptions/SharpnessScale" to="." method="_on_sharpness_scale_value_changed"]
 [connection signal="value_changed" from="DisplayOptions/RenderScale" to="." method="_on_render_scale_value_changed"]
 [connection signal="toggled" from="DisplayOptions/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="value_changed" from="ReflectionOptions/ReflectionQuality" to="." method="_on_reflection_quality_value_changed"]
