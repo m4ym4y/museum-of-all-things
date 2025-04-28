@@ -323,7 +323,7 @@ msgid "Featured Media Exhibits"
 msgstr "Sélection d'expositions médias"
 
 msgid "Search"
-msgstr "Search"
+msgstr "Recherche"
 
 msgid "Featured Search Exhibits"
 msgstr "Rechercher une exposition"
