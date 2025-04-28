@@ -14,6 +14,9 @@ var fps_limit = 60
 var _default_settings_obj
 var fullscreen = false
 var render_scale = 1.0
+var scale_mode = 0
+var fsr_quality = 5
+var fsr_sharpness = 0.2
 var post_processing = "none"
 var render_distance_multiplier = 2.5
 var vsync_enabled = true
@@ -46,6 +49,33 @@ func set_fullscreen(_fullscreen: bool):
 func set_render_scale(scale: float):
   render_scale = scale
   get_viewport().scaling_3d_scale = scale
+
+func set_scale_mode(mode: int):
+  scale_mode = mode
+  get_viewport().scaling_3d_mode = mode as Viewport.Scaling3DMode
+
+  if mode < 2:
+    get_viewport().msaa_3d = Viewport.MSAA_2X
+  else:
+    get_viewport().msaa_3d = Viewport.MSAA_DISABLED
+
+func set_fsr_quality(quality: int):
+  fsr_quality = quality
+
+  match quality:
+    0:
+      get_viewport().scaling_3d_scale = 1.0 / 1.3
+    1:
+      get_viewport().scaling_3d_scale = 1.0 / 1.5
+    2:
+      get_viewport().scaling_3d_scale = 1.0 / 1.7
+    3:
+      get_viewport().scaling_3d_scale = 1.0 / 2.0
+    4:
+      get_viewport().scaling_3d_scale = 1.0 / 3.0
+
+func set_fsr_sharpness(sharpness: float):
+    get_viewport().fsr_sharpness = sharpness
 
 func set_post_processing(_post_processing: String):
   post_processing = _post_processing
@@ -89,8 +119,16 @@ func _apply_settings(s, default={}):
     set_fps_limit(s["fps_limit"] if s.has("fps_limit") else default["fps_limit"])
     enable_fps_limit(s["limit_fps"] if s.has("limit_fps") else default["limit_fps"])
     set_fullscreen(s["fullscreen"] if s.has("fullscreen") else default["fullscreen"])
-    set_render_scale(s["render_scale"] if s.has("render_scale") else default["render_scale"])
+    set_fsr_sharpness(s["fsr_sharpness"] if s.has("fsr_sharpness") else default["fsr_sharpness"])
     set_post_processing(s["post_processing"] if s.has("post_processing") else default["post_processing"])
+
+    var mode = s["scale_mode"] if s.has("scale_mode") else default["scale_mode"]
+    set_scale_mode(mode)
+    if mode > 0:
+        set_fsr_quality(s["fsr_quality"] if s.has("fsr_quality") else default["fsr_quality"])
+    else:
+        set_render_scale(s["render_scale"] if s.has("render_scale") else default["render_scale"])
+
   set_render_distance_multiplier(s["render_distance_multiplier"] if s.has("render_distance_multiplier") else default["render_distance_multiplier"])
 
 func _create_settings_obj():
@@ -105,6 +143,9 @@ func _create_settings_obj():
     "limit_fps": limit_fps,
     "fullscreen": fullscreen,
     "render_scale": render_scale,
+    "scale_mode": scale_mode,
+    "fsr_quality": fsr_quality,
+    "fsr_sharpness": fsr_sharpness,
     "post_processing": post_processing,
     "vsync_enabled": vsync_enabled,
     "render_distance_multiplier": render_distance_multiplier,

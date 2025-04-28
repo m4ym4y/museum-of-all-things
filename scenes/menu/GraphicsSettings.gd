@@ -16,6 +16,11 @@ func _ready() -> void:
     _vbox.get_node("DisplayOptions").visible = false
     _vbox.get_node("PostProcessingOptions").visible = false
 
+  if _vbox.get_node("DisplayOptions/ScaleMode").selected == 0:
+    get_tree().set_group("fsr_options", "visible", false)
+  else:
+    _vbox.get_node("DisplayOptions/RenderScale").hide()
+
 func ui_cancel_pressed():
   if visible:
     call_deferred("_on_resume_pressed")
@@ -36,6 +41,9 @@ func _load_settings():
   _vbox.get_node("FPSOptions/VSync").button_pressed = GraphicsManager.vsync_enabled
   _vbox.get_node("DisplayOptions/Fullscreen").button_pressed = GraphicsManager.fullscreen
   _vbox.get_node("DisplayOptions/RenderScale").value = GraphicsManager.render_scale
+  _vbox.get_node("DisplayOptions/ScaleMode").selected = GraphicsManager.scale_mode
+  _vbox.get_node("DisplayOptions/FSRQuality").selected = GraphicsManager.fsr_quality
+  _vbox.get_node("DisplayOptions/SharpnessScale").value = GraphicsManager.fsr_sharpness
   _vbox.get_node("ReflectionOptions/ReflectionQuality").value = e.ssr_max_steps
   _vbox.get_node("ReflectionOptions/EnableReflections").button_pressed = e.ssr_enabled
   _vbox.get_node("LightOptions/AmbientLight").value = e.ambient_light_energy
@@ -44,6 +52,8 @@ func _load_settings():
   var post_processing = GraphicsManager.post_processing
   var idx = post_processing_options.find(post_processing)
   _vbox.get_node("PostProcessingOptions/PostProcessingEffect").select(idx if idx >= 0 else 0)
+
+  _update_scaling()
 
 func _on_restore_pressed():
   GraphicsManager.restore_default_settings()
@@ -84,9 +94,52 @@ func _on_fullscreen_toggled(toggled_on: bool):
   GraphicsManager.set_fullscreen(toggled_on)
   _vbox.get_node("DisplayOptions/Fullscreen").set_pressed_no_signal(toggled_on)
 
+func _update_scaling():
+  var scale_mode = _vbox.get_node("DisplayOptions/ScaleMode").selected
+  GraphicsManager.set_scale_mode(scale_mode)
+
+  # Show render scale if bilinear, FSR options otherwise
+  _vbox.get_node("DisplayOptions/RenderScale").visible = (scale_mode == 0)
+  get_tree().set_group("fsr_options", "visible", (scale_mode != 0))
+
+  if scale_mode == 0:  # Bilinear
+    GraphicsManager.set_render_scale(_vbox.get_node("DisplayOptions/RenderScale").value)
+    return
+
+  # FSR
+  var fsr_quality = _vbox.get_node("DisplayOptions/FSRQuality")
+  if scale_mode == 1:  # FSR 1 has no "ultra performance"
+    fsr_quality.set_item_disabled(0, false)
+    fsr_quality.set_item_disabled(4, true)
+  if scale_mode == 2:  # FSR 2 has no "ultra quality"
+    fsr_quality.set_item_disabled(0, true)
+    fsr_quality.set_item_disabled(4, false)
+
+  GraphicsManager.set_fsr_quality(fsr_quality.selected)
+
+  var scale = get_viewport().scaling_3d_scale
+  _vbox.get_node("DisplayOptions/RenderScale").value = scale
+  _vbox.get_node("DisplayOptions/RenderScaleValue").text = "%.0f %%\n" % (scale * 100)
+
 func _on_render_scale_value_changed(value: float):
-  GraphicsManager.set_render_scale(value)
-  _vbox.get_node("DisplayOptions/RenderScaleValue").text = str(value)
+  _vbox.get_node("DisplayOptions/RenderScaleValue").text = "%d %%\n" % (value * 100)
+  _update_scaling()
+
+func _on_scale_mode_value_changed(value: int):
+  match value:
+    1:
+      _vbox.get_node("DisplayOptions/FSRQuality").select(0)
+    2:
+      _vbox.get_node("DisplayOptions/FSRQuality").select(1)
+
+  _update_scaling()
+
+func _on_fsr_quality_item_selected(index: int) -> void:
+  _update_scaling()
+
+func _on_sharpness_scale_value_changed(value: float) -> void:
+  GraphicsManager.set_fsr_sharpness(value)
+  _vbox.get_node("DisplayOptions/SharpnessScaleValue").text = str(value)
 
 func _on_pause_menu_settings() -> void:
   pass # Replace with function body.
