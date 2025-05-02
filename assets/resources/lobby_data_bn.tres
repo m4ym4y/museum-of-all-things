@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="LobbyData" load_steps=11 format=3 uid="uid://34yga2226k3j"]
+
+[ext_resource type="Script" uid="uid://bdc8jjijlgjox" path="res://resource_definitions/LobbyData.gd" id="1_3ssej"]
+[ext_resource type="Script" uid="uid://ch3nm32ndlrbh" path="res://resource_definitions/LobbyWing.gd" id="2_y4oc8"]
+
+[sub_resource type="Resource" id="Resource_pgwi2"]
+script = ExtResource("2_y4oc8")
+name = "প্রযুক্তি"
+corner_1 = Vector2(-68, -44)
+corner_2 = Vector2(-32, -8)
+exhibits = PackedStringArray("লোকোমোটিভ", "কোডাক", "ট্রানজিস্টর", "মৃৎশিল্প (কারিগরি পেশা)", "গডো (গেম ইঞ্জিন)", "পাস্তুরায়ন", "পরমাণু অস্ত্র পরীক্ষা", "ইপোক্সি", "সেচ", "চিত্রায়ন (পরিগণক চিত্র)", "উড়োজাহাজ", "সরল যন্ত্র", "মুদ্রণযন্ত্র", "জন্মনিয়ন্ত্রণ", "অণুবীক্ষণ যন্ত্র", "ভিডিও গেইম কনসোল", "কামান (অস্ত্র)", "পশুপালনবিদ্যা", "পাথরের যন্ত্র")
+
+[sub_resource type="Resource" id="Resource_ooopd"]
+script = ExtResource("2_y4oc8")
+name = "সংস্কৃতি"
+corner_1 = Vector2(32, -44)
+corner_2 = Vector2(68, -8)
+exhibits = PackedStringArray("সার্কাস", "ড্রাগন", "মুদি দোকান", "করমর্দন", "ডোজে (মিম)", "কফি", "স্যুপ", "গোলকধাঁধা", "ট্যারোট", "কে-পপ", "গো (খেলা)", "হিন্দুধর্ম", "মেট্রোসেক্সুয়াল", "রাক্ষস", "গীতাঞ্জলি", "বিজ্ঞাপন", "মহাপ্লাবন (পুরাণ)", "ভিক্ষু")
+
+[sub_resource type="Resource" id="Resource_m2ope"]
+script = ExtResource("2_y4oc8")
+name = "বিজ্ঞান"
+corner_1 = Vector2(-44, -92)
+corner_2 = Vector2(-8, -36)
+exhibits = PackedStringArray("ছত্রাক", "ডাইনোসর", "সামুদ্রিক জীবন", "পৃথিবী", "মঙ্গল গ্রহ", "ধেড়ে ইঁদুর", "চিংড়ি", "কাঁঠাল", "উপাত্ত ও তথ্য প্রত্যক্ষীকরণ", "সোনা", "বাওবাব", "মানুষ", "সরল দোলক", "যৌন দ্বিরূপতা", "আলো", "পনির", "বুনো বাঁধাকপি", "জলাভূমি", "বাংলা লজ্জাবতী বানর", "প্রজাপতি", "বৃহস্পতি গ্রহ", "মাটি", "ফ্রাক্টাল", "চোখ")
+
+[sub_resource type="Resource" id="Resource_opuc1"]
+script = ExtResource("2_y4oc8")
+name = "ভূগোল"
+corner_1 = Vector2(8, -92)
+corner_2 = Vector2(44, -36)
+exhibits = PackedStringArray("মার্কিন যুক্তরাষ্ট্র", "অ্যান্টার্কটিকা", "পাতাগোনিয়া", "তিব্বত", "পার্সেপোলিস", "পেত্রা", "তাইপে ১০১", "কেওক্রাডং", "ভুটানের স্থাপত্য", "ছুংছিং", "নরফোক দ্বীপ", "মারিয়ানা খাত", "অতি-সাইবেরীয় রেলপথ", "ক্লিভল্যান্ড", "চাদ হ্রদ", "সেনেগাল", "বোরা বোরা দ্বীপপুঞ্জ", "গ্রেট ভিক্টোরিয়া মরুভূমি", "কিলিমাঞ্জারো", "ক্যানবেরা", "আমাজন অরণ্য", "সলওয়ে ফার্থ", "উরুক", "হাজরে আসওয়াদ")
+
+[sub_resource type="Resource" id="Resource_qiy1c"]
+script = ExtResource("2_y4oc8")
+name = "শিল্প"
+corner_1 = Vector2(-72, 12)
+corner_2 = Vector2(-36, 48)
+exhibits = PackedStringArray("বারোক", "তাঁত", "টালিকরণ", "পাবলো পিকাসো", "লুভ্‌র জাদুঘর", "জোয়ান মিরো", "সমকালীন শিল্পকলা", "ফ্রিদা কাহলো", "বহির্মুদ্রাবাদ", "ফ্র্যাংক লয়েড রাইট", "এদ্‌গার দ্যগা", "গুহাচিত্র", "মাইকেলেঞ্জেলো", "ফ্রান্সিসকো গয়া", "বিমূর্ত শিল্প", "গ্রাফিতি", "আর্তেমিস", "এম. সি. এশ্যর", "রবীন্দ্রনাথ ঠাকুর")
+
+[sub_resource type="Resource" id="Resource_l5mfx"]
+script = ExtResource("2_y4oc8")
+name = "ব্যক্তি"
+corner_1 = Vector2(36, 12)
+corner_2 = Vector2(72, 48)
+exhibits = PackedStringArray("বাঙালিদের তালিকা", "আলবার্ট আইনস্টাইন", "ফ্রেডি মার্কারি", "কোবি ব্রায়ান্ট", "চেঙ্গিজ খান", "গ্রিগোরি রাসপুতিন", "এমি ন্যোটার", "টুপাক শাকুর", "রবার্ট এফ. কেনেডি জুনিয়র", "উইলিয়াম শেকসপিয়র", "লিনাস পাউলিং", "ড্যানি ডেভিটো", "জে. আর. আর. টলকিন", "ম্যারি শেলি", "আলেকজান্দ্রিয়া ওকাসিও-কোর্টেজ", "ইবনে বতুতা", "মার্টিন লুথার", "মার্টিন লুথার কিং, জুনিয়র")
+
+[sub_resource type="Resource" id="Resource_bycfx"]
+script = ExtResource("2_y4oc8")
+name = "ইতিহাস"
+corner_1 = Vector2(-48, 60)
+corner_2 = Vector2(-12, 96)
+exhibits = PackedStringArray("আডলফ হিটলার", "চেরনোবিলের বিপর্যয়", "টাইটানিক", "১৯৬০-এর দশকের প্রতিসংস্কৃতি", "দ্বিতীয় বিশ্বযুদ্ধ", "কোভিড-১৯ এর বৈশ্বিক মহামারি", "সেন্ট্রাল ইন্টেলিজেন্স এজেন্সি", "ইসলামি স্বর্ণযুগ", "চাঁদে অবতরণ", "রানা প্লাজা ধস", "পিউনিক যুদ্ধসমূহ", "সঙ্গীতের ইতিহাস", "ক্যামেরার ইতিহাস", "১৯৬০-এর ইউ-২ ঘটনা", "প্রাগিতিহাস", "মুঘল সাম্রাজ্য", "জলদস্যুতা", "২০১৩-র শাহবাগ আন্দোলন")
+
+[sub_resource type="Resource" id="Resource_yimja"]
+script = ExtResource("2_y4oc8")
+name = "মিডিয়া"
+corner_1 = Vector2(12, 60)
+corner_2 = Vector2(48, 96)
+exhibits = PackedStringArray("বাইবেল", "দ্য বিটল্‌স", "দ্য ম্যাট্রিক্স", "ওডিসি", "গিলগামেশ", "ওয়েটিং ফর গোডো", "মীনা (ধারাবাহিক কার্টুন)", "স্টার ট্রেক", "বার্বি (চলচ্চিত্র)", "পোকেমন", "হ্যামলেট", "সিসিমপুর", "টুইটার", "ভোগ (ম্যাগাজিন)", "টম অ্যান্ড জেরি", "দ্য কাউন্ট অব মন্টি ক্রিস্টো", "উইকিপিডিয়া", "মাইনক্রাফট")
+
+[resource]
+script = ExtResource("1_3ssej")
+wings = Array[ExtResource("2_y4oc8")]([SubResource("Resource_pgwi2"), SubResource("Resource_ooopd"), SubResource("Resource_m2ope"), SubResource("Resource_opuc1"), SubResource("Resource_qiy1c"), SubResource("Resource_l5mfx"), SubResource("Resource_bycfx"), SubResource("Resource_yimja")])

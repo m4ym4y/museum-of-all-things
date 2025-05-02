@@ -50,6 +50,7 @@ an issue and we can discuss it before you put too much work in.
 - Spanish
 - Japanese
 - German
+- Bengali
 
 ## Roadmap for Future Updates (Not in any order)
 
