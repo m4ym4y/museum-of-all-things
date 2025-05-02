@@ -1,0 +1,433 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Museum of All Things\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+"Language: bn\n"
+
+msgid "Enter the Museum"
+msgstr "জাদুঘরে প্রবেশ করুন"
+
+msgid "Settings"
+msgstr "সেটিংস"
+
+msgid "Quit"
+msgstr "বেরিয়ে যান"
+
+msgid "The museum is currently unstaffed. Please refer to signage for information."
+msgstr "জাদুঘরটি বর্তমানে কর্মীহীন। অনুগ্রহ করে তথ্যের জন্য সাইনেজ ব্যবহার করুন।"
+
+msgid "English"
+msgstr "English"
+
+msgid "Spanish"
+msgstr "Español"
+
+msgid "Portuguese"
+msgstr "Português"
+
+msgid "French"
+msgstr "Français"
+
+msgid "Japanese"
+msgstr "日本語"
+
+msgid "Bengali"
+msgstr "বাংলা"
+
+msgid "Are you sure you want to Quit?"
+msgstr "আপনি কি নিশ্চিত বেরোতে চান?"
+
+msgid "Yes"
+msgstr "হ্যাঁ"
+
+msgid "No"
+msgstr "না"
+
+msgid "Open Page in Browser"
+msgstr "পাতাটি ব্রাউজারে ওপেন করুন"
+
+msgid "Paused"
+msgstr "বিরত রয়েছে"
+
+msgid " - Paused"
+msgstr "- বিরত রয়েছে"
+
+msgid "Lobby"
+msgstr "লবি"
+
+msgid "Resume"
+msgstr "চালিয়ে যান"
+
+msgid "Return to Lobby"
+msgstr "লবিতে ফিরে যান"
+
+msgid "Enter Exhibit Name"
+msgstr "প্রদর্শনীর নাম লিখুন"
+
+msgid "Go to Random Exhibit"
+msgstr "যেকোনো একটি অনির্ধারিত প্রদর্শনীতে যান"
+
+msgid "Enter exhibit title"
+msgstr "প্রদর্শনীর শিরোনাম লিখুন"
+
+msgid "Confirm"
+msgstr "নিশ্চিত করুন"
+
+msgid "Back"
+msgstr "পেছনে যান"
+
+msgid "Exhibit Found: \"\""
+msgstr "প্রদর্শনী খুঁজে পাওয়া গিয়েছে: \"\""
+
+msgid "OK / Exit"
+msgstr "আচ্ছা / বের হন"
+
+msgid "VR Controls"
+msgstr "ভি-আর কন্ট্রোল"
+
+msgid "Restore Default Settings"
+msgstr "ডিফল্ট সেটিংস-এ ফিরে যান"
+
+msgid "Movement Style"
+msgstr "চলাচলের ধরন"
+
+msgid "Teleportation (Left Trigger)"
+msgstr "টেলিপোর্টেশন (বাম ট্রিগার)"
+
+msgid "Direct Movement (Left Analog Stick)"
+msgstr "চলাচল (বাম এনালগ স্টিক)"
+
+msgid "Direct Movement Speed"
+msgstr "চলাচল গতি"
+
+msgid "Camera Rotation Increment (Right Stick)"
+msgstr "ক্যামেরা ঘূর্ণনের হার (ডান স্টিক)"
+
+msgid "Smooth Camera Rotation"
+msgstr "মসৃণ ক্যামেরা ঘূর্ণন"
+
+msgid "Preparing Exhibit..."
+msgstr "প্রদর্শনী তৈরি করা হচ্ছে..."
+
+msgid "Error Loading Exhibit."
+msgstr "প্রদর্শনী লোড করায় ক্রুটি দেখা গিয়েছে।"
+
+msgid "Graphics"
+msgstr "গ্রাফিক্স"
+
+msgid "Audio"
+msgstr "অডিও"
+
+msgid "Data"
+msgstr "তথ্য"
+
+msgid "Controls"
+msgstr "কন্ট্রোল"
+
+msgid "Data Settings"
+msgstr "তথ্য সেটিংস"
+
+msgid "Cache" ### Currently not applied (probably due to the values that follow)
+msgstr "ক্যাশ"
+
+msgid "Clear Cache"
+msgstr "ক্যাশ পরিষ্কার করুন"
+
+msgid "Cache Size Limit"
+msgstr "ক্যাশের আকার সীমা"
+
+msgid "Automatically limit cache size (on quit)"
+msgstr "বের হওয়ায় স্বক্রিয়ভাবে ক্যাশের আকার সীমাবদ্ধ করুন"
+
+msgid "Graphics Settings"
+msgstr "গ্রাফিক্স সেটিংস"
+
+msgid "Render Scale"
+msgstr "রেন্ডার স্কেল"
+
+msgid "Fullscreen"
+msgstr "ফুলস্ক্রিন"
+
+msgid "Reflection Quality"
+msgstr "প্রতিফলনের মান"
+
+msgid "Enable Reflections"
+msgstr "প্রতিফলন চালু"
+
+msgid "Ambient Light Level"
+msgstr "পরিবেষ্টনকারী আলোর লেভেল"
+
+msgid "Enable Indirect Lighting (SSIL)"
+msgstr "পরোক্ষ আলো (SSIL) চালু"
+
+msgid "Render Distance"
+msgstr "রেন্ডার দূরত্ব"
+
+msgid "Fog"
+msgstr "কুয়াশা"
+
+msgid "Maximum FPS"
+msgstr "সর্বাধিক FPS"
+
+msgid "Enable Fog"
+msgstr "কুয়াশা চালু"
+
+msgid "Enable V-Sync"
+msgstr "V-Sync চালু"
+
+msgid "Limit FPS"
+msgstr "FPS সীমাবদ্ধ"
+
+msgid "Post-Processing Effect"
+msgstr "পোস্ট-প্রোসেসিং ইফেক্ট"
+
+msgid "None"
+msgstr "কিছুই নয়"
+
+msgid "CRT Filter"
+msgstr "CRT ফিল্টার"
+
+msgid "Control Settings"
+msgstr "কন্ট্রোল সেটিংস"
+
+msgid "Mouse Sensitivity"
+msgstr "মাউস সংবেদনশীলতা"
+
+msgid "Invert Y-axis"
+msgstr "Y-অক্ষ উলটানো"
+
+msgid "Remap Inputs"
+msgstr "ইনপুট পুনঃনির্ধারন করুন"
+
+msgid "Move Forward"
+msgstr "সামনে যান"
+
+msgid "Move Back"
+msgstr "পেছনে যান"
+
+msgid "Strafe Left"
+msgstr "বামে স্ট্রেফ করুন"
+
+msgid "Strafe Right"
+msgstr "ডানে স্ট্রেফ করুন"
+
+msgid "Jump"
+msgstr "লাফ দিন"
+
+msgid "Crouch"
+msgstr "ক্রাউচ করুন"
+
+msgid "Interact"
+msgstr "ব্যবহার করুন"
+
+msgid "Joypad Camera Deadzone"
+msgstr "জয়পাড ক্যামেরা ডেডজোন"
+
+msgid "Audio Settings"
+msgstr "অডিও সেটিংস"
+
+msgid "Global Volume"
+msgstr "বৈশ্বিক ভলিউম"
+
+msgid "Sound Effects Volume"
+msgstr "সাউন্ড ইফেক্টস ভলিউম"
+
+msgid "Ambience Volume"
+msgstr "পরিবেষ্টনী ভলিউম"
+
+msgid "Music Volume"
+msgstr "মিউজিম ভলিউম"
+
+msgid "Enter VR"
+msgstr "ভি-আর এ প্রবেশ করুন"
+
+msgid "Snap turning:"
+msgstr "স্ন্যাপ টার্নিং:"
+
+msgid "Y axis dead zone"
+msgstr "Y-অক্ষ ডেডজোন"
+
+msgid "X axis dead zone"
+msgstr "X-অক্ষ ডেডজোন"
+
+msgid "Haptics Scale"
+msgstr "হ্যাপ্টিক্স স্কেল"
+
+msgid "Apply"
+msgstr "প্রয়োগ করুন"
+
+msgid "Reset"
+msgstr "রিসেট"
+
+msgid "Height adjust:"
+msgstr "উচ্চতা ঠিক করুন:"
+
+msgid "WebXR primary:"
+msgstr "WebXR প্রাইমারি:"
+
+msgid "Auto"
+msgstr "অটো"
+
+msgid "Thumbstick"
+msgstr "থাম্বস্টিক"
+
+msgid "Trackpad"
+msgstr "ট্র্যাকপ্যাড"
+
+msgid "Technology"
+msgstr "প্রযুক্তি"
+
+msgid "Featured Technology Exhibits"
+msgstr "বিশেষ প্রযুক্তি প্রদর্শনী"
+
+msgid "Science"
+msgstr "বিজ্ঞান"
+
+msgid "Featured Science Exhibits"
+msgstr "বিশেষ বিজ্ঞান প্রদর্শনী"
+
+msgid "Geography"
+msgstr "ভূগোল"
+
+msgid "Featured Geography Exhibits"
+msgstr "বিশেষ ভূগোল প্রদর্শনী"
+
+msgid "Culture"
+msgstr "সংস্কৃতি"
+
+msgid "Featured Culture Exhibits"
+msgstr "বিশেষ সংস্কৃতি প্রদর্শনী"
+
+msgid "Art"
+msgstr "শিল্প"
+
+msgid "Featured Art Exhibits"
+msgstr "বিশেষ শিল্প প্রদর্শনী"
+
+msgid "People"
+msgstr "ব্যক্তি"
+
+msgid "Featured People Exhibits"
+msgstr "বিশেষ ব্যক্তি প্রদর্শনী"
+
+msgid "History"
+msgstr "ইতিহাস"
+
+msgid "Featured History Exhibits"
+msgstr "বিশেষ ইতিহাস প্রদর্শনী"
+
+msgid "Media"
+msgstr "মিডিয়া"
+
+msgid "Featured Media Exhibits"
+msgstr "বিশেষ মিডিয়া প্রদর্শনী"
+
+msgid "Search"
+msgstr "অনুসন্ধান"
+
+msgid "Featured Search Exhibits"
+msgstr "বিশেষ অনুসন্ধান প্রদর্শনী"
+
+### scenes/Lobby.tscn Section
+
+msgid ""
+"[b]Welcome to the Museum of All Things![/b]\n"
+"\n"
+"[fill]This museum is different from any you've visited in the physical world, so it may take a moment to get your bearings.[/fill]\n"
+"\n"
+"[b]The Lobby[/b]\n"
+"\n"
+"[fill]Right now you are in the museum's lobby, tailored to give you a pleasant starting point on your visit. If you ever wish to return here, you may simply open your museum menu (via \"Escape,\" \"Start,\" or by hitting \"Y\" on your right-hand controller in Virtual Reality) and select \"Return to Lobby.\"\n"
+"\n"
+"The lobby is divided into areas by subject, which are marked by signs and indicated on the maps in the entry hall behind you. In each of these areas, you will find many hallways into a range of fascinating exhibits.[/fill]"
+msgstr ""
+"[b]সবকিছুর জাদুঘরে আপনাকে স্বাগতম![/b]\n"
+"\n"
+"[fill]এই জাদুঘরটি আপনি বাস্তবে যেরকম জাদুঘর দেখেছেন তা থেকে ভিন্ন। তাই এতে অভ্যস্ত হতে আপনার প্রথমে কিছু সময় লাগতে পারে।[/fill]\n"
+"\n"
+"[b]লবি[/b]\n"
+"\n"
+"[fill]এখন আপনি জাদুঘরটির লবিতে আছেন। এই লবি আপনার জাদুঘরে ভ্রমণের শুরু আনন্দদায়ক করে তোলার জন্য বিশেষভাবে পরিকল্পিত। যদি আপনি এখানে ফিরে আসতে চান, তাহলে (\"Escape,\" \"Start,\" বা ভি-আর এ ডান হাতের কন্ট্রোলারে \"Y\" তে চাপ দিয়ে) জাদুঘর মেনু ওপেন করুন এবং \"লবিতে ফিরে যান\" সিলেক্ট করুন\n"
+"\n"
+"লবিটি বিষয় অনুসারে নানান অঞ্চলে বিভক্ত। এই অঞ্চলগুলো সাইনেজ দিয়ে এবং আপনার পেছনে এন্ট্রি হলে অবস্থিত মানচিত্রে চিহ্নিত করা। এরূপ প্রত্যেকটি অঞ্চলে আপনি নানান বিস্ময়কর প্রদর্শনীর হল পাবেন।[/fill]"
+
+msgid ""
+"[b]Museum Exhibits[/b]\n"
+"\n"
+"[fill]Exhibits are not made by hand-- they are generated procedurally by pulling images and textual data from Wikipedia and Wikimedia commons. This means any topic with a Wikipedia page can also be accessed as an exhibit in this museum!\n"
+"\n"
+"Furthermore, each exhibit contains many hallways connecting it to other exhibits. These hallways are determined based on the links in the current exhibit's Wikipedia article. You can move from exhibit to exhibit endlessly, following your curiosity.\n"
+"\n"
+"If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.[/fill]"
+msgstr ""
+"[b]জাদুঘরের প্রদর্শনীসমুহ[/b]\n"
+"\n"
+"[fill]প্রদর্শনীগুলি হাতে তৈরি নয়। বরং, উইকিপিডিয়া এবং উইকিমিডিয়া কমন্স-এর পাঠগত তথ্য এবং ছবির ডেটা দ্বারা এগুলি পদ্ধতিগতভাবে জেনারেট হয়। এর ফলে উইকিপিডিয়ার প্রত্যেক পাতাই এই জাদুঘরে একটি প্রদর্শনীরুপে অবস্থিত!\n"
+"\n"
+"প্রত্যেক প্রদর্শনীতে অনেক হল আছে যা অন্যান্য প্রদর্শনীতে সংযুক্ত। এই হলগুলি বর্তমান প্রদর্শনীর উইকিপিডিয়া নিবন্ধে উপস্তিত লিংকগুলির মাধ্যমে নির্ধারিত। আপনার কৌতূহল অনুসরণ করে আপনি প্রদর্শনী থেকে প্রদর্শনী অবিরাম অন্বেষণ করতে পারেন।\n"
+"\n"
+"যদি আপনি একটি নির্দিষ্ট বিষয়ের প্রদর্শনীতে সরাসরি যেতে চান, তাহলে আপনি অনুসন্ধান টার্মিনালটি ব্যবহার করতে পারেন। অনুসন্ধান টার্মিনালটি আপনার সরাসরি পেছনে এবং এন্ট্রি হলের শেষে অবস্থিত। টার্মিনালে আপনার পছন্দের টপিকের নাম লিখলেই আপনার সামনে একটি হল তৈরি হয়ে যাবে।[/fill]"
+
+### scenes/menu/TerminalMenu.tscn Section
+
+msgid ""
+"Welcome to the MoAT Custom Exhibit Terminal\n"
+"\n"
+"You may access a specific exhibit by selecting \"Enter Exhibit Name.\" Alternatively, you may ask for a random exhibit.\n"
+"\n"
+"Hit \"E\" on your keyboard to interact with the terminal, or press Y/△ if you are using a controller.\n"
+"\n"
+msgstr ""
+"MoAT টার্মিনালে আপনাকে স্বাগতম\n"
+"\n"
+"\"প্রদর্শনীর নাম লিখুন\" সিলেক্ট করে আপনি একটি নির্দিষ্ট প্রদর্শনীতে যেতে পারবেন। এছাড়াও যেকোনো একটি অনির্ধারিত প্রদর্শনীতে যাওয়ার অপশনও আপনি বাছাই করতে পারেন।\n"
+"\n"
+"টার্মিনাল ব্যবহার করতে আপনার কিবোর্ডে \"E\", বা কন্ট্রোলারে Y/△-তে চাপ দিন।\n"
+"\n"
+
+msgid "Enter Exhibit Name "
+msgstr "প্রদর্শনীর নাম লিখুন "
+
+msgid "Go to Random Exhibit "
+msgstr "যেকোনো একটি অনির্ধারিত প্রদর্শনীতে যান "
+
+msgid ""
+"Enter the title of the exhibit you would like to acccess. A path will be routed and the door will open to the best matching exhibit.\n"
+"\n"
+msgstr ""
+"আপনার পছন্দের প্রদর্শনীর শিরোনাম লিখুন। এতে একটি পথ নির্ধারণ হবে এবং মিল পাওয়া প্রদর্শনীর দর্জা খুলে যাবে।\n"
+"\n"
+
+msgid "Enter exhibit title"
+msgstr "প্রদর্শনীর শিরোনাম লিখুন"
+
+msgid "Confirm"
+msgstr "নিশ্চিত করুন"
+
+msgid "Back"
+msgstr "পেছনে যান"
+
+msgid "Exhibit Found: \"\"\n"
+msgstr "প্রদর্শনী পাওয়া গিয়েছে: \"\"\n"
+
+msgid ""
+"\n"
+"Proceed to your right to access this exhibit, or return to the terminal's main menu to access a different exhibit.\n"
+"\n"
+msgstr ""
+"\n"
+"এই প্রদর্শনীতে যেতে আপনার ডানে যান এবং অন্য প্রদর্শনীতে যেতে টার্মিনালের প্রধান মেনুতে ফিরে যান।\n"
+"\n"
+
+msgid "OK / Exit"
+msgstr "ঠিক আছে / বেরিয়ে যান"
+
+msgid ""
+"We were unable to locate the exhibit that you requested. Please try a different exhibit.\n"
+"\n"
+msgstr ""
+"অনুরোধকৃত প্রদর্শনীটি পাওয়া যায়নি। অনুগ্রহ করে অন্য একটি প্রদর্শনী চেষ্টা করুন।\n"
+"\n"
