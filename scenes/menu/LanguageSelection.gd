@@ -10,6 +10,8 @@ func _get_lang_array():
   return arr
 
 func _ready():
+  GlobalMenuEvents.set_language.connect(_on_set_language)
+
   _languages = _get_lang_array()
   for i in range(1, len(_languages)):
     add_item(TranslationServer.get_language_name(_languages[i]))
@@ -23,3 +25,8 @@ func _ready():
 func _on_language_item_selected(index: int) -> void:
   var locale = _languages[index]
   LanguageManager.set_locale(locale)
+
+func _on_set_language(language: String) -> void:
+  var idx = _languages.find(language)
+  if idx >= 0 and selected != idx:
+    select(idx)
