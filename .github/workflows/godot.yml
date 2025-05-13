@@ -1,6 +1,9 @@
 name: "Godot"
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - '**'
   pull_request:
   release:
     types:
