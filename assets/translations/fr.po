@@ -206,10 +206,10 @@ msgid "Move Back"
 msgstr "Reculer"
 
 msgid "Strafe Left"
-msgstr "Mitrailler à gauche"
+msgstr "Tourner à gauche"
 
 msgid "Strafe Right"
-msgstr "Mitrailler à droite"
+msgstr "Tourner à droite"
 
 msgid "Jump"
 msgstr "Sauter"
