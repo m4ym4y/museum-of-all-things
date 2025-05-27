@@ -17,7 +17,7 @@ msgid "Quit"
 msgstr "Quitter"
 
 msgid "The museum is currently unstaffed. Please refer to signage for information."
-msgstr "Il n'y a pas de personnel au musée. Veuillez consulter les panneaux d'information."
+msgstr "Il n’y a pas de personnel au musée. Veuillez consulter les panneaux d’information."
 
 msgid "English"
 msgstr "English"
@@ -35,7 +35,7 @@ msgid "Japanese"
 msgstr "日本語"
 
 msgid "Are you sure you want to Quit?"
-msgstr "Êtes vous sûr•e de vouloir quitter ?"
+msgstr "Êtes vous sûr·e de vouloir quitter ?"
 
 msgid "Yes"
 msgstr "Oui"
@@ -44,31 +44,31 @@ msgid "No"
 msgstr "Non"
 
 msgid "Open Page in Browser"
-msgstr "Lancer la page dans le navigateur"
+msgstr "Ouvrir la page dans le navigateur"
 
 msgid "Paused"
 msgstr "En pause"
 
 msgid " - Paused"
-msgstr "- En pause"
+msgstr " - En pause"
 
 msgid "Lobby"
-msgstr "Acceuil"
+msgstr "Accueil"
 
 msgid "Resume"
 msgstr "Reprendre"
 
 msgid "Return to Lobby"
-msgstr "Retour à l'accueil"
+msgstr "Retour à l’accueil"
 
 msgid "Enter Exhibit Name"
-msgstr "Indiquer le nom de l'exposition"
+msgstr "Indiquer le nom de l’exposition"
 
 msgid "Go to Random Exhibit"
 msgstr "Se rendre à une exposition aléatoire"
 
 msgid "Enter exhibit title"
-msgstr "Entrer le titre de l'exposition"
+msgstr "Entrer le titre de l’exposition"
 
 msgid "Confirm"
 msgstr "Confirmer"
@@ -92,7 +92,7 @@ msgid "Movement Style"
 msgstr "Style de mouvement"
 
 msgid "Teleportation (Left Trigger)"
-msgstr "Téléportation (Gachette Gauche)"
+msgstr "Téléportation (Gâchette Gauche)"
 
 msgid "Direct Movement (Left Analog Stick)"
 msgstr "Mouvement direct (Joystick Gauche)"
@@ -107,10 +107,10 @@ msgid "Smooth Camera Rotation"
 msgstr "Rotation en douceur"
 
 msgid "Preparing Exhibit..."
-msgstr "Préparation de l'exposition..."
+msgstr "Préparation de l’exposition…"
 
 msgid "Error Loading Exhibit."
-msgstr "Erreur de chargement de l'exposition."
+msgstr "Erreur de chargement de l’exposition."
 
 msgid "Graphics"
 msgstr "Graphismes"
@@ -122,7 +122,7 @@ msgid "Data"
 msgstr "Données" ### TK are we talking about data saved from loading exhibits? That might be different.
 
 msgid "Controls"
-msgstr "Changer l'emplacement des boutons"
+msgstr "Changer l’emplacement des boutons"
 
 msgid "Data Settings"
 msgstr "Paramètres de cache"
@@ -134,7 +134,7 @@ msgid "Clear Cache"
 msgstr "Vider le cache"
 
 msgid "Cache Size Limit"
-msgstr "Limiter la taille de cache"
+msgstr "Limiter la taille du cache"
 
 msgid "Automatically limit cache size (on quit)"
 msgstr "Limiter automatiquement la taille du cache (à la fermeture)"
@@ -185,7 +185,7 @@ msgid "None"
 msgstr "Aucun"
 
 msgid "CRT Filter"
-msgstr "Effet ecran CRT" ### TK
+msgstr "Effet écran CRT" ### TK
 
 msgid "Control Settings"
 msgstr "Paramètres de contrôle"
@@ -194,7 +194,7 @@ msgid "Mouse Sensitivity"
 msgstr "Sensibilité de la souris"
 
 msgid "Invert Y-axis"
-msgstr "Inverser l'axe Y"
+msgstr "Inverser l’axe Y"
 
 msgid "Remap Inputs"
 msgstr "Réassigner les entrées"
@@ -215,7 +215,7 @@ msgid "Jump"
 msgstr "Sauter"
 
 msgid "Crouch"
-msgstr "S'accroupire"
+msgstr "S’accroupir"
 
 msgid "Interact"
 msgstr "Interagir"
@@ -233,7 +233,7 @@ msgid "Sound Effects Volume"
 msgstr "Volume des effets sonores"
 
 msgid "Ambience Volume"
-msgstr "Volume de l'environnement"
+msgstr "Volume de l’environnement"
 
 msgid "Music Volume"
 msgstr "Volume de la musique"
@@ -245,10 +245,10 @@ msgid "Snap turning:"
 msgstr "Rotation instantanée :"
 
 msgid "Y axis dead zone"
-msgstr "Zone morte de l'axe Y"
+msgstr "Zone morte de l’axe Y"
 
 msgid "X axis dead zone"
-msgstr "Zone morte de l'axe X"
+msgstr "Zone morte de l’axe X"
 
 msgid "Haptics Scale"
 msgstr "Intensité des vibrations"
@@ -278,49 +278,49 @@ msgid "Technology"
 msgstr "Technologie"
 
 msgid "Featured Technology Exhibits"
-msgstr "Sélection d'expositions technologie" ### TK I have no idea if this is the right way to translate this
+msgstr "Sélection d’expositions de technologie"
 
 msgid "Science"
 msgstr "Science"
 
 msgid "Featured Science Exhibits"
-msgstr "Sélection d'expositions science"
+msgstr "Sélection d’expositions de science"
 
 msgid "Geography"
-msgstr "Geographie"
+msgstr "Géographie"
 
 msgid "Featured Geography Exhibits"
-msgstr "Sélection d'expositions geographie"
+msgstr "Sélection d’expositions de géographie"
 
 msgid "Culture"
 msgstr "Culture"
 
 msgid "Featured Culture Exhibits"
-msgstr "Sélection d'expositions culture"
+msgstr "Sélection d’expositions de culture"
 
 msgid "Art"
 msgstr "Art"
 
 msgid "Featured Art Exhibits"
-msgstr "Sélection d'expositions art"
+msgstr "Sélection d’expositions d’art"
 
 msgid "People"
-msgstr "Personnes notables" ### TK 
+msgstr "Personnalités" ### TK 
 
 msgid "Featured People Exhibits"
-msgstr "Sélection d'expositions personnes notables"
+msgstr "Sélection d’expositions de personnalités"
 
 msgid "History"
 msgstr "Histoire"
 
 msgid "Featured History Exhibits"
-msgstr "Sélection d'expositions histoire"
+msgstr "Sélection d’expositions d’histoire"
 
 msgid "Media"
 msgstr "Médias"
 
 msgid "Featured Media Exhibits"
-msgstr "Sélection d'expositions médias"
+msgstr "Sélection d’expositions de médias"
 
 msgid "Search"
 msgstr "Recherche"
@@ -341,15 +341,15 @@ msgid ""
 "\n"
 "The lobby is divided into areas by subject, which are marked by signs and indicated on the maps in the entry hall behind you. In each of these areas, you will find many hallways into a range of fascinating exhibits.[/fill]"
 msgstr ""
-"[b]Bienvenue au Musée de Toute Choses![/b]\n"
+"[b]Bienvenue au Musée de Toutes Choses![/b]\n"
 "\n"
-"[fill]Ce musée n'est pas comme les musées du monde réel, donc il faut s'y habituer.[/fill]\n"
+"[fill]Ce musée n’est pas comme les musées du monde réel, il peut requérir un certain temps d’adaptation.[/fill]\n"
 "\n"
-"[b]Acceuil[/b]\n"
+"[b]Accueil[/b]\n"
 "\n"
-"[fill]À présent, vous vous trouvez à l'accueil. Cette salle sert à vous offrir un endroit d'où commencer votre aventure. Si vous désirez retourner, il suffit d'ouvrir le menu en tappant \"Escape,\" \"Start,\" ou \"Y\" sur votre mannette droit en realité virtuelle, et sélectionner \"Retour a l'accueil.\"\n"
+"[fill]À présent, vous vous trouvez à l’accueil. Cette salle sert à vous offrir un endroit d’où commencer votre aventure. Si vous désirez y revenir, il suffit d’ouvrir le menu en appuyant sur \"Escape,\" \"Start,\" ou \"Y\" sur votre mannette droite en realité virtuelle, et sélectionner \"Retour à l’accueil.\"\n"
 "\n"
-"Dans le couloir dèrrier vous, vous trouverez divers salles dédiées à divers thèmes, marquées par des panneaux indiquées sur les cartes. Dans chaque salle, vous découvrirez une multitude d'expositions fascinantes.[/fill]"
+"Dans le couloir derrière vous, vous trouverez diverses salles dédiées à divers thèmes, marquées par des panneaux indiqués sur les cartes. Dans chaque salle, vous découvrirez une multitude d’expositions fascinantes.[/fill]"
 
 msgid ""
 "[b]Museum Exhibits[/b]\n"
@@ -362,11 +362,11 @@ msgid ""
 msgstr ""
 "[b]Expositions du musée[/b]\n"
 "\n"
-"[fill]La création des expositions n'est pas manuelle. Plutot, elles sont générées automatiquement en extrayant des images et des données textuelles de Wikipédia et de Wikimedia Commons. Tout sujet ayant une page Wikipédia peut donc être exposé dans ce musée !\n"
+"[fill]La création des expositions n’est pas manuelle. Plutôt, elles sont générées automatiquement en extrayant des images et des données textuelles de Wikipédia et de Wikimedia Commons. Tout sujet ayant une page Wikipédia peut donc être exposé dans ce musée !\n"
 "\n"
-"Chaque exposition comporte de nombreux couloirs la reliant à d'autres expositions. Ces couloirs sont définis en fonction des liens dans l'article Wikipédia de l'exposition courante. Vous pouvez passer d'une exposition à l'autre à l'infini, d'aprés votre curiosité.\n"
+"Chaque exposition comporte de nombreux couloirs la reliant à d’autres expositions. Ces couloirs sont définis en fonction des liens dans l’article Wikipédia de l’exposition courante. Vous pouvez passer d’une exposition à l’autre à l’infini, en suivant votre votre curiosité.\n"
 "\n"
-"Si vous préférez accéder directement à un sujet précis, accédez au terminal de recherche situé au fond de l'accueil. Il suffit d'entrer le sujet dans le terminal, et un couloir vous y mènera directement.[/fill]"
+"Si vous préférez accéder directement à un sujet précis, accédez au terminal de recherche situé au fond de l’accueil. Il suffit d’entrer le sujet dans le terminal, et un couloir vous y mènera directement.[/fill]"
 
 ### scenes/menu/TerminalMenu.tscn Section
 
@@ -378,15 +378,15 @@ msgid ""
 "Hit \"E\" on your keyboard to interact with the terminal, or press Y/△ if you are using a controller.\n"
 "\n"
 msgstr ""
-"Bienvenu•e au terminal de recherche\n"
+"Bienvenue au terminal de recherche\n"  ### NDT: In this case, « bienvenue » is always feminine
 "\n"
-"Vous pouvez accéder à une exposition spécifique en sélectionnant « Entrer le nom de l'exposition ». Vous pouvez également demander une exposition aléatoire.\n"
+"Vous pouvez accéder à une exposition spécifique en sélectionnant « Entrer le nom de l’exposition ». Vous pouvez également demander une exposition aléatoire.\n"
 "\n"
-"Tapez \"E\" sur votre clavier Y/△ sur votre mannette pour interagire avec le terminal ou \n"
+"Appuyez sur \"E\" sur votre clavier ou Y/△ sur votre mannette pour intéragir avec le terminal.\n"
 "\n"
 
 msgid "Enter Exhibit Name "
-msgstr "Entrer le nom de l'exposition "
+msgstr "Entrer le nom de l’exposition "
 
 msgid "Go to Random Exhibit "
 msgstr "Exposition aléatoire "
@@ -395,17 +395,17 @@ msgid ""
 "Enter the title of the exhibit you would like to acccess. A path will be routed and the door will open to the best matching exhibit.\n"
 "\n"
 msgstr ""
-"Saisissez le titre de l'exposition à chercher. Si une page de ce nom existe, une porte s'ouvrira menant à l'exposition correspondante.\n"
+"Saisissez le titre de l’exposition à chercher. Si une page de ce nom existe, une porte s’ouvrira menant à l’exposition correspondante.\n"
 "\n"
 
 msgid "Enter exhibit title"
-msgstr "Saisissez le titre de l'exposition"
+msgstr "Saisissez le titre de l’exposition"
 
 msgid "Confirm"
 msgstr "Confirmer"
 
 msgid "Exhibit Found: \"\"\n"
-msgstr "Exhibition trouvée: \"\"\n"
+msgstr "Exposition trouvée : \"\"\n"
 
 msgid ""
 "\n"
@@ -413,7 +413,7 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"Procédez vers votre droite pour accéder à cette exposition ou revenez au menu principal du terminal pour accéder à une exposition différente.\n"
+"Prenez la porte sur votre droite pour accéder à cette exposition ou revenez au menu principal du terminal pour accéder à une exposition différente.\n"
 "\n"
 
 msgid "OK / Exit"
