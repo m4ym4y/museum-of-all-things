@@ -26,7 +26,7 @@ exhibits = PackedStringArray("Fungi", "Dinosaures", "Biodiversité marine", "Ter
 
 [sub_resource type="Resource" id="Resource_opuc1"]
 script = ExtResource("2_y4oc8")
-name = "Geography"
+name = "Géographie"
 corner_1 = Vector2(8, -92)
 corner_2 = Vector2(44, -36)
 exhibits = PackedStringArray("États-Unis", "Antarctique", "Patagonie", "Tibet", "Persépolis", "Pétra", "Taipei 101", "Colline", "Architecture à Bristol", "Chongqing", "Îles Pitcairn", "Fosse des Mariannes", "Transsibérien", "Lancaster (Ohio)", "Lac Tchad", "Sénégal", "Bora-Bora", "Landes de Gascogne", "Kilimandjaro", "Canberra", "Forêt amazonienne", "Wharfe", "Uruk", "Pierre noire (islam)")
