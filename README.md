@@ -45,6 +45,7 @@ an issue and we can discuss it before you put too much work in.
 ### Currently supported languages (On main branch -- may not reflect latest release)
 
 - English
+- Italian
 - Portuguese
 - French
 - Spanish
