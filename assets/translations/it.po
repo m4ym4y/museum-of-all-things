@@ -350,7 +350,7 @@ msgstr ""
 "\n"
 "[b]L'atrio[/b]\n"
 "\n"
-"[fill]In questo momento ti trovi nell'atrio del museo, pensato per offrirti un piacevole punto di partenza per la tua visita. Se in futuro vorrai tornarci, ti basterà aprire il menu del museo (tramite \"Escape,\" \"Start,\" o premendo \"Y\" sul controller destro in Realtà Virtuale) e selezionare \"Return to Lobby."\"\n"
+"[fill]In questo momento ti trovi nell'atrio del museo, pensato per offrirti un piacevole punto di partenza per la tua visita. Se in futuro vorrai tornarci, ti basterà aprire il menu del museo (tramite \"Escape,\" \"Start,\" o premendo \"Y\" sul controller destro in Realtà Virtuale) e selezionare \"Ritorna all'atrio.\"\n"
 "\n"
 "L'atrio è suddiviso in aree tematiche, segnalate da cartelli e indicate sulle mappe nell'atrio d'ingresso alle vostre spalle. In ognuna di queste aree troverete numerosi corridoi che conducono a una serie di affascinanti mostre.[/fill]"
 
