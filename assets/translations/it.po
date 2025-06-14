@@ -53,7 +53,7 @@ msgid "Paused"
 msgstr "Pausa"
 
 msgid " - Paused"
-msgstr "- Pausa"
+msgstr " - Pausa"
 
 msgid "Lobby"
 msgstr "Atrio"
