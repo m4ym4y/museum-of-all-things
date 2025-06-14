@@ -195,10 +195,10 @@ toggle_fullscreen={
 [internationalization]
 
 locale/translation_remaps={
-"res://assets/resources/lobby_data.tres": PackedStringArray("res://assets/resources/lobby_data_pt.tres:pt", "res://assets/resources/lobby_data_fr.tres:fr", "res://assets/resources/lobby_data_es.tres:es", "res://assets/resources/lobby_data_ja.tres:ja", "res://assets/resources/lobby_data_de.tres:de", "res://assets/resources/lobby_data_bn.tres:bn"),
+"res://assets/resources/lobby_data.tres": PackedStringArray("res://assets/resources/lobby_data_pt.tres:pt", "res://assets/resources/lobby_data_fr.tres:fr", "res://assets/resources/lobby_data_es.tres:es", "res://assets/resources/lobby_data_ja.tres:ja", "res://assets/resources/lobby_data_de.tres:de", "res://assets/resources/lobby_data_bn.tres:bn", "res://assets/resources/lobby_data_it.tres:it"),
 "res://assets/textures/lobby_plaque_intro_1.png": PackedStringArray()
 }
-locale/translations=PackedStringArray("res://assets/translations/fr.po", "res://assets/translations/pt.po", "res://assets/translations/en.po", "res://assets/translations/es.po", "res://assets/translations/ja.po", "res://assets/translations/de.po", "res://assets/translations/bn.po")
+locale/translations=PackedStringArray("res://assets/translations/fr.po", "res://assets/translations/pt.po", "res://assets/translations/en.po", "res://assets/translations/es.po", "res://assets/translations/ja.po", "res://assets/translations/de.po", "res://assets/translations/bn.po", "res://assets/translations/it.po")
 locale/test="en"
 locale/locale_filter_mode=0
 locale/language_filter=["en"]
