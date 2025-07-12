@@ -242,3 +242,4 @@ shaders/enabled=true
 openxr/foveation_level.meta_quest=3
 openxr/foveation_dynamic.meta_quest=true
 openxr/enabled.openxr=true
+openxr/extensions/meta/composition_layer_settings=false

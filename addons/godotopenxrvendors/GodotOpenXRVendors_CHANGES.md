@@ -1,5 +1,24 @@
 # Change history for the Godot OpenXR loaders asset
 
+## 4.0.0
+
+- Support making hybrid apps for Meta headsets
+- Add support for `XR_FB_android_surface_swapchain_create`
+- Implement `XR_META_recommended_layer_resolution`
+- Remove CMake from the build process
+- Implement instant splash screen for Meta headsets
+- Avoid casting errors when building with `precision=double`
+- Add missing Pico store manifest
+- Add support for `XR_FB_composition_layer_image_layout`
+- Update demo and samples for Godot 4.4
+- Switch Meta and Lynx to the Khronos loader
+- Fix `OpenXRFbSpatialEntityStorageExtensionWrapper` typos
+- Add support for `XR_FB_composition_layer_depth_test`
+- Use project settings to avoid enabling unneeded OpenXR extensions
+- Passthrough extensions should override real alpha blend mode, if enabled
+- Update the main manifest with the latest from the Khronos OpenXR loader AAR
+- Improve hand tracking related code in demo project
+
 ## 3.1.2
 - Fix passthrough sample color map display bug
 - Fix the issue preventing overridden vendor options from being updated

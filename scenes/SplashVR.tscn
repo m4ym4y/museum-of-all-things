@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dyw0howbtdh86"]
 
-[ext_resource type="Script" path="res://scenes/SplashVR.gd" id="1_4enco"]
-[ext_resource type="Texture2D" uid="uid://ds63c2nyaeggl" path="res://vr_splash.png" id="1_dp6s2"]
+[ext_resource type="Script" uid="uid://ohhsk1h00dpl" path="res://scenes/SplashVR.gd" id="1_4enco"]
+[ext_resource type="Texture2D" uid="uid://cf7dy454eb0db" path="res://assets/logo/moat_logo_large_white.png" id="2_4enco"]
 
 [sub_resource type="Environment" id="Environment_cgbrl"]
 background_mode = 1
@@ -14,7 +14,7 @@ size = Vector2(4.3, 2)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e6017"]
 transparency = 1
 shading_mode = 0
-albedo_texture = ExtResource("1_dp6s2")
+albedo_texture = ExtResource("2_4enco")
 
 [node name="SplashVR" type="Node3D"]
 script = ExtResource("1_4enco")
