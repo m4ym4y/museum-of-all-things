@@ -79,13 +79,13 @@ func _network_request_item():
 
 func set_language(language: String):
   wikipedia_prefix = "https://" + language + ".wikipedia.org/wiki/"
-  search_endpoint = "https://" + language + ".wikipedia.org/w/api.php?action=query&format=json&list=search&srprop=title&srsearch="
-  random_endpoint = "https://" + language + ".wikipedia.org/w/api.php?action=query&format=json&generator=random&grnnamespace=0&prop=info"
-  wikitext_endpoint = "https://" + language + ".wikipedia.org/w/api.php?action=query&prop=revisions|extracts|pageprops&ppprop=wikibase_item&explaintext=true&rvprop=content&format=json&redirects=1&titles="
-  images_endpoint = "https://" + language + ".wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=640&iiextmetadatafilter=LicenseShortName|Artist&format=json&redirects=1&titles="
-  wikidata_endpoint = "https://www.wikidata.org/w/api.php?action=wbgetclaims&uselang=" + language + "&format=json&entity="
-  wikimedia_commons_category_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=" + language + "&generator=categorymembers&gcmtype=file&gcmlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&gcmtitle="
-  wikimedia_commons_gallery_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=" + language + "&generator=images&gimlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&titles="
+  search_endpoint = "https://" + language + ".wikipedia.org/w/api.php?action=query&format=json&list=search&srprop=title&origin=*&srsearch="
+  random_endpoint = "https://" + language + ".wikipedia.org/w/api.php?action=query&format=json&generator=random&grnnamespace=0&prop=info&origin=*"
+  wikitext_endpoint = "https://" + language + ".wikipedia.org/w/api.php?action=query&prop=revisions|extracts|pageprops&ppprop=wikibase_item&explaintext=true&rvprop=content&format=json&redirects=1&origin=*&titles="
+  images_endpoint = "https://" + language + ".wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=640&iiextmetadatafilter=LicenseShortName|Artist&format=json&redirects=1&origin=*&titles="
+  wikidata_endpoint = "https://www.wikidata.org/w/api.php?action=wbgetclaims&uselang=" + language + "&format=json&origin=*&entity="
+  wikimedia_commons_category_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=" + language + "&generator=categorymembers&gcmtype=file&gcmlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&origin=*&gcmtitle="
+  wikimedia_commons_gallery_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=" + language + "&generator=images&gimlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&origin=*&titles="
 
 func fetch(titles, ctx):
   # queue wikitext fetch in front of queue to improve next exhibit load time
