@@ -12,7 +12,6 @@
   <description>
     <p>Visit the Museum of All Things, a nearly-infinite virtual museum generated from Wikipedia!</p>
     <p>You can find exhibits on millions of topics, from the Architecture of Liverpool to Zoroastrianism. Search for the topic you want to learn about, or just wander from topic to topic as your curiosity dictates!</p>
-    <!--p>If you have an OpenXR-compatible headset, you can also visit the MoAT in VR! (Currently, the Oculus Quest is not supported)</p-->
     <p>How does it work? The breadth of the museum is made possible by downloading text and images from Wikipedia and Wikimedia Commons. Every exhibit in the museum corresponds to a Wikipedia article. The walls of the exhibit are covered in images and text from the article, and hallways lead out to other exhibits based on the article's links.</p>
     <p>The museum is greatly inspired by educational videos that I watched as a kid, and the liminal spaces produced by early CGI. I want to recapture the promise that the internet can be a place of endless learning and exploration. I hope you enjoy your time exploring the Museum of All Things!</p>
   </description>
@@ -27,7 +26,6 @@
     <content_attribute id="sex-themes">moderate</content_attribute>
     <content_attribute id="social-info">mild</content_attribute>
   </content_rating>
-
 
   <url type="homepage">https://may.as/</url>
   <url type="bugtracker">https://github.com/m4ym4y/museum-of-all-things/issues</url>
@@ -61,7 +59,7 @@
   </screenshots>
 
   <releases>
-    <release version="v1.1.0" date="2025-02-27">
+    <release version="v1.1.0" date="2025-06-10">
       <description>
         <p>This version contains many features built by the community! Probably the largest of these efforts has been multi-language support, developed by @daviirodrig, @zHonys and @akien-mga, as well as the many contributors who helped translating their own languages (thank you to @dekotale, @rschmaelzle, @jasminedevv, @EcSolticia, @wallace-uozato, and @jd-develop !!)</p>
         <p>Currently supported languages as of this release are English, French, German, Spanish, Japanese, Portuguese, and Bengali.</p>
