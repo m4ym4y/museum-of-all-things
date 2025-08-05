@@ -61,6 +61,22 @@
   </screenshots>
 
   <releases>
+    <release version="v1.1.0" date="2025-02-27">
+      <description>
+        <p>This version contains many features built by the community! Probably the largest of these efforts has been multi-language support, developed by @daviirodrig, @zHonys and @akien-mga, as well as the many contributors who helped translating their own languages (thank you to @dekotale, @rschmaelzle, @jasminedevv, @EcSolticia, @wallace-uozato, and @jd-develop !!)</p>
+        <p>Currently supported languages as of this release are English, French, German, Spanish, Japanese, Portuguese, and Bengali.</p>
+        <p>Version 1.1.0 also includes the following features and bugfixes (listed along with their contributors if applicable):</p>
+        <ul>
+          <li>Controls can now be rebound in the settings (@TuTiuTe)</li>
+          <li>Mouse sensitivity and invert-y settings</li>
+          <li>Joypad deadzone settings</li>
+          <li>Update to Godot v4.4 (@dsnopek)</li>
+          <li>Language can be selected on the main menu and anywhere in the museum lobby</li>
+          <li>You can use a virtual keyboard at the search terminal in VR (@dsnopek)</li>
+          <li>Add non-latin fonts</li>
+        </ul>
+      </description>
+    </release>
     <release version="v1.0.1" date="2025-02-27">
       <description>
         <p>This version fixes some issues that people spotted after release! v1.0.1 has 5 contributors on it now!! Thank you so so much to everyone who's been helping out :)</p>
