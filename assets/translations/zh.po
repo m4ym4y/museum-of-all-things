@@ -5,331 +5,331 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
-"Language: en\n"
+"Language: zh\n"
 
 msgid "Enter the Museum"
-msgstr "Enter the Museum"
+msgstr "进入博物馆"
 
 msgid "Settings"
-msgstr "Settings"
+msgstr "设置"
 
 msgid "Quit"
-msgstr "Quit"
+msgstr "退出"
 
 msgid "The museum is currently unstaffed. Please refer to signage for information."
-msgstr "The museum is currently unstaffed. Please refer to signage for information."
+msgstr "博物馆目前无人值守。请参阅标牌获取信息。"
 
 msgid "English"
-msgstr "English"
+msgstr "英语"
 
 msgid "Spanish"
-msgstr "Español"
+msgstr "西班牙语"
 
 msgid "Portuguese"
-msgstr "Português"
+msgstr "葡萄牙语"
 
 msgid "French"
-msgstr "Français"
+msgstr "法语"
 
 msgid "Japanese"
-msgstr "日本語"
+msgstr "日语"
 
 msgid "Chinese"
 msgstr "中文"
 
 msgid "Are you sure you want to Quit?"
-msgstr "Are you sure you want to Quit?"
+msgstr "您确定要退出吗？"
 
 msgid "Yes"
-msgstr "Yes"
+msgstr "是"
 
 msgid "No"
-msgstr "No"
+msgstr "否"
 
 msgid "Open Page in Browser"
-msgstr "Open Page in Browser"
+msgstr "在浏览器中打开页面"
 
 msgid "Paused"
-msgstr "Paused"
+msgstr "已暂停"
 
 msgid " - Paused"
-msgstr "- Paused"
+msgstr " - 已暂停"
 
 msgid "Lobby"
-msgstr "Lobby"
+msgstr "大厅"
 
 msgid "Resume"
-msgstr "Resume"
+msgstr "继续"
 
 msgid "Return to Lobby"
-msgstr "Return to Lobby"
+msgstr "返回大厅"
 
 msgid "Enter Exhibit Name"
-msgstr "Enter Exhibit Name"
+msgstr "输入展览名称"
 
 msgid "Go to Random Exhibit"
-msgstr "Go to Random Exhibit"
+msgstr "前往随机展览"
 
 msgid "Enter exhibit title"
-msgstr "Enter exhibit title"
+msgstr "输入展览标题"
 
 msgid "Confirm"
-msgstr "Confirm"
+msgstr "确认"
 
 msgid "Back"
-msgstr "Back"
+msgstr "返回"
 
 msgid "Exhibit Found: \"\""
-msgstr "Exhibit Found: \"\""
+msgstr "找到展览：\"\""
 
 msgid "OK / Exit"
-msgstr "OK / Exit"
+msgstr "确定 / 退出"
 
 msgid "VR Controls"
-msgstr "VR Controls"
+msgstr "VR 控制"
 
 msgid "Restore Default Settings"
-msgstr "Restore Default Settings"
+msgstr "恢复默认设置"
 
 msgid "Movement Style"
-msgstr "Movement Style"
+msgstr "移动方式"
 
 msgid "Teleportation (Left Trigger)"
-msgstr "Teleportation (Left Trigger)"
+msgstr "传送（左触发器）"
 
 msgid "Direct Movement (Left Analog Stick)"
-msgstr "Direct Movement (Left Analog Stick)"
+msgstr "直接移动（左摇杆）"
 
 msgid "Direct Movement Speed"
-msgstr "Direct Movement Speed"
+msgstr "直接移动速度"
 
 msgid "Camera Rotation Increment (Right Stick)"
-msgstr "Camera Rotation Increment (Right Stick)"
+msgstr "相机旋转增量（右摇杆）"
 
 msgid "Smooth Camera Rotation"
-msgstr "Smooth Camera Rotation"
+msgstr "平滑相机旋转"
 
 msgid "Preparing Exhibit..."
-msgstr "Preparing Exhibit..."
+msgstr "正在准备展览..."
 
 msgid "Error Loading Exhibit."
-msgstr "Error Loading Exhibit."
+msgstr "加载展览时出错。"
 
 msgid "Graphics"
-msgstr "Graphics"
+msgstr "图形"
 
 msgid "Audio"
-msgstr "Audio"
+msgstr "音频"
 
 msgid "Data"
-msgstr "Data"
+msgstr "数据"
 
 msgid "Controls"
-msgstr "Controls"
+msgstr "控制"
 
 msgid "Data Settings"
-msgstr "Data Settings"
+msgstr "数据设置"
 
-msgid "Cache" ### Currently not applied (probably due to the values that follow)
-msgstr "Cache"
+msgid "Cache"
+msgstr "缓存"
 
 msgid "Clear Cache"
-msgstr "Clear Cache"
+msgstr "清除缓存"
 
 msgid "Cache Size Limit"
-msgstr "Cache Size Limit"
+msgstr "缓存大小限制"
 
 msgid "Automatically limit cache size (on quit)"
-msgstr "Automatically limit cache size (on quit)"
+msgstr "自动限制缓存大小（退出时）"
 
 msgid "Graphics Settings"
-msgstr "Graphics Settings"
+msgstr "图形设置"
 
 msgid "Render Scale"
-msgstr "Render Scale"
+msgstr "渲染比例"
 
 msgid "Fullscreen"
-msgstr "Fullscreen"
+msgstr "全屏"
 
 msgid "Reflection Quality"
-msgstr "Reflection Quality"
+msgstr "反射质量"
 
 msgid "Enable Reflections"
-msgstr "Enable Reflections"
+msgstr "启用反射"
 
 msgid "Ambient Light Level"
-msgstr "Ambient Light Level"
+msgstr "环境光水平"
 
 msgid "Enable Indirect Lighting (SSIL)"
-msgstr "Enable Indirect Lighting (SSIL)"
+msgstr "启用间接照明（SSIL）"
 
 msgid "Render Distance"
-msgstr "Render Distance"
+msgstr "渲染距离"
 
 msgid "Fog"
-msgstr "Fog"
+msgstr "雾"
 
 msgid "Maximum FPS"
-msgstr "Maximum FPS"
+msgstr "最大帧率"
 
 msgid "Enable Fog"
-msgstr "Enable Fog"
+msgstr "启用雾"
 
 msgid "Enable V-Sync"
-msgstr "Enable V-Sync"
+msgstr "启用垂直同步"
 
 msgid "Limit FPS"
-msgstr "Limit FPS"
+msgstr "限制帧率"
 
 msgid "Post-Processing Effect"
-msgstr "Post-Processing Effect"
+msgstr "后期处理效果"
 
 msgid "None"
-msgstr "None"
+msgstr "无"
 
 msgid "CRT Filter"
-msgstr "CRT Filter"
+msgstr "CRT 滤镜"
 
 msgid "Control Settings"
-msgstr "Control Settings"
+msgstr "控制设置"
 
 msgid "Mouse Sensitivity"
-msgstr "Mouse Sensitivity"
+msgstr "鼠标灵敏度"
 
 msgid "Invert Y-axis"
-msgstr "Invert Y-axis"
+msgstr "反转 Y 轴"
 
 msgid "Remap Inputs"
-msgstr "Remap Inputs"
+msgstr "重新映射输入"
 
 msgid "Move Forward"
-msgstr "Move Forward"
+msgstr "前进"
 
 msgid "Move Back"
-msgstr "Move Back"
+msgstr "后退"
 
 msgid "Strafe Left"
-msgstr "Strafe Left"
+msgstr "左平移"
 
 msgid "Strafe Right"
-msgstr "Strafe Right"
+msgstr "右平移"
 
 msgid "Jump"
-msgstr "Jump"
+msgstr "跳跃"
 
 msgid "Crouch"
-msgstr "Crouch"
+msgstr "蹲下"
 
 msgid "Interact"
-msgstr "Interact"
+msgstr "交互"
 
 msgid "Joypad Camera Deadzone"
-msgstr "Joypad Camera Deadzone"
+msgstr "手柄视角死区"
 
 msgid "Audio Settings"
-msgstr "Audio Settings"
+msgstr "音频设置"
 
 msgid "Global Volume"
-msgstr "Global Volume"
+msgstr "全局音量"
 
 msgid "Sound Effects Volume"
-msgstr "Sound Effects Volume"
+msgstr "音效音量"
 
 msgid "Ambience Volume"
-msgstr "Ambience Volume"
+msgstr "环境音量"
 
 msgid "Music Volume"
-msgstr "Music Volume"
+msgstr "音乐音量"
 
 msgid "Enter VR"
-msgstr "Enter VR"
+msgstr "进入 VR"
 
 msgid "Snap turning:"
-msgstr "Snap turning:"
+msgstr "急转向："
 
 msgid "Y axis dead zone"
-msgstr "Y axis dead zone"
+msgstr "Y 轴死区"
 
 msgid "X axis dead zone"
-msgstr "X axis dead zone"
+msgstr "X 轴死区"
 
 msgid "Haptics Scale"
-msgstr "Haptics Scale"
+msgstr "触觉反馈强度"
 
 msgid "Apply"
-msgstr "Apply"
+msgstr "应用"
 
 msgid "Reset"
-msgstr "Reset"
+msgstr "重置"
 
 msgid "Height adjust:"
-msgstr "Height adjust:"
+msgstr "高度调整："
 
 msgid "WebXR primary:"
-msgstr "WebXR primary:"
+msgstr "WebXR 主设备："
 
 msgid "Auto"
-msgstr "Auto"
+msgstr "自动"
 
 msgid "Thumbstick"
-msgstr "Thumbstick"
+msgstr "摇杆"
 
 msgid "Trackpad"
-msgstr "Trackpad"
+msgstr "触控板"
 
 msgid "Technology"
-msgstr "Technology"
+msgstr "技术"
 
 msgid "Featured Technology Exhibits"
-msgstr "Featured Technology Exhibits"
+msgstr "精选技术展览"
 
 msgid "Science"
-msgstr "Science"
+msgstr "科学"
 
 msgid "Featured Science Exhibits"
-msgstr "Featured Science Exhibits"
+msgstr "精选科学展览"
 
 msgid "Geography"
-msgstr "Geography"
+msgstr "地理"
 
 msgid "Featured Geography Exhibits"
-msgstr "Featured Geography Exhibits"
+msgstr "精选地理展览"
 
 msgid "Culture"
-msgstr "Culture"
+msgstr "文化"
 
 msgid "Featured Culture Exhibits"
-msgstr "Featured Culture Exhibits"
+msgstr "精选文化展览"
 
 msgid "Art"
-msgstr "Art"
+msgstr "艺术"
 
 msgid "Featured Art Exhibits"
-msgstr "Featured Art Exhibits"
+msgstr "精选艺术展览"
 
 msgid "People"
-msgstr "People"
+msgstr "人物"
 
 msgid "Featured People Exhibits"
-msgstr "Featured People Exhibits"
+msgstr "精选人物展览"
 
 msgid "History"
-msgstr "History"
+msgstr "历史"
 
 msgid "Featured History Exhibits"
-msgstr "Featured History Exhibits"
+msgstr "精选历史展览"
 
 msgid "Media"
-msgstr "Media"
+msgstr "媒体"
 
 msgid "Featured Media Exhibits"
-msgstr "Featured Media Exhibits"
+msgstr "精选媒体展览"
 
 msgid "Search"
-msgstr "Search"
+msgstr "搜索"
 
 msgid "Featured Search Exhibits"
-msgstr "Featured Search Exhibits"
+msgstr "精选搜索展览"
 
 ### scenes/Lobby.tscn Section
 
@@ -344,15 +344,15 @@ msgid ""
 "\n"
 "The lobby is divided into areas by subject, which are marked by signs and indicated on the maps in the entry hall behind you. In each of these areas, you will find many hallways into a range of fascinating exhibits.[/fill]"
 msgstr ""
-"[b]Welcome to the Museum of All Things![/b]\n"
+"[b]欢迎来到万物博物馆！[/b]\n"
 "\n"
-"[fill]This museum is different from any you've visited in the physical world, so it may take a moment to get your bearings.[/fill]\n"
+"[fill]这个博物馆与您在现实世界中参观过的任何博物馆都不同，因此可能需要一些时间来适应。[/fill]\n"
 "\n"
-"[b]The Lobby[/b]\n"
+"[b]大厅[/b]\n"
 "\n"
-"[fill]Right now you are in the museum's lobby, tailored to give you a pleasant starting point on your visit. If you ever wish to return here, you may simply open your museum menu (via \"Escape,\" \"Start,\" or by hitting \"Y\" on your right-hand controller in Virtual Reality) and select \"Return to Lobby.\"\n"
+"[fill]您现在位于博物馆的大厅，这里经过特别设计，旨在为您的参观提供一个舒适的起点。如果您希望返回这里，只需打开博物馆菜单（通过\"Escape\"键、\"Start\"键，或在虚拟现实中按下右手控制器上的\"Y\"键）并选择\"返回大厅\"。\n"
 "\n"
-"The lobby is divided into areas by subject, which are marked by signs and indicated on the maps in the entry hall behind you. In each of these areas, you will find many hallways into a range of fascinating exhibits.[/fill]"
+"大厅按主题划分，各区域有指示牌，并在您身后入口大厅的地图上标注。每个区域都有多条走廊通向各类引人入胜的展览。[/fill]"
 
 msgid ""
 "[b]Museum Exhibits[/b]\n"
@@ -363,13 +363,13 @@ msgid ""
 "\n"
 "If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.[/fill]"
 msgstr ""
-"[b]Museum Exhibits[/b]\n"
+"[b]博物馆展览[/b]\n"
 "\n"
-"[fill]Exhibits are not made by hand-- they are generated procedurally by pulling images and textual data from Wikipedia and Wikimedia commons. This means any topic with a Wikipedia page can also be accessed as an exhibit in this museum!\n"
+"[fill]这些展览并非人工打造，而是程序化生成的，通过从维基百科与维基共享资源获取图像与文本数据。这意味着任何拥有维基百科页面的主题都可以在本博物馆生成相应展览！\n"
 "\n"
-"Furthermore, each exhibit contains many hallways connecting it to other exhibits. These hallways are determined based on the links in the current exhibit's Wikipedia article. You can move from exhibit to exhibit endlessly, following your curiosity.\n"
+"此外，每个展览都有多条走廊与其他展览相连，这些连接依据当前展览维基百科条目中的超链接生成。您可以在展览之间无止境地穿梭，随心探索。\n"
 "\n"
-"If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.[/fill]"
+"如果您想直接前往某个特定主题，可以使用您身后入口大厅尽头的搜索终端。只需在终端界面输入感兴趣的主题，系统就会为您生成一条直达该展览的走廊。[/fill]"
 
 ### scenes/menu/TerminalMenu.tscn Section
 
@@ -381,37 +381,37 @@ msgid ""
 "Hit \"E\" on your keyboard to interact with the terminal, or press Y/△ if you are using a controller.\n"
 "\n"
 msgstr ""
-"Welcome to the MoAT Custom Exhibit Terminal\n"
+"欢迎来到万物博物馆自定义展览终端\n"
 "\n"
-"You may access a specific exhibit by selecting \"Enter Exhibit Name.\" Alternatively, you may ask for a random exhibit.\n"
+"您可以通过选择\"输入展览名称\"访问特定展览。或者，您可以请求随机展览。\n"
 "\n"
-"Hit \"E\" on your keyboard to interact with the terminal, or press Y/△ if you are using a controller.\n"
+"按下键盘上的\"E\"键与终端交互，或者如果您使用控制器，请按下Y/△键。\n"
 "\n"
 
 msgid "Enter Exhibit Name "
-msgstr "Enter Exhibit Name "
+msgstr "输入展览名称 "
 
 msgid "Go to Random Exhibit "
-msgstr "Go to Random Exhibit "
+msgstr "前往随机展览 "
 
 msgid ""
 "Enter the title of the exhibit you would like to acccess. A path will be routed and the door will open to the best matching exhibit.\n"
 "\n"
 msgstr ""
-"Enter the title of the exhibit you would like to acccess. A path will be routed and the door will open to the best matching exhibit.\n"
+"输入您想访问的展览标题。系统将规划路径，门将打开通往最匹配展览的通道。\n"
 "\n"
 
 msgid "Enter exhibit title"
-msgstr "Enter exhibit title"
+msgstr "输入展览标题"
 
 msgid "Confirm"
-msgstr "Confirm"
+msgstr "确认"
 
 msgid "Back"
-msgstr "Back"
+msgstr "返回"
 
 msgid "Exhibit Found: \"\"\n"
-msgstr "Exhibit Found: \"\"\n"
+msgstr "找到展览：\"\"\n"
 
 msgid ""
 "\n"
@@ -419,15 +419,15 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"Proceed to your right to access this exhibit, or return to the terminal's main menu to access a different exhibit.\n"
+"请向右前往访问此展览，或返回终端主菜单以访问其他展览。\n"
 "\n"
 
 msgid "OK / Exit"
-msgstr "OK / Exit"
+msgstr "确定 / 退出"
 
 msgid ""
 "We were unable to locate the exhibit that you requested. Please try a different exhibit.\n"
 "\n"
 msgstr ""
-"We were unable to locate the exhibit that you requested. Please try a different exhibit.\n"
+"我们无法找到您请求的展览。请尝试其他展览。\n"
 "\n"
