@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="LobbyData" load_steps=11 format=3 uid="uid://34yga2226k3j"]
+
+[ext_resource type="Script" uid="uid://bdc8jjijlgjox" path="res://resource_definitions/LobbyData.gd" id="1_3ssej"]
+[ext_resource type="Script" uid="uid://ch3nm32ndlrbh" path="res://resource_definitions/LobbyWing.gd" id="2_y4oc8"]
+
+[sub_resource type="Resource" id="Resource_pgwi2"]
+script = ExtResource("2_y4oc8")
+name = "科技"
+corner_1 = Vector2(-68, -44)
+corner_2 = Vector2(-32, -8)
+exhibits = PackedStringArray("遥控车", "美诺克斯", "晶体管", "陶器", "Godot（游戏引擎）", "巴氏杀菌法", "核武器试验", "黏合剂", "渡槽", "三维渲染", "飞机", "简单机械", "印刷机", "避孕", "显微技术", "游戏主机", "投石机", "畜牧业", "奥尔德维文化")
+
+[sub_resource type="Resource" id="Resource_ooopd"]
+script = ExtResource("2_y4oc8")
+name = "文化"
+corner_1 = Vector2(32, -44)
+corner_2 = Vector2(68, -8)
+exhibits = PackedStringArray("小丑", "龙", "便利店", "击掌", "Goncharov（梗）", "咖啡", "汤", "后室", "塔罗牌", "K-pop", "围棋", "印度教", "花花公子", "魔像", "海员号子", "广告", "大洪水神话", "僧侣")
+
+[sub_resource type="Resource" id="Resource_m2ope"]
+script = ExtResource("2_y4oc8")
+name = "科学"
+corner_1 = Vector2(-44, -92)
+corner_2 = Vector2(-8, -36)
+exhibits = PackedStringArray("真菌", "恐龙", "海洋生物", "地球", "阿拉伯象限", "鼠", "虾", "面包果", "数据与信息可视化", "金", "猴面包树属", "人类", "摆", "两性异形", "光", "奶酪", "芸薹", "湿地", "蜂猴", "蝴蝶", "木星", "土壤", "分形", "眼睛")
+
+[sub_resource type="Resource" id="Resource_opuc1"]
+script = ExtResource("2_y4oc8")
+name = "地理"
+corner_1 = Vector2(8, -92)
+corner_2 = Vector2(44, -36)
+exhibits = PackedStringArray("美国", "南极洲", "巴塔哥尼亚", "西藏", "波斯波利斯", "佩特拉", "台北101", "乳房状山丘", "利物浦建筑", "重庆", "皮特凯恩群岛", "马里亚纳海沟", "西伯利亚大铁路", "俄亥俄州兰开斯特", "乍得湖", "塞内加尔", "波拉波拉岛", "加斯科涅朗德", "乞力马扎罗山", "堪培拉", "亚马孙雨林", "沃夫河", "乌鲁克", "黑石")
+
+[sub_resource type="Resource" id="Resource_qiy1c"]
+script = ExtResource("2_y4oc8")
+name = "艺术"
+corner_1 = Vector2(-72, 12)
+corner_2 = Vector2(-36, 48)
+exhibits = PackedStringArray("巴洛克绘画", "菲律宾艺术", "亚美尼亚建筑", "巴勃罗·毕加索", "卢浮宫", "胡安·米罗", "艾未未", "芙里达·卡罗", "凯绥·珂勒惠支", "弗兰克·劳埃德·赖特", "埃德加·德加", "洞穴壁画", "米开朗琪罗", "弗朗西斯科·戈雅", "野兽派", "涂鸦", "古希腊雕塑", "M. C. 埃舍尔", "乔治·修拉")
+
+[sub_resource type="Resource" id="Resource_l5mfx"]
+script = ExtResource("2_y4oc8")
+name = "人物"
+corner_1 = Vector2(36, 12)
+corner_2 = Vector2(72, 48)
+exhibits = PackedStringArray("波兰人物列表", "阿尔伯特·爱因斯坦", "弗雷迪·默丘里", "科比·布莱恩特", "成吉思汗", "拉斯普京", "公共普世之友", "图派克·沙库尔", "路易吉·曼焦内", "威廉·莎士比亚", "莱纳斯·鲍林", "丹尼·德维托", "J. R. R. 托尔金", "玛丽·雪莱", "亚历山德里亚·奥卡西奥-科尔特斯", "伊本·白图泰", "马丁·路德", "马丁·路德·金")
+
+[sub_resource type="Resource" id="Resource_bycfx"]
+script = ExtResource("2_y4oc8")
+name = "历史"
+corner_1 = Vector2(-48, 60)
+corner_2 = Vector2(-12, 96)
+exhibits = PackedStringArray("德国历史", "切尔诺贝利事故", "泰坦尼克号", "20世纪60年代反主流文化", "美国不道德人体实验", "2019冠状病毒病疫情", "中央情报局", "伊斯兰黄金时代", "登月", "1906年旧金山地震", "汉尼拔翻越阿尔卑斯山", "德雷克与肯德里克·拉马尔之争", "摄影史", "戴夫·马修斯乐队巴士事件", "血祭诬陷", "奥约帝国", "海盗行为", "2019-2020年香港抗议活动")
+
+[sub_resource type="Resource" id="Resource_yimja"]
+script = ExtResource("2_y4oc8")
+name = "媒体"
+corner_1 = Vector2(12, 60)
+corner_2 = Vector2(48, 96)
+exhibits = PackedStringArray("圣经", "披头士乐队", "黑客帝国", "奥德赛", "吉尔伽美什史诗", "等待戈多", "Homestuck", "星际迷航", "芭比（电影）", "新世纪福音战士", "哈姆雷特", "卡坦岛", "Twitter", "VOGUE（杂志）", "威利汽船", "基督山伯爵", "维基百科", "我的世界")
+
+[resource]
+script = ExtResource("1_3ssej")
+wings = Array[ExtResource("2_y4oc8")]([SubResource("Resource_pgwi2"), SubResource("Resource_ooopd"), SubResource("Resource_m2ope"), SubResource("Resource_opuc1"), SubResource("Resource_qiy1c"), SubResource("Resource_l5mfx"), SubResource("Resource_bycfx"), SubResource("Resource_yimja")])
