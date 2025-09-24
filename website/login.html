@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thunderbird Merit Badges | Login</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./scripts.js" defer></script>
+  </head>
+  <body class="page page--login">
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="./index.html">
+          <span class="brand__mark" aria-hidden="true">🦅</span>
+          <span class="brand__text">Thunderbird Merit Badges</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a class="site-nav__link" href="./index.html">Home</a>
+          <a class="site-nav__link" href="./info.html">Badges &amp; Info</a>
+          <a class="site-nav__link" href="./payment.html">Pricing &amp; Payment</a>
+          <a class="site-nav__link site-nav__link--cta" href="./login.html">Scout Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="section section--narrow">
+        <div class="section__header">
+          <h1>Create or Resume Your Scout Profile</h1>
+          <p>
+            Fill out the form below to jump into your personalized badge
+            dashboard. We recommend completing the form together with a parent or
+            guardian.
+          </p>
+        </div>
+
+        <form class="form-card" data-login-form>
+          <fieldset class="form-fieldset">
+            <legend>Scout details</legend>
+            <label class="form-field">
+              <span>Scout name</span>
+              <input name="scoutName" type="text" autocomplete="name" required />
+            </label>
+            <label class="form-field">
+              <span>Troop number</span>
+              <input name="troop" type="text" inputmode="numeric" required />
+            </label>
+            <label class="form-field">
+              <span>Parent or guardian email</span>
+              <input name="parentEmail" type="email" autocomplete="parent email" required />
+            </label>
+            <label class="form-field">
+              <span>Emergency contact phone</span>
+              <input name="contactPhone" type="tel" autocomplete="tel" placeholder="(555) 123-4567" />
+            </label>
+          </fieldset>
+
+          <fieldset class="form-fieldset">
+            <legend>Select your badges</legend>
+            <p class="form-help">
+              Start with an Eagle-required badge or choose several. You can add
+              more anytime from your dashboard.
+            </p>
+            <div class="badge-select" data-badge-list></div>
+          </fieldset>
+
+          <fieldset class="form-fieldset">
+            <legend>Learning pace</legend>
+            <p class="form-help">
+              We use this to tailor milestone reminders and recommended check-ins
+              with your Scoutmaster.
+            </p>
+            <label class="radio-option">
+              <input type="radio" name="pace" value="weekly" checked />
+              <span>Weekly check-ins (recommended)</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="pace" value="biweekly" />
+              <span>Every other week</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="pace" value="monthly" />
+              <span>Once a month</span>
+            </label>
+          </fieldset>
+
+          <div class="form-actions">
+            <button class="button" type="submit">Save &amp; Continue</button>
+            <p class="form-footnote">
+              Already filled this out? Submit again to update your selections.
+            </p>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        Need help? Email <a href="mailto:support@thunderbirdbadges.org">support@thunderbirdbadges.org</a>.
+      </p>
+    </footer>
+  </body>
+</html>

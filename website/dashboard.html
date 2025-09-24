@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thunderbird Merit Badges | Scout Dashboard</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./scripts.js" defer></script>
+  </head>
+  <body class="page page--dashboard">
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="./index.html">
+          <span class="brand__mark" aria-hidden="true">🦅</span>
+          <span class="brand__text">Thunderbird Merit Badges</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a class="site-nav__link" href="./index.html">Home</a>
+          <a class="site-nav__link" href="./info.html">Badges &amp; Info</a>
+          <a class="site-nav__link" href="./payment.html">Pricing &amp; Payment</a>
+          <a class="site-nav__link site-nav__link--cta" href="./dashboard.html">My Dashboard</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="section section--narrow" data-dashboard>
+        <div class="section__header">
+          <h1>Scout Dashboard</h1>
+          <p>Track your requirements, celebrate wins, and know your next step.</p>
+        </div>
+
+        <div class="callout callout--info" data-dashboard-empty hidden>
+          <h2>No profile found</h2>
+          <p>
+            We could not find a saved scout profile on this device. Visit the
+            <a href="./login.html">login page</a> to create one, then return to
+            the dashboard.
+          </p>
+        </div>
+
+        <div class="dashboard" data-dashboard-content hidden>
+          <section class="dashboard__header">
+            <div>
+              <h2 class="dashboard__title">Welcome back, <span data-scout-name></span>!</h2>
+              <p class="dashboard__subtitle">
+                Troop <span data-scout-troop></span> &bull; Progress pace:
+                <span data-scout-pace></span>
+              </p>
+            </div>
+            <button class="button button--ghost" type="button" data-download-summary>
+              Download Summary / Blue Card
+            </button>
+          </section>
+
+          <section class="dashboard__panel">
+            <h3>Badge Progress</h3>
+            <div class="dashboard__badges" data-badge-progress></div>
+          </section>
+
+          <section class="dashboard__panel">
+            <h3>Add another badge</h3>
+            <form class="inline-form" data-add-badge-form>
+              <label class="inline-form__field">
+                <span class="sr-only">Select badge</span>
+                <select name="badgeName" required></select>
+              </label>
+              <button class="button" type="submit">Add Badge</button>
+            </form>
+          </section>
+
+          <section class="dashboard__panel">
+            <h3>Next recommended action</h3>
+            <div class="dashboard__recommendation" data-next-action>
+              Keep up the great work! Update your reflections after completing
+              today&rsquo;s activity.
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Remember: review all conversations with a registered merit badge counselor.</p>
+    </footer>
+  </body>
+</html>

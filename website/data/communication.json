@@ -1,0 +1,67 @@
+{
+  "badgeId": "communication",
+  "title": "Communication",
+  "summary": "Build clear speaking, listening, and planning skills for school, Scouting, and life — from five-minute talks to leading a group discussion.",
+  "priceUSD": 20,
+  "officialUrl": "https://www.scouting.org/merit-badges/communication/",
+  "resources": [
+    {
+      "title": "Toastmasters Youth Leadership Program",
+      "url": "https://www.toastmasters.org/education/youth-leadership-program",
+      "description": "Workshops that build public speaking confidence for teens."
+    },
+    {
+      "title": "TED-Ed Student Talk Resources",
+      "url": "https://ed.ted.com/student_talks",
+      "description": "Guides and planning worksheets for crafting engaging presentations."
+    },
+    {
+      "title": "Purdue OWL – Public Speaking Tips",
+      "url": "https://owl.purdue.edu/owl/general_writing/specific_writing/public_speaking/",
+      "description": "Advice on outlining, visuals, and practicing speeches effectively."
+    }
+  ],
+  "modules": [
+    {
+      "id": "listening",
+      "title": "Good Listener, Good Leader",
+      "minutes": 35,
+      "type": "reflection",
+      "prompt": "Keep a one-day communication log and list three listening techniques you used. What changed when you applied them?"
+    },
+    {
+      "id": "five-minute-speech",
+      "title": "The Five-Minute Speech",
+      "minutes": 60,
+      "type": "project",
+      "instructions": "Draft a 5-minute talk (outline + key cards). Record a practice run and upload notes or video. Aim for a story-hook, clear body, and memorable close."
+    },
+    {
+      "id": "teach-or-pitch",
+      "title": "Teach or Pitch",
+      "minutes": 45,
+      "type": "project",
+      "instructions": "Teach a skill with aids OR make a short sales pitch (attention → need → solution → close). Upload your plan and a 60–120s recording."
+    },
+    {
+      "id": "lead-discussion",
+      "title": "Lead a Small-Group Discussion",
+      "minutes": 45,
+      "type": "report",
+      "instructions": "Plan and moderate a 10–15 min group discussion (topic, ground rules, timekeeping). Submit agenda + brief outcomes."
+    },
+    {
+      "id": "media-choices",
+      "title": "Choosing the Right Medium",
+      "minutes": 25,
+      "type": "quiz",
+      "quiz": [
+        {"q":"Name two situations best suited to a formal letter.","a":"Applications/requests; thank-you/recognition; letters to editor."},
+        {"q":"Why proofread email before sending?","a":"Clarity, tone, grammar affect how your message is received and your professionalism."}
+      ]
+    }
+  ],
+  "checkpoints": [
+    {"id":"final","label":"Counselor Review","after":"lead-discussion"}
+  ]
+}

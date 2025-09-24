@@ -1,0 +1,68 @@
+{
+  "badgeId": "engineering",
+  "title": "Engineering",
+  "summary": "Discover engineering fields, apply the design process, build and test a small prototype, and reflect on safety and teamwork.",
+  "priceUSD": 20,
+  "officialUrl": "https://www.scouting.org/merit-badges/engineering/",
+  "resources": [
+    {
+      "title": "TryEngineering",
+      "url": "https://tryengineering.org/students/",
+      "description": "Hands-on activities and career spotlights across engineering disciplines."
+    },
+    {
+      "title": "NASA Jet Propulsion Laboratory STEM Lessons",
+      "url": "https://www.jpl.nasa.gov/edu/teach/",
+      "description": "Design challenges and lesson plans focused on space exploration engineering."
+    },
+    {
+      "title": "DiscoverE – Future City Resources",
+      "url": "https://discovere.org/resources/",
+      "description": "Project ideas and videos that highlight teamwork, safety, and innovation."
+    }
+  ],
+  "modules": [
+    {
+      "id": "fields-and-roles",
+      "title": "Fields & Roles",
+      "minutes": 40,
+      "type": "reading",
+      "instructions": "List four engineering disciplines (e.g., civil, mechanical, electrical, environmental) and an example project for each."
+    },
+    {
+      "id": "design-process",
+      "title": "Design Process",
+      "minutes": 45,
+      "type": "quiz",
+      "quiz": [
+        { "q": "Put these in order: prototype, define problem, test, brainstorm.", "a": "Define problem → Brainstorm → Prototype → Test" },
+        { "q": "Why iterate?", "a": "Testing reveals improvements; iteration optimizes performance and safety." }
+      ]
+    },
+    {
+      "id": "prototype",
+      "title": "Build a Prototype",
+      "minutes": 120,
+      "type": "project",
+      "instructions": "Design and build a small device (bridge, catapult, gear toy, sensor mount). Upload sketch, materials list, photos, and what you tested."
+    },
+    {
+      "id": "test-and-iterate",
+      "title": "Test & Iterate",
+      "minutes": 60,
+      "type": "report",
+      "instructions": "Record 2–3 test trials (what changed, results). Explain one improvement you made and why."
+    },
+    {
+      "id": "safety-and-ethics",
+      "title": "Safety & Ethics",
+      "minutes": 30,
+      "type": "reflection",
+      "prompt": "List three safety steps you followed while building/testing and one ethical responsibility engineers have to the public."
+    }
+  ],
+  "checkpoints": [
+    { "id": "mid", "label": "Design Review", "after": "prototype" },
+    { "id": "final", "label": "Final Review", "after": "test-and-iterate" }
+  ]
+}
