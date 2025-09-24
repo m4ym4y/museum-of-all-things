@@ -1,0 +1,67 @@
+{
+  "badgeId": "family-life",
+  "title": "Family Life",
+  "summary": "Strengthen your home team: what a family is, how to communicate, share responsibilities, plan meetings, and complete service together.",
+  "priceUSD": 20,
+  "officialUrl": "https://www.scouting.org/merit-badges/family-life/",
+  "resources": [
+    {
+      "title": "American Academy of Pediatrics – HealthyChildren.org Family Life",
+      "url": "https://www.healthychildren.org/English/family-life/",
+      "description": "Articles on communication, routines, and supporting one another at home."
+    },
+    {
+      "title": "Utah State University Extension – Family Meetings Guide",
+      "url": "https://extension.usu.edu/familyrelationships/quality-time/family-meetings",
+      "description": "Step-by-step advice for planning productive family meetings."
+    },
+    {
+      "title": "DoSomething.org – Family Service Ideas",
+      "url": "https://www.dosomething.org/us/articles/family-volunteering-ideas",
+      "description": "Project ideas for serving together and tracking impact."
+    }
+  ],
+  "modules": [
+    {
+      "id": "what-is-family",
+      "title": "What Is a Family?",
+      "minutes": 30,
+      "type": "reading",
+      "instructions": "List five positive family traits (e.g., love, security, respect, trust, time together) and give one example you’ve seen at home."
+    },
+    {
+      "id": "responsibilities",
+      "title": "Shared Roles & Responsibilities",
+      "minutes": 40,
+      "type": "project",
+      "instructions": "Create a one-week home duties chart (room care, meals, general chores). Track completion and reflect on what changed."
+    },
+    {
+      "id": "family-meeting",
+      "title": "Run a Family Meeting",
+      "minutes": 45,
+      "type": "report",
+      "instructions": "Set an agenda, ground rules, and a simple problem-solving plan. Include at least one topic from: chores, tech use, finances, or family project. Upload notes."
+    },
+    {
+      "id": "family-service",
+      "title": "Family Service Project",
+      "minutes": 180,
+      "type": "serviceLog",
+      "instructions": "Plan and complete a small service or improvement (home, neighborhood, or community). Log who did what, hours, and results."
+    },
+    {
+      "id": "time-money",
+      "title": "Managing Time & Money",
+      "minutes": 35,
+      "type": "quiz",
+      "quiz": [
+        {"q":"Name two time-management practices families can use.","a":"To-do lists/priorities; shared schedule; buffer time; divide chores; weekly meeting."},
+        {"q":"What’s a simple first step in budgeting?","a":"Track income and expenses; separate fixed vs. flexible costs; set goals."}
+      ]
+    }
+  ],
+  "checkpoints": [
+    {"id":"final","label":"Counselor Review","after":"family-service"}
+  ]
+}

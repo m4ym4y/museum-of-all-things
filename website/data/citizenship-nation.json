@@ -1,0 +1,69 @@
+{
+  "badgeId": "citizenship-nation",
+  "title": "Citizenship in the Nation",
+  "summary": "Explore the founding ideas, the Constitution and Bill of Rights, three branches, and how national issues are debated in a representative republic.",
+  "priceUSD": 20,
+  "officialUrl": "https://www.scouting.org/merit-badges/citizenship-in-the-nation/",
+  "resources": [
+    {
+      "title": "National Constitution Center – Interactive Constitution",
+      "url": "https://constitutioncenter.org/interactive-constitution",
+      "description": "Clause-by-clause explanations with essays from scholars across perspectives."
+    },
+    {
+      "title": "iCivics: Branches of Power",
+      "url": "https://www.icivics.org/games/branches-power",
+      "description": "Online game exploring checks and balances across the three branches."
+    },
+    {
+      "title": "Library of Congress – Congress.gov Resources for Students",
+      "url": "https://www.congress.gov/resources/display/content/Students+Resources",
+      "description": "Guides to how federal laws are made and where to follow current bills."
+    }
+  ],
+  "modules": [
+    {
+      "id": "foundations",
+      "title": "Foundations of American Democracy",
+      "minutes": 40,
+      "type": "reading",
+      "instructions": "Summarize the five core democratic concepts listed at the start of the pamphlet and explain one modern example for each."
+    },
+    {
+      "id": "constitution-billofrights",
+      "title": "Constitution & Bill of Rights",
+      "minutes": 60,
+      "type": "quiz",
+      "quiz": [
+        {"q": "What does 'popular sovereignty' mean?", "a": "The people hold supreme power and establish the government."},
+        {"q": "Name two protections in the First Amendment.", "a": "Any two of: religion, speech, press, assembly, petition."},
+        {"q": "What does the 10th Amendment reserve?", "a": "Powers not delegated to the federal government are reserved to the states or the people."}
+      ]
+    },
+    {
+      "id": "branches",
+      "title": "Three Branches & Checks",
+      "minutes": 45,
+      "type": "reading",
+      "instructions": "Create a simple chart listing the primary powers of Congress, the President, and the Supreme Court and one check each has on another branch."
+    },
+    {
+      "id": "national-issues",
+      "title": "National Issue Brief",
+      "minutes": 90,
+      "type": "research",
+      "instructions": "Choose a national issue (e.g., national security, economy, civil liberties). Write a 1-page balanced brief explaining two perspectives and a reasoned recommendation."
+    },
+    {
+      "id": "representative-letter",
+      "title": "Write Your Representative",
+      "minutes": 45,
+      "type": "reflection",
+      "prompt": "Draft a respectful letter to your U.S. Representative or Senators explaining your position on the issue from the prior module. Attach the draft."
+    }
+  ],
+  "checkpoints": [
+    {"id":"cpA","label":"Foundations Review","after":"constitution-billofrights"},
+    {"id":"final","label":"Final Counselor Review","after":"representative-letter"}
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "badgeId": "citizenship-community",
+  "title": "Citizenship in the Community",
+  "summary": "Learn how local government works, how public meetings run, how issues surface, and where you can pitch in to improve your community.",
+  "priceUSD": 20,
+  "officialUrl": "https://www.scouting.org/merit-badges/citizenship-in-the-community/",
+  "resources": [
+    {
+      "title": "National League of Cities – Civic Education",
+      "url": "https://www.nlc.org/resource/civic-education/",
+      "description": "Background on how local governments operate and engage residents."
+    },
+    {
+      "title": "ICMA Student Resources",
+      "url": "https://icma.org/students",
+      "description": "Explains the roles of city and county managers with case studies."
+    },
+    {
+      "title": "USA.gov – Local Governments",
+      "url": "https://www.usa.gov/local-governments",
+      "description": "Directory and overview of counties, municipalities, and special districts."
+    }
+  ],
+  "modules": [
+    {
+      "id": "belonging",
+      "title": "Citizenship: The Value of Belonging",
+      "minutes": 30,
+      "type": "reflection",
+      "prompt": "In 2–3 paragraphs, explain what 'citizenship' means in your daily life and list two obligations and two rights you have in your community."
+    },
+    {
+      "id": "local-structure",
+      "title": "How Local Governments Are Structured",
+      "minutes": 45,
+      "type": "reading",
+      "instructions": "Summarize how counties, municipalities, school districts, and special districts divide responsibilities where you live. Add one example for each."
+    },
+    {
+      "id": "public-meeting",
+      "title": "Observe a Public Meeting",
+      "minutes": 90,
+      "type": "report",
+      "instructions": "Attend (or watch a recording of) a city/town/school board meeting. Record agenda items, one debated issue, and how representatives voted. Submit a 1-page objective report."
+    },
+    {
+      "id": "local-issue",
+      "title": "Identify a Local Issue",
+      "minutes": 60,
+      "type": "research",
+      "instructions": "Pick a real local issue (e.g., traffic, park access, zoning). Interview or email one local official or informed adult. Summarize the issue, stakeholders, and one way youth can help."
+    },
+    {
+      "id": "service",
+      "title": "Make a Difference",
+      "minutes": 180,
+      "type": "serviceLog",
+      "instructions": "Plan and complete a community contribution (e.g., clean-up, info flyer, small advocacy step). Log what you did, hours, who benefited, and outcomes."
+    }
+  ],
+  "checkpoints": [
+    {"id":"cpA","label":"Midpoint Review","after":"public-meeting"},
+    {"id":"final","label":"Final Counselor Review","after":"service"}
+  ]
+}

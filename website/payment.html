@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thunderbird Merit Badges | Pricing &amp; Payment</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./scripts.js" defer></script>
+  </head>
+  <body class="page page--payment">
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="./index.html">
+          <span class="brand__mark" aria-hidden="true">🦅</span>
+          <span class="brand__text">Thunderbird Merit Badges</span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a class="site-nav__link" href="./index.html">Home</a>
+          <a class="site-nav__link" href="./info.html">Badges &amp; Info</a>
+          <a class="site-nav__link" href="./payment.html">Pricing &amp; Payment</a>
+          <a class="site-nav__link site-nav__link--cta" href="./login.html">Scout Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="section section--narrow">
+        <div class="section__header">
+          <h1>Flexible pricing for every troop</h1>
+          <p>
+            Thunderbird Merit Badges uses Stripe for secure payment processing.
+            Pay per badge or request a bundle to equip your troop or district.
+          </p>
+        </div>
+      </section>
+
+      <section class="section section--light">
+        <div class="pricing-grid">
+          <article class="pricing-card">
+            <h2>Single Badge</h2>
+            <p class="pricing-card__price">$20</p>
+            <ul>
+              <li>Full AI learning pathway</li>
+              <li>Scoutmaster review &amp; sign-off</li>
+              <li>Downloadable completion packet</li>
+            </ul>
+          </article>
+          <article class="pricing-card pricing-card--accent">
+            <h2>Troop Bundle</h2>
+            <p class="pricing-card__price">$85 / 5 badges</p>
+            <ul>
+              <li>Share across scouts</li>
+              <li>Leader analytics dashboard</li>
+              <li>Priority support</li>
+            </ul>
+          </article>
+          <article class="pricing-card">
+            <h2>Urban Troop Scholarship</h2>
+            <p class="pricing-card__price">$12</p>
+            <ul>
+              <li>Income-based discount</li>
+              <li>Sponsored by Thunderbird Foundation</li>
+              <li>Same features as standard plan</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section--narrow">
+        <div class="section__header">
+          <h2>Start a payment request</h2>
+          <p>
+            Complete the form below to calculate your total and generate a Stripe
+            checkout link. A confirmation email with the link will arrive within a
+            few minutes.
+          </p>
+        </div>
+
+        <form class="form-card" data-payment-form>
+          <label class="form-field">
+            <span>Contact name</span>
+            <input name="contactName" type="text" required />
+          </label>
+          <label class="form-field">
+            <span>Email address</span>
+            <input name="email" type="email" required />
+          </label>
+          <label class="form-field">
+            <span>Number of badges</span>
+            <input name="badgeCount" type="number" min="1" max="20" value="1" required />
+          </label>
+          <label class="form-field">
+            <span>Discount code (optional)</span>
+            <input name="discountCode" type="text" placeholder="URBAN20" />
+          </label>
+          <label class="form-field">
+            <span>Notes for our team</span>
+            <textarea name="notes" rows="3" placeholder="Include troop number, scheduling requests, or scholarship info."></textarea>
+          </label>
+          <div class="form-actions">
+            <button class="button" type="submit">Calculate &amp; Email Me</button>
+          </div>
+        </form>
+        <div class="callout" role="status" aria-live="polite" data-payment-summary></div>
+      </section>
+
+      <section class="section section--accent">
+        <div class="cta">
+          <div>
+            <h2>Need an invoice or purchase order?</h2>
+            <p>
+              District coordinators can email
+              <a href="mailto:finance@thunderbirdbadges.org">finance@thunderbirdbadges.org</a>
+              for invoicing or grant paperwork.
+            </p>
+          </div>
+          <div class="cta__actions">
+            <a class="button button--light" href="mailto:finance@thunderbirdbadges.org">Contact Finance</a>
+            <a class="button button--outline" href="./login.html">Return to Login</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Payments processed securely by Stripe. PCI compliant.</p>
+    </footer>
+  </body>
+</html>

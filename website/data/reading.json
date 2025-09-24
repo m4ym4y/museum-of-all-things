@@ -1,0 +1,84 @@
+{
+  "badgeId": "reading",
+  "title": "Reading",
+  "summary": "Discover why reading matters, explore genres, practice finding reliable info, stay safe online, and complete a reading-focused service project.",
+  "priceUSD": 20,
+  "officialUrl": "https://www.scouting.org/merit-badges/reading/",
+  "resources": [
+    {
+      "title": "Library of Congress – Kids & Families",
+      "url": "https://www.loc.gov/families/",
+      "description": "Digital storytimes, exhibits, and activities."
+    },
+    {
+      "title": "How to Choose a Book",
+      "url": "https://www.readbrightly.com/how-to-choose-a-book/",
+      "description": "Quick tips for finding books you’ll enjoy."
+    },
+    {
+      "title": "CrashCourse: How and Why We Read (video)",
+      "url": "https://www.youtube.com/watch?v=MSYw502dJNY",
+      "description": "Short explainer on the power of reading."
+    }
+  ],
+  "modules": [
+    {
+      "id": "why-read",
+      "title": "Why Read?",
+      "minutes": 30,
+      "type": "reflection",
+      "prompt": "In 2–3 minutes (text or audio), describe what you want reading to do for you this year."
+    },
+    {
+      "id": "fun",
+      "title": "Reading for Fun",
+      "minutes": 120,
+      "type": "readingLog",
+      "instructions": "Log 4+ books across different types/genres. For each: title, author, pages, why you chose it, 3–5 sentence takeaway."
+    },
+    {
+      "id": "library",
+      "title": "Using the Library",
+      "minutes": 30,
+      "type": "catalog",
+      "instructions": "Do an Author, Title, and Subject search; record one call number and shelf location."
+    },
+    {
+      "id": "info",
+      "title": "Reading for Information",
+      "minutes": 90,
+      "type": "research",
+      "instructions": "Find 3+ sources in mixed formats. Submit a one-page summary plus 1–2 credibility notes per source."
+    },
+    {
+      "id": "internet",
+      "title": "Online Safety",
+      "minutes": 25,
+      "type": "quiz",
+      "quiz": [
+        { "q": "True/False: Share your last name at will on public sites.", "a": "False" },
+        {
+          "q": "Best password behavior?",
+          "choices": ["Share with friend", "Reuse across sites", "Keep private; share only with parent/guardian"],
+          "a": "Keep private; share only with parent/guardian"
+        },
+        {
+          "q": "A stranger asks to meet to trade books. What do you do?",
+          "a": "Decline and tell a parent/guardian; never meet without family approval."
+        }
+      ]
+    },
+    {
+      "id": "service",
+      "title": "Volunteering for Reading",
+      "minutes": 240,
+      "type": "serviceLog",
+      "instructions": "≥4 hours. Options: read-aloud, help library, book drive, Little Free Library. Log hours + photo/note."
+    }
+  ],
+  "checkpoints": [
+    { "id": "cpA", "label": "Checkpoint A", "after": "fun" },
+    { "id": "cpB", "label": "Checkpoint B", "after": "info" },
+    { "id": "final", "label": "Final Review", "after": "service" }
+  ]
+}
