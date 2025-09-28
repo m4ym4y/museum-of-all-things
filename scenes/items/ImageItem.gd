@@ -50,7 +50,7 @@ func _on_image_loaded(url, image, _ctx):
     material_override.set_shader_parameter("texture_albedo", _image)
 
   var label = $Label
-  label.text = Util.strip_markup(text)
+  label.text = text
   call_deferred("_update_text_plate")
 
   var w = _image.get_width()
@@ -105,7 +105,7 @@ func _ready():
     $Label/Plate.material_override = plate_black
 
 func init(_title, _text, _plate_style = null):
-  text = _text
+  text = Util.strip_markup(_text)
   title = _title
   plate_style = _plate_style
 
