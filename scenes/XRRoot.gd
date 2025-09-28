@@ -10,6 +10,14 @@ signal set_xr_rotation_increment
 signal set_xr_smooth_rotation
 """
 
+const TRIGGER_TELEPORT_ACTION = "trigger_click"
+const THUMBSTICK_TELEPORT_ACTION = "thumbstick_up"
+
+const THUMBSTICK_TELEPORT_PRESSED_THRESHOLD := 0.8
+const THUMBSTICK_TELEPORT_RELEASED_THRESHOLD := 0.4
+
+var _thumbstick_teleport_pressed := false
+
 func _ready():
   if Util.is_openxr():
     var interface = XRServer.find_interface("OpenXR")
@@ -106,3 +114,26 @@ func _physics_process(delta: float) -> void:
       _hide_menu()
   elif right_controller and not right_controller.is_button_pressed("by_button") and by_button_pressed:
     by_button_pressed = false
+
+func _on_xr_controller_3d_left_input_vector2_changed(name: String, value: Vector2) -> void:
+  var xr_tracker: XRPositionalTracker = XRServer.get_tracker(left_controller.tracker)
+
+  if _thumbstick_teleport_pressed:
+    if value.length() < THUMBSTICK_TELEPORT_RELEASED_THRESHOLD:
+      _thumbstick_teleport_pressed = false
+      xr_tracker.set_input(THUMBSTICK_TELEPORT_ACTION, false)
+
+  else:
+    if value.y > THUMBSTICK_TELEPORT_PRESSED_THRESHOLD and not left_controller.is_button_pressed(TRIGGER_TELEPORT_ACTION):
+      _thumbstick_teleport_pressed = true
+      xr_tracker.set_input(THUMBSTICK_TELEPORT_ACTION, true)
+
+func _on_xr_controller_3d_left_button_pressed(name: String) -> void:
+  if not _thumbstick_teleport_pressed and name == TRIGGER_TELEPORT_ACTION:
+    var xr_tracker: XRPositionalTracker = XRServer.get_tracker(left_controller.tracker)
+    xr_tracker.set_input(THUMBSTICK_TELEPORT_ACTION, true)
+
+func _on_xr_controller_3d_left_button_released(name: String) -> void:
+  if not _thumbstick_teleport_pressed and name == TRIGGER_TELEPORT_ACTION:
+    var xr_tracker: XRPositionalTracker = XRServer.get_tracker(left_controller.tracker)
+    xr_tracker.set_input(THUMBSTICK_TELEPORT_ACTION, false)
