@@ -50,6 +50,7 @@ laser_length = 1
 laser_material = SubResource("StandardMaterial3D_ne1gf")
 
 [node name="FunctionTeleport" parent="XROrigin3D/XRController3D_left" instance=ExtResource("7_q0d1l")]
+teleport_button_action = "thumbstick_up"
 can_teleport_color = Color(1, 1, 1, 1)
 cant_teleport_color = Color(0.572989, 0.572988, 0.572988, 1)
 no_collision_color = Color(0.572549, 0.572549, 0.572549, 1)
@@ -93,4 +94,7 @@ Make sure you have a VR headet plugged in and an OpenXR provider configured.
 If you didn't mean to use VR, download a non-OpenXR version of the Musem of All Things."
 dialog_close_on_escape = false
 
+[connection signal="button_pressed" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_button_released"]
+[connection signal="input_vector2_changed" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_input_vector2_changed"]
 [connection signal="confirmed" from="FailedVrAccept" to="." method="_failed_vr_accept_confirmed"]
