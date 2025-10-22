@@ -1,0 +1,60 @@
+{
+  "badgeId": "citizenship-world",
+  "title": "Citizenship in the World",
+  "summary": "Understand how nations govern, how international systems work, and how global issues and alliances affect daily life.",
+  "priceUSD": 20,
+  "officialUrl": "https://www.scouting.org/merit-badges/citizenship-in-the-world/",
+  "resources": [
+    {
+      "title": "U.S. Department of State – Discover Diplomacy",
+      "url": "https://diplomacy.state.gov/discover-diplomacy/",
+      "description": "Explains how diplomats represent national interests around the world."
+    },
+    {
+      "title": "Council on Foreign Relations – World101",
+      "url": "https://world101.cfr.org/",
+      "description": "Short lessons on global systems, foreign policy tools, and current issues."
+    },
+    {
+      "title": "Model United Nations Guide for Students",
+      "url": "https://unausa.org/model-united-nations/",
+      "description": "Tips for researching countries, writing position papers, and debating respectfully."
+    }
+  ],
+  "modules": [
+    {
+      "id": "world-citizenship",
+      "title": "What Is Citizenship? (Global View)",
+      "minutes": 35,
+      "type": "reading",
+      "instructions": "Define citizenship, list two ways it’s acquired, and explain how rights/duties differ across governments."
+    },
+    {
+      "id": "systems",
+      "title": "Comparative Political Systems",
+      "minutes": 60,
+      "type": "quiz",
+      "quiz": [
+        {"q":"Define autocracy, oligarchy, democracy, and republic in one sentence each.","a":"Autocracy: power in one; Oligarchy: power in few; Democracy: rule by people/majority; Republic: elected reps with limited government protecting rights."},
+        {"q":"What is 'limited government' sometimes called?","a":"Rule of law."}
+      ]
+    },
+    {
+      "id": "national-interest",
+      "title": "National Interest & Foreign Policy",
+      "minutes": 50,
+      "type": "reading",
+      "instructions": "Summarize the three key areas of national interest and describe one real example for each (security, economic welfare, values)."
+    },
+    {
+      "id": "global-issues",
+      "title": "Global Issues Brief",
+      "minutes": 90,
+      "type": "research",
+      "instructions": "Pick a global challenge (e.g., pandemics, migration, climate, WMD proliferation). Write a 1-page overview, impacted regions, and two cooperative responses."
+    }
+  ],
+  "checkpoints": [
+    {"id":"final","label":"Counselor Review","after":"global-issues"}
+  ]
+}
