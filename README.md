@@ -65,5 +65,6 @@ an issue and we can discuss it before you put too much work in.
 All exhibit content is sourced from Wikipedia and Wikimedia commons. This game is written in the [Godot engine](https://godotengine.org). Textures are from [AmbientCG](https://ambientcg.com/).
 
 - Creator and Programmer: [Maya](https://github.com/m4ym4y)
+- App Store Publishing and Multi-Platform Support: [David Snopek](https://www.snopekgames.com/)
 - Audio: [Willow Wolf @ Neomoon](https://neomoon.one) (Accepting work on game audio)
 - Dramaturgy: Emma Bee Pernudi-Moon
