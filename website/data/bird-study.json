@@ -1,0 +1,65 @@
+{
+  "badgeId": "bird-study",
+  "title": "Bird Study",
+  "summary": "Build identification skills, keep a field notebook, explore habitats and conservation, and share your observations.",
+  "priceUSD": 20,
+  "officialUrl": "https://www.scouting.org/merit-badges/bird-study/",
+  "resources": [
+    {
+      "title": "Cornell Lab – All About Birds",
+      "url": "https://www.allaboutbirds.org/news/",
+      "description": "Field guides, ID tips, and seasonal birding advice."
+    },
+    {
+      "title": "Audubon Bird Guide App",
+      "url": "https://www.audubon.org/app",
+      "description": "Free mobile guide with photos, sounds, and habitat info."
+    },
+    {
+      "title": "Merlin Bird ID",
+      "url": "https://merlin.allaboutbirds.org/",
+      "description": "Instant identification help using photos or songs."
+    }
+  ],
+  "modules": [
+    {
+      "id": "id-basics",
+      "title": "Identification Basics",
+      "minutes": 40,
+      "type": "reading",
+      "instructions": "Describe how to ID birds using size/shape, field marks, behavior, habitat, and voice. List three local species with one distinguishing trait each."
+    },
+    {
+      "id": "field-notebook",
+      "title": "Field Notebook",
+      "minutes": 120,
+      "type": "project",
+      "instructions": "Keep a notebook with at least 6 observations on different days. For each: date, time, location, weather, species (or 'unknown'), behavior, and sketch/photo if possible."
+    },
+    {
+      "id": "habitats",
+      "title": "Habitats & Adaptations",
+      "minutes": 45,
+      "type": "reflection",
+      "prompt": "Pick two species and explain how their beaks, feet, or behavior fit their habitat."
+    },
+    {
+      "id": "conservation",
+      "title": "Conservation & Ethics",
+      "minutes": 35,
+      "type": "reading",
+      "instructions": "Summarize two threats to birds in your area (e.g., habitat loss, window strikes, invasive species) and one action you can take at home or school."
+    },
+    {
+      "id": "share-observations",
+      "title": "Share Your Observations",
+      "minutes": 45,
+      "type": "project",
+      "instructions": "Create a 3–5 minute presentation or one-page report highlighting three birds you observed. Include maps or checklists if you used them."
+    }
+  ],
+  "checkpoints": [
+    { "id": "mid", "label": "Notebook Check", "after": "field-notebook" },
+    { "id": "final", "label": "Final Review", "after": "share-observations" }
+  ]
+}

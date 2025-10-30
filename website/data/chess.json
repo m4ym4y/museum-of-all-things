@@ -1,0 +1,67 @@
+{
+  "badgeId": "chess",
+  "title": "Chess",
+  "summary": "Learn the rules and notation, practice tactics, play complete games, and teach others the joy of chess.",
+  "priceUSD": 20,
+  "officialUrl": "https://www.scouting.org/merit-badges/chess/",
+  "resources": [
+    {
+      "title": "lichess.org – Learn",
+      "url": "https://lichess.org/learn",
+      "description": "Interactive lessons covering piece moves, tactics, and checkmate patterns."
+    },
+    {
+      "title": "ChessKid Video Lessons",
+      "url": "https://www.chesskid.com/videos",
+      "description": "Kid-friendly videos on openings, tactics, and endgames."
+    },
+    {
+      "title": "U.S. Chess Federation – Rules & Resources",
+      "url": "https://new.uschess.org/play",
+      "description": "Official rules, tournament finder, and scholastic chess tips."
+    }
+  ],
+  "modules": [
+    {
+      "id": "rules-notation",
+      "title": "Rules & Notation",
+      "minutes": 40,
+      "type": "quiz",
+      "quiz": [
+        { "q": "How does the knight move?", "a": "In an L-shape: two squares in one direction and one perpendicular; may jump pieces." },
+        { "q": "What is castling?", "a": "A king/rook move for safety: king two squares toward rook; rook to the square the king passed over (no checks/pieces between/previous moves)." }
+      ]
+    },
+    {
+      "id": "tactics",
+      "title": "Core Tactics",
+      "minutes": 45,
+      "type": "reading",
+      "instructions": "Define fork, pin, skewer, discovered attack, and double check. Upload a diagram or brief example of any two."
+    },
+    {
+      "id": "openings-and-endgames",
+      "title": "Openings & Endgames",
+      "minutes": 50,
+      "type": "reflection",
+      "prompt": "Describe one opening principle (control center, develop pieces, king safety) and one basic endgame idea (opposition, triangulation, promotion)."
+    },
+    {
+      "id": "play-games",
+      "title": "Play Complete Games",
+      "minutes": 90,
+      "type": "report",
+      "instructions": "Play three full games (OTB or online). Upload PGNs or brief move lists and a 3–5 sentence takeaway for each game."
+    },
+    {
+      "id": "teach-someone",
+      "title": "Teach Someone",
+      "minutes": 45,
+      "type": "project",
+      "instructions": "Teach the rules to a beginner or run a mini-lesson for peers (15–20 min). Upload an outline and a photo or short reflection of how it went."
+    }
+  ],
+  "checkpoints": [
+    { "id": "final", "label": "Counselor Review", "after": "teach-someone" }
+  ]
+}

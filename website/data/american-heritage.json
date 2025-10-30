@@ -1,0 +1,65 @@
+{
+  "badgeId": "american-heritage",
+  "title": "American Heritage",
+  "summary": "Explore pivotal eras, visit historic places, analyze media about the past, and share how U.S. history shapes life today.",
+  "priceUSD": 20,
+  "officialUrl": "https://www.scouting.org/merit-badges/american-heritage/",
+  "resources": [
+    {
+      "title": "National Archives – Educator Resources",
+      "url": "https://www.archives.gov/education",
+      "description": "Primary source documents, lesson ideas, and virtual exhibits."
+    },
+    {
+      "title": "Smithsonian National Museum of American History",
+      "url": "https://americanhistory.si.edu/exhibitions",
+      "description": "Browse major exhibits and artifacts that shaped U.S. history."
+    },
+    {
+      "title": "Library of Congress – Chronicling America",
+      "url": "https://chroniclingamerica.loc.gov/",
+      "description": "Historic newspapers for researching people, places, and events."
+    }
+  ],
+  "modules": [
+    {
+      "id": "eras-overview",
+      "title": "Major Eras Overview",
+      "minutes": 40,
+      "type": "reading",
+      "instructions": "List five key U.S. historical eras and one defining event/person for each. Add 2–3 sentences on why each mattered."
+    },
+    {
+      "id": "local-history",
+      "title": "Local History Connections",
+      "minutes": 45,
+      "type": "research",
+      "instructions": "Choose a local site, person, or event. Write a 1-page summary linking it to a national theme (e.g., migration, industry, civil rights)."
+    },
+    {
+      "id": "site-visit",
+      "title": "Historic Site or Museum Visit",
+      "minutes": 90,
+      "type": "report",
+      "instructions": "Visit or take a virtual tour. Upload 3–5 notes/photos and a 1-page report: what you saw, era represented, and what you learned."
+    },
+    {
+      "id": "media-analysis",
+      "title": "History in Media",
+      "minutes": 60,
+      "type": "reflection",
+      "prompt": "Watch a film, documentary, or exhibit on a U.S. topic. In 2–3 paragraphs, note what seemed accurate, what might be dramatized, and one source you checked."
+    },
+    {
+      "id": "share-the-story",
+      "title": "Share What You Learned",
+      "minutes": 45,
+      "type": "project",
+      "instructions": "Create a short presentation, poster, or post (3–5 minutes or 300–500 words) to teach others one American Heritage topic. Upload your file or video link."
+    }
+  ],
+  "checkpoints": [
+    { "id": "mid", "label": "Midpoint Review", "after": "site-visit" },
+    { "id": "final", "label": "Final Review", "after": "share-the-story" }
+  ]
+}

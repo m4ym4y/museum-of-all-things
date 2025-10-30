@@ -1,0 +1,68 @@
+{
+  "badgeId": "american-business",
+  "title": "American Business",
+  "summary": "Learn how businesses work, plan a simple venture, track results, and understand ethics, marketing, and investing basics.",
+  "priceUSD": 20,
+  "officialUrl": "https://www.scouting.org/merit-badges/american-business/",
+  "resources": [
+    {
+      "title": "SBA Learning Center",
+      "url": "https://www.sba.gov/learning-center",
+      "description": "Free mini-courses on planning, financing, and managing small businesses."
+    },
+    {
+      "title": "Junior Achievement – Student Programs",
+      "url": "https://jausa.ja.org/programs",
+      "description": "Entrepreneurship and personal finance activities geared toward teens."
+    },
+    {
+      "title": "Investopedia: Introduction to Business",
+      "url": "https://www.investopedia.com/guides/starting-business/",
+      "description": "Plain-language guide to core concepts like revenue, profit, and cash flow."
+    }
+  ],
+  "modules": [
+    {
+      "id": "how-business-works",
+      "title": "How Business Works",
+      "minutes": 35,
+      "type": "reading",
+      "instructions": "Define revenue, cost, profit, cash flow, and break-even in your own words. Give a real-world example for two terms."
+    },
+    {
+      "id": "micro-venture-plan",
+      "title": "Plan a Micro-Venture",
+      "minutes": 90,
+      "type": "project",
+      "instructions": "Plan a simple business (lawn care, tutoring, crafts). Upload a 1-page plan: product/service, customers, price, costs, and expected profit."
+    },
+    {
+      "id": "run-and-track",
+      "title": "Run & Track Results",
+      "minutes": 120,
+      "type": "report",
+      "instructions": "Operate your venture for a short period OR simulate with 3–5 transactions. Upload a basic ledger (date, item, revenue, cost) and a profit summary."
+    },
+    {
+      "id": "marketing-ethics",
+      "title": "Marketing & Ethics",
+      "minutes": 45,
+      "type": "reflection",
+      "prompt": "Draft a simple ad or flyer. Then write a paragraph on truthful advertising and one ethical choice you’d make as an owner."
+    },
+    {
+      "id": "investing-basics",
+      "title": "Investing Basics",
+      "minutes": 40,
+      "type": "quiz",
+      "quiz": [
+        { "q": "What is diversification?", "a": "Spreading investments to reduce risk." },
+        { "q": "Stocks vs. bonds (one difference)?", "a": "Stocks = ownership and variable returns; bonds = loans with fixed interest." }
+      ]
+    }
+  ],
+  "checkpoints": [
+    { "id": "mid", "label": "Plan Review", "after": "micro-venture-plan" },
+    { "id": "final", "label": "Final Review", "after": "run-and-track" }
+  ]
+}
