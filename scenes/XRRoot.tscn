@@ -97,4 +97,6 @@ dialog_close_on_escape = false
 [connection signal="button_pressed" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_button_released"]
 [connection signal="input_vector2_changed" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_input_vector2_changed"]
+[connection signal="button_pressed" from="XROrigin3D/XRController3D_right" to="." method="_on_xr_controller_3d_right_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/XRController3D_right" to="." method="_on_xr_controller_3d_right_button_released"]
 [connection signal="confirmed" from="FailedVrAccept" to="." method="_failed_vr_accept_confirmed"]
