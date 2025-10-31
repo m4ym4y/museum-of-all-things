@@ -10,7 +10,6 @@ signal commons_images_complete(category, context)
 
 const MAX_BATCH_SIZE = 50
 const REQUEST_DELAY_MS = 1000
-const COMMONS_IMAGE_LIMIT = 2500
 
 # TODO: wikimedia support, and category support
 const WIKIMEDIA_COMMONS_PREFIX = "https://commons.wikimedia.org/wiki/"
@@ -469,7 +468,7 @@ func _on_commons_images_request_complete(res, ctx, caller_ctx):
     call_deferred("emit_signal", "commons_images_complete", file_batch, caller_ctx)
 
   # handle continues
-  if res.has("continue") and len(get_result(ctx.category).images) <= COMMONS_IMAGE_LIMIT:
+  if res.has("continue") and len(get_result(ctx.category).images) <= Util.get_max_slots_per_exhibit():
     return _dispatch_continue(res.continue, _get_commons_url(ctx.category), ctx.category, ctx, caller_ctx)
   else:
     _cache_all([ctx.category], WIKIMEDIA_COMMONS_PREFIX)

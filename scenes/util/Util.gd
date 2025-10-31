@@ -51,6 +51,9 @@ func is_xr():
 func is_web():
   return OS.get_name() == "Web"
 
+func is_mobile():
+  return OS.has_feature("mobile")
+
 func is_using_threads():
   return OS.has_feature("threads")
 
@@ -59,6 +62,10 @@ func is_compatibility_renderer():
 
 func is_meta_quest():
   return OS.has_feature("meta_quest")
+
+func get_max_slots_per_exhibit() -> int:
+  # @todo Should this be a setting?
+  return 200 if (is_mobile() or is_web()) else 2500
 
 func delay_msec(msecs):
   # Will only delay if we're not on the main thread.
