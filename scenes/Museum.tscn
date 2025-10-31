@@ -18,7 +18,6 @@ ssao_enabled = true
 sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
 sdfgi_cascades = 8
-sdfgi_max_distance = 3276.8
 sdfgi_energy = 0.5
 glow_bloom = 1.0
 glow_blend_mode = 0

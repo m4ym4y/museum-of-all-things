@@ -2,7 +2,7 @@ id: as.may.moat
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 base: org.godotengine.godot.BaseApp
-base-version: '4.4'
+base-version: '4.5'
 sdk: org.freedesktop.Sdk
 command: godot-runner
 
