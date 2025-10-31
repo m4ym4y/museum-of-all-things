@@ -31,7 +31,7 @@ func _get_hall_dir(pos):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-  GlobalGridAccess.set_grid(_grid)
+  GridManager.update_from_gridmap(_grid)
   _rng.seed = hash("$Lobby")
   for cell_pos in _grid.get_used_cells():
     var c = Vector3(cell_pos)

@@ -121,6 +121,11 @@ func _reset_custom_door(title):
 
 func reset_to_lobby():
   _set_current_room_title("$Lobby")
+  for exhibit_key in _exhibits:
+    if exhibit_key == "$Lobby":
+      _exhibits[exhibit_key]['exhibit'].visible = true
+    else:
+      _exhibits[exhibit_key]['exhibit'].visible = false
 
 func _set_current_room_title(title):
   if title == "$Lobby":
@@ -166,7 +171,21 @@ func _prepare_halls_for_teleport(from_hall, to_hall, entry_to_exit=false):
   )
   timer.start(HallDoor.animation_duration)
 
+func _toggle_exhibit_visibility(hide_title: String, show_title: String) -> void:
+  var old_exhibit = _exhibits[hide_title]['exhibit']
+  old_exhibit.visible = false
+
+  var new_exhibit = _exhibits[show_title]['exhibit']
+  new_exhibit.visible = true
+
 func _teleport_player(from_hall, to_hall, entry_to_exit=false):
+  var valid_hall = from_hall if is_instance_valid(from_hall) else (to_hall if is_instance_valid(to_hall) else null)
+  if valid_hall:
+    if entry_to_exit:
+      _toggle_exhibit_visibility(valid_hall.to_title, valid_hall.from_title)
+    else:
+      _toggle_exhibit_visibility(valid_hall.from_title, valid_hall.to_title)
+
   if is_instance_valid(from_hall) and is_instance_valid(to_hall):
     var pos = _player.global_position if not _xr else _player.get_node("XRCamera3D").global_position
     var distance = (from_hall.position - pos).length()
@@ -357,7 +376,7 @@ func _on_fetch_complete(_titles, context):
   add_child(new_exhibit)
 
   new_exhibit.exit_added.connect(_on_exit_added.bind(doors, backlink, new_exhibit, hall))
-  new_exhibit.generate(_grid, {
+  new_exhibit.generate({
     "start_pos": Vector3.UP * exhibit_height,
     "min_room_dimension": min_room_dimension,
     "max_room_dimension": max_room_dimension,

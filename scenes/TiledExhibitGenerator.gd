@@ -95,7 +95,6 @@ func get_item_slot():
     return null
 
 func generate(
-    grid,
     params,
   ):
   # set initial fields
@@ -112,10 +111,9 @@ func generate(
   _exit_limit = params.exit_limit if params.has("exit_limit") else 1e10
 
   # init grid
-  _raw_grid = grid
   _grid = grid_wrapper.instantiate()
-  _grid.init(_raw_grid)
   add_child(_grid)
+  _raw_grid = _grid._grid
 
   # init rng
   _rng = RandomNumberGenerator.new()
@@ -127,7 +125,7 @@ func generate(
   var starting_hall = hall.instantiate()
   add_child(starting_hall)
   starting_hall.init(
-    _raw_grid,
+    _grid,
     prev_title,
     title,
     start_pos + (Vector3.DOWN * hall_type[1]),
@@ -388,7 +386,7 @@ func decorate_wall_tile(pos):
       var hall_type = valid_halls[_rng.randi() % len(valid_halls)]
       add_child(new_hall)
       new_hall.init(
-        _raw_grid,
+        _grid,
         title,
         title,
         wall,
