@@ -150,9 +150,12 @@ func init(grid, from_title, to_title, hall_start, hall_dir, _hall_type=[true, FL
   position = Util.gridToWorld(hall_start)
   loader.monitoring = true
 
-  _grid = grid_wrapper.instantiate()
-  _grid.init(grid)
-  add_child(_grid)
+  if grid is GridMap:
+    _grid = grid_wrapper.instantiate()
+    _grid.init(grid)
+    add_child(_grid)
+  else:
+    _grid = grid
 
   hall_type = _hall_type
   create_curve_hall(hall_start, hall_dir, hall_type[0], hall_type[1])
