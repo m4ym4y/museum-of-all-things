@@ -4,5 +4,5 @@
 
 [node name="CacheCleaner" type="Node"]
 script = ExtResource("1_f4y30")
-max_cache_size = 4e+09
-target_cache_size = 2e+09
+max_cache_size = 4000000000.0
+target_cache_size = 2000000000.0
