@@ -69,7 +69,6 @@ func _on_webxr_primary_changed(webxr_primary: int):
   %XRToolsMovementTurn.input_action = action_name
 
 var menu_active = false
-var by_button_pressed = false
 var movement_style = "teleportation"
 
 func _set_xr_movement_style(style):
@@ -106,14 +105,12 @@ func _show_menu():
 
 func _physics_process(delta: float) -> void:
   $XROrigin3D/XRToolsPlayerBody/FootstepPlayer.set_on_floor($XROrigin3D/XRToolsPlayerBody.is_on_floor())
-  if right_controller and right_controller.is_button_pressed("by_button") and not by_button_pressed:
-    by_button_pressed = true
-    if not menu_active:
-      _show_menu()
-    else:
-      _hide_menu()
-  elif right_controller and not right_controller.is_button_pressed("by_button") and by_button_pressed:
-    by_button_pressed = false
+
+func _toggle_menu() -> void:
+  if not menu_active:
+    _show_menu()
+  else:
+    _hide_menu()
 
 func _on_xr_controller_3d_left_input_vector2_changed(name: String, value: Vector2) -> void:
   var xr_tracker: XRPositionalTracker = XRServer.get_tracker(left_controller.tracker)
@@ -132,8 +129,17 @@ func _on_xr_controller_3d_left_button_pressed(name: String) -> void:
   if not _thumbstick_teleport_pressed and name == TRIGGER_TELEPORT_ACTION:
     var xr_tracker: XRPositionalTracker = XRServer.get_tracker(left_controller.tracker)
     xr_tracker.set_input(THUMBSTICK_TELEPORT_ACTION, true)
+  elif name in ["menu_button", "by_button"]:
+    _toggle_menu()
 
 func _on_xr_controller_3d_left_button_released(name: String) -> void:
   if not _thumbstick_teleport_pressed and name == TRIGGER_TELEPORT_ACTION:
     var xr_tracker: XRPositionalTracker = XRServer.get_tracker(left_controller.tracker)
     xr_tracker.set_input(THUMBSTICK_TELEPORT_ACTION, false)
+
+func _on_xr_controller_3d_right_button_pressed(name: String) -> void:
+  if name == "by_button":
+    _toggle_menu()
+
+func _on_xr_controller_3d_right_button_released(name: String) -> void:
+  pass
