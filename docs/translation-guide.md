@@ -44,7 +44,7 @@ As another example, here's [the PR adding Spanish](https://github.com/m4ym4y/mus
 
 ## 4. Add translation to Godot
 
-- Open your forked & cloned repo in the [Godot editor](https://godotengine.org/). Make sure you are on Godot 4.4 (as of writing this).
+- Open your forked & cloned repo in the [Godot editor](https://godotengine.org/). Make sure you are on Godot 4.5 (as of writing this).
 
 - Open the menu `Project > Project Settings`
 

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LobbyData" load_steps=11 format=3 uid="uid://34yga2226k3j"]
+[gd_resource type="Resource" script_class="LobbyData" load_steps=11 format=3 uid="uid://dngddiugvqrp4"]
 
 [ext_resource type="Script" uid="uid://bdc8jjijlgjox" path="res://resource_definitions/LobbyData.gd" id="1_3ssej"]
 [ext_resource type="Script" uid="uid://ch3nm32ndlrbh" path="res://resource_definitions/LobbyWing.gd" id="2_y4oc8"]
