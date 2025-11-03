@@ -247,3 +247,4 @@ openxr/enabled.openxr=true
 openxr/extensions/meta/composition_layer_settings=false
 openxr/extensions/meta/hand_tracking_mesh=true
 openxr/extensions/meta/hand_tracking_aim=true
+openxr/extensions/meta/color_space/starting_color_space=3
