@@ -218,6 +218,8 @@ func add_room():
   if len(_next_room_candidates) == 0:
     push_error("no room candidate to create")
     return
+  if _item_slots.size() > Util.get_max_slots_per_exhibit():
+    return
 
   var idx = _rng.randi() % len(_next_room_candidates)
   var room = _next_room_candidates.pop_at(idx)
