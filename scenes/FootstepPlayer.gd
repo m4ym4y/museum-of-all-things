@@ -108,10 +108,6 @@ func _physics_process(delta):
     call_deferred("_play_footstep")
 
 func _play_footstep(override_type=null):
-  var grid = GlobalGridAccess.get_grid()
-  if not grid:
-    return
-
   var step_type
   var obj = $FloorCast.get_collider()
   if override_type:
@@ -122,7 +118,7 @@ func _play_footstep(override_type=null):
     step_type = "water"
   else:
     var floor_cell = Util.worldToGrid(global_position) - Vector3.UP
-    var floor_cell_type = grid.get_cell_item(floor_cell)
+    var floor_cell_type = GridManager.get_cell_item(floor_cell)
     step_type = _floor_material_map.get(
       floor_cell_type,
       _default_floor_type

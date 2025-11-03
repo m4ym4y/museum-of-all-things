@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpi6fgwyfw5hc"]
+[gd_scene load_steps=3 format=3 uid="uid://bpi6fgwyfw5hc"]
 
 [ext_resource type="Script" uid="uid://dh5uhkug81kn6" path="res://scenes/util/GridWrapper.gd" id="1_s0kke"]
+[ext_resource type="MeshLibrary" uid="uid://b887fn6f3qg14" path="res://assets/3d_tiles/mesh_library.tres" id="2_i15p3"]
 
 [node name="GridWrapper" type="Node"]
 script = ExtResource("1_s0kke")
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("2_i15p3")
+cell_size = Vector3(4, 4, 4)
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+collision_mask = 0
