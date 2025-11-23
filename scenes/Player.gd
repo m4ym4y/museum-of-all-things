@@ -26,11 +26,13 @@ var _joy_right_y = JOY_AXIS_RIGHT_Y
 
 var _invert_y = false
 var _mouse_sensitivity_factor = 1.0
+var _joy_sensitivity_factor = 1.0
 
 func _ready():
   GlobalMenuEvents.set_invert_y.connect(_set_invert_y)
   GlobalMenuEvents.set_mouse_sensitivity.connect(_set_mouse_sensitivity)
   GlobalMenuEvents.set_joypad_deadzone.connect(_set_joy_deadzone)
+  GlobalMenuEvents.set_joypad_sensitivity.connect(_set_joy_sensitivity)
 
   starting_height = $Pivot.get_position().y
   crouching_height = starting_height / 3
@@ -44,6 +46,9 @@ func _set_mouse_sensitivity(factor):
 
 func _set_joy_deadzone(value):
   joy_deadzone = value
+  
+func _set_joy_sensitivity(factor):
+  _joy_sensitivity_factor = factor
 
 func pause():
   _enabled = false
@@ -111,8 +116,8 @@ func _physics_process(delta):
   #var delta_vec = Input.get_vector("camera_left", "camera_right", "camera_up", "camera_down")
   var delta_vec = Vector2(-Input.get_joy_axis(0, _joy_right_x), -Input.get_joy_axis(0, _joy_right_y))
   if delta_vec.length() > joy_deadzone:
-    rotate_y(delta_vec.x * joy_sensitivity)
-    $Pivot.rotate_x(delta_vec.y * joy_sensitivity)
+    rotate_y(delta_vec.x * joy_sensitivity * _joy_sensitivity_factor)
+    $Pivot.rotate_x(delta_vec.y * joy_sensitivity * _joy_sensitivity_factor)
     $Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
 
   if smooth_movement:
