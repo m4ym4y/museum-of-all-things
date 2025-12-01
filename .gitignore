@@ -1,4 +1,5 @@
 .godot
+/android/
 dist/
 .import/
 *.translation
