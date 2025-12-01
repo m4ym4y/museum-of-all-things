@@ -61,17 +61,19 @@ func _recreate_player() -> void:
 
   _player = XrRoot.instantiate() if Util.is_xr() else Player.instantiate()
   add_child(_player)
+  _player.position = starting_point
 
   if Util.is_xr():
     _player = _player.get_node("XROrigin3D")
     _player.get_node("XRToolsPlayerBody").rotate_player(-starting_rotation)
+    # Prevent falling through the floor.
+    _player.position += Vector3(0.0, 0.5, 0.0)
   else:
     _player.get_node("Pivot/Camera3D").make_current()
     _player.rotation.y = starting_rotation
     _player.max_speed = player_speed
     _player.smooth_movement = smooth_movement
     _player.dampening = smooth_movement_dampening
-  _player.position = starting_point
 
 func _change_post_processing(post_processing: String):
   if post_processing == "crt":
