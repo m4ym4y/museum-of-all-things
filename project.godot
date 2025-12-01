@@ -239,7 +239,7 @@ environment/defaults/default_environment="res://assets/resources/default_env.tre
 
 openxr/reference_space=2
 shaders/enabled=true
-openxr/foveation_level.meta_quest=3
-openxr/foveation_dynamic.meta_quest=true
 openxr/enabled.openxr=true
 openxr/extensions/meta/composition_layer_settings=false
+openxr/foveation_level.openxr=3
+openxr/foveation_dynamic.openxr=true
