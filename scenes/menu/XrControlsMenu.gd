@@ -33,14 +33,17 @@ func _apply_settings(settings):
   if settings.has("rotation_increment"):
     vbox.get_node("RotationOptions/RotationIncrement").value = settings.rotation_increment
   if settings.has("smooth_rotation"):
-    vbox.get_node("RotationOptions/SmoothRotation").button_pressed = settings.smooth_rotation
+    if settings.smooth_rotation:
+      _on_smooth_turn_pressed()
+    else:
+      _on_snap_turn_pressed()
 
 func _create_settings_obj():
   return {
     "movement_style": "teleportation" if vbox.get_node("MovementOptions/Styles/Teleportation").disabled else "direct",
     "movement_speed": vbox.get_node("MovementOptions/MovementSpeed").value,
     "rotation_increment": vbox.get_node("RotationOptions/RotationIncrement").value,
-    "smooth_rotation": vbox.get_node("RotationOptions/SmoothRotation").button_pressed
+    "smooth_rotation": vbox.get_node("RotationOptions/Styles/SmoothTurn").disabled,
   }
 
 func _save_settings():
@@ -70,9 +73,15 @@ func _on_rotation_increment_value_changed(value: float) -> void:
   vbox.get_node("RotationOptions/RotationIncrementValue").text = str(value)
   GlobalMenuEvents.emit_set_xr_rotation_increment(value)
 
-func _on_smooth_rotation_toggled(toggled_on: bool) -> void:
-  vbox.get_node("RotationOptions/RotationIncrement").editable = not toggled_on
-  GlobalMenuEvents.emit_set_xr_smooth_rotation(toggled_on)
+func _on_snap_turn_pressed() -> void:
+  GlobalMenuEvents.emit_set_xr_smooth_rotation(false)
+  vbox.get_node("RotationOptions/Styles/SnapTurn").disabled = true
+  vbox.get_node("RotationOptions/Styles/SmoothTurn").disabled = false
+
+func _on_smooth_turn_pressed() -> void:
+  GlobalMenuEvents.emit_set_xr_smooth_rotation(true)
+  vbox.get_node("RotationOptions/Styles/SnapTurn").disabled = false
+  vbox.get_node("RotationOptions/Styles/SmoothTurn").disabled = true
 
 func _on_restore_default_pressed() -> void:
   _apply_settings(_default_settings)
