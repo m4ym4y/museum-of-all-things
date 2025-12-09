@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckm1qsdu5w3oy"]
+
+[ext_resource type="Script" uid="uid://dscjvab4voocb" path="res://scenes/XRVirtualThumbstick.gd" id="1_ipmxu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v16vg"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.314)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ipmxu"]
+material = SubResource("StandardMaterial3D_v16vg")
+radius = 0.02
+height = 0.04
+radial_segments = 16
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ipmxu"]
+shading_mode = 0
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_v16vg"]
+material = SubResource("StandardMaterial3D_ipmxu")
+radius = 0.01
+height = 0.02
+radial_segments = 16
+rings = 8
+
+[node name="XRVirtualThumbstick" type="Node3D"]
+script = ExtResource("1_ipmxu")
+
+[node name="OriginMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_ipmxu")
+
+[node name="PosMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_v16vg")

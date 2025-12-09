@@ -71,11 +71,64 @@ hand_material_override = ExtResource("4_jb2jl")
 unique_name_in_owner = true
 script = ExtResource("6_80eyh")
 turn_mode = 1
+step_turn_delay = 0.4
 step_turn_angle = 40.0
 
-[node name="XrMenu" parent="XROrigin3D/XRController3D_right" instance=ExtResource("10_g5s6k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.06897)
+[node name="HandTrackingLeft" type="XRController3D" parent="XROrigin3D"]
 visible = false
+tracker = &"/user/hand_tracker/left"
+
+[node name="OpenXRFbHandTrackingMesh" type="OpenXRFbHandTrackingMesh" parent="XROrigin3D/HandTrackingLeft"]
+material = ExtResource("4_jb2jl")
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/HandTrackingLeft/OpenXRFbHandTrackingMesh"]
+
+[node name="MenuLabel" type="Label3D" parent="XROrigin3D/HandTrackingLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
+visible = false
+pixel_size = 0.001
+text = "MENU"
+font_size = 16
+
+[node name="HandTrackingRight" type="XRController3D" parent="XROrigin3D"]
+visible = false
+tracker = &"/user/hand_tracker/right"
+
+[node name="OpenXRFbHandTrackingMesh" type="OpenXRFbHandTrackingMesh" parent="XROrigin3D/HandTrackingRight"]
+hand = 1
+material = ExtResource("4_jb2jl")
+bones/0/name = "RightPalm"
+bones/1/name = "RightHand"
+bones/2/name = "RightThumbMetacarpal"
+bones/3/name = "RightThumbProximal"
+bones/4/name = "RightThumbDistal"
+bones/5/name = "RightThumbTip"
+bones/6/name = "RightIndexMetacarpal"
+bones/7/name = "RightIndexProximal"
+bones/8/name = "RightIndexIntermediate"
+bones/9/name = "RightIndexDistal"
+bones/10/name = "RightIndexTip"
+bones/11/name = "RightMiddleMetacarpal"
+bones/12/name = "RightMiddleProximal"
+bones/13/name = "RightMiddleIntermediate"
+bones/14/name = "RightMiddleDistal"
+bones/15/name = "RightMiddleTip"
+bones/16/name = "RightRingMetacarpal"
+bones/17/name = "RightRingProximal"
+bones/18/name = "RightRingIntermediate"
+bones/19/name = "RightRingDistal"
+bones/20/name = "RightRingTip"
+bones/21/name = "RightLittleMetacarpal"
+bones/22/name = "RightLittleProximal"
+bones/23/name = "RightLittleIntermediate"
+bones/24/name = "RightLittleDistal"
+bones/25/name = "RightLittleTip"
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="XROrigin3D/HandTrackingRight/OpenXRFbHandTrackingMesh"]
+hand_tracker = &"/user/hand_tracker/right"
+
+[node name="HandTrackingAimLeft" type="XRController3D" parent="XROrigin3D"]
+tracker = &"/user/fbhandaim/left"
 
 [node name="XRToolsPlayerBody" type="CharacterBody3D" parent="XROrigin3D" groups=["Player"]]
 top_level = true
@@ -83,6 +136,12 @@ collision_layer = 524288
 script = ExtResource("4_l0d4h")
 
 [node name="FootstepPlayer" parent="XROrigin3D/XRToolsPlayerBody" instance=ExtResource("12_drak2")]
+
+[node name="MenuPivot" type="Node3D" parent="XROrigin3D"]
+
+[node name="XrMenu" parent="XROrigin3D/MenuPivot" instance=ExtResource("10_g5s6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.848823, -2.06897)
+visible = false
 
 [node name="FailedVrAccept" type="AcceptDialog" parent="."]
 process_mode = 3
@@ -94,9 +153,19 @@ Make sure you have a VR headet plugged in and an OpenXR provider configured.
 If you didn't mean to use VR, download a non-OpenXR version of the Musem of All Things."
 dialog_close_on_escape = false
 
+[node name="MenuPivotTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="button_pressed" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_button_released"]
+[connection signal="input_float_changed" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_input_float_changed"]
 [connection signal="input_vector2_changed" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_input_vector2_changed"]
 [connection signal="button_pressed" from="XROrigin3D/XRController3D_right" to="." method="_on_xr_controller_3d_right_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/XRController3D_right" to="." method="_on_xr_controller_3d_right_button_released"]
+[connection signal="input_float_changed" from="XROrigin3D/XRController3D_right" to="." method="_on_xr_controller_3d_right_input_float_changed"]
+[connection signal="tracking_changed" from="XROrigin3D/HandTrackingLeft" to="." method="_on_hand_tracking_left_tracking_changed"]
+[connection signal="tracking_changed" from="XROrigin3D/HandTrackingRight" to="." method="_on_hand_tracking_right_tracking_changed"]
+[connection signal="button_pressed" from="XROrigin3D/HandTrackingAimLeft" to="." method="_on_hand_tracking_aim_left_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/HandTrackingAimLeft" to="." method="_on_hand_tracking_aim_left_button_released"]
 [connection signal="confirmed" from="FailedVrAccept" to="." method="_failed_vr_accept_confirmed"]
+[connection signal="timeout" from="MenuPivotTimer" to="." method="_on_menu_pivot_timer_timeout"]
