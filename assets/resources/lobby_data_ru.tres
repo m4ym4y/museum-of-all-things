@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="LobbyData" load_steps=11 format=3 uid="uid://cc0qb0luh6qye"]
+
+[ext_resource type="Script" uid="uid://bdc8jjijlgjox" path="res://resource_definitions/LobbyData.gd" id="1_3ssej"]
+[ext_resource type="Script" uid="uid://ch3nm32ndlrbh" path="res://resource_definitions/LobbyWing.gd" id="2_y4oc8"]
+
+[sub_resource type="Resource" id="Resource_pgwi2"]
+script = ExtResource("2_y4oc8")
+name = "Технологии"
+corner_1 = Vector2(-68, -44)
+corner_2 = Vector2(-32, -8)
+exhibits = PackedStringArray("Головной вагон", "Minox", "Транзистор", "Гончарное производство", "Godot", "Pasteurization", "Nuclear weapons testing", "Adhesive", "Aqueduct (water supply)", "3D rendering", "Airplane", "Simple machine", "Printing press", "Birth control", "Microscopy", "Video game console", "Trebuchet", "Animal husbandry", "Oldowan")
+
+[sub_resource type="Resource" id="Resource_ooopd"]
+script = ExtResource("2_y4oc8")
+name = "Культура"
+corner_1 = Vector2(32, -44)
+corner_2 = Vector2(68, -8)
+exhibits = PackedStringArray("Клоун", "Дракон", "Магазин у дома", "Дай пять", "Гончаров (мем)", "Coffee", "Soup", "The Backrooms", "Tarot", "K-pop", "Go (game)", "Hinduism", "Dandy", "Golem", "Sea Shanty", "Advertising", "Flood Myth", "Monk")
+
+[sub_resource type="Resource" id="Resource_m2ope"]
+script = ExtResource("2_y4oc8")
+name = "Наука"
+corner_1 = Vector2(-44, -92)
+corner_2 = Vector2(-8, -36)
+exhibits = PackedStringArray("Грибы", "Динозавры", "Морская жизнь", "Земля", "Ибн аль-Хайсам", "Крысы", "Креветка", "Хлебное дерево", "Визуализация данных", "Золото", "Адансония", "Человек", "Маятник", "Половой диморфизм", "Свет", "Сыр", "Капуста огородная", "Водно-болотные угодья", "Толстые лори", "Булавоусые чешуекрылые", "Юпитер", "Почва", "Фрактал", "Глаз")
+
+[sub_resource type="Resource" id="Resource_opuc1"]
+script = ExtResource("2_y4oc8")
+name = "География"
+corner_1 = Vector2(8, -92)
+corner_2 = Vector2(44, -36)
+exhibits = PackedStringArray("Соединённые Штаты Америки", "Антарктида", "Патагония", "Тибет", "Персеполь", "Петра", "Тайбэй 101", "Лас-Тетас", "Здание ливерпульского порта", "Чунцин", "Острова Питкэрн", "Марианский жёлоб", "Транссибирская магистраль", "Ланкастер (Огайо)", "Чад (озеро)", "Сенегал", "Бора-Бора", "Ланды (природная область)", "Килиманджаро", "Канберра", "Дождевые леса Амазонии", "Уорф (река)", "Урук", "Чёрный камень")
+
+[sub_resource type="Resource" id="Resource_qiy1c"]
+script = ExtResource("2_y4oc8")
+name = "Искусство"
+corner_1 = Vector2(-72, 12)
+corner_2 = Vector2(-36, 48)
+exhibits = PackedStringArray("Барокко в живописи", "Культурный центр Филиппин", "Армянская архитектура", "Пикассо, Пабло", "Лувр", "Миро, Жоан", "Ай Вэйвэй", "Кало, Фрида", "Кольвиц, Кете", "Райт, Фрэнк Ллойд", "Дега, Эдгар", "Пещерная живопись", "Микеланджело", "Гойя, Франсиско", "Фовизм", "Граффити", "Скульптура Древней Греции", "Эшер, Мауриц Корнелис", "Сёра, Жорж")
+
+[sub_resource type="Resource" id="Resource_l5mfx"]
+script = ExtResource("2_y4oc8")
+name = "Люди"
+corner_1 = Vector2(36, 12)
+corner_2 = Vector2(72, 48)
+exhibits = PackedStringArray("Бялобрежский, Чеслав", "Эйнштейн, Альберт", "Фредди Меркьюри", "Брайант, Коби", "Чингисхан", "Распутин, Григорий Ефимович", "Бостонские мученики", "Шакур, Тупак", "Манджоне, Луиджи", "Шекспир, Уильям", "Полинг, Лайнус", "Де Вито, Дэнни", "Толкин, Джон Рональд Руэл", "Шелли, Мэри", "Окасио-Кортес, Александрия", "Ибн Баттута", "Лютер, Мартин", "Кинг, Мартин Лютер")
+
+[sub_resource type="Resource" id="Resource_bycfx"]
+script = ExtResource("2_y4oc8")
+name = "История"
+corner_1 = Vector2(-48, 60)
+corner_2 = Vector2(-12, 96)
+exhibits = PackedStringArray("История Германии", "Авария на Чернобыльской АЭС", "Титаник", "Контркультура 1960-х годов", "Эксперименты над людьми", "Пандемия COVID-19", "Центральное разведывательное управление", "Золотой век ислама", "Список прилунений", "Землетрясение в Сан-Франциско (1906)", "Переход Ганнибала через Альпы", "Конфликт Дрейка и Кендрика Ламара", "История фотоискусства", "Dave Matthews Band", "Кровавый навет на евреев", "Ойо (государство)", "Пиратство", "Протесты в Гонконге (2019—2020)")
+
+[sub_resource type="Resource" id="Resource_yimja"]
+script = ExtResource("2_y4oc8")
+name = "Медиа"
+corner_1 = Vector2(12, 60)
+corner_2 = Vector2(48, 96)
+exhibits = PackedStringArray("Библия", "The Beatles", "Матрица (фильм)", "Одиссея", "Гильгамеш", "В ожидании Годо", "Homestuck", "Звёздный путь", "Барби (фильм)", "Neon Genesis Evangelion", "Hamlet", "Catan", "Twitter", "Vogue (magazine)", "Steamboat Willie", "The Count of Monte Cristo", "Wikipedia", "Minecraft")
+
+[resource]
+script = ExtResource("1_3ssej")
+wings = Array[ExtResource("2_y4oc8")]([SubResource("Resource_pgwi2"), SubResource("Resource_ooopd"), SubResource("Resource_m2ope"), SubResource("Resource_opuc1"), SubResource("Resource_qiy1c"), SubResource("Resource_l5mfx"), SubResource("Resource_bycfx"), SubResource("Resource_yimja")])
