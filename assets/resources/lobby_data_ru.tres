@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LobbyData" load_steps=11 format=3 uid="uid://cc0qb0luh6qye"]
+[gd_resource type="Resource" script_class="LobbyData" load_steps=11 format=3 uid="uid://34yga2226k3j"]
 
 [ext_resource type="Script" uid="uid://bdc8jjijlgjox" path="res://resource_definitions/LobbyData.gd" id="1_3ssej"]
 [ext_resource type="Script" uid="uid://ch3nm32ndlrbh" path="res://resource_definitions/LobbyWing.gd" id="2_y4oc8"]
@@ -8,21 +8,21 @@ script = ExtResource("2_y4oc8")
 name = "Технологии"
 corner_1 = Vector2(-68, -44)
 corner_2 = Vector2(-32, -8)
-exhibits = PackedStringArray("Головной вагон", "Minox", "Транзистор", "Гончарное производство", "Godot", "Pasteurization", "Nuclear weapons testing", "Adhesive", "Aqueduct (water supply)", "3D rendering", "Airplane", "Simple machine", "Printing press", "Birth control", "Microscopy", "Video game console", "Trebuchet", "Animal husbandry", "Oldowan")
+exhibits = PackedStringArray("Головной вагон", "Minox", "Транзистор", "Гончарное производство", "Godot", "Пастеризация", "Ядерное испытание", "Клей", "Акведук", "3D-рендеринг", "Самолёт", "Простейший механизм", "Ручной типографский станок", "Контрацепция", "Микроскопия", "Игровая приставка", "Требушет", "Животноводство", "Олдувайская культура")
 
 [sub_resource type="Resource" id="Resource_ooopd"]
 script = ExtResource("2_y4oc8")
 name = "Культура"
 corner_1 = Vector2(32, -44)
 corner_2 = Vector2(68, -8)
-exhibits = PackedStringArray("Клоун", "Дракон", "Магазин у дома", "Дай пять", "Гончаров (мем)", "Coffee", "Soup", "The Backrooms", "Tarot", "K-pop", "Go (game)", "Hinduism", "Dandy", "Golem", "Sea Shanty", "Advertising", "Flood Myth", "Monk")
+exhibits = PackedStringArray("Клоун", "Дракон", "Магазин у дома", "Дай пять", "Гончаров (мем)", "Кофе", "Суп", "Закулисье", "Карты таро", "K-pop", "Го", "Индуизм", "Денди", "Голем", "Шанти (жанр песен)", "Реклама", "Всемирный потоп", "Монах")
 
 [sub_resource type="Resource" id="Resource_m2ope"]
 script = ExtResource("2_y4oc8")
 name = "Наука"
 corner_1 = Vector2(-44, -92)
 corner_2 = Vector2(-8, -36)
-exhibits = PackedStringArray("Грибы", "Динозавры", "Морская жизнь", "Земля", "Ибн аль-Хайсам", "Крысы", "Креветка", "Хлебное дерево", "Визуализация данных", "Золото", "Адансония", "Человек", "Маятник", "Половой диморфизм", "Свет", "Сыр", "Капуста огородная", "Водно-болотные угодья", "Толстые лори", "Булавоусые чешуекрылые", "Юпитер", "Почва", "Фрактал", "Глаз")
+exhibits = PackedStringArray("Грибы", "Динозавры", "Морская жизнь", "Земля", "Кассини (марсианский кратер)", "Крысы", "Креветка", "Хлебное дерево", "Визуализация данных", "Золото", "Адансония", "Человек", "Маятник", "Половой диморфизм", "Свет", "Сыр", "Капуста огородная", "Водно-болотные угодья", "Толстые лори", "Булавоусые чешуекрылые", "Юпитер", "Почва", "Фрактал", "Глаз")
 
 [sub_resource type="Resource" id="Resource_opuc1"]
 script = ExtResource("2_y4oc8")
@@ -57,7 +57,7 @@ script = ExtResource("2_y4oc8")
 name = "Медиа"
 corner_1 = Vector2(12, 60)
 corner_2 = Vector2(48, 96)
-exhibits = PackedStringArray("Библия", "The Beatles", "Матрица (фильм)", "Одиссея", "Гильгамеш", "В ожидании Годо", "Homestuck", "Звёздный путь", "Барби (фильм)", "Neon Genesis Evangelion", "Hamlet", "Catan", "Twitter", "Vogue (magazine)", "Steamboat Willie", "The Count of Monte Cristo", "Wikipedia", "Minecraft")
+exhibits = PackedStringArray("Библия", "The Beatles", "Матрица (фильм)", "Одиссея", "Гильгамеш", "В ожидании Годо", "Homestuck", "Звёздный путь", "Барби (фильм)", "Евангелион", "Гамлет", "Колонизаторы (настольная игра)", "X (социальная сеть)", "Vogue", "Пароходик Вилли", "Граф Монте-Кристо", "Википедия", "Minecraft")
 
 [resource]
 script = ExtResource("1_3ssej")
