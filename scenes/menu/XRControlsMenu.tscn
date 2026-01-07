@@ -85,9 +85,27 @@ layout_mode = 2
 text = " "
 label_settings = SubResource("LabelSettings_laulw")
 
+[node name="Label6" type="Label" parent="RotationOptions"]
+layout_mode = 2
+text = "Rotation Style (Right Stick)"
+
+[node name="Styles" type="HBoxContainer" parent="RotationOptions"]
+layout_mode = 2
+
+[node name="SnapTurn" type="Button" parent="RotationOptions/Styles"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = "Snap Turn"
+
+[node name="SmoothTurn" type="Button" parent="RotationOptions/Styles"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Smooth Turn"
+
 [node name="Label4" type="Label" parent="RotationOptions"]
 layout_mode = 2
-text = "Camera Rotation Increment (Right Stick)"
+text = "Camera Rotation Increment"
 
 [node name="RotationIncrement" type="HSlider" parent="RotationOptions"]
 layout_mode = 2
@@ -101,14 +119,11 @@ layout_mode = 2
 text = "40"
 horizontal_alignment = 1
 
-[node name="SmoothRotation" type="CheckBox" parent="RotationOptions"]
-layout_mode = 2
-text = "Smooth Camera Rotation"
-
 [connection signal="pressed" from="MainOptions/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="MainOptions/RestoreDefault" to="." method="_on_restore_default_pressed"]
 [connection signal="pressed" from="MovementOptions/Styles/Teleportation" to="." method="_on_teleportation_pressed"]
 [connection signal="pressed" from="MovementOptions/Styles/DirectMovement" to="." method="_on_direct_movement_pressed"]
 [connection signal="value_changed" from="MovementOptions/MovementSpeed" to="." method="_on_movement_speed_value_changed"]
+[connection signal="pressed" from="RotationOptions/Styles/SnapTurn" to="." method="_on_snap_turn_pressed"]
+[connection signal="pressed" from="RotationOptions/Styles/SmoothTurn" to="." method="_on_smooth_turn_pressed"]
 [connection signal="value_changed" from="RotationOptions/RotationIncrement" to="." method="_on_rotation_increment_value_changed"]
-[connection signal="toggled" from="RotationOptions/SmoothRotation" to="." method="_on_smooth_rotation_toggled"]
