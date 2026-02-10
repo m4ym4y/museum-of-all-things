@@ -171,6 +171,25 @@ jobs:
           path: dist/${{ env.EXPORT_NAME }}_Quest.apk
         if: github.event_name != 'pull_request'
 
+      - name: Export Android XR
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android-release.keystore
+
+          export GODOT_ANDROID_KEYSTORE_RELEASE_PATH=android-release.keystore
+          export GODOT_ANDROID_KEYSTORE_RELEASE_USER="${{ secrets.ANDROID_KEYSTORE_USER }}"
+          export GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD="${{ secrets.ANDROID_KEYSTORE_PASSWORD }}"
+
+          ./tools/godot --verbose --headless --install-android-build-template --export-release \
+          "Android XR" ./dist/${{ env.EXPORT_NAME }}_AndroidXR.apk
+        if: github.event_name != 'pull_request'
+
+      - name: Upload Android XR
+        uses: actions/upload-artifact@v4
+        with:
+          name: Meta Quest
+          path: dist/${{ env.EXPORT_NAME }}_AndroidXR.apk
+        if: github.event_name != 'pull_request'
+
   release:
     name: Attach to Release
     needs: export
