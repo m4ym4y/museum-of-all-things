@@ -130,8 +130,14 @@ msgstr "Controls"
 msgid "Data Settings"
 msgstr "Data Settings"
 
-msgid "Cache" ### Currently not applied (probably due to the values that follow)
+msgid "Cache"
 msgstr "Cache"
+
+msgid "Cache (calculating size...)"
+msgstr "Cache (calculating size...)"
+
+msgid "Cache (%3.2f GB)"
+msgstr "Cache (%3.2f GB)"
 
 msgid "Clear Cache"
 msgstr "Clear Cache"
