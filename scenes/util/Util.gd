@@ -183,6 +183,29 @@ func trim_to_length_sentence(s, lim):
       break
   return s.substr(0, pos + 1)
 
+func replace_unclosed_bbcodes(text):
+    var bbcode_re = RegEx.new()
+    #Replacing the unclosed: [s] tags with => ()
+    bbcode_re.compile("\\[(\\/)?([s])\\]")
+    var tag_stack = []
+    var result = text
+    var offset = 0
+    for match in bbcode_re.search_all(text):
+        var is_closing = match.get_string(1) == "/"
+        var tag_name = match.get_string(2)
+        var start_pos = match.get_start() + offset
+        var end_pos = match.get_end() + offset
+        if is_closing:
+            if tag_stack and tag_stack[-1] == tag_name:
+                tag_stack.pop_back()
+            result = result.substr(0, start_pos) + result.substr(end_pos)
+            offset -= (end_pos - start_pos)
+        else:
+            tag_stack.push_back(tag_name)
+            result = result.substr(0, start_pos) + "(" + tag_name + ")" + result.substr(end_pos)
+            offset += len("(" + tag_name + ")") - (end_pos - start_pos)
+    return result
+
 var html_tag_re = RegEx.new()
 var display_none_re = RegEx.new()
 var markup_tag_re = RegEx.new()
