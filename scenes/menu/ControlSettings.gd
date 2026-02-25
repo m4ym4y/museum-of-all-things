@@ -162,3 +162,7 @@ func _on_sensitivity_value_changed(value: float):
 func _on_deadzone_value_changed(value: float):
   $JoyOptions/DeadzoneValue.text = str(int(value * 100)) + "%"
   GlobalMenuEvents.emit_set_joypad_deadzone(value)
+
+func _on_joypad_sensitivity_value_changed(value: float) -> void:
+  $JoyOptions/SensitivityValue.text = str(int(value * 100)) + "%"
+  GlobalMenuEvents.emit_set_joypad_sensitivity(value)
