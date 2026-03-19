@@ -67,11 +67,21 @@ func get_max_slots_per_exhibit() -> int:
   # @todo Should this be a setting?
   return 200 if (is_mobile() or is_web()) else 2500
 
+# This is a "true delay" that will only take effect on a worker thread; it will be ignored on the main thread.
 func delay_msec(msecs):
-  # Will only delay if we're not on the main thread.
   if OS.get_thread_caller_id() == OS.get_main_thread_id():
     return
   OS.delay_msec(msecs)
+
+# This is an "async delay" (needs `await`) when used on the main thread, or a "true delay" on a worker thread.
+func delay_msec_async(msecs):
+  # If on the main thread, this will `await` - otherwise, a normal delay
+  if OS.get_thread_caller_id() == OS.get_main_thread_id():
+    var main_loop = Engine.get_main_loop()
+    if main_loop is SceneTree:
+      await main_loop.create_timer(msecs / 1000.0).timeout
+  else:
+    OS.delay_msec(msecs)
 
 func normalize_url(url):
   if url.begins_with('//'):
