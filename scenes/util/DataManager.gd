@@ -59,8 +59,21 @@ func _texture_load_item():
           request_url += ('&' if '?' in request_url else '?') + "origin=*"
 
           var handle_result = func(result):
-            if result[0] != OK:
-              push_error("failed to fetch image ", result[1], " ", item.url)
+            if result[0] == OK and result[1] == 429:
+              # Requeue images if we have been rate limited.
+              # See: https://www.mediawiki.org/wiki/Wikimedia_APIs/Rate_limits
+              var delay = 1000
+              for header in result[2]:
+                if header.to_lower().begins_with("retry-after:"):
+                  var delay_seconds = int(header.get_slice(":", 1).strip_edges())
+                  if delay_seconds > 0:
+                    delay = delay_seconds * 1000
+                  break
+              push_warning("rate limited, requeuing image in %dms: %s" % [delay, item.url])
+              await Util.delay_msec_async(delay)
+              request_image(item.url, item.ctx)
+            elif result[0] != OK or result[1] != 200:
+              push_error("failed to fetch image ", result[0], " ", result[1], " ", item.url)
             else:
               data = result[3]
               _write_url(item.url, data)
@@ -85,6 +98,7 @@ func _texture_load_item():
       elif fmt == "WebP":
         image.load_webp_from_buffer(data)
       else:
+        print("Unknown image type: ", item.url)
         return
 
       if image.get_width() == 0:
