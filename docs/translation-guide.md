@@ -95,7 +95,7 @@ As another example, here's [the PR adding Spanish](https://github.com/m4ym4y/mus
 README.md
 project.godot
 assets/translations/<your wikipedia subdomain>.po
-assets/translations/lobby_data_<your wikipedia subdomain>.po
+assets/resources/lobby_data_<your wikipedia subdomain>.tres
 ```
 
 - Open a pull request to [the main Museum of All Things repository.](https://github.com/m4ym4y/museum-of-all-things) If you are unfamiliar with this process, refer to [this guide by GitHub!](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork)
