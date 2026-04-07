@@ -234,7 +234,7 @@ func _on_xr_controller_3d_left_input_float_changed(name: String, value: float) -
           if not _is_openxr_hand_tracking_aim_enabled():
             _toggle_menu()
         else:
-          if menu_active:
+          if menu_active or left_controller.get_node("FunctionPointer/Laser").visible:
             xr_tracker.set_input(PINCH_POINTER_ACTION, true)
           else:
             if movement_style == "teleportation":
