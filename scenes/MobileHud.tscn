@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://chscowlj6t1qc"]
+
+[ext_resource type="Script" uid="uid://b5kdatfnr13gi" path="res://scenes/MobileHud.gd" id="1_igbnn"]
+[ext_resource type="Texture2D" uid="uid://hwyljdhu3s83" path="res://assets/textures/flatDark13.png" id="10_conix"]
+[ext_resource type="Texture2D" uid="uid://b0yr6vtmu74to" path="res://assets/textures/shadedDark14.png" id="11_v46tn"]
+[ext_resource type="Script" uid="uid://dx601anb6j2kg" path="res://addons/touch_screen_joystick/touch_screen_joystick.gd" id="12_v46tn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbwbb"]
+size = Vector2(50, 50)
+
+[node name="MobileHUD" type="CanvasLayer" unique_id=1697506552]
+script = ExtResource("1_igbnn")
+
+[node name="UITouchScreenControl" type="Control" parent="." unique_id=1068352900]
+layout_mode = 3
+anchors_preset = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=1089052968]
+position = Vector2(38.99994, 31.999996)
+scale = Vector2(1.4, 1.4)
+texture_normal = ExtResource("10_conix")
+texture_pressed = ExtResource("11_v46tn")
+shape = SubResource("RectangleShape2D_pbwbb")
+action = "pause"
+
+[node name="MovementJoystick" type="Control" parent="." unique_id=1111156073]
+layout_mode = 3
+anchor_left = 0.1078125
+anchor_top = 0.78125
+anchor_right = 0.1390625
+anchor_bottom = 0.83125
+grow_vertical = 0
+script = ExtResource("12_v46tn")
+use_input_actions = true
+action_left = &"strafe_left"
+action_right = &"strafe_right"
+action_up = &"move_forward"
+action_down = &"move_back"
+show_debug = true
+metadata/_edit_use_anchors_ = true

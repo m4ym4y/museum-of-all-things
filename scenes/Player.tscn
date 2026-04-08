@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bw5yn00va6hxl"]
+[gd_scene format=3 uid="uid://bw5yn00va6hxl"]
 
 [ext_resource type="Script" uid="uid://b4w1fxbmkdcgh" path="res://scenes/Player.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dxfoujgkv1e2y" path="res://scenes/FootstepPlayer.tscn" id="2_1mcm1"]
+[ext_resource type="PackedScene" uid="uid://chscowlj6t1qc" path="res://scenes/MobileHud.tscn" id="3_3li8b"]
 
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(0.6, 0.2, 0.6)
@@ -9,30 +10,32 @@ size = Vector3(0.6, 0.2, 0.6)
 [sub_resource type="CapsuleShape3D" id="2"]
 radius = 0.3
 
-[node name="Player" type="CharacterBody3D" groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=657318291 groups=["Player"]]
 collision_layer = 524288
 script = ExtResource("1")
 jump_impulse = 12
 smooth_movement = true
 max_speed_walk = 6
 
-[node name="Pivot" type="Node3D" parent="."]
+[node name="Pivot" type="Node3D" parent="." unique_id=126540717]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Pivot"]
+[node name="Camera3D" type="Camera3D" parent="Pivot" unique_id=305811394]
 far = 2000.0
 
-[node name="RayCast3D" type="RayCast3D" parent="Pivot/Camera3D"]
+[node name="RayCast3D" type="RayCast3D" parent="Pivot/Camera3D" unique_id=1548643813]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, -3, 0)
 collision_mask = 2
 
-[node name="Feet" type="CollisionShape3D" parent="."]
+[node name="Feet" type="CollisionShape3D" parent="." unique_id=907447197]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 shape = SubResource("1")
 
-[node name="CollisionShape2" type="CollisionShape3D" parent="."]
+[node name="CollisionShape2" type="CollisionShape3D" parent="." unique_id=1049948876]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("2")
 
-[node name="FootstepPlayer" parent="." instance=ExtResource("2_1mcm1")]
+[node name="FootstepPlayer" parent="." unique_id=1624733465 instance=ExtResource("2_1mcm1")]
+
+[node name="MobileHUD" parent="." unique_id=1697506552 instance=ExtResource("3_3li8b")]
