@@ -1,10 +1,10 @@
 extends CanvasLayer
 
 
-@onready var Jump = $UITouchScreenControl/JumpButton
-@onready var Interact = $UITouchScreenControl/InteractButton
-@onready var Crouch = $UITouchScreenControl/CrouchButton
-@onready var Dash = $UITouchScreenControl/DashButton
+@onready var Jump = $UITouchScreenControl/BottomRightGridContainer/JumpButton
+@onready var Interact = $UITouchScreenControl/BottomRightGridContainer/InteractButton
+@onready var Crouch = $UITouchScreenControl/BottomRightGridContainer/CrouchButton
+@onready var Dash = $UITouchScreenControl/BottomRightGridContainer/DashButton
 
 
 func _ready():

@@ -41,50 +41,82 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="PauseButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=415024118]
-position = Vector2(57.999943, 41.999992)
-scale = Vector2(1.6, 1.6)
+[node name="TopLeftGridContainer" type="GridContainer" parent="UITouchScreenControl" unique_id=2056895975]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015625007
+anchor_top = 0.025000002
+anchor_right = 0.08593749
+anchor_bottom = 0.1375
+offset_right = -39.999992
+offset_bottom = -40.0
+scale = Vector2(1.8, 1.8)
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseButton" type="TouchScreenButton" parent="UITouchScreenControl/TopLeftGridContainer" unique_id=415024118]
+position = Vector2(1.25, 1.25)
 texture_normal = ExtResource("2_nk2xy")
 texture_pressed = ExtResource("3_o7v4l")
 shape = SubResource("RectangleShape2D_pbwbb")
 action = "pause"
 
-[node name="JumpButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=1592805096]
-position = Vector2(1084.0001, 599.00006)
-scale = Vector2(1.6, 1.6)
+[node name="ReferenceRect" type="ReferenceRect" parent="UITouchScreenControl" unique_id=551692966]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8414062
+anchor_top = 0.74625
+anchor_right = 0.984375
+anchor_bottom = 0.975
+metadata/_edit_use_anchors_ = true
+
+[node name="BottomRightGridContainer" type="GridContainer" parent="UITouchScreenControl" unique_id=474633032]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8414062
+anchor_top = 0.74625
+anchor_right = 0.984375
+anchor_bottom = 0.975
+offset_right = -61.0
+offset_bottom = -61.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+columns = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="JumpButton" type="TouchScreenButton" parent="UITouchScreenControl/BottomRightGridContainer" unique_id=1592805096]
+scale = Vector2(1.2, 1.2)
 texture_normal = ExtResource("4_o7v4l")
 texture_pressed = ExtResource("5_fhfib")
 shape = SubResource("RectangleShape2D_0s86f")
 
-[node name="CrouchButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=1995306440]
-position = Vector2(1084, 688)
-scale = Vector2(1.6, 1.6)
+[node name="CrouchButton" type="TouchScreenButton" parent="UITouchScreenControl/BottomRightGridContainer" unique_id=1995306440]
+position = Vector2(0, 64)
+scale = Vector2(1.2, 1.2)
 texture_normal = ExtResource("8_v46tn")
 texture_pressed = ExtResource("9_pqy70")
 shape = SubResource("RectangleShape2D_ka30t")
 
-[node name="DashButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=1104618568]
-position = Vector2(1176, 599)
-scale = Vector2(1.6, 1.6)
+[node name="DashButton" type="TouchScreenButton" parent="UITouchScreenControl/BottomRightGridContainer" unique_id=1104618568]
+position = Vector2(64.333, 0)
+scale = Vector2(1.2, 1.2)
 texture_normal = ExtResource("10_qxhl5")
 texture_pressed = ExtResource("11_eob38")
 shape = SubResource("RectangleShape2D_pvvhj")
 
-[node name="InteractButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=225760821]
-position = Vector2(1176.0001, 688.00006)
-scale = Vector2(1.6, 1.6)
+[node name="InteractButton" type="TouchScreenButton" parent="UITouchScreenControl/BottomRightGridContainer" unique_id=225760821]
+position = Vector2(64, 64)
+scale = Vector2(1.2, 1.2)
 texture_normal = ExtResource("6_orgaa")
 texture_pressed = ExtResource("7_pbwbb")
 shape = SubResource("RectangleShape2D_nk2xy")
 
-[node name="MovementJoystick" type="Control" parent="." unique_id=772549848]
+[node name="TouchScreenJoystick" type="Control" parent="." unique_id=772549848]
 layout_mode = 3
-anchor_left = -0.3828125
-anchor_top = 0.31375
-anchor_right = 0.6171875
-anchor_bottom = 1.31375
-offset_top = -11.0
-offset_bottom = -11.0
+anchor_left = 0.015625
+anchor_top = 0.6625
+anchor_right = 0.2109375
+anchor_bottom = 0.975
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
