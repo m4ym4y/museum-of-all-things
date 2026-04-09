@@ -150,6 +150,7 @@ func _open_terminal_menu():
   _close_menus()
   $CanvasLayer.visible = true
   $CanvasLayer/PopupTerminalMenu.visible = true
+  hide_mobile_hud_platform_check()
 
 func _on_main_menu_start_pressed():
   _start_game()
