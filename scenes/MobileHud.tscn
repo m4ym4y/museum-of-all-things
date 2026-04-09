@@ -42,7 +42,7 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="PauseButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=415024118]
-position = Vector2(38.99994, 31.999996)
+position = Vector2(57.999943, 41.999992)
 scale = Vector2(1.6, 1.6)
 texture_normal = ExtResource("2_nk2xy")
 texture_pressed = ExtResource("3_o7v4l")
