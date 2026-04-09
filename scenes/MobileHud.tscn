@@ -19,24 +19,29 @@ size = Vector2(50, 50)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0s86f"]
 size = Vector2(50, 50)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nk2xy"]
-size = Vector2(50, 50)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ka30t"]
 size = Vector2(50, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvvhj"]
 size = Vector2(50, 50)
 
-[node name="MobileHUD" type="CanvasLayer" unique_id=1697506552]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nk2xy"]
+size = Vector2(50, 50)
+
+[node name="MobileHUD" type="CanvasLayer" unique_id=563185674]
 script = ExtResource("1_igbnn")
 
-[node name="UITouchScreenControl" type="Control" parent="." unique_id=1068352900]
+[node name="UITouchScreenControl" type="Control" parent="." unique_id=2132169583]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="PauseButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=1089052968]
+[node name="PauseButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=415024118]
 position = Vector2(38.99994, 31.999996)
 scale = Vector2(1.6, 1.6)
 texture_normal = ExtResource("2_nk2xy")
@@ -44,48 +49,49 @@ texture_pressed = ExtResource("3_o7v4l")
 shape = SubResource("RectangleShape2D_pbwbb")
 action = "pause"
 
-[node name="JumpButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=1344163839]
-position = Vector2(1063, 599)
+[node name="JumpButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=1592805096]
+position = Vector2(1084.0001, 599.00006)
 scale = Vector2(1.6, 1.6)
 texture_normal = ExtResource("4_o7v4l")
 texture_pressed = ExtResource("5_fhfib")
 shape = SubResource("RectangleShape2D_0s86f")
 
-[node name="InteractButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=774393867]
-position = Vector2(1153, 688)
-scale = Vector2(1.6, 1.6)
-texture_normal = ExtResource("6_orgaa")
-texture_pressed = ExtResource("7_pbwbb")
-shape = SubResource("RectangleShape2D_nk2xy")
-
-[node name="CrouchButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=1747085071]
-position = Vector2(1063, 688)
+[node name="CrouchButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=1995306440]
+position = Vector2(1084, 688)
 scale = Vector2(1.6, 1.6)
 texture_normal = ExtResource("8_v46tn")
 texture_pressed = ExtResource("9_pqy70")
 shape = SubResource("RectangleShape2D_ka30t")
 
-[node name="DashButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=1508430053]
-position = Vector2(1153, 599)
+[node name="DashButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=1104618568]
+position = Vector2(1176, 599)
 scale = Vector2(1.6, 1.6)
 texture_normal = ExtResource("10_qxhl5")
 texture_pressed = ExtResource("11_eob38")
 shape = SubResource("RectangleShape2D_pvvhj")
 
-[node name="MovementJoystick" type="Control" parent="." unique_id=1111156073]
+[node name="InteractButton" type="TouchScreenButton" parent="UITouchScreenControl" unique_id=225760821]
+position = Vector2(1176.0001, 688.00006)
+scale = Vector2(1.6, 1.6)
+texture_normal = ExtResource("6_orgaa")
+texture_pressed = ExtResource("7_pbwbb")
+shape = SubResource("RectangleShape2D_nk2xy")
+
+[node name="MovementJoystick" type="Control" parent="." unique_id=772549848]
 layout_mode = 3
-anchor_left = 0.0765625
-anchor_top = 0.8275
-anchor_right = 0.1078125
-anchor_bottom = 0.8775
-grow_vertical = 0
+anchor_left = -0.3828125
+anchor_top = 0.31375
+anchor_right = 0.6171875
+anchor_bottom = 1.31375
+offset_top = -11.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("12_v46tn")
-base_radius = 80.0
-knob_radius = 35.0
 use_input_actions = true
 action_left = &"strafe_left"
 action_right = &"strafe_right"
 action_up = &"move_forward"
 action_down = &"move_back"
-show_debug = true
 metadata/_edit_use_anchors_ = true
