@@ -110,6 +110,9 @@ func init(item_data):
     _start_animate()
   elif item_data.type == "sculpture":
     _frame.visible = false
+    var matte_marble = MarbleMaterial.duplicate()
+    matte_marble.roughness = 1.0
+    $Item/Plaque.material_override = matte_marble
     _item = SculptureItem.instantiate()
     _item.loaded.connect(_start_animate)
     _item.init(item_data.title, item_data.text)
