@@ -27,12 +27,24 @@ var _sculpture_material: StandardMaterial3D
 func _ready():
   _build_sculpture_material()
   _build_plinth()
+  _build_collision()
   _build_light()
   _sculpture_instance = MeshInstance3D.new()
   _sculpture_instance.visible = false
   add_child(_sculpture_instance)
   _build_label()
   visible = false
+
+func _build_collision():
+  var total_height = PLINTH_HEIGHT + SHELF_HEIGHT + SCULPTURE_SIZE
+  var body = StaticBody3D.new()
+  var shape = CollisionShape3D.new()
+  var box = BoxShape3D.new()
+  box.size = Vector3(0.95, total_height, PLINTH_DEPTH + 0.05)
+  shape.shape = box
+  shape.position = Vector3(0, -PLINTH_HEIGHT / 2.0 + total_height / 2.0, 0)
+  body.add_child(shape)
+  add_child(body)
 
 func _build_sculpture_material():
   _sculpture_material = _marble_material.duplicate()
