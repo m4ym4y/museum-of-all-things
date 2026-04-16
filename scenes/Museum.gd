@@ -410,7 +410,7 @@ func _on_fetch_complete(_titles, context):
   var item_queue = []
   for item_data in items:
     if item_data:
-      if item_data.type == "image" and item_data.has("title") and item_data.title != "":
+      if item_data.type in ["image", "sculpture"] and item_data.has("title") and item_data.title != "":
         image_titles.append(item_data.title)
       item_queue.append(_add_item.bind(new_exhibit, item_data))
 

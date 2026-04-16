@@ -12,6 +12,8 @@ var TEXTURE_FRAME_PACING = 6
 var _fs_lock = Mutex.new()
 var _texture_load_thread_pool_size = 5
 var _texture_load_thread_pool = []
+var _parsed_meshes = {}
+var _parsed_meshes_lock = Mutex.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -70,6 +72,9 @@ func _texture_load_item():
     "parse_stl":
       var mesh = _do_parse_binary_stl(item.data)
       if mesh:
+        _parsed_meshes_lock.lock()
+        _parsed_meshes[item.url] = mesh
+        _parsed_meshes_lock.unlock()
         call_deferred("emit_signal", "loaded_mesh", item.url, mesh, item.ctx)
 
     "request":
@@ -266,6 +271,12 @@ func _create_and_emit_texture(url, image, ctx=null):
   }, null, true)
 
 func request_stl(url, ctx=null):
+  _parsed_meshes_lock.lock()
+  var cached = _parsed_meshes.get(url, null)
+  _parsed_meshes_lock.unlock()
+  if cached:
+    call_deferred("emit_signal", "loaded_mesh", url, cached, ctx)
+    return
   WorkQueue.add_item(TEXTURE_QUEUE, {
     "type": "request_stl",
     "url": url,
