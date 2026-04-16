@@ -60,17 +60,18 @@ func _texture_load_item():
           else:
             data = result[3]
             _write_url(item.url, data)
-            _parse_stl(item.url, data, item.ctx)
+            _parse_stl(item.url, data, item.target_size, item.ctx)
         if Util.is_web():
           RequestSync.request_async(item.url).completed.connect(handle_result)
         else:
           handle_result.call(RequestSync.request(item.url))
       else:
-        _parse_stl(item.url, data, item.ctx)
+        _parse_stl(item.url, data, item.target_size, item.ctx)
 
     "parse_stl":
       var mesh = _do_parse_binary_stl(item.data)
       if mesh:
+        mesh = _normalize_mesh(mesh, item.target_size)
         call_deferred("emit_signal", "loaded_mesh", item.url, mesh, item.ctx)
 
     "request":
@@ -266,20 +267,53 @@ func _create_and_emit_texture(url, image, ctx=null):
     "ctx": ctx,
   }, null, true)
 
-func request_stl(url, ctx=null):
+func request_stl(url, target_size: float, ctx=null):
   WorkQueue.add_item(TEXTURE_QUEUE, {
     "type": "request_stl",
     "url": url,
+    "target_size": target_size,
     "ctx": ctx,
   })
 
-func _parse_stl(url, data, ctx=null):
+func _parse_stl(url, data, target_size: float, ctx=null):
   WorkQueue.add_item(TEXTURE_QUEUE, {
     "type": "parse_stl",
     "url": url,
     "data": data,
+    "target_size": target_size,
     "ctx": ctx,
   }, null, true)
+
+func _normalize_mesh(mesh: ArrayMesh, target_size: float) -> ArrayMesh:
+  if mesh.get_surface_count() == 0:
+    return mesh
+  var arrays = mesh.surface_get_arrays(0)
+  var verts: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+  if verts.size() == 0:
+    return mesh
+
+  var min_v = verts[0]
+  var max_v = verts[0]
+  for v in verts:
+    min_v = Vector3(minf(min_v.x, v.x), minf(min_v.y, v.y), minf(min_v.z, v.z))
+    max_v = Vector3(maxf(max_v.x, v.x), maxf(max_v.y, v.y), maxf(max_v.z, v.z))
+
+  var size = max_v - min_v
+  var max_dim = maxf(size.x, maxf(size.y, size.z))
+  if max_dim == 0.0:
+    return mesh
+
+  var scale_factor = target_size / max_dim
+  var center = (min_v + max_v) / 2.0
+  var new_verts = PackedVector3Array()
+  new_verts.resize(verts.size())
+  for i in range(verts.size()):
+    new_verts[i] = (verts[i] - center) * scale_factor
+  arrays[Mesh.ARRAY_VERTEX] = new_verts
+
+  var new_mesh = ArrayMesh.new()
+  new_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+  return new_mesh
 
 var STL_TARGET_MAX: int
 

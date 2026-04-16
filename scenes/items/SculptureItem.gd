@@ -146,10 +146,9 @@ func _on_mesh_loaded(url: String, mesh: ArrayMesh, _ctx):
   if not is_instance_valid(_sculpture_instance):
     return
 
-  var normalized = _normalize_mesh(mesh)
-  _sculpture_instance.mesh = normalized
+  _sculpture_instance.mesh = mesh
 
-  var aabb = normalized.get_aabb()
+  var aabb = mesh.get_aabb()
   _sculpture_instance.position = Vector3(
     0,
     (PLINTH_HEIGHT / 2.0 + SHELF_HEIGHT) - aabb.position.y + 0.01,
@@ -157,7 +156,7 @@ func _on_mesh_loaded(url: String, mesh: ArrayMesh, _ctx):
   )
 
   var shelf_top = PLINTH_HEIGHT / 2.0 + SHELF_HEIGHT
-  var first_surface = _find_first_central_surface(normalized)
+  var first_surface = _find_first_central_surface(mesh)
   var first_surface_y = _sculpture_instance.position.y + first_surface.y
   if first_surface_y > shelf_top + 0.02:
     _build_support_rod(shelf_top, first_surface_y, Vector2(first_surface.x, first_surface.z))
@@ -178,37 +177,6 @@ func _on_mesh_loaded(url: String, mesh: ArrayMesh, _ctx):
   visible = true
   emit_signal("loaded")
 
-func _normalize_mesh(mesh: ArrayMesh) -> ArrayMesh:
-  if mesh.get_surface_count() == 0:
-    return mesh
-  var arrays = mesh.surface_get_arrays(0)
-  var verts: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
-  if verts.size() == 0:
-    return mesh
-
-  var min_v = verts[0]
-  var max_v = verts[0]
-  for v in verts:
-    min_v = Vector3(minf(min_v.x, v.x), minf(min_v.y, v.y), minf(min_v.z, v.z))
-    max_v = Vector3(maxf(max_v.x, v.x), maxf(max_v.y, v.y), maxf(max_v.z, v.z))
-
-  var size = max_v - min_v
-  var max_dim = maxf(size.x, maxf(size.y, size.z))
-  if max_dim == 0.0:
-    return mesh
-
-  var scale_factor = SCULPTURE_SIZE / max_dim
-  var center = (min_v + max_v) / 2.0
-
-  var new_verts = PackedVector3Array()
-  new_verts.resize(verts.size())
-  for i in range(verts.size()):
-    new_verts[i] = (verts[i] - center) * scale_factor
-  arrays[Mesh.ARRAY_VERTEX] = new_verts
-
-  var new_mesh = ArrayMesh.new()
-  new_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-  return new_mesh
 
 func _on_data_complete(files, _ctx):
   if files.has(title):
@@ -229,7 +197,7 @@ func _apply_data(data):
   if not stl_url and data.has("stl_url"):
     stl_url = data.stl_url
     DataManager.loaded_mesh.connect(_on_mesh_loaded)
-    DataManager.request_stl(stl_url)
+    DataManager.request_stl(stl_url, SCULPTURE_SIZE)
 
 # Returns Vector3(h_x, mesh_y, h_z) — the horizontal position and lowest surface y found.
 # Tries wall-side offsets first (negative Z = toward wall), falls back to center.
