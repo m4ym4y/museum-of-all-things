@@ -17,7 +17,7 @@ func _ready() -> void:
 
 func _on_visibility_changed():
   if visible:
-    $MarginContainer/VBoxContainer/Start.grab_focus()
+    $MarginContainer/VBoxContainer/Start.call_deferred("grab_focus")
 
 func set_webxr_enabled(p_enabled):
   %StartWebXR.visible = p_enabled

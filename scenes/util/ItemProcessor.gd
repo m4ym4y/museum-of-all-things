@@ -15,6 +15,7 @@ var ignore_sections = [
 ]
 
 var IMAGE_REGEX = RegEx.new()
+var STL_REGEX = RegEx.new()
 var s2_re = RegEx.new()
 var template_re = RegEx.new()
 var links_re = RegEx.new()
@@ -39,6 +40,7 @@ var PROCESSOR_QUEUE = "ItemProcessor"
 
 func _ready():
   IMAGE_REGEX.compile("\\.(png|jpg|jpeg|webp|svg)$")
+  STL_REGEX.compile("\\.stl$")
   s2_re.compile("^==[^=]")
   template_re.compile("\\{\\{.*?\\}\\}")
   links_re.compile("\\[\\[([^|\\]]*?\\|)?(.*?)\\]\\]")
@@ -109,6 +111,9 @@ func _clean_section(s):
 var trim_filename_front = len("File:")
 func _clean_filename(s):
   return IMAGE_REGEX.sub(s.substr(trim_filename_front), "")
+
+func _clean_model_filename(s):
+  return STL_REGEX.sub(s.substr(trim_filename_front), "")
 
 func _create_text_items(title, extract):
   var items = []
@@ -262,6 +267,13 @@ func commons_images_to_items(title, images, extra_text):
         "title": image,
         "text": _clean_filename(image),
       })
+    elif image and STL_REGEX.search(image.to_lower()):
+      items.append({
+        "type": "sculpture",
+        "material": "marble",
+        "title": image,
+        "text": _clean_model_filename(image),
+      })
 
   return items
 
@@ -300,6 +312,13 @@ func _create_items(title, result, prev_title):
           "plate": plate,
           "title": target,
           "text": caption.get_string(1) if caption else _clean_filename(target),
+        })
+      elif target.begins_with("File:") and STL_REGEX.search(target.to_lower()):
+        image_items.append({
+          "type": "sculpture",
+          "material": "marble",
+          "title": target,
+          "text": caption.get_string(1) if caption else _clean_model_filename(target),
         })
 
       elif type == "template":

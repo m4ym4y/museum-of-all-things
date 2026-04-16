@@ -1,6 +1,7 @@
 extends Node
 
 signal loaded_image(url: String, image: Image)
+signal loaded_mesh(url: String, mesh: ArrayMesh)
 
 @onready var COMMON_HEADERS = [ "accept: image/png, image/jpeg; charset=utf-8" ]
 @onready var _in_flight = {}
@@ -49,6 +50,28 @@ func _texture_load_item():
     return
 
   match item.type:
+    "request_stl":
+      var data = _read_url(item.url)
+      if not data:
+        var handle_result = func(result):
+          if result[0] != OK or result[1] != 200:
+            push_error("failed to fetch STL ", result[0], " ", result[1], " ", item.url)
+          else:
+            data = result[3]
+            _write_url(item.url, data)
+            _parse_stl(item.url, data, item.ctx)
+        if Util.is_web():
+          RequestSync.request_async(item.url).completed.connect(handle_result)
+        else:
+          handle_result.call(RequestSync.request(item.url))
+      else:
+        _parse_stl(item.url, data, item.ctx)
+
+    "parse_stl":
+      var mesh = _do_parse_binary_stl(item.data)
+      if mesh:
+        call_deferred("emit_signal", "loaded_mesh", item.url, mesh, item.ctx)
+
     "request":
         var data = _read_url(item.url)
 
@@ -241,3 +264,60 @@ func _create_and_emit_texture(url, image, ctx=null):
     "image": image,
     "ctx": ctx,
   }, null, true)
+
+func request_stl(url, ctx=null):
+  WorkQueue.add_item(TEXTURE_QUEUE, {
+    "type": "request_stl",
+    "url": url,
+    "ctx": ctx,
+  })
+
+func _parse_stl(url, data, ctx=null):
+  WorkQueue.add_item(TEXTURE_QUEUE, {
+    "type": "parse_stl",
+    "url": url,
+    "data": data,
+    "ctx": ctx,
+  }, null, true)
+
+const STL_TARGET_MAX = 500000
+
+func _do_parse_binary_stl(data: PackedByteArray) -> ArrayMesh:
+  if data.size() < 84:
+    push_error("STL data too small: %d bytes" % data.size())
+    return null
+
+  var num_triangles = data.decode_u32(80)
+  var expected_size = 84 + num_triangles * 50
+  if data.size() < expected_size:
+    push_warning("STL data may be truncated, adjusting triangle count")
+    num_triangles = (data.size() - 84) / 50
+
+  if num_triangles == 0:
+    push_error("STL has no triangles")
+    return null
+
+  var vertices = PackedVector3Array()
+  vertices.resize(num_triangles * 3)
+
+  for i in num_triangles:
+    var byte_offset = 84 + i * 50
+    # STL uses Z-up; convert to Godot Y-up: (x, y, z) → (x, z, -y)
+    vertices[i * 3]     = Vector3(data.decode_float(byte_offset + 12),  data.decode_float(byte_offset + 20), -data.decode_float(byte_offset + 16))
+    vertices[i * 3 + 1] = Vector3(data.decode_float(byte_offset + 24),  data.decode_float(byte_offset + 32), -data.decode_float(byte_offset + 28))
+    vertices[i * 3 + 2] = Vector3(data.decode_float(byte_offset + 36),  data.decode_float(byte_offset + 44), -data.decode_float(byte_offset + 40))
+
+  var input_tri_count = vertices.size() / 3
+  var simplified = MeshSimplifier.simplify(vertices, STL_TARGET_MAX)
+  vertices = simplified[0]
+  var normals = simplified[1]
+  print("STL: %d → %d triangles" % [input_tri_count, vertices.size() / 3])
+
+  var arrays = []
+  arrays.resize(Mesh.ARRAY_MAX)
+  arrays[Mesh.ARRAY_VERTEX] = vertices
+  arrays[Mesh.ARRAY_NORMAL] = normals
+
+  var mesh = ArrayMesh.new()
+  mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+  return mesh

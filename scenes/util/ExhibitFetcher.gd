@@ -24,11 +24,11 @@ var search_endpoint = "https://" + lang + ".wikipedia.org/w/api.php?action=query
 var random_endpoint = "https://" + lang + ".wikipedia.org/w/api.php?action=query&format=json&generator=random&grnnamespace=0&prop=info&origin=*"
 
 var wikitext_endpoint = "https://" + lang + ".wikipedia.org/w/api.php?action=query&prop=revisions|extracts|pageprops&ppprop=wikibase_item&explaintext=true&rvprop=content&format=json&redirects=1&origin=*&titles="
-var images_endpoint = "https://" + lang + ".wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=640&iiextmetadatafilter=LicenseShortName|Artist&format=json&redirects=1&origin=*&titles="
+var images_endpoint = "https://" + lang + ".wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=640&iiextmetadatafilter=LicenseShortName|Artist|ImageDescription&format=json&redirects=1&origin=*&titles="
 var wikidata_endpoint = "https://www.wikidata.org/w/api.php?action=wbgetclaims&uselang=" + lang + "&format=json&origin=*&entity="
 
-var wikimedia_commons_category_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=" + lang + "&generator=categorymembers&gcmtype=file&gcmlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&origin=*&gcmtitle="
-var wikimedia_commons_gallery_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=" + lang + "&generator=images&gimlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&origin=*&titles="
+var wikimedia_commons_category_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=" + lang + "&generator=categorymembers&gcmtype=file&gcmlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName|ImageDescription&format=json&origin=*&gcmtitle="
+var wikimedia_commons_gallery_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=" + lang + "&generator=images&gimlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName|ImageDescription&format=json&origin=*&titles="
 
 var _fs_lock = Mutex.new()
 var _results_lock = Mutex.new()
@@ -428,8 +428,12 @@ func _on_images_request_complete(res, ctx, caller_ctx):
             _set_page_field(file, "license_short_name", md.LicenseShortName.value)
           if md.has("Artist"):
             _set_page_field(file, "artist", md.Artist.value)
+          if md.has("ImageDescription"):
+            _set_page_field(file, "image_description", md.ImageDescription.value)
         if info.has("thumburl"):
           _set_page_field(file, "src", info.thumburl)
+        if file.to_lower().ends_with(".stl") and info.has("url"):
+          _set_page_field(file, "stl_url", info.url)
 
   if len(file_batch) > 0:
     _cache_all(file_batch)
@@ -458,8 +462,12 @@ func _on_commons_images_request_complete(res, ctx, caller_ctx):
             _set_page_field(file, "license_short_name", md.LicenseShortName.value)
           if md.has("Artist"):
             _set_page_field(file, "artist", md.Artist.value)
+          if md.has("ImageDescription"):
+            _set_page_field(file, "image_description", md.ImageDescription.value)
         if info.has("thumburl"):
           _set_page_field(file, "src", info.thumburl)
+        if file.to_lower().ends_with(".stl") and info.has("url"):
+          _set_page_field(file, "stl_url", info.url)
         file_batch.append(file)
         _append_page_field(ctx.category, "images", [file])
 
