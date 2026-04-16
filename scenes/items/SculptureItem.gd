@@ -38,6 +38,8 @@ func _build_sculpture_material():
   _sculpture_material.uv1_triplanar = true
   _sculpture_material.uv1_triplanar_sharpness = 4.0
   _sculpture_material.uv1_scale = Vector3(2, 2, 2)
+  _sculpture_material.roughness = 1.0
+  _sculpture_material.metallic = 0.0
 
 func _build_plinth():
   var plinth = MeshInstance3D.new()
@@ -67,16 +69,19 @@ func _build_plinth():
 func _build_light():
   _light = SpotLight3D.new()
   _light.position = Vector3(0, 2.5, 3.0)
-  var dir = (Vector3(0, 1.0, 0) - _light.position).normalized()
-  _light.basis = Basis.looking_at(dir)
   _light.light_energy = 0.0
   _light.shadow_enabled = true
   _light.spot_range = 8.0
-  _light.spot_angle = 35.0
-  _light.spot_attenuation = 0.75
+  _light.spot_angle = 45.0
+  _light.spot_attenuation = 2.0
   _light.distance_fade_enabled = true
   _light.add_to_group("managed_light")
   add_child(_light)
+  call_deferred("_orient_light")
+
+func _orient_light():
+  if is_instance_valid(_light):
+    _light.look_at(to_global(Vector3(0, 0.9, 0)))
 
 func _build_label():
   _label = Label3D.new()
@@ -148,7 +153,7 @@ func _on_mesh_loaded(url: String, mesh: ArrayMesh, _ctx):
   if Util.is_compatibility_renderer():
     _light.visible = false
   else:
-    create_tween().tween_property(_light, "light_energy", 2.0, 0.5)
+    create_tween().tween_property(_light, "light_energy", 0.8, 0.5)
 
   visible = true
   emit_signal("loaded")

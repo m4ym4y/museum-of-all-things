@@ -39,7 +39,7 @@ func simplify(in_verts: PackedVector3Array, target_count: int) -> Array:
     f2[i] = _cell_index(in_verts[i * 3 + 2], min_v, size, grid_dim, cell_rep, rep_verts)
 
   var out_verts := PackedVector3Array()
-  var out_norms := PackedVector3Array()
+  var face_normals := PackedVector3Array()
 
   for i in face_count:
     var a = f0[i]; var b = f1[i]; var c = f2[i]
@@ -51,10 +51,29 @@ func simplify(in_verts: PackedVector3Array, target_count: int) -> Array:
     var n = (p1 - p0).cross(p2 - p0)
     if n.length_squared() < 1e-12:
       continue
-    n = n.normalized()
-    out_verts.append(p0); out_norms.append(n)
-    out_verts.append(p1); out_norms.append(n)
-    out_verts.append(p2); out_norms.append(n)
+    out_verts.append(p0)
+    out_verts.append(p1)
+    out_verts.append(p2)
+    face_normals.append(n)
+
+  # Smooth normals: accumulate face normals at each shared position.
+  # Clustering guarantees that vertices in the same cell have identical positions,
+  # so Vector3 equality is exact and safe to use as a dictionary key.
+  var pos_to_norm := {}
+  var tri_count = face_normals.size()
+  for i in tri_count:
+    var n = face_normals[i]
+    for j in 3:
+      var p = out_verts[i * 3 + j]
+      if pos_to_norm.has(p):
+        pos_to_norm[p] += n
+      else:
+        pos_to_norm[p] = n
+
+  var out_norms := PackedVector3Array()
+  out_norms.resize(out_verts.size())
+  for i in out_verts.size():
+    out_norms[i] = -pos_to_norm[out_verts[i]].normalized()
 
   return [out_verts, out_norms]
 

@@ -303,9 +303,10 @@ func _do_parse_binary_stl(data: PackedByteArray) -> ArrayMesh:
   for i in num_triangles:
     var byte_offset = 84 + i * 50
     # STL uses Z-up; convert to Godot Y-up: (x, y, z) → (x, z, -y)
+    # The reflection (-y) flips chirality, so swap v1/v2 to restore outward winding.
     vertices[i * 3]     = Vector3(data.decode_float(byte_offset + 12),  data.decode_float(byte_offset + 20), -data.decode_float(byte_offset + 16))
-    vertices[i * 3 + 1] = Vector3(data.decode_float(byte_offset + 24),  data.decode_float(byte_offset + 32), -data.decode_float(byte_offset + 28))
-    vertices[i * 3 + 2] = Vector3(data.decode_float(byte_offset + 36),  data.decode_float(byte_offset + 44), -data.decode_float(byte_offset + 40))
+    vertices[i * 3 + 1] = Vector3(data.decode_float(byte_offset + 36),  data.decode_float(byte_offset + 44), -data.decode_float(byte_offset + 40))
+    vertices[i * 3 + 2] = Vector3(data.decode_float(byte_offset + 24),  data.decode_float(byte_offset + 32), -data.decode_float(byte_offset + 28))
 
   var input_tri_count = vertices.size() / 3
   var simplified = MeshSimplifier.simplify(vertices, STL_TARGET_MAX)
