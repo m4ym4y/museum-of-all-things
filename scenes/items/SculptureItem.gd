@@ -9,7 +9,6 @@ const SHELF_HEIGHT = 0.04
 const LABEL_MARGIN = 0.05
 
 @onready var _marble_material = preload("res://assets/textures/marble21.tres")
-@onready var _wood_material = preload("res://assets/textures/wood.tres")
 @onready var _white_material = preload("res://assets/textures/flat_white.tres")
 @onready var _black_material = preload("res://assets/textures/black.tres")
 @onready var _label_font = preload("res://assets/fonts/CormorantGaramond/CormorantGaramond-Bold.ttf")
@@ -18,33 +17,18 @@ var stl_url: String
 var title: String
 var text: String
 
-var _sculpture_instance: MeshInstance3D
+@onready var _sculpture_instance: MeshInstance3D = $SculptureInstance
+@onready var _light: SpotLight3D = $Light
 var _label: Label3D
 var _label_plate: MeshInstance3D
-var _light: SpotLight3D
 var _sculpture_material: StandardMaterial3D
 
 func _ready():
   _build_sculpture_material()
-  _build_plinth()
-  _build_collision()
-  _build_light()
-  _sculpture_instance = MeshInstance3D.new()
-  _sculpture_instance.visible = false
-  add_child(_sculpture_instance)
   _build_label()
+  call_deferred("_orient_light")
   visible = false
 
-func _build_collision():
-  var total_height = PLINTH_HEIGHT + SHELF_HEIGHT + SCULPTURE_SIZE
-  var body = StaticBody3D.new()
-  var shape = CollisionShape3D.new()
-  var box = BoxShape3D.new()
-  box.size = Vector3(0.95, total_height, PLINTH_DEPTH + 0.05)
-  shape.shape = box
-  shape.position = Vector3(0, -PLINTH_HEIGHT / 2.0 + total_height / 2.0, 0)
-  body.add_child(shape)
-  add_child(body)
 
 func _build_sculpture_material():
   _sculpture_material = _marble_material.duplicate()
@@ -54,43 +38,6 @@ func _build_sculpture_material():
   _sculpture_material.roughness = 1.0
   _sculpture_material.metallic = 0.0
 
-func _build_plinth():
-  var plinth = MeshInstance3D.new()
-  var box = BoxMesh.new()
-  box.size = Vector3(0.9, PLINTH_HEIGHT, PLINTH_DEPTH)
-  plinth.mesh = box
-  plinth.material_override = _marble_material
-  plinth.position = Vector3.ZERO
-  plinth.visibility_range_end = 35.0
-  plinth.visibility_range_end_margin = 10.0
-  plinth.visibility_range_fade_mode = GeometryInstance3D.VISIBILITY_RANGE_FADE_SELF
-  plinth.add_to_group("render_distance")
-  add_child(plinth)
-
-  var shelf = MeshInstance3D.new()
-  var shelf_box = BoxMesh.new()
-  shelf_box.size = Vector3(0.95, SHELF_HEIGHT, PLINTH_DEPTH + 0.05)
-  shelf.mesh = shelf_box
-  shelf.material_override = _wood_material
-  shelf.position = Vector3(0, PLINTH_HEIGHT / 2.0 + SHELF_HEIGHT / 2.0, 0)
-  shelf.visibility_range_end = 35.0
-  shelf.visibility_range_end_margin = 10.0
-  shelf.visibility_range_fade_mode = GeometryInstance3D.VISIBILITY_RANGE_FADE_SELF
-  shelf.add_to_group("render_distance")
-  add_child(shelf)
-
-func _build_light():
-  _light = SpotLight3D.new()
-  _light.position = Vector3(0, 2.5, 3.0)
-  _light.light_energy = 0.0
-  _light.shadow_enabled = true
-  _light.spot_range = 8.0
-  _light.spot_angle = 45.0
-  _light.spot_attenuation = 2.0
-  _light.distance_fade_enabled = true
-  _light.add_to_group("managed_light")
-  add_child(_light)
-  call_deferred("_orient_light")
 
 func _orient_light():
   if is_instance_valid(_light):

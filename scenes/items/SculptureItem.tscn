@@ -1,6 +1,50 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3sculpt1tem"]
+[gd_scene load_steps=7 format=3 uid="uid://b3sculpt1tem"]
 
 [ext_resource type="Script" path="res://scenes/items/SculptureItem.gd" id="1"]
+[ext_resource type="Material" uid="uid://ddrg1bie5gs8p" path="res://assets/textures/marble21.tres" id="2"]
+[ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://assets/textures/wood.tres" id="3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_plinth"]
+size = Vector3(0.9, 1.0, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_shelf"]
+size = Vector3(0.95, 0.04, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_col"]
+size = Vector3(0.95, 1.79, 0.45)
 
 [node name="SculptureItem" type="Node3D"]
 script = ExtResource("1")
+
+[node name="Plinth" type="MeshInstance3D" parent="." groups=["render_distance"]]
+visibility_range_end = 35.0
+visibility_range_end_margin = 10.0
+visibility_range_fade_mode = 1
+mesh = SubResource("BoxMesh_plinth")
+material_override = ExtResource("2")
+
+[node name="Shelf" type="MeshInstance3D" parent="." groups=["render_distance"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52, 0)
+visibility_range_end = 35.0
+visibility_range_end_margin = 10.0
+visibility_range_fade_mode = 1
+mesh = SubResource("BoxMesh_shelf")
+material_override = ExtResource("3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.395, 0)
+shape = SubResource("BoxShape3D_col")
+
+[node name="Light" type="SpotLight3D" parent="." groups=["managed_light"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 3.0)
+light_energy = 0.0
+shadow_enabled = true
+distance_fade_enabled = true
+spot_range = 8.0
+spot_attenuation = 2.0
+spot_angle = 45.0
+
+[node name="SculptureInstance" type="MeshInstance3D" parent="."]
+visible = false
