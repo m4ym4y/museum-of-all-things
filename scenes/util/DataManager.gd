@@ -17,6 +17,7 @@ var _parsed_meshes_lock = Mutex.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+  STL_TARGET_MAX = Util.get_stl_target_max()
   WorkQueue.setup_queue(TEXTURE_QUEUE, TEXTURE_FRAME_PACING)
 
   if not Util.is_web():
@@ -291,7 +292,7 @@ func _parse_stl(url, data, ctx=null):
     "ctx": ctx,
   }, null, true)
 
-const STL_TARGET_MAX = 500000
+var STL_TARGET_MAX: int
 
 func _do_parse_binary_stl(data: PackedByteArray) -> ArrayMesh:
   if data.size() < 84:

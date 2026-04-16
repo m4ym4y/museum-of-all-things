@@ -67,6 +67,15 @@ func get_max_slots_per_exhibit() -> int:
   # @todo Should this be a setting?
   return 200 if (is_mobile() or is_web()) else 2500
 
+func get_stl_target_max() -> int:
+  if is_xr():
+    return 100_000    # mobile GPU, rendered twice
+  if is_mobile():
+    return 200_000   # mobile GPU, single screen
+  if is_web():
+    return 400_000   # browser
+  return 600_000     # desktop
+
 # This is a "true delay" that will only take effect on a worker thread; it will be ignored on the main thread.
 func delay_msec(msecs):
   if OS.get_thread_caller_id() == OS.get_main_thread_id():
