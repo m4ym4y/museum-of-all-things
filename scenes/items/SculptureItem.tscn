@@ -39,7 +39,7 @@ shape = SubResource("BoxShape3D_col")
 
 [node name="Light" type="SpotLight3D" parent="." groups=["managed_light"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 3.0)
-light_energy = 0.0
+light_energy = 0.8
 shadow_enabled = true
 distance_fade_enabled = true
 spot_range = 8.0

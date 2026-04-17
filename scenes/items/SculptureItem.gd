@@ -116,9 +116,8 @@ func _on_mesh_loaded(url: String, mesh: ArrayMesh, _ctx):
   _sculpture_instance.visible = true
 
   if Util.is_compatibility_renderer():
+    _light.remove_from_group("managed_light")
     _light.visible = false
-  else:
-    create_tween().tween_property(_light, "light_energy", 0.8, 0.5)
 
   add_to_group("loaded_sculpture")
   visible = true
