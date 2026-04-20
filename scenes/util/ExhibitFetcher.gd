@@ -17,6 +17,7 @@ const WIKIDATA_PREFIX = "https://www.wikidata.org/wiki/"
 
 const WIKIDATA_COMMONS_CATEGORY = "P373"
 const WIKIDATA_COMMONS_GALLERY = "P935"
+const WIKIDATA_3D_MODEL = "P4896"
 
 var lang = TranslationServer.get_locale()
 var wikipedia_prefix = "https://" + lang + ".wikipedia.org/wiki/"
@@ -497,6 +498,13 @@ func _on_wikidata_request_complete(res, ctx, caller_ctx):
         var claim = claims[0]
         var value = claim.mainsnak.datavalue.value
         _set_page_field(ctx.entity, "commons_gallery", value)
+    if res.claims.has(WIKIDATA_3D_MODEL):
+      var models = []
+      for claim in res.claims[WIKIDATA_3D_MODEL]:
+        var value = claim.get("mainsnak", {}).get("datavalue", {}).get("value", "")
+        if value != "": models.append("File:" + value)
+      if not models.is_empty():
+        _set_page_field(ctx.entity, "commons_3d_model", models)
 
   _cache_all([ctx.entity], WIKIDATA_PREFIX)
   call_deferred("emit_signal", "wikidata_complete", ctx.entity, caller_ctx)
