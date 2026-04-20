@@ -101,9 +101,11 @@ func _texture_load_item():
 
     "parse_stl":
       if Util.is_using_threads():
-        var mesh = _do_parse_binary_stl(item.data)
-        if mesh:
-          mesh = _normalize_mesh(mesh, item.target_size)
+        var arrays = _do_parse_binary_stl(item.data)
+        if not arrays.is_empty():
+          arrays = _normalize_arrays(arrays, item.target_size)
+          var mesh = ArrayMesh.new()
+          mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
           call_deferred("emit_signal", "loaded_mesh", item.url, mesh, item.ctx)
       else:
         # Web: split decode across frames to avoid blocking the main thread.
@@ -330,9 +332,9 @@ func _stl_chunk_item():
         arrays.resize(Mesh.ARRAY_MAX)
         arrays[Mesh.ARRAY_VERTEX] = PackedVector3Array(ss.out_verts)
         arrays[Mesh.ARRAY_NORMAL] = PackedVector3Array(ss.out_norms)
+        arrays = _normalize_arrays(arrays, ss.target_size)
         var mesh = ArrayMesh.new()
         mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-        mesh = _normalize_mesh(mesh, ss.target_size)
         call_deferred("emit_signal", "loaded_mesh", ss.url, mesh, ss.ctx)
 
 func _get_hash(input: String) -> String:
@@ -479,13 +481,10 @@ func _parse_stl(url, data, target_size: float, ctx=null):
     "ctx": ctx,
   }, null, true)
 
-func _normalize_mesh(mesh: ArrayMesh, target_size: float) -> ArrayMesh:
-  if mesh.get_surface_count() == 0:
-    return mesh
-  var arrays = mesh.surface_get_arrays(0)
+func _normalize_arrays(arrays: Array, target_size: float) -> Array:
   var verts: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
   if verts.size() == 0:
-    return mesh
+    return arrays
 
   var min_v = verts[0]
   var max_v = verts[0]
@@ -496,7 +495,7 @@ func _normalize_mesh(mesh: ArrayMesh, target_size: float) -> ArrayMesh:
   var size = max_v - min_v
   var max_dim = maxf(size.x, maxf(size.y, size.z))
   if max_dim == 0.0:
-    return mesh
+    return arrays
 
   var scale_factor = target_size / max_dim
   var center = (min_v + max_v) / 2.0
@@ -505,17 +504,14 @@ func _normalize_mesh(mesh: ArrayMesh, target_size: float) -> ArrayMesh:
   for i in range(verts.size()):
     new_verts[i] = (verts[i] - center) * scale_factor
   arrays[Mesh.ARRAY_VERTEX] = new_verts
-
-  var new_mesh = ArrayMesh.new()
-  new_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-  return new_mesh
+  return arrays
 
 var STL_TARGET_MAX: int
 
-func _do_parse_binary_stl(data: PackedByteArray) -> ArrayMesh:
+func _do_parse_binary_stl(data: PackedByteArray) -> Array:
   if data.size() < 84:
     push_error("STL data too small: %d bytes" % data.size())
-    return null
+    return []
 
   var num_triangles = data.decode_u32(80)
   var expected_size = 84 + num_triangles * 50
@@ -525,7 +521,7 @@ func _do_parse_binary_stl(data: PackedByteArray) -> ArrayMesh:
 
   if num_triangles == 0:
     push_error("STL has no triangles")
-    return null
+    return []
 
   var vertices = PackedVector3Array()
   vertices.resize(num_triangles * 3)
@@ -548,7 +544,4 @@ func _do_parse_binary_stl(data: PackedByteArray) -> ArrayMesh:
   arrays.resize(Mesh.ARRAY_MAX)
   arrays[Mesh.ARRAY_VERTEX] = vertices
   arrays[Mesh.ARRAY_NORMAL] = normals
-
-  var mesh = ArrayMesh.new()
-  mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-  return mesh
+  return arrays
