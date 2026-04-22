@@ -245,7 +245,7 @@ func hide_mobile_hud_platform_check():
   else:
     $Player/MobileHUD.visible = false
 
-func show_mobile_hud_platform_check():
+func show_mobile_hud():
   if Util.is_mobile() and not Util.is_xr():
     $Player/MobileHUD.visible = true
   else:
