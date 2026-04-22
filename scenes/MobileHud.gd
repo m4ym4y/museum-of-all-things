@@ -8,8 +8,8 @@ extends CanvasLayer
 
 
 func _ready():
-	Jump.connect("pressed", Callable(self, "On_Jump_Pressed"))
-	Jump.connect("released", Callable(self, "On_Jump_Released"))
+	Jump.connect("pressed", On_Jump_Pressed)
+	Jump.connect("released", On_Jump_Released))
 
 	Interact.connect("pressed", Callable(self, "On_Interact_Pressed"))
 	Interact.connect("released", Callable(self, "On_Interact_Released"))
