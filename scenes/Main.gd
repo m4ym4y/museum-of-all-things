@@ -239,7 +239,7 @@ func _webxr_session_failed(message):
   webxr_is_starting = false
   OS.alert("Failed to initialize WebXR: " + message)
 
-func hide_mobile_hud_platform_check():
+func hide_mobile_hud():
   if Util.is_mobile() and not Util.is_xr():
     $Player/MobileHUD.visible = false
   else:
