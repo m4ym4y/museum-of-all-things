@@ -126,31 +126,31 @@ func _close_menus():
   $CanvasLayer/MainMenu.visible = false
   $CanvasLayer/PauseMenu.visible = false
   $CanvasLayer/PopupTerminalMenu.visible = false
-  show_mobile_hud_platform_check()
+  show_mobile_hud()
 
 func _open_settings_menu():
   _close_menus()
   $CanvasLayer.visible = true
   $CanvasLayer/Settings.visible = true
-  hide_mobile_hud_platform_check()
+  hide_mobile_hud()
 
 func _open_main_menu():
   _close_menus()
   $CanvasLayer.visible = true
   $CanvasLayer/MainMenu.visible = true
-  hide_mobile_hud_platform_check()
+  hide_mobile_hud()
 
 func _open_pause_menu():
   _close_menus()
   $CanvasLayer.visible = true
   $CanvasLayer/PauseMenu.visible = true
-  hide_mobile_hud_platform_check()
+  hide_mobile_hud()
 
 func _open_terminal_menu():
   _close_menus()
   $CanvasLayer.visible = true
   $CanvasLayer/PopupTerminalMenu.visible = true
-  hide_mobile_hud_platform_check()
+  hide_mobile_hud()
 
 func _on_main_menu_start_pressed():
   _start_game()
