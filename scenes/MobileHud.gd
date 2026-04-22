@@ -11,14 +11,14 @@ func _ready():
 	Jump.connect("pressed", On_Jump_Pressed)
 	Jump.connect("released", On_Jump_Released)
 
-	Interact.connect("pressed", Callable(self, "On_Interact_Pressed"))
-	Interact.connect("released", Callable(self, "On_Interact_Released"))
+	Interact.connect("pressed", On_Interact_Pressed)
+	Interact.connect("released", On_Interact_Released)
 
-	Crouch.connect("pressed", Callable(self, "On_Crouch_Pressed"))
-	Crouch.connect("released", Callable(self, "On_Crouch_Released"))
+	Crouch.connect("pressed", On_Crouch_Pressed)
+	Crouch.connect("released", On_Crouch_Released)
 
-	Dash.connect("pressed", Callable(self, "On_Dash_Pressed"))
-	Dash.connect("released", Callable(self, "On_Dash_Released"))
+	Dash.connect("pressed", On_Dash_Pressed)
+	Dash.connect("released", On_Dash_Released)
 
 
 func On_Jump_Pressed():
