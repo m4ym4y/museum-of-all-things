@@ -14,6 +14,7 @@ var fps_limit = 60
 var _default_settings_obj
 var fullscreen = false
 var render_scale = 1.0
+var anti_aliasing = 0
 var scale_mode = 0
 var fsr_quality = 5
 var fsr_sharpness = 0.2
@@ -46,33 +47,45 @@ func set_fullscreen(_fullscreen: bool):
   else:
     DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
+func set_anti_aliasing(mode: int):
+  anti_aliasing = mode
+
+  if mode < 3:
+    get_viewport().screen_space_aa = mode as Viewport.ScreenSpaceAA
+    get_viewport().msaa_3d = Viewport.MSAA_DISABLED
+    get_viewport().use_taa = false
+  elif mode < 6:
+    get_viewport().screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
+    get_viewport().msaa_3d = (mode - 2) as Viewport.MSAA
+    get_viewport().use_taa = false
+  else:
+      get_viewport().screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED
+      get_viewport().msaa_3d = Viewport.MSAA_DISABLED
+      get_viewport().use_taa = true
+
 func set_render_scale(scale: float):
-  render_scale = scale
   get_viewport().scaling_3d_scale = scale
 
 func set_scale_mode(mode: int):
   scale_mode = mode
   get_viewport().scaling_3d_mode = mode as Viewport.Scaling3DMode
 
-  if mode < 2:
-    get_viewport().msaa_3d = Viewport.MSAA_2X
-  else:
-    get_viewport().msaa_3d = Viewport.MSAA_DISABLED
-
 func set_fsr_quality(quality: int):
   fsr_quality = quality
 
   match quality:
     0:
-      get_viewport().scaling_3d_scale = 1.0 / 1.3
+      set_render_scale(1.0 / 1.3)
     1:
-      get_viewport().scaling_3d_scale = 1.0 / 1.5
+      set_render_scale(1.0 / 1.5)
     2:
-      get_viewport().scaling_3d_scale = 1.0 / 1.7
+      set_render_scale(1.0 / 1.7)
     3:
-      get_viewport().scaling_3d_scale = 1.0 / 2.0
+      set_render_scale(1.0 / 2.0)
     4:
-      get_viewport().scaling_3d_scale = 1.0 / 3.0
+      set_render_scale(1.0 / 3.0)
+    5:
+      set_render_scale(1.0)
 
 func set_fsr_sharpness(sharpness: float):
     get_viewport().fsr_sharpness = sharpness
@@ -121,6 +134,7 @@ func _apply_settings(s, default={}):
     set_fullscreen(s["fullscreen"] if s.has("fullscreen") else default["fullscreen"])
     set_fsr_sharpness(s["fsr_sharpness"] if s.has("fsr_sharpness") else default["fsr_sharpness"])
     set_post_processing(s["post_processing"] if s.has("post_processing") else default["post_processing"])
+    set_anti_aliasing(s["anti_aliasing"] if s.has("anti_aliasing") else default["anti_aliasing"])
 
     var mode = s["scale_mode"] if s.has("scale_mode") else default["scale_mode"]
     set_scale_mode(mode)
@@ -142,6 +156,7 @@ func _create_settings_obj():
     "fps_limit": fps_limit,
     "limit_fps": limit_fps,
     "fullscreen": fullscreen,
+    "anti_aliasing": anti_aliasing,
     "render_scale": render_scale,
     "scale_mode": scale_mode,
     "fsr_quality": fsr_quality,
