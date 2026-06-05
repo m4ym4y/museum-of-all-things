@@ -126,26 +126,31 @@ func _close_menus():
   $CanvasLayer/MainMenu.visible = false
   $CanvasLayer/PauseMenu.visible = false
   $CanvasLayer/PopupTerminalMenu.visible = false
+  show_mobile_hud()
 
 func _open_settings_menu():
   _close_menus()
   $CanvasLayer.visible = true
   $CanvasLayer/Settings.visible = true
+  hide_mobile_hud()
 
 func _open_main_menu():
   _close_menus()
   $CanvasLayer.visible = true
   $CanvasLayer/MainMenu.visible = true
+  hide_mobile_hud()
 
 func _open_pause_menu():
   _close_menus()
   $CanvasLayer.visible = true
   $CanvasLayer/PauseMenu.visible = true
+  hide_mobile_hud()
 
 func _open_terminal_menu():
   _close_menus()
   $CanvasLayer.visible = true
   $CanvasLayer/PopupTerminalMenu.visible = true
+  hide_mobile_hud()
 
 func _on_main_menu_start_pressed():
   _start_game()
@@ -202,7 +207,7 @@ func _input(event):
       Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   $FpsLabel.text = str(Engine.get_frames_per_second())
 
 func _webxr_session_supported(session_mode, supported):
@@ -233,3 +238,15 @@ func _webxr_session_ended():
 func _webxr_session_failed(message):
   webxr_is_starting = false
   OS.alert("Failed to initialize WebXR: " + message)
+
+func hide_mobile_hud():
+  if Util.is_mobile() and not Util.is_xr():
+    $Player/MobileHUD.visible = false
+  else:
+    $Player/MobileHUD.visible = false
+
+func show_mobile_hud():
+  if Util.is_mobile() and not Util.is_xr():
+    $Player/MobileHUD.visible = true
+  else:
+    $Player/MobileHUD.visible = false
