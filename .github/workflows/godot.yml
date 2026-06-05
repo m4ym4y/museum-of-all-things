@@ -186,7 +186,7 @@ jobs:
       - name: Upload Android XR
         uses: actions/upload-artifact@v4
         with:
-          name: Meta Quest
+          name: Android XR
           path: dist/${{ env.EXPORT_NAME }}_AndroidXR.apk
         if: github.event_name != 'pull_request'
 
