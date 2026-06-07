@@ -194,9 +194,6 @@ func trim_to_length_sentence(s, lim):
   return s.substr(0, pos + 1)
 
 func replace_unclosed_bbcodes(text):
-    var bbcode_re = RegEx.new()
-    #Replacing the unclosed: [s] tags with => ()
-    bbcode_re.compile("\\[(\\/)?([s])\\]")
     var tag_stack = []
     var result = text
     var offset = 0
@@ -216,12 +213,14 @@ func replace_unclosed_bbcodes(text):
             offset += len("(" + tag_name + ")") - (end_pos - start_pos)
     return result
 
+var bbcode_re = RegEx.new()
 var html_tag_re = RegEx.new()
 var display_none_re = RegEx.new()
 var markup_tag_re = RegEx.new()
 var curly_tag_re = RegEx.new()
 func _ready():
   display_none_re.compile("<.*?display:\\s*none.*?>.+?<.*?>")
+  bbcode_re.compile("\\[(\\/)?([s])\\]")
   html_tag_re.compile("<.+?>")
   markup_tag_re.compile("\\.\\w.+? ")
   curly_tag_re.compile("\\{.+?\\}")
