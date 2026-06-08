@@ -37,6 +37,9 @@ msgstr "Giapponese"
 msgid "Chinese"
 msgstr "Cinese"
 
+msgid "German"
+msgstr "Tedesco"
+
 msgid "Are you sure you want to Quit?"
 msgstr "Sei sicuro di voler Uscire?"
 
