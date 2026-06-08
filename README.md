@@ -52,6 +52,7 @@ an issue and we can discuss it before you put too much work in.
 - German
 - Bengali
 - Chinese
+- Italian
 
 ## Roadmap for Future Updates (Not in any order)
 
