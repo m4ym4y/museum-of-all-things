@@ -20,6 +20,8 @@ current exhibit's wikipedia page. You'll never run out of things to explore!
 
 ## Contributing
 
+** _ANY CODE OR ASSETS CONTRIBUTED MUST BE WRITTEN BY HUMAN HANDS -- GENERATIVEAI USAGE IS NOT ACCEPTED INTO THIS PROJECT_ ** 
+
 If you encounter bugs in the museum, file them on the [issues
 page.](https://github.com/m4ym4y/museum-of-all-things/issues) **Please include
 the platform you're running on, and the name of the exhibit that the bug
