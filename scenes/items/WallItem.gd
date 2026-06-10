@@ -3,6 +3,7 @@ extends Node3D
 @onready var ImageItem = preload("res://scenes/items/ImageItem.tscn")
 @onready var TextItem = preload("res://scenes/items/TextItem.tscn")
 @onready var RichTextItem = preload("res://scenes/items/RichTextItem.tscn")
+@onready var SculptureItem = preload("res://scenes/items/SculptureItem.tscn")
 
 @onready var MarbleMaterial = preload("res://assets/textures/marble21.tres")
 @onready var WhiteMaterial = preload("res://assets/textures/flat_white.tres")
@@ -107,6 +108,17 @@ func init(item_data):
     _item = RichTextItem.instantiate()
     _item.init(item_data.text)
     _start_animate()
+  elif item_data.type == "sculpture":
+    _frame.visible = false
+    var matte_marble = MarbleMaterial.duplicate()
+    matte_marble.roughness = 1.0
+    $Item/Plaque.material_override = matte_marble
+    _item = SculptureItem.instantiate()
+    _item.loaded.connect(_start_animate)
+    _item.init(item_data.title, item_data.text)
+    _item.position = Vector3(0, -1.4, 0.45)
+    _item_node.add_child(_item)
+    return
   else:
     return
   _item.position = Vector3(0, 0, 0.07)

@@ -46,6 +46,7 @@ func _ready() -> void:
   ExhibitFetcher.wikitext_complete.connect(_on_fetch_complete)
   ExhibitFetcher.wikidata_complete.connect(_on_wikidata_complete)
   ExhibitFetcher.commons_images_complete.connect(_on_commons_images_complete)
+  ExhibitFetcher.images_complete.connect(_on_3d_model_images_complete)
   GlobalMenuEvents.reset_custom_door.connect(_reset_custom_door)
   GlobalMenuEvents.set_custom_door.connect(_set_custom_door)
   GlobalMenuEvents.set_language.connect(_on_change_language)
@@ -410,7 +411,7 @@ func _on_fetch_complete(_titles, context):
   var item_queue = []
   for item_data in items:
     if item_data:
-      if item_data.type == "image" and item_data.has("title") and item_data.title != "":
+      if item_data.type in ["image", "sculpture"] and item_data.has("title") and item_data.title != "":
         image_titles.append(item_data.title)
       item_queue.append(_add_item.bind(new_exhibit, item_data))
 
@@ -452,6 +453,8 @@ func _link_backlink_to_exit(exhibit, hall):
 
 func _on_wikidata_complete(entity, ctx):
   var result = ExhibitFetcher.get_result(entity)
+  if result and result.has("commons_3d_model"):
+    ExhibitFetcher.fetch_images(result.commons_3d_model, {"exhibit": ctx.exhibit, "title": ctx.title})
   if result and (result.has("commons_category") or result.has("commons_gallery")):
     if result.has("commons_category"):
       ExhibitFetcher.fetch_commons_images(result.commons_category, ctx)
@@ -460,6 +463,18 @@ func _on_wikidata_complete(entity, ctx):
   else:
     _queue_extra_text(ctx.exhibit, ctx.extra_text)
     _queue_item(ctx.title, _on_finished_exhibit.bind(ctx))
+
+func _on_3d_model_images_complete(files, ctx):
+  if not ctx is Dictionary or not ctx.has("exhibit"): return
+  if not is_instance_valid(ctx.exhibit): return
+  var material = Util.gen_item_material(ctx.title)
+  for file in files:
+    if file.to_lower().ends_with(".stl"):
+      var text = file.substr("File:".length()).get_basename().replace("_", " ")
+      _queue_item(ctx.title, _add_item.bind(ctx.exhibit, {
+        "type": "sculpture", "material": material, "plate": "none",
+        "title": file, "text": text,
+      }))
 
 func _on_commons_images_complete(images, ctx):
   if len(images) > 0:

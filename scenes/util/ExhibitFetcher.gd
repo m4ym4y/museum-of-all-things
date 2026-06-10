@@ -17,6 +17,7 @@ const WIKIDATA_PREFIX = "https://www.wikidata.org/wiki/"
 
 const WIKIDATA_COMMONS_CATEGORY = "P373"
 const WIKIDATA_COMMONS_GALLERY = "P935"
+const WIKIDATA_3D_MODEL = "P4896"
 
 var lang = TranslationServer.get_locale()
 var wikipedia_prefix = "https://" + lang + ".wikipedia.org/wiki/"
@@ -24,11 +25,11 @@ var search_endpoint = "https://" + lang + ".wikipedia.org/w/api.php?action=query
 var random_endpoint = "https://" + lang + ".wikipedia.org/w/api.php?action=query&format=json&generator=random&grnnamespace=0&prop=info&origin=*"
 
 var wikitext_endpoint = "https://" + lang + ".wikipedia.org/w/api.php?action=query&prop=revisions|extracts|pageprops&ppprop=wikibase_item&explaintext=true&rvprop=content&format=json&redirects=1&origin=*&titles="
-var images_endpoint = "https://" + lang + ".wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=640&iiextmetadatafilter=LicenseShortName|Artist&format=json&redirects=1&origin=*&titles="
+var images_endpoint = "https://" + lang + ".wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata|url&iiurlwidth=640&iiextmetadatafilter=LicenseShortName|Artist|ImageDescription&format=json&redirects=1&origin=*&titles="
 var wikidata_endpoint = "https://www.wikidata.org/w/api.php?action=wbgetclaims&uselang=" + lang + "&format=json&origin=*&entity="
 
-var wikimedia_commons_category_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=" + lang + "&generator=categorymembers&gcmtype=file&gcmlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&origin=*&gcmtitle="
-var wikimedia_commons_gallery_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=" + lang + "&generator=images&gimlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName&format=json&origin=*&titles="
+var wikimedia_commons_category_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=" + lang + "&generator=categorymembers&gcmtype=file&gcmlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName|ImageDescription&format=json&origin=*&gcmtitle="
+var wikimedia_commons_gallery_images_endpoint = "https://commons.wikimedia.org/w/api.php?action=query&uselang=" + lang + "&generator=images&gimlimit=max&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&iiextmetadatafilter=Artist|LicenseShortName|ImageDescription&format=json&origin=*&titles="
 
 var _fs_lock = Mutex.new()
 var _results_lock = Mutex.new()
@@ -428,8 +429,12 @@ func _on_images_request_complete(res, ctx, caller_ctx):
             _set_page_field(file, "license_short_name", md.LicenseShortName.value)
           if md.has("Artist"):
             _set_page_field(file, "artist", md.Artist.value)
+          if md.has("ImageDescription"):
+            _set_page_field(file, "image_description", md.ImageDescription.value)
         if info.has("thumburl"):
           _set_page_field(file, "src", info.thumburl)
+        if file.to_lower().ends_with(".stl") and info.has("url"):
+          _set_page_field(file, "stl_url", info.url)
 
   if len(file_batch) > 0:
     _cache_all(file_batch)
@@ -458,8 +463,12 @@ func _on_commons_images_request_complete(res, ctx, caller_ctx):
             _set_page_field(file, "license_short_name", md.LicenseShortName.value)
           if md.has("Artist"):
             _set_page_field(file, "artist", md.Artist.value)
+          if md.has("ImageDescription"):
+            _set_page_field(file, "image_description", md.ImageDescription.value)
         if info.has("thumburl"):
           _set_page_field(file, "src", info.thumburl)
+        if file.to_lower().ends_with(".stl") and info.has("url"):
+          _set_page_field(file, "stl_url", info.url)
         file_batch.append(file)
         _append_page_field(ctx.category, "images", [file])
 
@@ -489,6 +498,13 @@ func _on_wikidata_request_complete(res, ctx, caller_ctx):
         var claim = claims[0]
         var value = claim.mainsnak.datavalue.value
         _set_page_field(ctx.entity, "commons_gallery", value)
+    if res.claims.has(WIKIDATA_3D_MODEL):
+      var models = []
+      for claim in res.claims[WIKIDATA_3D_MODEL]:
+        var value = claim.get("mainsnak", {}).get("datavalue", {}).get("value", "")
+        if value != "": models.append("File:" + value)
+      if not models.is_empty():
+        _set_page_field(ctx.entity, "commons_3d_model", models)
 
   _cache_all([ctx.entity], WIKIDATA_PREFIX)
   call_deferred("emit_signal", "wikidata_complete", ctx.entity, caller_ctx)
