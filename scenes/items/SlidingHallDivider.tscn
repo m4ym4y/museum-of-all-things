@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqnx68ab5f0ek"]
+
+[ext_resource type="Script" uid="uid://bdaqa76jolixw" path="res://scenes/items/SlidingHallDivider.gd" id="1_a8fus"]
+[ext_resource type="Material" uid="uid://datvvi6j3c0kp" path="res://assets/textures/white.tres" id="1_q84oc"]
+[ext_resource type="AudioStream" uid="uid://c4hu7i85d0ohs" path="res://assets/sound/Environmental Ambience/Doors and Objects/Object Slide 4.ogg" id="3_7dr8n"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ss8xh"]
+material = ExtResource("1_q84oc")
+size = Vector3(4, 8, 0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_q84oc"]
+points = PackedVector3Array(2, 0.25, 0.05, 2, 0.25, -0.05, -2, 0.25, 0.05, 2, -0.25, 0.05, 2, -0.25, -0.05, -2, 0.25, -0.05, -2, -0.25, 0.05, -2, -0.25, -0.05)
+
+[node name="SlidingHallDivider" type="Node3D"]
+script = ExtResource("1_a8fus")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -0.05)
+mesh = SubResource("BoxMesh_ss8xh")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D2"]
+shape = SubResource("ConvexPolygonShape3D_q84oc")
+
+[node name="SlideSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_7dr8n")
+volume_db = 5.0
+pitch_scale = 0.5
+max_distance = 20.0
+bus = &"Sound"
