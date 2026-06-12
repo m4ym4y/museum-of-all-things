@@ -1,0 +1,436 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Museum of All Things\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+"Language: it\n"
+
+msgid "Enter the Museum"
+msgstr "Entra nel Museo"
+
+msgid "Settings"
+msgstr "Impostazioni"
+
+msgid "Quit"
+msgstr "Esci"
+
+msgid "The museum is currently unstaffed. Please refer to signage for information."
+msgstr "Il Museo è attualmente privo di personale. Per piacere fai riferimento ai cartelli per informazioni."
+
+msgid "English"
+msgstr "Inglese"
+
+msgid "Spanish"
+msgstr "Spagnolo"
+
+msgid "Portuguese"
+msgstr "Portoghese"
+
+msgid "French"
+msgstr "Francese"
+
+msgid "Japanese"
+msgstr "Giapponese"
+
+msgid "Chinese"
+msgstr "Cinese"
+
+msgid "German"
+msgstr "Tedesco"
+
+msgid "Are you sure you want to Quit?"
+msgstr "Sei sicuro di voler Uscire?"
+
+msgid "Yes"
+msgstr "Sì"
+
+msgid "No"
+msgstr "No"
+
+msgid "Open Page in Browser"
+msgstr "Apri Voce nel Browser"
+
+msgid "Paused"
+msgstr "Pausa"
+
+msgid " - Paused"
+msgstr "- In Pausa"
+
+msgid "Lobby"
+msgstr "Lobby"
+
+msgid "Resume"
+msgstr "Riprendi"
+
+msgid "Return to Lobby"
+msgstr "Ritorna alla Lobby"
+
+msgid "Enter Exhibit Name"
+msgstr "Inserisci il nome della mostra"
+
+msgid "Go to Random Exhibit"
+msgstr "Vai a una Mostra a Caso"
+
+msgid "Enter exhibit title"
+msgstr "Inserisci il titolo della mostra"
+
+msgid "Confirm"
+msgstr "Conferma"
+
+msgid "Back"
+msgstr "Indietro"
+
+msgid "Exhibit Found: \"\""
+msgstr "Mostra Trovata: \"\""
+
+msgid "OK / Exit"
+msgstr "OK / Esci"
+
+msgid "VR Controls"
+msgstr "Controlli VR"
+
+msgid "Restore Default Settings"
+msgstr "Ripristina Impostazioni di Default"
+
+msgid "Movement Style"
+msgstr "Stile di Movimento"
+
+msgid "Teleportation (Left Trigger)"
+msgstr "Teletrasporto (Grilletto Sinistro)"
+
+msgid "Direct Movement (Left Analog Stick)"
+msgstr "Movimento Diretto (Levetta Sinistra)"
+
+msgid "Direct Movement Speed"
+msgstr "Velocità di Movimento Diretto"
+
+msgid "Camera Rotation Increment (Right Stick)"
+msgstr "Incremento Rotazione Camera (Levetta Destra)"
+
+msgid "Smooth Camera Rotation"
+msgstr "Fluidità Rotazione Camera"
+
+msgid "Preparing Exhibit..."
+msgstr "Preparando Mostra..."
+
+msgid "Error Loading Exhibit."
+msgstr "Errore Caricamento della Mostra"
+
+msgid "Graphics"
+msgstr "Grafica"
+
+msgid "Audio"
+msgstr "Audio"
+
+msgid "Data"
+msgstr "Dati"
+
+msgid "Controls"
+msgstr "Controlli"
+
+msgid "Data Settings"
+msgstr "Impostazioni Dati"
+
+msgid "Cache" ### Currently not applied (probably due to the values that follow)
+msgstr "Cache"
+
+msgid "Clear Cache"
+msgstr "Pulisci Cache"
+
+msgid "Cache Size Limit"
+msgstr "Limita dimensione Cache"
+
+msgid "Automatically limit cache size (on quit)"
+msgstr "Limita dimensioni cache automaticamente(all'uscita)"
+
+msgid "Graphics Settings"
+msgstr "Impostazioni Grafiche"
+
+msgid "Render Scale"
+msgstr "Scanala di Rendering"
+
+msgid "Fullscreen"
+msgstr "Schermo Intero"
+
+msgid "Reflection Quality"
+msgstr "Qualità Riflessi"
+
+msgid "Enable Reflections"
+msgstr "Attivazione Riflessi"
+
+msgid "Ambient Light Level"
+msgstr "Livello Luce d'Ambiente"
+
+msgid "Enable Indirect Lighting (SSIL)"
+msgstr "Attiva Illuminazione Indiretta (SSIL)"
+
+msgid "Render Distance"
+msgstr "Distanza Rendering"
+
+msgid "Fog"
+msgstr "Nebbia"
+
+msgid "Maximum FPS"
+msgstr "FPS Massimi"
+
+msgid "Enable Fog"
+msgstr "Abilita Nebbia"
+
+msgid "Enable V-Sync"
+msgstr "Abilita V-Sync"
+
+msgid "Limit FPS"
+msgstr "Limita FPS"
+
+msgid "Post-Processing Effect"
+msgstr "Effetti Post-Elaborazione"
+
+msgid "None"
+msgstr "Nessuno"
+
+msgid "CRT Filter"
+msgstr "Filtro CRT"
+
+msgid "Control Settings"
+msgstr "Controllo Impostazioni"
+
+msgid "Mouse Sensitivity"
+msgstr "Sensibilità del Mouse"
+
+msgid "Invert Y-axis"
+msgstr "Inverti l'asse-Y"
+
+msgid "Remap Inputs"
+msgstr "Riconfigura gli Input"
+
+msgid "Move Forward"
+msgstr "Muoviti in Avanti"
+
+msgid "Move Back"
+msgstr "Muoviti all'Indietro"
+
+msgid "Strafe Left"
+msgstr "Deviare a Sinistra"
+
+msgid "Strafe Right"
+msgstr "Deviare a Destra"
+
+msgid "Jump"
+msgstr "Salta"
+
+msgid "Crouch"
+msgstr "Accovacciati"
+
+msgid "Interact"
+msgstr "Interagisci"
+
+msgid "Joypad Camera Deadzone"
+msgstr "Deadzone Telecamera del Joypad"
+
+msgid "Audio Settings"
+msgstr "Impostazioni Audio"
+
+msgid "Global Volume"
+msgstr "Volume Generale"
+
+msgid "Sound Effects Volume"
+msgstr "Effetto del Suono sul Volume"
+
+msgid "Ambience Volume"
+msgstr "Volume Ambientale"
+
+msgid "Music Volume"
+msgstr "Volume Musica"
+
+msgid "Enter VR"
+msgstr "Entra VR"
+
+msgid "Snap turning:"
+msgstr "Rotazione Istantanea:"
+
+msgid "Y axis dead zone"
+msgstr "dead zone asse Y"
+
+msgid "X axis dead zone"
+msgstr "dead zone asse X"
+
+msgid "Haptics Scale"
+msgstr "Scala aptica"
+
+msgid "Apply"
+msgstr "Applica"
+
+msgid "Reset"
+msgstr "Resetta"
+
+msgid "Height adjust:"
+msgstr "Aggiusta l'altezza"
+
+msgid "WebXR primary:"
+msgstr "Controller principale (WebXR):"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Thumbstick"
+msgstr "Levetta"
+
+msgid "Trackpad"
+msgstr "Touchpad"
+
+msgid "Technology"
+msgstr "Tecnologia"
+
+msgid "Featured Technology Exhibits"
+msgstr "Mostre Tecnologiche in Primo Piano"
+
+msgid "Science"
+msgstr "Scienza"
+
+msgid "Featured Science Exhibits"
+msgstr "Mostre Scientifiche in Primo Piano"
+
+msgid "Geography"
+msgstr "Geografia"
+
+msgid "Featured Geography Exhibits"
+msgstr "Mostre Geografiche in Primo Piano"
+
+msgid "Culture"
+msgstr "Cultura"
+
+msgid "Featured Culture Exhibits"
+msgstr "Mostre Culturali in Primo Piano"
+
+msgid "Art"
+msgstr "Arte"
+
+msgid "Featured Art Exhibits"
+msgstr "Mostre Artistiche in Primo Piano"
+
+msgid "People"
+msgstr "Persone"
+
+msgid "Featured People Exhibits"
+msgstr "Mostre sulle Persone in Primo Piano"
+
+msgid "History"
+msgstr "Storia"
+
+msgid "Featured History Exhibits"
+msgstr "Mostre Storiche in Primo Piano"
+
+msgid "Media"
+msgstr "Media"
+
+msgid "Featured Media Exhibits"
+msgstr "Mostre Mediatiche in Primo Piano"
+
+msgid "Search"
+msgstr "Cerca"
+
+msgid "Featured Search Exhibits"
+msgstr "Mostre cercate in primo piano"
+
+### scenes/Lobby.tscn Section
+
+msgid ""
+"[b]Welcome to the Museum of All Things![/b]\n"
+"\n"
+"[fill]This museum is different from any you've visited in the physical world, so it may take a moment to get your bearings.[/fill]\n"
+"\n"
+"[b]The Lobby[/b]\n"
+"\n"
+"[fill]Right now you are in the museum's lobby, tailored to give you a pleasant starting point on your visit. If you ever wish to return here, you may simply open your museum menu (via \"Escape,\" \"Start,\" or by hitting \"Y\" on your right-hand controller in Virtual Reality) and select \"Return to Lobby.\"\n"
+"\n"
+"The lobby is divided into areas by subject, which are marked by signs and indicated on the maps in the entry hall behind you. In each of these areas, you will find many hallways into a range of fascinating exhibits.[/fill]"
+msgstr 
+"[b]Benvenuto al Museum of All Things![/b]\n"
+"\n"
+"[fill]Questo museo è diverso dai musei che hai visitato nel mondo reale, quindi potresti metterci un attimo per ambientarti.[/fill]\n"
+"\n"
+"[b]La Lobby[/b]\n"
+"\n"
+"[fill]In questo momento sei nella lobby del museo, su misura per darti un piacevole punto di partenza per la tua visita. Se mai volessi tornare qui , puoi semplicemente aprire il menu del museo(con \"Escape,\" \"Start,\" o premendo \"Y\" sul tuo controller destro nel VR) e selezionando \"Ritorna alla Lobby.\"\n"
+"\n"
+"La lobby è divisa in zone per argomento, che sono segnate da un cartello e indicate sulla mappa nel corridoio d'entrata dietro di te. In ognuna di queste zone, troverai molti corridoi con un range di mostre fascinanti.[/fill]"
+
+msgid ""
+"[b]Museum Exhibits[/b]\n"
+"\n"
+"[fill]Exhibits are not made by hand-- they are generated procedurally by pulling images and textual data from Wikipedia and Wikimedia commons. This means any topic with a Wikipedia page can also be accessed as an exhibit in this museum!\n"
+"\n"
+"Furthermore, each exhibit contains many hallways connecting it to other exhibits. These hallways are determined based on the links in the current exhibit's Wikipedia article. You can move from exhibit to exhibit endlessly, following your curiosity.\n"
+"\n"
+"If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.[/fill]"
+msgstr ""
+"[b]Mostre Museo[/b]\n"
+"\n"
+"[fill]Le Mostre non sono fatte a mano-- sono generate proceduralmente estrapolando immagini e dati testuali da Wikipedia e Wikimedia commons. Questo significa che in ogni argomento con una voce Wikipedia vi è possibile accedervi come una mostra in questo museo!\n"
+"\n"
+"Inoltre, ogni mostra contiene molti corridoi che si connettono ad altre mostre. Questi corridoi sono determinati in base ai collegamenti alla mostra attuale della voce Wikipedia. Tu puoi muoverti da una mostra all'altra all'infinito, lasciandoti guidare dalla tua curiosità.\n"
+"\n"
+"Se preferisci andare dritto su un argomento in particolare, puoi accedere alla ricerca col terminale, alla fine del corridoio d'entrata direttamente dietro di te. Semplicemente inserisci il tuo topic di interesse nell'interfaccia del terminale, e creerà un corridoio per te per camminare in quella direzione.[/fill]"
+
+### scenes/menu/TerminalMenu.tscn Section
+
+msgid ""
+"Welcome to the MoAT Custom Exhibit Terminal\n"
+"\n"
+"You may access a specific exhibit by selecting \"Enter Exhibit Name.\" Alternatively, you may ask for a random exhibit.\n"
+"\n"
+"Hit \"E\" on your keyboard to interact with the terminal, or press Y/△ if you are using a controller.\n"
+"\n"
+msgstr ""
+"Benvenuto al Terminale della Mostra personalizzata MOAT\n"
+"\n"
+"Puoi accedere ad una mostra specifica selezionando \"Inserisci Nome Mostra.\" In alternativa, puoi chiedere per una mostra a caso.\n"
+"\n"
+"Schiaccia \"E\" nella tua tastiera per interagire col terminalee, or premi Y/△ se hai il controller.\n"
+"\n"
+
+msgid "Enter Exhibit Name "
+msgstr "Inserisci nome Mostra "
+
+msgid "Go to Random Exhibit "
+msgstr "Vai in una Mostra a Caso "
+
+msgid ""
+"Enter the title of the exhibit you would like to acccess. A path will be routed and the door will open to the best matching exhibit.\n"
+"\n"
+msgstr ""
+"Inserisci il titolo della mostra a cui vuoi accedere. Un percorso verrà indicato e la porta si aprirà alla migliore mostra corrispondente.\n"
+"\n"
+
+msgid "Enter exhibit title"
+msgstr "Entra titolo mostra"
+
+msgid "Confirm"
+msgstr "Conferma"
+
+msgid "Back"
+msgstr "Indietro"
+
+msgid "Exhibit Found: \"\"\n"
+msgstr "Mostra trovata: \"\"\n"
+
+msgid ""
+"\n"
+"Proceed to your right to access this exhibit, or return to the terminal's main menu to access a different exhibit.\n"
+"\n"
+msgstr ""
+"\n"
+"Procedi verso destra per accedere alla mostra, o ritorna al menù principale del terminale per accedere ad una mostra diversa.\n"
+"\n"
+
+msgid "OK / Exit"
+msgstr "OK / Esci"
+
+msgid ""
+"We were unable to locate the exhibit that you requested. Please try a different exhibit.\n"
+"\n"
+msgstr ""
+"Non siamo stati in grado di individuare la mostra richiesta. Per piacere riprova con una mostra diversa.\n"
+"\n"

@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="LobbyData" load_steps=11 format=3 uid="uid://34yga2226k3j"]
+
+[ext_resource type="Script" uid="uid://bdc8jjijlgjox" path="res://resource_definitions/LobbyData.gd" id="1_3ssej"]
+[ext_resource type="Script" uid="uid://ch3nm32ndlrbh" path="res://resource_definitions/LobbyWing.gd" id="2_y4oc8"]
+
+[sub_resource type="Resource" id="Resource_pgwi2"]
+script = ExtResource("2_y4oc8")
+name = "Tecnologia"
+corner_1 = Vector2(-68, -44)
+corner_2 = Vector2(-32, -8)
+exhibits = PackedStringArray("Carrozza semipilota", "Minox", "Transistor", "Ceramica", "Arduino (hardware)", "Pastorizzazione", "Test Nucleare", "Fibra ottica", "Acquedotto", "Cisco Systems", "Aeroplano", "Macchina semplice", "Torchio tipografico", "Contraccezione", "Radiantismo", "Console (videogiochi)", "Trabucco (arma)", "Allevamento", "Olduvaiano")
+
+[sub_resource type="Resource" id="Resource_ooopd"]
+script = ExtResource("2_y4oc8")
+name = "Cultura"
+corner_1 = Vector2(32, -44)
+corner_2 = Vector2(68, -8)
+exhibits = PackedStringArray("Pagliaccio", "Drago", "Convenience store", "Dare il cinque", "Goncharov (meme)", "Caffè", "Zuppa", "Backrooms", "Tarocchi", "K-pop", "Go (gioco)", "Induismo", "Dandismo", "Golem", "Canto marinaresco", "Pubblicità", "Diluvio universale", "Carnevale di Rio de Janeiro")
+
+[sub_resource type="Resource" id="Resource_m2ope"]
+script = ExtResource("2_y4oc8")
+name = "Scienza"
+corner_1 = Vector2(-44, -92)
+corner_2 = Vector2(-8, -36)
+exhibits = PackedStringArray("Fungi", "Dinosauria", "Idrogeno", "Terra", "Maglia Arabia", "Felis silvestris catus", "Chamaeleonidae", "Artocarpus altilis", "Legge di Ohm", "Oro", "Adansonia", "Homo sapiens", "Pendolo", "Dimorfismo sessuale", "Luce", "Formaggio", "Brassica oleracea", "Zona umida", "Nycticebus", "Farfalla", "Saturno (astronomia)", "Suolo", "Frattale", "Occhio")
+
+[sub_resource type="Resource" id="Resource_opuc1"]
+script = ExtResource("2_y4oc8")
+name = "Geografia"
+corner_1 = Vector2(8, -92)
+corner_2 = Vector2(44, -36)
+exhibits = PackedStringArray("USA", "Antartide", "Patagonia", "Tibet", "Persepoli", "Petra (Giordania)", "Taipei 101", "Veneto", "Provincia di Batman", "Chongqing", "Isole Pitcairn", "Fossa delle Marianne", "Ferrovia Transiberiana", "Lancaster (Ohio)", "Ciad (lago)", "Senegal", "Bora Bora", "Landes de Gascogne", "Kilimangiaro", "Perth", "Amazzonia", "Yukon (fiume)", "Uruk", "Pietra Nera")
+
+[sub_resource type="Resource" id="Resource_qiy1c"]
+script = ExtResource("2_y4oc8")
+name = "Arte"
+corner_1 = Vector2(-72, 12)
+corner_2 = Vector2(-36, 48)
+exhibits = PackedStringArray("Pittura barocca", "Arte giapponese", "Architettura armena", "Pablo Picasso", "Louvre", "Joan Miró", "Ai Weiwei", "Frida Kahlo", "Käthe Kollwitz", "Frank Lloyd Wright", "Edgar Degas", "Pittura rupestre", "Michelangelo", "Francisco Goya", "Fauves", "Graffiti", "Scultura greca", "M. C. Escher", "Georges Seurat")
+
+[sub_resource type="Resource" id="Resource_l5mfx"]
+script = ExtResource("2_y4oc8")
+name = "Persone"
+corner_1 = Vector2(36, 12)
+corner_2 = Vector2(72, 48)
+exhibits = PackedStringArray("Lista dei papi", "Albert Einstein", "Freddy Mercury", "Kobe Bryant", "Genghis Khan", "Rasputin", "Gerry Scotti", "Tupac Shakur", "Unabomber (Italia)", "William Shakespeare", "Linus Pauling", "Danny Devito", "J. R. R. Tolkien", "Mary Shelley", "Alexandria Ocasio-Cortez", "Ibn Battuta", "Paolo di Tarso", "Martin Luther King")
+
+[sub_resource type="Resource" id="Resource_bycfx"]
+script = ExtResource("2_y4oc8")
+name = "Storia"
+corner_1 = Vector2(-48, 60)
+corner_2 = Vector2(-12, 96)
+exhibits = PackedStringArray("Storia della Germania", "Disastro di Černobyl'", "Titanic", "Controcultura degli anni 1960", "Unità 731", "Pandemia di COVID-19", "CIA", "Epoca d'oro islamica", "Allunaggio", "Terremoto di San Francisco del 1906", "Passaggio delle Alpi di Annibale", "Boi", "Storia della fotografia", "Naufragio della Costa Concordia", "Accusa del sangue", "Impero Oyo", "Pirateria", "Proteste a Hong Kong del 2019-2020")
+
+[sub_resource type="Resource" id="Resource_yimja"]
+script = ExtResource("2_y4oc8")
+name = "Media"
+corner_1 = Vector2(12, 60)
+corner_2 = Vector2(48, 96)
+exhibits = PackedStringArray("Bibbia", "The Beatles", "Matrix", "Odissea", "Gilgameš", "Aspettando Godot", "Homestuck", "Star Trek", "Barbie (film)", "Neon Genesis Evangelion", "Amleto", "I coloni di Catan", "X (social network)", "Vogue", "Steamboat Willie", "Divina Commedia", "Wikipedia", "Minecraft")
+
+[resource]
+script = ExtResource("1_3ssej")
+wings = Array[ExtResource("2_y4oc8")]([SubResource("Resource_pgwi2"), SubResource("Resource_ooopd"), SubResource("Resource_m2ope"), SubResource("Resource_opuc1"), SubResource("Resource_qiy1c"), SubResource("Resource_l5mfx"), SubResource("Resource_bycfx"), SubResource("Resource_yimja")])
