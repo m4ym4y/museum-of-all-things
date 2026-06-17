@@ -56,14 +56,16 @@ popup/item_2/text = "AMD FSR 2"
 popup/item_2/id = 2
 
 [node name="Label2" type="Label" parent="DisplayOptions" groups=["fsr_options"]]
+visible = false
 layout_mode = 2
 text = "FSR quality mode"
 
-[node name="FSRQuality" type="OptionButton" parent="DisplayOptions" groups=["fsr_options"]]
+[node name="FSR1Quality" type="OptionButton" parent="DisplayOptions" groups=["fsr_options"]]
+visible = false
 layout_mode = 2
 selected = 0
-item_count = 5
-popup/item_0/text = "Ultra quality"
+item_count = 4
+popup/item_0/text = "Ultra Quality"
 popup/item_0/id = 0
 popup/item_1/text = "Quality"
 popup/item_1/id = 1
@@ -71,41 +73,87 @@ popup/item_2/text = "Balanced"
 popup/item_2/id = 2
 popup/item_3/text = "Performance"
 popup/item_3/id = 3
-popup/item_4/text = "Ultra performance"
-popup/item_4/id = 4
+
+[node name="FSR2Quality" type="OptionButton" parent="DisplayOptions" groups=["fsr_options"]]
+visible = false
+layout_mode = 2
+selected = 1
+item_count = 7
+popup/item_0/text = "Anti-aliasing only"
+popup/item_0/id = 0
+popup/item_0/separator = true
+popup/item_1/text = "Native"
+popup/item_1/id = 5
+popup/item_2/text = "With scaling"
+popup/item_2/id = 0
+popup/item_2/separator = true
+popup/item_3/text = "Quality"
+popup/item_3/id = 1
+popup/item_4/text = "Balanced"
+popup/item_4/id = 2
+popup/item_5/text = "Performance"
+popup/item_5/id = 3
+popup/item_6/text = "High Performance"
+popup/item_6/id = 4
 
 [node name="Label3" type="Label" parent="DisplayOptions" groups=["fsr_options"]]
+visible = false
 layout_mode = 2
 text = "FSR Sharpness"
 
 [node name="SharpnessScale" type="HSlider" parent="DisplayOptions" groups=["fsr_options"]]
+visible = false
 layout_mode = 2
 max_value = 2.0
 step = 0.05
 value = 0.2
 
 [node name="SharpnessScaleValue" type="Label" parent="DisplayOptions" groups=["fsr_options"]]
+visible = false
 layout_mode = 2
 text = "0.2
 "
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="DisplayOptions"]
+[node name="Label4" type="Label" parent="DisplayOptions" groups=["bilinear_options"]]
 layout_mode = 2
 text = "Render Scale"
 
-[node name="RenderScale" type="HSlider" parent="DisplayOptions"]
+[node name="RenderScale" type="HSlider" parent="DisplayOptions" groups=["bilinear_options"]]
 layout_mode = 2
 min_value = 0.1
 max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="RenderScaleValue" type="Label" parent="DisplayOptions"]
+[node name="RenderScaleValue" type="Label" parent="DisplayOptions" groups=["bilinear_options"]]
 layout_mode = 2
 text = "100 %
 "
 horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="DisplayOptions" groups=["aa_options"]]
+layout_mode = 2
+text = "Anti-aliasing"
+
+[node name="AAMode" type="OptionButton" parent="DisplayOptions" groups=["aa_options"]]
+layout_mode = 2
+selected = 0
+item_count = 7
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "FXAA"
+popup/item_1/id = 1
+popup/item_2/text = "SMAA"
+popup/item_2/id = 2
+popup/item_3/text = "MSAA 2×"
+popup/item_3/id = 3
+popup/item_4/text = "MSAA 4×"
+popup/item_4/id = 4
+popup/item_5/text = "MSAA 8×"
+popup/item_5/id = 5
+popup/item_6/text = "TAA"
+popup/item_6/id = 6
 
 [node name="Fullscreen" type="CheckBox" parent="DisplayOptions"]
 layout_mode = 2
@@ -266,9 +314,11 @@ popup/item_1/id = 1
 [connection signal="pressed" from="MainOptions/Back" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MainOptions/Restore" to="." method="_on_restore_pressed"]
 [connection signal="item_selected" from="DisplayOptions/ScaleMode" to="." method="_on_scale_mode_value_changed"]
-[connection signal="item_selected" from="DisplayOptions/FSRQuality" to="." method="_on_fsr_quality_item_selected"]
+[connection signal="item_selected" from="DisplayOptions/FSR1Quality" to="." method="_on_fsr_quality_item_selected"]
+[connection signal="item_selected" from="DisplayOptions/FSR2Quality" to="." method="_on_fsr_quality_item_selected"]
 [connection signal="value_changed" from="DisplayOptions/SharpnessScale" to="." method="_on_sharpness_scale_value_changed"]
 [connection signal="value_changed" from="DisplayOptions/RenderScale" to="." method="_on_render_scale_value_changed"]
+[connection signal="item_selected" from="DisplayOptions/AAMode" to="." method="_on_aa_mode_item_selected"]
 [connection signal="toggled" from="DisplayOptions/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="value_changed" from="ReflectionOptions/ReflectionQuality" to="." method="_on_reflection_quality_value_changed"]
 [connection signal="toggled" from="ReflectionOptions/EnableReflections" to="." method="_on_enable_reflections_toggled"]
