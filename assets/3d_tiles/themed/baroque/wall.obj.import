@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://se6gm2bwlcko"
+path="res://.godot/imported/wall.obj-748627b2080593d26c438aeb3ec2293c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wall.obj-748627b2080593d26c438aeb3ec2293c.mesh"]
+
+source_file="res://assets/3d_tiles/themed/baroque/wall.obj"
+dest_files=["res://.godot/imported/wall.obj-748627b2080593d26c438aeb3ec2293c.mesh", "res://.godot/imported/wall.obj-748627b2080593d26c438aeb3ec2293c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

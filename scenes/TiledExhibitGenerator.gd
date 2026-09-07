@@ -37,6 +37,7 @@ var _no_props
 var _exit_limit
 var _min_room_dimension
 var _max_room_dimension
+var _theme
 
 func _rand_dim():
   return _rng.randi_range(_min_room_dimension, _max_room_dimension)
@@ -64,7 +65,28 @@ const MARKER = 8
 const BENCH = 9
 const FREE_WALL = 10
 
+const BAROQUE_WALL = 19
+const BAROQUE_CEILING = 20
+const BAROQUE_FLOOR = 21
+
+# todo allow more mix-and-match for floor and wall colors within a single theme
+const THEMES = {
+  "default": {
+    "wall": WALL,
+    "floor": FLOOR,
+    "ceiling": CEILING,
+  },
+  "baroque": {
+    "wall": BAROQUE_WALL,
+    "floor": BAROQUE_FLOOR,
+    "ceiling": BAROQUE_CEILING,
+  },
+}
+
 const DIRECTIONS = [Vector3(1, 0, 0), Vector3(0, 0, 1), Vector3(-1, 0, 0), Vector3(0, 0, -1)]
+
+func is_wall(v):
+  return v == WALL or v == BAROQUE_WALL
 
 func rand_dir():
   return DIRECTIONS[_rng.randi() % len(DIRECTIONS)]
@@ -101,6 +123,10 @@ func generate(
   # set initial fields
   _min_room_dimension = params.min_room_dimension
   _max_room_dimension = params.max_room_dimension
+
+  # theme determines IDs to use for tiles
+  # todo: should i simply have a per-theme meshlibrary instead?
+  _theme = THEMES[params.theme] or THEMES["default"]
 
   var start_pos = params.start_pos
   title = params.title
@@ -457,13 +483,13 @@ func carve_room(corner1, corner2, y):
         if c == HALL_STAIRS_UP or c == HALL_STAIRS_DOWN or c == HALL_STAIRS_TURN:
           continue
         elif c == INTERNAL_HALL:
-          _grid.set_cell_item(Vector3(x, y + 1, z), WALL, 0)
+          _grid.set_cell_item(Vector3(x, y + 1, z), BAROQUE_WALL, 0)
         elif _grid.get_cell_item(Vector3(x, y - 1, z)) == -1:
-          _grid.set_cell_item(Vector3(x, y, z), WALL, 0)
-          _grid.set_cell_item(Vector3(x, y + 1, z), WALL, 0)
+          _grid.set_cell_item(Vector3(x, y, z), BAROQUE_WALL, 0)
+          _grid.set_cell_item(Vector3(x, y + 1, z), BAROQUE_WALL, 0)
           _grid.set_cell_item(Vector3(x, y + 2, z), -1, 0)
       else:
-        if c == WALL:
+        if is_wall(c):
           _grid.set_cell_item(Vector3(x, y, z), -1, 0)
           _grid.set_cell_item(Vector3(x, y + 1, z), -1, 0)
         _grid.set_cell_item(Vector3(x, y + 2, z), CEILING, 0)

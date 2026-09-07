@@ -6,6 +6,9 @@
 [ext_resource type="Material" uid="uid://x4bq1qrai2w2" path="res://assets/textures/carpet.tres" id="4_wgiei"]
 [ext_resource type="Material" uid="uid://ddrg1bie5gs8p" path="res://assets/textures/marble21.tres" id="5_xithv"]
 [ext_resource type="Material" uid="uid://c7c48j23p78pk" path="res://assets/textures/wood_2.tres" id="6_0vqhk"]
+[ext_resource type="ArrayMesh" uid="uid://dx38ygeltsn2g" path="res://assets/3d_tiles/wall_all_sides.obj" id="7_lyoyu"]
+[ext_resource type="ArrayMesh" uid="uid://dlxvobx8268jx" path="res://assets/3d_tiles/themed/baroque/ceiling.obj" id="8_7krum"]
+[ext_resource type="ArrayMesh" uid="uid://dsjr8urrxvdun" path="res://assets/3d_tiles/themed/baroque/floor.obj" id="9_3y1i5"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_p8exe"]
 lightmap_size_hint = Vector2i(82, 82)
@@ -871,3 +874,24 @@ item/18/shapes = [SubResource("BoxShape3D_fl1ol"), Transform3D(1, 0, 0, 0, 1, 0,
 item/18/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/18/navigation_layers = 1
 item/18/preview = SubResource("ImageTexture_quesc")
+item/19/name = "wall_baroque"
+item/19/mesh = ExtResource("7_lyoyu")
+item/19/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/19/mesh_cast_shadow = 1
+item/19/shapes = []
+item/19/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/19/navigation_layers = 1
+item/20/name = "ceiling_baroque"
+item/20/mesh = ExtResource("8_7krum")
+item/20/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/20/mesh_cast_shadow = 1
+item/20/shapes = []
+item/20/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/20/navigation_layers = 1
+item/21/name = "floor_baroque"
+item/21/mesh = ExtResource("9_3y1i5")
+item/21/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/21/mesh_cast_shadow = 1
+item/21/shapes = []
+item/21/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/21/navigation_layers = 1
