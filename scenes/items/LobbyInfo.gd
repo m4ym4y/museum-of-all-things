@@ -11,6 +11,7 @@ func _ready() -> void:
     
 func _generate_mipmaps(_lang: String = "") -> void:
   $SubViewport.render_target_update_mode = SubViewport.UPDATE_ONCE
-  MipmapThread.get_viewport_texture_with_mipmaps($SubViewport, func(texture):
-    $Sprite3D.texture = texture
-  )
+  MipmapThread.get_viewport_texture_with_mipmaps($SubViewport, _on_texture_ready)
+
+func _on_texture_ready(texture) -> void:
+  $Sprite3D.texture = texture

@@ -30,9 +30,6 @@ var _grid
 var _player
 var _custom_door
 
-func _init():
-  RenderingServer.set_debug_generate_wireframes(true)
-
 func init(player):
   _player = player
   _set_up_lobby($Lobby)
@@ -155,11 +152,16 @@ func _teleport(from_hall, to_hall, entry_to_exit=false):
   _prepare_halls_for_teleport(from_hall, to_hall, entry_to_exit)
 
 func _prepare_halls_for_teleport(from_hall, to_hall, entry_to_exit=false):
-  if not is_instance_valid(from_hall) or not is_instance_valid(to_hall):
+  # If the to_hall doesn't exist yet, we teleport right away without animating,
+  # so the player can't get stuck between exhibits.
+  if not is_instance_valid(to_hall):
+    _teleport_player(from_hall, to_hall, entry_to_exit)
     return
 
-  from_hall.entry_door.set_open(false)
-  from_hall.exit_door.set_open(false)
+  if is_instance_valid(from_hall):
+    from_hall.entry_door.set_open(false)
+    from_hall.exit_door.set_open(false)
+
   to_hall.entry_door.set_open(false, true)
   to_hall.exit_door.set_open(false, true)
 
@@ -173,8 +175,13 @@ func _prepare_halls_for_teleport(from_hall, to_hall, entry_to_exit=false):
   timer.start(HallDoor.animation_duration)
 
 func _toggle_exhibit_visibility(hide_title: String, show_title: String) -> void:
-  var old_exhibit = _exhibits[hide_title]['exhibit']
-  old_exhibit.visible = false
+  # If the new exhibit doesn't exist yet, we leave the old one shown for now.
+  if not _exhibits.has(show_title):
+    return
+
+  if _exhibits.has(hide_title):
+    var old_exhibit = _exhibits[hide_title]['exhibit']
+    old_exhibit.visible = false
 
   var new_exhibit = _exhibits[show_title]['exhibit']
   new_exhibit.visible = true
@@ -219,7 +226,8 @@ func _teleport_player(from_hall, to_hall, entry_to_exit=false):
       _load_exhibit_from_entry(to_hall)
 
 func _on_loader_body_entered(body, hall, backlink=false):
-  if hall.to_title == "" or hall.to_title == _current_room_title:
+  var target = hall.from_title if backlink else hall.to_title
+  if target == "" or target == _current_room_title:
     return
 
   if body.is_in_group("Player"):
@@ -299,6 +307,8 @@ func _init_item(exhibit, item, data):
     item.init(data)
 
 func _link_halls(entry, exit):
+  _backlink_map[exit.to_title] = { "title": exit.from_title, "hall_type": exit.hall_type }
+
   if entry.linked_hall == exit and exit.linked_hall == entry:
     return
 
@@ -306,7 +316,6 @@ func _link_halls(entry, exit):
     Util.clear_listeners(hall, "on_player_toward_exit")
     Util.clear_listeners(hall, "on_player_toward_entry")
 
-  _backlink_map[exit.to_title] = exit.from_title
   exit.on_player_toward_exit.connect(_teleport.bind(exit, entry))
   entry.on_player_toward_entry.connect(_teleport.bind(entry, exit, true))
   exit.linked_hall = entry
@@ -337,6 +346,7 @@ func _erase_exhibit(key):
   _exhibits[key].exhibit.queue_free()
   _release_exhibit_height(_exhibits[key].height)
   _global_item_queue_map.erase(key)
+  WorkQueue.clear_exhibit(key)
   _exhibits.erase(key)
   var i = _exhibit_hist.find(key)
   if i >= 0:
@@ -355,8 +365,11 @@ func _on_fetch_complete(_titles, context):
     return
 
   var prev_title
+  var entry_hall_type = hall.hall_type
   if backlink:
-    prev_title = _backlink_map[context.title]
+    var link = _backlink_map[context.title]
+    prev_title = link.title
+    entry_hall_type = link.hall_type
   else:
     prev_title = hall.from_title
 
@@ -365,8 +378,18 @@ func _on_fetch_complete(_titles, context):
   var data
   while not data:
     data = await ItemProcessor.items_complete
+    if not is_instance_valid(hall):
+      return
     if data.title != context.title:
       data = null
+
+  # Don't re-generate the exhibit again.
+  if _exhibits.has(context.title):
+    if backlink:
+      _link_backlink_to_exit(_exhibits[context.title].exhibit, hall)
+    else:
+      _load_exhibit_from_exit(hall)
+    return
 
   var doors = data.doors
   var items = data.items
@@ -388,7 +411,7 @@ func _on_fetch_complete(_titles, context):
     "title": context.title,
     "prev_title": prev_title,
     "no_props": len(items) < 10,
-    "hall_type": hall.hall_type,
+    "hall_type": entry_hall_type,
     "exit_limit": len(doors),
   })
 
@@ -400,7 +423,7 @@ func _on_fetch_complete(_titles, context):
         var key = _exhibit_hist[e]
         if _exhibits.has(key):
           var old_exhibit = _exhibits[key]
-          if abs(4 * old_exhibit.height - _player.position.y) < 20:
+          if key == _current_room_title:
             continue
           if old_exhibit.exhibit.title == new_exhibit.title:
             continue
@@ -428,6 +451,7 @@ func _on_fetch_complete(_titles, context):
   _queue_item(context.title, item_queue)
 
   if backlink:
+    new_exhibit.entry.exit_door.set_open(true, true)
     new_exhibit.entry.loader.body_entered.connect(_on_loader_body_entered.bind(new_exhibit.entry, true))
   else:
     _link_halls(new_exhibit.entry, hall)
@@ -500,6 +524,8 @@ func _queue_item_front(title, item):
   _queue_item(title, item, true)
 
 func _queue_item(title, item, front = false):
+  if not _exhibits.has(title):
+    return
   if not _global_item_queue_map.has(title):
     _global_item_queue_map[title] = []
   if typeof(item) == TYPE_ARRAY:

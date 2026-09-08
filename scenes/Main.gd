@@ -23,6 +23,10 @@ func _ready():
 
   _recreate_player()
 
+  # Mobile and web should keep fewer exhibits loaded to prevent running out of memory.
+  if Util.is_mobile() or Util.is_web():
+    $Museum.max_exhibits_loaded = 2
+
   if Util.is_xr():
     _start_game()
   else:

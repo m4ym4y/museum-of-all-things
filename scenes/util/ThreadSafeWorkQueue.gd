@@ -36,6 +36,16 @@ func setup_queue(name, frame_pacing=DEFAULT_FRAME_PACING):
     "frame_pacing": frame_pacing,
   }
 
+func clear_exhibit(title):
+  _global_queue_lock.lock()
+  var queues = _queue_map.values()
+  _global_queue_lock.unlock()
+
+  for queue in queues:
+    queue.lock.lock()
+    queue.exhibit_queues.erase(title)
+    queue.lock.unlock()
+
 func _get_queue(name):
   var res
   _global_queue_lock.lock()

@@ -224,6 +224,8 @@ func _toggle_managed_light(light, enable) -> void:
 
   tween.tween_property(light, "light_energy", light_energy if enable else 0.0, MANAGED_LIGHTS_FREQUENCY * 0.5)
   tween.tween_callback(func ():
+    if not is_instance_valid(light):
+      return
     light.visible = enable
     light.light_energy = light_energy
   )

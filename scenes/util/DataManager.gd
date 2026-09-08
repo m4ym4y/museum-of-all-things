@@ -8,9 +8,12 @@ signal loaded_image(url: String, image: Image)
 
 var TEXTURE_QUEUE = "Textures"
 var TEXTURE_FRAME_PACING = 6
+var MAX_RETRY_DELAY_MS = 60000
 var _fs_lock = Mutex.new()
-var _texture_load_thread_pool_size = 5
+var _texture_load_thread_pool_size = 3
 var _texture_load_thread_pool = []
+var _rate_limit_lock = Mutex.new()
+var _rate_limited_until = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -54,6 +57,11 @@ func _texture_load_item():
 
         if data:
           _load_image(item.url, data, item.ctx)
+          return
+
+        var wait = _get_rate_limit_remaining()
+        if wait > 0:
+          _retry_request_image_later.call_deferred(item.url, item.ctx, wait)
         else:
           var request_url = item.url
           request_url += ('&' if '?' in request_url else '?') + "origin=*"
@@ -69,9 +77,10 @@ func _texture_load_item():
                   if delay_seconds > 0:
                     delay = delay_seconds * 1000
                   break
+              delay = mini(delay, MAX_RETRY_DELAY_MS)
               push_warning("rate limited, requeuing image in %dms: %s" % [delay, item.url])
-              await Util.delay_msec_async(delay)
-              request_image(item.url, item.ctx)
+              _set_rate_limited(delay)
+              _retry_request_image_later.call_deferred(item.url, item.ctx, delay)
             elif result[0] != OK or result[1] != 200:
               push_error("failed to fetch image ", result[0], " ", result[1], " ", item.url)
             else:
@@ -210,6 +219,31 @@ func _emit_image(url, texture, ctx):
   if texture == null:
     return
   call_deferred("emit_signal", "loaded_image", url, texture, ctx)
+
+func _get_rate_limit_remaining() -> int:
+  _rate_limit_lock.lock()
+  var remaining = _rate_limited_until - Time.get_ticks_msec()
+  _rate_limit_lock.unlock()
+  return maxi(remaining, 0)
+
+func _set_rate_limited(delay_msec: int) -> void:
+  _rate_limit_lock.lock()
+  _rate_limited_until = maxi(_rate_limited_until, Time.get_ticks_msec() + delay_msec)
+  _rate_limit_lock.unlock()
+
+func _is_ctx_alive(ctx) -> bool:
+  if typeof(ctx) != TYPE_OBJECT:
+    # A null or non-object ctx means nothing claimed ownership of the request.
+    return true
+  return is_instance_valid(ctx)
+
+func _retry_request_image_later(url, ctx, delay_msec: int) -> void:
+  if not _is_ctx_alive(ctx):
+    return
+  await get_tree().create_timer(delay_msec / 1000.0).timeout
+  if not _is_ctx_alive(ctx):
+    return
+  request_image(url, ctx)
 
 func request_image(url, ctx=null):
   WorkQueue.add_item(TEXTURE_QUEUE, {

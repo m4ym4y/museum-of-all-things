@@ -12,10 +12,11 @@ func init(text):
   t = Util.replace_unclosed_bbcodes(t)
   label.text = t
   call_deferred("_center_vertically", label)
-  MipmapThread.get_viewport_texture_with_mipmaps.call_deferred($SubViewport, func(texture):
-    $Sprite3D.texture = texture
-    $SubViewport.queue_free()
-  )
+  MipmapThread.get_viewport_texture_with_mipmaps.call_deferred($SubViewport, _on_texture_ready)
+
+func _on_texture_ready(texture):
+  $Sprite3D.texture = texture
+  $SubViewport.queue_free()
 
 func _center_vertically(label):
   # Ensure the SubViewport is sized

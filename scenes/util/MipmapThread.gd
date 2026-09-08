@@ -30,10 +30,15 @@ func _mipmap_process_item():
   if not item:
     return
 
+  if not item.callback.is_valid():
+    return
+
   match item.type:
     "get_texture_data":
       # This item only happens on the compatibility renderer.
       var image = item.texture.get_image()
+      if not image:
+        return
       _generate_mipmaps(image, item.callback)
 
     "create_image":
@@ -57,11 +62,15 @@ func _get_texture_data_rd(texture: Texture2D, callback: Callable):
   var format = RenderingServer.texture_get_format(rid)
   var rd_rid = RenderingServer.texture_get_rd_texture(rid)
   RenderingServer.get_rendering_device().texture_get_data_async(rd_rid, 0, func(array) -> void:
+    if not callback.is_valid():
+      return
     _create_image(width, height, format, array, callback)
   )
 
 func get_viewport_texture_with_mipmaps(subviewport: SubViewport, callback: Callable):
   await RenderingServer.frame_post_draw
+  if not is_instance_valid(subviewport) or not callback.is_valid():
+    return
   if Util.is_compatibility_renderer():
     WorkQueue.add_item(MIPMAP_QUEUE, {
       "type": "get_texture_data",

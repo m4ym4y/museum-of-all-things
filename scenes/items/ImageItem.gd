@@ -89,7 +89,7 @@ func _set_image(data):
   if data.has("src"):
     image_url = Util.normalize_url(data.src)
     DataManager.loaded_image.connect(_on_image_loaded)
-    DataManager.request_image(data.src)
+    DataManager.request_image(data.src, self)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
