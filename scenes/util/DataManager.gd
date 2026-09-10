@@ -101,14 +101,39 @@ func _texture_load_item():
         print("Unknown image type: ", item.url)
         return
 
-      if image.get_width() == 0:
+      var width: int = image.get_width()
+      var height: int = image.get_height()
+
+      if width == 0:
         return
+
+      # Limit images to 1k textures.
+      if width > 1024:
+        # Using the GET arguments we're using now, we currently never get an image wider
+        # than 960px, but just in case that changes, we limit width to 1024px.
+        var ratio: float = 1024.0 / float(width)
+        width = 1024
+        height = floori(float(height) * ratio)
+      if height > 1024:
+        var ratio: float = 1024.0 / float(height)
+        height = 1024
+        width = floori(float(width) * ratio)
+
+      image.resize(width, height, Image.INTERPOLATE_CUBIC)
 
       _generate_mipmaps(item.url, image, item.ctx)
 
     "generate_mipmaps":
       var image = item.image
       image.generate_mipmaps()
+
+      # On mobile, we can save VRAM and get better performance with ETC2 compression.
+      if Util.is_mobile():
+        # This only works with PR #121979 and a custom Godot build.
+        var err = image.compress(Image.COMPRESS_ETC2, Image.COMPRESS_SOURCE_SRGB)
+        if err != OK:
+          push_warning("Unable to VRAM compress image; use Godot built with `scons etcpak_export_templates=yes`")
+
       _create_and_emit_texture(item.url, image, item.ctx)
 
     "create_and_emit_texture":

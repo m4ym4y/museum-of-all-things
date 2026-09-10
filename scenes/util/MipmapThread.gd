@@ -44,6 +44,14 @@ func _mipmap_process_item():
     "generate_mipmaps":
       var image = item.image
       image.generate_mipmaps()
+
+      # On mobile, we can save VRAM and get better performance with ETC2 compression.
+      if Util.is_mobile():
+        # This only works with PR #121979 and custom Godot build.
+        var err = image.compress(Image.COMPRESS_ETC2, Image.COMPRESS_SOURCE_SRGB)
+        if err != OK:
+          push_warning("Unable to VRAM compress image; use Godot built with `scons etcpak_export_templates=yes`")
+
       _create_and_emit_texture(image, item.callback)
 
     "create_and_emit_texture":
