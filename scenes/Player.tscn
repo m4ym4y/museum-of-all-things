@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b4w1fxbmkdcgh" path="res://scenes/Player.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dxfoujgkv1e2y" path="res://scenes/FootstepPlayer.tscn" id="2_1mcm1"]
+[ext_resource type="PackedScene" uid="uid://chscowlj6t1qc" path="res://scenes/MobileHud.tscn" id="3_3li8b"]
 
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(0.6, 0.2, 0.6)
@@ -36,3 +37,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("2")
 
 [node name="FootstepPlayer" parent="." unique_id=1987773104 instance=ExtResource("2_1mcm1")]
+
+[node name="MobileHUD" parent="." unique_id=563185674 instance=ExtResource("3_3li8b")]

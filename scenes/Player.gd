@@ -83,6 +83,23 @@ func _unhandled_input(event):
         clamp(delta_x, -dampening, dampening)
       )
 
+  # --- TOUCH SUPPORT (ADDED) ---
+  var is_touch_drag = event is InputEventScreenDrag
+  if is_touch_drag:
+    if event.position.x > get_viewport().size.x * 0.3:
+      var delta_x = -event.relative.x * mouse_sensitivity * _mouse_sensitivity_factor
+      var delta_y = -event.relative.y * mouse_sensitivity * _mouse_sensitivity_factor * (-1 if _invert_y else 1)
+
+      if not smooth_movement:
+        rotate_y(delta_x)
+        $Pivot.rotate_x(delta_y)
+        $Pivot.rotation.x = clamp($Pivot.rotation.x, -1.2, 1.2)
+      else:
+        camera_v += Vector2(
+          clamp(delta_y, -dampening, dampening),
+          clamp(delta_x, -dampening, dampening)
+        )
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
   if not _enabled:
