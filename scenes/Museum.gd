@@ -378,6 +378,7 @@ func _on_fetch_complete(_titles, context):
 
   new_exhibit.exit_added.connect(_on_exit_added.bind(doors, backlink, new_exhibit, hall))
   new_exhibit.generate({
+    "theme": "baroque",
     "start_pos": Vector3.UP * exhibit_height,
     "min_room_dimension": min_room_dimension,
     "max_room_dimension": max_room_dimension,

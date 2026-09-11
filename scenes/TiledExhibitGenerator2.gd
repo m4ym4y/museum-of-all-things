@@ -1,0 +1,150 @@
+@tool
+extends Node3D
+
+# params
+#   min_room_dimension: int
+#   max_room_dimension: int
+#   theme: str | "default"
+#   start_pos: Vector3
+#   title: str
+#   prev_title: str
+#   hall_type: Array[2] | [true, 0]
+#   no_props (?): boolean
+#   exit_limit: int
+
+const FLOOR_WOOD = 0
+const RESERVED_VAL = 1
+const FLOOR_CARPET = 11
+const FLOOR_MARBLE = 12
+
+const WALL = 5
+const CEILING = 3
+const INTERNAL_HALL = 7
+const INTERNAL_HALL_TURN = 6
+const HALL_STAIRS_UP = 16
+const HALL_STAIRS_DOWN = 17
+const HALL_STAIRS_TURN = 18
+const MARKER = 8
+const BENCH = 9
+const FREE_WALL = 10
+
+const BAROQUE_WALL = 19
+const BAROQUE_CEILING = 20
+const BAROQUE_FLOOR = 21
+
+const THEMES = {
+  "default": {
+    "wall": WALL,
+    "floor": FLOOR_WOOD,
+    "ceiling": CEILING,
+  },
+  "baroque": {
+    "wall": BAROQUE_WALL,
+    "floor": BAROQUE_FLOOR,
+    "ceiling": BAROQUE_CEILING,
+  },
+}
+
+@onready var _fgrid = $FloorTiles
+@onready var _wgrid = $WallTiles
+
+var _theme
+
+func _normalize_rect(rect):
+  var p1 = rect[0]
+  var p2 = rect[1]
+  var c1 = Vector3(min(p1.x, p2.x), 0, min(p1.z, p2.z))
+  var c2 = Vector3(max(p1.x, p2.x), 0, max(p1.z, p2.z))
+  return [c1, c2]
+
+func _expand_rect(_rect, n):
+  var rect = _normalize_rect(_rect)
+  var c1 = rect[0]
+  var c2 = rect[1]
+  return [
+    Vector3(c1.x - n, 0, c1.z - n),
+    Vector3(c2.x + n, 0, c2.z + n)
+  ]
+
+func _is_in_rect(p, _rect):
+  var rect = _normalize_rect(_rect)
+  var c1 = rect[0]
+  var c2 = rect[1]
+  return (p.x >= c1.x and p.x <= c2.x) and (p.z >= c1.z and p.z <= c2.z)
+
+func _intersecting_rect(_r1, _r2):
+  var r1 = _normalize_rect(_r1)
+  var r2 = _normalize_rect(_r2)
+  var overlap_x = r1[0].x < r2[1].x and r2[0].x < r1[1].x
+  var overlap_z = r1[0].z < r2[1].z and r2[0].z < r1[1].z
+  return overlap_x and overlap_z
+
+func _left90(v):
+  return v.rotated(Vector3.UP, deg_to_rad(90))
+
+func _right90(v):
+  return v.rotated(Vector3.UP, deg_to_rad(-90))
+
+func _left_half(dimension):
+  return floor(dimension / 2)
+
+func _right_half(dimension):
+  return floor((dimension - 1) / 2)
+
+func _rect_anchor_points(_rect):
+  var rect = _normalize_rect(_rect)
+  var c1 = rect[0]
+  var c2 = rect[1]
+
+  # round anchor points to the right
+  # to accomodate for left_half/right_half split
+  return [
+    {
+      "dir": Vector3.LEFT,
+      "p": Vector3(c1.x, 0, floor((c1.z + c2.z - 1) / 2))
+    },
+    {
+      "dir": Vector3.FORWARD,
+      "p": Vector3(floor((c1.x + c2.x + 1) / 2), 0, c1.z)
+    },
+    {
+      "dir": Vector3.RIGHT,
+      "p": Vector3(c2.x, 0, floor((c1.z + c2.z + 1) / 2))
+    },
+    {
+      "dir": Vector3.BACK,
+      "p": Vector3(floor((c1.x + c2.x - 1) / 2), 0, c2.z)
+    }
+  ]
+
+func _fill_floor(_rect):
+  var rect = _normalize_rect(_rect)
+  var c1 = rect[0]
+  var c2 = rect[1]
+  for x in range(c1.x, c2.x + 1):
+    for z in range(c1.z, c2.z + 1):
+      _fgrid.set_cell_item(Vector3(x, 0, z), _theme.floor)
+
+func generate(
+    params
+  ):
+    _theme = THEMES[params.theme]
+    var start_room = [Vector3(-3, 0, -3), Vector3(2, 0, 2)]
+    var last_room = start_room
+
+    for i in range(10):
+      var anchors = _rect_anchor_points(last_room)
+      _fill_floor(last_room)
+
+      var next = anchors[randi() % 4]
+      var next_rect = extend_rect_from_point(next.p, next.dir, 5, 2)
+      _fill_floor(next_rect)
+      last_room = next_rect
+
+func extend_rect_from_point(start, dir, length, width):
+  var c1 = start + _left90(dir) * _left_half(width)
+  var c2 = start + _right90(dir) * _right_half(width) + dir * length
+  return [c1, c2]
+
+func add_room():
+  pass

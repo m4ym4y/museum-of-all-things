@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cy8fc6vq7323s"]
+
+[ext_resource type="Script" uid="uid://c8xla5ea02m1b" path="res://scenes/TileGeneratorTester.gd" id="1_wc3gd"]
+
+[node name="Node3D" type="Node3D" unique_id=1691634374]
+script = ExtResource("1_wc3gd")

@@ -73,7 +73,7 @@ const BAROQUE_FLOOR = 21
 const THEMES = {
   "default": {
     "wall": WALL,
-    "floor": FLOOR,
+    "floor": FLOOR_WOOD,
     "ceiling": CEILING,
   },
   "baroque": {
@@ -86,7 +86,7 @@ const THEMES = {
 const DIRECTIONS = [Vector3(1, 0, 0), Vector3(0, 0, 1), Vector3(-1, 0, 0), Vector3(0, 0, -1)]
 
 func is_wall(v):
-  return v == WALL or v == BAROQUE_WALL
+  return v == _theme.wall
 
 func rand_dir():
   return DIRECTIONS[_rng.randi() % len(DIRECTIONS)]
@@ -126,7 +126,7 @@ func generate(
 
   # theme determines IDs to use for tiles
   # todo: should i simply have a per-theme meshlibrary instead?
-  _theme = THEMES[params.theme] or THEMES["default"]
+  _theme = THEMES[params.theme]
 
   var start_pos = params.start_pos
   title = params.title
@@ -417,7 +417,7 @@ func decorate_room_center(center, width, length):
         var valid_bench = len(Util.cell_neighbors(_raw_grid, pos, INTERNAL_HALL)) == 0 and\
             len(Util.cell_neighbors(_raw_grid, pos, HALL_STAIRS_UP)) == 0 and\
             len(Util.cell_neighbors(_raw_grid, pos, HALL_STAIRS_DOWN)) == 0
-        var valid_free_wall = valid_bench and len(Util.cell_neighbors(_raw_grid, pos, WALL)) == 0
+        var valid_free_wall = valid_bench and len(Util.cell_neighbors(_raw_grid, pos, _theme.wall)) == 0
 
         if width > 3 or length > 3 and free_wall and valid_free_wall and _room_count > 2:
           var dir = Vector3.RIGHT if width > length else Vector3.FORWARD
@@ -436,7 +436,7 @@ func decorate_wall_tile(pos):
   if _raw_grid.get_cell_item(pos) == FREE_WALL:
     return
 
-  var wall_neighbors = Util.cell_neighbors(_grid, pos, WALL)
+  var wall_neighbors = Util.cell_neighbors(_grid, pos, _theme.wall)
   for wall in wall_neighbors:
     var slot = (wall + pos) / 2
     var hall_dir = wall - pos
@@ -482,18 +482,14 @@ func carve_room(corner1, corner2, y):
       if x < lx or z < lz or x > gx or z > gz:
         if c == HALL_STAIRS_UP or c == HALL_STAIRS_DOWN or c == HALL_STAIRS_TURN:
           continue
-        elif c == INTERNAL_HALL:
-          _grid.set_cell_item(Vector3(x, y + 1, z), BAROQUE_WALL, 0)
         elif _grid.get_cell_item(Vector3(x, y - 1, z)) == -1:
-          _grid.set_cell_item(Vector3(x, y, z), BAROQUE_WALL, 0)
-          _grid.set_cell_item(Vector3(x, y + 1, z), BAROQUE_WALL, 0)
+          _grid.set_cell_item(Vector3(x, y, z), _theme.wall, 0)
           _grid.set_cell_item(Vector3(x, y + 2, z), -1, 0)
       else:
         if is_wall(c):
           _grid.set_cell_item(Vector3(x, y, z), -1, 0)
-          _grid.set_cell_item(Vector3(x, y + 1, z), -1, 0)
-        _grid.set_cell_item(Vector3(x, y + 2, z), CEILING, 0)
-        _grid.set_cell_item(Vector3(x, y - 1, z), _floor, 0)
+        _grid.set_cell_item(Vector3(x, y + 1, z), _theme.ceiling, 0)
+        _grid.set_cell_item(Vector3(x, y - 1, z), _theme.floor, 0)
 
 func overlaps_room(corner1, corner2, y):
   for x in range(corner1.x - 1, corner2.x + 2):

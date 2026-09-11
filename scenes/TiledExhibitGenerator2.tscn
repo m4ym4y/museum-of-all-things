@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://gp6c0nadrnk5"]
+
+[ext_resource type="MeshLibrary" uid="uid://b887fn6f3qg14" path="res://assets/3d_tiles/mesh_library.tres" id="1_274tc"]
+[ext_resource type="Script" uid="uid://yprhsx112ogr" path="res://scenes/TiledExhibitGenerator2.gd" id="1_revr2"]
+
+[node name="TiledExhibitGenerator2" type="Node3D" unique_id=1860408522]
+script = ExtResource("1_revr2")
+
+[node name="FloorTiles" type="GridMap" parent="." unique_id=1118473973]
+mesh_library = ExtResource("1_274tc")
+cell_size = Vector3(4, 4, 4)
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+
+[node name="WallTiles" type="GridMap" parent="." unique_id=226490231]
+mesh_library = ExtResource("1_274tc")
+cell_size = Vector3(4, 4, 4)
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false

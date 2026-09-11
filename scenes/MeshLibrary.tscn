@@ -4,7 +4,13 @@
 [ext_resource type="Material" uid="uid://x4bq1qrai2w2" path="res://assets/textures/carpet.tres" id="2_hh216"]
 [ext_resource type="Material" uid="uid://1ddkd5q5infj" path="res://assets/textures/wood.tres" id="2_tedfh"]
 [ext_resource type="Texture2D" uid="uid://d28b2l52nlx2p" path="res://assets/textures/white.png" id="3_a830f"]
+[ext_resource type="ArrayMesh" uid="uid://se6gm2bwlcko" path="res://assets/3d_tiles/themed/baroque/wall.obj" id="8_hamdk"]
+[ext_resource type="Material" uid="uid://bwcbbw6gtxwq" path="res://assets/textures/red_wall.tres" id="9_n785q"]
+[ext_resource type="Material" uid="uid://x8q20urpssf8" path="res://assets/textures/flat_white.tres" id="10_d54e2"]
+[ext_resource type="ArrayMesh" uid="uid://dlxvobx8268jx" path="res://assets/3d_tiles/themed/baroque/ceiling.obj" id="11_n785q"]
+[ext_resource type="ArrayMesh" uid="uid://dsjr8urrxvdun" path="res://assets/3d_tiles/themed/baroque/floor.obj" id="12_d54e2"]
 [ext_resource type="Material" uid="uid://datvvi6j3c0kp" path="res://assets/textures/white.tres" id="12_r4mto"]
+[ext_resource type="ArrayMesh" uid="uid://dbkb4eob1d40i" path="res://assets/3d_tiles/themed/baroque/facade.obj" id="13_7qb60"]
 [ext_resource type="Material" uid="uid://ddrg1bie5gs8p" path="res://assets/textures/marble21.tres" id="15_vywv5"]
 [ext_resource type="Material" uid="uid://c7c48j23p78pk" path="res://assets/textures/wood_2.tres" id="19_4jtqk"]
 
@@ -488,6 +494,12 @@ blend_shape_mode = 0
 [sub_resource type="BoxShape3D" id="BoxShape3D_11svc"]
 size = Vector3(4, 4, 4)
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hamdk"]
+points = PackedVector3Array(-2.1, 0, -2.0000978, -2.0000978, 0, -2.1, -2.1, 0, 1.9996867, -2.1, 0.99960846, -2.0000978, 1.9996867, 0, -2.1, -2.0000978, 0.99960846, -2.1, -2.0000978, 0, 2.1, -2.1, 0.99960846, 1.9996867, -2.0000978, 6, -2.0000978, 2.0995889, 0, -2.0000978, 1.9996867, 0.99960846, -2.1, 1.9996867, 0, 2.1, -2.0000978, 0.99960846, 2.1, -2.0000978, 6, 1.9996867, 1.9996867, 6, -2.0000978, 2.1, 0, 1.9996867, 2.0995889, 0.99960846, -2.0000978, 1.9996867, 0.99960846, 2.1, 1.9996867, 6, 1.9996867, 2.1, 0.99960846, 1.9996867)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d54e2"]
+points = PackedVector3Array(-2, 4, -2, -2, 4, 2, 2, 4, -2, 2, 4, 2)
+
 [node name="MeshLibrary" type="Node3D" unique_id=1382286949]
 
 [node name="floor" type="MeshInstance3D" parent="." unique_id=1009059699]
@@ -753,3 +765,36 @@ shape = SubResource("BoxShape3D_11svc")
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="hall_stair_turn/StaticBody3D" unique_id=1879246309]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.95, 0)
 shape = SubResource("BoxShape3D_1mvt4")
+
+[node name="wall_baroque" type="MeshInstance3D" parent="." unique_id=1503148830]
+visible = false
+mesh = ExtResource("8_hamdk")
+surface_material_override/0 = ExtResource("9_n785q")
+surface_material_override/1 = ExtResource("10_d54e2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wall_baroque" unique_id=1762614640]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall_baroque/StaticBody3D" unique_id=1648256170]
+shape = SubResource("ConvexPolygonShape3D_hamdk")
+
+[node name="ceiling_baroque" type="MeshInstance3D" parent="." unique_id=626314091]
+visible = false
+mesh = ExtResource("11_n785q")
+surface_material_override/0 = ExtResource("9_n785q")
+
+[node name="floor_baroque" type="MeshInstance3D" parent="." unique_id=1155601970]
+visible = false
+mesh = ExtResource("12_d54e2")
+skeleton = NodePath("../ceiling_baroque")
+surface_material_override/0 = ExtResource("2_tedfh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor_baroque" unique_id=518624102]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor_baroque/StaticBody3D" unique_id=656218656]
+shape = SubResource("ConvexPolygonShape3D_d54e2")
+
+[node name="facade_baroque" type="MeshInstance3D" parent="." unique_id=328657283]
+visible = false
+mesh = ExtResource("13_7qb60")
+surface_material_override/0 = ExtResource("9_n785q")
+surface_material_override/1 = ExtResource("10_d54e2")

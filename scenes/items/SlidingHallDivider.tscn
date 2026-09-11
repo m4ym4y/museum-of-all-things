@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqnx68ab5f0ek"]
+[gd_scene format=3 uid="uid://bqnx68ab5f0ek"]
 
 [ext_resource type="Script" uid="uid://bdaqa76jolixw" path="res://scenes/items/SlidingHallDivider.gd" id="1_a8fus"]
 [ext_resource type="Material" uid="uid://datvvi6j3c0kp" path="res://assets/textures/white.tres" id="1_q84oc"]
