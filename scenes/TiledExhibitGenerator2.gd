@@ -48,7 +48,30 @@ const THEMES = {
 @onready var _fgrid = $FloorTiles
 @onready var _wgrid = $WallTiles
 
+# set from params
 var _theme
+var _min_room_dimension
+var _max_room_dimension
+
+# just member state
+var _areas_reserved = []
+var _areas_created = []
+
+func generate(
+    params
+  ):
+    _theme = THEMES[params.theme]
+    _min_room_dimension = params.min_room_dimension
+    _max_room_dimension = params.max_room_dimension
+
+    for i in range(10):
+      add_room()
+
+func _rdim():
+  return (randi() % (_max_room_dimension - _min_room_dimension)) + _min_room_dimension
+
+func _rdim_hall():
+  return (randi() % (_min_room_dimension - 1)) + 1
 
 func _normalize_rect(rect):
   var p1 = rect[0]
@@ -125,26 +148,54 @@ func _fill_floor(_rect):
     for z in range(c1.z, c2.z + 1):
       _fgrid.set_cell_item(Vector3(x, 0, z), _theme.floor)
 
-func generate(
-    params
-  ):
-    _theme = THEMES[params.theme]
-    var start_room = [Vector3(-3, 0, -3), Vector3(2, 0, 2)]
-    var last_room = start_room
-
-    for i in range(10):
-      var anchors = _rect_anchor_points(last_room)
-      _fill_floor(last_room)
-
-      var next = anchors[randi() % 4]
-      var next_rect = extend_rect_from_point(next.p, next.dir, 5, 2)
-      _fill_floor(next_rect)
-      last_room = next_rect
-
-func extend_rect_from_point(start, dir, length, width):
+func _extend_rect_from_point(start, dir, length, width):
   var c1 = start + _left90(dir) * _left_half(width)
   var c2 = start + _right90(dir) * _right_half(width) + dir * length
   return [c1, c2]
 
+func _valid_placement(rect):
+  for area in _areas_reserved:
+    if _intersecting_rect(rect, area.room) or _intersecting_rect(rect, area.hall):
+      return false
+  for area in _areas_created:
+    if _intersecting_rect(rect, area.room):
+      return false
+    # start area does not have a hall
+    if area.hall and _intersecting_rect(rect, area.hall):
+      return false
+  return true
+
 func add_room():
-  pass
+  var room = null
+  var hall = null
+  if len(_areas_reserved) == 0:
+    # room reserved initial could be added in generate
+    room = _extend_rect_from_point(Vector3.ZERO, Vector3.FORWARD, _rdim(), _rdim())
+  else:
+    var reservation = _areas_reserved.pop_at(randi() % len(_areas_reserved))
+    room = reservation.room
+    hall = reservation.hall
+
+  # scope out the next rooms
+  var anchors = _rect_anchor_points(room)
+  for anchor in anchors:
+    # todo: random hall widths
+    var try_hall = _extend_rect_from_point(anchor.p, anchor.dir, 3, _rdim_hall())
+    var try_hall_anchors = _rect_anchor_points(try_hall)
+
+    # place room in the same direction hallway is going
+    var try_room_start
+    for a in try_hall_anchors:
+      if a.dir == anchor.dir:
+        try_room_start = a.p
+
+    # todo random room sizes
+    var try_room = _extend_rect_from_point(try_room_start, anchor.dir, _rdim(), _rdim())
+    if _valid_placement(try_hall) and _valid_placement(try_room):
+      _areas_reserved.push_back({ "room": try_room, "hall": try_hall })
+
+  # actually write them to the gridmap
+  _areas_created.push_back({ "room": room, "hall": hall })
+  _fill_floor(room)
+  if hall:
+    _fill_floor(hall)

@@ -19,7 +19,9 @@ func _on_generate_pressed():
   add_child(generator)
 
   generator.generate({
-    "theme": "default"
+    "theme": "default",
+    "min_room_dimension": 3,
+    "max_room_dimension": 6,
   })
 
 @export_tool_button("Generate!") var button = _on_generate_pressed
