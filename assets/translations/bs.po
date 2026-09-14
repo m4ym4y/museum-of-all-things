@@ -1,0 +1,475 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Museum of All Things\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: bs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+msgid "Enter the Museum"
+msgstr "Uđite u muzej"
+
+msgid "Settings"
+msgstr "Podešavanja"
+
+msgid "Quit"
+msgstr "Prestani"
+
+msgid ""
+"The museum is currently unstaffed. Please refer to signage for information."
+msgstr ""
+"Muzej je trenutno bez osoblja. Molimo vas da se za informacije obratite "
+"natpisima."
+
+msgid "English"
+msgstr "Engleski"
+
+msgid "Spanish"
+msgstr "Španski"
+
+msgid "Portuguese"
+msgstr "Portugalski"
+
+msgid "French"
+msgstr "Francuski"
+
+msgid "Japanese"
+msgstr "Japanski"
+
+msgid "Chinese"
+msgstr "Kineski"
+
+msgid "Are you sure you want to Quit?"
+msgstr "Jesi li siguran da želiš da odustaneš?"
+
+msgid "Yes"
+msgstr "Da"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "Open Page in Browser"
+msgstr "Otvori stranicu u pregledniku"
+
+msgid "Paused"
+msgstr "Zaustavljeno"
+
+msgid " - Paused"
+msgstr " - Pauzirano"
+
+msgid "Lobby"
+msgstr "Lobi"
+
+msgid "Resume"
+msgstr "Nastavi"
+
+msgid "Return to Lobby"
+msgstr "Povratak u lobi"
+
+msgid "Enter Exhibit Name"
+msgstr "Unesite naziv izložbe"
+
+msgid "Go to Random Exhibit"
+msgstr "Idi na nasumičnu izložbu"
+
+msgid "Enter exhibit title"
+msgstr "Unesite naslov izložbe"
+
+msgid "Confirm"
+msgstr "Potvrdi"
+
+msgid "Back"
+msgstr "Nazad"
+
+msgid "Exhibit Found: \"\""
+msgstr "Pronađen ekshibit: \"\""
+
+msgid "OK / Exit"
+msgstr "U redu / Izlaz"
+
+msgid "VR Controls"
+msgstr "VR kontrole"
+
+msgid "Restore Default Settings"
+msgstr "Obnovite zadana podešavanja"
+
+msgid "Movement Style"
+msgstr "Stil pokreta"
+
+msgid "Teleportation (Left Trigger)"
+msgstr "Teleportacija (lijevi okidač)"
+
+msgid "Direct Movement (Left Analog Stick)"
+msgstr "Direktno kretanje (lijevi analogni džojstik)"
+
+msgid "Direct Movement Speed"
+msgstr "Brzina direktnog kretanja"
+
+msgid "Camera Rotation Increment (Right Stick)"
+msgstr "Koračaj rotacije kamere (desni stick)"
+
+msgid "Smooth Camera Rotation"
+msgstr "Glatko rotiranje kamere"
+
+msgid "Preparing Exhibit..."
+msgstr "Priprema izloška..."
+
+msgid "Error Loading Exhibit."
+msgstr "Greška pri učitavanju izložbe."
+
+msgid "Graphics"
+msgstr "Grafika"
+
+msgid "Audio"
+msgstr "Audio"
+
+msgid "Data"
+msgstr "Podaci"
+
+msgid "Controls"
+msgstr "Kontrole"
+
+msgid "Data Settings"
+msgstr "Postavke podataka"
+
+msgid "Cache"
+msgstr "Keš"
+
+msgid "Cache (calculating size...)"
+msgstr "Keš (izračunava se veličina...)"
+
+msgid "Cache (%3.2f GB)"
+msgstr "Keš (%3.2f GB)"
+
+msgid "Clear Cache"
+msgstr "Očisti keš"
+
+msgid "Cache Size Limit"
+msgstr "Ograničenje veličine keša"
+
+msgid "Automatically limit cache size (on quit)"
+msgstr "Automatski ograničite veličinu keša (pri izlasku)"
+
+msgid "Graphics Settings"
+msgstr "Grafičke postavke"
+
+msgid "Render Scale"
+msgstr "Mjerilo prikaza"
+
+msgid "Fullscreen"
+msgstr "Cijeli Ekran"
+
+msgid "Reflection Quality"
+msgstr "Kvalitet refleksije"
+
+msgid "Enable Reflections"
+msgstr "Omogući odraze"
+
+msgid "Ambient Light Level"
+msgstr "Nivo ambijentalnog svjetla"
+
+msgid "Enable Indirect Lighting (SSIL)"
+msgstr "Omogući indirektno osvjetljenje (SSIL)"
+
+msgid "Render Distance"
+msgstr "Daljina iscrtavanja"
+
+msgid "Fog"
+msgstr "Magla"
+
+msgid "Maximum FPS"
+msgstr "Maksimalni FPS"
+
+msgid "Enable Fog"
+msgstr "Omogući maglu"
+
+msgid "Enable V-Sync"
+msgstr "Omogući V-Sync"
+
+msgid "Limit FPS"
+msgstr "Ograniči FPS"
+
+msgid "Post-Processing Effect"
+msgstr "Efekt post-obrade"
+
+msgid "None"
+msgstr "Nema"
+
+msgid "CRT Filter"
+msgstr "CRT filter"
+
+msgid "Control Settings"
+msgstr "Postavke kontrole"
+
+msgid "Mouse Sensitivity"
+msgstr "Osjetljivost miša"
+
+msgid "Invert Y-axis"
+msgstr "Obrni Y-os"
+
+msgid "Remap Inputs"
+msgstr "Unosi za remapiranje"
+
+msgid "Move Forward"
+msgstr "Kreni naprijed"
+
+msgid "Move Back"
+msgstr "Povratak"
+
+msgid "Strafe Left"
+msgstr "Šalt lijevo"
+
+msgid "Strafe Right"
+msgstr "Šalt desno"
+
+msgid "Jump"
+msgstr "Skoči"
+
+msgid "Crouch"
+msgstr "Čučanj"
+
+msgid "Interact"
+msgstr "Interagirati"
+
+msgid "Joypad Camera Deadzone"
+msgstr "Joypad Kamera mrtva zona"
+
+msgid "Audio Settings"
+msgstr "Audio postavke"
+
+msgid "Global Volume"
+msgstr "Globalni obim"
+
+msgid "Sound Effects Volume"
+msgstr "Jačina zvučnih efekata"
+
+msgid "Ambience Volume"
+msgstr "Volumen ambijenta"
+
+msgid "Music Volume"
+msgstr "Jačina zvuka"
+
+msgid "Enter VR"
+msgstr "Uđite u VR"
+
+msgid "Snap turning:"
+msgstr "Naglo okretanje:"
+
+msgid "Y axis dead zone"
+msgstr "Mrtva zona osi Y"
+
+msgid "X axis dead zone"
+msgstr "Mrtva zona X-ose"
+
+msgid "Haptics Scale"
+msgstr "Haptička skala"
+
+msgid "Apply"
+msgstr "Primijeni"
+
+msgid "Reset"
+msgstr "Resetuj"
+
+msgid "Height adjust:"
+msgstr "Podešavanje visine:"
+
+msgid "WebXR primary:"
+msgstr "WebXR primarno:"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Thumbstick"
+msgstr "Palčasti džojstik"
+
+msgid "Trackpad"
+msgstr "Dodirna ploha"
+
+msgid "Technology"
+msgstr "Tehnologija"
+
+msgid "Featured Technology Exhibits"
+msgstr "Istaknuti tehnološki eksponati"
+
+msgid "Science"
+msgstr "Nauka"
+
+msgid "Featured Science Exhibits"
+msgstr "Istaknute naučne izložbe"
+
+msgid "Geography"
+msgstr "Geografija"
+
+msgid "Featured Geography Exhibits"
+msgstr "Istaknute geografske izložbe"
+
+msgid "Culture"
+msgstr "Kultura"
+
+msgid "Featured Culture Exhibits"
+msgstr "Istaknute kulturne izložbe"
+
+msgid "Art"
+msgstr "Umjetnost"
+
+msgid "Featured Art Exhibits"
+msgstr "Istaknute umjetničke izložbe"
+
+msgid "People"
+msgstr "Ljudi"
+
+msgid "Featured People Exhibits"
+msgstr "Istaknuti eksponati"
+
+msgid "History"
+msgstr "Historija"
+
+msgid "Featured History Exhibits"
+msgstr "Istaknute historijske izložbe"
+
+msgid "Media"
+msgstr "Medij"
+
+msgid "Featured Media Exhibits"
+msgstr "Istaknuti medijski eksponati"
+
+msgid "Search"
+msgstr "Pretraži"
+
+msgid "Featured Search Exhibits"
+msgstr "Istaknute izložbe pretrage"
+
+# ## scenes/Lobby.tscn Section
+msgid ""
+"[b]Welcome to the Museum of All Things![/b]\n"
+"\n"
+"[fill]This museum is different from any you've visited in the physical "
+"world, so it may take a moment to get your bearings.[/fill]\n"
+"\n"
+"[b]The Lobby[/b]\n"
+"\n"
+"[fill]Right now you are in the museum's lobby, tailored to give you a "
+"pleasant starting point on your visit. If you ever wish to return here, you "
+"may simply open your museum menu (via \"Escape,\" \"Start,\" or by hitting "
+"\"Y\" on your right-hand controller in Virtual Reality) and select \"Return "
+"to Lobby.\"\n"
+"\n"
+"The lobby is divided into areas by subject, which are marked by signs and "
+"indicated on the maps in the entry hall behind you. In each of these areas, "
+"you will find many hallways into a range of fascinating exhibits.[/fill]"
+msgstr ""
+"[b]Dobrodošli u Muzej svega![/b]\n"
+"\n"
+"[fill]Ovaj muzej se razlikuje od bilo kojeg koji ste posjetili u fizičkom "
+"svijetu, pa vam možda treba trenutak da se orijentirate.[/fill]\n"
+"\n"
+"[b]Lobi[/b]\n"
+"\n"
+"[fill]Trenutno se nalazite u lobiju muzeja, prilagođenom da vam pruži ugodnu "
+"polaznu tačku za vašu posjetu. Ako se ikada budete željeli vratiti ovdje, "
+"možete jednostavno otvoriti meni muzeja (putem tipki \"Escape\" i \"Start\" "
+"ili pritiskom na \"Y\" na desnom kontroleru u virtualnoj stvarnosti) i "
+"odabrati \"Povratak u lobi\".\n"
+"\n"
+"Lobi je podijeljen na zone po temama, koje su označene znakovima i prikazane "
+"na mapama u ulaznoj dvorani iza vas. U svakoj od ovih zona pronaći ćete "
+"brojne hodnike koji vode do niza fascinantnih izložbi.[/fill]"
+
+msgid ""
+"[b]Museum Exhibits[/b]\n"
+"\n"
+"[fill]Exhibits are not made by hand-- they are generated procedurally by "
+"pulling images and textual data from Wikipedia and Wikimedia commons. This "
+"means any topic with a Wikipedia page can also be accessed as an exhibit in "
+"this museum!\n"
+"\n"
+"Furthermore, each exhibit contains many hallways connecting it to other "
+"exhibits. These hallways are determined based on the links in the current "
+"exhibit's Wikipedia article. You can move from exhibit to exhibit endlessly, "
+"following your curiosity.\n"
+"\n"
+"If you prefer to go straight to a particular subject, you may access the "
+"search terminal, at the end of the entry hall directly behind you. Simply "
+"enter your topic of interest into the terminal's interface, and it will "
+"create a hallway for you to walk straight there.[/fill]"
+msgstr ""
+"[b]Muzejski eksponati[/b]\n"
+"\n"
+"[fill]Eksponati nisu ručno izrađeni – oni se generišu proceduralno uzimanjem "
+"slika i tekstualnih podataka sa Wikipedije i Wikimedia Commonsa. To znači da "
+"se bilo koja tema sa stranicom na Wikipediji može pronaći i kao eksponat u "
+"ovom muzeju!\n"
+"\n"
+"Nadalje, svaki eksponat sadrži mnogo hodnika koji ga povezuju sa drugim "
+"eksponatima. Ovi hodnici se određuju na osnovu linkova u članku na "
+"Wikipediji trenutnog eksponata. Možete beskonačno prelaziti s izložbe na "
+"izložbu, slijedeći svoju znatiželju.\n"
+"\n"
+"Ako želite ići direktno na određenu temu, možete pristupiti terminalu za "
+"pretraživanje, koji se nalazi na kraju ulaznog hodnika, tačno iza vas. "
+"Jednostavno unesite temu koja vas zanima u interfejs terminala i on će za "
+"vas stvoriti hodnik kojim ćete ići direktno tamo."
+
+# ## scenes/menu/TerminalMenu.tscn Section
+msgid ""
+"Welcome to the MoAT Custom Exhibit Terminal\n"
+"\n"
+"You may access a specific exhibit by selecting \"Enter Exhibit Name.\" "
+"Alternatively, you may ask for a random exhibit.\n"
+"\n"
+"Hit \"E\" on your keyboard to interact with the terminal, or press Y/△ if "
+"you are using a controller.\n"
+"\n"
+msgstr ""
+"Dobrodošli na MoAT terminal za prilagođene izložbe\n"
+"\n"
+"Do određene izložbe možete pristupiti odabirom opcije \"Unesi naziv "
+"izložbe\". Alternativno, možete zatražiti nasumičnu izložbu.\n"
+"\n"
+"Pritisnite \"E\" na tastaturi da biste komunicirali s terminalom, ili "
+"pritisnite Y/△ ako koristite kontroler.\n"
+"\n"
+
+msgid "Enter Exhibit Name "
+msgstr "Unesite naziv izložbe "
+
+msgid "Go to Random Exhibit "
+msgstr "Idi na nasumičnu izložbu "
+
+msgid ""
+"Enter the title of the exhibit you would like to acccess. A path will be "
+"routed and the door will open to the best matching exhibit.\n"
+"\n"
+msgstr ""
+"Unesite naslov izložbe koju želite pristupiti. Bit će usmjeren put i vrata "
+"će se otvoriti prema izložbi koja najbolje odgovara.\n"
+"\n"
+
+msgid "Exhibit Found: \"\"\n"
+msgstr "Pronađen ekshibit: \"\"\n"
+
+msgid ""
+"\n"
+"Proceed to your right to access this exhibit, or return to the terminal's "
+"main menu to access a different exhibit.\n"
+"\n"
+msgstr ""
+"\n"
+"Idite desno da biste pristupili ovoj izložbi ili se vratite na glavni meni "
+"terminala da biste pristupili drugoj izložbi.\n"
+"\n"
+
+msgid ""
+"We were unable to locate the exhibit that you requested. Please try a "
+"different exhibit.\n"
+"\n"
+msgstr ""
+"Nismo uspjeli pronaći izložak koji ste zatražili. Molimo vas da pokušate s "
+"drugim izložkom.\n"
+"\n"
