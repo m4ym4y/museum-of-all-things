@@ -1,0 +1,399 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Museum of All Things\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+"Language: ru\n"
+
+msgid "Enter the Museum"
+msgstr "Войти в музей"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Quit"
+msgstr "Выход"
+
+msgid "The museum is currently unstaffed. Please refer to signage for information."
+msgstr "Сейчас в музее нет персонала. Пожалуйста, ориентируйтесь по информационным табличкам."
+
+msgid "English"
+msgstr "Английский"
+
+msgid "Spanish"
+msgstr "Испанский"
+
+msgid "Portuguese"
+msgstr "Португальский"
+
+msgid "French"
+msgstr "Французский"
+
+msgid "Japanese"
+msgstr "Японский"
+
+msgid "Are you sure you want to Quit?"
+msgstr "Вы уверены, что хотите выйти?"
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "Open Page in Browser"
+msgstr "Открыть страницу в браузере"
+
+msgid "Paused"
+msgstr "Пауза"
+
+msgid " - Paused"
+msgstr " — Пауза"
+
+msgid "Lobby"
+msgstr "Лобби"
+
+msgid "Resume"
+msgstr "Продолжить"
+
+msgid "Return to Lobby"
+msgstr "Вернуться в лобби"
+
+msgid "Enter Exhibit Name"
+msgstr "Ввести название экспозиции"
+
+msgid "Go to Random Exhibit"
+msgstr "Случайная экспозиция"
+
+msgid "Enter exhibit title"
+msgstr "Введите название экспозиции"
+
+msgid "Confirm"
+msgstr "Подтвердить"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Exhibit Found: \"\""
+msgstr "Экспозиция найдена: \"\""
+
+msgid "OK / Exit"
+msgstr "ОК / Выход"
+
+msgid "VR Controls"
+msgstr "Управление VR"
+
+msgid "Restore Default Settings"
+msgstr "Восстановить настройки по умолчанию"
+
+msgid "Movement Style"
+msgstr "Стиль перемещения"
+
+msgid "Teleportation (Left Trigger)"
+msgstr "Телепортация (левый триггер)"
+
+msgid "Direct Movement (Left Analog Stick)"
+msgstr "Прямое движение (левый стик)"
+
+msgid "Direct Movement Speed"
+msgstr "Скорость прямого движения"
+
+msgid "Camera Rotation Increment (Right Stick)"
+msgstr "Шаг поворота камеры (правый стик)"
+
+msgid "Smooth Camera Rotation"
+msgstr "Плавный поворот камеры"
+
+msgid "Preparing Exhibit..."
+msgstr "Подготовка экспозиции..."
+
+msgid "Error Loading Exhibit."
+msgstr "Ошибка загрузки экспозиции."
+
+msgid "Graphics"
+msgstr "Графика"
+
+msgid "Audio"
+msgstr "Звук"
+
+msgid "Data"
+msgstr "Данные"
+
+msgid "Controls"
+msgstr "Управление"
+
+msgid "Data Settings"
+msgstr "Настройки данных"
+
+msgid "Cache"
+msgstr "Кэш"
+
+msgid "Clear Cache"
+msgstr "Очистить кэш"
+
+msgid "Cache Size Limit"
+msgstr "Ограничение размера кэша"
+
+msgid "Automatically limit cache size (on quit)"
+msgstr "Автоматически ограничивать размер кэша (при выходе)"
+
+msgid "Graphics Settings"
+msgstr "Настройки графики"
+
+msgid "Render Scale"
+msgstr "Масштаб рендеринга"
+
+msgid "Fullscreen"
+msgstr "Полноэкранный режим"
+
+msgid "Reflection Quality"
+msgstr "Качество отражений"
+
+msgid "Enable Reflections"
+msgstr "Включить отражения"
+
+msgid "Ambient Light Level"
+msgstr "Уровень фонового освещения"
+
+msgid "Enable Indirect Lighting (SSIL)"
+msgstr "Включить непрямое освещение (SSIL)"
+
+msgid "Render Distance"
+msgstr "Дальность прорисовки"
+
+msgid "Fog"
+msgstr "Туман"
+
+msgid "Maximum FPS"
+msgstr "Максимальный FPS"
+
+msgid "Enable Fog"
+msgstr "Включить туман"
+
+msgid "Enable V-Sync"
+msgstr "Включить V-Sync"
+
+msgid "Limit FPS"
+msgstr "Ограничить FPS"
+
+msgid "Post-Processing Effect"
+msgstr "Эффект постобработки"
+
+msgid "None"
+msgstr "Нет"
+
+msgid "CRT Filter"
+msgstr "CRT-фильтр"
+
+msgid "Control Settings"
+msgstr "Настройки управления"
+
+msgid "Mouse Sensitivity"
+msgstr "Чувствительность мыши"
+
+msgid "Invert Y-axis"
+msgstr "Инвертировать ось Y"
+
+msgid "Remap Inputs"
+msgstr "Переназначить клавиши"
+
+msgid "Move Forward"
+msgstr "Движение вперёд"
+
+msgid "Move Back"
+msgstr "Движение назад"
+
+msgid "Strafe Left"
+msgstr "Страф влево"
+
+msgid "Strafe Right"
+msgstr "Страф вправо"
+
+msgid "Jump"
+msgstr "Прыжок"
+
+msgid "Crouch"
+msgstr "Присесть"
+
+msgid "Interact"
+msgstr "Взаимодействие"
+
+msgid "Joypad Camera Deadzone"
+msgstr "Мёртвая зона стика камеры"
+
+msgid "Audio Settings"
+msgstr "Настройки звука"
+
+msgid "Global Volume"
+msgstr "Общая громкость"
+
+msgid "Sound Effects Volume"
+msgstr "Громкость эффектов"
+
+msgid "Ambience Volume"
+msgstr "Громкость окружения"
+
+msgid "Music Volume"
+msgstr "Громкость музыки"
+
+msgid "Enter VR"
+msgstr "Войти в VR"
+
+msgid "Snap turning:"
+msgstr "Поворот рывками:"
+
+msgid "Y axis dead zone"
+msgstr "Мёртвая зона оси Y"
+
+msgid "X axis dead zone"
+msgstr "Мёртвая зона оси X"
+
+msgid "Haptics Scale"
+msgstr "Интенсивность вибрации"
+
+msgid "Apply"
+msgstr "Применить"
+
+msgid "Reset"
+msgstr "Сбросить"
+
+msgid "Height adjust:"
+msgstr "Настройка высоты:"
+
+msgid "WebXR primary:"
+msgstr "Основной ввод WebXR:"
+
+msgid "Auto"
+msgstr "Авто"
+
+msgid "Thumbstick"
+msgstr "Стик"
+
+msgid "Trackpad"
+msgstr "Тачпад"
+
+msgid "Technology"
+msgstr "Технологии"
+
+msgid "Featured Technology Exhibits"
+msgstr "Рекомендуемые экспозиции: технологии"
+
+msgid "Science"
+msgstr "Наука"
+
+msgid "Featured Science Exhibits"
+msgstr "Рекомендуемые экспозиции: наука"
+
+msgid "Geography"
+msgstr "География"
+
+msgid "Featured Geography Exhibits"
+msgstr "Рекомендуемые экспозиции: география"
+
+msgid "Culture"
+msgstr "Культура"
+
+msgid "Featured Culture Exhibits"
+msgstr "Рекомендуемые экспозиции: культура"
+
+msgid "Art"
+msgstr "Искусство"
+
+msgid "Featured Art Exhibits"
+msgstr "Рекомендуемые экспозиции: искусство"
+
+msgid "People"
+msgstr "Люди"
+
+msgid "Featured People Exhibits"
+msgstr "Рекомендуемые экспозиции: люди"
+
+msgid "History"
+msgstr "История"
+
+msgid "Featured History Exhibits"
+msgstr "Рекомендуемые экспозиции: история"
+
+msgid "Media"
+msgstr "Медиа"
+
+msgid "Featured Media Exhibits"
+msgstr "Рекомендуемые экспозиции: медиа"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Featured Search Exhibits"
+msgstr "Рекомендуемые экспозиции: поиск"
+
+msgid ""
+"[b]Welcome to the Museum of All Things![/b]\n"
+"\n"
+"[fill]This museum is different from any you've visited in the physical world, so it may take a moment to get your bearings.[/fill]\n"
+"\n"
+"[b]The Lobby[/b]\n"
+"\n"
+"[fill]Right now you are in the museum's lobby, tailored to give you a pleasant starting point on your visit. If you ever wish to return here, you may simply open your museum menu (via \"Escape,\" \"Start,\" or by hitting \"Y\" on your right-hand controller in Virtual Reality) and select \"Return to Lobby.\"\n"
+"\n"
+"The lobby is divided into areas by subject, which are marked by signs and indicated on the maps in the entry hall behind you. In each of these areas, you will find many hallways into a range of fascinating exhibits.[/fill]"
+msgstr ""
+"[b]Добро пожаловать в Museum of All Things![/b]\n"
+"\n"
+"[fill]Этот музей не похож ни на один из тех, что вы посещали в физическом мире, поэтому вам может понадобиться немного времени, чтобы сориентироваться.[/fill]\n"
+"\n"
+"[b]Вестибюль[/b]\n"
+"\n"
+"[fill]В данный момент вы находитесь в вестибюле музея — пространстве, созданном для того, чтобы дать вам удобную отправную точку для посещения. Если вы захотите вернуться сюда в любой момент, просто откройте меню музея (клавишей \"Escape\", кнопкой \"Start\" или нажатием \"Y\" на правом контроллере в режиме виртуальной реальности) и выберите пункт \"Вернуться в Вестибюль\".\n"
+"\n"
+"Вестибюль разделен на зоны по темам, которые отмечены табличками и обозначены на картах в вестибюле позади вас. В каждой из этих зон вы найдете множество коридоров, ведущих к самым разным увлекательным экспозициям.[/fill]"
+
+msgid ""
+"[b]Museum Exhibits[/b]\n"
+"\n"
+"[fill]Exhibits are not made by hand-- they are generated procedurally by pulling images and textual data from Wikipedia and Wikimedia commons. This means any topic with a Wikipedia page can also be accessed as an exhibit in this museum!\n"
+"\n"
+"Furthermore, each exhibit contains many hallways connecting it to other exhibits. These hallways are determined based on the links in the current exhibit's Wikipedia article. You can move from exhibit to exhibit endlessly, following your curiosity.\n"
+"\n"
+"If you prefer to go straight to a particular subject, you may access the search terminal, at the end of the entry hall directly behind you. Simply enter your topic of interest into the terminal's interface, and it will create a hallway for you to walk straight there.[/fill]"
+msgstr ""
+"[b]Экспозиции музея[/b]\n"
+"\n"
+"[fill]Экспозиции не создаются вручную — они генерируются процедурно, с использованием изображений и текстовых данных из Википедии и Wikimedia Commons. Это означает, что практически любая тема, имеющая страницу в Википедии, может быть представлена в этом музее в виде экспозиции!\n"
+"\n"
+"Кроме того, каждая экспозиция содержит множество коридоров, соединяющих его с другими экспозициями. Эти коридоры формируются на основе ссылок в текущей статье Википедии. Вы можете бесконечно переходить от экспозиции к экспозиции, следуя своему любопытству.\n"
+"\n"
+"Если вы предпочитаете сразу перейти к конкретной теме, вы можете воспользоваться поисковым терминалом, расположенным в конце вестибюля прямо позади вас. Просто введите интересующую вас тему в интерфейс терминала — и он создаст коридор, по которому вы сможете пройти прямо к нужной экспозиции.[/fill]"
+
+msgid "Welcome to the MoAT Custom Exhibit Terminal\n\nYou may access a specific exhibit by selecting \"Enter Exhibit Name.\" Alternatively, you may ask for a random exhibit.\n\nHit \"E\" on your keyboard to interact with the terminal, or press Y/△ if you are using a controller.\n\n"
+msgstr "Добро пожаловать в терминал пользовательских экспозиций MoAT\n\nВы можете открыть конкретную экспозицию, выбрав «Ввести название экспозиции». Также можно запросить случайную экспозицию.\n\nНажмите «E» на клавиатуре, чтобы взаимодействовать с терминалом, или нажмите Y/△, если вы используете геймпад.\n\n"
+
+msgid "Enter Exhibit Name "
+msgstr "Ввести название экспозиции "
+
+msgid "Go to Random Exhibit "
+msgstr "Случайная экспозиция "
+
+msgid "Enter the title of the exhibit you would like to acccess. A path will be routed and the door will open to the best matching exhibit.\n\n"
+msgstr "Введите название экспозиции, к которой вы хотите получить доступ. Маршрут будет проложен, и дверь откроется к наиболее подходящей экспозиции.\n\n"
+
+msgid "Enter exhibit title"
+msgstr "Введите название экспозиции"
+
+msgid "Confirm"
+msgstr "Подтвердить"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Exhibit Found: \"\"\n"
+msgstr "Экспозиция найдена: \"\"\n"
+
+msgid "\nProceed to your right to access this exhibit, or return to the terminal's main menu to access a different exhibit.\n\n"
+msgstr "\nПройдите направо, чтобы попасть в эту экспозицию, или вернитесь в главное меню терминала, чтобы выбрать другую экспозицию.\n\n"
+
+msgid "OK / Exit"
+msgstr "ОК / Выход"
+
+msgid "We were unable to locate the exhibit that you requested. Please try a different exhibit.\n\n"
+msgstr "Нам не удалось найти запрошенную вами экспозицию. Пожалуйста, попробуйте другую.\n\n"
