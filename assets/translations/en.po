@@ -37,6 +37,9 @@ msgstr "日本語"
 msgid "Chinese"
 msgstr "中文"
 
+msgid "Russian"
+msgstr "Русский"
+
 msgid "Are you sure you want to Quit?"
 msgstr "Are you sure you want to Quit?"
 
