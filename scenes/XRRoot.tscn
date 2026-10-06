@@ -139,6 +139,9 @@ hand_tracker = &"/user/hand_tracker/right"
 [node name="HandTrackingAimLeft" type="XRController3D" parent="XROrigin3D" unique_id=1148489984]
 tracker = &"/user/fbhandaim/left"
 
+[node name="HandTrackingAimRight" type="XRController3D" parent="XROrigin3D" unique_id=96918787]
+tracker = &"/user/fbhandaim/right"
+
 [node name="XRToolsPlayerBody" type="CharacterBody3D" parent="XROrigin3D" unique_id=1480952486 groups=["Player"]]
 top_level = true
 collision_layer = 524288
@@ -176,5 +179,7 @@ one_shot = true
 [connection signal="tracking_changed" from="XROrigin3D/HandTrackingRight" to="." method="_on_hand_tracking_right_tracking_changed"]
 [connection signal="button_pressed" from="XROrigin3D/HandTrackingAimLeft" to="." method="_on_hand_tracking_aim_left_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/HandTrackingAimLeft" to="." method="_on_hand_tracking_aim_left_button_released"]
+[connection signal="button_pressed" from="XROrigin3D/HandTrackingAimRight" to="." method="_on_hand_tracking_aim_right_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/HandTrackingAimRight" to="." method="_on_hand_tracking_aim_right_button_released"]
 [connection signal="confirmed" from="FailedVrAccept" to="." method="_failed_vr_accept_confirmed"]
 [connection signal="timeout" from="MenuPivotTimer" to="." method="_on_menu_pivot_timer_timeout"]

@@ -35,6 +35,7 @@ const RELEASED_THRESHOLD := 0.6
 
 var _thumbstick_teleport_pressed := false
 var _is_menu_gesture_ready := false
+var _is_system_gesture_ready := false
 
 var _left_hand_pinching := false
 var _right_hand_pinching := false
@@ -147,13 +148,18 @@ func _get_menu_pivot_basis() -> Basis:
 
 func _process(_delta: float) -> void:
   if not _is_openxr_hand_tracking_aim_enabled():
-    var vector_to_camera: Vector3 = (camera.position - left_hand_tracking.position).normalized()
-    if vector_to_camera.dot(left_hand_tracking.basis.z) > 0.8:
+    var vector_to_camera_left: Vector3 = (camera.position - left_hand_tracking.position).normalized()
+    if vector_to_camera_left.dot(left_hand_tracking.basis.z) > 0.8:
       _is_menu_gesture_ready = true
       menu_icon.visible = true
     else:
       _is_menu_gesture_ready = false
       menu_icon.visible = false
+    var vector_to_camera_right: Vector3 = (camera.position - right_hand_tracking.position).normalized()
+    if vector_to_camera_right.dot(right_hand_tracking.basis.z) > 0.7:
+      _is_system_gesture_ready = true
+    else:
+      _is_system_gesture_ready = false
 
   if menu_active:
     var desired_basis := _get_menu_pivot_basis()
@@ -258,9 +264,10 @@ func _on_xr_controller_3d_right_input_float_changed(name: String, value: float) 
       if value > PRESSED_THRESHOLD:
         _right_hand_pinching = true
 
-        _right_virtual_thumbstick = XRVirtualThumbstickScene.instantiate()
-        xr_origin.add_child(_right_virtual_thumbstick)
-        _right_virtual_thumbstick.setup_virtual_thumbstick(right_controller, VIRTUAL_ROTATION_ACTION, Vector3(1.0, 0.0, 0.0))
+        if not _is_system_gesture_ready:
+            _right_virtual_thumbstick = XRVirtualThumbstickScene.instantiate()
+            xr_origin.add_child(_right_virtual_thumbstick)
+            _right_virtual_thumbstick.setup_virtual_thumbstick(right_controller, VIRTUAL_ROTATION_ACTION, Vector3(1.0, 0.0, 0.0))
 
 func _on_hand_tracking_aim_left_button_pressed(name: String) -> void:
   if name == "menu_gesture":
@@ -271,6 +278,14 @@ func _on_hand_tracking_aim_left_button_pressed(name: String) -> void:
 func _on_hand_tracking_aim_left_button_released(name: String) -> void:
   if name == "menu_gesture":
     _is_menu_gesture_ready = false
+
+func _on_hand_tracking_aim_right_button_pressed(name: String) -> void:
+    if name == "system_gesture":
+        _is_system_gesture_ready = true
+
+func _on_hand_tracking_aim_right_button_released(name: String) -> void:
+    if name == "system_gesture":
+        _is_system_gesture_ready = false
 
 func _on_hand_tracking_left_tracking_changed(tracking: bool) -> void:
   left_hand_tracking.visible = tracking
