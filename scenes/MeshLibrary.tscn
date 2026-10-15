@@ -11,7 +11,10 @@
 [ext_resource type="ArrayMesh" uid="uid://dsjr8urrxvdun" path="res://assets/3d_tiles/themed/baroque/floor.obj" id="12_d54e2"]
 [ext_resource type="Material" uid="uid://datvvi6j3c0kp" path="res://assets/textures/white.tres" id="12_r4mto"]
 [ext_resource type="ArrayMesh" uid="uid://dbkb4eob1d40i" path="res://assets/3d_tiles/themed/baroque/facade.obj" id="13_7qb60"]
+[ext_resource type="ArrayMesh" uid="uid://dj6s7otqosoe" path="res://assets/3d_tiles/wall_single_baroque.obj" id="14_sa085"]
+[ext_resource type="ArrayMesh" uid="uid://bs8caocajj820" path="res://assets/3d_tiles/wall_internalcorner_baroque.obj" id="15_107x5"]
 [ext_resource type="Material" uid="uid://ddrg1bie5gs8p" path="res://assets/textures/marble21.tres" id="15_vywv5"]
+[ext_resource type="ArrayMesh" uid="uid://cylqsppygtiyt" path="res://assets/3d_tiles/wall_internalhall_baroque.obj" id="16_b1c57"]
 [ext_resource type="Material" uid="uid://c7c48j23p78pk" path="res://assets/textures/wood_2.tres" id="19_4jtqk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sqqpe"]
@@ -500,6 +503,9 @@ points = PackedVector3Array(-2.1, 0, -2.0000978, -2.0000978, 0, -2.1, -2.1, 0, 1
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d54e2"]
 points = PackedVector3Array(-2, 4, -2, -2, 4, 2, 2, 4, -2, 2, 4, 2)
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sa085"]
+points = PackedVector3Array(-2, 0, -2, 2, 0, -2, -2, 0, -1.9, -2, 6, -2, 2, 0, -1.9, 2, 6, -2, -2, 0.99960846, -1.9, 2, 0.99960846, -1.9)
+
 [node name="MeshLibrary" type="Node3D" unique_id=1382286949]
 
 [node name="floor" type="MeshInstance3D" parent="." unique_id=1009059699]
@@ -796,5 +802,27 @@ shape = SubResource("ConvexPolygonShape3D_d54e2")
 [node name="facade_baroque" type="MeshInstance3D" parent="." unique_id=328657283]
 visible = false
 mesh = ExtResource("13_7qb60")
+surface_material_override/0 = ExtResource("9_n785q")
+surface_material_override/1 = ExtResource("10_d54e2")
+
+[node name="wall_single_baroque" type="MeshInstance3D" parent="." unique_id=748608513]
+mesh = ExtResource("14_sa085")
+surface_material_override/0 = ExtResource("9_n785q")
+surface_material_override/1 = ExtResource("10_d54e2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="wall_single_baroque" unique_id=2102436821]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wall_single_baroque/StaticBody3D" unique_id=1968542734]
+shape = SubResource("ConvexPolygonShape3D_sa085")
+
+[node name="wall_internalcorner_baroque" type="MeshInstance3D" parent="." unique_id=98296579]
+visible = false
+mesh = ExtResource("15_107x5")
+surface_material_override/0 = ExtResource("9_n785q")
+surface_material_override/1 = ExtResource("10_d54e2")
+
+[node name="wall_internalhall_baroque" type="MeshInstance3D" parent="." unique_id=609100552]
+visible = false
+mesh = ExtResource("16_b1c57")
 surface_material_override/0 = ExtResource("9_n785q")
 surface_material_override/1 = ExtResource("10_d54e2")

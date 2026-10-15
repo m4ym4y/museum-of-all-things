@@ -34,7 +34,9 @@ const BAROQUE_FLOOR = 21
 
 const THEMES = {
   "default": {
-    "wall": WALL,
+    "wall": 23,
+    "wall_internalcorner": 24,
+    "wall_internalhall": 25,
     "floor": FLOOR_WOOD,
     "ceiling": CEILING,
   },
@@ -148,17 +150,84 @@ func _fill_floor(_rect):
     for z in range(c1.z, c2.z + 1):
       _fgrid.set_cell_item(Vector3(x, 0, z), _theme.floor)
 
+func _empty_neighbors(grid, pos):
+  # 1 = 0x, -z (orientation 0)
+  # 2 = -x, 0z (orientation 16)
+  # 4 = 0x, +z (orientation 10)
+  # 8 = +x, 0z (orientation 22)
+  var neighborhood_place = 1
+  var neighborhood = 0
+  for n in [[0, -1], [-1, 0], [0, 1], [1, 0]]:
+    var x = n[0]
+    var z = n[1]
+    var vec = Vector3(pos.x + x, pos.y, pos.z + z)
+    var cell_val = grid.get_cell_item(vec)
+
+    if cell_val == -1:
+      neighborhood += neighborhood_place
+    neighborhood_place = neighborhood_place * 2
+  return neighborhood
+
+func _place_wall_if_valid(p):
+  var n = _empty_neighbors(_fgrid, p)
+  var wp = p + Vector3.UP
+  if n == 0:
+      # this is a totally enclosed floor and should have no wall
+      _wgrid.set_cell_item(wp, -1)
+  elif nearest_po2(n) == n: # only 1 bit is flipped if this is a power of 2, meaning 1 neighbor
+      # single wall case, rotate so the wall faces the floor away from empty space
+      if n == 1:
+        _wgrid.set_cell_item(wp, _theme.wall, 0)
+      elif n == 2:
+        _wgrid.set_cell_item(wp, _theme.wall, 16)
+      elif n == 4:
+        _wgrid.set_cell_item(wp, _theme.wall, 10)
+      elif n == 8:
+        _wgrid.set_cell_item(wp, _theme.wall, 22)
+  else:
+      # the negative z is empty
+      if n & 1 == 1:
+        # if positive z is empty it's a hall
+        if n & 4 == 4:
+          _wgrid.set_cell_item(wp, _theme.wall_internalhall)
+        elif n & 2 == 2:
+          _wgrid.set_cell_item(wp, _theme.wall_internalcorner, 16)
+        elif n & 8 == 8:
+          _wgrid.set_cell_item(wp, _theme.wall_internalcorner, 0)
+      # the negative x is empty
+      elif n & 2 == 2:
+        # if positive x is empty too it's a hall
+        if n & 8 == 8:
+          _wgrid.set_cell_item(wp, _theme.wall_internalhall, 16)
+        elif n & 4 == 4:
+          _wgrid.set_cell_item(wp, _theme.wall_internalcorner, 10)
+      else:
+        _wgrid.set_cell_item(wp, _theme.wall_internalcorner, 22)
+  pass
+
+func _fill_walls(_rect):
+  var rect = _normalize_rect(_rect)
+  var c1 = rect[0]
+  var c2 = rect[1]
+  for x in range(c1.x, c2.x + 1):
+    for z in [c1.z, c2.z]:
+      _place_wall_if_valid(Vector3(x, 0, z))
+  for z in range(c1.z, c2.z + 1):
+    for x in [c1.x, c2.x]:
+      _place_wall_if_valid(Vector3(x, 0, z))
+
 func _extend_rect_from_point(start, dir, length, width):
   var c1 = start + _left90(dir) * _left_half(width)
   var c2 = start + _right90(dir) * _right_half(width) + dir * length
   return [c1, c2]
 
-func _valid_placement(rect):
+func _valid_placement(_rect):
+  var rect = _expand_rect(_rect, 2)
   for area in _areas_reserved:
-    if _intersecting_rect(rect, area.room) or _intersecting_rect(rect, area.hall):
+    if _intersecting_rect(rect, _expand_rect(area.room, 2)) or _intersecting_rect(rect, area.hall):
       return false
   for area in _areas_created:
-    if _intersecting_rect(rect, area.room):
+    if _intersecting_rect(rect, _expand_rect(area.room, 2)):
       return false
     # start area does not have a hall
     if area.hall and _intersecting_rect(rect, area.hall):
@@ -197,5 +266,7 @@ func add_room():
   # actually write them to the gridmap
   _areas_created.push_back({ "room": room, "hall": hall })
   _fill_floor(room)
+  _fill_walls(room)
   if hall:
     _fill_floor(hall)
+    _fill_walls(hall)
