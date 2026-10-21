@@ -11,6 +11,8 @@ extends Node3D
 #   no_props (?): boolean
 #   exit_limit: int
 
+@export var HallCommon: PackedScene
+
 @onready var _fgrid = $FloorTiles
 @onready var _wgrid = $WallTiles
 
@@ -146,18 +148,23 @@ func _place_wall_if_valid(p):
       # in single wall case we can try to place a link(hall)
       var vec = Vector3(0, 0, 0)
       var ori = 0
+      var rot = PI
       if n == 1:
         vec = Vector3(0, 0, -1)
         ori = 0
+        rot = PI
       elif n == 2:
         vec = Vector3(-1, 0, 0)
         ori = 16
+        rot = 3 * PI / 2
       elif n == 4:
         vec = Vector3(0, 0, 1)
         ori = 10
+        rot = 0
       elif n == 8:
         vec = Vector3(1, 0, 0)
         ori = 22
+        rot = PI / 2
 
       # create the colliding rect for the link(hall)
       # this is the rect extending 2 out and 2 clockwise from p
@@ -168,6 +175,11 @@ func _place_wall_if_valid(p):
 
       # check if valid placement for link(hall)
       if vec.length() == 1 and _valid_hall_placement(hall_rect):
+        var hall_obj = HallCommon.instantiate()
+        hall_obj.position = 4 * ((hall_rect[0] + hall_rect[1]) / 2)
+        hall_obj.rotation.y = rot
+        add_child(hall_obj)
+
         _halls_created.push_back(hall_rect)
         _wgrid.set_cell_item(wp, _m("wall_facade"), ori)
       else:

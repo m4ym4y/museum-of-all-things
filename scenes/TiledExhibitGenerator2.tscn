@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://gp6c0nadrnk5"]
 
 [ext_resource type="Script" uid="uid://yprhsx112ogr" path="res://scenes/TiledExhibitGenerator2.gd" id="1_revr2"]
+[ext_resource type="PackedScene" uid="uid://5g2m1ueui0xr" path="res://scenes/items/HallCommon.tscn" id="2_i8oxh"]
 [ext_resource type="MeshLibrary" uid="uid://c4ce27j8jxqx" path="res://assets/3d_tiles/mesh_library_baroque.tres" id="2_revr2"]
 
 [node name="TiledExhibitGenerator2" type="Node3D" unique_id=1860408522]
 script = ExtResource("1_revr2")
+HallCommon = ExtResource("2_i8oxh")
 
 [node name="FloorTiles" type="GridMap" parent="." unique_id=1118473973]
 mesh_library = ExtResource("2_revr2")
