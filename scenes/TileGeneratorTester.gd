@@ -2,6 +2,8 @@
 extends Node3D
 
 @export var theme = "default"
+@export var min_room_dimension = 3
+@export var max_room_dimension = 6
 var _generated = null
 
 func _ready():
@@ -20,8 +22,8 @@ func _on_generate_pressed():
 
   generator.generate({
     "theme": "default",
-    "min_room_dimension": 3,
-    "max_room_dimension": 6,
+    "min_room_dimension": min_room_dimension,
+    "max_room_dimension": max_room_dimension,
   })
 
 @export_tool_button("Generate!") var button = _on_generate_pressed

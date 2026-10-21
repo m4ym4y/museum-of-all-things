@@ -4,7 +4,6 @@ extends Node3D
 # params
 #   min_room_dimension: int
 #   max_room_dimension: int
-#   theme: str | "default"
 #   start_pos: Vector3
 #   title: str
 #   prev_title: str
@@ -12,57 +11,24 @@ extends Node3D
 #   no_props (?): boolean
 #   exit_limit: int
 
-const FLOOR_WOOD = 0
-const RESERVED_VAL = 1
-const FLOOR_CARPET = 11
-const FLOOR_MARBLE = 12
-
-const WALL = 5
-const CEILING = 3
-const INTERNAL_HALL = 7
-const INTERNAL_HALL_TURN = 6
-const HALL_STAIRS_UP = 16
-const HALL_STAIRS_DOWN = 17
-const HALL_STAIRS_TURN = 18
-const MARKER = 8
-const BENCH = 9
-const FREE_WALL = 10
-
-const BAROQUE_WALL = 19
-const BAROQUE_CEILING = 20
-const BAROQUE_FLOOR = 21
-
-const THEMES = {
-  "default": {
-    "wall": 23,
-    "wall_internalcorner": 24,
-    "wall_internalhall": 25,
-    "floor": FLOOR_WOOD,
-    "ceiling": CEILING,
-  },
-  "baroque": {
-    "wall": BAROQUE_WALL,
-    "floor": BAROQUE_FLOOR,
-    "ceiling": BAROQUE_CEILING,
-  },
-}
-
 @onready var _fgrid = $FloorTiles
 @onready var _wgrid = $WallTiles
 
 # set from params
-var _theme
 var _min_room_dimension
 var _max_room_dimension
 
 # just member state
 var _areas_reserved = []
 var _areas_created = []
+var _halls_created = []
+
+func _m(name):
+  return _fgrid.mesh_library.find_item_by_name(name)
 
 func generate(
     params
   ):
-    _theme = THEMES[params.theme]
     _min_room_dimension = params.min_room_dimension
     _max_room_dimension = params.max_room_dimension
 
@@ -100,8 +66,8 @@ func _is_in_rect(p, _rect):
 func _intersecting_rect(_r1, _r2):
   var r1 = _normalize_rect(_r1)
   var r2 = _normalize_rect(_r2)
-  var overlap_x = r1[0].x < r2[1].x and r2[0].x < r1[1].x
-  var overlap_z = r1[0].z < r2[1].z and r2[0].z < r1[1].z
+  var overlap_x = r1[0].x <= r2[1].x and r2[0].x <= r1[1].x
+  var overlap_z = r1[0].z <= r2[1].z and r2[0].z <= r1[1].z
   return overlap_x and overlap_z
 
 func _left90(v):
@@ -148,7 +114,8 @@ func _fill_floor(_rect):
   var c2 = rect[1]
   for x in range(c1.x, c2.x + 1):
     for z in range(c1.z, c2.z + 1):
-      _fgrid.set_cell_item(Vector3(x, 0, z), _theme.floor)
+      _fgrid.set_cell_item(Vector3(x, 0, z), _m("floor"))
+      _fgrid.set_cell_item(Vector3(x, 1, z), _m("ceiling"))
 
 func _empty_neighbors(grid, pos):
   # 1 = 0x, -z (orientation 0)
@@ -170,39 +137,60 @@ func _empty_neighbors(grid, pos):
 
 func _place_wall_if_valid(p):
   var n = _empty_neighbors(_fgrid, p)
-  var wp = p + Vector3.UP
+  var wp = p
   if n == 0:
       # this is a totally enclosed floor and should have no wall
       _wgrid.set_cell_item(wp, -1)
   elif nearest_po2(n) == n: # only 1 bit is flipped if this is a power of 2, meaning 1 neighbor
       # single wall case, rotate so the wall faces the floor away from empty space
+      # in single wall case we can try to place a link(hall)
+      var vec = Vector3(0, 0, 0)
+      var ori = 0
       if n == 1:
-        _wgrid.set_cell_item(wp, _theme.wall, 0)
+        vec = Vector3(0, 0, -1)
+        ori = 0
       elif n == 2:
-        _wgrid.set_cell_item(wp, _theme.wall, 16)
+        vec = Vector3(-1, 0, 0)
+        ori = 16
       elif n == 4:
-        _wgrid.set_cell_item(wp, _theme.wall, 10)
+        vec = Vector3(0, 0, 1)
+        ori = 10
       elif n == 8:
-        _wgrid.set_cell_item(wp, _theme.wall, 22)
+        vec = Vector3(1, 0, 0)
+        ori = 22
+
+      # create the colliding rect for the link(hall)
+      # this is the rect extending 2 out and 2 clockwise from p
+      var hall_rect = _normalize_rect([
+        p + vec,
+        p + 2 * vec + vec.rotated(Vector3.UP, -PI / 2)
+      ])
+
+      # check if valid placement for link(hall)
+      if vec.length() == 1 and _valid_hall_placement(hall_rect):
+        _halls_created.push_back(hall_rect)
+        _wgrid.set_cell_item(wp, _m("wall_facade"), ori)
+      else:
+        _wgrid.set_cell_item(wp, _m("wall_single"), ori)
   else:
       # the negative z is empty
       if n & 1 == 1:
         # if positive z is empty it's a hall
         if n & 4 == 4:
-          _wgrid.set_cell_item(wp, _theme.wall_internalhall)
+          _wgrid.set_cell_item(wp, _m("wall_internalhall"), 0)
         elif n & 2 == 2:
-          _wgrid.set_cell_item(wp, _theme.wall_internalcorner, 16)
+          _wgrid.set_cell_item(wp, _m("wall_internalcorner"), 16)
         elif n & 8 == 8:
-          _wgrid.set_cell_item(wp, _theme.wall_internalcorner, 0)
+          _wgrid.set_cell_item(wp, _m("wall_internalcorner"), 0)
       # the negative x is empty
       elif n & 2 == 2:
         # if positive x is empty too it's a hall
         if n & 8 == 8:
-          _wgrid.set_cell_item(wp, _theme.wall_internalhall, 16)
+          _wgrid.set_cell_item(wp, _m("wall_internalhall"), 16)
         elif n & 4 == 4:
-          _wgrid.set_cell_item(wp, _theme.wall_internalcorner, 10)
+          _wgrid.set_cell_item(wp, _m("wall_internalcorner"), 10)
       else:
-        _wgrid.set_cell_item(wp, _theme.wall_internalcorner, 22)
+        _wgrid.set_cell_item(wp, _m("wall_internalcorner"), 22)
   pass
 
 func _fill_walls(_rect):
@@ -221,16 +209,37 @@ func _extend_rect_from_point(start, dir, length, width):
   var c2 = start + _right90(dir) * _right_half(width) + dir * length
   return [c1, c2]
 
+# todo: we could use a structure to prevent exhaustive search by storing areas in a map
+# this would at least work for halls which are of known size and are more numerous
 func _valid_placement(_rect):
   var rect = _expand_rect(_rect, 2)
   for area in _areas_reserved:
-    if _intersecting_rect(rect, _expand_rect(area.room, 2)) or _intersecting_rect(rect, area.hall):
+    if _intersecting_rect(rect, area.room) or _intersecting_rect(rect, area.hall):
       return false
   for area in _areas_created:
-    if _intersecting_rect(rect, _expand_rect(area.room, 2)):
+    if _intersecting_rect(rect, area.room):
       return false
     # start area does not have a hall
     if area.hall and _intersecting_rect(rect, area.hall):
+      return false
+  for hall in _halls_created:
+    if _intersecting_rect(rect, hall):
+      return false
+  return true
+   
+# todo less code dupe
+func _valid_hall_placement(rect):
+  for area in _areas_reserved:
+    if _intersecting_rect(rect, area.room) or _intersecting_rect(rect, area.hall):
+      return false
+  for area in _areas_created:
+    if _intersecting_rect(rect, area.room):
+      return false
+    # start area does not have a hall
+    if area.hall and _intersecting_rect(rect, area.hall):
+      return false
+  for hall in _halls_created:
+    if _intersecting_rect(rect,  hall):
       return false
   return true
 
@@ -249,7 +258,7 @@ func add_room():
   var anchors = _rect_anchor_points(room)
   for anchor in anchors:
     # todo: random hall widths
-    var try_hall = _extend_rect_from_point(anchor.p, anchor.dir, 3, _rdim_hall())
+    var try_hall = _extend_rect_from_point(anchor.p, anchor.dir, 4, _rdim_hall())
     var try_hall_anchors = _rect_anchor_points(try_hall)
 
     # place room in the same direction hallway is going
