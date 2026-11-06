@@ -9,6 +9,9 @@ var _generated = null
 func _ready():
   if Engine.is_editor_hint():
     pass
+  else:
+    $Player.start()
+    _on_generate_pressed()
 
 func _on_generate_pressed():
   var GeneratorScene = ResourceLoader.load("res://scenes/TiledExhibitGenerator2.tscn", "PackedScene", ResourceLoader.CACHE_MODE_IGNORE)

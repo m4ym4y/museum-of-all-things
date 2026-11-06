@@ -34,7 +34,7 @@ func generate(
     _min_room_dimension = params.min_room_dimension
     _max_room_dimension = params.max_room_dimension
 
-    for i in range(10):
+    for i in range(9):
       add_room()
 
 func _rdim():
@@ -73,10 +73,10 @@ func _intersecting_rect(_r1, _r2):
   return overlap_x and overlap_z
 
 func _left90(v):
-  return v.rotated(Vector3.UP, deg_to_rad(90))
+  return Vector3(v.z, 0, -v.x)
 
 func _right90(v):
-  return v.rotated(Vector3.UP, deg_to_rad(-90))
+  return Vector3(-v.z, 0, v.x)
 
 func _left_half(dimension):
   return floor(dimension / 2)
@@ -170,7 +170,7 @@ func _place_wall_if_valid(p):
       # this is the rect extending 2 out and 2 clockwise from p
       var hall_rect = _normalize_rect([
         p + vec,
-        p + 2 * vec + vec.rotated(Vector3.UP, -PI / 2)
+        p + 2 * vec + _right90(vec)
       ])
 
       # check if valid placement for link(hall)
@@ -185,7 +185,6 @@ func _place_wall_if_valid(p):
       else:
         _wgrid.set_cell_item(wp, _m("wall_single"), ori)
   else:
-      # the negative z is empty
       if n & 1 == 1:
         # if positive z is empty it's a hall
         if n & 4 == 4:
@@ -238,7 +237,7 @@ func _valid_placement(_rect):
     if _intersecting_rect(rect, hall):
       return false
   return true
-   
+
 # todo less code dupe
 func _valid_hall_placement(rect):
   for area in _areas_reserved:
@@ -255,12 +254,35 @@ func _valid_hall_placement(rect):
       return false
   return true
 
+func _place_initial_hall():
+  var p = Vector3.ZERO
+  var vec = Vector3.FORWARD
+
+  var hall_obj = HallCommon.instantiate()
+  var hall_rect = _normalize_rect([
+    p,
+    p + vec + _right90(vec)
+  ])
+
+  hall_obj.position = 4 * ((hall_rect[0] + hall_rect[1]) / 2)
+  _halls_created.push_back(hall_rect)
+  add_child(hall_obj)
+
+
+  return Vector3(1, 0, -2)
+
 func add_room():
   var room = null
   var hall = null
+
+  var first_room = false
+  var out_point
+
   if len(_areas_reserved) == 0:
+    first_room = true
     # room reserved initial could be added in generate
-    room = _extend_rect_from_point(Vector3.ZERO, Vector3.FORWARD, _rdim(), _rdim())
+    out_point = _place_initial_hall()
+    room = _extend_rect_from_point(out_point, Vector3.FORWARD, _rdim(), _rdim())
   else:
     var reservation = _areas_reserved.pop_at(randi() % len(_areas_reserved))
     room = reservation.room
@@ -273,7 +295,6 @@ func add_room():
     var try_hall = _extend_rect_from_point(anchor.p, anchor.dir, 4, _rdim_hall())
     var try_hall_anchors = _rect_anchor_points(try_hall)
 
-    # place room in the same direction hallway is going
     var try_room_start
     for a in try_hall_anchors:
       if a.dir == anchor.dir:
@@ -291,3 +312,5 @@ func add_room():
   if hall:
     _fill_floor(hall)
     _fill_walls(hall)
+  if first_room:
+    _wgrid.set_cell_item(out_point, _m("wall_facade"), 10)
